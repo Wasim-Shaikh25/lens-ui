@@ -5,7 +5,6 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import moment from 'moment';
 import axios from 'axios';
-import '../../App.css'
 // import DataContext from '../../contextAPI/DataContext'
 // import "C:/Admin Panel/adminpanel/src/Pages/customerPage/createCustomer/customerFrom.css";
 import { useNavigate, useParams } from 'react-router-dom';
@@ -264,6 +263,7 @@ export default function CreateApi() {
                 <Grid item xs={4}>
                   <InputLabel className="ip-label">API Plan Drf Number</InputLabel>
                   <TextField
+                  size="small"
                     className="text-field"
                     name="apiPlanDrfNumber"
                     value={formData.apiPlanDrfNumber}
@@ -273,6 +273,7 @@ export default function CreateApi() {
               <Grid item xs={4}>
                 <InputLabel className="ip-label">Branch</InputLabel>
                 <TextField
+                size="small"
                   className="text-field"
                   name="branch"
                   value={formData.branch}
@@ -282,6 +283,7 @@ export default function CreateApi() {
               <Grid item xs={4}>
                 <InputLabel className="ip-label">Customer</InputLabel>
                 <TextField
+                size="small"
                   className="text-field"
                   name="customer"
                   value={formData.customer}
@@ -291,6 +293,7 @@ export default function CreateApi() {
               <Grid item xs={4}>
                 <InputLabel className="ip-label">Customer Address</InputLabel>
                 <TextField
+                size="small"
                   className="text-field"
                   name="customerAddress"
                   value={formData.customerAddress}
@@ -323,6 +326,7 @@ export default function CreateApi() {
               <Grid item xs={4}>      
                   <InputLabel className="ip-label" >Existing Make</InputLabel >
                 <TextField
+                size="small"
                   className="text-field"
                   name="existingMake"
                   value={formData.existingMake}
@@ -331,7 +335,8 @@ export default function CreateApi() {
 
               <Grid item xs={4}>
                 <InputLabel className="ip-label">Type</InputLabel>
-                <TextField // Consider using Dropdown for options if applicable
+                <TextField
+                size="small" // Consider using Dropdown for options if applicable
                   className="text-field"
                   name="type"
                   value={formData.type}
@@ -342,6 +347,7 @@ export default function CreateApi() {
             <Grid item xs={4}>
               <InputLabel className="ip-label">Make</InputLabel>
               <TextField
+              size="small"
                 className="text-field"
                 name="make"
                 value={formData.make}
@@ -351,6 +357,7 @@ export default function CreateApi() {
             <Grid item xs={4}>
               <InputLabel className="ip-label">Model</InputLabel>
               <TextField
+              size="small"
                 className="text-field"
                 name="model"
                 value={formData.model}
@@ -360,6 +367,7 @@ export default function CreateApi() {
             <Grid item xs={4}>
               <InputLabel className="ip-label">Tag Number</InputLabel>
               <TextField
+              size="small"
                 className="text-field"
                 name="tagNumber"
                 value={formData.tagNumber}
@@ -369,6 +377,7 @@ export default function CreateApi() {
             <Grid item xs={4}>
               <InputLabel className="ip-label">Arrangement</InputLabel>
               <TextField
+              size="small"
                 className="text-field"
                 name="arrangement"
                 value={formData.arrangement}
@@ -377,7 +386,8 @@ export default function CreateApi() {
             </Grid>
             <Grid item xs={4}>
               <InputLabel className="ip-label">Max Dynamic Sealing Pressure</InputLabel>
-              <TextField // Consider using number input type
+              <TextField
+              size="small" // Consider using number input type
                 className="text-field"
                 name="maxDynamicSealingPressure"
                 value={formData.maxDynamicSealingPressure}
@@ -387,7 +397,8 @@ export default function CreateApi() {
             </Grid>
             <Grid item xs={4}>
               <InputLabel className="ip-label">Max Static Sealing Pressure</InputLabel>
-              <TextField // Consider using number input type
+              <TextField
+              size="small" // Consider using number input type
                 className="text-field"
                 name="maxStaticSealingPressure"
                 value={formData.maxStaticSealingPressure}
@@ -412,6 +423,7 @@ export default function CreateApi() {
   <Grid item xs={4}>
     <InputLabel className="ip-label">Mechanical Seal Make</InputLabel>
     <TextField
+    size="small"
       className="text-field"
       name="mechanicalSealMake"
       value={formData.mechanicalSealMake}
@@ -422,6 +434,7 @@ export default function CreateApi() {
   <Grid item xs={4}>
     <InputLabel className="ip-label">Mechanical Seal Series</InputLabel>
     <TextField
+    size="small"
       className="text-field"
       name="mechanicalSealSeries"
       value={formData.mechanicalSealSeries}
@@ -431,6 +444,7 @@ export default function CreateApi() {
   <Grid item xs={4}>
     <InputLabel className="ip-label">Connection Size</InputLabel>
     <TextField
+    size="small"
       className="text-field"
       name="connectionSize"
       value={formData.connectionSize}
@@ -440,6 +454,7 @@ export default function CreateApi() {
   <Grid item xs={4}>
     <InputLabel className="ip-label">Connection Size Unit</InputLabel>
     <TextField
+    size="small"
       className="text-field"
       name="connectionSizeUnit"
       value={formData.connectionSizeUnit}
@@ -449,6 +464,7 @@ export default function CreateApi() {
   <Grid item xs={4}>
     <InputLabel className="ip-label">Drawing Number</InputLabel>
     <TextField
+    size="small"
       className="text-field"
       name="drawingNumber"
       value={formData.drawingNumber}
@@ -458,6 +474,7 @@ export default function CreateApi() {
   <Grid item xs={4}>
     <InputLabel className="ip-label">Shaft Size</InputLabel>
     <TextField
+    size="small"
       className="text-field"
       name="shaftSize"
       value={formData.shaftSize}
@@ -476,6 +493,7 @@ export default function CreateApi() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">Center Type</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="centerType"
                 value={formData.centerType}
@@ -485,6 +503,7 @@ export default function CreateApi() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">Rotary Joint Type</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="rotaryJointType"
                 value={formData.rotaryJointType}
@@ -494,6 +513,7 @@ export default function CreateApi() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">Syphon Pipe Type</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="syphonPipeType"
                 value={formData.syphonPipeType}
@@ -504,6 +524,7 @@ export default function CreateApi() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">Syphon Pipe Diameter</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="syphonPipeDiameter"
                 value={formData.syphonPipeDiameter}
@@ -523,6 +544,7 @@ export default function CreateApi() {
             <Grid item xs={4}>
             <InputLabel className="ip-label">Shell</InputLabel>
             <TextField
+            size="small"
               className="text-field"
               name="shell"
               value={formData.shell}
@@ -532,6 +554,7 @@ export default function CreateApi() {
           <Grid item xs={4}>
             <InputLabel className="ip-label">Cooling Coil</InputLabel>
             <TextField
+            size="small"
               className="text-field"
               name="coolingCoil"
               value={formData.coolingCoil}
@@ -541,6 +564,7 @@ export default function CreateApi() {
           <Grid item xs={4}>
             <InputLabel className="ip-label">Bladder</InputLabel>
             <TextField
+            size="small"
               className="text-field"
               name="bladder"
               value={formData.bladder}
@@ -550,7 +574,8 @@ export default function CreateApi() {
    
     <Grid item xs={4}>
     <InputLabel className="ip-label">Heat Exchanger Type</InputLabel>
-    <TextField // Consider using Dropdown for options if applicable
+    <TextField
+    size="small" // Consider using Dropdown for options if applicable
       className="text-field"
       name="heatExchangerType"
       value={formData.heatExchangerType}
@@ -559,7 +584,8 @@ export default function CreateApi() {
   </Grid>
   <Grid item xs={4}>
     <InputLabel className="ip-label">Heat Exchanger Area</InputLabel>
-    <TextField // Consider using number input type
+    <TextField
+    size="small" // Consider using number input type
       className="text-field"
       name="heatExchangerArea"
       value={formData.heatExchangerArea}
@@ -569,7 +595,8 @@ export default function CreateApi() {
   </Grid>
   <Grid item xs={4}>
     <InputLabel className="ip-label">Standard</InputLabel>
-    <TextField // Consider using Dropdown for options if applicable
+    <TextField
+    size="small" // Consider using Dropdown for options if applicable
       className="text-field"
       name="standard"
       value={formData.standard}

@@ -7,7 +7,7 @@ import moment from 'moment';
 import axios from 'axios';
 import { useContext } from 'react'; 
 // import DataContext from '../../contextAPI/DataContext'
-import "C:/Admin Panel/adminpanel/src/Pages/customerPage/createCustomer/customerFrom.css";
+import "./customerFrom.css";
 import { useNavigate, useParams } from 'react-router-dom';
 
 
@@ -175,6 +175,7 @@ export default function Customer() {
          {rId &&<Grid item xs={4}>
             <InputLabel className="ip-label"  >Customer Reference No</InputLabel >
             <TextField
+              size="small" 
               className="text-field" 
               name="customerReferenceNumber"
               value={formData.customerReferenceNumber}
@@ -184,6 +185,7 @@ export default function Customer() {
       <Grid item xs={4}>
             <InputLabel className="ip-label" >Branch ID</InputLabel >
             <TextField
+              size="small" 
               className="text-field" 
               name="branchId"
               value={formData.branchId}
@@ -194,6 +196,7 @@ export default function Customer() {
           <Grid item xs={4}>
             <InputLabel className="ip-label"  >Name</InputLabel >
             <TextField
+              size="small" 
               className="text-field" 
               name="name"
               value={formData.name}
@@ -209,6 +212,7 @@ export default function Customer() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label"  >Address</InputLabel >
           <TextField
+            size="small" 
             className="text-field" 
             name="address"
             value={detail.address}
@@ -219,6 +223,7 @@ export default function Customer() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label"  >Contact Person</InputLabel >
           <TextField
+            size="small" 
             className="text-field" 
             name="contactPerson"
             value={detail.contactPerson}
@@ -229,6 +234,7 @@ export default function Customer() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label"  >Industry Id</InputLabel >
           <TextField
+            size="small" 
             className="text-field" 
             name="industryId"
             value={detail.industryId}
@@ -239,6 +245,7 @@ export default function Customer() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label"  >Designation</InputLabel >
           <TextField
+            size="small" 
             className="text-field" 
             name="designation"
             value={detail.designation}
@@ -249,6 +256,7 @@ export default function Customer() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label"  >Telephone Number</InputLabel >
           <TextField
+            size="small" 
             className="text-field" 
             name="telephoneNos"
             value={detail.telephoneNos}
@@ -259,6 +267,7 @@ export default function Customer() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label"  >Ecc No</InputLabel >
           <TextField
+            size="small" 
             className="text-field" 
             name="eccNo"
             value={detail.eccNo}
@@ -269,6 +278,7 @@ export default function Customer() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label"  >SSt No</InputLabel >
           <TextField
+            size="small" 
             className="text-field" 
             name="sstNo"
             value={detail.sstNo}
@@ -279,6 +289,7 @@ export default function Customer() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label"  >GST No</InputLabel >
           <TextField
+            size="small" 
             className="text-field" 
             name="gstNo"
             value={detail.gstNo}
@@ -289,6 +300,7 @@ export default function Customer() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label"  >Pan No</InputLabel >
           <TextField
+            size="small" 
             className="text-field" 
             name="panNo"
             value={detail.panNo}
@@ -299,6 +311,7 @@ export default function Customer() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label"  >CST No</InputLabel >
           <TextField
+            size="small" 
             className="text-field" 
             name="cstNo"
             value={detail.cstNo}

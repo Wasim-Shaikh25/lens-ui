@@ -1,11 +1,11 @@
 .container{
-  margin-top: 20px;
-  background-color: rgb(250, 251, 251);
-
+  margin-top: 20px !important;
+  background-color: rgb(250, 251, 251) !important;
+  max-width:85% !important;
 }
 
 .form-style {
-  background-color: white;
+  background-color: #F5F7F8;
   padding: 25px;
   border: 1px solid lightgray;
   border-radius: 10px;
@@ -20,7 +20,7 @@
 .card{
   display:flex;
   flex-direction:column;
-  margin:20px;
+  margin:20px 20px 0px 20px;
   padding:10px 20px 20px 20px;
   border-radius: 8px;
    border:1px solid #ddd;
@@ -62,9 +62,8 @@
 .text-field{
   border-color: #DEE3E9 !important;
   border-radius: 10px !important;
-  background-color: white !important;
-
-}
+  background-color: white !important; 
+} 
 
 .deleteIcon{
 

@@ -176,6 +176,7 @@ export default function CreateRotatory() {
             {rjId && <Grid item xs={4}>
               <InputLabel className="ip-label" >Rotatory Joint Drf Number</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="rotaryDrfNumber"
                 value={formData.rotaryDrfNumber}
@@ -187,6 +188,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >branch</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="branch"
                 value={formData.branch}
@@ -197,6 +199,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Enquiry Number</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="enquiryNumber"
                 value={formData.enquiryNumber}
@@ -207,6 +210,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Customer</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="customer"
                 value={formData.customer}
@@ -218,6 +222,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Customer Address</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="customerAddress"
                 value={formData.customerAddress}
@@ -251,6 +256,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Equipment</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="equipment"
                 value={formData.equipment}
@@ -261,6 +267,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Make</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="make"
                 value={formData.make}
@@ -270,6 +277,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Model</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="model"
                 value={formData.model}
@@ -280,6 +288,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Fluid</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="fluid"
                 value={formData.fluid}
@@ -289,6 +298,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Operating Temprature</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="operatingTemperature"
                 value={formData.operatingTemperature}
@@ -299,6 +309,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Operating Temprature Unit</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="operatingTemperatureUnit"
                 value={formData.operatingTemperatureUnit}
@@ -309,6 +320,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Flow Rate</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="flowRate"
                 value={formData.flowRate}
@@ -319,6 +331,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Speed</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="speed"
                 value={formData.speed}
@@ -329,6 +342,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Operating Pressure</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="operatingPressure"
                 value={formData.operatingPressure}
@@ -338,6 +352,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Operating Pressure Unit</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="operatingPressureUnit"
                 value={formData.operatingPressureUnit}
@@ -356,6 +371,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Existing Make</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="existingMake"
                 value={formData.existingMake}
@@ -365,6 +381,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Existing Model</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="existingModel"
                 value={formData.existingModel}
@@ -375,6 +392,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Connection Type</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="connectionType"
                 value={formData.connectionType}
@@ -385,6 +403,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Connection Size</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="connectionSize"
                 value={formData.connectionSize}
@@ -395,6 +414,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Flange Type</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="flangeType"
                 value={formData.flangeType}
@@ -409,6 +429,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">Center Type</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="centerType"
                 value={formData.centerType}
@@ -418,6 +439,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">Rotary Joint Type</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="rotaryJointType"
                 value={formData.rotaryJointType}
@@ -427,6 +449,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">Syphon Pipe Type</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="syphonPipeType"
                 value={formData.syphonPipeType}
@@ -437,6 +460,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">Syphon Pipe Diameter</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="syphonPipeDiameter"
                 value={formData.syphonPipeDiameter}

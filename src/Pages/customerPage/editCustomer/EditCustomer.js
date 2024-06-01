@@ -103,7 +103,7 @@ export default function EditCustomer() {
 
   return (
     <div>
-      <TableContainer component={Paper} style={{ width: '86%', margin: '10px auto' }}>
+      <TableContainer component={Paper} style={{maxWidth:'80%',margin: '10px auto' }}>
         <Table sx={{ minWidth: 500 }} aria-label="customized table">
           <TableHead>
             <TableRow>

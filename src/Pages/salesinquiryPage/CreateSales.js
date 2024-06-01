@@ -243,6 +243,7 @@ export default function CreateSales() {
          {sId &&<Grid item xs={4}>
             <InputLabel className="ip-label">Sales Inquiry Number</InputLabel >
             <TextField
+            size="small"
               className="text-field" 
               name="inquiryNumber"
               value={formData.inquiryNumber}
@@ -252,6 +253,7 @@ export default function CreateSales() {
       <Grid item xs={4}>
             <InputLabel className="ip-label" >Company ID</InputLabel >
             <TextField
+            size="small"
               className="text-field" 
               name="companyId"
               value={formData.companyId}
@@ -262,6 +264,7 @@ export default function CreateSales() {
           <Grid item xs={4}>
             <InputLabel className="ip-label" >Category ID</InputLabel >
             <TextField
+            size="small"
               className="text-field" 
               name="categoryId"
               value={formData.categoryId}
@@ -272,6 +275,7 @@ export default function CreateSales() {
           <Grid item xs={4}>
             <InputLabel className="ip-label">Category Name</InputLabel >
             <TextField
+            size="small"
               className="text-field" 
               name="categoryName"
               value={formData.categoryName}
@@ -283,6 +287,7 @@ export default function CreateSales() {
           <Grid item xs={4}>
             <InputLabel className="ip-label">Customer ID</InputLabel >
             <TextField
+            size="small"
               className="text-field" 
               name="customerId"
               value={formData.customerId}
@@ -293,6 +298,7 @@ export default function CreateSales() {
           <Grid item xs={4}>
             <InputLabel className="ip-label">Customer Name</InputLabel >
             <TextField
+            size="small"
               className="text-field" 
               name="customerName"
               value={formData.customerName}
@@ -304,6 +310,7 @@ export default function CreateSales() {
           <Grid item xs={4}>
             <InputLabel className="ip-label">Customer Address</InputLabel >
             <TextField
+            size="small"
               className="text-field" 
               name="customerAddress"
               value={formData.customerAddress}
@@ -315,6 +322,7 @@ export default function CreateSales() {
           <Grid item xs={4}>
             <InputLabel className="ip-label">Contact Person</InputLabel >
             <TextField
+            size="small"
               className="text-field" 
               name="contactPerson"
               value={formData.contactPerson}
@@ -325,6 +333,7 @@ export default function CreateSales() {
           <Grid item xs={4}>
             <InputLabel className="ip-label">Designation</InputLabel >
             <TextField
+            size="small"
               className="text-field" 
               name="designation"
               value={formData.designation}
@@ -335,6 +344,7 @@ export default function CreateSales() {
           <Grid item xs={4}>
             <InputLabel className="ip-label">Special Comments</InputLabel >
             <TextField
+            size="small"
               className="text-field" 
               name="specialComments"
               value={formData.specialComments}
@@ -346,6 +356,7 @@ export default function CreateSales() {
           <Grid item xs={4}>
             <InputLabel className="ip-label">Mobile Number</InputLabel >
             <TextField
+            size="small"
               className="text-field" 
               name="mobileNo"
               value={formData.mobileNo}
@@ -357,6 +368,7 @@ export default function CreateSales() {
           <Grid item xs={4}>
             <InputLabel className="ip-label">Source</InputLabel >
             <TextField
+            size="small"
               className="text-field" 
               name="source"
               value={formData.source}
@@ -368,6 +380,7 @@ export default function CreateSales() {
           <Grid item xs={4}>
             <InputLabel className="ip-label">Branch ID</InputLabel >
             <TextField
+            size="small"
               className="text-field" 
               name="branchId"
               value={formData.branchId}
@@ -380,6 +393,7 @@ export default function CreateSales() {
           <Grid item xs={4}>
             <InputLabel className="ip-label">Industry</InputLabel >
             <TextField
+            size="small"
               className="text-field" 
               name="industry"
               value={formData.industry}
@@ -387,9 +401,8 @@ export default function CreateSales() {
             />
           </Grid> 
 
-
-
-        
+    </Grid>
+          </form>
           {formData?.salesItems?.map((detail, index) => (
             <div className='card'  key = {index}>
               {/* <Grid> */}
@@ -398,6 +411,7 @@ export default function CreateSales() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label">Quantity</InputLabel >
           <TextField
+          size="small"
             className="text-field" 
             name="quantity"
             value={detail.quantity}
@@ -408,6 +422,7 @@ export default function CreateSales() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label">Unit</InputLabel >
           <TextField
+          size="small"
             className="text-field" 
             name="unit"
             value={detail.unit}
@@ -420,6 +435,7 @@ export default function CreateSales() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label" >New or Existing</InputLabel >
           {/* <TextField
+          size="small"
             className="text-field" 
             name="newOrExisting"
             value={detail.newOrExisting}
@@ -436,6 +452,7 @@ export default function CreateSales() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label"  >Type</InputLabel >
           <TextField
+          size="small"
             className="text-field" 
             name="type"
             value={detail.type}
@@ -447,6 +464,7 @@ export default function CreateSales() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label">Size</InputLabel >
           <TextField
+          size="small"
             className="text-field" 
             name="size"
             value={detail.size}
@@ -459,6 +477,7 @@ export default function CreateSales() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label">Header Description</InputLabel >
           <TextField
+          size="small"
             className="text-field" 
             name="headerDescription"
             value={detail.headerDescription}
@@ -471,6 +490,7 @@ export default function CreateSales() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label">Item Description</InputLabel >
           <TextField
+          size="small"
             className="text-field" 
             name="itemDescription"
             value={detail.itemDescription}
@@ -483,6 +503,7 @@ export default function CreateSales() {
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label"  >CI CODE</InputLabel >
           <TextField
+          size="small"
             className="text-field" 
             name="ciCode"
             value={detail.ciCode}
@@ -494,7 +515,8 @@ export default function CreateSales() {
           {/* MOC Tyeps    */}
   { detail.moc.map((elem,idx)=>{
    return (
-   <div className='card' style={{width:"100%"}} spacing={2}>
+   <div  style={{margin:"1rem 2rem"}} spacing={2}>
+    <hr style={{width:"100%",margin:"20px auto"}}/>
     <h3>{elem.mocType}</h3>
 
     <Grid container spacing={2} direction="row">
@@ -503,6 +525,7 @@ export default function CreateSales() {
   <Grid item xs={12} sm={4}>
  <InputLabel className="ip-label">Moc Type</InputLabel >
  <TextField
+ size="small"
    className="text-field" 
    name="mocType"
    value={elem.mocType}
@@ -513,6 +536,7 @@ export default function CreateSales() {
   <Grid item xs={12} sm={4}>
  <InputLabel className="ip-label">Mating Ring</InputLabel >
  <TextField
+ size="small"
    className="text-field" 
    name="matingRing"
    value={elem.matingRing}
@@ -525,6 +549,7 @@ export default function CreateSales() {
   <Grid item xs={12} sm={4}>
  <InputLabel className="ip-label">Seal Ring</InputLabel >
  <TextField
+ size="small"
    className="text-field" 
    name="sealRing"
    value={elem.sealRing}
@@ -537,6 +562,7 @@ export default function CreateSales() {
   <Grid item xs={12} sm={4}>
  <InputLabel className="ip-label">Elastomer</InputLabel >
  <TextField
+ size="small"
    className="text-field" 
    name="elastomer"
    value={elem.elastomer}
@@ -549,6 +575,7 @@ export default function CreateSales() {
   <Grid item xs={12} sm={4}>
  <InputLabel className="ip-label">Spring Element</InputLabel >
  <TextField
+ size="small"
    className="text-field" 
    name="springElement"
    value={elem.springElement}
@@ -561,6 +588,7 @@ export default function CreateSales() {
   <Grid item xs={12} sm={4}>
  <InputLabel className="ip-label">Hardware</InputLabel >
  <TextField
+ size="small"
    className="text-field" 
    name="hardware"
    value={elem.hardware}
@@ -573,6 +601,7 @@ export default function CreateSales() {
   <Grid item xs={12} sm={4}>
  <InputLabel className="ip-label">Fasteners</InputLabel >
  <TextField
+ size="small"
    className="text-field" 
    name="fasteners"
    value={elem.fasteners}
@@ -598,19 +627,20 @@ export default function CreateSales() {
 
    
           ))}
-
+          <div style={{display:"flex", alignItems:'center',margin:"0px 10px 20px 10px", justifyContent:'space-between'}}>
+            
 <Button className="add-btn"  onClick={handleAddSales}><AddIcon/> Add Sales Items</Button>
-          </Grid>
           <Grid item xs={4}>
           <Grid item xs={4}  >
         
         {!sId ?( <Button className="submit-btn" type="submit" onClick ={handleSubmit} variant="contained" >Submit</Button>) : (
-          <>
+          <div >
             <Button className="update-btn" variant="contained" onClick={handleUpdate} >Update</Button>
-            <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
+            <Button className="cancel-btn"   variant="contained" onClick={cancelUpdate} >Cancel</Button> </div>)}
           </Grid>
         </Grid>
-      </form>
+          </div>
+      
     </Container>
   );
 

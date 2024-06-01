@@ -358,6 +358,7 @@ export default function CreatePumpSeal() {
             </select>
           ) : (
             <TextField
+            size="small"
               className="text-field" 
               name={key}
               value={formData[key]}
@@ -372,6 +373,7 @@ export default function CreatePumpSeal() {
             {pId && <Grid item xs={4}>
               <InputLabel className="ip-label" >PumpSeal Drf Number</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="pumpSealDrfNumber"
                 value={formData.pumpSealDrfNumber}
@@ -382,6 +384,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Branch</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="branch"
                 value={formData.branch}
@@ -392,6 +395,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >endUser</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="endUser"
                 value={formData.endUser}
@@ -401,6 +405,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Customer Address</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="customerAddress"
                 value={formData.customerAddress}
@@ -431,6 +436,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Make</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="make"
                 value={formData.make}
@@ -441,6 +447,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Model</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="model"
                 value={formData.model}
@@ -452,6 +459,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Bearing BKT</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="bearingBracket"
                 value={formData.bearingBracket}
@@ -461,6 +469,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Impeller</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="impeller"
                 value={formData.impeller}
@@ -470,6 +479,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Shaft</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="shaft"
                 value={formData.shaft}
@@ -479,6 +489,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Seal Chamber</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="sealChamber"
                 value={formData.sealChamber}
@@ -489,6 +500,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Tag Number</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="tagNumber"
                 value={formData.tagNumber}
@@ -517,6 +529,7 @@ export default function CreatePumpSeal() {
   options={arOption}
   renderInput={(params) => (
     <TextField
+    size="small"
       {...params}
       placeholder="Select Arrangement"
       variant="outlined"
@@ -551,6 +564,7 @@ export default function CreatePumpSeal() {
   options={ptOption}
   renderInput={(params) => (
     <TextField
+    size="small"
       {...params}
       placeholder="Select Pump Type"
       variant="outlined"
@@ -564,6 +578,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label">Stuffing Box</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="stuffingBox"
                 value={formData.stuffingBox}
@@ -591,6 +606,7 @@ export default function CreatePumpSeal() {
   options={stgOption}
   renderInput={(params) => (
     <TextField
+    size="small"
       {...params}
       placeholder="Select Stage"
       variant="outlined"
@@ -622,6 +638,7 @@ export default function CreatePumpSeal() {
   options={cstOption}
   renderInput={(params) => (
     <TextField
+    size="small"
       {...params}
       placeholder="Select Casing Type"
       variant="outlined"
@@ -642,6 +659,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Series</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="series"
                 value={formData.series}
@@ -670,6 +688,7 @@ export default function CreatePumpSeal() {
   options={pfOption}
   renderInput={(params) => (
     <TextField
+    size="small"
       {...params}
       placeholder="Select Performance Type"
       variant="outlined"
@@ -702,6 +721,7 @@ export default function CreatePumpSeal() {
   options={saOption}
   renderInput={(params) => (
     <TextField
+    size="small"
       {...params}
       placeholder="Select Seal Arrangement"
       variant="outlined"
@@ -734,6 +754,7 @@ export default function CreatePumpSeal() {
   options={stOption}
   renderInput={(params) => (
     <TextField
+    size="small"
       {...params}
       placeholder="Select Seal Type"
       variant="outlined"
@@ -757,6 +778,7 @@ export default function CreatePumpSeal() {
            <Grid item xs={4}>
               <InputLabel className="ip-label" >All Pressure Unit</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="allPressureUnit"
                 value={formData.allPressureUnit}
@@ -766,6 +788,7 @@ export default function CreatePumpSeal() {
            <Grid item xs={4}>
               <InputLabel className="ip-label" >Total Heat</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="totalHeat"
                 value={formData.totalHeat}
@@ -776,6 +799,7 @@ export default function CreatePumpSeal() {
            <Grid item xs={4}>
               <InputLabel className="ip-label" >Suction Pressure</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="suctionPressure"
                 value={formData.suctionPressure}
@@ -785,6 +809,7 @@ export default function CreatePumpSeal() {
            <Grid item xs={4}>
               <InputLabel className="ip-label" >Discharge Pressure</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="dischargePressure"
                 value={formData.dischargePressure}
@@ -794,6 +819,7 @@ export default function CreatePumpSeal() {
            <Grid item xs={4}>
               <InputLabel className="ip-label" >Direction of Rortation</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="directionOfRotation"
                 value={formData.directionOfRotation}
@@ -803,6 +829,7 @@ export default function CreatePumpSeal() {
            <Grid item xs={4}>
               <InputLabel className="ip-label" >Speed</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="speed"
                 value={formData.speed}
@@ -813,6 +840,7 @@ export default function CreatePumpSeal() {
            <Grid item xs={4}>
               <InputLabel className="ip-label" >Box Pressure</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="boxPressure"
                 value={formData.boxPressure}
@@ -831,6 +859,7 @@ export default function CreatePumpSeal() {
            <Grid item xs={4}>
               <InputLabel className="ip-label" >Operating Fluid</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="operatingFluid"
                 value={formData.operatingFluid}
@@ -840,6 +869,7 @@ export default function CreatePumpSeal() {
            <Grid item xs={4}>
               <InputLabel className="ip-label" >All Temprature Unit</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="allTempPressureUnit"
                 value={formData.allTempPressureUnit}
@@ -869,6 +899,7 @@ export default function CreatePumpSeal() {
   options={fnOption}
   renderInput={(params) => (
     <TextField
+    size="small"
       {...params}
       placeholder="Select Fluid Nature"
       variant="outlined"
@@ -882,6 +913,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Opearating Temprature</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="operatingTemperature"
                 value={formData.operatingTemperature}
@@ -891,6 +923,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Minimum Operating Temprature</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="minOperatingTemperature"
                 value={formData.minOperatingTemperature}
@@ -900,6 +933,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >SP Gravity</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="spGravity"
                 value={formData.spGravity}
@@ -909,6 +943,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Freez Point</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="freezePoint"
                 value={formData.freezePoint}
@@ -919,6 +954,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Boiling Point</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="boilPoint"
                 value={formData.boilPoint}
@@ -928,6 +964,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Viscosity</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="viscosity"
                 value={formData.viscosity}
@@ -938,6 +975,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Viscosity Unit</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="viscosityUnit"
                 value={formData.viscosityUnit}
@@ -947,6 +985,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >percentage Of Solid</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="percentageOfSolid"
                 value={formData.percentageOfSolid}
@@ -956,6 +995,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Grain Point</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="grainPoint"
                 value={formData.grainPoint}
@@ -965,6 +1005,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Description</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="description"
                 value={formData.description}
@@ -985,6 +1026,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >flush plan:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="flushPlan"
              value={formData.flushPlan}
@@ -994,6 +1036,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Barrier OR Buffer plan:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="barrierOrBufferPlan"
              value={formData.barrierOrBufferFluid}
@@ -1003,6 +1046,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Quench plan:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="quenchPlan"
              value={formData.quenchPlan}
@@ -1013,6 +1057,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Design Offered:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="designOffered"
              value={formData.designOffered}
@@ -1022,6 +1067,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Size Available:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="sizeAvailable"
              value={formData.sizeAvailable}
@@ -1031,6 +1077,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Material Code:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="materialCode"
              value={formData.materialCode}
@@ -1040,6 +1087,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Seal Series:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="sealSeries"
              value={formData.sealSeries}
@@ -1049,6 +1097,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Shaft Size:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="shaftSize"
              value={formData.shaftSize}
@@ -1058,6 +1107,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Bore Dia:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="boreDia"
              value={formData.boreDia}
@@ -1067,6 +1117,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Bore Depth:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="boreDepth"
              value={formData.boreDepth}
@@ -1077,6 +1128,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Nearest Obstruction:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="nearestObstruction"
              value={formData.nearestObstruction}
@@ -1103,6 +1155,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >d1-Sleev OD:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="d1SleeveOd"
              value={formData.d1SleeveOd}
@@ -1112,6 +1165,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Stud Holes:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="studHoles"
              value={formData.studHoles}
@@ -1122,6 +1176,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >D2 Stuffing Box ID:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="d2StuffingBoxId"
              value={formData.d2StuffingBoxId}
@@ -1132,6 +1187,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >D4 Stuffing Box Bore:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="d4StuffingBoxBore"
              value={formData.d4StuffingBoxBore}
@@ -1141,6 +1197,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >D5 Spogit Dia:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="d5SpigotDia"
              value={formData.d5SpigotDia}
@@ -1150,6 +1207,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >D51:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="d51"
              value={formData.d51}
@@ -1159,6 +1217,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >D52:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="d52"
              value={formData.d52}
@@ -1168,6 +1227,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >D9 Bolt Circle:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="d9BoltCircle"
              value={formData.d9BoltCircle}
@@ -1177,6 +1237,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Bolt Size:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="boltSize"
              value={formData.boltSize}
@@ -1187,6 +1248,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >l11:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="l11"
              value={formData.l11}
@@ -1197,6 +1259,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >l12:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="l12"
              value={formData.l12}
@@ -1206,6 +1269,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >l1 Sleeve Exten:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="l1SleeveExten"
              value={formData.l1SleeveExten}
@@ -1215,6 +1279,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >l2 Shaft Hub:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="l2ShaftHub"
              value={formData.l2ShaftHub}
@@ -1224,6 +1289,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >l3 Thread Length:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="l3ThreadLength"
              value={formData.l3ThreadLength}
@@ -1234,6 +1300,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >l8 SB Depth:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="l8sbDepth"
              value={formData.l8sbDepth}
@@ -1243,6 +1310,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >l9 Nearest Obstruction:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="l9NearObstr"
              value={formData.l9NearObstr}
@@ -1253,6 +1321,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Alpha:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="alpha"
              value={formData.alpha}
@@ -1262,6 +1331,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Beta:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="beta"
              value={formData.beta}
@@ -1271,6 +1341,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Theta:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="theta"
              value={formData.theta}
@@ -1280,6 +1351,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Created By User GUID:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="createdByUserGUID"
              value={formData.createdByUserGUID}
@@ -1289,6 +1361,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Last Edited By User GUID:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="lastEditedByUserGUID"
              value={formData.lastEditedByUserGUID}
@@ -1298,6 +1371,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Row GUID:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="rowguid"
              value={formData.rowguid}
@@ -1308,6 +1382,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Email Id:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="emailId"
              value={formData.emailId}
@@ -1318,6 +1393,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Region:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="region"
              value={formData.region}
@@ -1327,6 +1403,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Address:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="address"
              value={formData.address}
@@ -1337,6 +1414,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Sr No:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="srNo"
              value={formData.srNo}
@@ -1347,6 +1425,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >Dshaft OD:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="dshaftOd"
              value={formData.dshaftOd}
@@ -1357,6 +1436,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >SBox Cover:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="sboxCover"
              value={formData.sboxCover}
@@ -1366,6 +1446,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >M Number Of Bolts:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="mnumberOfBolts"
              value={formData.mnumberOfBolts}
@@ -1375,6 +1456,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
            <InputLabel className="ip-label" >L Raised Col:</InputLabel >
            <TextField
+           size="small"
              className="text-field"
              name="lraisedCol"
              value={formData.lraisedCol}
