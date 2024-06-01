@@ -188,8 +188,9 @@ const CustomSidebar = () => {
                   <Link to ='/editPump'><MenuItem icon={<AddBoxIcon />}>Edit</MenuItem></Link>
                   <Link to ='/createRotary'><MenuItem icon={<AddBoxIcon />}>Rotary Join New</MenuItem></Link>
                   <Link to ='/editRotary'><MenuItem icon={<AddBoxIcon />}>Edit Rotary Join</MenuItem></Link>
+                  <Link to ='/createApi'><MenuItem icon={<AddBoxIcon />}>API Plan New</MenuItem></Link>
+                  <Link to ='/editApi'><MenuItem icon={<AddBoxIcon />}>Edit API Plan</MenuItem></Link>
                   <MenuItem icon={<AddBoxIcon />}>Agitator Seal New</MenuItem>
-                  <MenuItem icon={<AddBoxIcon />}>API Plan New</MenuItem>
                   <MenuItem icon={<AddBoxIcon />}>Status</MenuItem>
                   <MenuItem icon={<AddBoxIcon />}>Status</MenuItem>
                   <MenuItem icon={<AddBoxIcon />}>Status Filter</MenuItem>

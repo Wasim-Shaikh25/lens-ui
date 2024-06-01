@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Topbar from "./components/global/TopBar";
 import CustomSidebar from "./components/global/SideBar";
-//import Dashboard from "./components/dashboard";
+import Dashboard from "./components/dashboard";
 // import {AllRoutes} from './route/AllRoutes'
 
 // import Team from "./scenes/team";

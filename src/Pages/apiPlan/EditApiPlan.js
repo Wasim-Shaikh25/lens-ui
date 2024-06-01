@@ -40,7 +40,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
-export default function EditSales() {
+export default function EditApi() {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);  
   const [isDeleted, setIsDeleted] = useState(false);  
@@ -54,7 +54,7 @@ export default function EditSales() {
   // const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
   
   useEffect(() => {
-    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
+    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/apiPlan/getAllApiPlansByFilter?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
       .then(res => {
         setData(res.data);
         console.log("the fetched data is ",res.data);
@@ -71,28 +71,25 @@ export default function EditSales() {
     
     const editDetail = (detail) => {
       // setEditData(detail.customerReferenceNumber);
-      console.log("edit detail is ", detail.inquiryNumber);
-      navigate(`/SalesInquiry/${detail.inquiryNumber}`)
+      console.log("edit detail is ", detail.apiPlanDrfNumber);
+      navigate(`/createApi/${detail.apiPlanDrfNumber}`)
     };
     
 
 
-  const deleteDetail = (sId) => {
-    console.log("sId is ", sId)
-    
-    axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/delete/:InquiryNumber?InquiryNumber=${sId}`)
-    .then(res=>{
-      console.log(res)
-      const newData = data.filter(item => item.inquiryNumber !== sId);
-      setIsDeleted(true)
+  const deleteDetail = async (crId) => {
+    try {
+      await axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/apiPlan/delete?apiPlanId=${crId}`);
+      const newData = data.filter(item => item.apiPlanDrfNumber !== crId);
+      console.log("data is ",data)
+      console.log("New data is ",newData)
       setData(newData);
-
-    }).catch(err=>{
-      console.log(err)
-    })
-    
-    console.log("Sales Inquiry Number of deletion elem is ", sId);
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+
 
   const paginate = (items)=>{
      setItemsPerPage(items);
@@ -108,11 +105,11 @@ export default function EditSales() {
           <TableHead>
             <TableRow>
               <StyledTableCell>Sr No</StyledTableCell>
-              <StyledTableCell align="right">Sales Inquiry Number</StyledTableCell>
-              <StyledTableCell align="right">Name</StyledTableCell>
-              <StyledTableCell align="right">Branch ID</StyledTableCell>
-              <StyledTableCell align="right">Inserted On</StyledTableCell>
-              <StyledTableCell align="right">Last Updated On</StyledTableCell>
+              <StyledTableCell align="right">Api Plan Drf Number</StyledTableCell>
+              <StyledTableCell align="right">Branch</StyledTableCell>
+              <StyledTableCell align="right">model</StyledTableCell>
+              <StyledTableCell align="right">Tag Number</StyledTableCell>
+              <StyledTableCell align="right">Drawing Number </StyledTableCell>
               <StyledTableCell align="right">Action</StyledTableCell>
             </TableRow>
           </TableHead>
@@ -125,15 +122,15 @@ export default function EditSales() {
                   {index+1}
                 </StyledTableCell>
               
-                <StyledTableCell align="right">{row.inquiryNumber}</StyledTableCell>
-                <StyledTableCell align="right">{row.name}</StyledTableCell>
-                <StyledTableCell align="right">{row.branchId}</StyledTableCell>
-                <StyledTableCell align="right">{row.insertedOn}</StyledTableCell>
-                <StyledTableCell align="right">{row.lastUpdatedOn}</StyledTableCell>
+                <StyledTableCell align="right">{row.apiPlanDrfNumber}</StyledTableCell>
+                <StyledTableCell align="right">{row.branch}</StyledTableCell>
+                <StyledTableCell align="right">{row.model}</StyledTableCell>
+                <StyledTableCell align="right">{row.tagNumber}</StyledTableCell>
+                <StyledTableCell align="right">{row.drawingNumber}</StyledTableCell>
                 <StyledTableCell align="right">
                   <button onClick={() => editDetail(row)} style={{margin:'0px 3px', border:'none', backgroundColor:'transparent', cursor:'pointer'}}><EditIcon style={{ color: 'blue' }} /></button>
                   <button style={{border:'none', backgroundColor:'transparent', cursor:'pointer'}} 
-                  onClick={() => deleteDetail(row.inquiryNumber)}><DeleteIcon style={{ color: 'red' }} /></button>
+                  onClick={() => deleteDetail(row.apiPlanDrfNumber)}><DeleteIcon style={{ color: 'red' }} /></button>
                 </StyledTableCell>
               </StyledTableRow>
             ))}
