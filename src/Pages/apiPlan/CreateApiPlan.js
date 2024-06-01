@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { TextField ,Button,  Container, Grid, InputLabel , IconButton } from '@mui/material';
-// import '../../css/CustomerFrom.css';
-import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
-import moment from 'moment';
+import { TextField ,Button,  Container, Grid, InputLabel } from '@mui/material';
+
 import axios from 'axios';
 // import DataContext from '../../contextAPI/DataContext'
 // import "C:/Admin Panel/adminpanel/src/Pages/customerPage/createCustomer/customerFrom.css";
@@ -78,8 +75,6 @@ export default function CreateApi() {
         percentageOfSolid: "",
         grainPoint: "",
         description: ""
-    
-      
   });
   
   
@@ -255,7 +250,7 @@ export default function CreateApi() {
   return (
       <Container className="container" sx={{ marginTop: "20px", backgroundColor: "rgb(250, 251, 251)" }}>
         {!apId ? <h1 style={{ marginLeft: '20px' }}>API plan :</h1> : <h1 style={{ marginLeft: '20px' }}>Update Api Plan :</h1>}
-        <form onSubmit={handleSubmit} className="form-style">
+        <form onSubmit={handleSubmit} >
           <div className='card'>
             <h3>API Plan:-</h3>
             <Grid container spacing={2}>
@@ -301,10 +296,11 @@ export default function CreateApi() {
                 />
               </Grid>
 
+
               <Grid item xs={4}>
               <InputLabel className="ip-label">Costing Requirement</InputLabel>
               <select
-                className="text-field" style={{ width: "63%", padding: "10px" }}
+                className="text-field" style={{ width: "63%",height:"2rem", padding: "10px" }}
                 name="costingRequirement"
                 value={formData.costingRequirement}
                 onChange={handleChange}
@@ -487,52 +483,7 @@ export default function CreateApi() {
 
 {/*  Opration Parameter*/}
 
-          <div className="card">
-            <h3>Operation Parameters</h3>
-            <Grid container spacing={2}>
-            <Grid item xs={4}>      
-                <InputLabel className="ip-label">Center Type</InputLabel >
-              <TextField
-              size="small"
-                className="text-field"
-                name="centerType"
-                value={formData.centerType}
-                onChange={handleChange} />
-            </Grid>
 
-            <Grid item xs={4}>      
-                <InputLabel className="ip-label">Rotary Joint Type</InputLabel >
-              <TextField
-              size="small"
-                className="text-field"
-                name="rotaryJointType"
-                value={formData.rotaryJointType}
-                onChange={handleChange} />
-            </Grid>
-
-            <Grid item xs={4}>      
-                <InputLabel className="ip-label">Syphon Pipe Type</InputLabel >
-              <TextField
-              size="small"
-                className="text-field"
-                name="syphonPipeType"
-                value={formData.syphonPipeType}
-                onChange={handleChange} />
-            </Grid>
-
-
-            <Grid item xs={4}>      
-                <InputLabel className="ip-label">Syphon Pipe Diameter</InputLabel >
-              <TextField
-              size="small"
-                className="text-field"
-                name="syphonPipeDiameter"
-                value={formData.syphonPipeDiameter}
-                onChange={handleChange} />
-            </Grid>
-
-            </Grid>
-            </div>
 
 
             
@@ -607,7 +558,7 @@ export default function CreateApi() {
       </Grid>
       </div>
 
-          <Grid item xs={4}>
+          <Grid item xs={4} style={{marginLeft:"1rem",marginBottom:'1rem'}}>
           <Grid item xs={4}>
         
         {!apId ?( <Button className="submit-btn" type="submit" onClick ={handleSubmit} variant="contained" >Submit</Button>) : (

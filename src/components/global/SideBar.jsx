@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef, useContext, useState } from "react";
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { Box, IconButton, Typography, useTheme, Avatar } from "@mui/material";
+import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
 import { ColorModeContext } from "../../theme";
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -11,18 +10,16 @@ import EditIcon from '@mui/icons-material/Edit';
 import ImageIcon from '@mui/icons-material/Image';
 import hassan_usmani21 from "../../assets/hassan_usmani21.webp";
 import PersonIcon from '@mui/icons-material/Person';
-import { useParams } from "react-router-dom";
 
-
-const CustomSidebar = () => {
+const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(true);
   const colorMode = useContext(ColorModeContext);
   const backgroundColor = colorMode === "dark" ? colors.primary[900] : theme.palette.background.default;
-  const navigate = useNavigate();
+  const sidebarRef = useRef(null);
 
-  
+  const [activeSubMenu, setActiveSubMenu] = useState("");
+
   useEffect(() => {
     document.body.style.backgroundColor = backgroundColor;
     return () => {
@@ -30,202 +27,270 @@ const CustomSidebar = () => {
     };
   }, [backgroundColor]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        setIsSidebar(true); // Collapse the sidebar
+      }
+    };
 
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [sidebarRef, setIsSidebar]);
 
-
-  
-
-  // Set the background color for sub-menu items in dark mode
-  const subMenuItemStyle = colorMode === "dark" ? { backgroundColor: colors.primary[900] } : {};
-
-  
-    // const handleMenuItemClick = () => {
-    //   // Hide the sidebar when a menu item is clicked
-    //   setIsCollapsed(true);
-    // };
-
-    
-  
-  
+  const getSubMenuStyle = (menuName) => ({
+    backgroundColor: activeSubMenu === menuName ? 'darkblue' : 'transparent',
+    color: activeSubMenu === menuName ? 'white' : 'black',
+  });
 
   return (
-    <Box
-      id="sidebar"
-      height="100vh"
-      bgcolor={backgroundColor}
-      style={{
-        overflowY: "hidden",
-        position: "fixed",
-        top: 0,
-        left: 0,
-        bottom: 0,
-        zIndex: 2,
-        paddingRight:'0px'
-      }}
-      pr={2}
+<Box
+  ref={sidebarRef}
+  id="sidebar"
+  height="100vh"
+  bgcolor={backgroundColor}
+  style={{
+    overflowY: "hidden",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    zIndex: 2,
+    paddingRight: '0px'
+  }}
+  pr={2}
+  sx={{
+    "& .css-dip3t8": {
+      backgroundColor: "transparent !important",
+    },
+    "& ul, & ul ul": {
+      padding: 0,
+      margin: 0,
+      listStyle: "none", // Remove bullet points
+    },
+    "& li": {
+      listStyle: "none", // Remove bullet points
+    },
+    "& .pro-menu-item": {
+      padding: "10px",
+      color: 'black',
+      "&:hover": {
+        backgroundColor: 'lightgray',
+      },
+    },
+  }}
+>
 
-      sx={{
-        // ... (previous styles)
-        "& .css-dip3t8": {
-          backgroundColor: "transparent !important",
-        }
-
-      }}>
 
 
-      <div style={{ display: "flex", height: "100vh", justifyContent: "center" }}>
+      <div style={{ display: "flex", height: "100vh", justifyContent: "center", listStyle:"none" }}>
         <Sidebar
           id="custom-sidebar"
-          collapsed={isCollapsed}
+          collapsed={isSidebar}
           style={{
-            backgroundColor:
-              colorMode === "dark" ? colors.primary[900] : theme.palette.background.default,
+            backgroundColor: backgroundColor,
             flex: 1,
             overflowY: "auto",
+            boxShadow: 3,
           }}
-
-        
-          
         >
-          <Menu iconShape="square">
+          <Menu iconShape="square" >
             <MenuItem
-              onClick={() => setIsCollapsed(!isCollapsed)}
-              icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+              onClick={() => setIsSidebar(!isSidebar)}
+              icon={isSidebar ? <MenuOutlinedIcon /> : undefined}
               style={{
                 margin: "10px 0 20px 0",
-                color: colors.grey[100],
-
+                color: 'black',
+                listStyleType:"none"
               }}
             >
-              {!isCollapsed && (
-                <Box
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  ml="15px"
-                >
-                  <Typography variant="h3" color={colors.grey[100]}>
+              {!isSidebar && (
+                <Box display="flex" justifyContent="space-between" alignItems="center" ml="15px">
+                  <Typography variant="h3" color="black">
                     Admin
                   </Typography>
-                  <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                  <IconButton onClick={() => setIsSidebar(!isSidebar)}>
                     <MenuOutlinedIcon />
                   </IconButton>
                 </Box>
               )}
             </MenuItem>
 
-            {!isCollapsed && (
+            {!isSidebar && (
               <Box mb="25px">
                 <Box display="flex" justifyContent="center" alignItems="center">
-                  <img
-                    alt="profile-user"
-                    width="100px"
-                    height="100px"
-                    src={hassan_usmani21}
-                    style={{ cursor: "pointer", borderRadius: "50%" }}
-                  />
+                  <Avatar alt="profile-user" src={hassan_usmani21} sx={{ width: 100, height: 100, cursor: "pointer" }} />
                 </Box>
-                <Box textAlign="center">
-                  <Typography
-                    variant="h2"
-                    color={colors.red}
-                    fontWeight="bold"
-                    sx={{ m: "10px 0 0 0" }}
-                  >
+                <Box textAlign="center" mt={2}>
+                  <Typography variant="h5" color="red" fontWeight="bold">
                     Ed Roh
                   </Typography>
-                  <Typography variant="h5" color={colors.greenAccent[500]}>
+                  <Typography variant="body1" color="greenAccent">
                     VP Fancy Admin
                   </Typography>
                 </Box>
               </Box>
             )}
 
-            <Box paddingLeft={isCollapsed ? undefined : "10%"}
-            sx={{
-              "& .css-1097eso": {
-                display: 'inline',
-              },
-            }}
-          
-            >
-              <Menu>
+            <Box pl={isSidebar ? 0 : 3}  >
+              <Menu >
                 {/* Customer */}
-                <SubMenu label="Customer" icon={<PersonIcon />} styles={{ subMenu: subMenuItemStyle,}}
-
-                >
-                  <MenuItem icon={<AddBoxIcon />}
-                  onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <Link to="/Customer">New</Link> 
+                <SubMenu label="Customer" icon={<PersonIcon />} style={{listStyle:"none"}}>
+                  <Link to="/Customer" style={{ color: 'inherit', }}>
+                  <MenuItem
+                    icon={<AddBoxIcon />}
+                    style={getSubMenuStyle("Customer New")}
+                    onClick={() => setActiveSubMenu("Customer New")}
+                  >
+                    New
                   </MenuItem>
+                  </Link>
 
-
-                  <MenuItem icon={<EditIcon />}
-                   onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <Link to="/editCustomer">Edit</Link>
+                  <Link to="/editCustomer" style={{ color: 'inherit' }}>
+                  <MenuItem
+                    icon={<EditIcon />}
+                    style={getSubMenuStyle("Customer Edit")}
+                    onClick={() => setActiveSubMenu("Customer Edit")}
+                  >
+                    Edit
                   </MenuItem>
-
-                  
+                  </Link>
                 </SubMenu>
+                
 
                 {/* Sales Inquiry */}
-                <SubMenu label="Sales Inquiry" 
-                icon={<PersonIcon />} 
-                styles={{ subMenu: subMenuItemStyle }}>
- 
-                <MenuItem icon={<AddBoxIcon />}
-                  onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <Link to="/SalesInquiry">New</Link>
+                <SubMenu label="Sales Inquiry" icon={<PersonIcon />}>
+                <Link to="/SalesInquiry" style={{ color: 'inherit' }}>
+                  <MenuItem
+                    icon={<AddBoxIcon />}
+                    style={getSubMenuStyle("Sales Inquiry New")}
+                    onClick={() => setActiveSubMenu("Sales Inquiry New")}
+                  >
+                   New
                   </MenuItem>
-
-                  <MenuItem icon={<EditIcon />}  onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <Link to="/editSales">Edit</Link></MenuItem>
+                   </Link>
+                 
+                   <Link to="/editSales" style={{ color: 'inherit' }}>
+                  <MenuItem
+                    icon={<EditIcon />}
+                    style={getSubMenuStyle("Sales Inquiry Edit")}
+                    onClick={() => setActiveSubMenu("Sales Inquiry Edit")}
+                  >
+                    Edit
+                  </MenuItem>
+                  </Link>
                 </SubMenu>
 
+
+
                 {/* Drawing Requisition */}
-                <SubMenu label="Drawing Requisition" icon={<ImageIcon />} styles={{ subMenu: subMenuItemStyle }}>
-                  <Link to ='/createPump'><MenuItem icon={<AddBoxIcon />}>PumpSeal New </MenuItem></Link>
-                  <Link to ='/editPump'><MenuItem icon={<AddBoxIcon />}>Edit</MenuItem></Link>
-                  <Link to ='/createRotary'><MenuItem icon={<AddBoxIcon />}>Rotary Join New</MenuItem></Link>
-                  <Link to ='/editRotary'><MenuItem icon={<AddBoxIcon />}>Edit Rotary Join</MenuItem></Link>
-                  <Link to ='/createApi'><MenuItem icon={<AddBoxIcon />}>API Plan New</MenuItem></Link>
-                  <Link to ='/editApi'><MenuItem icon={<AddBoxIcon />}>Edit API Plan</MenuItem></Link>
-                  <MenuItem icon={<AddBoxIcon />}>Agitator Seal New</MenuItem>
-                  <MenuItem icon={<AddBoxIcon />}>Status</MenuItem>
-                  <MenuItem icon={<AddBoxIcon />}>Status</MenuItem>
-                  <MenuItem icon={<AddBoxIcon />}>Status Filter</MenuItem>
+                <SubMenu label="Drawing Requisition" icon={<ImageIcon />}>
+                <Link to='/createPump' style={{ color: 'inherit' }}>
+                  <MenuItem
+                    icon={<AddBoxIcon />}
+                    style={getSubMenuStyle("Drawing Requisition PumpSeal New")}
+                    onClick={() => setActiveSubMenu("Drawing Requisition PumpSeal New")}
+                  >
+                    PumpSeal New
+                  </MenuItem>
+                  </Link>
+                  
+
+                  <Link to='/editPump' style={{ color: 'inherit' }}>
+                  <MenuItem
+                    icon={<AddBoxIcon />}
+                    style={getSubMenuStyle("Drawing Requisition Edit")}
+                    onClick={() => setActiveSubMenu("Drawing Requisition Edit")}
+                  >
+                    Edit
+                  </MenuItem>
+                  </Link>
+
+
+                  <Link to='/createRotary' style={{ color: 'inherit' }}> 
+                  <MenuItem
+                    icon={<AddBoxIcon />}
+                    style={getSubMenuStyle("Drawing Requisition Rotary Join New")}
+                    onClick={() => setActiveSubMenu("Drawing Requisition Rotary Join New")}
+                  >
+                    Rotary Join New
+                  </MenuItem>
+                  </Link>
+
+                  <Link to='/editRotary' style={{ color: 'inherit' }}>
+                  <MenuItem
+                    icon={<AddBoxIcon />}
+                    style={getSubMenuStyle("Drawing Requisition Edit Rotary Join")}
+                    onClick={() => setActiveSubMenu("Drawing Requisition Edit Rotary Join")}
+                  >
+                    Edit Rotary Join
+                  </MenuItem>
+                  </Link>
+
+                  <Link to='/createApi' style={{ color: 'inherit' }}>
+                  <MenuItem
+                    icon={<AddBoxIcon />}
+                    style={getSubMenuStyle("Drawing Requisition API Plan New")}
+                    onClick={() => setActiveSubMenu("Drawing Requisition API Plan New")}
+                  >
+                    API Plan New
+                  </MenuItem>
+                  </Link>
+
+                  <Link to='/editApi' style={{ color: 'inherit' }}>
+                  <MenuItem
+                    icon={<AddBoxIcon />}
+                    style={getSubMenuStyle("Drawing Requisition Edit API Plan")}
+                    onClick={() => setActiveSubMenu("Drawing Requisition Edit API Plan")}
+                  >
+                    Edit API Plan
+                  </MenuItem>
+                  </Link>
+
+
+
+                  <MenuItem
+                    icon={<AddBoxIcon />}
+                    style={getSubMenuStyle("Drawing Requisition Agitator Seal New")}
+                    onClick={() => setActiveSubMenu("Drawing Requisition Agitator Seal New")}
+                  >
+                    Agitator Seal New
+                  </MenuItem>
+                  <MenuItem
+                    icon={<AddBoxIcon />}
+                    style={getSubMenuStyle("Drawing Requisition Edit Agitator")}
+                    onClick={() => setActiveSubMenu("Drawing Requisition Edit Agitator")}
+                  >
+                    Edit Agitator
+                  </MenuItem>
                 </SubMenu>
 
                 {/* Quotation */}
-                <SubMenu label="Quotation" 
-                icon={<PersonIcon />} 
-                styles={{ subMenu: subMenuItemStyle }}>
-                   <MenuItem icon={<EditIcon />}
-                  onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <Link to="/Quotation">Edit</Link>
+                <SubMenu label="Quotation" icon={<PersonIcon />}>
+                  <MenuItem
+                    icon={<EditIcon />}
+                    style={getSubMenuStyle("Quotation Edit")}
+                    onClick={() => setActiveSubMenu("Quotation Edit")}
+                  >
+                    <Link to="/Quotation" style={{ color: 'inherit' }}>Edit</Link>
                   </MenuItem>
                   <MenuItem icon={<EditIcon />}>Edit</MenuItem>
                 </SubMenu>
 
                 {/* Ofm */}
-                <SubMenu label="Ofm" icon={<PersonIcon />} styles={{ subMenu: subMenuItemStyle }}>
-                <MenuItem icon={<EditIcon />}
-                  onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <Link to="/OfmId">Edit</Link>
+                <SubMenu
+                  label="Ofm"
+                  icon={<PersonIcon />}
+                  style={getSubMenuStyle("Quotation Edit")}
+                  onClick={() => setActiveSubMenu("Quotation Edit")}
+                >
+                  <MenuItem icon={<EditIcon />} onClick={() => setIsSidebar(true)}>
+                    <Link to="/OfmId" style={{ color: 'white' }}>Edit</Link>
                   </MenuItem>
                   <MenuItem icon={<EditIcon />}>Edit</MenuItem>
                 </SubMenu>
-
-                {/* Ofm Communication */}
-                <SubMenu label="Ofm Communication" icon={<PersonIcon />} styles={{ subMenu: subMenuItemStyle }}>
-                  <MenuItem icon={<AddBoxIcon />}>Dashboard</MenuItem>
-                  <MenuItem icon={<EditIcon />}
-                  onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <Link to="/OfmCommunication">Ofm Communication List</Link>
-                  </MenuItem>
-                  <MenuItem icon={<EditIcon />}>Ofm To OA-Link</MenuItem>
-                </SubMenu>
-
               </Menu>
             </Box>
           </Menu>

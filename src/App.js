@@ -27,7 +27,7 @@ function App() {
         <CssBaseline />
         <div className="app">
           <main className="content">
-          <CustomSidebar isSidebar={isSidebar} />
+          <CustomSidebar isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
           <Topbar setIsSidebar={setIsSidebar} />
               <AllRoute/>
           </main>
