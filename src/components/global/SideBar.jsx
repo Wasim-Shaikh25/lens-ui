@@ -12,6 +12,8 @@ import hassan_usmani21 from "../../assets/hassan_usmani21.webp";
 import PersonIcon from '@mui/icons-material/Person';
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+
 
 const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
   const theme = useTheme();
@@ -85,7 +87,7 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
           padding: 0, // Additional specificity
         },
         "& .pro-menu-item": {
-          padding: "10px 20px",
+          padding: "5px 10px",
           borderRadius: '8px',
           margin: '4px 0',
           "&:hover": {
@@ -109,6 +111,9 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
             overflowY: "auto",
             listStyle: 'none',
             boxShadow: 3,
+            borderRadius:"3px",
+            margin:"5px 0",
+            boxShadow:"rgba(90, 114, 123, 0.11) 0px 7px 30px 0px"
           }}
         >
           <Menu iconShape="square">
