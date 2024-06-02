@@ -5,8 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import moment from 'moment';
 import axios from 'axios';
-// import DataContext from '../../contextAPI/DataContext'
-// import "C:/Admin Panel/adminpanel/src/Pages/customerPage/createCustomer/customerFrom.css";
+
 import { useNavigate, useParams } from 'react-router-dom';
 
 
@@ -171,12 +170,6 @@ export default function CreateSales() {
     } 
 
 
-    // if (formData.salesItems && formData.salesItems.length > "") {
-    //   // Update insertedOn and lastUpdatedOn for the last item in customerDetail
-    //   formData.salesItems[formData.salesItems.length -1].lastUpdatedOn = "2""24-""4-28T12:32:46.141Z";
-    //   formData.salesItems[formData.salesItems.length -1].insertedOn = "2""24-""4-28T12:32:46.141Z";
-    // } 
-
     
       // If customerDetail is not defined or empty, set insertedOn and lastUpdatedOn for formData
       formData.insertedOn = dateTime;
@@ -206,7 +199,6 @@ export default function CreateSales() {
       // formData.salesItems[formData.salesItems.length -1].insertedOn = dateTime;
     } 
       // If customerDetail is not defined or empty, set insertedOn and lastUpdatedOn for formData
-      // formData.insertedOn = dateTime;
       formData.lastUpdatedOn = dateTime;
      
       console.log("formData inside update ",formData);
@@ -434,14 +426,6 @@ export default function CreateSales() {
 
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label" >New or Existing</InputLabel >
-          {/* <TextField
-          size="small"
-            className="text-field" 
-            name="newOrExisting"
-            value={detail.newOrExisting}
-            onChange={e => handleChange(e, index)}
-            fullWidth
-          /> */}
 
           <select name ="newOrExisting" value={detail.newOrExisting} onChange={e => handleChange(e, index)} >
             <option  value="Existing">Existing</option>

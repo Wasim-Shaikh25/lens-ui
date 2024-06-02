@@ -76,28 +76,6 @@ export default function EditPump() {
     };
     
 
-
-  // const deleteDetail =async (crId) => {
-  //   axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/pumSeal/delete?pumSealDrfNo=${crId}`)
-  //   .then(res=>{
-  //     console.log(res)
-  //     console.log("data is",data)
-  //     const newData = data.filter(item => item.pumSealDrfNo !== crId);
-  //     console.log("New data is",newData)
-  //     setIsDeleted(true)
-  //     setData(newData);
-
-  //   }).catch(err=>{
-  //     console.log(err)
-  //   })
-
-
-    
-  //   console.log("customer reference id of deletion elem is ", crId);
-  // };
-
-
-
   const deleteDetail = async (crId) => {
     try {
       await axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/pumSeal/delete?pumSealDrfNo=${crId}`);

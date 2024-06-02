@@ -7,9 +7,11 @@ import { ColorModeContext } from "../../theme";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import EditIcon from '@mui/icons-material/Edit';
-import ImageIcon from '@mui/icons-material/Image';
+import DescriptionIcon from '@mui/icons-material/Description';
 import hassan_usmani21 from "../../assets/hassan_usmani21.webp";
 import PersonIcon from '@mui/icons-material/Person';
+import LoyaltyIcon from '@mui/icons-material/Loyalty';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 
 const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
   const theme = useTheme();
@@ -26,6 +28,7 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
       document.body.style.backgroundColor = ''; // Reset background color when component unmounts
     };
   }, [backgroundColor]);
+  
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -41,215 +44,220 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
   }, [sidebarRef, setIsSidebar]);
 
   const getSubMenuStyle = (menuName) => ({
-    backgroundColor: activeSubMenu === menuName ? 'darkblue' : 'transparent',
+    backgroundColor: activeSubMenu === menuName ? '#00C292' : 'transparent',
     color: activeSubMenu === menuName ? 'white' : 'black',
+    borderRadius: '8px',
+    margin: '4px 6px',
   });
 
   return (
-<Box
-  ref={sidebarRef}
-  id="sidebar"
-  height="100vh"
-  bgcolor={backgroundColor}
-  style={{
-    overflowY: "hidden",
-    position: "fixed",
-    top: 0,
-    left: 0,
-    bottom: 0,
-    zIndex: 2,
-    paddingRight: '0px'
-  }}
-  pr={2}
-  sx={{
-    "& .css-dip3t8": {
-      backgroundColor: "transparent !important",
-    },
-    "& ul, & ul ul": {
-      padding: 0,
-      margin: 0,
-      listStyle: "none", // Remove bullet points
-    },
-    "& li": {
-      listStyle: "none", // Remove bullet points
-    },
-    "& .pro-menu-item": {
-      padding: "10px",
-      color: 'black',
-      "&:hover": {
-        backgroundColor: 'lightgray',
-      },
-    },
-  }}
->
-
-
-
-      <div style={{ display: "flex", height: "100vh", justifyContent: "center", listStyle:"none" }}>
+    <Box
+      ref={sidebarRef}
+      id="sidebar"
+      height="100vh"
+      bgcolor={backgroundColor}
+      style={{
+        overflowY: "hidden",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        bottom: 0,
+        zIndex: 2,
+        paddingRight: '0px'
+      }}
+      pr={2}
+      sx={{
+        "& .css-dip3t8": {
+          backgroundColor: "transparent !important",
+        },
+        "& ul, & ul ul": {
+          padding: 0,
+          margin: 0,
+          listStyle: "none !important", // Remove bullet points
+        },
+        "& li": {
+          listStyle: "none !important", // Remove bullet points
+        },
+        "& .pro-sidebar-content": {
+          padding: 0, // Additional specificity
+        },
+        "& .pro-menu": {
+          padding: 0, // Additional specificity
+        },
+        "& .pro-menu-item": {
+          padding: "10px 20px",
+          borderRadius: '8px',
+          margin: '4px 0',
+          "&:hover": {
+            backgroundColor: '#03C9D7',
+            color: 'white',
+          },
+        },
+        "& .pro-menu-item-active": {
+          backgroundColor: '#03C9D7 !important',
+          color: 'white !important',
+        },
+      }}
+    >
+      <div style={{ display: "flex", height: "100vh", justifyContent: "center", listStyle: "none" }}>
         <Sidebar
           id="custom-sidebar"
           collapsed={isSidebar}
           style={{
-            backgroundColor: backgroundColor,
+            backgroundColor: "#FFFFFF",
             flex: 1,
             overflowY: "auto",
+            listStyle: 'none',
             boxShadow: 3,
           }}
         >
-          <Menu iconShape="square" >
+          <Menu iconShape="square">
             <MenuItem
               onClick={() => setIsSidebar(!isSidebar)}
               icon={isSidebar ? <MenuOutlinedIcon /> : undefined}
               style={{
                 margin: "10px 0 20px 0",
                 color: 'black',
-                listStyleType:"none"
+                listStyleType: "none"
               }}
             >
               {!isSidebar && (
-                <Box display="flex" justifyContent="space-between" alignItems="center" ml="15px">
-                  <Typography variant="h3" color="black">
-                    Admin
+                <Box display="flex" justifyContent="space-between" alignItems="center" ml="15px" pr="15px">
+                  <Typography variant="h6" color="black" fontWeight="bold">
+                    Admin Panel
                   </Typography>
                   <IconButton onClick={() => setIsSidebar(!isSidebar)}>
                     <MenuOutlinedIcon />
                   </IconButton>
                 </Box>
               )}
+              <hr />
             </MenuItem>
 
             {!isSidebar && (
               <Box mb="25px">
                 <Box display="flex" justifyContent="center" alignItems="center">
-                  <Avatar alt="profile-user" src={hassan_usmani21} sx={{ width: 100, height: 100, cursor: "pointer" }} />
+                  <Avatar alt="profile-user" src={hassan_usmani21} sx={{ width: 80, height: 80, cursor: "pointer", boxShadow: 3 }} />
                 </Box>
                 <Box textAlign="center" mt={2}>
-                  <Typography variant="h5" color="red" fontWeight="bold">
-                    Ed Roh
+                  <Typography variant="h6" color="black" fontWeight="bold">
+                    PK
                   </Typography>
-                  <Typography variant="body1" color="greenAccent">
-                    VP Fancy Admin
+                  <Typography variant="body2" color="textSecondary">
+                    Hassan Admin
                   </Typography>
                 </Box>
               </Box>
             )}
-
-            <Box pl={isSidebar ? 0 : 3}  >
-              <Menu >
+            
+            <Box pl={isSidebar ? 0 : 3}>
+              <Menu>
                 {/* Customer */}
-                <SubMenu label="Customer" icon={<PersonIcon />} style={{listStyle:"none"}}>
-                  <Link to="/Customer" style={{ color: 'inherit', }}>
-                  <MenuItem
-                    icon={<AddBoxIcon />}
-                    style={getSubMenuStyle("Customer New")}
-                    onClick={() => setActiveSubMenu("Customer New")}
-                  >
-                    New
-                  </MenuItem>
+                <SubMenu label={<Typography variant="body1">Customer</Typography>} icon={<PersonIcon />}>
+                  <Link to="/Customer" style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getSubMenuStyle("Customer New")}
+                      onClick={() => setActiveSubMenu("Customer New")}
+                    >
+                      New
+                    </MenuItem>
                   </Link>
 
-                  <Link to="/editCustomer" style={{ color: 'inherit' }}>
-                  <MenuItem
-                    icon={<EditIcon />}
-                    style={getSubMenuStyle("Customer Edit")}
-                    onClick={() => setActiveSubMenu("Customer Edit")}
-                  >
-                    Edit
-                  </MenuItem>
+                  <Link to="/editCustomer" style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<EditIcon />}
+                      style={getSubMenuStyle("Customer Edit")}
+                      onClick={() => setActiveSubMenu("Customer Edit")}
+                    >
+                      Edit
+                    </MenuItem>
                   </Link>
                 </SubMenu>
-                
 
                 {/* Sales Inquiry */}
-                <SubMenu label="Sales Inquiry" icon={<PersonIcon />}>
-                <Link to="/SalesInquiry" style={{ color: 'inherit' }}>
-                  <MenuItem
-                    icon={<AddBoxIcon />}
-                    style={getSubMenuStyle("Sales Inquiry New")}
-                    onClick={() => setActiveSubMenu("Sales Inquiry New")}
-                  >
-                   New
-                  </MenuItem>
-                   </Link>
-                 
-                   <Link to="/editSales" style={{ color: 'inherit' }}>
-                  <MenuItem
-                    icon={<EditIcon />}
-                    style={getSubMenuStyle("Sales Inquiry Edit")}
-                    onClick={() => setActiveSubMenu("Sales Inquiry Edit")}
-                  >
-                    Edit
-                  </MenuItem>
+                <SubMenu label={<Typography variant="body1">Sales Inquiry</Typography>} icon={<LoyaltyIcon />}>
+                  <Link to="/SalesInquiry" style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getSubMenuStyle("Sales Inquiry New")}
+                      onClick={() => setActiveSubMenu("Sales Inquiry New")}
+                    >
+                      New
+                    </MenuItem>
+                  </Link>
+
+                  <Link to="/editSales" style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<EditIcon />}
+                      style={getSubMenuStyle("Sales Inquiry Edit")}
+                      onClick={() => setActiveSubMenu("Sales Inquiry Edit")}
+                    >
+                      Edit
+                    </MenuItem>
                   </Link>
                 </SubMenu>
-
-
-
                 {/* Drawing Requisition */}
-                <SubMenu label="Drawing Requisition" icon={<ImageIcon />}>
-                <Link to='/createPump' style={{ color: 'inherit' }}>
-                  <MenuItem
-                    icon={<AddBoxIcon />}
-                    style={getSubMenuStyle("Drawing Requisition PumpSeal New")}
-                    onClick={() => setActiveSubMenu("Drawing Requisition PumpSeal New")}
-                  >
-                    PumpSeal New
-                  </MenuItem>
-                  </Link>
-                  
-
-                  <Link to='/editPump' style={{ color: 'inherit' }}>
-                  <MenuItem
-                    icon={<AddBoxIcon />}
-                    style={getSubMenuStyle("Drawing Requisition Edit")}
-                    onClick={() => setActiveSubMenu("Drawing Requisition Edit")}
-                  >
-                    Edit
-                  </MenuItem>
+                <SubMenu label="Drawing Requisition" icon={<DescriptionIcon />}>
+                  <Link to='/createPump' style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getSubMenuStyle("Drawing Requisition PumpSeal New")}
+                      onClick={() => setActiveSubMenu("Drawing Requisition PumpSeal New")}
+                    >
+                      PumpSeal New
+                    </MenuItem>
                   </Link>
 
-
-                  <Link to='/createRotary' style={{ color: 'inherit' }}> 
-                  <MenuItem
-                    icon={<AddBoxIcon />}
-                    style={getSubMenuStyle("Drawing Requisition Rotary Join New")}
-                    onClick={() => setActiveSubMenu("Drawing Requisition Rotary Join New")}
-                  >
-                    Rotary Join New
-                  </MenuItem>
+                  <Link to='/editPump' style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<EditIcon />}
+                      style={getSubMenuStyle("Drawing Requisition Edit")}
+                      onClick={() => setActiveSubMenu("Drawing Requisition Edit")}
+                    >
+                      Edit Pump Seal
+                    </MenuItem>
                   </Link>
 
-                  <Link to='/editRotary' style={{ color: 'inherit' }}>
-                  <MenuItem
-                    icon={<AddBoxIcon />}
-                    style={getSubMenuStyle("Drawing Requisition Edit Rotary Join")}
-                    onClick={() => setActiveSubMenu("Drawing Requisition Edit Rotary Join")}
-                  >
-                    Edit Rotary Join
-                  </MenuItem>
+                  <Link to='/createRotary' style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getSubMenuStyle("Drawing Requisition Rotary Join New")}
+                      onClick={() => setActiveSubMenu("Drawing Requisition Rotary Join New")}
+                    >
+                      Rotary Join New
+                    </MenuItem>
                   </Link>
 
-                  <Link to='/createApi' style={{ color: 'inherit' }}>
-                  <MenuItem
-                    icon={<AddBoxIcon />}
-                    style={getSubMenuStyle("Drawing Requisition API Plan New")}
-                    onClick={() => setActiveSubMenu("Drawing Requisition API Plan New")}
-                  >
-                    API Plan New
-                  </MenuItem>
+                  <Link to='/editRotary' style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<EditIcon />}
+                      style={getSubMenuStyle("Drawing Requisition Edit Rotary Join")}
+                      onClick={() => setActiveSubMenu("Drawing Requisition Edit Rotary Join")}
+                    >
+                      Edit Rotary Join
+                    </MenuItem>
                   </Link>
 
-                  <Link to='/editApi' style={{ color: 'inherit' }}>
-                  <MenuItem
-                    icon={<AddBoxIcon />}
-                    style={getSubMenuStyle("Drawing Requisition Edit API Plan")}
-                    onClick={() => setActiveSubMenu("Drawing Requisition Edit API Plan")}
-                  >
-                    Edit API Plan
-                  </MenuItem>
+                  <Link to='/createApi' style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getSubMenuStyle("Drawing Requisition API Plan New")}
+                      onClick={() => setActiveSubMenu("Drawing Requisition API Plan New")}
+                    >
+                      API Plan New
+                    </MenuItem>
                   </Link>
 
-
+                  <Link to='/editApi' style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<EditIcon />}
+                      style={getSubMenuStyle("Drawing Requisition Edit API Plan")}
+                      onClick={() => setActiveSubMenu("Drawing Requisition Edit API Plan")}
+                    >
+                      Edit API Plan
+                    </MenuItem>
+                  </Link>
 
                   <MenuItem
                     icon={<AddBoxIcon />}
@@ -259,7 +267,7 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
                     Agitator Seal New
                   </MenuItem>
                   <MenuItem
-                    icon={<AddBoxIcon />}
+                    icon={<EditIcon />}
                     style={getSubMenuStyle("Drawing Requisition Edit Agitator")}
                     onClick={() => setActiveSubMenu("Drawing Requisition Edit Agitator")}
                   >
@@ -268,28 +276,26 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
                 </SubMenu>
 
                 {/* Quotation */}
-                <SubMenu label="Quotation" icon={<PersonIcon />}>
-                  <MenuItem
-                    icon={<EditIcon />}
-                    style={getSubMenuStyle("Quotation Edit")}
-                    onClick={() => setActiveSubMenu("Quotation Edit")}
-                  >
-                    <Link to="/Quotation" style={{ color: 'inherit' }}>Edit</Link>
-                  </MenuItem>
-                  <MenuItem icon={<EditIcon />}>Edit</MenuItem>
-                </SubMenu>
+                <SubMenu label="Quotation" icon={<MonetizationOnIcon />}>
+                  <Link to="/Quotation" style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getSubMenuStyle("Quotation New")}
+                      onClick={() => setActiveSubMenu("Quotation New")}
+                    >
+                      New
+                    </MenuItem>
+                  </Link>
 
-                {/* Ofm */}
-                <SubMenu
-                  label="Ofm"
-                  icon={<PersonIcon />}
-                  style={getSubMenuStyle("Quotation Edit")}
-                  onClick={() => setActiveSubMenu("Quotation Edit")}
-                >
-                  <MenuItem icon={<EditIcon />} onClick={() => setIsSidebar(true)}>
-                    <Link to="/OfmId" style={{ color: 'white' }}>Edit</Link>
-                  </MenuItem>
-                  <MenuItem icon={<EditIcon />}>Edit</MenuItem>
+                  <Link to="/Quotation" style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<EditIcon />}
+                      style={getSubMenuStyle("Quotation Edit")}
+                      onClick={() => setActiveSubMenu("Quotation Edit")}
+                    >
+                      Edit
+                    </MenuItem>
+                  </Link>
                 </SubMenu>
               </Menu>
             </Box>
@@ -301,3 +307,7 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
 };
 
 export default CustomSidebar;
+
+
+
+

@@ -1,3 +1,7 @@
+*{
+  font-family: 'Times New Roman', Times, serif;
+}
+
 .container{
   margin-top: 20px !important;
   background-color: rgb(250, 251, 251) !important;
@@ -37,6 +41,11 @@
   margin-left: 18px  !important;
 }
 
+.css-um1o6k{
+  position: absolute !important;
+  right: -6px !important;
+  top: 50% !important;
+}
 
 .submit-btn{
   background-color: #03C9D7 !important;

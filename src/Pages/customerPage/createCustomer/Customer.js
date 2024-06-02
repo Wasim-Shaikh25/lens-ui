@@ -5,8 +5,6 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import moment from 'moment';
 import axios from 'axios';
-import { useContext } from 'react'; 
-// import DataContext from '../../contextAPI/DataContext'
 import "./customerFrom.css";
 import { useNavigate, useParams } from 'react-router-dom';
 

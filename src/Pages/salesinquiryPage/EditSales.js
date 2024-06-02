@@ -46,13 +46,7 @@ export default function EditSales() {
   const [isDeleted, setIsDeleted] = useState(false);  
   const [itemsPerPage, setItemsPerPage] = useState(5); // Adjust as needed
   const navigate = useNavigate();  
-  // const { editData, setEditData } = useContext(AppContext); // Accessing context values
 
-
-  // const indexOfLastItem = currentPage * itemsPerPage;
-  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-  
   useEffect(() => {
     axios.get(`https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
       .then(res => {
@@ -182,3 +176,4 @@ export default function EditSales() {
     </div>
   );
 }
+
