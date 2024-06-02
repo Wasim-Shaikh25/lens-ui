@@ -2,6 +2,25 @@
   font-family: 'Times New Roman', Times, serif;
 }
 
+
+.css-1tqrhto >.ps-menu-button {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex !important;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 43px !important;
+  -webkit-text-decoration: none;
+  text-decoration: none !important;
+  color: inherit;
+  box-sizing: border-box;
+  cursor: pointer;
+  padding-right: 20px !important;
+  padding-left: 20px !important;
+}
 .container{
   margin-top: 20px !important;
   background-color: rgb(250, 251, 251) !important;
@@ -42,10 +61,44 @@
 }
 
 .css-um1o6k{
+  display:none !important;
   position: absolute !important;
-  right: -6px !important;
+  right:-6px !important;
   top: 50% !important;
 }
+
+
+.css-honxw6 {
+  display: inline-block;
+  -webkit-transition: -webkit-transform 0.3s !important;
+  transition: transform 0.3s !important;
+  border-right: 2px solid currentcolor !important;
+  border-bottom: 2px solid currentcolor !important;
+  width: 5px !important;
+  height: 5px !important;
+  -moz-transform: rotate(-45deg) !important;
+  -ms-transform: rotate(-45deg) !important;
+  transform: rotate(-45deg) !important;
+  margin-right: 9px  !important;
+}
+
+.css-jn69v9 {
+  display: inline-block !important;
+  -webkit-transition: -webkit-transform 0.3s !important;
+  transition: transform 0.3s !important;
+  border-right: 2px solid currentcolor !important;
+  border-bottom: 2px solid currentcolor !important;
+  width: 5px !important;
+  height: 5px !important;
+  -webkit-transform: rotate(45deg) !important;
+  -moz-transform: rotate(45deg) !important;
+  -ms-transform: rotate(45deg) !important;
+  transform: rotate(45deg) !important;
+  margin-right: 9px !important;
+  margin-bottom: 3px !important;
+}
+
+
 
 .submit-btn{
   background-color: #03C9D7 !important;
