@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { TextField ,Button,  Container, Grid, InputLabel } from '@mui/material';
-
-import axios from 'axios';
-// import DataContext from '../../contextAPI/DataContext'
-// import "C:/Admin Panel/adminpanel/src/Pages/customerPage/createCustomer/customerFrom.css";
+import { getApi, handleSubmit } from '../../APIs/ApiPlan';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import { handleUpdate } from '../../APIs/ApiPlan';
 
 
 
@@ -81,16 +78,7 @@ export default function CreateApi() {
 
    useEffect(()=>{
     if(apId!==undefined){
-      axios.get(`https://lens-svc.azurewebsites.net/lens-svc/apiPlan/get?apiPlanDrfNumber=${apId}`)
-      .then(res=>{
-        const {data} = res;
-          setFormData(data);
-          console.log("the apId fetched data is ",data)
-
-      }) 
-      .catch(err=>{
-        console.log(err)
-      })
+    getApi(apId,setFormData);
 
     }else{
       setFormData(
@@ -190,50 +178,6 @@ export default function CreateApi() {
   };
 
 
-
- 
-
-
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-
-      console.log("formData sales is ",formData);
-      
-      try{
-          const res = await axios.post("https://lens-svc.azurewebsites.net/lens-svc/apiPlan/save", formData);
-        console.log("response is ",res.data);
-        navigate(`/apiSuccess/${res.data}`);
-      }  
-      catch(err){
-        console.log(err)
-      }
-
-    // Add form submission logic here
-
-  };
-
-
-
-
-  const handleUpdate = async (e)=>{
-    e.preventDefault();
-  
-      
-      try{
-          const res = await axios.put("https://lens-svc.azurewebsites.net/lens-svc/apiPlan/update", formData);
-          console.log("response from update is ",res.data);
-      }
-      catch(err){
-        console.log(err)
-      }
-
-    
-    apId="";
-    navigate(`/apiSuccess/${formData.apiPlanDrfNumber}`);
-  }
-
-
-
   const cancelUpdate = ()=>{
 
       const confirmCancel = window.confirm("Are you sure you want to cancel the update?");
@@ -249,7 +193,7 @@ export default function CreateApi() {
  
   return (
       <Container className="container" sx={{ marginTop: "20px", backgroundColor: "rgb(250, 251, 251)" }}>
-        {!apId ? <h1 style={{ marginLeft: '20px' }}>API plan :</h1> : <h1 style={{ marginLeft: '20px' }}>Update Api Plan :</h1>}
+        {!apId ? <h1 style={{ marginLeft: '20px' }}>Create API Plan :</h1> : <h1 style={{ marginLeft: '20px' }}>Update Api Plan :</h1>}
         <form onSubmit={handleSubmit} >
           <div className='card'>
             <h3>API Plan:-</h3>
@@ -561,9 +505,9 @@ export default function CreateApi() {
           <Grid item xs={4} style={{marginLeft:"1rem",marginBottom:'1rem'}}>
           <Grid item xs={4}>
         
-        {!apId ?( <Button className="submit-btn" type="submit" onClick ={handleSubmit} variant="contained" >Submit</Button>) : (
+        {!apId ?( <Button className="submit-btn" type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate)} variant="contained" >Submit</Button>) : (
           <>
-            <Button className="update-btn" variant="contained" onClick={handleUpdate} >Update</Button>
+            <Button className="update-btn" variant="contained" onClick={(e)=>handleUpdate(e, formData, apId, navigate)} >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
         </Grid>

@@ -15,7 +15,6 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 
-
 const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -59,6 +58,8 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
 
   const getMenuItemStyle = (menuName) => ({
     color: activeItemMenu === menuName ? '#00CEC3' : 'black',
+    margin: '4px 18px',
+    borderRadius: '6px',
 
   });
 
@@ -111,7 +112,7 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
         },
       }}
     >
-      <div style={{ display: "flex", height: "100vh", justifyContent: "center", listStyle: "none" }}>
+      <div style={{ display: "flex", height: "100vh",width:"87%", justifyContent: "center", listStyle: "none" }}>
         <Sidebar
           id="custom-sidebar"
           collapsed={isSidebar}
@@ -123,7 +124,7 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
             boxShadow: 3,
             borderRadius:"3px",
             margin:"5px 0",
-            boxShadow:"rgba(90, 114, 123, 0.11) 0px 7px 30px 0px"
+            boxShadow:"0px 2px 4px rgba(0, 0, 0, 0.3)"
           }}
         >
           <Menu iconShape="square">
@@ -138,15 +139,16 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
             >
               {!isSidebar && (
                 <Box display="flex" justifyContent="space-between" alignItems="center" ml="15px" pr="15px">
-                  <Typography variant="h6" color="black" fontWeight="bold">
+                  <hr />
+                  <Typography variant="h5" color="black" fontWeight="bold">
                     Admin Panel
                   </Typography>
                   <IconButton onClick={() => setIsSidebar(!isSidebar)}>
-                    <MenuOutlinedIcon />
+                   { isSidebar?<MenuOutlinedIcon />: <KeyboardBackspaceIcon style={{position:"absolute",left:"40"}}/>}
                   </IconButton>
+                  <hr />
                 </Box>
               )}
-              <hr />
             </MenuItem>
 
             {!isSidebar && (
@@ -174,7 +176,7 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
                       icon={<AddBoxIcon />}
                       style={getMenuItemStyle("Customer")} onClick={() => setActiveItemMenu("Customer")}
                     >
-                      New
+                      Create
                     </MenuItem>
                   </Link>
 
@@ -196,9 +198,9 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
                   <Link to="/SalesInquiry" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
                       icon={<AddBoxIcon />}
-                      style={getMenuItemStyle("Sales Inquiry New")} onClick={() => setActiveItemMenu("Sales Inquiry New")}
+                      style={getMenuItemStyle("Sales Inquiry Create")} onClick={() => setActiveItemMenu("Sales Inquiry Create")}
                     >
-                      New
+                      Create
                     </MenuItem>
                   </Link>
 
@@ -219,10 +221,10 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
                   <Link to='/createPump' style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
                       icon={<AddBoxIcon />}
-                      style={getMenuItemStyle("Pump Seal New")} onClick={() => setActiveItemMenu("Pump Seal New")}
+                      style={getMenuItemStyle("Pump Seal Create")} onClick={() => setActiveItemMenu("Pump Seal Create")}
 
                     >
-                      PumpSeal New
+                      Create PumpSeal 
                     </MenuItem>
                   </Link>
 
@@ -238,10 +240,10 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
                   <Link to='/createRotary' style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
                       icon={<AddBoxIcon />}
-                      style={getMenuItemStyle("Rotary New")} onClick={() => setActiveItemMenu("Rotary New")}
+                      style={getMenuItemStyle("Rotary Create")} onClick={() => setActiveItemMenu("Rotary Create")}
 
                     >
-                      Rotary Join New
+                      Create Rotary Join 
                     </MenuItem>
                   </Link>
 
@@ -258,10 +260,10 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
                   <Link to='/createApi' style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
                       icon={<AddBoxIcon />}
-                      style={getMenuItemStyle("New Api")} onClick={() => setActiveItemMenu("New Api")}
+                      style={getMenuItemStyle("Create Api")} onClick={() => setActiveItemMenu("Create Api")}
 
                     >
-                      API Plan New
+                      Create API Plan 
                     </MenuItem>
                   </Link>
 
@@ -277,10 +279,10 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
 
                   <MenuItem
                     icon={<AddBoxIcon />}
-                    style={getMenuItemStyle("New Agitator")} onClick={() => setActiveItemMenu("New Agitator")}
+                    style={getMenuItemStyle("Create Agitator")} onClick={() => setActiveItemMenu("Create Agitator")}
 
                   >
-                    Agitator Seal New
+                    Create Agitator Seal 
                   </MenuItem>
                   <MenuItem
                     icon={<EditIcon />}
@@ -296,10 +298,10 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
                   <Link to="/Quotation" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
                       icon={<AddBoxIcon />}
-                      style={getMenuItemStyle("New quote")} onClick={() => setActiveItemMenu("New quote")}
+                      style={getMenuItemStyle("Create quote")} onClick={() => setActiveItemMenu("Create quote")}
 
                     >
-                      New
+                      Create Quotation
                     </MenuItem>
                   </Link>
 
@@ -307,9 +309,8 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
                     <MenuItem
                       icon={<EditIcon />}
                       style={getMenuItemStyle("Edit quote")} onClick={() => setActiveItemMenu("Edit quote")}
-
                     >
-                      Edit
+                      Edit Quotation
                     </MenuItem>
                   </Link>
                 </SubMenu>

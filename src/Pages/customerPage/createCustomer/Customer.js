@@ -7,7 +7,7 @@ import moment from 'moment';
 import axios from 'axios';
 import "./customerFrom.css";
 import { useNavigate, useParams } from 'react-router-dom';
-
+import {Box} from '@mui/material';
 
 
 
@@ -168,44 +168,48 @@ export default function Customer() {
  
     <Container className="container" sx= {{marginTop:"20px", backgroundColor:"rgb(250, 251, 251)"}}>
       {!rId?<h1 style={{marginLeft:"20px"}}>New Customer Registration :</h1> : <h1 style={{marginLeft:"20px"}}>Update Customer :</h1> }
-      <form onSubmit={handleSubmit} className="form-style">
+      <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
-         {rId &&<Grid item xs={4}>
-            <InputLabel className="ip-label"  >Customer Reference No</InputLabel >
-            <TextField
-              size="small" 
-              className="text-field" 
-              name="customerReferenceNumber"
-              value={formData.customerReferenceNumber}
-            />
-          </Grid>
-}          
-      <Grid item xs={4}>
-            <InputLabel className="ip-label" >Branch ID</InputLabel >
-            <TextField
-              size="small" 
-              className="text-field" 
-              name="branchId"
-              value={formData.branchId}
-              onChange={handleChange}
-            
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <InputLabel className="ip-label"  >Name</InputLabel >
-            <TextField
-              size="small" 
-              className="text-field" 
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-            />
-          </Grid> 
 
+        <Box sx={{width:"100%", display:"flex !important",margin:"20px 20px 0px 20px !important",
+  padding:"10px 25px 25px 25px !important",
+  borderRadius:"8px !important",border:"1px solid #ddd !important",backgroundColor:"white !important",
+    boxShadow:"rgba(90, 114, 123, 0.11) 0px 7px 30px 0px !important"}}>
+            {rId && (
+              <Box sx={{ flex: 1 }}>
+                <InputLabel className="ip-label">Customer Reference No</InputLabel>
+                <TextField
+                  size="small"
+                  className="text-field"
+                  name="customerReferenceNumber"
+                  value={formData.customerReferenceNumber}
+                />
+              </Box>
+            )}
+            <Box sx={{ flex: 1 }}>
+              <InputLabel className="ip-label">Branch ID</InputLabel>
+              <TextField
+                size="small"
+                className="text-field"
+                name="branchId"
+                value={formData.branchId}
+                onChange={handleChange}
+              />
+            </Box>
+            <Box sx={{ flex: 1, margin:"2px 0px" }}>
+              <InputLabel className="ip-label">Name</InputLabel>
+              <TextField
+                size="small"
+                className="text-field"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+            </Box>
+          </Box>
           {formData?.customerDetail?.map((detail, index) => (
             <div className='card'  key = {index}>
-              {/* <Grid> */}
-          <h4 >Customer Detail {index + 1}</h4>
+          <h3 >Customer Detail {index + 1}</h3>
       <Grid container  spacing={2}>
         <Grid item xs={12} sm={4}>
           <InputLabel className="ip-label"  >Address</InputLabel >
@@ -328,14 +332,14 @@ export default function Customer() {
    
           ))}
 
-<Button className="add-btn"  onClick={handleAddCustomerDetail}><AddIcon/> Add Customer Details</Button>
           </Grid>
           <Grid item xs={4}>
           <Grid item xs={4}  >
+<Button className="add-btn" sx={{margin:"0rem 1rem 1rem 1rem"}}  onClick={handleAddCustomerDetail}><AddIcon/> Add Customer Details</Button>
         
-        {!rId ?( <Button className="submit-btn" type="submit" onClick ={handleSubmit} variant="contained" >Submit</Button>) : (
+        {!rId ?( <Button className="submit-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} type="submit" onClick ={handleSubmit} variant="contained" >Submit</Button>) : (
           <>
-            <Button className="update-btn" variant="contained" onClick={handleUpdate} >Update</Button>
+            <Button className="update-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} variant="contained" onClick={handleUpdate} >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
         </Grid>

@@ -163,7 +163,7 @@ export default function CreateRotatory() {
    {!rjId ? <h1 style={{ marginLeft: '20px' }}>New Rotary Joint :</h1> : <h1 style={{ marginLeft: '20px' }}>Update Rotary Joint :</h1>}
 
 
-   <form onSubmit={handleSubmit} className="form-style">
+   <form onSubmit={handleSubmit} >
      
         <div className='card'>
           <h3>Rotary Joint New Mode:-</h3>
@@ -469,7 +469,7 @@ export default function CreateRotatory() {
           <Grid item xs={4}>
           <Grid item xs={4}>
         
-        {!rjId ?( <Button className="submit-btn" type="submit" onClick ={handleSubmit} variant="contained" >Submit</Button>) : (
+        {!rjId ?( <Button className="submit-btn" type="submit" style={{margin:"20px"}} onClick ={handleSubmit} variant="contained" >Submit</Button>) : (
           <>
             <Button className="update-btn" variant="contained" onClick={handleUpdate} >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}

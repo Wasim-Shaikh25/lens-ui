@@ -342,33 +342,10 @@ export default function CreatePumpSeal() {
 
     <Container className="container" sx={{ marginTop: '20px', backgroundColor: 'rgb(250, 251, 251)' }}>
       {!pId ? <h1 style={{ marginLeft: '20px' }}>New Pump Seal :</h1> : <h1 style={{ marginLeft: '20px' }}>Update Pump Seal :</h1>}
-      <form onSubmit={handleSubmit} className="form-style">
-        {/* {Object.keys(formData).map((key, index) => (
-      <Grid item xs={4} key={index}>
-        <InputLabel className="ip-label">{key}</InputLabel>
-        {key === 'costingRequirement' ? ( 
-            <select
-              className="text-field" style={{width:"55%", padding:"10px"}}
-              name={key}
-              value={formData[key]}
-              onChange={handleChange}
-            >
-              <option value={true}>True</option>
-              <option value={false}>False</option>
-            </select>
-          ) : (
-            <TextField
-            size="small"
-              className="text-field" 
-              name={key}
-              value={formData[key]}
-              onChange={handleChange}
-            />
-          )}
-      </Grid>
-    ))} */}
+      <form onSubmit={handleSubmit} className="">
         <div className='card'>
           <h3>Drawing Requisition - Pump Seal :-</h3>
+          <hr />
           <Grid container spacing={2}>
             {pId && <Grid item xs={4}>
               <InputLabel className="ip-label" >PumpSeal Drf Number</InputLabel >
@@ -771,7 +748,7 @@ export default function CreatePumpSeal() {
             
           <div className='card'>
           <h2>Parameters & Fluids :-</h2>
-          <div className='card'>
+          <div className=''>
           <h3>Parameters :-</h3>
           <Grid container spacing={2}>
            
@@ -850,8 +827,7 @@ export default function CreatePumpSeal() {
             </Grid>
             </div>
 
-
-        <div className='card'>
+        <div >
         <h3>Fluids :-</h3>
 
         <Grid container spacing={2}>
@@ -1472,7 +1448,7 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
           <Grid item xs={4}>
             {!pId ? (
-              <Button className="submit-btn" type="submit" variant="contained">
+              <Button className="submit-btn" style={{margin:"2rem 1rem"}} type="submit" variant="contained">
                 Submit
               </Button>
             ) : (

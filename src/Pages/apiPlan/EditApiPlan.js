@@ -12,8 +12,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
-// import {AppContext} from '../../contextAPI/AppContext';
-// import { DataGrid } from '@mui/x-data-grid';
+import { getAllApi } from '../../APIs/ApiPlan';
+import { deleteDetail } from '../../APIs/ApiPlan';
+
 
 
 
@@ -46,24 +47,10 @@ export default function EditApi() {
   const [isDeleted, setIsDeleted] = useState(false);  
   const [itemsPerPage, setItemsPerPage] = useState(5); // Adjust as needed
   const navigate = useNavigate();  
-  // const { editData, setEditData } = useContext(AppContext); // Accessing context values
 
-
-  // const indexOfLastItem = currentPage * itemsPerPage;
-  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
   
   useEffect(() => {
-    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/apiPlan/getAllApiPlansByFilter?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
-      .then(res => {
-        setData(res.data);
-        console.log("the fetched data is ",res.data);
-        setIsDeleted(false)
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-      
+      getAllApi(currentPage, itemsPerPage, setData, setIsDeleted)
     }, [currentPage, itemsPerPage]);
     
     
@@ -75,19 +62,6 @@ export default function EditApi() {
       navigate(`/createApi/${detail.apiPlanDrfNumber}`)
     };
     
-
-
-  const deleteDetail = async (crId) => {
-    try {
-      await axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/apiPlan/delete?apiPlanId=${crId}`);
-      const newData = data.filter(item => item.apiPlanDrfNumber !== crId);
-      console.log("data is ",data)
-      console.log("New data is ",newData)
-      setData(newData);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
 
 
@@ -130,7 +104,7 @@ export default function EditApi() {
                 <StyledTableCell align="right">
                   <button onClick={() => editDetail(row)} style={{margin:'0px 3px', border:'none', backgroundColor:'transparent', cursor:'pointer'}}><EditIcon style={{ color: 'blue' }} /></button>
                   <button style={{border:'none', backgroundColor:'transparent', cursor:'pointer'}} 
-                  onClick={() => deleteDetail(row.apiPlanDrfNumber)}><DeleteIcon style={{ color: 'red' }} /></button>
+                  onClick={() => deleteDetail(row.apiPlanDrfNumber,data,setData)}><DeleteIcon style={{ color: 'red' }} /></button>
                 </StyledTableCell>
               </StyledTableRow>
             ))}
