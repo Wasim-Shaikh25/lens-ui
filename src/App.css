@@ -126,7 +126,7 @@
 .text-field{
   border-color: #DEE3E9 !important;
   border-radius: 10px !important;
-  background-color: white !important; 
+  /* background-color: white !important;  */
 } 
 
 .deleteIcon{
@@ -138,3 +138,41 @@
 
 
 
+.sidebarBox{
+  overflow-y: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  max-height: 100vh;
+  padding-right: 0px;
+  margin: 5rem 1rem 1rem 1rem;
+
+
+
+  ::-webkit-scrollbar {
+    max-height:0.5rem !important;
+    width: 0.3rem;
+  }
+
+ 
+
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px white; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #d3d3d3; 
+    border-radius: 10px;
+    
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: gray; 
+  }
+}

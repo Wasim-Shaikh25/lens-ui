@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Topbar from "./components/global/TopBar";
 import CustomSidebar from "./components/global/SideBar";
-import './app.css'
-                                                                                                                                                                                                                                                                                                                                          
+import './app.css'                                                                              
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import AllRoute from '../src/router/allRoute'
@@ -12,15 +11,17 @@ function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
 
+  console.log("isSidebar is ",isSidebar)
+
   return (
       <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
           <main className="content">
-          <CustomSidebar isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
-          <Topbar setIsSidebar={setIsSidebar} />
-              <AllRoute/>
+        {!isSidebar&&<CustomSidebar  isSidebar={isSidebar} setIsSidebar={setIsSidebar} />}
+          <Topbar   isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
+          <AllRoute  isSidebar={isSidebar}/> 
           </main>
         </div>
       </ThemeProvider>

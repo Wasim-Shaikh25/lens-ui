@@ -1,31 +1,46 @@
-import { Box, IconButton } from "@mui/material";
-
-
+import { Box, IconButton, MenuItem, Typography } from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-// import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from '@mui/icons-material/Close';
 
- const Topbar = () => {
+
+ const Topbar = ({isSidebar, setIsSidebar}) => {
 
   return (
     <Box 
     display="flex" 
-    justifyContent="space-between" 
+    justifyContent="space-between"
+    position="fixed"
+    top="0"
+    zIndex="100"
+    backgroundColor="white"
+    overflowY="hidden"
     p={2} 
     sx={{
       boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.3)", // Adjust values as needed
-    }}
-    
-    >
+      width:"100%" }}>
   
- 
+ {isSidebar? 
+         <MenuIcon onClick={() =>setIsSidebar(!isSidebar)}   sx={{width: "1.6em",height:"100%",color: '#5A5A5A',
+          position: "sticky",
+          padding:"5px",
+          borderRadius:"5px",
+          cursor:"pointer",
+        }}/>
+  :
+        <CloseIcon  onClick={() =>setIsSidebar(!isSidebar)} sx={{width: "1.6em",height:"100%",color: '#5A5A5A',
+        position: "sticky",
+        padding:"5px",
+        cursor:"pointer",
+        borderRadius:"5px"}}/>
+ }
 
       {/* ICONS */}
       <Box 
       display="flex"
       justifyContent='flex-end'
-      marginLeft="85%"
       >
 
         <IconButton>

@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button, Container, Grid, InputLabel, IconButton } from '@mui/material';
-// import '../../css/CustomerFrom.css';
-import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
 import moment from 'moment';
 import axios from 'axios';
 // import DataContext from '../../contextAPI/DataContext'
@@ -15,6 +12,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 export default function CreatePumpSeal() {
 
+
   const navigate = useNavigate();
   let { pId } = useParams();
   const [ptOption, setptOption] = useState([]);
@@ -25,7 +23,6 @@ export default function CreatePumpSeal() {
   const [cstOption, setcstOption] = useState([]);
   const [pfOption, setpfOption] = useState([]);
   const [fnOption, setfnOption] = useState([]);
-
 
 
 
