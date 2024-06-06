@@ -18,7 +18,7 @@ const RegistrationSuccessPage = () => {
       <Typography variant="body1" style={{ marginBottom: '20px' }}>
         Thank you for registering with us, Your Customer Reference Number is <b>: {id}</b>
       </Typography>
-      <Button variant="contained" color="primary" onClick={()=>navigate('/')}>
+      <Button variant="contained" color="primary" onClick={()=>navigate('/editCustomer')}>
         Home
       </Button>
     </Container>

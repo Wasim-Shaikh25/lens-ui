@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { TextField ,Button,  Container, Grid, InputLabel } from '@mui/material';
-import { getApi, handleSubmit } from '../../APIs/ApiPlan';
+import { getApi, handleSubmit } from '../../apis/ApiPlan';
 import { useNavigate, useParams } from 'react-router-dom';
-import { handleUpdate } from '../../APIs/ApiPlan';
+import { handleUpdate } from '../../apis/ApiPlan';
 
 
 

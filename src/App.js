@@ -4,7 +4,7 @@ import CustomSidebar from "./components/global/SideBar";
 import './app.css'                                                                              
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
-import AllRoute from '../src/router/allRoute'
+import AllRoute from './router/AllRoute.js'
 
 
 function App() {

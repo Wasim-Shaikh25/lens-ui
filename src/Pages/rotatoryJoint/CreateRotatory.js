@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { TextField ,Button,  Container, Grid, InputLabel , IconButton } from '@mui/material';
-import axios from 'axios';
 
 import { useNavigate, useParams } from 'react-router-dom';
-
+import { getRotary, handleSubmit, handleUpdate } from '../../apis/RotaryApi';
 
 
 
@@ -17,7 +16,7 @@ export default function CreateRotatory() {
   const [formData, setFormData] = useState({
     branch: "",
     enquiryNumber: "",
-    customer: "",
+    customerName: "",
     customerAddress: "",
     costingRequirement: true,
     equipment: "",
@@ -45,23 +44,14 @@ export default function CreateRotatory() {
 
    useEffect(()=>{
     if(rjId!==undefined){
-      axios.get(`https://lens-svc.azurewebsites.net/lens-svc/rotaryJoint/get?rotaryJointDrfNo=${rjId}`)
-      .then(res=>{
-        const {data} = res;
-          setFormData(data);
-          console.log("the rjId fetched data is ",data)
-
-      }) 
-      .catch(err=>{
-        console.log(err)
-      })
+     getRotary(rjId,setFormData);
 
     }else{
       setFormData(
         {
             branch: "",
             enquiryNumber: "",
-            customer: "",
+            customerName: "",
             customerAddress: "",
             costingRequirement: true,
             equipment: "",
@@ -101,50 +91,6 @@ export default function CreateRotatory() {
   };
 
 
-
- 
-
-
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-
-      console.log("formData sales is ",formData);
-      
-      try{
-          const res = await axios.post("https://lens-svc.azurewebsites.net/lens-svc/rotaryJoint/save", formData);
-        console.log("response is ",res.data);
-        navigate(`/rotarySuccess/${res.data}`);
-      }  
-      catch(err){
-        console.log(err)
-      }
-
-    // Add form submission logic here
-
-  };
-
-
-
-
-  const handleUpdate = async (e)=>{
-    e.preventDefault();
-  
-      
-      try{
-          const res = await axios.put("https://lens-svc.azurewebsites.net/lens-svc/rotaryJoint/update", formData);
-          console.log("response from update is ",res.data);
-      }
-      catch(err){
-        console.log(err)
-      }
-
-    
-    rjId="";
-    navigate(`/rotarySuccess/${formData.rotaryDrfNumber}`);
-  }
-
-
-
   const cancelUpdate = ()=>{
 
       const confirmCancel = window.confirm("Are you sure you want to cancel the update?");
@@ -163,7 +109,7 @@ export default function CreateRotatory() {
    {!rjId ? <h1 style={{ marginLeft: '20px' }}>New Rotary Joint :</h1> : <h1 style={{ marginLeft: '20px' }}>Update Rotary Joint :</h1>}
 
 
-   <form onSubmit={handleSubmit} >
+   <form >
      
         <div className='card'>
           <h3>Rotary Joint New Mode:-</h3>
@@ -207,8 +153,8 @@ export default function CreateRotatory() {
               <TextField
               size="small"
                 className="text-field"
-                name="customer"
-                value={formData.customer}
+                name="customerName"
+                value={formData.customerName}
                 onChange={handleChange} />
             </Grid>
 
@@ -469,9 +415,9 @@ export default function CreateRotatory() {
           <Grid item xs={4}>
           <Grid item xs={4}>
         
-        {!rjId ?( <Button className="submit-btn" type="submit" style={{margin:"20px"}} onClick ={handleSubmit} variant="contained" >Submit</Button>) : (
+        {!rjId ?( <Button className="submit-btn" type="submit" style={{margin:"20px"}} onClick ={(e)=>handleSubmit(e,formData,navigate)} variant="contained" >Submit</Button>) : (
           <>
-            <Button className="update-btn" variant="contained" onClick={handleUpdate} >Update</Button>
+            <Button className="update-btn" variant="contained" onClick={(e)=>handleUpdate(e,formData,rjId,navigate)} >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
         </Grid>

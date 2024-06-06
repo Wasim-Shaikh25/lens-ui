@@ -12,8 +12,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
-import { getAllApi } from '../../APIs/ApiPlan';
-import { deleteDetail } from '../../APIs/ApiPlan';
+import { getAllApi } from '../../apis/ApiPlan';
+import { deleteDetail } from '../../apis/ApiPlan';
 
 
 

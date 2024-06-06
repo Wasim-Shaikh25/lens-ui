@@ -3,10 +3,9 @@ import { TextField ,Button,  Container, Grid, InputLabel , IconButton } from '@m
 // import '../../css/CustomerFrom.css';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
-import moment from 'moment';
-import axios from 'axios';
-
 import { useNavigate, useParams } from 'react-router-dom';
+import { getSales, handleSubmit, handleUpdate } from '../../apis/SalesInquiryApi';
+
 
 
 
@@ -41,16 +40,7 @@ export default function CreateSales() {
 
    useEffect(()=>{
     if(sId!==0){
-      axios.get(`https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/get/${sId}`)
-      .then(res=>{
-        const {data} = res;
-          setFormData(data);
-          console.log("the sId fetched data is ",data)
-
-      }) 
-      .catch(err=>{
-        console.log(err)
-      })
+     getSales(sId,setFormData);
 
     }else{
       setFormData(
@@ -158,59 +148,8 @@ export default function CreateSales() {
  
 
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
-    
+ 
 
-    if (formData.salesItems && formData.salesItems.length > "") {
-      // Update insertedOn and lastUpdatedOn for the last item in customerDetail
-      formData.salesItems[formData.salesItems.length -1].lastUpdatedOn = dateTime;
-      formData.salesItems[formData.salesItems.length -1].insertedOn = dateTime;
-    } 
-
-
-    
-      // If customerDetail is not defined or empty, set insertedOn and lastUpdatedOn for formData
-      formData.insertedOn = dateTime;
-      formData.lastUpdatedOn = dateTime;
-      formData.inquiryDate = dateTime;
-       
-      
-      console.log("formData sales is ",formData);
-      const res = await axios.post("https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/save", formData);
-    console.log("response is ",res.data);
-    navigate(`/salesSuccess/${res.data}`);
-
-    // Add form submission logic here
-
-  };
-
-
-
-
-  const handleUpdate = async (e)=>{
-    e.preventDefault();
-    const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
-
-    if (formData.salesItems && formData.salesItems.length > "") {
-      // Update insertedOn and lastUpdatedOn for the last item in customerDetail
-      formData.salesItems[formData.salesItems.length -1].lastUpdatedOn = dateTime;
-      // formData.salesItems[formData.salesItems.length -1].insertedOn = dateTime;
-    } 
-      // If customerDetail is not defined or empty, set insertedOn and lastUpdatedOn for formData
-      formData.lastUpdatedOn = dateTime;
-     
-      console.log("formData inside update ",formData);
-      
-      
-    const res = await axios.put("https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/Update", formData);
-    console.log("response from update is ",res.data);
-
-    
-    sId="";
-    navigate(`/salesSuccess/${formData.inquiryNumber}`);
-  }
 
 
 
@@ -230,7 +169,7 @@ export default function CreateSales() {
   return (
     <Container className="container" sx= {{marginTop:"20px", backgroundColor:"rgb(250, 251, 251)"}}>
    {!sId?<h1 style={{marginLeft:"20px"}}>New Sales Inquiry :</h1> : <h1 style={{marginLeft:"20px"}}>Update Sales Inquiry :</h1> }
-      <form onSubmit={handleSubmit} className="form-style">
+      <form  className="form-style">
         <Grid container spacing={2}>
          {sId &&<Grid item xs={4}>
             <InputLabel className="ip-label">Sales Inquiry Number</InputLabel >
@@ -617,9 +556,9 @@ export default function CreateSales() {
           <Grid item xs={4}>
           <Grid item xs={4}  >
         
-        {!sId ?( <Button className="submit-btn" type="submit" onClick ={handleSubmit} variant="contained" >Submit</Button>) : (
+        {!sId ?( <Button className="submit-btn" type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate)} variant="contained" >Submit</Button>) : (
           <div >
-            <Button className="update-btn" variant="contained" onClick={handleUpdate} >Update</Button>
+            <Button className="update-btn" variant="contained" onClick={(e)=>handleUpdate(e,formData,sId,navigate)} >Update</Button>
             <Button className="cancel-btn"   variant="contained" onClick={cancelUpdate} >Cancel</Button> </div>)}
           </Grid>
         </Grid>

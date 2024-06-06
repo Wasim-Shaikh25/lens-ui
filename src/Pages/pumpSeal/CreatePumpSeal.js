@@ -6,7 +6,9 @@ import axios from 'axios';
 // import "C:/Admin Panel/adminpanel/src/Pages/customerPage/createCustomer/customerFrom.css";
 import { useNavigate, useParams } from 'react-router-dom';
 import Autocomplete from '@mui/material/Autocomplete';
-
+import { getPumpSeal, handleSubmit } from '../../apis/PumpSealApi';
+import { handleUpdatePumpSeal } from '../../apis/PumpSealApi';
+import { getColumnData } from '../../apis/PumpSealApi';
 
 
 
@@ -31,6 +33,7 @@ export default function CreatePumpSeal() {
     endUser: '',
     costingRequirement: true,
     customerAddress: '',
+    customerName:'',
     make: '',
     model: '',
     impeller: '',
@@ -115,16 +118,7 @@ export default function CreatePumpSeal() {
 
   useEffect(() => {
     if (pId !== undefined) {
-      axios.get(`https://lens-svc.azurewebsites.net/lens-svc/pumSeal/get?pumSealDrfNo=${pId}`)
-        .then(res => {
-          const { data } = res;
-          setFormData(data);
-          console.log("the pId fetched data is ", data)
-
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      getPumpSeal(pId, setFormData)
 
     } else {
       setFormData(
@@ -132,6 +126,7 @@ export default function CreatePumpSeal() {
           branch: '',
           endUser: '',
           costingRequirement: true,
+          customerName: '',
           customerAddress: '',
           make: '',
           model: '',
@@ -230,98 +225,6 @@ export default function CreatePumpSeal() {
   };
 
 
-
-
-
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
-
-
-    if (!formData.createdDate) {
-      // Update insertedOn and lastUpdatedOn for the last item in customerDetail
-      formData.createdDate = dateTime;
-    }
-    formData.lastEditedDate = dateTime;
-
-    formData.srNo = parseInt(formData.srNo)
-
-    console.log("formData sales is ", formData);
-
-
-    try {
-      const res = await axios.post("https://lens-svc.azurewebsites.net/lens-svc/pumSeal/save", formData);
-      console.log("response is ", res.data);
-      navigate(`/pumpSealSuccess/${res.data}`);
-    }
-    catch (err) {
-      console.log(err);
-    }
-
-
-
-  };
-
-
-  const getColumnData = async (colName)=>{
-
-    try {
-      const res = await axios.get(`https://lens-svc.azurewebsites.net/lens-svc/queryDrawingMasterTablebyColumn?columnName=${colName}`);
-      switch(colName){
-        case 'Pump Type' :
-          setptOption(res.data);
-          break;
-          case 'Arrangement':
-          setarOption(res.data);
-          break;
-          case 'Seal Arrangement':
-          setsaOption(res.data);
-          break;
-          case 'Seal Type':
-          setstOption(res.data);
-          break;
-          case 'Stages':
-          setstgOption(res.data);
-          break;
-          case 'Casing Type':
-          setcstOption(res.data);
-          break;
-          case 'Performance':
-          setpfOption(res.data);
-          break;
-          case 'Fluid Nature':
-          setfnOption(res.data);
-          break;
-          default:
-            break;
-      }
-      console.log("res is ",res.data);
-
-    } catch (error) {
-        console.log(error)
-    }
-
-  }
-
-
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
-    formData.lastEditedDate = dateTime;
-
-    console.log("formData sales is ", formData);
-
-    const res = await axios.put("https://lens-svc.azurewebsites.net/lens-svc/pumSeal/Update", formData);
-    console.log("response from update is ", res.data);
-
-
-    pId = "";
-    navigate(`/pumpSealSuccess/${formData.pumpSealDrfNumber}`);
-  }
-
-
-
   const cancelUpdate = () => {
 
     const confirmCancel = window.confirm("Are you sure you want to cancel the update?");
@@ -339,7 +242,7 @@ export default function CreatePumpSeal() {
 
     <Container className="container" sx={{ marginTop: '20px', backgroundColor: 'rgb(250, 251, 251)' }}>
       {!pId ? <h1 style={{ marginLeft: '20px' }}>New Pump Seal :</h1> : <h1 style={{ marginLeft: '20px' }}>Update Pump Seal :</h1>}
-      <form onSubmit={handleSubmit} className="">
+      <form  className="">
         <div className='card'>
           <h3>Drawing Requisition - Pump Seal :-</h3>
           <hr />
@@ -362,6 +265,16 @@ export default function CreatePumpSeal() {
                 className="text-field"
                 name="branch"
                 value={formData.branch}
+                onChange={handleChange} />
+            </Grid>
+
+            <Grid item xs={4}>
+              <InputLabel className="ip-label" >Name</InputLabel >
+              <TextField
+              size="small"
+                className="text-field"
+                name="customerName"
+                value={formData.customerName}
                 onChange={handleChange} />
             </Grid>
 
@@ -492,7 +405,7 @@ export default function CreatePumpSeal() {
       arrangement: newValue
     });
   }}
-  onFocus={()=>getColumnData('Arrangement')}
+  onFocus={()=>getColumnData('Arrangement', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
   inputValue={formData.arrangement || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -527,7 +440,7 @@ export default function CreatePumpSeal() {
       pumpType: newValue
     });
   }}
-  onFocus={()=>getColumnData('Pump Type')}
+  onFocus={()=>getColumnData('Pump Type', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
   inputValue={formData.pumpType || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -569,7 +482,7 @@ export default function CreatePumpSeal() {
       stage: newValue
     });
   }}
-  onFocus={()=>getColumnData('Stages')}
+  onFocus={()=>getColumnData('Stages', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
   inputValue={formData.stage || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -601,7 +514,7 @@ export default function CreatePumpSeal() {
       casting: newValue
     });
   }}
-  onFocus={()=>getColumnData('Casing Type')}
+  onFocus={()=>getColumnData('Casing Type', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
   inputValue={formData.casting || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -651,7 +564,7 @@ export default function CreatePumpSeal() {
       performance: newValue
     });
   }}
-  onFocus={()=>getColumnData('Performance')}
+  onFocus={()=>getColumnData('Performance', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
   inputValue={formData.performance || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -684,7 +597,7 @@ export default function CreatePumpSeal() {
       sealArrangement: newValue
     });
   }}
-  onFocus={()=>getColumnData('Seal Arrangement')}
+  onFocus={()=>getColumnData('Seal Arrangement', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
   inputValue={formData.sealArrangement || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -717,7 +630,7 @@ export default function CreatePumpSeal() {
       sealType: newValue
     });
   }}
-  onFocus={()=>getColumnData('Seal Type')}
+  onFocus={()=>getColumnData('Seal Type', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
   inputValue={formData.sealType || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -861,7 +774,7 @@ export default function CreatePumpSeal() {
       nature: newValue
     });
   }}
-  onFocus={()=>getColumnData('Fluid Nature')}
+  onFocus={()=>getColumnData('Fluid Nature',setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
   inputValue={formData.nature || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -1011,7 +924,7 @@ export default function CreatePumpSeal() {
            <TextField
            size="small"
              className="text-field"
-             name="barrierOrBufferPlan"
+             name="barrierOrBufferFluid"
              value={formData.barrierOrBufferFluid}
              onChange={handleChange} />
          </Grid>
@@ -1445,12 +1358,14 @@ export default function CreatePumpSeal() {
         <Grid item xs={4}>
           <Grid item xs={4}>
             {!pId ? (
-              <Button className="submit-btn" style={{margin:"2rem 1rem"}} type="submit" variant="contained">
+              <Button className="submit-btn" style={{margin:"2rem 1rem"}} 
+              onClick={(e)=>handleSubmit(e,formData,navigate)} type="submit" variant="contained">
                 Submit
               </Button>
             ) : (
               <>
-                <Button className="update-btn" variant="contained" onClick={handleUpdate}>
+                <Button className="update-btn" variant="contained" type="submit" 
+                onClick={(e)=>handleUpdatePumpSeal(e,formData,pId,navigate)}>
                   Update
                 </Button>
                 <Button className="cancel-btn" variant="contained" onClick={cancelUpdate}>

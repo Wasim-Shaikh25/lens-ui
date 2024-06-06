@@ -8,6 +8,17 @@ import CloseIcon from '@mui/icons-material/Close';
 
  const Topbar = ({isSidebar, setIsSidebar}) => {
 
+  const iconStyle={ 
+    width:"1.6em",
+    height:"100%",
+    color: '#5A5A5A',
+          position: "sticky",
+          padding:"5px",
+          borderRadius:"5px",
+          cursor:"pointer",
+        }
+
+
   return (
     <Box 
     display="flex" 
@@ -16,25 +27,15 @@ import CloseIcon from '@mui/icons-material/Close';
     top="0"
     zIndex="100"
     backgroundColor="white"
-    overflowY="hidden"
     p={2} 
     sx={{
       boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.3)", // Adjust values as needed
       width:"100%" }}>
   
  {isSidebar? 
-         <MenuIcon onClick={() =>setIsSidebar(!isSidebar)}   sx={{width: "1.6em",height:"100%",color: '#5A5A5A',
-          position: "sticky",
-          padding:"5px",
-          borderRadius:"5px",
-          cursor:"pointer",
-        }}/>
+         <MenuIcon onClick={() =>setIsSidebar(!isSidebar)}   sx={iconStyle}/>
   :
-        <CloseIcon  onClick={() =>setIsSidebar(!isSidebar)} sx={{width: "1.6em",height:"100%",color: '#5A5A5A',
-        position: "sticky",
-        padding:"5px",
-        cursor:"pointer",
-        borderRadius:"5px"}}/>
+        <CloseIcon  onClick={() =>setIsSidebar(!isSidebar)} sx={iconStyle}/>
  }
 
       {/* ICONS */}

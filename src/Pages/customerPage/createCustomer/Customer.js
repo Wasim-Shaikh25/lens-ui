@@ -5,9 +5,11 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import moment from 'moment';
 import axios from 'axios';
-import "./customerFrom.css";
+import "./CustomerFrom.css";
 import { useNavigate, useParams } from 'react-router-dom';
 import {Box} from '@mui/material';
+import { getCustomer, handleSubmit } from '../../../apis/CustomerApi';
+import { handleUpdate } from '../../../apis/CustomerApi';
 
 
 
@@ -19,8 +21,8 @@ export default function Customer() {
 
 
   const [formData, setFormData] = useState({
-    branchId: '',
-    name: '',
+    branch: '',
+    customerName: '',
     customerDetail:[],
     insertedByUserId:'10223',
     lastUpdatedByUserId:'10223',
@@ -32,20 +34,11 @@ export default function Customer() {
 
    useEffect(()=>{
     if(rId!==undefined){
-      axios.get(`https://lens-svc.azurewebsites.net/lens-svc/customer/get?customerRefrenceNumber=${rId}`)
-      .then(res=>{
-        const {data} = res;
-          setFormData(data);
-          console.log("the rId fetched data is ",data)
-
-      }) 
-      .catch(err=>{
-        console.log(err)
-      })
-
+    getCustomer(rId, setFormData)
     }else{
-      setFormData({ branchId: '',
-      name: '',
+
+      setFormData({ branch: '',
+      customerName: '',
       customerDetail:[],
       insertedByUserId:'10223',
       lastUpdatedByUserId:'10223',
@@ -78,7 +71,7 @@ export default function Customer() {
       customerDetail: [
         ...prevState.customerDetail,
         {
-          address: '',
+          customerAddress: '',
           contactPerson: '',
           designation: '',
           telephoneNos: '',
@@ -95,6 +88,7 @@ export default function Customer() {
     }));
   };
   
+
   const handleDeleteCustomerDetail = index => {
     setFormData(prevState => {
       const newCustomerDetail = [...prevState.customerDetail];
@@ -104,54 +98,6 @@ export default function Customer() {
   };
   
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
-    
-
-    if (formData.customerDetail && formData.customerDetail.length > 0) {
-      // Update insertedOn and lastUpdatedOn for the last item in customerDetail
-      formData.customerDetail[formData.customerDetail.length -1].lastUpdatedOn = dateTime;
-      formData.customerDetail[formData.customerDetail.length -1].insertedOn = dateTime;
-    } 
-      // If customerDetail is not defined or empty, set insertedOn and lastUpdatedOn for formData
-      formData.insertedOn = dateTime;
-      formData.lastUpdatedOn = dateTime;
-    
-  
-    
-    const res = await axios.post("https://lens-svc.azurewebsites.net/lens-svc/customer/save", formData);
-    console.log("response is ",res.data);
-    navigate(`/registerSuccess/${res.data}`);
-
-    console.log(formData);
-    // Add form submission logic here
-
-  };
-
-
-
-  const handleUpdate = async (e)=>{
-    e.preventDefault();
-    const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
-
-    if (formData.customerDetail && formData.customerDetail.length > 0) {
-      // Update insertedOn and lastUpdatedOn for the last item in customerDetail
-      formData.customerDetail[formData.customerDetail.length -1].lastUpdatedOn = dateTime;
-      // formData.customerDetail[formData.customerDetail.length -1].insertedOn = dateTime;
-    } 
-      // If customerDetail is not defined or empty, set insertedOn and lastUpdatedOn for formData
-      // formData.insertedOn = dateTime;
-      formData.lastUpdatedOn = dateTime;
-
-    const res = await axios.put("https://lens-svc.azurewebsites.net/lens-svc/customer/Update", formData);
-    console.log("response from update is ",res.data);
-
-    
-    console.log(formData);
-    rId=null;
-    navigate(`/updateSuccess/${formData.customerReferenceNumber}`);
-  }
 
   const cancelUpdate = ()=>{
 
@@ -187,22 +133,23 @@ export default function Customer() {
               </Box>
             )}
             <Box sx={{ flex: 1 }}>
-              <InputLabel className="ip-label">Branch ID</InputLabel>
+              <InputLabel className="ip-label">Branch</InputLabel>
               <TextField
                 size="small"
                 className="text-field"
-                name="branchId"
-                value={formData.branchId}
+                name="branch"
+                value={formData.branch}
                 onChange={handleChange}
               />
             </Box>
+
             <Box sx={{ flex: 1, margin:"2px 0px" }}>
-              <InputLabel className="ip-label">Name</InputLabel>
+              <InputLabel className="ip-label">Customer Name</InputLabel>
               <TextField
                 size="small"
                 className="text-field"
-                name="name"
-                value={formData.name}
+                name="customerName"
+                value={formData.customerName}
                 onChange={handleChange}
               />
             </Box>
@@ -212,12 +159,12 @@ export default function Customer() {
           <h3 >Customer Detail {index + 1}</h3>
       <Grid container  spacing={2}>
         <Grid item xs={12} sm={4}>
-          <InputLabel className="ip-label"  >Address</InputLabel >
+          <InputLabel className="ip-label"  >Customer Address</InputLabel >
           <TextField
             size="small" 
             className="text-field" 
-            name="address"
-            value={detail.address}
+            name="customerAddress"
+            value={detail.customerAddress}
             onChange={e => handleChange(e, index)}
             fullWidth
           />
@@ -337,9 +284,9 @@ export default function Customer() {
           <Grid item xs={4}  >
 <Button className="add-btn" sx={{margin:"0rem 1rem 1rem 1rem"}}  onClick={handleAddCustomerDetail}><AddIcon/> Add Customer Details</Button>
         
-        {!rId ?( <Button className="submit-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} type="submit" onClick ={handleSubmit} variant="contained" >Submit</Button>) : (
+        {!rId ?( <Button className="submit-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate)} variant="contained" >Submit</Button>) : (
           <>
-            <Button className="update-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} variant="contained" onClick={handleUpdate} >Update</Button>
+            <Button className="update-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} variant="contained" onClick={(e)=>handleUpdate(e,formData,rId,navigate)} >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
         </Grid>

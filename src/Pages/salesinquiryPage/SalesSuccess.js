@@ -18,7 +18,7 @@ const SalesSuccessPage = () => {
       <Typography variant="body1" style={{ marginBottom: '20px' }}>
         Thank you for Connecting with us, Your Sales Number is <b>: {sId}</b>
       </Typography>
-      <Button variant="contained" color="primary" onClick={()=>navigate('/')}>
+      <Button variant="contained" color="primary" onClick={()=>navigate('/editSales')}>
         Home
       </Button>
     </Container>
