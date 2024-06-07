@@ -144,6 +144,7 @@ export default function AgitatorSeal() {
                 <Grid item xs={4}>
                   <InputLabel className="ip-label">Agitator Drf Number</InputLabel>
                   <TextField
+                  size="small"
                     className="text-field"
                     name="agitatorSealDrfNumber"
                     value={formData.agitatorSealDrfNumber}
@@ -153,6 +154,7 @@ export default function AgitatorSeal() {
               <Grid item xs={4}>
                 <InputLabel className="ip-label">Branch</InputLabel>
                 <TextField
+                size="small"
                   className="text-field"
                   name="branch"
                   value={formData.branch}
@@ -162,6 +164,7 @@ export default function AgitatorSeal() {
               <Grid item xs={4}>
                 <InputLabel className="ip-label">Customer</InputLabel>
                 <TextField
+                size="small"
                   className="text-field"
                   name="customerName"
                   value={formData.customerName}
@@ -171,6 +174,7 @@ export default function AgitatorSeal() {
               <Grid item xs={4}>
                 <InputLabel className="ip-label">Customer Address</InputLabel>
                 <TextField
+                size="small"
                   className="text-field"
                   name="customerAddress"
                   value={formData.customerAddress}
@@ -201,6 +205,7 @@ export default function AgitatorSeal() {
               <Grid item xs={4}>      
                   <InputLabel className="ip-label" >Ref Dwg No</InputLabel >
                 <TextField
+                size="small"
                   className="text-field"
                   name="refDrawingNumber"
                   value={formData.refDrawingNumber}
@@ -220,6 +225,7 @@ export default function AgitatorSeal() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Make</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="make"
                 value={formData.make}
@@ -230,6 +236,7 @@ export default function AgitatorSeal() {
   <Grid item xs={4}>
     <InputLabel className="ip-label">Model</InputLabel>
     <TextField
+    size="small"
       className="text-field"
       name="model"
       value={formData.model}
@@ -240,6 +247,7 @@ export default function AgitatorSeal() {
   <Grid item xs={4}>
     <InputLabel className="ip-label">Tag No</InputLabel>
     <TextField
+    size="small"
       className="text-field"
       name="tagNo"
       value={formData.tagNo}
@@ -249,6 +257,7 @@ export default function AgitatorSeal() {
   <Grid item xs={4}>
     <InputLabel className="ip-label">Entry</InputLabel>
     <TextField
+    size="small"
       className="text-field"
       name="entry"
       value={formData.entry}
@@ -266,6 +275,7 @@ export default function AgitatorSeal() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">percentage of soil</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="percentageOfSolid"
                 value={formData.percentageOfSolid}
@@ -275,6 +285,7 @@ export default function AgitatorSeal() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">Proposed Seal Series</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="proposedSealSeries"
                 value={formData.proposedSealSeries}
@@ -284,6 +295,7 @@ export default function AgitatorSeal() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">Propsed Seal Size</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="proposedSealSize"
                 value={formData.proposedSealSize}
@@ -294,6 +306,7 @@ export default function AgitatorSeal() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">Pad Plate</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="padPlate"
                 value={formData.padPlate}
@@ -313,6 +326,7 @@ export default function AgitatorSeal() {
             <Grid item xs={4}>
             <InputLabel className="ip-label">Temprature</InputLabel>
             <TextField
+            size="small"
               className="text-field"
               name="temperature"
               value={formData.temperature}
@@ -322,6 +336,7 @@ export default function AgitatorSeal() {
           <Grid item xs={4}>
             <InputLabel className="ip-label">Speed</InputLabel>
             <TextField
+            size="small"
               className="text-field"
               name="speed"
               value={formData.speed}
@@ -331,6 +346,7 @@ export default function AgitatorSeal() {
           <Grid item xs={4}>
             <InputLabel className="ip-label">Vessel Designer PR</InputLabel>
             <TextField
+            size="small"
               className="text-field"
               name="vesselDesignPR"
               value={formData.vesselDesignPR}
@@ -340,7 +356,8 @@ export default function AgitatorSeal() {
    
     <Grid item xs={4}>
     <InputLabel className="ip-label">Vessel Design Temperature</InputLabel>
-    <TextField // Consider using Dropdown for options if applicable
+    <TextField
+    size="small" // Consider using Dropdown for options if applicable
       className="text-field"
       name="vesselDesignTemperature"
       value={formData.vesselDesignTemperature}
@@ -349,7 +366,8 @@ export default function AgitatorSeal() {
   </Grid>
   <Grid item xs={4}>
     <InputLabel className="ip-label">Vessel Operating PR</InputLabel>
-    <TextField // Consider using number input type
+    <TextField
+    size="small" // Consider using number input type
       className="text-field"
       name="vesselOperatingPR"
       value={formData.vesselOperatingPR}
@@ -359,7 +377,8 @@ export default function AgitatorSeal() {
   </Grid>
   <Grid item xs={4}>
     <InputLabel className="ip-label">Vessel Operating Temperature</InputLabel>
-    <TextField // Consider using Dropdown for options if applicable
+    <TextField
+    size="small" // Consider using Dropdown for options if applicable
       className="text-field"
       name="vesselOperatingTemperature"
       value={formData.vesselOperatingTemperature}
