@@ -21,6 +21,8 @@
   padding-right: 20px !important;
   padding-left: 20px !important;
 }
+
+
 .container{
   margin-top: 20px !important;
   background-color: rgb(250, 251, 251) !important;
@@ -149,7 +151,7 @@
   padding-right: 0px;
   margin: 5rem 1rem 1rem 1rem;
 
-
+}
 
   ::-webkit-scrollbar {
     max-height:0.5rem !important;
@@ -174,4 +176,5 @@
   ::-webkit-scrollbar-thumb:hover {
     background: gray; 
   }
-}
+
+
