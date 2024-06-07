@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Topbar from "./components/global/TopBar";
 import CustomSidebar from "./components/global/SideBar";
-import './app.css'                                                                              
+import './App.css'                                                                              
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
-import AllRoute from './router/AllRoute.js'
+import AllRoute from './router/allRoute.js'
 
 
 function App() {
