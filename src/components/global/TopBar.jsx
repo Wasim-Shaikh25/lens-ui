@@ -1,67 +1,52 @@
-import { Box, IconButton, useTheme } from "@mui/material";
-import { useContext, useEffect } from "react";
-import { ColorModeContext, tokens } from "../../theme";
-// import InputBase from '@mui/material/InputBase';/
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import { Box, IconButton, MenuItem, Typography } from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-// import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from '@mui/icons-material/Close';
 
- const Topbar = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  const colorMode = useContext(ColorModeContext);
 
-  // Set the background color of the entire screen based on the color mode
-  const backgroundColor = colorMode === "dark" ? colors.primary[900] : theme.palette.background.default;
+ const Topbar = ({isSidebar, setIsSidebar}) => {
 
-  // useEffect to set the initial background color based on the initial color mode
-  useEffect(() => {
-    document.body.style.backgroundColor = backgroundColor;
-    return () => {
-      document.body.style.backgroundColor = ''; // Reset background color when component unmounts
-    };
-  }, [backgroundColor]);
+  const iconStyle={ 
+    width:"1.6em",
+    height:"100%",
+    color: '#5A5A5A',
+          position: "sticky",
+          padding:"5px",
+          borderRadius:"5px",
+          cursor:"pointer",
+        }
+
 
   return (
     <Box 
     display="flex" 
-    justifyContent="space-between" 
+    justifyContent="space-between"
+    position="fixed"
+    top="0"
+    zIndex="100"
+    backgroundColor="white"
     p={2} 
-    bgcolor={backgroundColor}
     sx={{
       boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.3)", // Adjust values as needed
-      
-    }}
-    
-    >
+      width:"100%" }}>
   
-      {/* SEARCH BAR */}
-      {/* <Box display="flex" borderRadius="3px">
-        <InputBase 
-        sx={{ ml:35, flex: 1 }}  
-        placeholder="Search" />
-        <IconButton type="button" sx={{ p:1}}>
-          <SearchIcon />
-        </IconButton>
-      </Box> */}
-
-
+ {isSidebar? 
+         <MenuIcon onClick={() =>setIsSidebar(!isSidebar)}   sx={iconStyle}/>
+  :
+        <CloseIcon  onClick={() =>setIsSidebar(!isSidebar)} sx={iconStyle}/>
+ }
 
       {/* ICONS */}
       <Box 
       display="flex"
       justifyContent='flex-end'
-      marginLeft="85%"
       >
-        <IconButton onClick={colorMode.toggleColorMode}>
-          {colorMode === "dark" ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
-        </IconButton>
+
         <IconButton>
-          <NotificationsOutlinedIcon />
-        </IconButton>
+         <NotificationsOutlinedIcon /> 
+        </IconButton> 
         <IconButton>
           <SettingsOutlinedIcon />
         </IconButton>

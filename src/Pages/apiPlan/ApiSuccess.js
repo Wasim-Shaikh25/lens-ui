@@ -4,7 +4,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useNavigate, useParams } from 'react-router-dom';
 
 
-const UpdateSuccessPage = () => {
+const ApiSuccessPage = () => {
     const {id} = useParams();
     const navigate = useNavigate();
     
@@ -13,16 +13,16 @@ const UpdateSuccessPage = () => {
     <Container maxWidth="sm" style={{ textAlign: 'center', marginTop: '50px' }}>
       <CheckCircleOutlineIcon style={{ fontSize: 100, color: 'green' }} />
       <Typography variant="h3" gutterBottom style={{ marginTop: '20px' }}>
-        User Details Updated Successfully!
+        API plan Created Successfully!
       </Typography>
+          API Plan DRF Number is <b>: {id}</b>
       <Typography variant="body1" style={{ marginBottom: '20px' }}>
-         Your Customer Reference Number is <b>: {id}</b>
       </Typography>
-      <Button variant="contained" color="primary" onClick={()=>navigate('/editCustomer')}>
-         Users Details
+      <Button variant="contained" color="primary" onClick={()=>navigate('/editApi')}>
+         API plan Details
       </Button>
     </Container>
   );
 };
 
-export default UpdateSuccessPage;
+export default ApiSuccessPage;

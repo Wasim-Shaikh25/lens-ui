@@ -1,24 +1,17 @@
 import { useState } from "react";
 import Topbar from "./components/global/TopBar";
 import CustomSidebar from "./components/global/SideBar";
-//import Dashboard from "./components/dashboard";
-// import {AllRoutes} from './route/AllRoutes'
-
-// import Team from "./scenes/team";
-// import Invoices from "./scenes/invoices";
-// import Contacts from "./scenes/contacts";
-// import Bar from "./scenes/bar";
-// import Form from "./scenes/form";
-// import Line from "./scenes/line";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+import './app.css'                                                                              
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
-import AllRoute from '../src/router/allRoute'
-// import Calendar from "./scenes/calendar/calendar";
+import AllRoute from './router/AllRoute.js'
 
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
+
+  console.log("isSidebar is ",isSidebar)
 
   return (
       <ColorModeContext.Provider value={colorMode}>
@@ -26,9 +19,9 @@ function App() {
         <CssBaseline />
         <div className="app">
           <main className="content">
-          <CustomSidebar isSidebar={isSidebar} />
-          <Topbar setIsSidebar={setIsSidebar} />
-              <AllRoute/>
+        {!isSidebar&&<CustomSidebar  isSidebar={isSidebar} setIsSidebar={setIsSidebar} />}
+          <Topbar   isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
+          <AllRoute  isSidebar={isSidebar}/> 
           </main>
         </div>
       </ThemeProvider>

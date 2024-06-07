@@ -1,4 +1,4 @@
-import {React} from 'react';
+import {React, createContext, useContext} from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,8 +10,11 @@ import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
+import { deleteDetail, getAllSales } from '../../apis/SalesInquiryApi';
+
+
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -41,23 +44,9 @@ export default function EditSales() {
   const [isDeleted, setIsDeleted] = useState(false);  
   const [itemsPerPage, setItemsPerPage] = useState(5); // Adjust as needed
   const navigate = useNavigate();  
-  // const { editData, setEditData } = useContext(AppContext); // Accessing context values
 
-
-  // const indexOfLastItem = currentPage * itemsPerPage;
-  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-  
   useEffect(() => {
-    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
-      .then(res => {
-        setData(res.data);
-        console.log("the fetched data is ",res.data);
-        setIsDeleted(false)
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
+      getAllSales(currentPage,itemsPerPage,setData,setIsDeleted)
       
     }, [currentPage, itemsPerPage]);
     
@@ -72,23 +61,7 @@ export default function EditSales() {
     
 
 
-  const deleteDetail = (sId) => {
-    console.log("sId is ", sId)
-    
-    axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/delete/:InquiryNumber?InquiryNumber=${sId}`)
-    .then(res=>{
-      console.log(res)
-      const newData = data.filter(item => item.inquiryNumber !== sId);
-      setIsDeleted(true)
-      setData(newData);
-
-    }).catch(err=>{
-      console.log(err)
-    })
-    
-    console.log("Sales Inquiry Number of deletion elem is ", sId);
-  };
-
+  
   const paginate = (items)=>{
      setItemsPerPage(items);
       setCurrentPage(0)
@@ -98,8 +71,8 @@ export default function EditSales() {
 
   return (
     <div>
-      <TableContainer component={Paper} style={{ width: '86%', margin: '10px auto' }}>
-        <Table sx={{ minWidth: 500 }} aria-label="customized table">
+      <TableContainer component={Paper} style={{maxWidth:'85%',margin: '10px auto' }}>
+        <Table sx={{ minWidth:500 }} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell>Sr No</StyledTableCell>
@@ -121,14 +94,14 @@ export default function EditSales() {
                 </StyledTableCell>
               
                 <StyledTableCell align="right">{row.inquiryNumber}</StyledTableCell>
-                <StyledTableCell align="right">{row.name}</StyledTableCell>
+                <StyledTableCell align="right">{row.customerName}</StyledTableCell>
                 <StyledTableCell align="right">{row.branchId}</StyledTableCell>
                 <StyledTableCell align="right">{row.insertedOn}</StyledTableCell>
                 <StyledTableCell align="right">{row.lastUpdatedOn}</StyledTableCell>
                 <StyledTableCell align="right">
                   <button onClick={() => editDetail(row)} style={{margin:'0px 3px', border:'none', backgroundColor:'transparent', cursor:'pointer'}}><EditIcon style={{ color: 'blue' }} /></button>
                   <button style={{border:'none', backgroundColor:'transparent', cursor:'pointer'}} 
-                  onClick={() => deleteDetail(row.inquiryNumber)}><DeleteIcon style={{ color: 'red' }} /></button>
+                  onClick={() => deleteDetail(row.inquiryNumber,data,setData, setIsDeleted)}><DeleteIcon style={{ color: 'red' }} /></button>
                 </StyledTableCell>
               </StyledTableRow>
             ))}
@@ -177,3 +150,4 @@ export default function EditSales() {
     </div>
   );
 }
+

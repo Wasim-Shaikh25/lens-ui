@@ -12,8 +12,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
-import { getAll } from '../../apis/PumpSealApi';
-import { deleteDetail } from '../../apis/PumpSealApi';
+import { getAllApi } from '../../apis/ApiPlan';
+import { deleteDetail } from '../../apis/ApiPlan';
+
 
 
 
@@ -40,7 +41,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
-export default function EditPump() {
+export default function EditApi() {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);  
   const [isDeleted, setIsDeleted] = useState(false);  
@@ -49,8 +50,7 @@ export default function EditPump() {
 
   
   useEffect(() => {
-      getAll(currentPage, itemsPerPage,setData, setIsDeleted)
-      
+      getAllApi(currentPage, itemsPerPage, setData, setIsDeleted)
     }, [currentPage, itemsPerPage]);
     
     
@@ -58,8 +58,8 @@ export default function EditPump() {
     
     const editDetail = (detail) => {
       // setEditData(detail.customerReferenceNumber);
-      console.log("edit detail is ", detail.pumSealDrfNo);
-      navigate(`/createPump/${detail.pumpSealDrfNumber}`)
+      console.log("edit detail is ", detail.apiPlanDrfNumber);
+      navigate(`/createApi/${detail.apiPlanDrfNumber}`)
     };
     
 
@@ -74,17 +74,16 @@ export default function EditPump() {
 
   return (
     <div>
-      <TableContainer component={Paper} style={{maxWidth:'80%',margin: '10px auto' }}>
+      <TableContainer component={Paper} style={{maxWidth:'80%',margin: '10px auto'}}>
         <Table sx={{ minWidth: 500 }} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell>Sr No</StyledTableCell>
-              <StyledTableCell align="right">pumpSeal Drf Number</StyledTableCell>
+              <StyledTableCell align="right">Api Plan Drf Number</StyledTableCell>
               <StyledTableCell align="right">Branch</StyledTableCell>
               <StyledTableCell align="right">model</StyledTableCell>
-              <StyledTableCell align="right">Created Date</StyledTableCell>
-              <StyledTableCell align="right">Last Edited Date</StyledTableCell>
-              <StyledTableCell align="right">Performace</StyledTableCell>
+              <StyledTableCell align="right">Tag Number</StyledTableCell>
+              <StyledTableCell align="right">Drawing Number </StyledTableCell>
               <StyledTableCell align="right">Action</StyledTableCell>
             </TableRow>
           </TableHead>
@@ -97,16 +96,15 @@ export default function EditPump() {
                   {index+1}
                 </StyledTableCell>
               
-                <StyledTableCell align="right">{row.pumpSealDrfNumber}</StyledTableCell>
+                <StyledTableCell align="right">{row.apiPlanDrfNumber}</StyledTableCell>
                 <StyledTableCell align="right">{row.branch}</StyledTableCell>
                 <StyledTableCell align="right">{row.model}</StyledTableCell>
-                <StyledTableCell align="right">{row.createdDate}</StyledTableCell>
-                <StyledTableCell align="right">{row.lastEditedDate}</StyledTableCell>
-                <StyledTableCell align="right">{row.performance}</StyledTableCell>
+                <StyledTableCell align="right">{row.tagNumber}</StyledTableCell>
+                <StyledTableCell align="right">{row.drawingNumber}</StyledTableCell>
                 <StyledTableCell align="right">
                   <button onClick={() => editDetail(row)} style={{margin:'0px 3px', border:'none', backgroundColor:'transparent', cursor:'pointer'}}><EditIcon style={{ color: 'blue' }} /></button>
                   <button style={{border:'none', backgroundColor:'transparent', cursor:'pointer'}} 
-                  onClick={() => deleteDetail(row.pumpSealDrfNumber,data, setData)}><DeleteIcon style={{ color: 'red' }} /></button>
+                  onClick={() => deleteDetail(row.apiPlanDrfNumber,data,setData)}><DeleteIcon style={{ color: 'red' }} /></button>
                 </StyledTableCell>
               </StyledTableRow>
             ))}

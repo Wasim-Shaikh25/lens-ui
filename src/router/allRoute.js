@@ -1,8 +1,6 @@
-import {Routes , Route } from "react-router-dom";
-// import {Form2} from '../form/form2'
-import {Quotation} from '../formPage/quotationId/quotationId'
-import {OfmId} from '../formPage/ofmId/ofmId'
-import {OfmCommunication} from '../formPage/ofmcommunication/ofmcommunication'
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import '../app.css'; // Import the CSS file
 import Customer from '../Pages/customerPage/createCustomer/Customer.js';
 import EditCustomer from "../Pages/customerPage/editCustomer/EditCustomer.js";
 import RegistrationSuccessPage from "../Pages/customerPage/createCustomer/CustomerSuccess.js";
@@ -16,34 +14,48 @@ import EditPump from "../Pages/pumpSeal/EditPumpSeal.js";
 import CreateRotatory from "../Pages/rotatoryJoint/CreateRotatory.js";
 import RotarySuccessPage from "../Pages/rotatoryJoint/RotarySuccess.js";
 import EditRotary from "../Pages/rotatoryJoint/EditRotryJoint.js";
+import CreateApi from "../Pages/apiPlan/CreateApiPlan.js";
+import EditApi from "../Pages/apiPlan/EditApiPlan.js";
+import ApiSuccessPage from "../Pages/apiPlan/ApiSuccess.js";
+import AgitatorSeal from '../Pages/agitator/CreateAgitator';
+import AgitatorSuccessPage from '../Pages/agitator/AgitatorSuccess';
+import EditAgitator from '../Pages/agitator/EditAgitator';
 
 
-const AllRoute = () => {
+const AllRoute = ({isSidebar}) => {
+ 
   return (
-    <Routes>
-      <Route path="/SalesInquiry" element={<CreateSales />} />
-      <Route path="/createRotary" element={<CreateRotatory />} />
-      <Route path="/createRotary/:rjId" element={<CreateRotatory />} />
-      <Route path="/rotarySuccess/:id" element={<RotarySuccessPage />} />
-      <Route path="/createPump" element={<CreatePumpSeal />} />
-      <Route path="/createPump/:pId" element={<CreatePumpSeal />} />
-      <Route path="/editPump" element={<EditPump />} />
-      <Route path="/editRotary" element={<EditRotary />} />
-      <Route path="/pumpSealSuccess/:id" element={<PumpSealSuccessPage />} />
-      <Route path="/editSales" element={<EditSales />} />
-      <Route path="/SalesInquiry/:sId" element={<CreateSales />} />
-      <Route path="/Quotation" element={<Quotation/>} />
-      <Route path="/OfmId" element={<OfmId/>} />
-      <Route path="/OfmCommunication" element={<OfmCommunication/>}/>  
-      <Route path="/Customer/:rId" element={<Customer/>}/>
-      <Route path="/Customer" element={<Customer/>}/>
-      <Route path="/editCustomer" element={<EditCustomer/>}/>
-      <Route path="/registerSuccess/:id" element={<RegistrationSuccessPage />}/>
-      <Route path="/salesSuccess/:sId" element={<SalesSuccessPage />}/>
-      <Route path="/updateSuccess/:id" element={<UpdateSuccessPage />}/>
-    </Routes>
+    <div style={!isSidebar?{width:"80%",position:"absolute",right:0,marginTop:"5rem"} : {marginTop:"5.5rem"}}>
+      <Routes>
+          <Route path="/createAgitator" element={<AgitatorSeal />} />
+          <Route path="/editAgitator" element={<EditAgitator />} />
+          <Route path="/createAgitator/:aId" element={<AgitatorSeal />} />
+          <Route path="/agitatorSuccess/:id" element={<AgitatorSuccessPage />} />
+          <Route path="/SalesInquiry" element={<CreateSales />} />
+          <Route path="/createRotary" element={<CreateRotatory />} />
+          <Route path="/createRotary/:rjId" element={<CreateRotatory />} />
+          <Route path="/editApi" element={<EditApi />} />
+          <Route path="/createApi" element={<CreateApi />} />
+          <Route path="/apiSuccess/:id" element={<ApiSuccessPage />} />
+          <Route path="/createApi/:apId" element={<CreateApi />} />
+          <Route path="/rotarySuccess/:id" element={<RotarySuccessPage />} />
+          <Route path="/createPump" element={<CreatePumpSeal />} />
+          <Route path="/createPump/:pId" element={<CreatePumpSeal />} />
+          <Route path="/editPump" element={<EditPump />} />
+          <Route path="/editRotary" element={<EditRotary />} />
+          <Route path="/pumpSealSuccess/:id" element={<PumpSealSuccessPage />} />
+          <Route path="/editSales" element={<EditSales />} />
+          <Route path="/SalesInquiry/:sId" element={<CreateSales />} />
+          <Route path="/Customer/:rId" element={<Customer />} />
+          <Route path="/Customer" element={<Customer />} />
+          <Route path="/editCustomer" element={<EditCustomer />} />
+          <Route path="/registerSuccess/:id" element={<RegistrationSuccessPage />} />
+          <Route path="/salesSuccess/:sId" element={<SalesSuccessPage />} />
+          <Route path="/updateSuccess/:id" element={<UpdateSuccessPage />} />
+        </Routes>
+        </div>
+
   );
 };
 
 export default AllRoute;
-

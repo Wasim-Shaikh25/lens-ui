@@ -1,4 +1,4 @@
-import {React} from 'react';
+import {React, createContext, useContext} from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,11 +10,9 @@ import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
-// import {AppContext} from '../../contextAPI/AppContext';
-// import { DataGrid } from '@mui/x-data-grid';
-
+import { getAllCustomer } from '../../../apis/CustomerApi';
+import { deleteDetail } from '../../../apis/CustomerApi';
 
 
 
@@ -46,24 +44,10 @@ export default function EditCustomer() {
   const [isDeleted, setIsDeleted] = useState(false);  
   const [itemsPerPage, setItemsPerPage] = useState(5); // Adjust as needed
   const navigate = useNavigate();  
-  // const { editData, setEditData } = useContext(AppContext); // Accessing context values
 
 
-  // const indexOfLastItem = currentPage * itemsPerPage;
-  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-  
   useEffect(() => {
-    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/customer/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
-      .then(res => {
-        setData(res.data);
-        console.log("the fetched data is ",res.data);
-        setIsDeleted(false)
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-      
+    getAllCustomer(currentPage, itemsPerPage, setData, setIsDeleted);
     }, [currentPage, itemsPerPage]);
     
     
@@ -76,24 +60,6 @@ export default function EditCustomer() {
     };
     
 
-
-  const deleteDetail = crId => {
-    axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/customer/delete?customerRefrenceNumber=${crId}`)
-    .then(res=>{
-      console.log(res)
-      const newData = data.filter(item => item.customerReferenceNumber !== crId);
-      setIsDeleted(true)
-      setData(newData);
-
-    }).catch(err=>{
-      console.log(err)
-    })
-
-
-    
-    console.log("customer reference id of deletion elem is ", crId);
-  };
-
   const paginate = (items)=>{
      setItemsPerPage(items);
       setCurrentPage(0)
@@ -103,7 +69,7 @@ export default function EditCustomer() {
 
   return (
     <div>
-      <TableContainer component={Paper} style={{ width: '86%', margin: '10px auto' }}>
+      <TableContainer component={Paper} style={{maxWidth:'80%',margin: '10px auto' }}>
         <Table sx={{ minWidth: 500 }} aria-label="customized table">
           <TableHead>
             <TableRow>
@@ -132,7 +98,7 @@ export default function EditCustomer() {
                 <StyledTableCell align="right">{row.lastUpdatedOn}</StyledTableCell>
                 <StyledTableCell align="right">
                   <button onClick={() => editDetail(row)} style={{margin:'0px 3px', border:'none', backgroundColor:'transparent', cursor:'pointer'}}><EditIcon style={{ color: 'blue' }} /></button>
-                  <button style={{border:'none', backgroundColor:'transparent', cursor:'pointer'}} onClick={() => deleteDetail(row.customerReferenceNumber)}><DeleteIcon style={{ color: 'red' }} /></button>
+                  <button style={{border:'none', backgroundColor:'transparent', cursor:'pointer'}} onClick={() => deleteDetail(row.customerReferenceNumber,data,setIsDeleted,setData)}><DeleteIcon style={{ color: 'red' }} /></button>
                 </StyledTableCell>
               </StyledTableRow>
             ))}

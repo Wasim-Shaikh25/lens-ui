@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { TextField ,Button,  Container, Grid, InputLabel , IconButton } from '@mui/material';
-import axios from 'axios';
-import "./customerFrom.css";
+
 import { useNavigate, useParams } from 'react-router-dom';
+import { getRotary, handleSubmit, handleUpdate } from '../../apis/RotaryApi';
+
+
 
 export default function CreateRotatory() {
 
@@ -14,7 +16,7 @@ export default function CreateRotatory() {
   const [formData, setFormData] = useState({
     branch: "",
     enquiryNumber: "",
-    customer: "",
+    customerName: "",
     customerAddress: "",
     costingRequirement: true,
     equipment: "",
@@ -42,23 +44,14 @@ export default function CreateRotatory() {
 
    useEffect(()=>{
     if(rjId!==undefined){
-      axios.get(`https://lens-svc.azurewebsites.net/lens-svc/rotaryJoint/get?rotaryJointDrfNo=${rjId}`)
-      .then(res=>{
-        const {data} = res;
-          setFormData(data);
-          console.log("the rjId fetched data is ",data)
-
-      }) 
-      .catch(err=>{
-        console.log(err)
-      })
+     getRotary(rjId,setFormData);
 
     }else{
       setFormData(
         {
             branch: "",
             enquiryNumber: "",
-            customer: "",
+            customerName: "",
             customerAddress: "",
             costingRequirement: true,
             equipment: "",
@@ -98,50 +91,6 @@ export default function CreateRotatory() {
   };
 
 
-
- 
-
-
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-
-      console.log("formData sales is ",formData);
-      
-      try{
-          const res = await axios.post("https://lens-svc.azurewebsites.net/lens-svc/rotaryJoint/save", formData);
-        console.log("response is ",res.data);
-        navigate(`/rotarySuccess/${res.data}`);
-      }  
-      catch(err){
-        console.log(err)
-      }
-
-    // Add form submission logic here
-
-  };
-
-
-
-
-  const handleUpdate = async (e)=>{
-    e.preventDefault();
-  
-      
-      try{
-          const res = await axios.put("https://lens-svc.azurewebsites.net/lens-svc/rotaryJoint/update", formData);
-          console.log("response from update is ",res.data);
-      }
-      catch(err){
-        console.log(err)
-      }
-
-    
-    rjId="";
-    navigate(`/rotarySuccess/${formData.rotaryDrfNumber}`);
-  }
-
-
-
   const cancelUpdate = ()=>{
 
       const confirmCancel = window.confirm("Are you sure you want to cancel the update?");
@@ -160,7 +109,7 @@ export default function CreateRotatory() {
    {!rjId ? <h1 style={{ marginLeft: '20px' }}>New Rotary Joint :</h1> : <h1 style={{ marginLeft: '20px' }}>Update Rotary Joint :</h1>}
 
 
-   <form onSubmit={handleSubmit} className="form-style">
+   <form >
      
         <div className='card'>
           <h3>Rotary Joint New Mode:-</h3>
@@ -168,6 +117,7 @@ export default function CreateRotatory() {
             {rjId && <Grid item xs={4}>
               <InputLabel className="ip-label" >Rotatory Joint Drf Number</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="rotaryDrfNumber"
                 value={formData.rotaryDrfNumber}
@@ -179,6 +129,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >branch</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="branch"
                 value={formData.branch}
@@ -189,6 +140,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Enquiry Number</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="enquiryNumber"
                 value={formData.enquiryNumber}
@@ -199,9 +151,10 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Customer</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
-                name="customer"
-                value={formData.customer}
+                name="customerName"
+                value={formData.customerName}
                 onChange={handleChange} />
             </Grid>
 
@@ -210,6 +163,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Customer Address</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="customerAddress"
                 value={formData.customerAddress}
@@ -243,6 +197,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Equipment</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="equipment"
                 value={formData.equipment}
@@ -253,6 +208,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Make</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="make"
                 value={formData.make}
@@ -262,6 +218,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Model</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="model"
                 value={formData.model}
@@ -272,6 +229,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Fluid</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="fluid"
                 value={formData.fluid}
@@ -281,6 +239,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Operating Temprature</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="operatingTemperature"
                 value={formData.operatingTemperature}
@@ -291,6 +250,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Operating Temprature Unit</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="operatingTemperatureUnit"
                 value={formData.operatingTemperatureUnit}
@@ -301,6 +261,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Flow Rate</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="flowRate"
                 value={formData.flowRate}
@@ -311,6 +272,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Speed</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="speed"
                 value={formData.speed}
@@ -321,6 +283,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Operating Pressure</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="operatingPressure"
                 value={formData.operatingPressure}
@@ -330,6 +293,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Operating Pressure Unit</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="operatingPressureUnit"
                 value={formData.operatingPressureUnit}
@@ -348,6 +312,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Existing Make</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="existingMake"
                 value={formData.existingMake}
@@ -357,6 +322,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Existing Model</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="existingModel"
                 value={formData.existingModel}
@@ -367,6 +333,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Connection Type</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="connectionType"
                 value={formData.connectionType}
@@ -377,6 +344,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Connection Size</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="connectionSize"
                 value={formData.connectionSize}
@@ -387,6 +355,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label" >Flange Type</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="flangeType"
                 value={formData.flangeType}
@@ -401,6 +370,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">Center Type</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="centerType"
                 value={formData.centerType}
@@ -410,6 +380,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">Rotary Joint Type</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="rotaryJointType"
                 value={formData.rotaryJointType}
@@ -419,6 +390,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">Syphon Pipe Type</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="syphonPipeType"
                 value={formData.syphonPipeType}
@@ -429,6 +401,7 @@ export default function CreateRotatory() {
             <Grid item xs={4}>      
                 <InputLabel className="ip-label">Syphon Pipe Diameter</InputLabel >
               <TextField
+              size="small"
                 className="text-field"
                 name="syphonPipeDiameter"
                 value={formData.syphonPipeDiameter}
@@ -442,9 +415,9 @@ export default function CreateRotatory() {
           <Grid item xs={4}>
           <Grid item xs={4}>
         
-        {!rjId ?( <Button className="submit-btn" type="submit" onClick ={handleSubmit} variant="contained" >Submit</Button>) : (
+        {!rjId ?( <Button className="submit-btn" type="submit" style={{margin:"20px"}} onClick ={(e)=>handleSubmit(e,formData,navigate)} variant="contained" >Submit</Button>) : (
           <>
-            <Button className="update-btn" variant="contained" onClick={handleUpdate} >Update</Button>
+            <Button className="update-btn" variant="contained" onClick={(e)=>handleUpdate(e,formData,rjId,navigate)} >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
         </Grid>

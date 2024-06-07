@@ -1,11 +1,34 @@
-.container{
-  margin-top: 20px;
-  background-color: rgb(250, 251, 251);
+*{
+  font-family: 'Times New Roman', Times, serif;
+}
 
+
+.css-1tqrhto >.ps-menu-button {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex !important;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 43px !important;
+  -webkit-text-decoration: none;
+  text-decoration: none !important;
+  color: inherit;
+  box-sizing: border-box;
+  cursor: pointer;
+  padding-right: 20px !important;
+  padding-left: 20px !important;
+}
+.container{
+  margin-top: 20px !important;
+  background-color: rgb(250, 251, 251) !important;
+  max-width:85% !important;
 }
 
 .form-style {
-  background-color: white;
+  background-color: #F5F7F8;
   padding: 25px;
   border: 1px solid lightgray;
   border-radius: 10px;
@@ -18,14 +41,14 @@
 }
 
 .card{
-  display:flex;
-  flex-direction:column;
-  margin:20px;
-  padding:10px 20px 20px 20px;
-  border-radius: 8px;
-   border:1px solid #ddd;
-   background-color: white;
-    box-shadow:rgba(90, 114, 123, 0.11) 0px 7px 30px 0px
+  display:flex !important;
+  flex-direction:column !important;
+  margin:20px 20px 0px 20px !important;
+  padding:10px 25px 25px 25px !important;
+  border-radius: 8px !important;
+   border:1px solid #ddd !important;
+   background-color: white !important;
+    box-shadow:rgba(90, 114, 123, 0.11) 0px 7px 30px 0px !important;
 }
 
 
@@ -33,38 +56,77 @@
   background-color: #00C292 !important;
   color: white !important;
   height: 30px !important;
-  margin-top: 2rem !important;
-  margin-left: 18px  !important;
+  margin: 3rem 1.5rem !important;
+ 
 }
+
+.css-um1o6k{
+  display:none !important;
+  position: absolute !important;
+  right:-6px !important;
+  top: 50% !important;
+}
+
+
+.css-honxw6 {
+  display: inline-block;
+  -webkit-transition: -webkit-transform 0.3s !important;
+  transition: transform 0.3s !important;
+  border-right: 2px solid currentcolor !important;
+  border-bottom: 2px solid currentcolor !important;
+  width: 5px !important;
+  height: 5px !important;
+  -moz-transform: rotate(-45deg) !important;
+  -ms-transform: rotate(-45deg) !important;
+  transform: rotate(-45deg) !important;
+  margin-right: 9px  !important;
+}
+
+.css-jn69v9 {
+  display: inline-block !important;
+  -webkit-transition: -webkit-transform 0.3s !important;
+  transition: transform 0.3s !important;
+  border-right: 2px solid currentcolor !important;
+  border-bottom: 2px solid currentcolor !important;
+  width: 5px !important;
+  height: 5px !important;
+  -webkit-transform: rotate(45deg) !important;
+  -moz-transform: rotate(45deg) !important;
+  -ms-transform: rotate(45deg) !important;
+  transform: rotate(45deg) !important;
+  margin-right: 9px !important;
+  margin-bottom: 3px !important;
+}
+
 
 
 .submit-btn{
   background-color: #03C9D7 !important;
   padding: 8px 12px !important;
-  margin-top: 10px !important;
+  margin: 2rem 1.5rem !important;
 }
+
+
 
 .update-btn{
   background-color: #03C9D7 !important;
   padding: 8px 12px !important;
-  margin-top: 8px !important;
+  margin: 1.5rem 1.5rem!important;
 }
 
 
 .cancel-btn{
   background-color: #E46A76 !important;
   padding: 8px 12px !important;
-  margin-top: 8px !important;
-  margin-left: 15px !important;
+  margin: 1.5rem 1.5rem!important;
 
 }
 
 .text-field{
   border-color: #DEE3E9 !important;
   border-radius: 10px !important;
-  background-color: white !important;
-
-}
+  /* background-color: white !important;  */
+} 
 
 .deleteIcon{
 
@@ -75,3 +137,41 @@
 
 
 
+.sidebarBox{
+  overflow-y: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  max-height: 100vh;
+  padding-right: 0px;
+  margin: 5rem 1rem 1rem 1rem;
+
+
+
+  ::-webkit-scrollbar {
+    max-height:0.5rem !important;
+    width: 0.3rem;
+  }
+
+ 
+
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px white; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #d3d3d3; 
+    border-radius: 10px;
+    
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: gray; 
+  }
+}

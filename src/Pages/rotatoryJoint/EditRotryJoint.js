@@ -12,6 +12,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
+import { getAllRotary } from '../../apis/RotaryApi';
+import { deleteDetail } from '../../apis/RotaryApi';
+
+
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,25 +48,12 @@ export default function EditRotary() {
   const navigate = useNavigate();  
   // const { editData, setEditData } = useContext(AppContext); // Accessing context values
 
-
-  // const indexOfLastItem = currentPage * itemsPerPage;
-  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-  
   useEffect(() => {
-    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/rotaryJoint/getAllRotaryJointByFilter?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
-      .then(res => {
-        setData(res.data);
-        console.log("the fetched data is ",res.data);
-        setIsDeleted(false)
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
+    getAllRotary(setData, setIsDeleted) 
       
     }, [currentPage, itemsPerPage]);
     
-    
+    console.log("data from edit is",data)
     
     
     const editDetail = (detail) => {
@@ -72,38 +64,7 @@ export default function EditRotary() {
     
 
 
-  // const deleteDetail =async (crId) => {
-  //   axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/pumSeal/delete?pumSealDrfNo=${crId}`)
-  //   .then(res=>{
-  //     console.log(res)
-  //     console.log("data is",data)
-  //     const newData = data.filter(item => item.pumSealDrfNo !== crId);
-  //     console.log("New data is",newData)
-  //     setIsDeleted(true)
-  //     setData(newData);
 
-  //   }).catch(err=>{
-  //     console.log(err)
-  //   })
-
-
-    
-  //   console.log("customer reference id of deletion elem is ", crId);
-  // };
-
-
-
-  const deleteDetail = async (crId) => {
-    try {
-      await axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/rotaryJoint/delete?rotaryJointDrfNo=${crId}`);
-      const newData = data.filter(item => item.rotaryDrfNumber !== crId);
-      console.log("data is ",data)
-      console.log("New data is ",newData)
-      setData(newData);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
 
 
@@ -116,7 +77,7 @@ export default function EditRotary() {
 
   return (
     <div>
-      <TableContainer component={Paper} style={{ width: '86%', margin: '10px auto' }}>
+      <TableContainer component={Paper} style={{maxWidth:'80%',margin: '10px auto' }}>
         <Table sx={{ minWidth: 500 }} aria-label="customized table">
           <TableHead>
             <TableRow>
@@ -125,8 +86,8 @@ export default function EditRotary() {
               <StyledTableCell align="right">Branch</StyledTableCell>
               <StyledTableCell align="right">model</StyledTableCell>
               <StyledTableCell align="right">Equipment</StyledTableCell>
-              <StyledTableCell align="right">Equipment</StyledTableCell>
               <StyledTableCell align="right">Speed</StyledTableCell>
+              <StyledTableCell align="right">Flow Rate</StyledTableCell>
               <StyledTableCell align="right">Action</StyledTableCell>
             </TableRow>
           </TableHead>
@@ -148,7 +109,7 @@ export default function EditRotary() {
                 <StyledTableCell align="right">
                   <button onClick={() => editDetail(row)} style={{margin:'0px 3px', border:'none', backgroundColor:'transparent', cursor:'pointer'}}><EditIcon style={{ color: 'blue' }} /></button>
                   <button style={{border:'none', backgroundColor:'transparent', cursor:'pointer'}} 
-                  onClick={() => deleteDetail(row.rotaryDrfNumber)}><DeleteIcon style={{ color: 'red' }} /></button>
+                  onClick={() => deleteDetail(row.rotaryDrfNumber,data,setData)}><DeleteIcon style={{ color: 'red' }} /></button>
                 </StyledTableCell>
               </StyledTableRow>
             ))}

@@ -1,235 +1,568 @@
-import React, { useState, useEffect } from "react";
+// import React, { useEffect, useRef, useContext, useState } from "react";
+// import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+// import { Box, IconButton, Typography, useTheme, Avatar } from "@mui/material";
+// import { Link } from "react-router-dom";
+// import { tokens } from "../../theme";
+// import { ColorModeContext } from "../../theme";
+// import AddBoxIcon from '@mui/icons-material/AddBox';
+// import EditIcon from '@mui/icons-material/Edit';
+// import DescriptionIcon from '@mui/icons-material/Description';
+// import hassan_usmani21 from "../../assets/hassan_usmani21.webp";
+// import PersonIcon from '@mui/icons-material/Person';
+// import LoyaltyIcon from '@mui/icons-material/Loyalty';
+// import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+
+// const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
+//   const theme = useTheme();
+//   const colors = tokens(theme.palette.mode);
+//   const colorMode = useContext(ColorModeContext);
+//   const backgroundColor = colorMode === "dark" ? colors.primary[900] : theme.palette.background.default;
+//   const sidebarRef = useRef(null);
+
+//   const [activeSubMenu, setActiveSubMenu] = useState("");
+//   const [activeItemMenu, setActiveItemMenu] = useState("");
+
+  
+//   useEffect(() => {
+//     document.body.style.backgroundColor = backgroundColor;
+//     return () => {
+//       document.body.style.backgroundColor = ''; // Reset background color when component unmounts
+//     };
+//   }, [backgroundColor]);
+
+  
+//   useEffect(() => {
+//     const handleClickOutside = (event) => {
+//       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+//         setIsSidebar(true); // Collapse the sidebar
+//       }
+//     };
+
+//     document.addEventListener("mousedown", handleClickOutside);
+//     return () => {
+//       document.removeEventListener("mousedown", handleClickOutside);
+//     };
+//   }, [sidebarRef, setIsSidebar]);
+
+//   const getSubMenuStyle = (menuName) => ({
+//     backgroundColor: activeSubMenu === menuName ? '#00CEC3' : 'transparent',
+//     color: activeSubMenu === menuName ? 'white' : 'black',
+//     borderRadius: '8px',
+//     margin: '4px 16px',
+//     padding:"6px",
+//   });
+
+//   const getMenuItemStyle = (menuName) => ({
+//     color: activeItemMenu === menuName ? '#00CEC3' : 'black',
+//     margin: '4px 18px',
+//     borderRadius: '6px',
+//   });
+
+//   const handleSubMenuClick = (menuName) => {
+//     console.log(`SubMenu ${menuName} clicked`);
+//     setActiveSubMenu(menuName);
+//   };
+
+//   return (
+//     <Box
+//       ref={sidebarRef}
+//       id="sidebar"
+//       height="100vh"
+//       bgcolor={backgroundColor}
+//       style={{
+//         overflowY: "hidden",
+//         position: "fixed",
+//         top: 0 ,
+//         left: 0,
+//         width: "100%",
+//         bottom: 0,
+//         display:"flex",
+//         maxHeight:"85vh",
+//         paddingRight: '0px',
+//         margin:"4.5rem 0 1rem 0rem",
+//       }}
+//       pr={2}
+//       sx={{
+//         "& .css-dip3t8": {
+//           backgroundColor: "transparent !important",
+//         },
+//         "& ul, & ul ul": {
+//           padding: 0,
+//           margin: 0,
+//           listStyle: "none !important", // Remove bullet points
+//         },
+//         "& li": {
+//           listStyle: "none !important", // Remove bullet points
+//         },
+//         "& .pro-sidebar-content": {
+//           padding: 0, // Additional specificity
+//         },
+//         "& .pro-menu": {
+//           padding: 0, // Additional specificity
+//         },
+//         "& .pro-menu-item": {
+//           padding: "5px 10px",
+//           borderRadius: '8px',
+//           margin: '4px 0',
+//           "&:hover": {
+//             backgroundColor: '#03C9D7',
+//             color: 'white',
+//           },
+//         },
+//         "& .pro-menu-item-active": {
+//           backgroundColor: '#03C9D7 !important',
+//           color: 'white !important',
+//         },
+//       }}
+//     >
+//     <div style={{ display: "flex", borderRadius:"20px",height:"85vh",width:"25%", justifyContent: "center"  }}>
+//         <Sidebar
+//           id="custom-sidebar"
+//           collapsed={isSidebar}
+//           style={{
+//             backgroundColor: "#FFFFFF",
+//             flex: 1,
+//             boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.3)",
+//             // display: !isSidebar ? "block" : "none",
+//           }}>
+
+//           <Menu iconShape="square">
+//             {!isSidebar && (
+//               <Box mb="25px" >
+//                 <Box display="flex" justifyContent="center" alignItems="center">
+//                   <Avatar alt="profile-user" src={hassan_usmani21} sx={{ width: 80, height: 80, cursor: "pointer", boxShadow:3, marginTop:"1.5rem" }} />
+//                 </Box>
+//                 <Box textAlign="center" mt={2}>
+//                   <Typography variant="h6" color="black" fontWeight="bold">
+//                     PK
+//                   </Typography>
+//                   <Typography variant="body2" color="textSecondary">
+//                     Hassan Admin
+//                   </Typography>
+//                 </Box>
+//               </Box>
+//             )}
+            
+//             <Box pl={isSidebar ? 0 : 3}>
+//               <Menu>
+//                 {/* Customer */}
+//                 <SubMenu label={<Typography variant="body1">Customer</Typography>} style={getSubMenuStyle("Customer")} onClick={() => handleSubMenuClick("Customer")} icon={<PersonIcon />}>
+//                   <Link to="/Customer" onClick={()=>setIsSidebar(!isSidebar)} style={{ color: 'inherit', textDecoration: "none" }}>
+//                     <MenuItem
+//                       icon={<AddBoxIcon />}
+//                       style={getMenuItemStyle("Customer")} onClick={() => setActiveItemMenu("Customer")}
+//                     >
+//                       Create
+//                     </MenuItem>
+//                   </Link>
+
+//                   <Link to="/editCustomer" onClick={()=>setIsSidebar(!isSidebar)} style={{ color: 'inherit', textDecoration: "none" }}>
+//                     <MenuItem
+//                       icon={<EditIcon />}
+//                       style={getMenuItemStyle("Customer Edit")} onClick={() => setActiveItemMenu("Customer Edit")}
+//                     >
+//                       Edit
+//                     </MenuItem>
+//                   </Link>
+//                 </SubMenu>
+
+//                 {/* Sales Inquiry */}
+//                 <SubMenu label={<Typography variant="body1">Sales Inquiry</Typography>} style={getSubMenuStyle("Sales")} onClick={()=>handleSubMenuClick("Sales")} icon={<LoyaltyIcon />}>
+//                   <Link to="/SalesInquiry" onClick={()=>setIsSidebar(!isSidebar)} style={{ color: 'inherit', textDecoration: "none" }}>
+//                     <MenuItem
+//                       icon={<AddBoxIcon />}
+//                       style={getMenuItemStyle("Sales Inquiry Create")} onClick={() => setActiveItemMenu("Sales Inquiry Create")}
+//                     >
+//                       Create
+//                     </MenuItem>
+//                   </Link>
+
+//                   <Link to="/editSales" onClick={()=>setIsSidebar(!isSidebar)} style={{ color: 'inherit', textDecoration: "none" }}>
+//                     <MenuItem
+//                       icon={<EditIcon />}
+//                       style={getMenuItemStyle("Sales Inquiry Edit")} onClick={() => setActiveItemMenu("Sales Inquiry Edit")}
+//                     >
+//                       Edit
+//                     </MenuItem>
+//                   </Link>
+//                 </SubMenu>
+
+//                 {/* Drawing Requisition */}
+//                 <SubMenu label="Drawing Requisition" style={getSubMenuStyle("Drawing")} onClick={() => handleSubMenuClick("Drawing")} icon={<DescriptionIcon />}>
+//                   <Link to='/createPump' onClick={()=>setIsSidebar(!isSidebar)} style={{ color: 'inherit', textDecoration: "none" }}>
+//                     <MenuItem
+//                       icon={<AddBoxIcon />}
+//                       style={getMenuItemStyle("Pump Seal Create")} onClick={() => setActiveItemMenu("Pump Seal Create")}
+//                     >
+//                       Create PumpSeal 
+//                     </MenuItem>
+//                   </Link>
+
+//                   <Link to='/editPump' onClick={()=>setIsSidebar(!isSidebar)} style={{ color: 'inherit', textDecoration: "none" }}>
+//                     <MenuItem
+                    
+//                       icon={<EditIcon />}
+//                       style={getMenuItemStyle("Pump Seal Edit")} onClick={() => setActiveItemMenu("Pump Seal Edit")}
+//                     >
+//                       Edit Pump Seal
+//                     </MenuItem>
+//                   </Link>
+
+//                   <Link to='/createRotary' onClick={()=>setIsSidebar(!isSidebar)} style={{ color: 'inherit', textDecoration: "none" }}>
+//                     <MenuItem
+//                       icon={<AddBoxIcon />}
+//                       style={getMenuItemStyle("Rotary Create")} onClick={() => setActiveItemMenu("Rotary Create")}
+//                     >
+//                       Create Rotary Join 
+//                     </MenuItem>
+//                   </Link>
+
+//                   <Link to='/editRotary' onClick={()=>setIsSidebar(!isSidebar)} style={{ color: 'inherit', textDecoration: "none" }}>
+//                     <MenuItem
+//                       icon={<EditIcon />}
+//                       style={getMenuItemStyle("Rotary Edit")} onClick={() => setActiveItemMenu("Rotary Edit")}
+//                     >
+//                       Edit Rotary Join
+//                     </MenuItem>
+//                   </Link>
+
+//                   <Link to='/createApi' onClick={()=>setIsSidebar(!isSidebar)} style={{ color: 'inherit', textDecoration: "none" }}>
+//                     <MenuItem
+//                       icon={<AddBoxIcon />}
+//                       style={getMenuItemStyle("Create Api")} onClick={() => setActiveItemMenu("Create Api")}
+//                     >
+//                       Create API Plan 
+//                     </MenuItem>
+//                   </Link>
+
+//                   <Link to='/editApi' onClick={()=>setIsSidebar(!isSidebar)} style={{ color: 'inherit', textDecoration: "none" }}>
+//                     <MenuItem
+//                       icon={<EditIcon />}
+//                       style={getMenuItemStyle("Edit Api")} onClick={() => setActiveItemMenu("Edit Api")}
+//                     >
+//                       Edit API Plan
+//                     </MenuItem>
+//                   </Link>
+
+//                   <Link to="/" onClick={()=>setIsSidebar(!isSidebar)} style={{ color: 'inherit', textDecoration: "none" }}>
+//                   <MenuItem
+//                     icon={<AddBoxIcon />}
+//                     style={getMenuItemStyle("Create Agitator")} onClick={() => setActiveItemMenu("Create Agitator")}
+//                   >
+//                     Create Agitator Seal 
+//                   </MenuItem>
+//                   </Link>
+//                   <Link to="/" onClick={()=>setIsSidebar(!isSidebar)} style={{ color: 'inherit', textDecoration: "none" }}>
+//                   <MenuItem
+//                     icon={<EditIcon />}
+//                     style={getMenuItemStyle("Edit Agitator")} onClick={() => setActiveItemMenu("Edit Agitator")}
+//                   >
+//                     Edit Agitator
+//                   </MenuItem>
+//                   </Link>
+//                 </SubMenu>
+
+//                 {/* Quotation */}
+//                 <SubMenu label="Quotation" style={getSubMenuStyle("Quotation")} onClick={() => handleSubMenuClick("Quotation")} icon={<MonetizationOnIcon />}>
+//                   <Link to="/Quotation" onClick={()=>setIsSidebar(!isSidebar)} style={{ color: 'inherit', textDecoration: "none" }}>
+//                     <MenuItem
+//                       icon={<AddBoxIcon />}
+//                       style={getMenuItemStyle("Create quote")} onClick={() => setActiveItemMenu("Create quote")}
+//                     >
+//                       Create Quotation
+//                     </MenuItem>
+//                   </Link>
+
+//                   <Link to="/Quotation" onClick={()=>setIsSidebar(!isSidebar)} style={{ color: 'inherit', textDecoration: "none" }}>
+//                     <MenuItem
+//                       icon={<EditIcon />}
+//                       style={getMenuItemStyle("Edit quote")} onClick={() => setActiveItemMenu("Edit quote")}
+//                     >
+//                       Edit Quotation
+//                     </MenuItem>
+//                   </Link>
+//                 </SubMenu>
+//               </Menu>
+//             </Box>
+//           </Menu>
+//         </Sidebar>
+//       </div>
+
+//        <div style={{width:"75%",zIndex:"-5",background:"linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),white"}}>
+
+//         </div>       
+
+//     </Box>
+//   );
+// };
+
+// export default CustomSidebar;
+
+
+
+
+import {React,useState,useRef,useContext, useEffect} from "react";
+import { Box, Typography, Avatar } from "@mui/material";
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { tokens } from "../../theme";
+import { useTheme} from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+import AddBoxIcon from "@mui/icons-material/AddBox";
 import { ColorModeContext } from "../../theme";
-import AddBoxIcon from '@mui/icons-material/AddBox';
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import EditIcon from '@mui/icons-material/Edit';
-import ImageIcon from '@mui/icons-material/Image';
-import hassan_usmani21 from "../../assets/hassan_usmani21.webp";
-import PersonIcon from '@mui/icons-material/Person';
-import { useParams } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
+import { tokens } from "../../theme";
+import LoyaltyIcon from "@mui/icons-material/Loyalty";
+import DescriptionIcon from "@mui/icons-material/Description";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import { Link } from "react-router-dom";
+
+import hassan_usmani21 from "../../assets/hassan_usmani21.webp"; // Adjust the import according to your project 
 
 
-const CustomSidebar = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(true);
-  const colorMode = useContext(ColorModeContext);
-  const backgroundColor = colorMode === "dark" ? colors.primary[900] : theme.palette.background.default;
-  const navigate = useNavigate();
-
-  
-  useEffect(() => {
-    document.body.style.backgroundColor = backgroundColor;
-    return () => {
-      document.body.style.backgroundColor = ''; // Reset background color when component unmounts
-    };
-  }, [backgroundColor]);
-
-
-
-
-  
-
-  // Set the background color for sub-menu items in dark mode
-  const subMenuItemStyle = colorMode === "dark" ? { backgroundColor: colors.primary[900] } : {};
-
-  
-    // const handleMenuItemClick = () => {
-    //   // Hide the sidebar when a menu item is clicked
-    //   setIsCollapsed(true);
-    // };
+const CustomSidebar = ({isSidebar,setIsSidebar}) => {
+      const theme = useTheme();
+      const colors = tokens(theme.palette.mode);
+      const colorMode = useContext(ColorModeContext);
+      const backgroundColor = colorMode === "dark" ? colors.primary[900] : theme.palette.background.default;
+      const sidebarRef = useRef(null);
+    
+      const [activeSubMenu, setActiveSubMenu] = useState("");
+      const [activeItemMenu, setActiveItemMenu] = useState("");
+    
+      
+      useEffect(() => {
+        document.body.style.backgroundColor = backgroundColor;
+        return () => {
+          document.body.style.backgroundColor = ''; // Reset background color when component unmounts
+        };
+      }, [backgroundColor]);
+    
+      
+      // useEffect(() => {
+      //   const handleClickOutside = (event) => {
+      //     if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+      //       setIsSidebar(true); // Collapse the sidebar
+      //     }
+      //   };
+    
+      //   document.addEventListener("mousedown", handleClickOutside);
+      //   return () => {
+      //     document.removeEventListener("mousedown", handleClickOutside);
+      //   };
+      // }, [sidebarRef, setIsSidebar]);
 
     
-  
-  
-
+      const getSubMenuStyle = (menuName) => ({
+        backgroundColor: activeSubMenu === menuName ? '#00CEC3' : 'transparent',
+        color: activeSubMenu === menuName ? 'white' : 'black',
+        borderRadius: '8px',
+        margin: '4px 16px',
+        padding:"6px",
+      });
+    
+      const getMenuItemStyle = (menuName) => ({
+        color: activeItemMenu === menuName ? '#00CEC3' : 'black',
+        margin: '4px 18px',
+        borderRadius: '6px',
+      });
+    
+      const handleSubMenuClick = (menuName) => {
+        console.log(`SubMenu ${menuName} clicked`);
+        setActiveSubMenu(menuName);
+      };
   return (
     <Box
+      ref={sidebarRef}
       id="sidebar"
       height="100vh"
+      className="sidebarBox"
       bgcolor={backgroundColor}
-      style={{
-        overflowY: "hidden",
-        position: "fixed",
-        top: 0,
-        left: 0,
-        bottom: 0,
-        zIndex: 2,
-        paddingRight:'0px'
-      }}
       pr={2}
-
       sx={{
-        // ... (previous styles)
         "& .css-dip3t8": {
           backgroundColor: "transparent !important",
-        }
-
-      }}>
-
-
-      <div style={{ display: "flex", height: "100vh", justifyContent: "center" }}>
+        },
+        "& ul, & ul ul": {
+          padding: 0,
+          margin: 0,
+          listStyle: "none !important", // Remove bullet points
+        },
+        "& li": {
+          listStyle: "none !important", // Remove bullet points
+        },
+        "& .pro-sidebar-content": {
+          padding: 0, // Additional specificity
+        },
+        "& .pro-menu": {
+          padding: 0, // Additional specificity
+        },
+        "& .pro-menu-item": {
+          padding: "5px 10px",
+          borderRadius: '8px',
+          margin: '4px 0',
+          "&:hover": {
+            backgroundColor: '#03C9D7',
+            color: 'white',
+          },
+        },
+        "& .pro-menu-item-active": {
+          backgroundColor: '#03C9D7 !important',
+          color: 'white !important',
+        },
+      }}
+    >
+      <div style={{ display: "flex", borderRadius: "20px", height: "90vh", width: "20%", justifyContent: "center" }}>
         <Sidebar
           id="custom-sidebar"
-          collapsed={isCollapsed}
+          collapsed={isSidebar}
           style={{
-            backgroundColor:
-              colorMode === "dark" ? colors.primary[900] : theme.palette.background.default,
+            backgroundColor: "#FFFFFF",
             flex: 1,
-            overflowY: "auto",
-          }}
-
-        
-          
-        >
+            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.3)",
+          }}>
           <Menu iconShape="square">
-            <MenuItem
-              onClick={() => setIsCollapsed(!isCollapsed)}
-              icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
-              style={{
-                margin: "10px 0 20px 0",
-                color: colors.grey[100],
-
-              }}
-            >
-              {!isCollapsed && (
-                <Box
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  ml="15px"
-                >
-                  <Typography variant="h3" color={colors.grey[100]}>
-                    Admin
-                  </Typography>
-                  <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <MenuOutlinedIcon />
-                  </IconButton>
-                </Box>
-              )}
-            </MenuItem>
-
-            {!isCollapsed && (
+            {!isSidebar && (
               <Box mb="25px">
                 <Box display="flex" justifyContent="center" alignItems="center">
-                  <img
-                    alt="profile-user"
-                    width="100px"
-                    height="100px"
-                    src={hassan_usmani21}
-                    style={{ cursor: "pointer", borderRadius: "50%" }}
-                  />
+                  <Avatar alt="profile-user" src={hassan_usmani21} sx={{ width: 80, height: 80, cursor: "pointer", boxShadow: 3, marginTop: "1.5rem" }} />
                 </Box>
-                <Box textAlign="center">
-                  <Typography
-                    variant="h2"
-                    color={colors.red}
-                    fontWeight="bold"
-                    sx={{ m: "10px 0 0 0" }}
-                  >
-                    Ed Roh
+                <Box textAlign="center" mt={2}>
+                  <Typography variant="h6" color="black" fontWeight="bold">
+                    PK
                   </Typography>
-                  <Typography variant="h5" color={colors.greenAccent[500]}>
-                    VP Fancy Admin
+                  <Typography variant="body2" color="textSecondary">
+                    Hassan Admin
                   </Typography>
                 </Box>
               </Box>
             )}
-
-            <Box paddingLeft={isCollapsed ? undefined : "10%"}
-            sx={{
-              "& .css-1097eso": {
-                display: 'inline',
-              },
-            }}
-          
-            >
+            <Box pl={isSidebar ? 0 : 3}>
               <Menu>
-                {/* Customer */}
-                <SubMenu label="Customer" icon={<PersonIcon />} styles={{ subMenu: subMenuItemStyle,}}
-
-                >
-                  <MenuItem icon={<AddBoxIcon />}
-                  onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <Link to="/Customer">New</Link> 
-                  </MenuItem>
-
-
-                  <MenuItem icon={<EditIcon />}
-                   onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <Link to="/editCustomer">Edit</Link>
-                  </MenuItem>
-
-                  
+                <SubMenu label={<Typography variant="body1">Customer</Typography>} style={getSubMenuStyle("Customer")} onClick={() => handleSubMenuClick("Customer")} icon={<PersonIcon />}>
+                  <Link to="/Customer"  style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getMenuItemStyle("Customer")} onClick={() => setActiveItemMenu("Customer")}
+                    >
+                      Create
+                    </MenuItem>
+                  </Link>
+                  <Link to="/editCustomer"  style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<EditIcon />}
+                      style={getMenuItemStyle("Customer Edit")} onClick={() => setActiveItemMenu("Customer Edit")}
+                    >
+                      Edit
+                    </MenuItem>
+                  </Link>
                 </SubMenu>
-
-                {/* Sales Inquiry */}
-                <SubMenu label="Sales Inquiry" 
-                icon={<PersonIcon />} 
-                styles={{ subMenu: subMenuItemStyle }}>
- 
-                <MenuItem icon={<AddBoxIcon />}
-                  onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <Link to="/SalesInquiry">New</Link>
-                  </MenuItem>
-
-                  <MenuItem icon={<EditIcon />}  onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <Link to="/editSales">Edit</Link></MenuItem>
+                <SubMenu label={<Typography variant="body1">Sales Inquiry</Typography>} style={getSubMenuStyle("Sales")} onClick={() => handleSubMenuClick("Sales")} icon={<LoyaltyIcon />}>
+                  <Link to="/SalesInquiry"  style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getMenuItemStyle("Sales Inquiry Create")} onClick={() => setActiveItemMenu("Sales Inquiry Create")}
+                    >
+                      Create
+                    </MenuItem>
+                  </Link>
+                  <Link to="/editSales"  style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<EditIcon />}
+                      style={getMenuItemStyle("Sales Inquiry Edit")} onClick={() => setActiveItemMenu("Sales Inquiry Edit")}
+                    >
+                      Edit
+                    </MenuItem>
+                  </Link>
                 </SubMenu>
-
-                {/* Drawing Requisition */}
-                <SubMenu label="Drawing Requisition" icon={<ImageIcon />} styles={{ subMenu: subMenuItemStyle }}>
-                  <Link to ='/createPump'><MenuItem icon={<AddBoxIcon />}>PumpSeal New </MenuItem></Link>
-                  <Link to ='/editPump'><MenuItem icon={<AddBoxIcon />}>Edit</MenuItem></Link>
-                  <Link to ='/createRotary'><MenuItem icon={<AddBoxIcon />}>Rotary Join New</MenuItem></Link>
-                  <Link to ='/editRotary'><MenuItem icon={<AddBoxIcon />}>Edit Rotary Join</MenuItem></Link>
-                  <MenuItem icon={<AddBoxIcon />}>Agitator Seal New</MenuItem>
-                  <MenuItem icon={<AddBoxIcon />}>API Plan New</MenuItem>
-                  <MenuItem icon={<AddBoxIcon />}>Status</MenuItem>
-                  <MenuItem icon={<AddBoxIcon />}>Status</MenuItem>
-                  <MenuItem icon={<AddBoxIcon />}>Status Filter</MenuItem>
+                <SubMenu label="Drawing Requisition" style={getSubMenuStyle("Drawing")} onClick={() => handleSubMenuClick("Drawing")} icon={<DescriptionIcon />}>
+                  <Link to='/createPump'  style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getMenuItemStyle("Pump Seal Create")} onClick={() => setActiveItemMenu("Pump Seal Create")}
+                    >
+                      Create PumpSeal
+                    </MenuItem>
+                  </Link>
+                  <Link to='/editPump'  style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<EditIcon />}
+                      style={getMenuItemStyle("Pump Seal Edit")} onClick={() => setActiveItemMenu("Pump Seal Edit")}
+                    >
+                      Edit Pump Seal
+                    </MenuItem>
+                  </Link>
+                  <Link to='/createRotary'  style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getMenuItemStyle("Rotary Create")} onClick={() => setActiveItemMenu("Rotary Create")}
+                    >
+                      Create Rotary Join
+                    </MenuItem>
+                  </Link>
+                  <Link to='/editRotary'  style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<EditIcon />}
+                      style={getMenuItemStyle("Rotary Edit")} onClick={() => setActiveItemMenu("Rotary Edit")}
+                    >
+                      Edit Rotary Join
+                    </MenuItem>
+                  </Link>
+                  <Link to='/createApi'  style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getMenuItemStyle("Create Api")} onClick={() => setActiveItemMenu("Create Api")}
+                    >
+                      Create API Plan
+                    </MenuItem>
+                  </Link>
+                  <Link to='/editApi'  style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<EditIcon />}
+                      style={getMenuItemStyle("Edit Api")} onClick={() => setActiveItemMenu("Edit Api")}
+                    >
+                      Edit API Plan
+                    </MenuItem>
+                  </Link>
+                  <Link to="/createAgitator"  style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getMenuItemStyle("Create Agitator")} onClick={() => setActiveItemMenu("Create Agitator")}
+                    >
+                      Create Agitator Seal
+                    </MenuItem>
+                  </Link>
+                  <Link to="/editAgitator"  style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<EditIcon />}
+                      style={getMenuItemStyle("Edit Agitator")} onClick={() => setActiveItemMenu("Edit Agitator")}
+                    >
+                      Edit Agitator Seal
+                    </MenuItem>
+                  </Link>
                 </SubMenu>
-
-                {/* Quotation */}
-                <SubMenu label="Quotation" 
-                icon={<PersonIcon />} 
-                styles={{ subMenu: subMenuItemStyle }}>
-                   <MenuItem icon={<EditIcon />}
-                  onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <Link to="/Quotation">Edit</Link>
-                  </MenuItem>
-                  <MenuItem icon={<EditIcon />}>Edit</MenuItem>
+                <SubMenu label="Sales Order" style={getSubMenuStyle("SalesOrder")} onClick={() => handleSubMenuClick("SalesOrder")} icon={<MonetizationOnIcon />}>
+                  <Link to='/createOrder'  style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getMenuItemStyle("Create Order")} onClick={() => setActiveItemMenu("Create Order")}
+                    >
+                      Create
+                    </MenuItem>
+                  </Link>
+                  <Link to='/editOrder'  style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<EditIcon />}
+                      style={getMenuItemStyle("Edit Order")} onClick={() => setActiveItemMenu("Edit Order")}
+                    >
+                      Edit
+                    </MenuItem>
+                  </Link>
                 </SubMenu>
-
-                {/* Ofm */}
-                <SubMenu label="Ofm" icon={<PersonIcon />} styles={{ subMenu: subMenuItemStyle }}>
-                <MenuItem icon={<EditIcon />}
-                  onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <Link to="/OfmId">Edit</Link>
-                  </MenuItem>
-                  <MenuItem icon={<EditIcon />}>Edit</MenuItem>
-                </SubMenu>
-
-                {/* Ofm Communication */}
-                <SubMenu label="Ofm Communication" icon={<PersonIcon />} styles={{ subMenu: subMenuItemStyle }}>
-                  <MenuItem icon={<AddBoxIcon />}>Dashboard</MenuItem>
-                  <MenuItem icon={<EditIcon />}
-                  onClick={() => setIsCollapsed(!isCollapsed)}>
-                    <Link to="/OfmCommunication">Ofm Communication List</Link>
-                  </MenuItem>
-                  <MenuItem icon={<EditIcon />}>Ofm To OA-Link</MenuItem>
-                </SubMenu>
-
               </Menu>
             </Box>
           </Menu>
         </Sidebar>
       </div>
+     
     </Box>
   );
 };
