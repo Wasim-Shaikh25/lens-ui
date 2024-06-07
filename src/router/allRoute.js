@@ -17,12 +17,20 @@ import EditRotary from "../Pages/rotatoryJoint/EditRotryJoint.js";
 import CreateApi from "../Pages/apiPlan/CreateApiPlan.js";
 import EditApi from "../Pages/apiPlan/EditApiPlan.js";
 import ApiSuccessPage from "../Pages/apiPlan/ApiSuccess.js";
+import AgitatorSeal from '../Pages/agitator/CreateAgitator';
+import AgitatorSuccessPage from '../Pages/agitator/AgitatorSuccess';
+import EditAgitator from '../Pages/agitator/EditAgitator';
+
 
 const AllRoute = ({isSidebar}) => {
  
   return (
     <div style={!isSidebar?{width:"80%",position:"absolute",right:0,marginTop:"5rem"} : {marginTop:"5.5rem"}}>
       <Routes>
+          <Route path="/createAgitator" element={<AgitatorSeal />} />
+          <Route path="/editAgitator" element={<EditAgitator />} />
+          <Route path="/createAgitator/:aId" element={<AgitatorSeal />} />
+          <Route path="/agitatorSuccess/:id" element={<AgitatorSuccessPage />} />
           <Route path="/SalesInquiry" element={<CreateSales />} />
           <Route path="/createRotary" element={<CreateRotatory />} />
           <Route path="/createRotary/:rjId" element={<CreateRotatory />} />

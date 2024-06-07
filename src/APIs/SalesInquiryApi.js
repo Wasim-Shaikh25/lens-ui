@@ -12,15 +12,12 @@ export const handleSubmit = async(e,formData,navigate) => {
       formData.salesItems[formData.salesItems.length -1].lastUpdatedOn = dateTime;
       formData.salesItems[formData.salesItems.length -1].insertedOn = dateTime;
     } 
-
-
     
       // If customerDetail is not defined or empty, set insertedOn and lastUpdatedOn for formData
       formData.insertedOn = dateTime;
       formData.lastUpdatedOn = dateTime;
       formData.inquiryDate = dateTime;
        
-      
       console.log("formData sales is ",formData);
       const res = await axios.post("https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/save", formData);
     console.log("response is ",res.data);
@@ -47,7 +44,6 @@ export const handleSubmit = async(e,formData,navigate) => {
      
       console.log("formData inside update ",formData);
       
-      
     const res = await axios.put("https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/Update", formData);
     console.log("response from update is ",res.data);
 
@@ -58,8 +54,7 @@ export const handleSubmit = async(e,formData,navigate) => {
 
 
 
-  //get Sales
-
+//get Sales
 export const getSales=(sId,setFormData) =>{
 
     axios.get(`https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/get/${sId}`)
@@ -88,6 +83,7 @@ export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted)=>{
         console.log(err)
       })
 }
+
 
 
 //gee delete detail

@@ -56,7 +56,7 @@ export const handleUpdate = async (e, formData, apId, navigate)=>{
 export const getAllApi = async(currentPage, itemsPerPage, setData, setIsDeleted)=>{
 
   try{
-    const res = await axios.get(`https://lens-svc.azurewebsites.net/lens-svc/apiPlan/getAllApiPlansByFilter?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
+    const res = await axios.get(`https://lens-svc.azurewebsites.net/lens-svc/apiPlan/getAll`)
     setData(res.data);
     console.log("the fetched data is ",res.data);
     setIsDeleted(false)

@@ -111,7 +111,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate) => {
 
   //get All data
   export const getAll = (currentPage, itemsPerPage,setData, setIsDeleted)=>{
-    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/pumSeal/getAllPumSealByFilter?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
+    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/pumSeal/getAll`)
     .then(res => {
       setData(res.data);
       console.log("the fetched data is ",res.data);

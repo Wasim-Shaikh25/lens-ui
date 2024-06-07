@@ -522,7 +522,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                       Edit API Plan
                     </MenuItem>
                   </Link>
-                  <Link to="/"  style={{ color: 'inherit', textDecoration: "none" }}>
+                  <Link to="/createAgitator"  style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
                       icon={<AddBoxIcon />}
                       style={getMenuItemStyle("Create Agitator")} onClick={() => setActiveItemMenu("Create Agitator")}
@@ -530,7 +530,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                       Create Agitator Seal
                     </MenuItem>
                   </Link>
-                  <Link to="/"  style={{ color: 'inherit', textDecoration: "none" }}>
+                  <Link to="/editAgitator"  style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
                       icon={<EditIcon />}
                       style={getMenuItemStyle("Edit Agitator")} onClick={() => setActiveItemMenu("Edit Agitator")}
