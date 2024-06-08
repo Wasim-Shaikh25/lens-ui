@@ -114,25 +114,22 @@ export default function Customer() {
  
     <Container className="container" sx= {{marginTop:"20px", backgroundColor:"rgb(250, 251, 251)"}}>
       {!rId?<h1 style={{marginLeft:"20px"}}>New Customer Registration :</h1> : <h1 style={{marginLeft:"20px"}}>Update Customer :</h1> }
-      <form onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
+      <form onSubmit={handleSubmit} >
+        <Grid container spacing={2} >
+          <div style={{display:"flex", justifyContent:"space-between", gap:"16px",padding:"25px",backgroundColor:"white",border:"1px solid #ddd",boxShadow:"rgba(90, 114, 123, 0.11) 0px 7px 30px 0px",margin:"1rem 1.3rem", borderRadius:"8px",width:"100%"}}>
 
-        <Box sx={{width:"100%", display:"flex !important",margin:"20px 20px 0px 20px !important",
-  padding:"10px 25px 25px 25px !important",
-  borderRadius:"8px !important",border:"1px solid #ddd !important",backgroundColor:"white !important",
-    boxShadow:"rgba(90, 114, 123, 0.11) 0px 7px 30px 0px !important"}}>
             {rId && (
-              <Box sx={{ flex: 1 }}>
-                <InputLabel className="ip-label">Customer Reference No</InputLabel>
+        <Grid item xs={12} sm={4}>
+        <InputLabel className="ip-label">Customer Reference No</InputLabel>
                 <TextField
                   size="small"
                   className="text-field"
                   name="customerReferenceNumber"
                   value={formData.customerReferenceNumber}
                 />
-              </Box>
+              </Grid>
             )}
-            <Box sx={{ flex: 1 }}>
+        <Grid item xs={12} sm={4}>
               <InputLabel className="ip-label">Branch</InputLabel>
               <TextField
                 size="small"
@@ -141,9 +138,9 @@ export default function Customer() {
                 value={formData.branch}
                 onChange={handleChange}
               />
-            </Box>
+            </Grid>
 
-            <Box sx={{ flex: 1, margin:"2px 0px" }}>
+            <Grid item xs={12} sm={4}>
               <InputLabel className="ip-label">Customer Name</InputLabel>
               <TextField
                 size="small"
@@ -152,8 +149,9 @@ export default function Customer() {
                 value={formData.customerName}
                 onChange={handleChange}
               />
-            </Box>
-          </Box>
+            </Grid>
+            </div>
+          {/* </Box> */}
           {formData?.customerDetail?.map((detail, index) => (
             <div className='card'  key = {index}>
           <h3 >Customer Detail {index + 1}</h3>

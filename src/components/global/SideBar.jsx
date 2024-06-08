@@ -410,7 +410,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
         },
       }}
     >
-      <div style={{ display: "flex", borderRadius: "20px", height: "90vh", width: "20%", justifyContent: "center" }}>
+      <div style={{ display: "flex", borderRadius: "20px", height: "100vh", width: "20%", justifyContent: "center" }}>
         <Sidebar
           id="custom-sidebar"
           collapsed={isSidebar}
