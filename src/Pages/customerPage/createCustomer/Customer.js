@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TextField ,Button,  Container, Grid, InputLabel , IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
-import "./customerFrom.css";
+import "./CustomerFrom.css";
 import { useNavigate, useParams } from 'react-router-dom';
 import {Box} from '@mui/material';
 import { getCustomer, handleSubmit } from '../../../apis/CustomerApi';
