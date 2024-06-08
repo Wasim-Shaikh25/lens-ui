@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button, Container, Grid, InputLabel, IconButton } from '@mui/material';
-import moment from 'moment';
-import axios from 'axios';
-// import DataContext from '../../contextAPI/DataContext'
-// import "C:/Admin Panel/adminpanel/src/Pages/customerPage/createCustomer/customerFrom.css";
 import { useNavigate, useParams } from 'react-router-dom';
 import Autocomplete from '@mui/material/Autocomplete';
 import { getPumpSeal, handleSubmit } from '../../apis/PumpSealApi';

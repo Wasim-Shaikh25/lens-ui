@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextField ,Button,  Container, Grid, InputLabel , IconButton } from '@mui/material';
-import axios from 'axios';
-import '../../app.css'
+import '../../App.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { getApi, handleSubmit, handleUpdate } from '../../apis/AgitatorApi';
 

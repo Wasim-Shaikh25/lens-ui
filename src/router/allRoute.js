@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import '../app.css'; // Import the CSS file
+import '../App.css'; // Import the CSS file
 import Customer from '../Pages/customerPage/createCustomer/Customer.js';
 import EditCustomer from "../Pages/customerPage/editCustomer/EditCustomer.js";
 import RegistrationSuccessPage from "../Pages/customerPage/createCustomer/CustomerSuccess.js";

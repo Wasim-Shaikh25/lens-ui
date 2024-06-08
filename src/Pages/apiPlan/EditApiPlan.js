@@ -10,14 +10,9 @@ import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import { getAllApi } from '../../apis/ApiPlan';
 import { deleteDetail } from '../../apis/ApiPlan';
-
-
-
-
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
