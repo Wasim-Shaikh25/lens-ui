@@ -16,6 +16,7 @@ import { getAllCustomer } from '../../../apis/CustomerApi';
 import { deleteDetail } from '../../../apis/CustomerApi';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import { searchFilter } from '../../../apis/CustomerApi';
 
 
 
@@ -26,15 +27,22 @@ export default function EditCustomer() {
   const [isDeleted, setIsDeleted] = useState(false);  
   const [itemsPerPage, setItemsPerPage] = useState(5); // Adjust as needed
   const navigate = useNavigate();  
+  const [customerRef, setcustomerRef] = useState();
+  const [customerName, setcustomerName] = useState();
+  const [branch, setBranch] = useState();
+  const [startDate, setStartDate] = useState();
+  const [endDate, setEndDate] = useState();
+
+
 
 
   useEffect(() => {
     getAllCustomer(currentPage, itemsPerPage, setData, setIsDeleted);
+
     }, [currentPage, itemsPerPage]);
     
-    
-    
-    
+
+  
     const editDetail = (detail) => {
       // setEditData(detail.customerReferenceNumber);
       console.log("edit detail is ", detail.customerReferenceNumber);
@@ -49,9 +57,12 @@ export default function EditCustomer() {
 
 
 return (
-  <div>
+  <div >
+    <h2 style={{margin:"1rem 5rem"}}>Search and Filter</h2>
 
-<div style={{display:"flex", justifyContent:"space-between",flexWrap:"wrap",gap:"16px",padding:"25px",backgroundColor:"white",border:"1px solid #ddd",boxShadow:"rgba(90, 114, 123, 0.11) 0px 7px 30px 0px",margin:"1rem auto", borderRadius:"8px",width:"85%"}}>
+<div style={{backgroundColor:"white",border:"1px solid #ddd",boxShadow:"rgba(90, 114, 123, 0.11) 0px 7px 30px 0px",margin:"1rem auto", borderRadius:"8px",width:"85%"}}>
+<div style={{display:"flex", justifyContent:"space-between",flexWrap:"wrap",gap:"18px",padding:"25px",}}>
+
 
 
 <Grid item xs={12} sm={4}>
@@ -59,8 +70,9 @@ return (
     <TextField
       size="small"
       className="text-field"
-      name="customerReferenceNumber"
-      // value={}
+      name="customerRef"
+      value={customerRef}
+      onChange={(e)=>setcustomerRef(e.target.value)}
     />
   </Grid>
 <Grid item xs={12} sm={4}>
@@ -69,8 +81,8 @@ return (
     size="small"
     className="text-field"
     name="branch"
-    // value={}
-    // onChange={handleChange}
+    value={branch}
+    onChange={(e)=>setBranch(e.target.value)}
   />
 </Grid>
 
@@ -80,16 +92,41 @@ return (
     size="small"
     className="text-field"
     name="customerName"
-    // value={}
-    // onChange={handleChange}
+    value={customerName}
+    onChange={(e)=>setcustomerName(e.target.value)}
   />
 </Grid>
 
-<Button  style={{width:"100%", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
+<Grid item xs={12} sm={5}>
+        <InputLabel className="ip-label">Start Date</InputLabel>
+        <TextField
+        size="small"
+        type="datetime-local"
+        value={startDate}
+        onChange={(e)=>setStartDate(e.target.value)}
+      />
+      </Grid>
+
+<Grid item xs={12} sm={4}>
+        <InputLabel className="ip-label">End Date</InputLabel>
+        <TextField
+        size="small"
+        type="datetime-local"
+        value={endDate}
+        onChange={(e)=>setEndDate(e.target.value)}
+      />
+      </Grid>
+
+</div>
+
+<Button onClick={()=>searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData)}  style={{width:"15%",margin:"1rem 2rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
   Search
 </Button>
 
 </div>
+
+
+
 
     <TableContainer component={Paper} className="table-container">
       <Table sx={{ minWidth: 500 }} aria-label="customized table">
@@ -98,7 +135,7 @@ return (
             <TableCell>Sr No</TableCell>
             <TableCell align="right">Reference Number</TableCell>
             <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Branch ID</TableCell>
+            <TableCell align="right">Branch</TableCell>
             <TableCell align="right">Inserted On</TableCell>
             <TableCell align="right">Last Updated On</TableCell>
             <TableCell align="right">Action</TableCell>
@@ -160,115 +197,5 @@ return (
 
 
 
-
-
-
-
-
-
-
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import { DataGrid, GridToolbar, GridActionsCellItem } from '@mui/x-data-grid';
-// import { useNavigate } from 'react-router-dom';
-// import { getAllCustomer, deleteDetail } from '../../../apis/CustomerApi';
-// import EditIcon from '@mui/icons-material/Edit';
-// import DeleteIcon from '@mui/icons-material/Delete';
-
-// export default function EditCustomer() {
-//   const [data, setData] = useState([]);
-//   const [currentPage, setCurrentPage] = useState(0);
-//   const [isDeleted, setIsDeleted] = useState(false);
-//   const [itemsPerPage, setItemsPerPage] = useState(5); // Adjust as needed
-//   const navigate = useNavigate();
-  
-
-//   const columns = [
-//     { field: 'customerId', headerName: 'ID', width: 50 },
-//     { field: 'customerReferenceNumber', headerName: 'Reference Number', width: 130 },
-//     {
-//       field: 'customerName',
-//       headerName: 'Name',
-//       width: 100,
-//     },
-//     { field: 'branch', headerName: 'Branch', width: 60 },
-//     {
-//       field: 'insertedOn',
-//       headerName: 'Inserted On',
-//       width: 130,
-//     },
-//     {
-//       field: 'lastUpdatedOn',
-//       headerName: 'LastUpdated On',
-//       width: 130,
-//     },
-//     {
-//       field: 'actions',
-//       headerName: 'Actions',
-//       width: 80,
-//       sortable: false,
-//       renderCell: (params) => (
-//         <>
-//           <GridActionsCellItem
-//             icon={<EditIcon />}
-//             style={{color:"blue"}}
-//             label="Edit"
-//             onClick={() => editDetail(params.row)}
-//           />
-//           <GridActionsCellItem
-//             icon={<DeleteIcon />}
-//             style={{color:"red"}}
-//             label="Delete"
-//             onClick={() => deleteDetail(params.row.customerReferenceNumber,data,setIsDeleted,setData)}
-//           />
-//         </>
-//       ),
-//     },
-//   ];
-
-
-//   useEffect(() => {
-//     getAllCustomer(currentPage, itemsPerPage, (fetchedData) => {
-//       setData(fetchedData);
-//       setIsDeleted(false);
-//     });
-//   }, [currentPage, itemsPerPage]);
-
-
-//   const editDetail = (detail) => {
-//     console.log("edit detail is ", detail.customerReferenceNumber);
-//     navigate(`/Customer/${detail.customerReferenceNumber}`);
-//   };
-
-
-//   const paginate = (items) => {
-//     setItemsPerPage(items);
-//     setCurrentPage(0);
-//   };
-
-
-//   return (
-//     <div  style={{ height: 400, maxWidth: '80%', margin: "3rem auto", padding:"20px",borderRadius:"10px",backgroundColor:"white",boxShadow:"rgba(90, 114, 123, 0.11) 0px 7px 30px 0px" }}>
-//       <DataGrid
-//       style={{backgroundColor:"white", maxWidth:"fit-content", margin:"0 auto"}}
-//         rows={data}
-//         getRowId={(row) => row.customerId} // Ensure each row has a unique ID
-//         columns={columns}
-//         initialState={{
-//           pagination: {
-//             paginationModel: { page: 0, pageSize: 5 },
-//           },
-//         }}
-//         pageSizeOptions={[5, 10]}
-//         checkboxSelection
-//         components={{
-//           Toolbar: GridToolbar,
-//         }}
-//       />
-//     </div>
-//   );
-// }
 
 
