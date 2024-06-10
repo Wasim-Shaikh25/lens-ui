@@ -4,14 +4,16 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import "./customerFrom.css";
 import { useNavigate, useParams } from 'react-router-dom';
-import {Box} from '@mui/material';
 import { getCustomer, handleSubmit } from '../../../apis/CustomerApi';
 import { handleUpdate } from '../../../apis/CustomerApi';
+
 
 export default function Customer() {
 
   const navigate = useNavigate();
   let {rId} = useParams();
+
+
  
   const [formData, setFormData] = useState({
     branch: '',

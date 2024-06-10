@@ -32,11 +32,13 @@ import CloseIcon from '@mui/icons-material/Close';
       boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.3)", // Adjust values as needed
       width:"100%" }}>
   
+  
  {isSidebar? 
          <MenuIcon onClick={() =>setIsSidebar(!isSidebar)}   sx={iconStyle}/>
   :
         <CloseIcon  onClick={() =>setIsSidebar(!isSidebar)} sx={iconStyle}/>
  }
+
 
       {/* ICONS */}
       <Box 

@@ -28,6 +28,13 @@ export const handleSubmit = async(e, formData, navigate )=>{
   };
 
 
+  //edit detail
+  export const editDetail = (detail,navigate) => {
+    // setEditData(detail.customerReferenceNumber);
+    console.log("edit detail is ", detail.customerReferenceNumber);
+    navigate(`/Customer/${detail.customerReferenceNumber}`)
+  };
+
 
 //getApi
 export const handleUpdate = async (e,formData,rId,navigate)=>{
