@@ -39,7 +39,7 @@ export default function CreateSales() {
   
 
    useEffect(()=>{
-    if(sId!==0){
+    if(sId!==undefined){
      getSales(sId,setFormData);
 
     }else{

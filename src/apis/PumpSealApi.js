@@ -135,3 +135,38 @@ export  const deleteDetail = async (crId, data, setData) => {
       console.log(err);
     }
   };
+
+
+  //search and filter
+  //Customer filter Search
+export const searchFilter = async (startDate,endDate,branch,customerName,pumpSealDrfNumber,currentPage,itemsPerPage,setData) => {
+  console.log("recieved Page number is",currentPage)
+  const formattedStartDate = startDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
+  const formattedEndDate = endDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
+
+  if (formattedStartDate) {
+    console.log("start date is", formattedStartDate);
+  }
+  if (formattedEndDate) {
+    console.log("end date is", formattedEndDate);
+  }
+
+  try {
+    let url = `https://lens-svc.azurewebsites.net/lens-svc/pumpSeal/getAllPumpSealByFilter?`;
+    if (startDate) url += `startDate=${formattedStartDate}&`;
+    if (endDate) url += `endDate=${formattedEndDate}&`;
+    if (branch) url += `branch=${branch}&`;
+    if (customerName) url += `customerName=${customerName}&`;
+    if (pumpSealDrfNumber) url += `pumpSealDrfNumber=${pumpSealDrfNumber}&`;
+    url += `pageNo=${currentPage}&pageSize=${itemsPerPage}`;
+
+    console.log("URL:", url); // Log the constructed URL
+
+    const res = await axios.get(url);
+    const { data } = res;
+    setData(data);
+    console.log("response is", res);
+  } catch (err) {
+    console.log(err);
+  }
+}

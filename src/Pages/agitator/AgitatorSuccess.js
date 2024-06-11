@@ -8,7 +8,6 @@ const AgitatorSuccessPage = () => {
     const {id} = useParams();
     const navigate = useNavigate();
     
-    
     return (
     <Container maxWidth="sm" style={{ textAlign: 'center', marginTop: '50px' }}>
       <CheckCircleOutlineIcon style={{ fontSize: 100, color: 'green' }} />

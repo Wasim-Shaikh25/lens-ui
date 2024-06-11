@@ -25,7 +25,7 @@ import EditAgitator from '../Pages/agitator/EditAgitator';
 const AllRoute = ({isSidebar}) => {
  
   return (
-    <div style={!isSidebar?{width:"80%",position:"absolute",right:0,marginTop:"5rem"} : {marginTop:"5.5rem"}}>
+    <div style={!isSidebar?{width:"80%",position:"absolute",right:0,marginTop:"4.5rem"} : {marginTop:"5.5rem"}}>
       <Routes>
           <Route path="/createAgitator" element={<AgitatorSeal />} />
           <Route path="/editAgitator" element={<EditAgitator />} />

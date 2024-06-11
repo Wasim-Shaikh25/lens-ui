@@ -15,7 +15,8 @@ import {useNavigate} from 'react-router-dom';
 import { getAllCustomer } from '../../../apis/CustomerApi';
 import { deleteDetail } from '../../../apis/CustomerApi';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { searchFilter } from '../../../apis/CustomerApi';
 
 
@@ -182,11 +183,11 @@ return (
 
         <label className="pagination-label">Select Page:</label>
         <button className="pagination-button" disabled={currentPage <= 0} onClick={() => setCurrentPage(currentPage - 1)}>
-          <ArrowLeftIcon style={{ height: '1rem' }} />
+          <KeyboardDoubleArrowLeftIcon style={{ height: '0.9rem', marginTop:'0.1rem' }} />
         </button>
         <span className="pagination-span">{currentPage + 1}</span>
         <button className="pagination-button" disabled={data.length < itemsPerPage && !isDeleted} onClick={() => setCurrentPage(currentPage + 1)}>
-          <ArrowRightIcon style={{ height: '1rem' }} />
+          <KeyboardDoubleArrowRightIcon style={{ height: '0.9rem', marginTop:'0.1rem' }} />
         </button>
       </div>
       <hr style={{ border: '1px solid lightGray' }} />
