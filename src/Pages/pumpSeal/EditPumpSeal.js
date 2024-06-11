@@ -35,10 +35,10 @@ export default function EditPump() {
 
 
 
-  useEffect(() => {
-    getAll(currentPage, itemsPerPage,setData, setIsDeleted)
+  // useEffect(() => {
+  //   getAll(currentPage, itemsPerPage,setData, setIsDeleted)
     
-  }, []);
+  // }, []);
   
 
   useEffect(() => {
