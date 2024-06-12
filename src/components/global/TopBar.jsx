@@ -4,6 +4,7 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CloseIcon from '@mui/icons-material/Close';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 
  const Topbar = ({isSidebar, setIsSidebar}) => {
@@ -32,11 +33,13 @@ import CloseIcon from '@mui/icons-material/Close';
       boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.3)", // Adjust values as needed
       width:"100%" }}>
   
+  
  {isSidebar? 
          <MenuIcon onClick={() =>setIsSidebar(!isSidebar)}   sx={iconStyle}/>
   :
-        <CloseIcon  onClick={() =>setIsSidebar(!isSidebar)} sx={iconStyle}/>
+        <KeyboardBackspaceIcon  onClick={() =>setIsSidebar(!isSidebar)} sx={iconStyle}/>
  }
+
 
       {/* ICONS */}
       <Box 

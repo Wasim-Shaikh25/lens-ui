@@ -1,176 +1,323 @@
 *{
-  font-family: 'Times New Roman', Times, serif;
-}
-
-
-.css-1tqrhto >.ps-menu-button {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex !important;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 43px !important;
-  -webkit-text-decoration: none;
-  text-decoration: none !important;
-  color: inherit;
-  box-sizing: border-box;
-  cursor: pointer;
-  padding-right: 20px !important;
-  padding-left: 20px !important;
-}
-
-
-.container{
-  margin-top: 20px !important;
-  background-color: rgb(250, 251, 251) !important;
-  max-width:85% !important;
-}
-
-.form-style {
-  background-color: #F5F7F8;
-  padding: 25px;
-  border: 1px solid lightgray;
-  border-radius: 10px;
-  box-shadow: rgba(90, 114, 123, 0.11) 0px 7px 30px 0px;
-  margin: 15px;
-}
-
-.ip-label{
-  color:black !important;
-}
-
-.card{
-  display:flex !important;
-  flex-direction:column !important;
-  margin:20px 20px 0px 20px !important;
-  padding:10px 25px 25px 25px !important;
-  border-radius: 8px !important;
-   border:1px solid #ddd !important;
-   background-color: white !important;
-    box-shadow:rgba(90, 114, 123, 0.11) 0px 7px 30px 0px !important;
-}
-
-
-.add-btn{
-  background-color: #00C292 !important;
-  color: white !important;
-  height: 30px !important;
-  margin: 3rem 1.5rem !important;
- 
-}
-
-.css-um1o6k{
-  display:none !important;
-  position: absolute !important;
-  right:-6px !important;
-  top: 50% !important;
-}
-
-
-.css-honxw6 {
-  display: inline-block;
-  -webkit-transition: -webkit-transform 0.3s !important;
-  transition: transform 0.3s !important;
-  border-right: 2px solid currentcolor !important;
-  border-bottom: 2px solid currentcolor !important;
-  width: 5px !important;
-  height: 5px !important;
-  -moz-transform: rotate(-45deg) !important;
-  -ms-transform: rotate(-45deg) !important;
-  transform: rotate(-45deg) !important;
-  margin-right: 9px  !important;
-}
-
-.css-jn69v9 {
-  display: inline-block !important;
-  -webkit-transition: -webkit-transform 0.3s !important;
-  transition: transform 0.3s !important;
-  border-right: 2px solid currentcolor !important;
-  border-bottom: 2px solid currentcolor !important;
-  width: 5px !important;
-  height: 5px !important;
-  -webkit-transform: rotate(45deg) !important;
-  -moz-transform: rotate(45deg) !important;
-  -ms-transform: rotate(45deg) !important;
-  transform: rotate(45deg) !important;
-  margin-right: 9px !important;
-  margin-bottom: 3px !important;
-}
-
-
-
-.submit-btn{
-  background-color: #03C9D7 !important;
-  padding: 8px 12px !important;
-  margin: 2rem 1.5rem !important;
-}
-
-
-
-.update-btn{
-  background-color: #03C9D7 !important;
-  padding: 8px 12px !important;
-  margin: 1.5rem 1.5rem!important;
-}
-
-
-.cancel-btn{
-  background-color: #E46A76 !important;
-  padding: 8px 12px !important;
-  margin: 1.5rem 1.5rem!important;
-
-}
-
-.text-field{
-  border-color: #DEE3E9 !important;
-  border-radius: 10px !important;
-  /* background-color: white !important;  */
-} 
-
-.deleteIcon{
-
-  background-color: red !important;
-  color: white !important;
-}
-
-
-
-
-.sidebarBox{
-  overflow-y: hidden;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  bottom: 0;
-  display: flex;
-  max-height: 100vh;
-  padding-right: 0px;
-  margin: 5rem 1rem 1rem 1rem;
-
-}
-
-  ::-webkit-scrollbar {
-    max-height:0.5rem !important;
-    width: 0.3rem;
-  }
-
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px white; 
-    border-radius: 10px;
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #d3d3d3; 
-    border-radius: 10px;
-    
+    font-family: 'Times New Roman', Times, serif;
   }
   
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: gray; 
+  
+  .css-1tqrhto >.ps-menu-button {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex !important;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 43px !important;
+    -webkit-text-decoration: none;
+    text-decoration: none !important;
+    color: inherit;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding-right: 20px !important;
+    padding-left: 20px !important;
   }
+  
+
+  .css-17w9904-MuiTypography-root {
+    margin: 0 !important;
+    font-family: Times New Roman !important;
+    /* font-weight: 400 !important;
+    font-size: 0.717143rem !important;
+    line-height: 1.5 !important; */
+}
+
+
+  .container{
+    margin-top: 20px !important;
+    background-color: rgb(250, 251, 251) !important;
+    max-width:85% !important;
+  }
+  
+  .form-style {
+    background-color: #F5F7F8;
+    padding: 25px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    box-shadow: rgba(90, 114, 123, 0.11) 0px 7px 30px 0px;
+    margin: 15px;
+  }
+  
+  .ip-label{
+    color:black !important;
+  }
+  
+  .card{
+    display:flex !important;
+    flex-direction:column !important;
+    margin:20px 20px 0px 20px !important;
+    padding:10px 25px 25px 25px !important;
+    border-radius: 8px !important;
+     border:1px solid #ddd !important;
+     background-color: white !important;
+      box-shadow:rgba(90, 114, 123, 0.11) 0px 7px 30px 0px !important;
+  }
+  
+  
+  .add-btn{
+    background-color: #00C292 !important;
+    color: white !important;
+    height: 30px !important;
+    margin: 3rem 1.5rem !important;
+   
+  }
+  
+  .css-um1o6k{
+    display:none !important;
+    position: absolute !important;
+    right:-6px !important;
+    top: 50% !important;
+  }
+  
+  
+  .css-honxw6 {
+    display: inline-block;
+    -webkit-transition: -webkit-transform 0.3s !important;
+    transition: transform 0.3s !important;
+    border-right: 2px solid currentcolor !important;
+    border-bottom: 2px solid currentcolor !important;
+    width: 5px !important;
+    height: 5px !important;
+    -moz-transform: rotate(-45deg) !important;
+    -ms-transform: rotate(-45deg) !important;
+    transform: rotate(-45deg) !important;
+    margin-right: 9px  !important;
+  }
+  
+  .css-jn69v9 {
+    display: inline-block !important;
+    -webkit-transition: -webkit-transform 0.3s !important;
+    transition: transform 0.3s !important;
+    border-right: 2px solid currentcolor !important;
+    border-bottom: 2px solid currentcolor !important;
+    width: 5px !important;
+    height: 5px !important;
+    -webkit-transform: rotate(45deg) !important;
+    -moz-transform: rotate(45deg) !important;
+    -ms-transform: rotate(45deg) !important;
+    transform: rotate(45deg) !important;
+    margin-right: 9px !important;
+    margin-bottom: 3px !important;
+  }
+  
+  
+  
+  .submit-btn{
+    background-color: #03C9D7 !important;
+    padding: 8px 12px !important;
+    margin: 2rem 1.5rem !important;
+  }
+  
+  
+  
+  .update-btn{
+    background-color: #03C9D7 !important;
+    padding: 8px 12px !important;
+    margin: 1.5rem 1.5rem!important;
+  }
+  
+  
+  .cancel-btn{
+    background-color: #E46A76 !important;
+    padding: 8px 12px !important;
+    margin: 1.5rem 1.5rem!important;
+  
+  }
+  
+  .text-field{
+    border-color: #DEE3E9 !important;
+    border-radius: 10px !important;
+    /* background-color: white !important;  */
+  } 
+  
+  .deleteIcon{
+  
+    background-color: red !important;
+    color: white !important;
+  }
+  
+  
+  
+  
+  .sidebarBox{
+    overflow-y: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    max-height: 100vh;
+    padding-right: 0px;
+    margin: 5rem 1rem 1rem 1rem;
+  
+  }
+  
+    ::-webkit-scrollbar {
+      max-height:0.5rem !important;
+      width: 0.3rem;
+    }
+  
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px white; 
+      border-radius: 10px;
+    }
+     
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #d3d3d3; 
+      border-radius: 10px;
+      
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: gray; 
+    }
+
+
+
+
+
+
+    
+/* table css */
+
+/* Add these styles to your CSS file or style block */
+
+/* General styles for the table container */
+.table-container {
+  padding: 4px;
+  max-width: 85%;
+  border-radius: 8px;
+  margin: 10px auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+/* Table header styles */
+.table-header th {
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: bold;
+  text-align: left;
+  padding: 10px;
+}
+
+/* Table body row styles */
+.table-row {
+  border-bottom: 1px solid #e9ecef;
+}
+
+.table-row td {
+  padding: 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* Status and team indicator styles */
+.status-active {
+  color: green;
+}
+
+.status-pending {
+  color: orange;
+}
+
+.status-completed {
+  color: teal;
+}
+
+.status-cancel {
+  color: red;
+}
+
+.team-indicator {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.team-s {
+  background-color: #f8b195;
+}
+
+.team-d {
+  background-color: #f67280;
+}
+
+.team-a {
+  background-color: #c06c84;
+}
+
+.team-x {
+  background-color: #6c5b7b;
+}
+
+.team-n {
+  background-color: #355c7d;
+}
+
+.team-y {
+  background-color: #f8b195;
+}
+
+.team-solo {
+  background-color: #355c7d;
+}
+
+/* Pagination styles */
+.pagination-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+  margin-right: 0.7rem;
+}
+
+.pagination-label {
+  margin: 0 5px;
+  font-size: 12px;
+  color: #4a4a4a;
+}
+
+.pagination-select {
+  cursor: pointer;
+  padding: 3px 7px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: #f0f0f0;
+}
+
+.pagination-button {
+  color: #fff;
+  background-color: black;
+  padding: 1px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.pagination-span {
+  padding: 2px 6px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: #4a4a4a;
+  font-size: 11px;
+}

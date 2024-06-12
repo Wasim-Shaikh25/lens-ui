@@ -28,6 +28,13 @@ export const handleSubmit = async(e, formData, navigate )=>{
   };
 
 
+  //edit detail
+  export const editDetail = (detail,navigate) => {
+    // setEditData(detail.customerReferenceNumber);
+    console.log("edit detail is ", detail.customerReferenceNumber);
+    navigate(`/Customer/${detail.customerReferenceNumber}`)
+  };
+
 
 //getApi
 export const handleUpdate = async (e,formData,rId,navigate)=>{
@@ -84,6 +91,8 @@ export const getAllCustomer = (currentPage, itemsPerPage, setData, setIsDeleted)
 }
 
 
+
+
 //delete data
 export const deleteDetail = (crId,data,setIsDeleted,setData)=>{
     axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/customer/delete?customerRefrenceNumber=${crId}`)
@@ -98,4 +107,39 @@ export const deleteDetail = (crId,data,setIsDeleted,setData)=>{
     })
     
     console.log("customer reference id of deletion elem is ", crId);
+}
+
+
+
+//Customer filter Search
+
+export const searchFilter = async (startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData) => {
+  const formattedStartDate = startDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
+  const formattedEndDate = endDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
+
+  if (formattedStartDate) {
+    console.log("start date is", formattedStartDate);
+  }
+  if (formattedEndDate) {
+    console.log("end date is", formattedEndDate);
+  }
+
+  try {
+    let url = `https://lens-svc.azurewebsites.net/lens-svc/customer/getAllCustomerByFilter?`;
+    if (startDate) url += `startDate=${formattedStartDate}&`;
+    if (endDate) url += `endDate=${formattedEndDate}&`;
+    if (branch) url += `branch=${branch}&`;
+    if (customerName) url += `customerName=${customerName}&`;
+    if (customerRef) url += `customerReferenceNumber=${customerRef}&`;
+    url += `pageNo=${currentPage}&pageSize=${itemsPerPage}`;
+
+    console.log("URL:", url); // Log the constructed URL
+
+    const res = await axios.get(url);
+    const { data } = res;
+    setData(data);
+    console.log("response is", res);
+  } catch (err) {
+    console.log(err);
+  }
 }

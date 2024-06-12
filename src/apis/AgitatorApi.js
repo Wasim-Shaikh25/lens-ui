@@ -66,21 +66,20 @@ import moment from "moment";
 
 
 
-
   export const handleUpdate = async (e,formData,navigate,aId)=>{
     e.preventDefault();
    
       try{
           const res = await axios.put("https://lens-svc.azurewebsites.net/lens-svc/agitatorSeal/update", formData);
           console.log("response from update is ",res.data);
+          
+          aId="";
+          navigate(`/agitatorSuccess/${formData.agitatorSealDrfNumber}`);
       }
       catch(err){
         console.log(err)
       }
 
-    
-    aId="";
-    navigate(`/agitatorSuccess/${formData.rotaryDrfNumber}`);
   }
 
 
@@ -99,3 +98,41 @@ export const getApi = (aId,setFormData)=>{
       console.log(err)
     })
 } 
+
+
+
+
+//Search Filter
+
+export const searchFilter = async (startDate,endDate,branch,customerName,agitatorSealDrfNumber,currentPage,itemsPerPage,setData) => {
+  console.log("recieved Page number is",currentPage)
+  const formattedStartDate = startDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
+  const formattedEndDate = endDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
+
+  if (formattedStartDate) {
+    console.log("start date is", formattedStartDate);
+  }
+  if (formattedEndDate) {
+    console.log("end date is", formattedEndDate);
+  }
+
+  try {
+    let url = `https://lens-svc.azurewebsites.net/lens-svc/agitatorSeal/getAllAgitatorSealByFilter?`;
+    if (startDate) url += `startDate=${formattedStartDate}&`;
+    if (endDate) url += `endDate=${formattedEndDate}&`;
+    if (branch) url += `branch=${branch}&`;
+    if (customerName) url += `customerName=${customerName}&`;
+    if (agitatorSealDrfNumber) url += `agitatorSealDrfNumber=${agitatorSealDrfNumber}&`;
+    url += `pageNo=${currentPage}&pageSize=${itemsPerPage}`;
+
+    console.log("URL:", url); // Log the constructed URL
+
+    const res = await axios.get(url);
+    const { data } = res;
+    setData(data);
+    console.log("response is", res);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
