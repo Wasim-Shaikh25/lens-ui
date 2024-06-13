@@ -1,10 +1,13 @@
-import { Box, IconButton, MenuItem, Typography } from "@mui/material";
+import { Box, Button, IconButton, MenuItem, Typography } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { Link } from "react-router-dom";
+import { alpha } from '@mui/material/styles';
+
 
 
  const Topbar = ({isSidebar, setIsSidebar}) => {
@@ -46,7 +49,16 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
       display="flex"
       justifyContent='flex-end'
       >
-
+        <Link to='signup'>  <Button size="small"  sx={{backgroundColor:"#03C9D7",color:"white",marginTop:"4px",
+      '&:hover': {
+        backgroundColor: alpha("#03C9D7", 0.8) // Adjust the alpha value to make it slightly darker
+      }}}>SignUp</Button>
+</Link>
+        <Link to='login'>  <Button size="small"  sx={{backgroundColor:"#03C9D7",color:"white",margin:"4px",
+      '&:hover': {
+        backgroundColor: alpha("#03C9D7", 0.8) // Adjust the alpha value to make it slightly darker
+      }}}>Login</Button>
+</Link>
         <IconButton>
          <NotificationsOutlinedIcon /> 
         </IconButton> 

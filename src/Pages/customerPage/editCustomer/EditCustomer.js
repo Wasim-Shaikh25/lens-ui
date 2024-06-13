@@ -124,7 +124,6 @@ return (
   Search
 </Button>
 
-</div>
 
 
 
@@ -192,6 +191,8 @@ return (
       </div>
       <hr style={{ border: '1px solid lightGray' }} />
     </TableContainer>
+    
+    </div>
   </div>
 );
 }

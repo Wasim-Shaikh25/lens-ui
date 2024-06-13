@@ -20,6 +20,9 @@ import ApiSuccessPage from "../Pages/apiPlan/ApiSuccess.js";
 import AgitatorSeal from '../Pages/agitator/CreateAgitator';
 import AgitatorSuccessPage from '../Pages/agitator/AgitatorSuccess';
 import EditAgitator from '../Pages/agitator/EditAgitator';
+import SignUp from '../Pages/signup/Signup.js';
+import Login from '../Pages/login/Login.js';
+
 
 
 const AllRoute = ({isSidebar}) => {
@@ -27,6 +30,8 @@ const AllRoute = ({isSidebar}) => {
   return (
     <div style={!isSidebar?{width:"80%",position:"absolute",right:0,marginTop:"4.5rem"} : {marginTop:"5.5rem"}}>
       <Routes>
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/createAgitator" element={<AgitatorSeal />} />
           <Route path="/editAgitator" element={<EditAgitator />} />
           <Route path="/createAgitator/:aId" element={<AgitatorSeal />} />
