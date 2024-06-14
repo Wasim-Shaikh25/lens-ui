@@ -6,7 +6,7 @@ import moment from "moment";
   //get All 
   export const getAllAgitator = async(setData, setIsDeleted)=>{
     try{
-        const res = await axios.get(`https://lens-svc.azurewebsites.net/lens-svc/agitatorSeal/getAll`)
+        const res = await axios.get(`https://lens-svc.azurewebsites.net/lens-svc/lens/agitatorSeal/getAll`)
         setData(res.data);
         console.log("the fetched data is ",res.data);
         setIsDeleted(false)
@@ -22,7 +22,7 @@ import moment from "moment";
   // delete One
  export const deleteDetail = async (crId,data, setData) => {
     try {
-      await axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/agitatorSeal/delete?agitatorSealDrfNumber=${crId}`);
+      await axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/lens/agitatorSeal/delete?agitatorSealDrfNumber=${crId}`);
       const newData = data.filter(item => item.agitatorSealDrfNumber !== crId);
       console.log("data is ",data)
       console.log("New data is ",newData)
@@ -53,7 +53,7 @@ import moment from "moment";
     formData.lastUpdatedOn = dateTime;
     
      try{
-          const res = await axios.post("https://lens-svc.azurewebsites.net/lens-svc/agitatorSeal/save", formData);
+          const res = await axios.post("https://lens-svc.azurewebsites.net/lens-svc/lens/agitatorSeal/save", formData);
         console.log("response is ",res.data);
         navigate(`/agitatorSuccess/${res.data}`);
       }  
@@ -70,7 +70,7 @@ import moment from "moment";
     e.preventDefault();
    
       try{
-          const res = await axios.put("https://lens-svc.azurewebsites.net/lens-svc/agitatorSeal/update", formData);
+          const res = await axios.put("https://lens-svc.azurewebsites.net/lens-svc/lens/agitatorSeal/update", formData);
           console.log("response from update is ",res.data);
           
           aId="";
@@ -87,7 +87,7 @@ import moment from "moment";
   //get One
 
 export const getApi = (aId,setFormData)=>{
-    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/agitatorSeal/get?agitatorSealDrfNumber=${aId}`)
+    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/lens/agitatorSeal/get?agitatorSealDrfNumber=${aId}`)
     .then(res=>{
       const {data} = res;
         setFormData(data);
@@ -117,7 +117,7 @@ export const searchFilter = async (startDate,endDate,branch,customerName,agitato
   }
 
   try {
-    let url = `https://lens-svc.azurewebsites.net/lens-svc/agitatorSeal/getAllAgitatorSealByFilter?`;
+    let url = `https://lens-svc.azurewebsites.net/lens-svc/lens/agitatorSeal/getAllAgitatorSealByFilter?`;
     if (startDate) url += `startDate=${formattedStartDate}&`;
     if (endDate) url += `endDate=${formattedEndDate}&`;
     if (branch) url += `branch=${branch}&`;

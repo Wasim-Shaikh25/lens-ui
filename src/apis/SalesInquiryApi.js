@@ -19,7 +19,7 @@ export const handleSubmit = async(e,formData,navigate) => {
       formData.inquiryDate = dateTime;
        
       console.log("formData sales is ",formData);
-      const res = await axios.post("https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/save", formData);
+      const res = await axios.post("https://lens-svc.azurewebsites.net/lens-svc/lens/salesInquiry/save", formData);
     console.log("response is ",res.data);
     navigate(`/salesSuccess/${res.data}`);
 
@@ -44,7 +44,7 @@ export const handleSubmit = async(e,formData,navigate) => {
      
       console.log("formData inside update ",formData);
       
-    const res = await axios.put("https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/Update", formData);
+    const res = await axios.put("https://lens-svc.azurewebsites.net/lens-svc/lens/salesInquiry/Update", formData);
     console.log("response from update is ",res.data);
 
     
@@ -57,7 +57,7 @@ export const handleSubmit = async(e,formData,navigate) => {
 //get Sales
 export const getSales=(sId,setFormData) =>{
 
-    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/get/${sId}`)
+    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/lens/salesInquiry/get/${sId}`)
     .then(res=>{
       const {data} = res;
         setFormData(data);
@@ -73,7 +73,7 @@ export const getSales=(sId,setFormData) =>{
 
 //get All sales
 export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted)=>{
-    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
+    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/lens/salesInquiry/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
       .then(res => {
         setData(res.data);
         console.log("the fetched data is ",res.data);
@@ -90,7 +90,7 @@ export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted)=>{
 export const deleteDetail = (sId,data,setData, setIsDeleted) => {
     console.log("sId is ", sId)
     
-    axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/salesInquiry/delete/:InquiryNumber?InquiryNumber=${sId}`)
+    axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/lens/salesInquiry/delete/:InquiryNumber?InquiryNumber=${sId}`)
     .then(res=>{
       console.log(res)
       const newData = data.filter(item => item.inquiryNumber !== sId);

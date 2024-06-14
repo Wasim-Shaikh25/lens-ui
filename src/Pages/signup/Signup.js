@@ -13,6 +13,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Autocomplete, InputLabel } from '@mui/material';
+import { useState } from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 
 
@@ -23,13 +26,103 @@ const defaultTheme = createTheme();
 
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const [designation, setDesignation] = useState([]);
+  const [departments, setDepartments] = useState([]);
+  const [branches, setBranches] = useState([]);
+
+
+ const[formData,setFormData]= useState({
+
+  firstName: "",
+  lastName: "",
+  empId: "",
+  password: "",
+  designation: '',
+  insertedByUserId: "123",
+  lastUpdatedByUserId: "321",
+  resetPasswordRequired: false,
+  departments: [
+  {
+      departmentName:""
+    }
+  ],
+  branches: [
+    {
+      branchName: "",
+      region: ""
+    }
+  ]
+ }) 
+
+ 
+ const handleChange = (e) => {
+  const { name, value } = e.target;
+  setFormData(prevState => ({
+    ...prevState,
+    [name]: value
+  }));
+};
+
+
+ //get All Designation
+ const getDesignation = async()=>{
+  try{
+    const res = await axios.get('https://lens-svc.azurewebsites.net/lens-svc/user/allDesignations');
+    const{data} = res;
+    setDesignation(data);
+    console.log(formData)
+  }
+  catch(err){
+    console.log(err);
+  }
+
+ }
+
+
+ //get All Departments
+ const getDepartments = async()=>{
+  try{
+    const res = await axios.get('https://lens-svc.azurewebsites.net/lens-svc/user/getAllDepartments');
+    const{data} = res;
+    setDepartments(data);
+    console.log(data)
+  }
+  catch(err){
+    console.log(err);
+  }
+ }
+
+
+ //get All Branches
+ const getBranches = async()=>{
+  try{
+    const res = await axios.get('https://lens-svc.azurewebsites.net/lens-svc/user/getAllBranches');
+    const{data} = res;
+    setBranches(data);
+    console.log(data)
+  }
+  catch(err){
+    console.log(err);
+  }
+ }
+
+
+
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    formData.departments[0].region = formData.departments[0].departmentName;
+
+    try{
+      const res = await axios.post('https://lens-svc.azurewebsites.net/lens-svc/user/createAccount',formData);
+      const{data} = res;
+      console.log("response Data ",data);
+    }
+    catch(err){
+      console.log(err);
+
+    }
+
   };
 
   return (
@@ -62,15 +155,19 @@ export default function SignUp() {
                     autoComplete="given-name"
                     name="firstName"
                     required
+                    value={formData.firstName}
                     fullWidth
                     id="firstName"
+                    onChange={(e)=>handleChange(e)}
                     label="First Name"
                     autoFocus
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    value={formData.lastName}
                     size="small"
+                    onChange={(e)=>handleChange(e)}
                     required
                     fullWidth
                     id="lastName"
@@ -81,8 +178,10 @@ export default function SignUp() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    value={formData.email}
                     size="small"
                     required
+                    onChange={(e)=>handleChange(e)}
                     fullWidth
                     id="email"
                     label="Email Address"
@@ -92,8 +191,10 @@ export default function SignUp() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                  value={formData.password}
                     size="small"
                     required
+                    onChange={(e)=>handleChange(e)}
                     fullWidth
                     name="password"
                     label="Password"
@@ -105,20 +206,10 @@ export default function SignUp() {
 
                 <Grid item xs={12} sm={6}>
                   <TextField
+                  value={formData.empId}
                     size="small"
                     required
-                    fullWidth
-                    id="designation"
-                    label="Designation"
-                    name="designation"
-                    autoComplete="family-name"
-                  />
-                </Grid>
-
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    size="small"
-                    required
+                    onChange={(e)=>handleChange(e)}
                     fullWidth
                     id="empId"
                     label="Employee ID"
@@ -127,31 +218,63 @@ export default function SignUp() {
                   />
                 </Grid>
 
-                <Grid item xs={12}>
-                  {/* <InputLabel className="ip-label" >Department</InputLabel > */}
+                  
+      <Grid item xs={12} sm={6}>
+        <Autocomplete
+          size="small"
+          value={formData.designation}
+          onChange={(event, newValue) => {
+            setFormData({
+              ...formData,
+              designation: newValue
+            });
+          }}
+          inputValue={formData.designation || ''}
+          onInputChange={(event, newInputValue) => {
+            setFormData({
+              ...formData,
+              designation: newInputValue
+            });
+          }}
+          options={designation}
+          onFocus={getDesignation}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              size="small"
+              label="Designation"
+              variant="outlined"
+              fullWidth
+            />
+          )}
+        />
+      </Grid>
 
+              
+
+      <Grid item xs={12}>
                   <Autocomplete
                     size="small"
-                    // value={formData.pumpType}
-                    // onChange={(event, newValue) => {
-                    //   setFormData({
-                    //     ...formData,
-                    //     pumpType: newValue
-                    //   });
-                    // }}
-                    // onFocus={()=>getColumnData('Pump Type', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
-                    // inputValue={formData.pumpType || ''}
-                    // onInputChange={(event, newInputValue) => {
-                    //   setFormData({
-                    //     ...formData,
-                    //     pumpType: newInputValue
-                    //   });
-                    // }}
-                    // options={ptOption}
+                    value={formData.departments[0].departmentName}
+                    onChange={(event, newValue) => {
+                      setFormData({
+                        ...formData,
+                        departments: [{ departmentName: newValue }]
+                      });
+                    }}
+                    inputValue={formData.departments[0].departmentName}
+                    onInputChange={(event, newInputValue) => {
+                      setFormData({
+                        ...formData,
+                        departments: [{ departmentName: newInputValue }]
+                      });
+                    }}
+                    options={departments.map((department) => department.departmentName)}
+                    onFocus={getDepartments}
                     renderInput={(params) => (
                       <TextField
-                        size="small"
                         {...params}
+                        size="small"
                         label="Department"
                         variant="outlined"
                         fullWidth
@@ -160,39 +283,37 @@ export default function SignUp() {
                   />
                 </Grid>
 
+      <Grid item xs={12} >
+        <Autocomplete
+          size="small"
+          value={formData.branches[0].branchName}
+          onChange={(event, newValue) => {
+            setFormData({
+              ...formData,
+              branches:[{branchName: newValue}]
+            });
+          }}
+          inputValue={formData.branches[0].branchName || ''}
+          onInputChange={(event, newInputValue) => {
+            setFormData({
+              ...formData,
+              branches:[{branchName: newInputValue}]
+            });
+          }}
+          options={branches.map((branch) => branch.branchName)}
+          onFocus={getBranches}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              size="small"
+              label="Branches"
+              variant="outlined"
+              fullWidth
+            />
+          )}
+        />
+      </Grid>
 
-                <Grid item xs={12}>
-                  {/* <InputLabel className="ip-label" >Department</InputLabel > */}
-
-                  <Autocomplete
-                    size="small"
-                    // value={formData.pumpType}
-                    // onChange={(event, newValue) => {
-                    //   setFormData({
-                    //     ...formData,
-                    //     pumpType: newValue
-                    //   });
-                    // }}
-                    // onFocus={()=>getColumnData('Pump Type', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
-                    // inputValue={formData.pumpType || ''}
-                    // onInputChange={(event, newInputValue) => {
-                    //   setFormData({
-                    //     ...formData,
-                    //     pumpType: newInputValue
-                    //   });
-                    // }}
-                    // options={ptOption}
-                    renderInput={(params) => (
-                      <TextField
-                        size="small"
-                        {...params}
-                        label="Branch"
-                        variant="outlined"
-                        fullWidth
-                      />
-                    )}
-                  />
-                </Grid>
 
 
 
