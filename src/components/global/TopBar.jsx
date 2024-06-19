@@ -5,12 +5,17 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { alpha } from '@mui/material/styles';
-
+import { useAuth } from '../../contextApi/AuthContext';
 
 
  const Topbar = ({isSidebar, setIsSidebar}) => {
+  const { authState, logout } = useAuth();
+  const navigate = useNavigate()  
+
+  console.log("loggedIn user is ", authState);
+
 
   const iconStyle={ 
     width:"1.6em",
@@ -22,6 +27,13 @@ import { alpha } from '@mui/material/styles';
           cursor:"pointer",
         }
 
+
+        const userLogout = () => {
+          logout()
+          navigate('/login'); // Redirect to login page after logout
+        };
+
+        
 
   return (
     <Box 
@@ -54,11 +66,17 @@ import { alpha } from '@mui/material/styles';
         backgroundColor: alpha("#03C9D7", 0.8) // Adjust the alpha value to make it slightly darker
       }}}>SignUp</Button>
 </Link>
-        <Link to='login'>  <Button size="small"  sx={{backgroundColor:"#03C9D7",color:"white",margin:"4px",
+     
+     { !authState? <Link to='/login'>  <Button size="small"  sx={{backgroundColor:"#03C9D7",color:"white",margin:"4px",
       '&:hover': {
         backgroundColor: alpha("#03C9D7", 0.8) // Adjust the alpha value to make it slightly darker
       }}}>Login</Button>
-</Link>
+</Link> :
+       <Button onClick={userLogout} size="small"  sx={{backgroundColor:"#FF0000",color:"white",margin:"4px",
+      '&:hover': {
+        backgroundColor: alpha("#FF0000", 0.8) // Adjust the alpha value to make it slightly darker
+      }}}>Logout</Button>
+}
         <IconButton>
          <NotificationsOutlinedIcon /> 
         </IconButton> 
@@ -66,7 +84,7 @@ import { alpha } from '@mui/material/styles';
           <SettingsOutlinedIcon />
         </IconButton>
         <IconButton>
-          <PersonOutlinedIcon />
+          <PersonOutlinedIcon />  {authState? <span style={{fontSize:'0.8rem', marginLeft:'0.5rem'}}>Welcome, <b>{authState.authorities}</b></span> : null}
         </IconButton>
       </Box>
     </Box>

@@ -17,6 +17,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode'; // Importing named export
+import { useAuth } from '../../contextApi/AuthContext';
 
 
 
@@ -27,6 +28,9 @@ const defaultTheme = createTheme();
 
 export default function Login() {
   const navigate = useNavigate();
+  const { setToken } = useAuth();
+
+
 
   const[formData,setFormData] = useState({
     empId:'',
@@ -42,23 +46,21 @@ export default function Login() {
   };
 
 
-  const handleSubmit = async(e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    try{
-      const res = await axios.post('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/auth/authenticate',formData);
-      const {data} = res;
-      const decodedToken = jwtDecode(data.access_token);
+    try {
+      const res = await axios.post('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/auth/authenticate', formData);
+      const { data } = res;
+      
       Cookies.set('access_token', data.access_token);
-      Cookies.set('decoded_token', JSON.stringify(decodedToken));
-      console.log("Token is ", data.access_token);
-      console.log("Decoded Token is ", decodedToken);
-      navigate('/')
-    }
-    catch(err){
-      console.log(err)
-    }
+      setToken(data.access_token); // Store the decoded token in global state
 
+      console.log("Token is ", data.access_token);
+      navigate('/');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
