@@ -16,6 +16,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode'; // Importing named export
+
 
 
 
@@ -46,8 +48,11 @@ export default function Login() {
     try{
       const res = await axios.post('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/auth/authenticate',formData);
       const {data} = res;
+      const decodedToken = jwtDecode(data.access_token);
       Cookies.set('access_token', data.access_token);
-      console.log("troken is ",data.access_token)
+      Cookies.set('decoded_token', JSON.stringify(decodedToken));
+      console.log("Token is ", data.access_token);
+      console.log("Decoded Token is ", decodedToken);
       navigate('/')
     }
     catch(err){
