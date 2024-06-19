@@ -16,6 +16,7 @@ import { Autocomplete, InputLabel } from '@mui/material';
 import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -29,6 +30,7 @@ export default function SignUp() {
   const [designation, setDesignation] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [branches, setBranches] = useState([]);
+  const navigate = useNavigate();
 
 
  const[formData,setFormData]= useState({
@@ -38,8 +40,8 @@ export default function SignUp() {
   empId: "",
   password: "",
   designation: '',
-  insertedByUserId: "123",
-  lastUpdatedByUserId: "321",
+  insertedByUserId: "",
+  lastUpdatedByUserId: "",
   resetPasswordRequired: false,
   departments: [
   {
@@ -67,7 +69,7 @@ export default function SignUp() {
  //get All Designation
  const getDesignation = async()=>{
   try{
-    const res = await axios.get('https://lens-svc.azurewebsites.net/lens-svc/user/allDesignations');
+    const res = await axios.get('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/user/allDesignations');
     const{data} = res;
     setDesignation(data);
     console.log(formData)
@@ -82,7 +84,7 @@ export default function SignUp() {
  //get All Departments
  const getDepartments = async()=>{
   try{
-    const res = await axios.get('https://lens-svc.azurewebsites.net/lens-svc/user/getAllDepartments');
+    const res = await axios.get('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/user/getAllDepartments');
     const{data} = res;
     setDepartments(data);
     console.log(data)
@@ -96,7 +98,7 @@ export default function SignUp() {
  //get All Branches
  const getBranches = async()=>{
   try{
-    const res = await axios.get('https://lens-svc.azurewebsites.net/lens-svc/user/getAllBranches');
+    const res = await axios.get('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/user/getAllBranches');
     const{data} = res;
     setBranches(data);
     console.log(data)
@@ -112,11 +114,14 @@ export default function SignUp() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     formData.departments[0].region = formData.departments[0].departmentName;
+    formData.lastUpdatedByUserId = formData.empId;
+    
 
     try{
-      const res = await axios.post('https://lens-svc.azurewebsites.net/lens-svc/user/createAccount',formData);
+      const res = await axios.post('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/user/createAccount',formData);
       const{data} = res;
       console.log("response Data ",data);
+      navigate('/reset')
     }
     catch(err){
       console.log(err);
@@ -125,11 +130,12 @@ export default function SignUp() {
 
   };
 
+  
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <div className='card' sx={{
-           padding: "2px", borderRadius: "8px", border: "1px solid #ddd",
+           padding: "2px", marginBottom:"5rem", borderRadius: "8px", border: "1px solid #ddd",
           backgroundColor: "white", boxShadow: "rgba(90, 114, 123, 0.11) 0px 7px 30px 0px"
         }}>
           <CssBaseline />
@@ -322,7 +328,7 @@ export default function SignUp() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 2, mb: 1 }}
+                sx={{ mt: 1, mb: 1 }}
               >
                 Sign Up
               </Button>

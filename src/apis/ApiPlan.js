@@ -9,7 +9,7 @@ export const handleSubmit = async (e, formData,navigate) => {
     console.log("formData sales is ", formData);
 
     try {
-      const res = await axios.post("https://lens-svc.azurewebsites.net/lens-svc/lens/apiPlan/save", formData);
+      const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/save", formData);
       console.log("response is ", res.data);
       navigate(`/apiSuccess/${res.data}`);
     } catch (err) {
@@ -23,7 +23,7 @@ export const handleSubmit = async (e, formData,navigate) => {
 export const getApi = async(apId,setFormData)=>{
 
   try{
-    const res = await axios.get(`https://lens-svc.azurewebsites.net/lens-svc/lens/apiPlan/get?apiPlanDrfNumber=${apId}`)
+    const res = await axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/get?apiPlanDrfNumber=${apId}`)
     const {data} = res;
     setFormData(data);
     console.log("the apId fetched data is ",data)
@@ -40,7 +40,7 @@ export const handleUpdate = async (e, formData, apId, navigate)=>{
   e.preventDefault();
 
     try{
-        const res = await axios.put("https://lens-svc.azurewebsites.net/lens-svc/lens/apiPlan/update", formData);
+        const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/update", formData);
         console.log("response from update is ",res.data);
         apId="";
         navigate(`/apiSuccess/${formData.apiPlanDrfNumber}`);
@@ -56,7 +56,7 @@ export const handleUpdate = async (e, formData, apId, navigate)=>{
 export const getAllApi = async(currentPage, itemsPerPage, setData, setIsDeleted)=>{
 
   try{
-    const res = await axios.get(`https://lens-svc.azurewebsites.net/lens-svc/lens/apiPlan/getAll`)
+    const res = await axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/getAll`)
     setData(res.data);
     console.log("the fetched data is ",res.data);
     setIsDeleted(false)
@@ -71,7 +71,7 @@ export const getAllApi = async(currentPage, itemsPerPage, setData, setIsDeleted)
 // delete One
 export const deleteDetail = async (crId,data, setData) => {
   try {
-    await axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/lens/apiPlan/delete?apiPlanId=${crId}`);
+    await axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/delete?apiPlanId=${crId}`);
     const newData = data.filter(item => item.apiPlanDrfNumber !== crId);
     console.log("data is ",data)
     console.log("New data is ",newData)
@@ -96,7 +96,7 @@ export const searchFilter = async (startDate,endDate,branch,customerName,apiPlan
   }
 
   try {
-    let url = `https://lens-svc.azurewebsites.net/lens-svc/lens/apiPlan/getAllApiPlanByFilter?`;
+    let url = `http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/getAllApiPlanByFilter?`;
     if (startDate) url += `startDate=${formattedStartDate}&`;
     if (endDate) url += `endDate=${formattedEndDate}&`;
     if (branch) url += `branch=${branch}&`;

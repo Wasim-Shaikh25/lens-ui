@@ -19,7 +19,7 @@ export const handleSubmit = async(e, formData, navigate )=>{
     
   
     
-    const res = await axios.post("https://lens-svc.azurewebsites.net/lens-svc/lens/customer/save", formData);
+    const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/customer/save", formData);
     console.log("response is ",res.data);
     navigate(`/registerSuccess/${res.data}`);
 
@@ -50,7 +50,7 @@ export const handleUpdate = async (e,formData,rId,navigate)=>{
       // formData.insertedOn = dateTime;
       formData.lastUpdatedOn = dateTime;
 
-    const res = await axios.put("https://lens-svc.azurewebsites.net/lens-svc/lens/customer/Update", formData);
+    const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/customer/Update", formData);
     console.log("response from update is ",res.data);
 
     
@@ -65,7 +65,7 @@ export const handleUpdate = async (e,formData,rId,navigate)=>{
 //get single data
 export const getCustomer = async(rId,setFormData)=>{
     try{
-    const res = await axios.get(`https://lens-svc.azurewebsites.net/lens-svc/lens/customer/get?customerRefrenceNumber=${rId}`)
+    const res = await axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/customer/get?customerRefrenceNumber=${rId}`)
     const {data} = res;
         setFormData(data);
     }
@@ -79,7 +79,7 @@ export const getCustomer = async(rId,setFormData)=>{
 //getAll Customers
 export const getAllCustomer = (currentPage, itemsPerPage, setData, setIsDeleted)=>{
 
-    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/lens/customer/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
+    axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/customer/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
     .then(res => {
       setData(res.data);
       console.log("the fetched data is ",res.data);
@@ -95,7 +95,7 @@ export const getAllCustomer = (currentPage, itemsPerPage, setData, setIsDeleted)
 
 //delete data
 export const deleteDetail = (crId,data,setIsDeleted,setData)=>{
-    axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/lens/customer/delete?customerRefrenceNumber=${crId}`)
+    axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/customer/delete?customerRefrenceNumber=${crId}`)
     .then(res=>{
       console.log(res)
       const newData = data.filter(item => item.customerReferenceNumber !== crId);
@@ -125,7 +125,7 @@ export const searchFilter = async (startDate,endDate,branch,customerName,custome
   }
 
   try {
-    let url = `https://lens-svc.azurewebsites.net/lens-svc/lens/customer/getAllCustomerByFilter?`;
+    let url = `http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/customer/getAllCustomerByFilter?`;
     if (startDate) url += `startDate=${formattedStartDate}&`;
     if (endDate) url += `endDate=${formattedEndDate}&`;
     if (branch) url += `branch=${branch}&`;

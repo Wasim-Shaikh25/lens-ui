@@ -1,37 +1,36 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
+import React from 'react'
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import {Link, useNavigate} from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Autocomplete, InputLabel } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Autocomplete, Button, InputLabel } from '@mui/material';
 import { useState } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+function ResetPassword() {
 
+    const defaultTheme = createTheme();
+    const[formData,setFormData]= useState({
 
-export default function Login() {
-  const navigate = useNavigate();
+        empId: '',
+        oldPassword: "",
+        newPassword: "",
+       }) 
+     const navigate = useNavigate();
 
-  const[formData,setFormData] = useState({
-    empId:'',
-    password:''
-  })
-
-  const handleChange = (e) => {
+     
+ const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
@@ -39,22 +38,19 @@ export default function Login() {
     }));
   };
 
-
-  const handleSubmit = async(e) => {
-  e.preventDefault();
-
+  const handleSubmit = async (e)=>{
+    e.preventDefault();
     try{
-      const res = await axios.post('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/auth/authenticate',formData);
+      const res = await axios.post('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/auth/resetPassword',formData);
       const {data} = res;
-      Cookies.set('access_token', data.access_token);
-      console.log("troken is ",data.access_token)
-      navigate('/')
+      navigate('/login')
+      console.log("response is ",data)
     }
     catch(err){
-      console.log(err)
-    }
 
-  };
+    }
+  }
+
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -76,66 +72,70 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar> */}
             <Typography component="h5" variant="h5">
-              Login
+              Reset Password
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
-              <Grid container spacing={2}>
-              
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
-                    size="small"
                     value={formData.empId}
+                    size="small"
                     required
+                    onChange={(e)=>handleChange(e)}
                     fullWidth
                     id="empId"
                     label="Employee ID"
-                    onChange={(e)=>handleChange(e)}
                     name="empId"
-                    autoComplete="empId"
+                    autoComplete="email"
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                  value={formData.oldPassword}
                     size="small"
-                    value={formData.password}
                     required
-                    fullWidth
                     onChange={(e)=>handleChange(e)}
-                    name="password"
-                    label="Password"
+                    fullWidth
+                    name="oldPassword"
+                    label="Old Password"
                     type="password"
                     id="password"
                     autoComplete="new-password"
                   />
                 </Grid>
 
-               
+                <Grid item xs={12}>
+                  <TextField
+                  value={formData.newPassword}
+                    size="small"
+                    required
+                    onChange={(e)=>handleChange(e)}
+                    fullWidth
+                    name="newPassword"
+                    label="New Password"
+                    type="password"
+                    id="newPassword"
+                    autoComplete="new-password"
+                  />
+                </Grid>
 
               </Grid>
-              <Button
+                <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 2, mb: 1 }}
               >
-                Login
+                Set New Password
               </Button>
-              <Grid container justifyContent="center" flexDirection="column" alignItems="center">
-              <Grid item>
-                  <Link to={`/reset/${formData.empId}`} style={{cursor:"pointer"}}  variant="body2">
-                    Forgot Password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link  to="/signup" style={{cursor:"pointer"}} variant="body2">
-                    Dont have an account? Sign up
-                  </Link>
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
-        </div>
-      </Container>
-    </ThemeProvider>
-  );
+                </Box>
+                </Box>
+                </div>
+                </Container>
+                </ThemeProvider>
+
+
+  )
 }
+
+export default ResetPassword

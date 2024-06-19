@@ -22,6 +22,7 @@ import AgitatorSuccessPage from '../Pages/agitator/AgitatorSuccess';
 import EditAgitator from '../Pages/agitator/EditAgitator';
 import SignUp from '../Pages/signup/Signup.js';
 import Login from '../Pages/login/Login.js';
+import ResetPassword from '../Pages/resetPassword/ResetPassword.js';
 
 
 
@@ -31,6 +32,7 @@ const AllRoute = ({isSidebar}) => {
     <div style={!isSidebar?{width:"80%",position:"absolute",right:0,marginTop:"4.5rem"} : {marginTop:"5.5rem"}}>
       <Routes>
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/reset" element={<ResetPassword />} />
           <Route path="/login" element={<Login />} />
           <Route path="/createAgitator" element={<AgitatorSeal />} />
           <Route path="/editAgitator" element={<EditAgitator />} />
