@@ -16,6 +16,7 @@ import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { getAllApi,deleteDetail, searchFilter } from '../../apis/ApiPlan';
 import'../../App.css'
+import useToken from '../../contextApi/useToken';
 
 
 export default function EditApi() {
@@ -29,25 +30,25 @@ export default function EditApi() {
   const [branch, setBranch] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
-
+  const token = useToken();
 
 
 
   useEffect(() => {
-    getAllApi(currentPage, itemsPerPage,setData, setIsDeleted)
+    getAllApi(currentPage, itemsPerPage,setData, setIsDeleted,token)
     
   }, []);
   
 
   useEffect(() => {
-    searchFilter(startDate, endDate, branch, customerName, apiPlanDrfNumber, currentPage, itemsPerPage, setData);
+    searchFilter(startDate, endDate, branch, customerName, apiPlanDrfNumber, currentPage, itemsPerPage, setData,token);
   }, [currentPage, itemsPerPage]);
 
 
 
   const handleSearch = () => {
     setCurrentPage(0);  // Reset to first page on new search
-    searchFilter(startDate, endDate, branch, customerName, apiPlanDrfNumber, 0, itemsPerPage, setData);
+    searchFilter(startDate, endDate, branch, customerName, apiPlanDrfNumber, 0, itemsPerPage, setData,token);
   };
 
   
@@ -176,7 +177,7 @@ return (
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
                     <EditIcon style={{ color: 'blue' }} />
                   </button>
-                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.apiPlanDrfNumber, data,setData)}>
+                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.apiPlanDrfNumber, data,setData,token)}>
                     <DeleteIcon style={{ color: 'red' }} />
                   </button>
                 </TableCell>

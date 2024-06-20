@@ -3,7 +3,7 @@ import moment from "moment";
 
 
 //handle Submit
-export const handleSubmit = async(e,formData,navigate) => {
+export const handleSubmit = async(e,formData,navigate, token) => {
     e.preventDefault();
     const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');  
 
@@ -19,7 +19,10 @@ export const handleSubmit = async(e,formData,navigate) => {
       formData.inquiryDate = dateTime;
        
       console.log("formData sales is ",formData);
-      const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/salesInquiry/save", formData);
+      const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/salesInquiry/save", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }});
     console.log("response is ",res.data);
     navigate(`/salesSuccess/${res.data}`);
 
@@ -30,7 +33,7 @@ export const handleSubmit = async(e,formData,navigate) => {
 
 
   //Update
-  export const handleUpdate = async (e,formData,sId,navigate)=>{
+  export const handleUpdate = async (e,formData,sId,navigate, token)=>{
     e.preventDefault();
     const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
 
@@ -44,7 +47,10 @@ export const handleSubmit = async(e,formData,navigate) => {
      
       console.log("formData inside update ",formData);
       
-    const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/salesInquiry/Update", formData);
+    const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/salesInquiry/Update", formData,{
+      headers: {
+        Authorization: `Bearer ${token}`
+      }});
     console.log("response from update is ",res.data);
 
     
@@ -55,9 +61,12 @@ export const handleSubmit = async(e,formData,navigate) => {
 
 
 //get Sales
-export const getSales=(sId,setFormData) =>{
+export const getSales=(sId,setFormData, token) =>{
 
-    axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/salesInquiry/get/${sId}`)
+    axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/salesInquiry/get/${sId}`,{
+      headers: {
+        Authorization: `Bearer ${token}`
+      }})
     .then(res=>{
       const {data} = res;
         setFormData(data);
@@ -72,8 +81,11 @@ export const getSales=(sId,setFormData) =>{
 
 
 //get All sales
-export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted)=>{
-    axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/salesInquiry/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
+export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted, token)=>{
+    axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/salesInquiry/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`,{
+      headers: {
+        Authorization: `Bearer ${token}`
+      }})
       .then(res => {
         setData(res.data);
         console.log("the fetched data is ",res.data);
@@ -87,10 +99,13 @@ export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted)=>{
 
 
 //gee delete detail
-export const deleteDetail = (sId,data,setData, setIsDeleted) => {
+export const deleteDetail = (sId,data,setData, setIsDeleted, token) => {
     console.log("sId is ", sId)
     
-    axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/salesInquiry/delete/:InquiryNumber?InquiryNumber=${sId}`)
+    axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/salesInquiry/delete/:InquiryNumber?InquiryNumber=${sId}`,{
+      headers: {
+        Authorization: `Bearer ${token}`
+      }})
     .then(res=>{
       console.log(res)
       const newData = data.filter(item => item.inquiryNumber !== sId);

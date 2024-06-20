@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { TextField ,Button,  Container, Grid, InputLabel} from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getRotary, handleSubmit, handleUpdate } from '../../apis/RotaryApi';
+import useToken from '../../contextApi/useToken';
+
+
 
 export default function CreateRotatory() {
 
   const navigate = useNavigate();
   let {rjId} = useParams();
- 
+  const token = useToken();
 
 
   const [formData, setFormData] = useState({
@@ -41,7 +44,7 @@ export default function CreateRotatory() {
 
    useEffect(()=>{
     if(rjId!==undefined){
-     getRotary(rjId,setFormData);
+     getRotary(rjId,setFormData, token);
 
     }else{
       setFormData(
@@ -412,9 +415,9 @@ export default function CreateRotatory() {
           <Grid item xs={4}>
           <Grid item xs={4}>
         
-        {!rjId ?( <Button className="submit-btn" type="submit" style={{margin:"20px"}} onClick ={(e)=>handleSubmit(e,formData,navigate)} variant="contained" >Submit</Button>) : (
+        {!rjId ?( <Button className="submit-btn" type="submit" style={{margin:"20px"}} onClick ={(e)=>handleSubmit(e,formData,navigate, token)} variant="contained" >Submit</Button>) : (
           <>
-            <Button className="update-btn" variant="contained" onClick={(e)=>handleUpdate(e,formData,rjId,navigate)} >Update</Button>
+            <Button className="update-btn" variant="contained" onClick={(e)=>handleUpdate(e,formData,rjId,navigate, token)} >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
         </Grid>

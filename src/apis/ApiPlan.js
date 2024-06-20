@@ -2,14 +2,18 @@ import axios from 'axios';
 import moment from 'moment';
 
 //Submit form
-export const handleSubmit = async (e, formData,navigate) => {
+export const handleSubmit = async (e, formData,navigate,token) => {
 
     e.preventDefault();
   
     console.log("formData sales is ", formData);
 
     try {
-      const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/save", formData);
+      const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/save", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       console.log("response is ", res.data);
       navigate(`/apiSuccess/${res.data}`);
     } catch (err) {
@@ -20,10 +24,14 @@ export const handleSubmit = async (e, formData,navigate) => {
 
 
 //getApi
-export const getApi = async(apId,setFormData)=>{
+export const getApi = async(apId,setFormData,token)=>{
 
   try{
-    const res = await axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/get?apiPlanDrfNumber=${apId}`)
+    const res = await axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/get?apiPlanDrfNumber=${apId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
     const {data} = res;
     setFormData(data);
     console.log("the apId fetched data is ",data)
@@ -36,11 +44,15 @@ export const getApi = async(apId,setFormData)=>{
 
 
 //Update API
-export const handleUpdate = async (e, formData, apId, navigate)=>{
+export const handleUpdate = async (e, formData, apId, navigate,token)=>{
   e.preventDefault();
 
     try{
-        const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/update", formData);
+        const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/update", formData, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         console.log("response from update is ",res.data);
         apId="";
         navigate(`/apiSuccess/${formData.apiPlanDrfNumber}`);
@@ -53,10 +65,14 @@ export const handleUpdate = async (e, formData, apId, navigate)=>{
 }
 
 //get All 
-export const getAllApi = async(currentPage, itemsPerPage, setData, setIsDeleted)=>{
+export const getAllApi = async(currentPage, itemsPerPage, setData, setIsDeleted,token)=>{
 
   try{
-    const res = await axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/getAll`)
+    const res = await axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/getAll`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
     setData(res.data);
     console.log("the fetched data is ",res.data);
     setIsDeleted(false)
@@ -69,9 +85,13 @@ export const getAllApi = async(currentPage, itemsPerPage, setData, setIsDeleted)
 
 
 // delete One
-export const deleteDetail = async (crId,data, setData) => {
+export const deleteDetail = async (crId,data, setData, token) => {
   try {
-    await axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/delete?apiPlanId=${crId}`);
+    await axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/delete?apiPlanId=${crId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
     const newData = data.filter(item => item.apiPlanDrfNumber !== crId);
     console.log("data is ",data)
     console.log("New data is ",newData)
@@ -83,7 +103,7 @@ export const deleteDetail = async (crId,data, setData) => {
 }
 
 
-export const searchFilter = async (startDate,endDate,branch,customerName,apiPlanDrfNumber,currentPage,itemsPerPage,setData) => {
+export const searchFilter = async (startDate,endDate,branch,customerName,apiPlanDrfNumber,currentPage,itemsPerPage,setData, token) => {
   console.log("recieved Page number is",currentPage)
   const formattedStartDate = startDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
   const formattedEndDate = endDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
@@ -106,7 +126,11 @@ export const searchFilter = async (startDate,endDate,branch,customerName,apiPlan
 
     console.log("URL:", url); // Log the constructed URL
 
-    const res = await axios.get(url);
+    const res = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
     const { data } = res;
     setData(data);
     console.log("response is", res);

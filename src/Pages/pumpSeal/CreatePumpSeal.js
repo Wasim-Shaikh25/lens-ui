@@ -5,7 +5,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { getPumpSeal, handleSubmit } from '../../apis/PumpSealApi';
 import { handleUpdatePumpSeal } from '../../apis/PumpSealApi';
 import { getColumnData } from '../../apis/PumpSealApi';
-
+import useToken from '../../contextApi/useToken'
 
 
 export default function CreatePumpSeal() {
@@ -21,6 +21,7 @@ export default function CreatePumpSeal() {
   const [cstOption, setcstOption] = useState([]);
   const [pfOption, setpfOption] = useState([]);
   const [fnOption, setfnOption] = useState([]);
+  const token = useToken()
 
 
 
@@ -114,7 +115,7 @@ export default function CreatePumpSeal() {
 
   useEffect(() => {
     if (pId !== undefined) {
-      getPumpSeal(pId, setFormData)
+      getPumpSeal(pId, setFormData, token)
 
     } else {
       setFormData(
@@ -401,7 +402,7 @@ export default function CreatePumpSeal() {
       arrangement: newValue
     });
   }}
-  onFocus={()=>getColumnData('Arrangement', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
+  onFocus={()=>getColumnData('Arrangement', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption, token)}
   inputValue={formData.arrangement || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -436,7 +437,7 @@ export default function CreatePumpSeal() {
       pumpType: newValue
     });
   }}
-  onFocus={()=>getColumnData('Pump Type', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
+  onFocus={()=>getColumnData('Pump Type', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption, token)}
   inputValue={formData.pumpType || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -478,7 +479,7 @@ export default function CreatePumpSeal() {
       stage: newValue
     });
   }}
-  onFocus={()=>getColumnData('Stages', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
+  onFocus={()=>getColumnData('Stages', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption, token)}
   inputValue={formData.stage || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -510,7 +511,7 @@ export default function CreatePumpSeal() {
       casting: newValue
     });
   }}
-  onFocus={()=>getColumnData('Casing Type', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
+  onFocus={()=>getColumnData('Casing Type', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption, token)}
   inputValue={formData.casting || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -560,7 +561,7 @@ export default function CreatePumpSeal() {
       performance: newValue
     });
   }}
-  onFocus={()=>getColumnData('Performance', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
+  onFocus={()=>getColumnData('Performance', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption, token)}
   inputValue={formData.performance || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -593,7 +594,7 @@ export default function CreatePumpSeal() {
       sealArrangement: newValue
     });
   }}
-  onFocus={()=>getColumnData('Seal Arrangement', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
+  onFocus={()=>getColumnData('Seal Arrangement', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption, token)}
   inputValue={formData.sealArrangement || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -626,7 +627,7 @@ export default function CreatePumpSeal() {
       sealType: newValue
     });
   }}
-  onFocus={()=>getColumnData('Seal Type', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
+  onFocus={()=>getColumnData('Seal Type', setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption, token)}
   inputValue={formData.sealType || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -770,7 +771,7 @@ export default function CreatePumpSeal() {
       nature: newValue
     });
   }}
-  onFocus={()=>getColumnData('Fluid Nature',setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)}
+  onFocus={()=>getColumnData('Fluid Nature',setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption, token)}
   inputValue={formData.nature || ''}
   onInputChange={(event, newInputValue) => {
     setFormData({
@@ -1355,13 +1356,13 @@ export default function CreatePumpSeal() {
           <Grid item xs={4}>
             {!pId ? (
               <Button className="submit-btn" style={{margin:"2rem 1rem"}} 
-              onClick={(e)=>handleSubmit(e,formData,navigate)} type="submit" variant="contained">
+              onClick={(e)=>handleSubmit(e,formData,navigate, token)} type="submit" variant="contained">
                 Submit
               </Button>
             ) : (
               <>
                 <Button className="update-btn" variant="contained" type="submit" 
-                onClick={(e)=>handleUpdatePumpSeal(e,formData,pId,navigate)}>
+                onClick={(e)=>handleUpdatePumpSeal(e,formData,pId,navigate, token)}>
                   Update
                 </Button>
                 <Button className="cancel-btn" variant="contained" onClick={cancelUpdate}>

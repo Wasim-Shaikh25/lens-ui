@@ -3,13 +3,17 @@ import moment from "moment";
 
  
 //submit 
-export const handleSubmit = async(e, formData, navigate) => {
+export const handleSubmit = async(e, formData, navigate, token) => {
     e.preventDefault();
 
       console.log("formData sales is ",formData);
       
       try{
-          const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/save", formData);
+          const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/save", formData, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
         console.log("response is ",res.data);
         navigate(`/rotarySuccess/${res.data}`);
       }  
@@ -24,12 +28,16 @@ export const handleSubmit = async(e, formData, navigate) => {
 
 
   //handle update
-export const handleUpdate = async (e,formData,rjId,navigate)=>{
+export const handleUpdate = async (e,formData,rjId,navigate, token)=>{
     e.preventDefault();
   
       
       try{
-          const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/update", formData);
+          const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/update", formData, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
           console.log("response from update is ",res.data);
           
           rjId="";
@@ -45,8 +53,12 @@ export const handleUpdate = async (e,formData,rjId,navigate)=>{
 
 
     //getRotary
-    export const getRotary = (rjId,setFormData)=>{
-        axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/get?rotaryJointDrfNo=${rjId}`)
+    export const getRotary = (rjId,setFormData, token)=>{
+        axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/get?rotaryJointDrfNo=${rjId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
         .then(res=>{
           const {data} = res;
             setFormData(data);
@@ -64,9 +76,13 @@ export const handleUpdate = async (e,formData,rjId,navigate)=>{
 
   //get All Rotary
 
-export const getAllRotary = (setData, setIsDeleted) =>{
+export const getAllRotary = (setData, setIsDeleted, token) =>{
 
-    axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/getAll`)
+    axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/getAll`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
     .then(res => {
       setData(res.data);
       console.log("the fetched data is ",res.data);
@@ -80,9 +96,13 @@ export const getAllRotary = (setData, setIsDeleted) =>{
 
 
 // delete
-export const deleteDetail = async (crId,data,setData) => {
+export const deleteDetail = async (crId,data,setData, token) => {
     try {
-      await axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/delete?rotaryJointDrfNo=${crId}`);
+      await axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/delete?rotaryJointDrfNo=${crId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       const newData = data.filter(item => item.rotaryDrfNumber !== crId);
       console.log("data is ",data)
       console.log("New data is ",newData)
@@ -95,7 +115,7 @@ export const deleteDetail = async (crId,data,setData) => {
 
 
 //Customer filter Search
-export const searchFilter = async (startDate,endDate,branch,customerName,rotaryDrfNumber,currentPage,itemsPerPage,setData) => {
+export const searchFilter = async (startDate,endDate,branch,customerName,rotaryDrfNumber,currentPage,itemsPerPage,setData, token) => {
   console.log("recieved Page number is",currentPage)
   const formattedStartDate = startDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
   const formattedEndDate = endDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
@@ -118,7 +138,11 @@ export const searchFilter = async (startDate,endDate,branch,customerName,rotaryD
 
     console.log("URL:", url); // Log the constructed URL
 
-    const res = await axios.get(url);
+    const res = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
     const { data } = res;
     setData(data);
     console.log("response is", res);

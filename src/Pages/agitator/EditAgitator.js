@@ -14,8 +14,9 @@ import { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-import { getAllAgitator, deleteDetail, searchFilter} from '../../apis/AgitatorApi';
+import { deleteDetail, searchFilter} from '../../apis/AgitatorApi';
 import'../../App.css'
+import useToken from '../../contextApi/useToken';
 
 export default function EditAgitator() {
   const [data, setData] = useState([]);
@@ -28,13 +29,14 @@ export default function EditAgitator() {
   const [branch, setBranch] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
+  const token = useToken();
 
 
 
 
 
   useEffect(() => {
-    searchFilter(startDate, endDate, branch, customerName, agitatorSealDrfNumber, currentPage, itemsPerPage, setData);
+    searchFilter(startDate, endDate, branch, customerName, agitatorSealDrfNumber, currentPage, itemsPerPage, setData,token);
   }, [currentPage, itemsPerPage]);
 
 
@@ -42,7 +44,7 @@ export default function EditAgitator() {
 
   const handleSearch = () => {
     setCurrentPage(0);  // Reset to first page on new search
-    searchFilter(startDate, endDate, branch, customerName, agitatorSealDrfNumber, 0, itemsPerPage, setData);
+    searchFilter(startDate, endDate, branch, customerName, agitatorSealDrfNumber, 0, itemsPerPage, setData,token);
   };
 
   
@@ -52,9 +54,7 @@ export default function EditAgitator() {
   };
 
   const handleDelete = async (agitatorSealDrfNumber) => {
-    await deleteDetail(agitatorSealDrfNumber,data,setData);
-    // Refresh data after deletion
-    getAllAgitator(currentPage, itemsPerPage, setData, setIsDeleted);
+    await deleteDetail(agitatorSealDrfNumber,data,setData,token);
   };
 
     const handleItemsPerPageChange = (e) => {

@@ -3,26 +3,18 @@ import moment from "moment";
 
 
 
-  //get All 
-  export const getAllAgitator = async(setData, setIsDeleted)=>{
-    try{
-        const res = await axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/agitatorSeal/getAll`)
-        setData(res.data);
-        console.log("the fetched data is ",res.data);
-        setIsDeleted(false)
-      
-      }catch(err){
-        console.log(err)
-      }
-    
-
-  } 
+  
+  
   
   
   // delete One
- export const deleteDetail = async (crId,data, setData) => {
+ export const deleteDetail = async (crId,data, setData, token) => {
     try {
-      await axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/agitatorSeal/delete?agitatorSealDrfNumber=${crId}`);
+      await axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/agitatorSeal/delete?agitatorSealDrfNumber=${crId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       const newData = data.filter(item => item.agitatorSealDrfNumber !== crId);
       console.log("data is ",data)
       console.log("New data is ",newData)
@@ -37,7 +29,7 @@ import moment from "moment";
 
 
   
-  export const handleSubmit = async(e,formData, navigate) => {
+  export const handleSubmit = async(e,formData, navigate, token) => {
     e.preventDefault();
 
       console.log("formData sales is ",formData);
@@ -53,7 +45,11 @@ import moment from "moment";
     formData.lastUpdatedOn = dateTime;
     
      try{
-          const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/agitatorSeal/save", formData);
+          const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/agitatorSeal/save", formData, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
         console.log("response is ",res.data);
         navigate(`/agitatorSuccess/${res.data}`);
       }  
@@ -66,11 +62,15 @@ import moment from "moment";
 
 
 
-  export const handleUpdate = async (e,formData,navigate,aId)=>{
+  export const handleUpdate = async (e,formData,navigate,aId, token)=>{
     e.preventDefault();
    
       try{
-          const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/agitatorSeal/update", formData);
+          const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/agitatorSeal/update", formData, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
           console.log("response from update is ",res.data);
           
           aId="";
@@ -86,8 +86,12 @@ import moment from "moment";
 
   //get One
 
-export const getApi = (aId,setFormData)=>{
-    axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/agitatorSeal/get?agitatorSealDrfNumber=${aId}`)
+export const getApi = (aId,setFormData, token)=>{
+    axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/agitatorSeal/get?agitatorSealDrfNumber=${aId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
     .then(res=>{
       const {data} = res;
         setFormData(data);
@@ -104,7 +108,7 @@ export const getApi = (aId,setFormData)=>{
 
 //Search Filter
 
-export const searchFilter = async (startDate,endDate,branch,customerName,agitatorSealDrfNumber,currentPage,itemsPerPage,setData) => {
+export const searchFilter = async (startDate,endDate,branch,customerName,agitatorSealDrfNumber,currentPage,itemsPerPage,setData, token) => {
   console.log("recieved Page number is",currentPage)
   const formattedStartDate = startDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
   const formattedEndDate = endDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
@@ -127,7 +131,11 @@ export const searchFilter = async (startDate,endDate,branch,customerName,agitato
 
     console.log("URL:", url); // Log the constructed URL
 
-    const res = await axios.get(url);
+    const res = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
     const { data } = res;
     setData(data);
     console.log("response is", res);

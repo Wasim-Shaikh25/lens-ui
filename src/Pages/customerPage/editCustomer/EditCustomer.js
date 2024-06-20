@@ -18,7 +18,7 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { searchFilter } from '../../../apis/CustomerApi';
-
+import useToken from '../../../contextApi/useToken';
 
 
 
@@ -33,12 +33,12 @@ export default function EditCustomer() {
   const [branch, setBranch] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
-
+  const token = useToken();
 
 
 
   useEffect(() => {
-    getAllCustomer(currentPage, itemsPerPage, setData, setIsDeleted);
+    getAllCustomer(currentPage, itemsPerPage, setData, setIsDeleted,token);
 
     }, [currentPage, itemsPerPage]);
     
@@ -159,7 +159,7 @@ return (
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
                     <EditIcon style={{ color: 'blue' }} />
                   </button>
-                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.customerReferenceNumber, data, setIsDeleted, setData)}>
+                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.customerReferenceNumber, data, setIsDeleted, setData,token)}>
                     <DeleteIcon style={{ color: 'red' }} />
                   </button>
                 </TableCell>

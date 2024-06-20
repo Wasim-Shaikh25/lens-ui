@@ -15,12 +15,15 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import useToken from '../../contextApi/useToken';
 
 
 
 function ResetPassword() {
 
     const defaultTheme = createTheme();
+    const token = useToken();
+    
     const[formData,setFormData]= useState({
 
         empId: '',
@@ -41,7 +44,11 @@ function ResetPassword() {
   const handleSubmit = async (e)=>{
     e.preventDefault();
     try{
-      const res = await axios.post('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/auth/resetPassword',formData);
+      const res = await axios.post('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/auth/resetPassword',formData, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       const {data} = res;
       navigate('/login')
       console.log("response is ",data)

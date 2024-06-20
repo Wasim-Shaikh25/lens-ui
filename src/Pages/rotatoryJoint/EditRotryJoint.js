@@ -16,6 +16,7 @@ import {searchFilter,deleteDetail } from '../../apis/RotaryApi'
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { getAllRotary } from '../../apis/RotaryApi';
+import useToken from '../../contextApi/useToken';
 
 
 
@@ -30,21 +31,21 @@ export default function EditRotary() {
   const [branch, setBranch] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
-
+  const token = useToken();
 
 
   useEffect(() => {
-    getAllRotary(setData, setIsDeleted);
+    getAllRotary(setData, setIsDeleted,token);
   }, []);
 
   
   useEffect(() => {
-    searchFilter(startDate, endDate, branch, customerName, rotaryDrfNumber, currentPage, itemsPerPage, setData);
+    searchFilter(startDate, endDate, branch, customerName, rotaryDrfNumber, currentPage, itemsPerPage, setData,token);
   }, [currentPage, itemsPerPage]);
 
   const handleSearch = () => {
     setCurrentPage(0);  // Reset to first page on new search
-    searchFilter(startDate, endDate, branch, customerName, rotaryDrfNumber, 0, itemsPerPage, setData);
+    searchFilter(startDate, endDate, branch, customerName, rotaryDrfNumber, 0, itemsPerPage, setData,token);
   };
 
     
@@ -165,7 +166,7 @@ return (
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
                     <EditIcon style={{ color: 'blue' }} />
                   </button>
-                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.rotaryDrfNumber, data, setIsDeleted, setData)}>
+                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.rotaryDrfNumber, data, setData, token)}>
                     <DeleteIcon style={{ color: 'red' }} />
                   </button>
                 </TableCell>

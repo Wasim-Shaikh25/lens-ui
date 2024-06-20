@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 const AuthContext = createContext();
 
 
+
 export const useAuth = () => {
   return useContext(AuthContext);
 };
@@ -17,6 +18,11 @@ export const AuthProvider = ({ children }) => {
     const decodedToken = jwtDecode(token);
     setAuthState(decodedToken);
   };
+  
+
+  const getTokenFromCookie = () => {
+    return Cookies.get('access_token');
+  };
 
   useEffect(() => {
     const token = Cookies.get('access_token');
@@ -24,6 +30,7 @@ export const AuthProvider = ({ children }) => {
       setToken(token);
     }
   }, []);
+  
 
   const logout = () => {
     // Clear the access_token cookie and reset authState
@@ -33,7 +40,7 @@ export const AuthProvider = ({ children }) => {
 
 
   return (
-    <AuthContext.Provider value={{ authState, setToken, logout }}>
+    <AuthContext.Provider value={{ authState, setToken, getTokenFromCookie, logout }}>
       {children}
     </AuthContext.Provider>
   );

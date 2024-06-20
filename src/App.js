@@ -8,17 +8,18 @@ import AllRoute from './router/allRoute.js'
 import { useEffect } from "react";
 import { useAuth } from "./contextApi/AuthContext.js";
 import { useNavigate } from "react-router-dom";
+import useToken from "./contextApi/useToken.js";
 
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
 
-  const {authState} = useAuth();
   const navigate = useNavigate();
+  const token = useToken();
 
   useEffect(()=>{
-    if(!authState){
+    if(!token){
       navigate('/login')
     }
 

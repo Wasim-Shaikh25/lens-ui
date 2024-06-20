@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import { deleteDetail, getAllSales } from '../../apis/SalesInquiryApi';
 import '../../App.css'
+import useToken from '../../contextApi/useToken';
 
 
 
@@ -24,10 +25,12 @@ export default function EditSales() {
   const [isDeleted, setIsDeleted] = useState(false);  
   const [itemsPerPage, setItemsPerPage] = useState(5); // Adjust as needed
   const navigate = useNavigate();  
+  const token = useToken();
+  
 
 
   useEffect(() => {
-    getAllSales(currentPage,itemsPerPage,setData,setIsDeleted);
+    getAllSales(currentPage,itemsPerPage,setData,setIsDeleted, token);
 
     }, [currentPage, itemsPerPage]);
     
@@ -147,7 +150,7 @@ return (
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
                     <EditIcon style={{ color: 'blue' }} />
                   </button>
-                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.inquiryNumber,data,setData, setIsDeleted)}>
+                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.inquiryNumber,data,setData, setIsDeleted, token)}>
                     <DeleteIcon style={{ color: 'red' }} />
                   </button>
                 </TableCell>
