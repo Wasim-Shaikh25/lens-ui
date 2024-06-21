@@ -1,20 +1,14 @@
-import axios from "axios";
+import axiosInstance from "../axios/axiosInstance";
 import moment from "moment";
 
 
 
   
-const baseUrl = process.env.REACT_APP_BASE_URL; 
-
 
   // delete One
  export const deleteDetail = async (crId,data, setData, token) => {
     try {
-      await axios.delete(`${baseUrl}/lens/agitatorSeal/delete?agitatorSealDrfNumber=${crId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      await axiosInstance.delete(`lens/agitatorSeal/delete?agitatorSealDrfNumber=${crId}`);
       const newData = data.filter(item => item.agitatorSealDrfNumber !== crId);
       console.log("data is ",data)
       console.log("New data is ",newData)
@@ -45,11 +39,7 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
     formData.lastUpdatedOn = dateTime;
     
      try{
-          const res = await axios.post(`${baseUrl}/lens/agitatorSeal/save`, formData, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          });
+          const res = await axiosInstance.post(`lens/agitatorSeal/save`, formData);
         console.log("response is ",res.data);
         navigate(`/agitatorSuccess/${res.data}`);
       }  
@@ -66,11 +56,7 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
     e.preventDefault();
    
       try{
-          const res = await axios.put(`${baseUrl}/lens/agitatorSeal/update`, formData, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          });
+          const res = await axiosInstance.put(`lens/agitatorSeal/update`, formData);
           console.log("response from update is ",res.data);
           
           aId="";
@@ -87,11 +73,7 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
   //get One
 
 export const getApi = (aId,setFormData, token)=>{
-    axios.get(`${baseUrl}/lens/agitatorSeal/get?agitatorSealDrfNumber=${aId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    axiosInstance.get(`lens/agitatorSeal/get?agitatorSealDrfNumber=${aId}`)
     .then(res=>{
       const {data} = res;
         setFormData(data);
@@ -121,7 +103,7 @@ export const searchFilter = async (startDate,endDate,branch,customerName,agitato
   }
 
   try {
-    let url = `${baseUrl}/lens/agitatorSeal/getAllAgitatorSealByFilter?`;
+    let url = `lens/agitatorSeal/getAllAgitatorSealByFilter?`;
     if (startDate) url += `startDate=${formattedStartDate}&`;
     if (endDate) url += `endDate=${formattedEndDate}&`;
     if (branch) url += `branch=${branch}&`;
@@ -131,11 +113,7 @@ export const searchFilter = async (startDate,endDate,branch,customerName,agitato
 
     console.log("URL:", url); // Log the constructed URL
 
-    const res = await axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const res = await axiosInstance.get(url);
     const { data } = res;
     setData(data);
     console.log("response is", res);

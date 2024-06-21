@@ -1,9 +1,8 @@
-import axios from 'axios';
+import axiosInstance from "../axios/axiosInstance";
 import moment from 'moment';
 
 
-const baseUrl = process.env.REACT_APP_BASE_URL; 
-console.log("top url is ",baseUrl)
+
 
 
 // submit data
@@ -19,11 +18,7 @@ export const handleSubmit = async (e, formData, navigate, token) => {
     formData.lastUpdatedOn = dateTime;
   }
 
-  const res = await axios.post(`${baseUrl}/lens/customer/save`, formData, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
+  const res = await axiosInstance.post(`lens/customer/save`, formData);
 
   console.log("response is ", res.data);
   navigate(`/registerSuccess/${res.data}`);
@@ -47,11 +42,7 @@ export const handleUpdate = async (e, formData, rId, navigate, token) => {
     formData.lastUpdatedOn = dateTime;
   }
 
-  const res = await axios.put(`${baseUrl}/lens/customer/Update`, formData, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
+  const res = await axiosInstance.put(`lens/customer/Update`, formData);
 
   console.log("response from update is ", res.data);
   console.log(formData);
@@ -59,10 +50,11 @@ export const handleUpdate = async (e, formData, rId, navigate, token) => {
   navigate(`/updateSuccess/${formData.customerReferenceNumber}`);
 };
 
+
 // get single data
 export const getCustomer = async (rId, setFormData, token) => {
   try {
-    const res = await axios.get(`${baseUrl}/lens/customer/get?customerRefrenceNumber=${rId}`, {
+    const res = await axiosInstance.get(`lens/customer/get?customerRefrenceNumber=${rId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -79,11 +71,7 @@ export const getCustomer = async (rId, setFormData, token) => {
 
 // delete data
 export const deleteDetail = (crId, data, setIsDeleted, setData, token) => {
-  axios.delete(`${baseUrl}/lens/customer/delete?customerRefrenceNumber=${crId}`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
+  axiosInstance.delete(`lens/customer/delete?customerRefrenceNumber=${crId}`)
   .then(res => {
     console.log(res);
     const newData = data.filter(item => item.customerReferenceNumber !== crId);
@@ -111,8 +99,7 @@ export const searchFilter = async (startDate, endDate, branch, customerName, cus
   }
 
   try {
-    console.log("bsurl in try is ",baseUrl)
-    let url = `${baseUrl}/lens/customer/getAllCustomerByFilter?`;
+    let url = `lens/customer/getAllCustomerByFilter?`;
     if (startDate) url += `startDate=${formattedStartDate}&`;
     if (endDate) url += `endDate=${formattedEndDate}&`;
     if (branch) url += `branch=${branch}&`;
@@ -122,11 +109,7 @@ export const searchFilter = async (startDate, endDate, branch, customerName, cus
 
     console.log("URL is :", url); // Log the constructed URL
 
-    const res = await axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const res = await axiosInstance.get(url);
 
     const { data } = res;
     setData(data);

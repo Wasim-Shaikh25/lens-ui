@@ -1,8 +1,7 @@
-import axios from 'axios';
+import axiosInstance from "../axios/axiosInstance";
 import moment from 'moment';
 
 
-const baseUrl = process.env.REACT_APP_BASE_URL; 
 
 
 //Submit form
@@ -13,11 +12,7 @@ export const handleSubmit = async (e, formData,navigate,token) => {
     console.log("formData sales is ", formData);
 
     try {
-      const res = await axios.post(`${baseUrl}/lens/apiPlan/save`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const res = await axiosInstance.post(`lens/apiPlan/save`, formData);
       console.log("response is ", res.data);
       navigate(`/apiSuccess/${res.data}`);
     } catch (err) {
@@ -31,11 +26,7 @@ export const handleSubmit = async (e, formData,navigate,token) => {
 export const getApi = async(apId,setFormData,token)=>{
 
   try{
-    const res = await axios.get(`${baseUrl}/lens/apiPlan/get?apiPlanDrfNumber=${apId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    const res = await axiosInstance.get(`lens/apiPlan/get?apiPlanDrfNumber=${apId}`)
     const {data} = res;
     setFormData(data);
     console.log("the apId fetched data is ",data)
@@ -52,11 +43,7 @@ export const handleUpdate = async (e, formData, apId, navigate,token)=>{
   e.preventDefault();
 
     try{
-        const res = await axios.put(`${baseUrl}/lens/apiPlan/update`, formData, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
+        const res = await axiosInstance.put(`lens/apiPlan/update`, formData);
         console.log("response from update is ",res.data);
         apId="";
         navigate(`/apiSuccess/${formData.apiPlanDrfNumber}`);
@@ -72,11 +59,7 @@ export const handleUpdate = async (e, formData, apId, navigate,token)=>{
 export const getAllApi = async(currentPage, itemsPerPage, setData, setIsDeleted,token)=>{
 
   try{
-    const res = await axios.get(`${baseUrl}/lens/apiPlan/getAll`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    const res = await axiosInstance.get(`lens/apiPlan/getAll`)
     setData(res.data);
     console.log("the fetched data is ",res.data);
     setIsDeleted(false)
@@ -91,11 +74,7 @@ export const getAllApi = async(currentPage, itemsPerPage, setData, setIsDeleted,
 // delete One
 export const deleteDetail = async (crId,data, setData, token) => {
   try {
-    await axios.delete(`${baseUrl}/lens/apiPlan/delete?apiPlanId=${crId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    await axiosInstance.delete(`lens/apiPlan/delete?apiPlanId=${crId}`);
     const newData = data.filter(item => item.apiPlanDrfNumber !== crId);
     console.log("data is ",data)
     console.log("New data is ",newData)
@@ -120,7 +99,7 @@ export const searchFilter = async (startDate,endDate,branch,customerName,apiPlan
   }
 
   try {
-    let url = `${baseUrl}/lens/apiPlan/getAllApiPlanByFilter?`;
+    let url = `lens/apiPlan/getAllApiPlanByFilter?`;
     if (startDate) url += `startDate=${formattedStartDate}&`;
     if (endDate) url += `endDate=${formattedEndDate}&`;
     if (branch) url += `branch=${branch}&`;
@@ -130,11 +109,7 @@ export const searchFilter = async (startDate,endDate,branch,customerName,apiPlan
 
     console.log("URL:", url); // Log the constructed URL
 
-    const res = await axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const res = await axiosInstance.get(url);
     const { data } = res;
     setData(data);
     console.log("response is", res);

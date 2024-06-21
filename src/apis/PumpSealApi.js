@@ -1,10 +1,9 @@
-import axios from 'axios';
+import axiosInstance from "../axios/axiosInstance";
 import moment from 'moment';
 
 
 
 
-const baseUrl = process.env.REACT_APP_BASE_URL; 
 
 
 
@@ -25,11 +24,7 @@ export const handleSubmit = async (e,formData,navigate, token) => {
     console.log("formData sales is ", formData);
 
     try {
-      const res = await axios.post(`${baseUrl}/lens/pumSeal/save`, formData,{
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const res = await axiosInstance.post(`lens/pumSeal/save`, formData);
       console.log("response is ", res.data);
       navigate(`/pumpSealSuccess/${res.data}`);
     }
@@ -50,11 +45,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate, token) => {
 
     console.log("formData sales is ", formData);
 
-    const res = await axios.put(`${baseUrl}/lens/pumSeal/Update`, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const res = await axiosInstance.put(`lens/pumSeal/Update`, formData);
     console.log("response from update is ", res.data);
 
 
@@ -65,11 +56,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate, token) => {
   //get particular data
   export const getPumpSeal = (pId,setFormData,token)=>{
 
-    axios.get(`${baseUrl}/lens/pumSeal/get?pumSealDrfNo=${pId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    axiosInstance.get(`lens/pumSeal/get?pumSealDrfNo=${pId}`)
     .then(res => {
       const { data } = res;
       setFormData(data);
@@ -88,11 +75,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate, token) => {
   export const getColumnData = async (colName, setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption, token)=>{
 
     try {
-      const res = await axios.get(`${baseUrl}/lens/queryDrawingMasterTablebyColumn?columnName=${colName}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const res = await axiosInstance.get(`lens/queryDrawingMasterTablebyColumn?columnName=${colName}`);
       switch(colName){
         case 'Pump Type' :
           setptOption(res.data);
@@ -133,11 +116,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate, token) => {
 
   //get All data
   export const getAll = (currentPage, itemsPerPage,setData, setIsDeleted, token)=>{
-    axios.get(`${baseUrl}/lens/pumSeal/getAll`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    axiosInstance.get(`lens/pumSeal/getAll`)
     .then(res => {
       setData(res.data);
       console.log("the fetched data is ",res.data);
@@ -152,11 +131,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate, token) => {
   //delete pump seal
 export  const deleteDetail = async (crId, data, setData, token) => {
     try {
-      await axios.delete(`${baseUrl}/lens/pumSeal/delete?pumSealDrfNo=${crId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      await axiosInstance.delete(`lens/pumSeal/delete?pumSealDrfNo=${crId}`);
       const newData = data.filter(item => item.pumpSealDrfNumber !== crId);
       console.log("data is ",data)
       console.log("New data is ",newData)
@@ -182,7 +157,7 @@ export const searchFilter = async (startDate,endDate,branch,customerName,pumpSea
   }
 
   try {
-    let url = `${baseUrl}/lens/pumpSeal/getAllPumpSealByFilter?`;
+    let url = `lens/pumpSeal/getAllPumpSealByFilter?`;
     if (startDate) url += `startDate=${formattedStartDate}&`;
     if (endDate) url += `endDate=${formattedEndDate}&`;
     if (branch) url += `branch=${branch}&`;
@@ -192,11 +167,7 @@ export const searchFilter = async (startDate,endDate,branch,customerName,pumpSea
 
     console.log("URL:", url); // Log the constructed URL
 
-    const res = await axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    const res = await axiosInstance.get(url);
     const { data } = res;
     setData(data);
     console.log("response is", res);

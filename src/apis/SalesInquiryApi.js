@@ -1,8 +1,7 @@
-import axios from "axios";
+import axiosInstance from "../axios/axiosInstance";
 import moment from "moment";
 
 
-const baseUrl = process.env.REACT_APP_BASE_URL; 
 
 
 //handle Submit
@@ -22,10 +21,7 @@ export const handleSubmit = async(e,formData,navigate, token) => {
       formData.inquiryDate = dateTime;
        
       console.log("formData sales is ",formData);
-      const res = await axios.post(`${baseUrl}/lens/salesInquiry/save`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }});
+      const res = await axiosInstance.post(`lens/salesInquiry/save`, formData);
     console.log("response is ",res.data);
     navigate(`/salesSuccess/${res.data}`);
 
@@ -50,10 +46,7 @@ export const handleSubmit = async(e,formData,navigate, token) => {
      
       console.log("formData inside update ",formData);
       
-    const res = await axios.put(`${baseUrl}/lens/salesInquiry/Update`, formData,{
-      headers: {
-        Authorization: `Bearer ${token}`
-      }});
+    const res = await axiosInstance.put(`lens/salesInquiry/Update`, formData);
     console.log("response from update is ",res.data);
 
     
@@ -66,10 +59,7 @@ export const handleSubmit = async(e,formData,navigate, token) => {
 //get Sales
 export const getSales=(sId,setFormData, token) =>{
 
-    axios.get(`${baseUrl}/lens/salesInquiry/get/${sId}`,{
-      headers: {
-        Authorization: `Bearer ${token}`
-      }})
+    axiosInstance.get(`lens/salesInquiry/get/${sId}`)
     .then(res=>{
       const {data} = res;
         setFormData(data);
@@ -85,10 +75,7 @@ export const getSales=(sId,setFormData, token) =>{
 
 //get All sales
 export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted, token)=>{
-    axios.get(`${baseUrl}/lens/salesInquiry/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`,{
-      headers: {
-        Authorization: `Bearer ${token}`
-      }})
+    axiosInstance.get(`lens/salesInquiry/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
       .then(res => {
         setData(res.data);
         console.log("the fetched data is ",res.data);
@@ -105,10 +92,7 @@ export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted, token
 export const deleteDetail = (sId,data,setData, setIsDeleted, token) => {
     console.log("sId is ", sId)
     
-    axios.delete(`${baseUrl}/lens/salesInquiry/delete/:InquiryNumber?InquiryNumber=${sId}`,{
-      headers: {
-        Authorization: `Bearer ${token}`
-      }})
+    axiosInstance.delete(`lens/salesInquiry/delete/:InquiryNumber?InquiryNumber=${sId}`)
     .then(res=>{
       console.log(res)
       const newData = data.filter(item => item.inquiryNumber !== sId);

@@ -15,10 +15,9 @@ import { Autocomplete, InputLabel } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode'; // Importing named export
 import { useAuth } from '../../contextApi/AuthContext';
-
+import { handleSubmit } from '../../apis/LoginApi';
 
 
 
@@ -46,23 +45,7 @@ export default function Login() {
   };
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    try {
-      const res = await axios.post('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/auth/authenticate', formData);
-      const { data } = res;
-      const expiryTime = new Date(new Date().getTime() + 30 * 60 * 1000); // 30 minutes from now
-
-      Cookies.set('access_token', data.access_token, { expires: expiryTime });
-      setToken(data.access_token); // Store the decoded token in global state
-
-      console.log("Token is ", data.access_token);
-      navigate('/');
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -86,7 +69,7 @@ export default function Login() {
             <Typography component="h5" variant="h5">
               Login
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
+            <Box component="form" noValidate onSubmit={(e)=>handleSubmit(e,setToken,formData,navigate)} sx={{ mt: 2 }}>
               <Grid container spacing={2}>
               
                 <Grid item xs={12}>

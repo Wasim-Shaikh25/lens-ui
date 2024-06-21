@@ -16,7 +16,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import useToken from '../../contextApi/useToken';
-
+import { handleSubmit } from '../../apis/ResetPassword';
 
 
 function ResetPassword() {
@@ -41,23 +41,7 @@ function ResetPassword() {
     }));
   };
 
-  const handleSubmit = async (e)=>{
-    e.preventDefault();
-    try{
-      const res = await axios.post('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/auth/resetPassword',formData, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      const {data} = res;
-      navigate('/login')
-      console.log("response is ",data)
-    }
-    catch(err){
-
-    }
-  }
-
+ 
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -81,7 +65,7 @@ function ResetPassword() {
             <Typography component="h5" variant="h5">
               Reset Password
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" noValidate onSubmit={(e)=>handleSubmit(e,formData,navigate)} sx={{ mt: 1 }}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField

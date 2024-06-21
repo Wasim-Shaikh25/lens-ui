@@ -17,6 +17,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {getDesignation, getBranches, getDepartments, handleSubmit} from '../../apis/SignupApi'
 
 
 
@@ -66,71 +67,7 @@ export default function SignUp() {
 };
 
 
- //get All Designation
- const getDesignation = async()=>{
-  try{
-    const res = await axios.get('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/user/allDesignations');
-    const{data} = res;
-    setDesignation(data);
-    console.log(formData)
-  }
-  catch(err){
-    console.log(err);
-  }
 
- }
-
-
- //get All Departments
- const getDepartments = async()=>{
-  try{
-    const res = await axios.get('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/user/getAllDepartments');
-    const{data} = res;
-    setDepartments(data);
-    console.log(data)
-  }
-  catch(err){
-    console.log(err);
-  }
- }
-
-
- //get All Branches
- const getBranches = async()=>{
-  try{
-    const res = await axios.get('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/user/getAllBranches');
-    const{data} = res;
-    setBranches(data);
-    console.log(data)
-  }
-  catch(err){
-    console.log(err);
-  }
- }
-
-
-
-
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    formData.departments[0].region = formData.departments[0].departmentName;
-    formData.lastUpdatedByUserId = formData.empId;
-    
-
-    try{
-      const res = await axios.post('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/user/createAccount',formData);
-      const{data} = res;
-      console.log("response Data ",data);
-      navigate('/reset')
-    }
-    catch(err){
-      console.log(err);
-
-    }
-
-  };
-
-  
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -153,7 +90,7 @@ export default function SignUp() {
             <Typography component="h5" variant="h5">
               Sign up
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
+            <Box component="form" noValidate onSubmit={(e)=>handleSubmit(e,formData,navigate)} sx={{ mt: 2 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -243,7 +180,7 @@ export default function SignUp() {
             });
           }}
           options={designation}
-          onFocus={getDesignation}
+          onFocus={()=>getDesignation(setDesignation)}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -276,7 +213,7 @@ export default function SignUp() {
                       });
                     }}
                     options={departments.map((department) => department.departmentName)}
-                    onFocus={getDepartments}
+                    onFocus={()=>getDepartments(setDepartments)}
                     renderInput={(params) => (
                       <TextField
                         {...params}
@@ -307,7 +244,7 @@ export default function SignUp() {
             });
           }}
           options={branches.map((branch) => branch.branchName)}
-          onFocus={getBranches}
+          onFocus={()=>getBranches(setBranches)}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -328,6 +265,7 @@ export default function SignUp() {
                 type="submit"
                 fullWidth
                 variant="contained"
+                onClick={(e)=>handleSubmit(e,formData,navigate)}
                 sx={{ mt: 1, mb: 1 }}
               >
                 Sign Up
