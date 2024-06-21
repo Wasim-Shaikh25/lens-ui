@@ -2,6 +2,9 @@ import axios from "axios";
 import moment from "moment";
 
 
+const baseUrl = process.env.REACT_APP_BASE_URL; 
+
+
 //handle Submit
 export const handleSubmit = async(e,formData,navigate, token) => {
     e.preventDefault();
@@ -19,7 +22,7 @@ export const handleSubmit = async(e,formData,navigate, token) => {
       formData.inquiryDate = dateTime;
        
       console.log("formData sales is ",formData);
-      const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/salesInquiry/save", formData, {
+      const res = await axios.post(`${baseUrl}/lens/salesInquiry/save`, formData, {
         headers: {
           Authorization: `Bearer ${token}`
         }});
@@ -47,7 +50,7 @@ export const handleSubmit = async(e,formData,navigate, token) => {
      
       console.log("formData inside update ",formData);
       
-    const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/salesInquiry/Update", formData,{
+    const res = await axios.put(`${baseUrl}/lens/salesInquiry/Update`, formData,{
       headers: {
         Authorization: `Bearer ${token}`
       }});
@@ -63,7 +66,7 @@ export const handleSubmit = async(e,formData,navigate, token) => {
 //get Sales
 export const getSales=(sId,setFormData, token) =>{
 
-    axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/salesInquiry/get/${sId}`,{
+    axios.get(`${baseUrl}/lens/salesInquiry/get/${sId}`,{
       headers: {
         Authorization: `Bearer ${token}`
       }})
@@ -82,7 +85,7 @@ export const getSales=(sId,setFormData, token) =>{
 
 //get All sales
 export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted, token)=>{
-    axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/salesInquiry/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`,{
+    axios.get(`${baseUrl}/lens/salesInquiry/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`,{
       headers: {
         Authorization: `Bearer ${token}`
       }})
@@ -102,7 +105,7 @@ export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted, token
 export const deleteDetail = (sId,data,setData, setIsDeleted, token) => {
     console.log("sId is ", sId)
     
-    axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/salesInquiry/delete/:InquiryNumber?InquiryNumber=${sId}`,{
+    axios.delete(`${baseUrl}/lens/salesInquiry/delete/:InquiryNumber?InquiryNumber=${sId}`,{
       headers: {
         Authorization: `Bearer ${token}`
       }})

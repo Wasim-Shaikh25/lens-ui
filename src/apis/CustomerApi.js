@@ -1,6 +1,11 @@
 import axios from 'axios';
 import moment from 'moment';
 
+
+const baseUrl = process.env.REACT_APP_BASE_URL; 
+console.log("top url is ",baseUrl)
+
+
 // submit data
 export const handleSubmit = async (e, formData, navigate, token) => {
   e.preventDefault();
@@ -14,7 +19,7 @@ export const handleSubmit = async (e, formData, navigate, token) => {
     formData.lastUpdatedOn = dateTime;
   }
 
-  const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/customer/save", formData, {
+  const res = await axios.post(`${baseUrl}/lens/customer/save`, formData, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -42,7 +47,7 @@ export const handleUpdate = async (e, formData, rId, navigate, token) => {
     formData.lastUpdatedOn = dateTime;
   }
 
-  const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/customer/Update", formData, {
+  const res = await axios.put(`${baseUrl}/lens/customer/Update`, formData, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -57,7 +62,7 @@ export const handleUpdate = async (e, formData, rId, navigate, token) => {
 // get single data
 export const getCustomer = async (rId, setFormData, token) => {
   try {
-    const res = await axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/customer/get?customerRefrenceNumber=${rId}`, {
+    const res = await axios.get(`${baseUrl}/lens/customer/get?customerRefrenceNumber=${rId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -70,26 +75,11 @@ export const getCustomer = async (rId, setFormData, token) => {
   }
 };
 
-// getAll Customers
-export const getAllCustomer = (currentPage, itemsPerPage, setData, setIsDeleted, token) => {
-  axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/customer/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-  .then(res => {
-    setData(res.data);
-    console.log("the fetched data is ", res.data);
-    setIsDeleted(false);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-};
+
 
 // delete data
 export const deleteDetail = (crId, data, setIsDeleted, setData, token) => {
-  axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/customer/delete?customerRefrenceNumber=${crId}`, {
+  axios.delete(`${baseUrl}/lens/customer/delete?customerRefrenceNumber=${crId}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -107,6 +97,7 @@ export const deleteDetail = (crId, data, setIsDeleted, setData, token) => {
   console.log("customer reference id of deletion elem is ", crId);
 };
 
+
 // Customer filter Search
 export const searchFilter = async (startDate, endDate, branch, customerName, customerRef, currentPage, itemsPerPage, setData, token) => {
   const formattedStartDate = startDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
@@ -120,7 +111,8 @@ export const searchFilter = async (startDate, endDate, branch, customerName, cus
   }
 
   try {
-    let url = `http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/customer/getAllCustomerByFilter?`;
+    console.log("bsurl in try is ",baseUrl)
+    let url = `${baseUrl}/lens/customer/getAllCustomerByFilter?`;
     if (startDate) url += `startDate=${formattedStartDate}&`;
     if (endDate) url += `endDate=${formattedEndDate}&`;
     if (branch) url += `branch=${branch}&`;
@@ -128,7 +120,7 @@ export const searchFilter = async (startDate, endDate, branch, customerName, cus
     if (customerRef) url += `customerReferenceNumber=${customerRef}&`;
     url += `pageNo=${currentPage}&pageSize=${itemsPerPage}`;
 
-    console.log("URL:", url); // Log the constructed URL
+    console.log("URL is :", url); // Log the constructed URL
 
     const res = await axios.get(url, {
       headers: {

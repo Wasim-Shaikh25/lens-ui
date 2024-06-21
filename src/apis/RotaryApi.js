@@ -2,6 +2,9 @@ import axios from "axios";
 import moment from "moment";
 
  
+const baseUrl = process.env.REACT_APP_BASE_URL; 
+
+
 //submit 
 export const handleSubmit = async(e, formData, navigate, token) => {
     e.preventDefault();
@@ -9,7 +12,7 @@ export const handleSubmit = async(e, formData, navigate, token) => {
       console.log("formData sales is ",formData);
       
       try{
-          const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/save", formData, {
+          const res = await axios.post(`${baseUrl}/lens/rotaryJoint/save`, formData, {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -33,7 +36,7 @@ export const handleUpdate = async (e,formData,rjId,navigate, token)=>{
   
       
       try{
-          const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/update", formData, {
+          const res = await axios.put(`${baseUrl}/lens/rotaryJoint/update`, formData, {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -54,7 +57,7 @@ export const handleUpdate = async (e,formData,rjId,navigate, token)=>{
 
     //getRotary
     export const getRotary = (rjId,setFormData, token)=>{
-        axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/get?rotaryJointDrfNo=${rjId}`, {
+        axios.get(`${baseUrl}/lens/rotaryJoint/get?rotaryJointDrfNo=${rjId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -78,7 +81,7 @@ export const handleUpdate = async (e,formData,rjId,navigate, token)=>{
 
 export const getAllRotary = (setData, setIsDeleted, token) =>{
 
-    axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/getAll`, {
+    axios.get(`${baseUrl}/lens/rotaryJoint/getAll`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -98,7 +101,7 @@ export const getAllRotary = (setData, setIsDeleted, token) =>{
 // delete
 export const deleteDetail = async (crId,data,setData, token) => {
     try {
-      await axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/delete?rotaryJointDrfNo=${crId}`, {
+      await axios.delete(`${baseUrl}/lens/rotaryJoint/delete?rotaryJointDrfNo=${crId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -128,7 +131,7 @@ export const searchFilter = async (startDate,endDate,branch,customerName,rotaryD
   }
 
   try {
-    let url = `http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/rotaryJoint/getAllRotaryJointByFilter?`;
+    let url = `${baseUrl}/lens/rotaryJoint/getAllRotaryJointByFilter?`;
     if (startDate) url += `startDate=${formattedStartDate}&`;
     if (endDate) url += `endDate=${formattedEndDate}&`;
     if (branch) url += `branch=${branch}&`;

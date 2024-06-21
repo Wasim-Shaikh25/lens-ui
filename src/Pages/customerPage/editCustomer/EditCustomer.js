@@ -12,9 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
-import { getAllCustomer } from '../../../apis/CustomerApi';
 import { deleteDetail } from '../../../apis/CustomerApi';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { searchFilter } from '../../../apis/CustomerApi';
@@ -38,7 +36,7 @@ export default function EditCustomer() {
 
 
   useEffect(() => {
-    getAllCustomer(currentPage, itemsPerPage, setData, setIsDeleted,token);
+    searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData,token)
 
     }, [currentPage, itemsPerPage]);
     
@@ -120,7 +118,7 @@ return (
 
 </div>
 
-<Button onClick={()=>searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData)}  style={{width:"15%",margin:"1rem 2rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
+<Button onClick={()=>searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData,token)}  style={{width:"15%",margin:"1rem 2rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
   Search
 </Button>
 

@@ -3,6 +3,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import {jwtDecode} from 'jwt-decode';
 import Cookies from 'js-cookie';
 
+
 const AuthContext = createContext();
 
 
@@ -24,6 +25,7 @@ export const AuthProvider = ({ children }) => {
     return Cookies.get('access_token');
   };
 
+  
   useEffect(() => {
     const token = Cookies.get('access_token');
     if (token) {

@@ -1,6 +1,10 @@
 import axios from 'axios';
 import moment from 'moment';
 
+
+const baseUrl = process.env.REACT_APP_BASE_URL; 
+
+
 //Submit form
 export const handleSubmit = async (e, formData,navigate,token) => {
 
@@ -9,7 +13,7 @@ export const handleSubmit = async (e, formData,navigate,token) => {
     console.log("formData sales is ", formData);
 
     try {
-      const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/save", formData, {
+      const res = await axios.post(`${baseUrl}/lens/apiPlan/save`, formData, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -27,7 +31,7 @@ export const handleSubmit = async (e, formData,navigate,token) => {
 export const getApi = async(apId,setFormData,token)=>{
 
   try{
-    const res = await axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/get?apiPlanDrfNumber=${apId}`, {
+    const res = await axios.get(`${baseUrl}/lens/apiPlan/get?apiPlanDrfNumber=${apId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -48,7 +52,7 @@ export const handleUpdate = async (e, formData, apId, navigate,token)=>{
   e.preventDefault();
 
     try{
-        const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/update", formData, {
+        const res = await axios.put(`${baseUrl}/lens/apiPlan/update`, formData, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -68,7 +72,7 @@ export const handleUpdate = async (e, formData, apId, navigate,token)=>{
 export const getAllApi = async(currentPage, itemsPerPage, setData, setIsDeleted,token)=>{
 
   try{
-    const res = await axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/getAll`, {
+    const res = await axios.get(`${baseUrl}/lens/apiPlan/getAll`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -87,7 +91,7 @@ export const getAllApi = async(currentPage, itemsPerPage, setData, setIsDeleted,
 // delete One
 export const deleteDetail = async (crId,data, setData, token) => {
   try {
-    await axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/delete?apiPlanId=${crId}`, {
+    await axios.delete(`${baseUrl}/lens/apiPlan/delete?apiPlanId=${crId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -116,7 +120,7 @@ export const searchFilter = async (startDate,endDate,branch,customerName,apiPlan
   }
 
   try {
-    let url = `http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/apiPlan/getAllApiPlanByFilter?`;
+    let url = `${baseUrl}/lens/apiPlan/getAllApiPlanByFilter?`;
     if (startDate) url += `startDate=${formattedStartDate}&`;
     if (endDate) url += `endDate=${formattedEndDate}&`;
     if (branch) url += `branch=${branch}&`;

@@ -4,13 +4,13 @@ import moment from "moment";
 
 
   
-  
-  
-  
+const baseUrl = process.env.REACT_APP_BASE_URL; 
+
+
   // delete One
  export const deleteDetail = async (crId,data, setData, token) => {
     try {
-      await axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/agitatorSeal/delete?agitatorSealDrfNumber=${crId}`, {
+      await axios.delete(`${baseUrl}/lens/agitatorSeal/delete?agitatorSealDrfNumber=${crId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -45,7 +45,7 @@ import moment from "moment";
     formData.lastUpdatedOn = dateTime;
     
      try{
-          const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/agitatorSeal/save", formData, {
+          const res = await axios.post(`${baseUrl}/lens/agitatorSeal/save`, formData, {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -66,7 +66,7 @@ import moment from "moment";
     e.preventDefault();
    
       try{
-          const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/agitatorSeal/update", formData, {
+          const res = await axios.put(`${baseUrl}/lens/agitatorSeal/update`, formData, {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -87,7 +87,7 @@ import moment from "moment";
   //get One
 
 export const getApi = (aId,setFormData, token)=>{
-    axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/agitatorSeal/get?agitatorSealDrfNumber=${aId}`, {
+    axios.get(`${baseUrl}/lens/agitatorSeal/get?agitatorSealDrfNumber=${aId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -121,7 +121,7 @@ export const searchFilter = async (startDate,endDate,branch,customerName,agitato
   }
 
   try {
-    let url = `http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/agitatorSeal/getAllAgitatorSealByFilter?`;
+    let url = `${baseUrl}/lens/agitatorSeal/getAllAgitatorSealByFilter?`;
     if (startDate) url += `startDate=${formattedStartDate}&`;
     if (endDate) url += `endDate=${formattedEndDate}&`;
     if (branch) url += `branch=${branch}&`;

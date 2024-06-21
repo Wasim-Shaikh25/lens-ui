@@ -52,8 +52,9 @@ export default function Login() {
     try {
       const res = await axios.post('http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/auth/authenticate', formData);
       const { data } = res;
-      
-      Cookies.set('access_token', data.access_token);
+      const expiryTime = new Date(new Date().getTime() + 30 * 60 * 1000); // 30 minutes from now
+
+      Cookies.set('access_token', data.access_token, { expires: expiryTime });
       setToken(data.access_token); // Store the decoded token in global state
 
       console.log("Token is ", data.access_token);

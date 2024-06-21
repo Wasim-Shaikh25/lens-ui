@@ -2,6 +2,12 @@ import axios from 'axios';
 import moment from 'moment';
 
 
+
+
+const baseUrl = process.env.REACT_APP_BASE_URL; 
+
+
+
 export const handleSubmit = async (e,formData,navigate, token) => {
 
     e.preventDefault();
@@ -19,7 +25,7 @@ export const handleSubmit = async (e,formData,navigate, token) => {
     console.log("formData sales is ", formData);
 
     try {
-      const res = await axios.post("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/pumSeal/save", formData,{
+      const res = await axios.post(`${baseUrl}/lens/pumSeal/save`, formData,{
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -44,7 +50,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate, token) => {
 
     console.log("formData sales is ", formData);
 
-    const res = await axios.put("http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/pumSeal/Update", formData, {
+    const res = await axios.put(`${baseUrl}/lens/pumSeal/Update`, formData, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -59,7 +65,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate, token) => {
   //get particular data
   export const getPumpSeal = (pId,setFormData,token)=>{
 
-    axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/pumSeal/get?pumSealDrfNo=${pId}`, {
+    axios.get(`${baseUrl}/lens/pumSeal/get?pumSealDrfNo=${pId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -82,7 +88,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate, token) => {
   export const getColumnData = async (colName, setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption, token)=>{
 
     try {
-      const res = await axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/queryDrawingMasterTablebyColumn?columnName=${colName}`, {
+      const res = await axios.get(`${baseUrl}/lens/queryDrawingMasterTablebyColumn?columnName=${colName}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -127,7 +133,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate, token) => {
 
   //get All data
   export const getAll = (currentPage, itemsPerPage,setData, setIsDeleted, token)=>{
-    axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/pumSeal/getAll`, {
+    axios.get(`${baseUrl}/lens/pumSeal/getAll`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -146,7 +152,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate, token) => {
   //delete pump seal
 export  const deleteDetail = async (crId, data, setData, token) => {
     try {
-      await axios.delete(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/pumSeal/delete?pumSealDrfNo=${crId}`, {
+      await axios.delete(`${baseUrl}/lens/pumSeal/delete?pumSealDrfNo=${crId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -176,7 +182,7 @@ export const searchFilter = async (startDate,endDate,branch,customerName,pumpSea
   }
 
   try {
-    let url = `http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/lens/pumpSeal/getAllPumpSealByFilter?`;
+    let url = `${baseUrl}/lens/pumpSeal/getAllPumpSealByFilter?`;
     if (startDate) url += `startDate=${formattedStartDate}&`;
     if (endDate) url += `endDate=${formattedEndDate}&`;
     if (branch) url += `branch=${branch}&`;
