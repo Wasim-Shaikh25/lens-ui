@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import {Link} from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -17,7 +17,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {getDesignation, getBranches, getDepartments, handleSubmit} from '../../apis/SignupApi'
+import { getDesignation, getBranches, getDepartments, handleSubmit, getuser, handleUpdate } from '../../apis/SignupApi'
 
 
 
@@ -32,39 +32,80 @@ export default function SignUp() {
   const [departments, setDepartments] = useState([]);
   const [branches, setBranches] = useState([]);
   const navigate = useNavigate();
+  const { uId } = useParams();
 
 
- const[formData,setFormData]= useState({
+  const [formData, setFormData] = useState({
 
-  firstName: "",
-  lastName: "",
-  empId: "",
-  password: "",
-  designation: '',
-  insertedByUserId: "",
-  lastUpdatedByUserId: "",
-  resetPasswordRequired: false,
-  departments: [
-  {
-      departmentName:""
+    firstName: "",
+    lastName: "",
+    empId: "",
+    password: "",
+    designation: '',
+    insertedByUseuId: "",
+    lastUpdatedByUseuId: "",
+    resetPasswordRequired: false,
+    departments: [
+      {
+        departmentName: ""
+      }
+    ],
+    branches: [
+      {
+        branchName: "",
+        region: ""
+      }
+    ]
+  })
+
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+
+
+
+
+
+
+
+  useEffect(() => {
+    if (uId !== undefined) {
+      getuser(uId, setFormData)
+
+    } else {
+
+      setFormData({
+
+        firstName: "",
+        lastName: "",
+        empId: "",
+        password: "",
+        designation: '',
+        insertedByUseuId: "",
+        lastUpdatedByUseuId: "",
+        resetPasswordRequired: false,
+        departments: [
+          {
+            departmentName: ""
+          }
+        ],
+        branches: [
+          {
+            branchName: "",
+            region: ""
+          }
+        ]
+      })
     }
-  ],
-  branches: [
-    {
-      branchName: "",
-      region: ""
-    }
-  ]
- }) 
 
- 
- const handleChange = (e) => {
-  const { name, value } = e.target;
-  setFormData(prevState => ({
-    ...prevState,
-    [name]: value
-  }));
-};
+
+  }, [uId])
 
 
 
@@ -72,7 +113,7 @@ export default function SignUp() {
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <div className='card' sx={{
-           padding: "2px", marginBottom:"5rem", borderRadius: "8px", border: "1px solid #ddd",
+          padding: "2px", marginBottom: "5rem", borderRadius: "8px", border: "1px solid #ddd",
           backgroundColor: "white", boxShadow: "rgba(90, 114, 123, 0.11) 0px 7px 30px 0px"
         }}>
           <CssBaseline />
@@ -88,9 +129,9 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar> */}
             <Typography component="h5" variant="h5">
-              Sign up
+              {uId && <>Update</>} Sign up
             </Typography>
-            <Box component="form" noValidate onSubmit={(e)=>handleSubmit(e,formData,navigate)} sx={{ mt: 2 }}>
+            <Box component="form" noValidate onSubmit={(e) => handleSubmit(e, formData, navigate)} sx={{ mt: 2 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -101,7 +142,7 @@ export default function SignUp() {
                     value={formData.firstName}
                     fullWidth
                     id="firstName"
-                    onChange={(e)=>handleChange(e)}
+                    onChange={(e) => handleChange(e)}
                     label="First Name"
                     autoFocus
                   />
@@ -110,7 +151,7 @@ export default function SignUp() {
                   <TextField
                     value={formData.lastName}
                     size="small"
-                    onChange={(e)=>handleChange(e)}
+                    onChange={(e) => handleChange(e)}
                     required
                     fullWidth
                     id="lastName"
@@ -119,40 +160,47 @@ export default function SignUp() {
                     autoComplete="family-name"
                   />
                 </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    value={formData.email}
-                    size="small"
-                    required
-                    onChange={(e)=>handleChange(e)}
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                  value={formData.password}
-                    size="small"
-                    required
-                    onChange={(e)=>handleChange(e)}
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="new-password"
-                  />
-                </Grid>
 
+
+                {
+                  uId === undefined && (
+                    <>
+                      <Grid item xs={12}>
+                        <TextField
+                          value={formData.email}
+                          size="small"
+                          required
+                          onChange={(e) => handleChange(e)}
+                          fullWidth
+                          id="email"
+                          label="Email Address"
+                          name="email"
+                          autoComplete="email"
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          value={formData.password}
+                          size="small"
+                          required
+                          onChange={(e) => handleChange(e)}
+                          fullWidth
+                          name="password"
+                          label="Password"
+                          type="password"
+                          id="password"
+                          autoComplete="new-password"
+                        />
+                      </Grid>
+                    </>
+
+                  )}
                 <Grid item xs={12} sm={6}>
                   <TextField
-                  value={formData.empId}
+                    value={formData.empId}
                     size="small"
                     required
-                    onChange={(e)=>handleChange(e)}
+                    onChange={(e) => handleChange(e)}
                     fullWidth
                     id="empId"
                     label="Employee ID"
@@ -161,41 +209,41 @@ export default function SignUp() {
                   />
                 </Grid>
 
-                  
-      <Grid item xs={12} sm={6}>
-        <Autocomplete
-          size="small"
-          value={formData.designation}
-          onChange={(event, newValue) => {
-            setFormData({
-              ...formData,
-              designation: newValue
-            });
-          }}
-          inputValue={formData.designation || ''}
-          onInputChange={(event, newInputValue) => {
-            setFormData({
-              ...formData,
-              designation: newInputValue
-            });
-          }}
-          options={designation}
-          onFocus={()=>getDesignation(setDesignation)}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              size="small"
-              label="Designation"
-              variant="outlined"
-              fullWidth
-            />
-          )}
-        />
-      </Grid>
 
-              
+                <Grid item xs={12} sm={6}>
+                  <Autocomplete
+                    size="small"
+                    value={formData.designation}
+                    onChange={(event, newValue) => {
+                      setFormData({
+                        ...formData,
+                        designation: newValue
+                      });
+                    }}
+                    inputValue={formData.designation || ''}
+                    onInputChange={(event, newInputValue) => {
+                      setFormData({
+                        ...formData,
+                        designation: newInputValue
+                      });
+                    }}
+                    options={designation}
+                    onFocus={() => getDesignation(setDesignation)}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        size="small"
+                        label="Designation"
+                        variant="outlined"
+                        fullWidth
+                      />
+                    )}
+                  />
+                </Grid>
 
-      <Grid item xs={12}>
+
+
+                <Grid item xs={12}>
                   <Autocomplete
                     size="small"
                     value={formData.departments[0].departmentName}
@@ -213,7 +261,7 @@ export default function SignUp() {
                       });
                     }}
                     options={departments.map((department) => department.departmentName)}
-                    onFocus={()=>getDepartments(setDepartments)}
+                    onFocus={() => getDepartments(setDepartments)}
                     renderInput={(params) => (
                       <TextField
                         {...params}
@@ -226,53 +274,64 @@ export default function SignUp() {
                   />
                 </Grid>
 
-      <Grid item xs={12} >
-        <Autocomplete
-          size="small"
-          value={formData.branches[0].branchName}
-          onChange={(event, newValue) => {
-            setFormData({
-              ...formData,
-              branches:[{branchName: newValue}]
-            });
-          }}
-          inputValue={formData.branches[0].branchName || ''}
-          onInputChange={(event, newInputValue) => {
-            setFormData({
-              ...formData,
-              branches:[{branchName: newInputValue}]
-            });
-          }}
-          options={branches.map((branch) => branch.branchName)}
-          onFocus={()=>getBranches(setBranches)}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              size="small"
-              label="Branches"
-              variant="outlined"
-              fullWidth
-            />
-          )}
-        />
-      </Grid>
+                <Grid item xs={12} >
+                  <Autocomplete
+                    size="small"
+                    value={formData.branches[0].branchName}
+                    onChange={(event, newValue) => {
+                      setFormData({
+                        ...formData,
+                        branches: [{ branchName: newValue }]
+                      });
+                    }}
+                    inputValue={formData.branches[0].branchName || ''}
+                    onInputChange={(event, newInputValue) => {
+                      setFormData({
+                        ...formData,
+                        branches: [{ branchName: newInputValue }]
+                      });
+                    }}
+                    options={branches.map((branch) => branch.branchName)}
+                    onFocus={() => getBranches(setBranches)}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        size="small"
+                        label="Branches"
+                        variant="outlined"
+                        fullWidth
+                      />
+                    )}
+                  />
+                </Grid>
 
 
 
 
               </Grid>
-              <Button
+              {!uId ? <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                onClick={(e)=>handleSubmit(e,formData,navigate)}
+                onClick={(e) => handleSubmit(e, formData, navigate)}
                 sx={{ mt: 1, mb: 1 }}
               >
                 Sign Up
               </Button>
+                :
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  onClick={(e) => handleUpdate(e, formData, navigate)}
+                  sx={{ mt: 1, mb: 1 }}
+                >
+                  Update User
+                </Button>
+              }
               <Grid container justifyContent="center">
                 <Grid item>
-                  <Link to="/login" style={{cursor:"pointer"}}  variant="body2">
+                  <Link to="/login" style={{ cursor: "pointer" }} variant="body2">
                     Already have an account? Sign in
                   </Link>
                 </Grid>
@@ -284,3 +343,5 @@ export default function SignUp() {
     </ThemeProvider>
   );
 }
+
+

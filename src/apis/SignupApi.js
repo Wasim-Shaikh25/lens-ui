@@ -70,3 +70,32 @@
     };
   
     
+
+    export const getuser = async(uId, setFormData)=>{
+
+      const res = await axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/user/getUser?empId=${uId}`);
+      const{data} = res;
+      setFormData(data);
+      console.log("single user data is ",data)
+    } 
+  
+
+
+    export const handleUpdate = async(e,formData,navigate)=>{
+      e.preventDefault();
+      formData.departments[0].region = formData.departments[0].departmentName;
+      formData.lastUpdatedByUserId = formData.empId;
+      
+  
+      try{
+        const res = await axios.post(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/user/updateUser`,formData);
+        const{data} = res;
+        console.log("response Data ",data);
+        navigate('/user')
+      }
+      catch(err){
+        console.log(err);
+  
+      }
+   
+    }
