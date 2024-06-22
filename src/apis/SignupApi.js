@@ -1,6 +1,7 @@
  import axios from "axios";
- 
+ import axiosInstance from "../axios/axiosInstance";
 
+ 
  
  const baseUrl = process.env.REACT_APP_BASE_URL
 
@@ -88,7 +89,7 @@
       
   
       try{
-        const res = await axios.post(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/user/updateUser`,formData);
+        const res = await axiosInstance.put(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/user/updateUser`,formData);
         const{data} = res;
         console.log("response Data ",data);
         navigate('/user')

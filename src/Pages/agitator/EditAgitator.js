@@ -29,14 +29,10 @@ export default function EditAgitator() {
   const [branch, setBranch] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
-  const token = useToken();
-
-
-
-
-
+  
+  
   useEffect(() => {
-    searchFilter(startDate, endDate, branch, customerName, agitatorSealDrfNumber, currentPage, itemsPerPage, setData,token);
+    searchFilter(startDate, endDate, branch, customerName, agitatorSealDrfNumber, currentPage, itemsPerPage, setData);
   }, [currentPage, itemsPerPage]);
 
 
@@ -44,7 +40,7 @@ export default function EditAgitator() {
 
   const handleSearch = () => {
     setCurrentPage(0);  // Reset to first page on new search
-    searchFilter(startDate, endDate, branch, customerName, agitatorSealDrfNumber, 0, itemsPerPage, setData,token);
+    searchFilter(startDate, endDate, branch, customerName, agitatorSealDrfNumber, 0, itemsPerPage, setData);
   };
 
   
@@ -54,7 +50,7 @@ export default function EditAgitator() {
   };
 
   const handleDelete = async (agitatorSealDrfNumber) => {
-    await deleteDetail(agitatorSealDrfNumber,data,setData,token);
+    await deleteDetail(agitatorSealDrfNumber,data,setData);
   };
 
     const handleItemsPerPageChange = (e) => {

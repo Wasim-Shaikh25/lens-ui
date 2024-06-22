@@ -5,7 +5,6 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getSales, handleSubmit, handleUpdate } from '../../apis/SalesInquiryApi';
-import useToken from '../../contextApi/useToken';
 
 
 
@@ -15,7 +14,6 @@ export default function CreateSales() {
 
   const navigate = useNavigate();
   let {sId} = useParams();
-  const token = useToken();
 
 
   const [formData, setFormData] = useState({
@@ -41,7 +39,7 @@ export default function CreateSales() {
 
    useEffect(()=>{
     if(sId!==undefined){
-     getSales(sId,setFormData,token);
+     getSales(sId,setFormData);
 
     }else{
       setFormData(
@@ -552,9 +550,9 @@ export default function CreateSales() {
           <Grid item xs={4}>
           <Grid item xs={4}  >
         
-        {!sId ?( <Button className="submit-btn" type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate,token)} variant="contained" >Submit</Button>) : (
+        {!sId ?( <Button className="submit-btn" type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate)} variant="contained" >Submit</Button>) : (
           <div >
-            <Button className="update-btn" variant="contained" onClick={(e)=>handleUpdate(e,formData,sId,navigate,token)} >Update</Button>
+            <Button className="update-btn" variant="contained" onClick={(e)=>handleUpdate(e,formData,sId,navigate)} >Update</Button>
             <Button className="cancel-btn"   variant="contained" onClick={cancelUpdate} >Cancel</Button> </div>)}
           </Grid>
         </Grid>

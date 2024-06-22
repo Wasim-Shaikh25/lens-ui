@@ -3,14 +3,12 @@ import { TextField ,Button,  Container, Grid, InputLabel } from '@mui/material';
 import { getApi, handleSubmit } from '../../apis/ApiPlan';
 import { useNavigate, useParams } from 'react-router-dom';
 import { handleUpdate } from '../../apis/ApiPlan';
-import useToken from '../../contextApi/useToken';
 
 
 export default function CreateApi() {
 
   const navigate = useNavigate();
   let {apId} = useParams();
-  const token = useToken();
 
  
   const [formData, setFormData] = useState({
@@ -78,7 +76,7 @@ export default function CreateApi() {
 
    useEffect(()=>{
     if(apId!==undefined){
-    getApi(apId,setFormData,token);
+    getApi(apId,setFormData);
 
     }else{
       setFormData(
@@ -505,9 +503,9 @@ export default function CreateApi() {
           <Grid item xs={4} style={{marginLeft:"1rem",marginBottom:'1rem'}}>
           <Grid item xs={4}>
         
-        {!apId ?( <Button className="submit-btn" type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate,token)} variant="contained" >Submit</Button>) : (
+        {!apId ?( <Button className="submit-btn" type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate)} variant="contained" >Submit</Button>) : (
           <>
-            <Button className="update-btn" variant="contained" onClick={(e)=>handleUpdate(e, formData, apId, navigate,token)} >Update</Button>
+            <Button className="update-btn" variant="contained" onClick={(e)=>handleUpdate(e, formData, apId, navigate)} >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
         </Grid>

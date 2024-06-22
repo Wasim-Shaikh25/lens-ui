@@ -7,7 +7,7 @@ import moment from 'moment';
 
 
 
-export const handleSubmit = async (e,formData,navigate, token) => {
+export const handleSubmit = async (e,formData,navigate) => {
 
     e.preventDefault();
     const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -38,7 +38,7 @@ export const handleSubmit = async (e,formData,navigate, token) => {
 
 
 //update data
-export const handleUpdatePumpSeal = async (e,formData,pId,navigate, token) => {
+export const handleUpdatePumpSeal = async (e,formData,pId,navigate) => {
     e.preventDefault();
     const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
     formData.lastEditedDate = dateTime;
@@ -54,7 +54,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate, token) => {
   }
 
   //get particular data
-  export const getPumpSeal = (pId,setFormData,token)=>{
+  export const getPumpSeal = (pId,setFormData)=>{
 
     axiosInstance.get(`lens/pumSeal/get?pumSealDrfNo=${pId}`)
     .then(res => {
@@ -72,7 +72,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate, token) => {
 
 
   //get data by column name
-  export const getColumnData = async (colName, setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption, token)=>{
+  export const getColumnData = async (colName, setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)=>{
 
     try {
       const res = await axiosInstance.get(`lens/queryDrawingMasterTablebyColumn?columnName=${colName}`);
@@ -115,7 +115,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate, token) => {
 
 
   //get All data
-  export const getAll = (currentPage, itemsPerPage,setData, setIsDeleted, token)=>{
+  export const getAll = (currentPage, itemsPerPage,setData, setIsDeleted)=>{
     axiosInstance.get(`lens/pumSeal/getAll`)
     .then(res => {
       setData(res.data);
@@ -129,7 +129,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate, token) => {
 
 
   //delete pump seal
-export  const deleteDetail = async (crId, data, setData, token) => {
+export  const deleteDetail = async (crId, data, setData) => {
     try {
       await axiosInstance.delete(`lens/pumSeal/delete?pumSealDrfNo=${crId}`);
       const newData = data.filter(item => item.pumpSealDrfNumber !== crId);
@@ -144,7 +144,7 @@ export  const deleteDetail = async (crId, data, setData, token) => {
 
   //search and filter
   //Customer filter Search
-export const searchFilter = async (startDate,endDate,branch,customerName,pumpSealDrfNumber,currentPage,itemsPerPage,setData, token) => {
+export const searchFilter = async (startDate,endDate,branch,customerName,pumpSealDrfNumber,currentPage,itemsPerPage,setData) => {
   console.log("recieved Page number is",currentPage)
   const formattedStartDate = startDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
   const formattedEndDate = endDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;

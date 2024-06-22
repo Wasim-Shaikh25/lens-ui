@@ -178,6 +178,8 @@ export default function SignUp() {
                           autoComplete="email"
                         />
                       </Grid>
+                        </>
+                        )}
                       <Grid item xs={12}>
                         <TextField
                           value={formData.password}
@@ -190,11 +192,9 @@ export default function SignUp() {
                           type="password"
                           id="password"
                           autoComplete="new-password"
-                        />
+                          />
                       </Grid>
-                    </>
 
-                  )}
                 <Grid item xs={12} sm={6}>
                   <TextField
                     value={formData.empId}

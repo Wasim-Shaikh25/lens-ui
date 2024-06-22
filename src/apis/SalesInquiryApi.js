@@ -5,7 +5,7 @@ import moment from "moment";
 
 
 //handle Submit
-export const handleSubmit = async(e,formData,navigate, token) => {
+export const handleSubmit = async(e,formData,navigate) => {
     e.preventDefault();
     const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');  
 
@@ -32,7 +32,7 @@ export const handleSubmit = async(e,formData,navigate, token) => {
 
 
   //Update
-  export const handleUpdate = async (e,formData,sId,navigate, token)=>{
+  export const handleUpdate = async (e,formData,sId,navigate)=>{
     e.preventDefault();
     const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
 
@@ -57,7 +57,7 @@ export const handleSubmit = async(e,formData,navigate, token) => {
 
 
 //get Sales
-export const getSales=(sId,setFormData, token) =>{
+export const getSales=(sId,setFormData) =>{
 
     axiosInstance.get(`lens/salesInquiry/get/${sId}`)
     .then(res=>{
@@ -74,7 +74,7 @@ export const getSales=(sId,setFormData, token) =>{
 
 
 //get All sales
-export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted, token)=>{
+export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted)=>{
     axiosInstance.get(`lens/salesInquiry/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
       .then(res => {
         setData(res.data);
@@ -89,7 +89,7 @@ export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted, token
 
 
 //gee delete detail
-export const deleteDetail = (sId,data,setData, setIsDeleted, token) => {
+export const deleteDetail = (sId,data,setData, setIsDeleted) => {
     console.log("sId is ", sId)
     
     axiosInstance.delete(`lens/salesInquiry/delete/:InquiryNumber?InquiryNumber=${sId}`)

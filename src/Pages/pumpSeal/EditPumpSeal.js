@@ -17,7 +17,6 @@ import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { getAll, deleteDetail, searchFilter } from '../../apis/PumpSealApi';
 import'../../App.css'
-import useToken from '../../contextApi/useToken';
 
 
 
@@ -32,25 +31,19 @@ export default function EditPump() {
   const [branch, setBranch] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
-  const token = useToken();
 
 
-
-  // useEffect(() => {
-  //   getAll(currentPage, itemsPerPage,setData, setIsDeleted)
-    
-  // }, []);
   
 
   useEffect(() => {
-    searchFilter(startDate, endDate, branch, customerName, pumpSealDrfNumber, currentPage, itemsPerPage, setData, token);
+    searchFilter(startDate, endDate, branch, customerName, pumpSealDrfNumber, currentPage, itemsPerPage, setData);
   }, [currentPage, itemsPerPage]);
 
 
 
   const handleSearch = () => {
     setCurrentPage(0);  // Reset to first page on new search
-    searchFilter(startDate, endDate, branch, customerName, pumpSealDrfNumber, 0, itemsPerPage, setData,token);
+    searchFilter(startDate, endDate, branch, customerName, pumpSealDrfNumber, 0, itemsPerPage, setData);
   };
 
   
@@ -171,7 +164,7 @@ return (
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
                     <EditIcon style={{ color: 'blue' }} />
                   </button>
-                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.pumpSealDrfNumber, data,setData, token)}>
+                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.pumpSealDrfNumber, data,setData)}>
                     <DeleteIcon style={{ color: 'red' }} />
                   </button>
                 </TableCell>

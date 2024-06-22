@@ -3,7 +3,6 @@ import { TextField ,Button,  Container, Grid, InputLabel , IconButton } from '@m
 import '../../App.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { getApi, handleSubmit, handleUpdate } from '../../apis/AgitatorApi';
-import useToken from '../../contextApi/useToken'
 
 
 
@@ -11,7 +10,6 @@ export default function AgitatorSeal() {
 
   const navigate = useNavigate();
   let {aId} = useParams();
-  const token = useToken();
 
 
   const [formData, setFormData] = useState({
@@ -55,7 +53,7 @@ export default function AgitatorSeal() {
 
    useEffect(()=>{
     if(aId!==undefined){
-      getApi(aId,setFormData,token)
+      getApi(aId,setFormData)
 
     }else{
       setFormData(
@@ -392,9 +390,9 @@ export default function AgitatorSeal() {
           <Grid item xs={4}>
           <Grid item xs={4}>
         
-        {!aId ?( <Button className="submit-btn" type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate,token)} variant="contained" >Submit</Button>) : (
+        {!aId ?( <Button className="submit-btn" type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate)} variant="contained" >Submit</Button>) : (
           <>
-            <Button className="update-btn" variant="contained" onClick={(e)=>handleUpdate(e,formData,navigate,aId,token)} >Update</Button>
+            <Button className="update-btn" variant="contained" onClick={(e)=>handleUpdate(e,formData,navigate,aId)} >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
         </Grid>

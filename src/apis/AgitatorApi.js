@@ -6,7 +6,7 @@ import moment from "moment";
   
 
   // delete One
- export const deleteDetail = async (crId,data, setData, token) => {
+ export const deleteDetail = async (crId,data, setData) => {
     try {
       await axiosInstance.delete(`lens/agitatorSeal/delete?agitatorSealDrfNumber=${crId}`);
       const newData = data.filter(item => item.agitatorSealDrfNumber !== crId);
@@ -23,7 +23,7 @@ import moment from "moment";
 
 
   
-  export const handleSubmit = async(e,formData, navigate, token) => {
+  export const handleSubmit = async(e,formData, navigate) => {
     e.preventDefault();
 
       console.log("formData sales is ",formData);
@@ -52,7 +52,7 @@ import moment from "moment";
 
 
 
-  export const handleUpdate = async (e,formData,navigate,aId, token)=>{
+  export const handleUpdate = async (e,formData,navigate,aId)=>{
     e.preventDefault();
    
       try{
@@ -72,7 +72,7 @@ import moment from "moment";
 
   //get One
 
-export const getApi = (aId,setFormData, token)=>{
+export const getApi = (aId,setFormData)=>{
     axiosInstance.get(`lens/agitatorSeal/get?agitatorSealDrfNumber=${aId}`)
     .then(res=>{
       const {data} = res;
@@ -90,7 +90,7 @@ export const getApi = (aId,setFormData, token)=>{
 
 //Search Filter
 
-export const searchFilter = async (startDate,endDate,branch,customerName,agitatorSealDrfNumber,currentPage,itemsPerPage,setData, token) => {
+export const searchFilter = async (startDate,endDate,branch,customerName,agitatorSealDrfNumber,currentPage,itemsPerPage,setData) => {
   console.log("recieved Page number is",currentPage)
   const formattedStartDate = startDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
   const formattedEndDate = endDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;

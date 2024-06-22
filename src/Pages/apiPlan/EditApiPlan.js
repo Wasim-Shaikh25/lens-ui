@@ -16,7 +16,6 @@ import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { getAllApi,deleteDetail, searchFilter } from '../../apis/ApiPlan';
 import'../../App.css'
-import useToken from '../../contextApi/useToken';
 
 
 export default function EditApi() {
@@ -30,25 +29,24 @@ export default function EditApi() {
   const [branch, setBranch] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
-  const token = useToken();
 
 
 
   useEffect(() => {
-    getAllApi(currentPage, itemsPerPage,setData, setIsDeleted,token)
+    getAllApi(currentPage, itemsPerPage,setData, setIsDeleted)
     
   }, []);
   
 
   useEffect(() => {
-    searchFilter(startDate, endDate, branch, customerName, apiPlanDrfNumber, currentPage, itemsPerPage, setData,token);
+    searchFilter(startDate, endDate, branch, customerName, apiPlanDrfNumber, currentPage, itemsPerPage, setData);
   }, [currentPage, itemsPerPage]);
 
 
 
   const handleSearch = () => {
     setCurrentPage(0);  // Reset to first page on new search
-    searchFilter(startDate, endDate, branch, customerName, apiPlanDrfNumber, 0, itemsPerPage, setData,token);
+    searchFilter(startDate, endDate, branch, customerName, apiPlanDrfNumber, 0, itemsPerPage, setData);
   };
 
   
@@ -169,7 +167,7 @@ return (
                   {index + 1}
                 </TableCell>
                 <TableCell align="right">{row.apiPlanDrfNumber}</TableCell>
-                <TableCell align="right">{row.customerName}</TableCell>
+                <TableCell align="right">{row.firstName}</TableCell>
                 <TableCell align="right">{row.branch}</TableCell>
                 <TableCell align="right">{row.insertedOn}</TableCell>
                 <TableCell align="right">{row.lastUpdatedOn}</TableCell>
@@ -177,7 +175,7 @@ return (
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
                     <EditIcon style={{ color: 'blue' }} />
                   </button>
-                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.apiPlanDrfNumber, data,setData,token)}>
+                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.apiPlanDrfNumber, data,setData)}>
                     <DeleteIcon style={{ color: 'red' }} />
                   </button>
                 </TableCell>

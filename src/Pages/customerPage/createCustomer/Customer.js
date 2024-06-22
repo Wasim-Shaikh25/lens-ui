@@ -6,7 +6,6 @@ import "./customerFrom.css";
 import { useNavigate, useParams } from 'react-router-dom';
 import { getCustomer, handleSubmit } from '../../../apis/CustomerApi';
 import { handleUpdate } from '../../../apis/CustomerApi';
-import useToken from '../../../contextApi/useToken';
 
 
 
@@ -14,7 +13,6 @@ export default function Customer() {
 
   const navigate = useNavigate();
   let {rId} = useParams();
-  const token = useToken();
 
  
   const [formData, setFormData] = useState({
@@ -31,7 +29,7 @@ export default function Customer() {
 
    useEffect(()=>{
     if(rId!==undefined){
-    getCustomer(rId, setFormData, token)
+    getCustomer(rId, setFormData)
     }else{
 
       setFormData({ branch: '',
@@ -279,9 +277,9 @@ export default function Customer() {
           <Grid item xs={4}  >
 <Button className="add-btn" sx={{margin:"0rem 1rem 1rem 1rem"}}  onClick={handleAddCustomerDetail}><AddIcon/> Add Customer Details</Button>
         
-        {!rId ?( <Button className="submit-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate,token)} variant="contained" >Submit</Button>) : (
+        {!rId ?( <Button className="submit-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate)} variant="contained" >Submit</Button>) : (
           <>
-            <Button className="update-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} variant="contained" onClick={(e)=>handleUpdate(e,formData,rId,navigate,token)} >Update</Button>
+            <Button className="update-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} variant="contained" onClick={(e)=>handleUpdate(e,formData,rId,navigate)} >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
         </Grid>

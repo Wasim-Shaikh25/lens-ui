@@ -6,7 +6,7 @@ import moment from "moment";
 
 
 //submit 
-export const handleSubmit = async(e, formData, navigate, token) => {
+export const handleSubmit = async(e, formData, navigate) => {
     e.preventDefault();
 
       console.log("formData sales is ",formData);
@@ -27,7 +27,7 @@ export const handleSubmit = async(e, formData, navigate, token) => {
 
 
   //handle update
-export const handleUpdate = async (e,formData,rjId,navigate, token)=>{
+export const handleUpdate = async (e,formData,rjId,navigate)=>{
     e.preventDefault();
   
       
@@ -48,7 +48,7 @@ export const handleUpdate = async (e,formData,rjId,navigate, token)=>{
 
 
     //getRotary
-    export const getRotary = (rjId,setFormData, token)=>{
+    export const getRotary = (rjId,setFormData)=>{
         axiosInstance.get(`lens/rotaryJoint/get?rotaryJointDrfNo=${rjId}`)
         .then(res=>{
           const {data} = res;
@@ -67,7 +67,7 @@ export const handleUpdate = async (e,formData,rjId,navigate, token)=>{
 
   //get All Rotary
 
-export const getAllRotary = (setData, setIsDeleted, token) =>{
+export const getAllRotary = (setData, setIsDeleted) =>{
 
     axiosInstance.get(`lens/rotaryJoint/getAll`)
     .then(res => {
@@ -83,7 +83,7 @@ export const getAllRotary = (setData, setIsDeleted, token) =>{
 
 
 // delete
-export const deleteDetail = async (crId,data,setData, token) => {
+export const deleteDetail = async (crId,data,setData) => {
     try {
       await axiosInstance.delete(`lens/rotaryJoint/delete?rotaryJointDrfNo=${crId}`);
       const newData = data.filter(item => item.rotaryDrfNumber !== crId);
@@ -98,7 +98,7 @@ export const deleteDetail = async (crId,data,setData, token) => {
 
 
 //Customer filter Search
-export const searchFilter = async (startDate,endDate,branch,customerName,rotaryDrfNumber,currentPage,itemsPerPage,setData, token) => {
+export const searchFilter = async (startDate,endDate,branch,customerName,rotaryDrfNumber,currentPage,itemsPerPage,setData) => {
   console.log("recieved Page number is",currentPage)
   const formattedStartDate = startDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
   const formattedEndDate = endDate ? moment(startDate).format('YYYY-MM-DD HH:mm:ss') : null;
