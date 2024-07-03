@@ -6,7 +6,6 @@ import { getApi, handleSubmit, handleUpdate } from '../../apis/AgitatorApi';
 
 
 
-
 export default function AgitatorSeal() {
 
   const navigate = useNavigate();

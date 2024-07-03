@@ -32,7 +32,6 @@ export default function EditApi() {
 
 
 
-
   useEffect(() => {
     getAllApi(currentPage, itemsPerPage,setData, setIsDeleted)
     
@@ -141,7 +140,6 @@ return (
   Search
 </Button>
 
-</div>
 
 
 
@@ -169,7 +167,7 @@ return (
                   {index + 1}
                 </TableCell>
                 <TableCell align="right">{row.apiPlanDrfNumber}</TableCell>
-                <TableCell align="right">{row.customerName}</TableCell>
+                <TableCell align="right">{row.firstName}</TableCell>
                 <TableCell align="right">{row.branch}</TableCell>
                 <TableCell align="right">{row.insertedOn}</TableCell>
                 <TableCell align="right">{row.lastUpdatedOn}</TableCell>
@@ -209,6 +207,7 @@ return (
       </div>
       <hr style={{ border: '1px solid lightGray' }} />
     </TableContainer>
+  </div>
   </div>
 );
 }

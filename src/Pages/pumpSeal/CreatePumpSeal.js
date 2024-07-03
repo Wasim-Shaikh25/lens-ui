@@ -7,7 +7,6 @@ import { handleUpdatePumpSeal } from '../../apis/PumpSealApi';
 import { getColumnData } from '../../apis/PumpSealApi';
 
 
-
 export default function CreatePumpSeal() {
 
 

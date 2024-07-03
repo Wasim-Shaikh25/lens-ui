@@ -32,7 +32,6 @@ export default function EditRotary() {
   const [endDate, setEndDate] = useState();
 
 
-
   useEffect(() => {
     getAllRotary(setData, setIsDeleted);
   }, []);
@@ -130,7 +129,6 @@ return (
   Search
 </Button>
 
-</div>
 
 
 
@@ -166,7 +164,7 @@ return (
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
                     <EditIcon style={{ color: 'blue' }} />
                   </button>
-                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.rotaryDrfNumber, data, setIsDeleted, setData)}>
+                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.rotaryDrfNumber, data, setData)}>
                     <DeleteIcon style={{ color: 'red' }} />
                   </button>
                 </TableCell>
@@ -198,6 +196,8 @@ return (
       </div>
       <hr style={{ border: '1px solid lightGray' }} />
     </TableContainer>
+    
+    </div>
   </div>
 );
 }

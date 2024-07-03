@@ -14,8 +14,9 @@ import { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-import { getAllAgitator, deleteDetail, searchFilter} from '../../apis/AgitatorApi';
+import { deleteDetail, searchFilter} from '../../apis/AgitatorApi';
 import'../../App.css'
+import useToken from '../../contextApi/useToken';
 
 export default function EditAgitator() {
   const [data, setData] = useState([]);
@@ -28,16 +29,8 @@ export default function EditAgitator() {
   const [branch, setBranch] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
-
-
-
-
-  // useEffect(() => {
-  //   getAllAgitator(setData, setIsDeleted)
-    
-  // }, []);
   
-
+  
   useEffect(() => {
     searchFilter(startDate, endDate, branch, customerName, agitatorSealDrfNumber, currentPage, itemsPerPage, setData);
   }, [currentPage, itemsPerPage]);
@@ -58,23 +51,15 @@ export default function EditAgitator() {
 
   const handleDelete = async (agitatorSealDrfNumber) => {
     await deleteDetail(agitatorSealDrfNumber,data,setData);
-    // Refresh data after deletion
-    getAllAgitator(currentPage, itemsPerPage, setData, setIsDeleted);
   };
 
-
-
-const paginate = (items)=>{
-   setItemsPerPage(items);
-    setCurrentPage(0)
-}
-  
     const handleItemsPerPageChange = (e) => {
       setItemsPerPage(Number(e.target.value));
       setCurrentPage(0);  // Reset to first page when items per page change
     };
 
 
+    
 
 return (
   <div >
@@ -117,6 +102,7 @@ return (
   />
 </Grid>
 
+
 <Grid item xs={12} sm={5}>
         <InputLabel className="ip-label">Start Date</InputLabel>
         <TextField
@@ -142,8 +128,6 @@ return (
 <Button onClick={handleSearch}  style={{width:"15%",margin:"1rem 2rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
   Search
 </Button>
-
-</div>
 
 
 
@@ -212,6 +196,8 @@ return (
       <hr style={{ border: '1px solid lightGray' }} />
     </TableContainer>
   </div>
+  </div>
+
 );
 }
 

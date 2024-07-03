@@ -24,6 +24,7 @@ export default function EditSales() {
   const [isDeleted, setIsDeleted] = useState(false);  
   const [itemsPerPage, setItemsPerPage] = useState(5); // Adjust as needed
   const navigate = useNavigate();  
+  
 
 
   useEffect(() => {

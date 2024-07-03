@@ -20,13 +20,21 @@ import ApiSuccessPage from "../Pages/apiPlan/ApiSuccess.js";
 import AgitatorSeal from '../Pages/agitator/CreateAgitator';
 import AgitatorSuccessPage from '../Pages/agitator/AgitatorSuccess';
 import EditAgitator from '../Pages/agitator/EditAgitator';
+import SignUp from '../Pages/signup/Signup.js';
+import Login from '../Pages/login/Login.js';
+import ResetPassword from '../Pages/resetPassword/ResetPassword.js';
+import UserDashboard from '../Pages/userDashboard/UserDashboard.js';
 
 
 const AllRoute = ({isSidebar}) => {
- 
+
+  
+
   return (
-    <div style={!isSidebar?{width:"80%",position:"absolute",right:0,marginTop:"4.5rem"} : {marginTop:"5.5rem"}}>
-      <Routes>
+    <div style={!isSidebar ? { width: "80%", position: "absolute", right: 0, marginTop: "4.5rem" } : { marginTop: "5.5rem" }}>
+    <Routes>
+
+          <Route path="/user" element={<UserDashboard />} />
           <Route path="/createAgitator" element={<AgitatorSeal />} />
           <Route path="/editAgitator" element={<EditAgitator />} />
           <Route path="/createAgitator/:aId" element={<AgitatorSeal />} />
@@ -52,8 +60,13 @@ const AllRoute = ({isSidebar}) => {
           <Route path="/registerSuccess/:id" element={<RegistrationSuccessPage />} />
           <Route path="/salesSuccess/:sId" element={<SalesSuccessPage />} />
           <Route path="/updateSuccess/:id" element={<UpdateSuccessPage />} />
-        </Routes>
-        </div>
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup/:uId" element={<SignUp />} />
+          <Route path="/reset" element={<ResetPassword />} />
+          <Route path="/login" element={<Login />} />
+      
+    </Routes>
+  </div>
 
   );
 };

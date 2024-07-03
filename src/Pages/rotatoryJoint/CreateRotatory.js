@@ -3,11 +3,12 @@ import { TextField ,Button,  Container, Grid, InputLabel} from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getRotary, handleSubmit, handleUpdate } from '../../apis/RotaryApi';
 
+
+
 export default function CreateRotatory() {
 
   const navigate = useNavigate();
   let {rjId} = useParams();
- 
 
 
   const [formData, setFormData] = useState({

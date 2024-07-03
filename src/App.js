@@ -5,11 +5,26 @@ import './App.css'
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import AllRoute from './router/allRoute.js'
+import { useEffect } from "react";
+import { useAuth } from "./contextApi/AuthContext.js";
+import { useNavigate } from "react-router-dom";
+import useToken from "./contextApi/useToken.js";
 
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
+
+  const navigate = useNavigate();
+  const token = useToken();
+
+  useEffect(()=>{
+    if(!token){
+      navigate('/login')
+    }
+
+  },[])
+
 
   console.log("isSidebar is ",isSidebar)
 

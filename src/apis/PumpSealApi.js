@@ -1,5 +1,10 @@
-import axios from 'axios';
+import axiosInstance from "../axios/axiosInstance";
 import moment from 'moment';
+
+
+
+
+
 
 
 export const handleSubmit = async (e,formData,navigate) => {
@@ -19,7 +24,7 @@ export const handleSubmit = async (e,formData,navigate) => {
     console.log("formData sales is ", formData);
 
     try {
-      const res = await axios.post("https://lens-svc.azurewebsites.net/lens-svc/pumSeal/save", formData);
+      const res = await axiosInstance.post(`lens/pumSeal/save`, formData);
       console.log("response is ", res.data);
       navigate(`/pumpSealSuccess/${res.data}`);
     }
@@ -40,7 +45,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate) => {
 
     console.log("formData sales is ", formData);
 
-    const res = await axios.put("https://lens-svc.azurewebsites.net/lens-svc/pumSeal/Update", formData);
+    const res = await axiosInstance.put(`lens/pumSeal/Update`, formData);
     console.log("response from update is ", res.data);
 
 
@@ -51,7 +56,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate) => {
   //get particular data
   export const getPumpSeal = (pId,setFormData)=>{
 
-    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/pumSeal/get?pumSealDrfNo=${pId}`)
+    axiosInstance.get(`lens/pumSeal/get?pumSealDrfNo=${pId}`)
     .then(res => {
       const { data } = res;
       setFormData(data);
@@ -70,7 +75,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate) => {
   export const getColumnData = async (colName, setptOption,setarOption,setsaOption,setstOption,setstgOption,setcstOption,setpfOption,setfnOption)=>{
 
     try {
-      const res = await axios.get(`https://lens-svc.azurewebsites.net/lens-svc/queryDrawingMasterTablebyColumn?columnName=${colName}`);
+      const res = await axiosInstance.get(`lens/queryDrawingMasterTablebyColumn?columnName=${colName}`);
       switch(colName){
         case 'Pump Type' :
           setptOption(res.data);
@@ -111,7 +116,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate) => {
 
   //get All data
   export const getAll = (currentPage, itemsPerPage,setData, setIsDeleted)=>{
-    axios.get(`https://lens-svc.azurewebsites.net/lens-svc/pumSeal/getAll`)
+    axiosInstance.get(`lens/pumSeal/getAll`)
     .then(res => {
       setData(res.data);
       console.log("the fetched data is ",res.data);
@@ -126,7 +131,7 @@ export const handleUpdatePumpSeal = async (e,formData,pId,navigate) => {
   //delete pump seal
 export  const deleteDetail = async (crId, data, setData) => {
     try {
-      await axios.delete(`https://lens-svc.azurewebsites.net/lens-svc/pumSeal/delete?pumSealDrfNo=${crId}`);
+      await axiosInstance.delete(`lens/pumSeal/delete?pumSealDrfNo=${crId}`);
       const newData = data.filter(item => item.pumpSealDrfNumber !== crId);
       console.log("data is ",data)
       console.log("New data is ",newData)
@@ -152,7 +157,7 @@ export const searchFilter = async (startDate,endDate,branch,customerName,pumpSea
   }
 
   try {
-    let url = `https://lens-svc.azurewebsites.net/lens-svc/pumpSeal/getAllPumpSealByFilter?`;
+    let url = `lens/pumpSeal/getAllPumpSealByFilter?`;
     if (startDate) url += `startDate=${formattedStartDate}&`;
     if (endDate) url += `endDate=${formattedEndDate}&`;
     if (branch) url += `branch=${branch}&`;
@@ -162,7 +167,7 @@ export const searchFilter = async (startDate,endDate,branch,customerName,pumpSea
 
     console.log("URL:", url); // Log the constructed URL
 
-    const res = await axios.get(url);
+    const res = await axiosInstance.get(url);
     const { data } = res;
     setData(data);
     console.log("response is", res);

@@ -12,13 +12,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
-import { getAllCustomer } from '../../../apis/CustomerApi';
 import { deleteDetail } from '../../../apis/CustomerApi';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { searchFilter } from '../../../apis/CustomerApi';
-
+import useToken from '../../../contextApi/useToken';
 
 
 
@@ -33,12 +31,12 @@ export default function EditCustomer() {
   const [branch, setBranch] = useState();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
-
+  const token = useToken();
 
 
 
   useEffect(() => {
-    getAllCustomer(currentPage, itemsPerPage, setData, setIsDeleted);
+    searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData,token)
 
     }, [currentPage, itemsPerPage]);
     
@@ -120,11 +118,10 @@ return (
 
 </div>
 
-<Button onClick={()=>searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData)}  style={{width:"15%",margin:"1rem 2rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
+<Button onClick={()=>searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData,token)}  style={{width:"15%",margin:"1rem 2rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
   Search
 </Button>
 
-</div>
 
 
 
@@ -160,7 +157,7 @@ return (
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
                     <EditIcon style={{ color: 'blue' }} />
                   </button>
-                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.customerReferenceNumber, data, setIsDeleted, setData)}>
+                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.customerReferenceNumber, data, setIsDeleted, setData,token)}>
                     <DeleteIcon style={{ color: 'red' }} />
                   </button>
                 </TableCell>
@@ -192,6 +189,8 @@ return (
       </div>
       <hr style={{ border: '1px solid lightGray' }} />
     </TableContainer>
+    
+    </div>
   </div>
 );
 }

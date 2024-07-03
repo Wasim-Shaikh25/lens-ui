@@ -14,7 +14,6 @@ export default function CreateSales() {
 
   const navigate = useNavigate();
   let {sId} = useParams();
- 
 
 
   const [formData, setFormData] = useState({
@@ -144,11 +143,6 @@ export default function CreateSales() {
     });
   };
   
-
- 
-
-
- 
 
 
 

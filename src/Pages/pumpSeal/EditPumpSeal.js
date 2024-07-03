@@ -33,12 +33,6 @@ export default function EditPump() {
   const [endDate, setEndDate] = useState();
 
 
-
-
-  // useEffect(() => {
-  //   getAll(currentPage, itemsPerPage,setData, setIsDeleted)
-    
-  // }, []);
   
 
   useEffect(() => {
@@ -135,7 +129,6 @@ return (
   Search
 </Button>
 
-</div>
 
 
 
@@ -203,6 +196,8 @@ return (
       </div>
       <hr style={{ border: '1px solid lightGray' }} />
     </TableContainer>
+    </div>
+
   </div>
 );
 }
