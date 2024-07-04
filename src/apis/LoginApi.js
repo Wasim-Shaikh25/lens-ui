@@ -5,8 +5,6 @@ import Cookies from 'js-cookie';
 const baseUrl=process.env.REACT_APP_BASE_URL
 
 
-
-
 export const handleSubmit = async (e,setToken,formData, navigate) => {
     e.preventDefault();
 
@@ -24,3 +22,6 @@ export const handleSubmit = async (e,setToken,formData, navigate) => {
       console.log(err);
     }
   };
+
+
+  

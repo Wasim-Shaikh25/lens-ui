@@ -126,7 +126,7 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
             <Box pl={isSidebar ? 0 : 3}>
               <Menu>
 
-                {authState.authorities == 'ADMIN' && (<SubMenu label={<Typography variant="body1">Users</Typography>} style={getSubMenuStyle("Users")} onClick={() => handleSubMenuClick("Users")} icon={<GroupIcon />}>
+                {authState?.authorities === 'ADMIN' && (<SubMenu label={<Typography variant="body1">Users</Typography>} style={getSubMenuStyle("Users")} onClick={() => handleSubMenuClick("Users")} icon={<GroupIcon />}>
                   <Link to="/user" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
                       icon={<EditIcon />}
