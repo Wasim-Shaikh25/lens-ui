@@ -125,9 +125,7 @@ export default function SignUp() {
               alignItems: 'center',
             }}
           >
-            {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar> */}
+      
             <Typography component="h5" variant="h5">
               {uId && <>Update</>} Sign up
             </Typography>

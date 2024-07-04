@@ -74,7 +74,7 @@
 
     export const getuser = async(uId, setFormData)=>{
 
-      const res = await axios.get(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/user/getUser?empId=${uId}`);
+      const res = await axios.get(`${baseUrl}/user/getUser?empId=${uId}`);
       const{data} = res;
       setFormData(data);
       console.log("single user data is ",data)
@@ -89,7 +89,7 @@
       
   
       try{
-        const res = await axiosInstance.put(`http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com/user/updateUser`,formData);
+        const res = await axiosInstance.put(`/user/updateUser`,formData);
         const{data} = res;
         console.log("response Data ",data);
         navigate('/user')
