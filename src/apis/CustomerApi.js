@@ -3,12 +3,12 @@ import moment from 'moment';
 
 
 
-
-
 // submit data
 export const handleSubmit = async (e, formData, navigate) => {
+
   e.preventDefault();
   const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
+
 
   if (formData.customerDetail && formData.customerDetail.length > 0) {
     formData.customerDetail[formData.customerDetail.length - 1].lastUpdatedOn = dateTime;
@@ -18,7 +18,7 @@ export const handleSubmit = async (e, formData, navigate) => {
     formData.lastUpdatedOn = dateTime;
   }
 
-  const res = await axiosInstance.post(`lens/customer/save`, formData);
+  const res = await axiosInstance.post(`/lens/customer/save`, formData);
 
   console.log("response is ", res.data);
   navigate(`/registerSuccess/${res.data}`);
