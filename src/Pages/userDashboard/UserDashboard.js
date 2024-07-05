@@ -49,7 +49,7 @@ function UserDashboard(){
 
 
 return (    
-<div >
+<div style={{width:"85%" , margin:'2rem auto'}}>
 
     <TableContainer component={Paper} className="table-container">
       <Table sx={{ minWidth: 500 }} aria-label="customized table">

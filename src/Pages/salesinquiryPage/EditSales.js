@@ -48,8 +48,7 @@ export default function EditSales() {
 
 
 return (
-  <div >
-    <h2 style={{margin:"1rem 5rem"}}>Search and Filter</h2>
+  <div style={{width:"85%" , margin:'2rem auto'}}>
 
 {/* <div style={{backgroundColor:"white",border:"1px solid #ddd",boxShadow:"rgba(90, 114, 123, 0.11) 0px 7px 30px 0px",margin:"1rem auto", borderRadius:"8px",width:"85%"}}>
 <div style={{display:"flex", justifyContent:"space-between",flexWrap:"wrap",gap:"18px",padding:"25px",}}>
