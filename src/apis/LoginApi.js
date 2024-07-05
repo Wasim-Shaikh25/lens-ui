@@ -5,31 +5,18 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
 
 export const handleSubmit = async (e, setToken, formData, navigate) => {
   e.preventDefault();
-  
   try {
     const res = await axios.post(`${baseUrl}/auth/authenticate`, formData);
     const { data } = res;
+    const token = String(data.access_token); // Ensure token is a string
+    const expiryTime = new Date(new Date().getTime() + 30 * 60 * 1000); // 30 minutes from now
 
-    // Check if the response data is a string (likely HTML)
-    if (typeof data === 'string') {
-      console.error("Unexpected HTML response:", data);
-      throw new Error("Received an unexpected HTML response instead of JSON.");
-    }
+    Cookies.set('access_token', token, { expires: expiryTime });
+    setToken(token); // Store the decoded token in global state
 
-    if (data.access_token) {
-      const accessToken = String(data.access_token); // Ensure the token is a string
-      const expiryTime = new Date(new Date().getTime() + 30 * 60 * 1000); // 30 minutes from now
-
-      // Setting the token as a cookie
-      Cookies.set('access_token', accessToken, { expires: expiryTime });
-      setToken(accessToken); // Store the token in global state
-
-      console.log("Token is ", accessToken);
-      navigate('/');
-    } else {
-      throw new Error("Invalid token format received");
-    }
+    console.log("Token is ", token);
+    navigate('/');
   } catch (err) {
-    console.log("Error: ", err);
+    console.log(err);
   }
 };
