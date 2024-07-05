@@ -1,9 +1,8 @@
-// src/axiosInstance.js
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const baseURL = process.env.REACT_APP_BASE_URL;
-
+// Ensure baseURL is correctly defined
+const baseURL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
 
 // Create an Axios instance
 const axiosInstance = axios.create({
