@@ -3,7 +3,7 @@
 
  
  
- const baseUrl = process.env.REACT_APP_BASE_URL
+ const baseUrl = "http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com";
 
 
  //get All Designation
