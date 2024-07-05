@@ -132,9 +132,9 @@ return (
         </TableHead>
 
 
-        {data.length ? (
+        {data?.length ? (
           <TableBody>
-            {data.map((row, index) => (
+            {data?.map((row, index) => (
               <TableRow key={index} className="table-row">
                 <TableCell component="th" scope="row">
                   {index + 1}
