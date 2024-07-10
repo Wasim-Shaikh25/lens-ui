@@ -2,16 +2,12 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const baseURL = "https://cors-everywhere.herokuapp.com/http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com";
+const baseURL = "http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com";
 
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL: baseURL,
-  headers: {
-    'Access-Control-Allow-Origin' : '*',
-  'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-  }
+  baseURL: baseURL
 });
 
 // Add a request interceptor
