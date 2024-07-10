@@ -3,13 +3,16 @@
 
  
  
- const baseUrl = "http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com";
+ const baseUrl = "https://cors-everywhere.herokuapp.com/http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com";
 
 
  //get All Designation
  export const getDesignation = async(setDesignation)=>{
     try{
-      const res = await axios.get(`${baseUrl}/user/allDesignations`)
+      const res = await axios.get(`${baseUrl}/user/allDesignations`, {headers: {
+        'Access-Control-Allow-Origin' : '*',
+      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+      }})
       const{data} = res;
       setDesignation(data);
     }
