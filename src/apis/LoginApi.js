@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import axiosInstance from "../axios/axiosInstance";
 
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
+const baseUrl = "https://testapp-env.eba-6smrf3fp.ap-south-1.elasticbeanstalk.com";
 
 
 export const handleSubmit = async (e, setToken, formData, navigate) => {
