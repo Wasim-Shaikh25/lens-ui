@@ -7,10 +7,14 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { Link, useNavigate } from "react-router-dom";
 import { alpha } from '@mui/material/styles';
 import { useAuth } from '../../contextApi/AuthContext';
+import useToken from "../../contextApi/useToken";
+
 
 const Topbar = ({ isSidebar, setIsSidebar }) => {
   const { authState, logout } = useAuth();
   const navigate = useNavigate();
+  const token = useToken();
+
 
   const iconStyle = { 
     width: "1.6em",
@@ -59,14 +63,18 @@ const Topbar = ({ isSidebar, setIsSidebar }) => {
         width: "100%"
       }}
     >
+      
+     {token&&<>
       {isSidebar ? 
         <MenuIcon onClick={() => setIsSidebar(!isSidebar)} sx={iconStyle} />
         : 
         <KeyboardBackspaceIcon onClick={() => setIsSidebar(!isSidebar)} sx={iconStyle} />
       }
+      </>}
+
 
       {/* ICONS */}
-      <Box display="flex" justifyContent='flex-end' alignItems="center">
+      <Box display="flex"  justifyContent='flex-end' alignItems="center"  sx={{ ml: "auto" }}>
         <Link to='signup'>
           <Button size="small" sx={buttonStyle}>SignUp</Button>
         </Link>
