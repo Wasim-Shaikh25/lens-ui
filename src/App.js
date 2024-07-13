@@ -32,12 +32,12 @@ function App() {
   console.log("isSidebar is ",isSidebar)
 
   return (
-      <ColorModeContext.Provider value={colorMode}>
+    <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
           <main className="content">
-        {!isSidebar&&<CustomSidebar  isSidebar={isSidebar} setIsSidebar={setIsSidebar} />}
+        {!isSidebar&&token&&<CustomSidebar  isSidebar={isSidebar} setIsSidebar={setIsSidebar} />}
       {!isLogin&&<Topbar   isSidebar={isSidebar} setIsSidebar={setIsSidebar} /> }
           <AllRoute  isSidebar={isSidebar}/> 
           </main>
