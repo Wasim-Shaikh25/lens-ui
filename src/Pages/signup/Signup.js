@@ -211,7 +211,7 @@ export default function SignUp() {
                 <Grid item xs={12} sm={6}>
                   <Autocomplete
                     size="small"
-                    value={formData.designation}
+                    value={formData.designation || ''}
                     onChange={(event, newValue) => {
                       setFormData({
                         ...formData,
@@ -244,7 +244,7 @@ export default function SignUp() {
                 <Grid item xs={12}>
                   <Autocomplete
                     size="small"
-                    value={formData.departments[0].departmentName}
+                    value={formData.departments[0].departmentName || ''}
                     onChange={(event, newValue) => {
                       setFormData({
                         ...formData,
@@ -275,7 +275,7 @@ export default function SignUp() {
                 <Grid item xs={12} >
                   <Autocomplete
                     size="small"
-                    value={formData.branches[0].branchName}
+                    value={formData.branches[0].branchName || ''}
                     onChange={(event, newValue) => {
                       setFormData({
                         ...formData,
