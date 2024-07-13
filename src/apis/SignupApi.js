@@ -3,7 +3,7 @@
 
  
  
- const baseUrl = "http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com";
+ const baseUrl = "https://testapp-env.eba-6smrf3fp.ap-south-1.elasticbeanstalk.com";
 
 
  //get All Designation

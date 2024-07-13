@@ -2,7 +2,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const baseURL = "http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com";
+const baseURL = "https://testapp-env.eba-6smrf3fp.ap-south-1.elasticbeanstalk.com";
 
 
 // Create an Axios instance

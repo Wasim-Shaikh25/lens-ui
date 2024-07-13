@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from 'js-cookie';
 
-const baseUrl = "http://lens-env.eba-fanbcwd6.ap-south-1.elasticbeanstalk.com";
+const baseUrl = "https://testapp-env.eba-6smrf3fp.ap-south-1.elasticbeanstalk.com";
 
 export const handleSubmit = async (e, setToken, formData, navigate) => {
   e.preventDefault();
