@@ -177,6 +177,7 @@ return (
       </Table>
       <hr style={{ border: '1px solid lightGray' }} />
 
+
       <div className="pagination-container">
         <label className="pagination-label">Items Per Page:</label>
         <select value={itemsPerPage} onChange={handleItemsPerPageChange} className="pagination-select">

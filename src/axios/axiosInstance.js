@@ -1,8 +1,9 @@
-// src/axiosInstance.js
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const baseURL = "https://testapp-env.eba-6smrf3fp.ap-south-1.elasticbeanstalk.com";
+
+// Ensure baseURL is correctly defined
+const baseURL = process.env.REACT_APP_BASE_URL ;
 
 
 // Create an Axios instance

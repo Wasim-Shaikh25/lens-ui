@@ -7,13 +7,16 @@ import { ColorModeContext, useMode } from "./theme";
 import AllRoute from './router/allRoute.js'
 import { useEffect } from "react";
 import { useAuth } from "./contextApi/AuthContext.js";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useToken from "./contextApi/useToken.js";
 
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
+  const location = useLocation();
+  const isLogin = location.pathname === '/login';
+   
 
   const navigate = useNavigate();
   const token = useToken();
@@ -35,7 +38,7 @@ function App() {
         <div className="app">
           <main className="content">
         {!isSidebar&&<CustomSidebar  isSidebar={isSidebar} setIsSidebar={setIsSidebar} />}
-          <Topbar   isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
+      {!isLogin&&<Topbar   isSidebar={isSidebar} setIsSidebar={setIsSidebar} /> }
           <AllRoute  isSidebar={isSidebar}/> 
           </main>
         </div>
