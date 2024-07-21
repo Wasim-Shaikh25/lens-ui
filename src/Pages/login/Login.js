@@ -118,8 +118,8 @@ export default function Login() {
                   </Link>
                 </Grid> */}
                 <Grid item>
-                  <Link  to="/signup" style={{cursor:"pointer"}} variant="body2">
-                    Dont have an account? Sign up
+                  <Link  to="/reset" style={{cursor:"pointer"}} variant="body2">
+                    Forgot Password ?
                   </Link>
                 </Grid>
               </Grid>

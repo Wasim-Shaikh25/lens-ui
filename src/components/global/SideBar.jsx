@@ -10,18 +10,24 @@ import { tokens } from "../../theme";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import DescriptionIcon from "@mui/icons-material/Description";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import hassan_usmani21 from "../../assets/hassan_usmani21.webp"; // Adjust the import according to your project
 import { useAuth } from "../../contextApi/AuthContext";
 import GroupIcon from '@mui/icons-material/Group';
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+
+
 
 const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
+  const {logout} = useAuth();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
   const backgroundColor = colorMode === "dark" ? colors.primary[900] : theme.palette.background.default;
   const sidebarRef = useRef(null);
   const { authState } = useAuth();
+  const navigate = useNavigate();
+
 
 
   const [activeSubMenu, setActiveSubMenu] = useState("");
@@ -53,6 +59,13 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
     console.log(`SubMenu ${menuName} clicked`);
     setActiveSubMenu(menuName);
   };
+
+  const userLogout = () => {
+    logout();
+    navigate('/login'); // Redirect to login page after logout
+  };
+
+
 
   return (
     <Box
@@ -96,6 +109,7 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
         },
       }}
     >
+      
       <div style={{ display: "flex", borderRadius: "20px", height: "100vh", width: "20%", justifyContent: "center" }}>
         <Sidebar
           id="custom-sidebar"
@@ -135,7 +149,6 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
                       Edit
                     </MenuItem>
                   </Link>
-
                 </SubMenu>)
                 }
 
@@ -261,6 +274,7 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
                     </MenuItem>
                   </Link>
                 </SubMenu>
+                <SubMenu label="Logout" style={{color:'black',fontFamily:"Times New Roman",borderRadius: '8px',margin: '4px 16px',padding: "6px"}} onClick={userLogout} icon={<PowerSettingsNewIcon />}></SubMenu>
               </Menu>
             </Box>
           </Menu>

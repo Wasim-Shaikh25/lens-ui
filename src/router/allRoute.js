@@ -20,10 +20,10 @@ import ApiSuccessPage from "../Pages/apiPlan/ApiSuccess.js";
 import AgitatorSeal from '../Pages/agitator/CreateAgitator';
 import AgitatorSuccessPage from '../Pages/agitator/AgitatorSuccess';
 import EditAgitator from '../Pages/agitator/EditAgitator';
-import SignUp from '../Pages/signup/Signup.js';
+import CreateUser from '../Pages/User/CreateUser.js';
 import Login from '../Pages/login/Login.js';
 import ResetPassword from '../Pages/resetPassword/ResetPassword.js';
-import UserDashboard from '../Pages/userDashboard/UserDashboard.js';
+import UserDashboard from '../Pages/User/UserDashboard.js';
 
 
 const AllRoute = ({isSidebar}) => {
@@ -60,8 +60,8 @@ const AllRoute = ({isSidebar}) => {
           <Route path="/registerSuccess/:id" element={<RegistrationSuccessPage />} />
           <Route path="/salesSuccess/:sId" element={<SalesSuccessPage />} />
           <Route path="/updateSuccess/:id" element={<UpdateSuccessPage />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signup/:uId" element={<SignUp />} />
+          <Route path="/CreateUser" element={<CreateUser />} />
+          <Route path="/CreateUser/:uId" element={<CreateUser />} />
           <Route path="/reset" element={<ResetPassword />} />
           <Route path="/login" element={<Login />} />
       
