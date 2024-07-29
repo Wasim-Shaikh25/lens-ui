@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import '../App.css'; // Import the CSS file
 import Customer from '../Pages/customerPage/createCustomer/Customer.js';
@@ -20,20 +20,42 @@ import ApiSuccessPage from "../Pages/apiPlan/ApiSuccess.js";
 import AgitatorSeal from '../Pages/agitator/CreateAgitator';
 import AgitatorSuccessPage from '../Pages/agitator/AgitatorSuccess';
 import EditAgitator from '../Pages/agitator/EditAgitator';
-import SignUp from '../Pages/signup/Signup.js';
+import CreateUser from '../Pages/User/CreateUser.js';
 import Login from '../Pages/login/Login.js';
 import ResetPassword from '../Pages/resetPassword/ResetPassword.js';
-import UserDashboard from '../Pages/userDashboard/UserDashboard.js';
+import UserDashboard from '../Pages/User/UserDashboard.js';
+import {useLocation} from 'react-router-dom';
+
 
 
 const AllRoute = ({isSidebar}) => {
 
+  const location = useLocation();
+
+  const isLogin = location.pathname === '/login';
+  const reset = location.pathname === '/reset';
+
+
+  const sidebarOpenStyle = {
+    width: "80%", // Sidebar open, adjust width
+    position: "absolute",
+    right: 0,
+    marginTop: "5.4rem",
+  };
+
+
+  const sidebarClosedStyle = {
+    width: "100%", // Sidebar closed, full width
+    position: "absolute",
+    right: 0,
+    marginTop: "4.5rem",
+  };
+
   
-
   return (
-    <div style={!isSidebar ? { width: "80%", position: "absolute", right: 0, marginTop: "4.5rem" } : { marginTop: "5.5rem" }}>
-    <Routes>
+    <div style={!isSidebar&&!isLogin&&!reset ? sidebarOpenStyle : sidebarClosedStyle}>
 
+    <Routes>
           <Route path="/user" element={<UserDashboard />} />
           <Route path="/createAgitator" element={<AgitatorSeal />} />
           <Route path="/editAgitator" element={<EditAgitator />} />
@@ -60,8 +82,8 @@ const AllRoute = ({isSidebar}) => {
           <Route path="/registerSuccess/:id" element={<RegistrationSuccessPage />} />
           <Route path="/salesSuccess/:sId" element={<SalesSuccessPage />} />
           <Route path="/updateSuccess/:id" element={<UpdateSuccessPage />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signup/:uId" element={<SignUp />} />
+          <Route path="/CreateUser" element={<CreateUser />} />
+          <Route path="/CreateUser/:uId" element={<CreateUser />} />
           <Route path="/reset" element={<ResetPassword />} />
           <Route path="/login" element={<Login />} />
       
