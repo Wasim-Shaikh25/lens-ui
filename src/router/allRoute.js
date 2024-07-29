@@ -20,7 +20,7 @@ import ApiSuccessPage from "../Pages/apiPlan/ApiSuccess.js";
 import AgitatorSeal from '../Pages/agitator/CreateAgitator';
 import AgitatorSuccessPage from '../Pages/agitator/AgitatorSuccess';
 import EditAgitator from '../Pages/agitator/EditAgitator';
-import CreateUser from '../Pages/user/CreateUser.js';
+import CreateUser from '../Pages/User/CreateUser.js';
 import Login from '../Pages/login/Login.js';
 import ResetPassword from '../Pages/resetPassword/ResetPassword.js';
 import UserDashboard from '../Pages/User/UserDashboard.js';
