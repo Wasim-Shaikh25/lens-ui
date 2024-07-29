@@ -52,7 +52,7 @@ export default function Login() {
       <Container component="main" maxWidth="xs">
         <div className='card' sx={{
            padding: "2px", borderRadius: "8px", border: "1px solid #ddd",
-          backgroundColor: "white", boxShadow: "rgba(90, 114, 123, 0.11) 0px 7px 30px 0px"
+          backgroundColor: "white", boxShadow: "rgba(90, 114, 123, 0.11) 0px 7px 30px 0px",
         }}>
           <CssBaseline />
           <Box

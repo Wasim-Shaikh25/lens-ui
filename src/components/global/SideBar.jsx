@@ -38,19 +38,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
         };
       }, [backgroundColor]);
     
-      
-      // useEffect(() => {
-      //   const handleClickOutside = (event) => {
-      //     if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-      //       setIsSidebar(true); // Collapse the sidebar
-      //     }
-      //   };
     
-      //   document.addEventListener("mousedown", handleClickOutside);
-      //   return () => {
-      //     document.removeEventListener("mousedown", handleClickOutside);
-      //   };
-      // }, [sidebarRef, setIsSidebar]);
 
     
       const getSubMenuStyle = (menuName) => ({
@@ -73,8 +61,9 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
       };
 
       const userLogout = () => {
-        logout();
-        navigate('/login'); // Redirect to login page after logout
+            logout();
+            navigate('/login'); // Redirect to login page after logout
+
       };
 
   return (
@@ -150,11 +139,21 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
             <Box pl={isSidebar ? 0 : 3}>
               <Menu>
 
-                {authState?.authorities === 'ADMIN' && (<SubMenu label={<Typography variant="body1">Users</Typography>} style={getSubMenuStyle("Users")} onClick={() => handleSubMenuClick("Users")} icon={<GroupIcon />}>
+                {authState?.authorities === 'ADMIN' && (
+                <SubMenu label={<Typography variant="body1">Users</Typography>} style={getSubMenuStyle("Users")} onClick={() => handleSubMenuClick("Users")} icon={<GroupIcon />}>
+                  <Link to="/CreateUser" style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getMenuItemStyle("Users")} onClick={() => setActiveItemMenu("Users")}
+                    >
+                      New
+                    </MenuItem>
+                    </Link>
+
                   <Link to="/user" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
                       icon={<EditIcon />}
-                      style={getMenuItemStyle("Users")} onClick={() => setActiveItemMenu("Users")}
+                      style={getMenuItemStyle("editUser")} onClick={() => setActiveItemMenu("editUser")}
                     >
                       Edit
                     </MenuItem>
@@ -284,7 +283,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                     </MenuItem>
                   </Link>
                 </SubMenu>
-                <SubMenu label="Logout" style={{color:'black',fontFamily:"Times New Roman",borderRadius: '8px',margin: '4px 16px',padding: "6px"}} onClick={userLogout} icon={<PowerSettingsNewIcon />}></SubMenu>
+                <SubMenu label="Logout" style={{color:'black',fontFamily:"Times New Roman",borderRadius: '8px',margin: '4px 16px',padding: "15px 6px",position:"fixed",bottom:"1px",width:"15.5%",color:"red"}} onClick={userLogout} icon={<PowerSettingsNewIcon />}></SubMenu>
               </Menu>
             </Box>
           </Menu>
