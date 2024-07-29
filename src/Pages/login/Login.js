@@ -111,13 +111,12 @@ export default function Login() {
               >
                 Login
               </Button>
-              <Grid container justifyContent="center" flexDirection="column" alignItems="center">
-              {/* <Grid item>
-                  <Link to={`/reset/${formData.empId}`} style={{cursor:"pointer"}}  variant="body2">
+              <Grid container justifyContent="center">
+                <Grid item>
+                  <Link to="/reset" style={{ cursor: "pointer" }} variant="body2">
                     Forgot Password?
                   </Link>
-                </Grid> */}
-             
+                </Grid>
               </Grid>
             </Box>
           </Box>
