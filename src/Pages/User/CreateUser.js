@@ -314,7 +314,7 @@ export default function CreateUser() {
                 onClick={(e) => handleSubmit(e, formData, navigate)}
                 sx={{ mt: 1, mb: 1 }}
               >
-                Sign Up
+                Create User
               </Button>
                 :
                 <Button
