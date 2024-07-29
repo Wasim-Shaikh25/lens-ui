@@ -10,6 +10,7 @@ import { useAuth } from '../../contextApi/AuthContext';
 import useToken from "../../contextApi/useToken";
 
 
+
 const Topbar = ({ isSidebar, setIsSidebar }) => {
   const { authState, logout } = useAuth();
   const navigate = useNavigate();
@@ -44,11 +45,9 @@ const Topbar = ({ isSidebar, setIsSidebar }) => {
     }
   };
 
-  const userLogout = () => {
-    logout();
-    navigate('/login'); // Redirect to login page after logout
-  };
+ 
 
+  
   return (
     <Box 
       display="flex" 
@@ -75,17 +74,7 @@ const Topbar = ({ isSidebar, setIsSidebar }) => {
 
       {/* ICONS */}
       <Box display="flex"  justifyContent='flex-end' alignItems="center"  sx={{ ml: "auto" }}>
-        <Link to='signup'>
-          <Button size="small" sx={buttonStyle}>SignUp</Button>
-        </Link>
-     
-        {!authState ? 
-          <Link to='/login'>
-            <Button size="small" sx={buttonStyle}>Login</Button>
-          </Link> 
-          : 
-          <Button onClick={userLogout} size="small" sx={logoutButtonStyle}>Logout</Button>
-        }
+      
         <IconButton>
           <NotificationsOutlinedIcon /> 
         </IconButton> 
@@ -106,3 +95,4 @@ const Topbar = ({ isSidebar, setIsSidebar }) => {
 };
 
 export default Topbar;
+
