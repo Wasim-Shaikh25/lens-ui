@@ -1,4 +1,4 @@
-import { React, useState, useRef, useContext, useEffect } from "react";
+import {React,useState,useRef,useContext, useEffect} from "react";
 import { Box, Typography, Avatar } from "@mui/material";
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { useTheme } from "@mui/material";
@@ -10,49 +10,61 @@ import { tokens } from "../../theme";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import DescriptionIcon from "@mui/icons-material/Description";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import hassan_usmani21 from "../../assets/hassan_usmani21.webp"; // Adjust the import according to your project
 import { useAuth } from "../../contextApi/AuthContext";
 import GroupIcon from '@mui/icons-material/Group';
-
-const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  const colorMode = useContext(ColorModeContext);
-  const backgroundColor = colorMode === "dark" ? colors.primary[900] : theme.palette.background.default;
-  const sidebarRef = useRef(null);
-  const { authState } = useAuth();
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 
 
-  const [activeSubMenu, setActiveSubMenu] = useState("");
-  const [activeItemMenu, setActiveItemMenu] = useState("");
 
-  useEffect(() => {
-    document.body.style.backgroundColor = backgroundColor;
-    return () => {
-      document.body.style.backgroundColor = ''; // Reset background color when component unmounts
-    };
-  }, [backgroundColor]);
+const CustomSidebar = ({isSidebar,setIsSidebar}) => {
+      const theme = useTheme();
+      const colors = tokens(theme.palette.mode);
+      const colorMode = useContext(ColorModeContext);
+      const backgroundColor = colorMode === "dark" ? colors.primary[900] : theme.palette.background.default;
+      const sidebarRef = useRef(null);
+      const {logout, authState} = useAuth();
+      const navigate = useNavigate();
+    
+      const [activeSubMenu, setActiveSubMenu] = useState("");
+      const [activeItemMenu, setActiveItemMenu] = useState("");
+    
+      
+      useEffect(() => {
+        document.body.style.backgroundColor = backgroundColor;
+        return () => {
+          document.body.style.backgroundColor = ''; // Reset background color when component unmounts
+        };
+      }, [backgroundColor]);
+    
+    
 
-  const getSubMenuStyle = (menuName) => ({
-    backgroundColor: activeSubMenu === menuName ? '#00CEC3' : 'transparent',
-    color: activeSubMenu === menuName ? 'white' : 'black',
-    fontFamily: "Times New Roman', Times, serif",
-    borderRadius: '8px',
-    margin: '4px 16px',
-    padding: "6px",
-  });
+    
+      const getSubMenuStyle = (menuName) => ({
+        backgroundColor: activeSubMenu === menuName ? '#00CEC3' : 'transparent',
+        color: activeSubMenu === menuName ? 'white' : 'black',
+        borderRadius: '8px',
+        margin: '4px 16px',
+        padding:"6px",
+      });
+    
+      const getMenuItemStyle = (menuName) => ({
+        color: activeItemMenu === menuName ? '#00CEC3' : 'black',
+        margin: '4px 18px',
+        borderRadius: '6px',
+      });
+    
+      const handleSubMenuClick = (menuName) => {
+        console.log(`SubMenu ${menuName} clicked`);
+        setActiveSubMenu(menuName);
+      };
 
-  const getMenuItemStyle = (menuName) => ({
-    color: activeItemMenu === menuName ? '#00CEC3' : 'black',
-    margin: '4px 18px',
-    borderRadius: '6px',
-  });
+      const userLogout = () => {
+            logout();
+            navigate('/login'); // Redirect to login page after logout
 
-  const handleSubMenuClick = (menuName) => {
-    console.log(`SubMenu ${menuName} clicked`);
-    setActiveSubMenu(menuName);
-  };
+      };
 
   return (
     <Box
@@ -96,6 +108,7 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
         },
       }}
     >
+      
       <div style={{ display: "flex", borderRadius: "20px", height: "100vh", width: "20%", justifyContent: "center" }}>
         <Sidebar
           id="custom-sidebar"
@@ -126,16 +139,25 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
             <Box pl={isSidebar ? 0 : 3}>
               <Menu>
 
-                {authState?.authorities === 'ADMIN' && (<SubMenu label={<Typography variant="body1">Users</Typography>} style={getSubMenuStyle("Users")} onClick={() => handleSubMenuClick("Users")} icon={<GroupIcon />}>
+                {authState?.authorities === 'ADMIN' && (
+                <SubMenu label={<Typography variant="body1">Users</Typography>} style={getSubMenuStyle("Users")} onClick={() => handleSubMenuClick("Users")} icon={<GroupIcon />}>
+                  <Link to="/CreateUser" style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getMenuItemStyle("Users")} onClick={() => setActiveItemMenu("Users")}
+                    >
+                      New
+                    </MenuItem>
+                    </Link>
+
                   <Link to="/user" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
                       icon={<EditIcon />}
-                      style={getMenuItemStyle("Users")} onClick={() => setActiveItemMenu("Users")}
+                      style={getMenuItemStyle("editUser")} onClick={() => setActiveItemMenu("editUser")}
                     >
                       Edit
                     </MenuItem>
                   </Link>
-
                 </SubMenu>)
                 }
 
@@ -261,6 +283,7 @@ const CustomSidebar = ({ isSidebar, setIsSidebar }) => {
                     </MenuItem>
                   </Link>
                 </SubMenu>
+                <SubMenu label="Logout" style={{color:'black',fontFamily:"Times New Roman",borderRadius: '8px',margin: '4px 16px',padding: "15px 6px",position:"fixed",bottom:"1px",width:"15.5%",color:"red"}} onClick={userLogout} icon={<PowerSettingsNewIcon />}></SubMenu>
               </Menu>
             </Box>
           </Menu>
