@@ -27,25 +27,7 @@ const Topbar = ({ isSidebar, setIsSidebar }) => {
     cursor: "pointer",
   };
 
-  const buttonStyle = {
-    backgroundColor: "#03C9D7",
-    color: "white",
-    margin: "4px",
-    '&:hover': {
-      backgroundColor: alpha("#03C9D7", 0.8)
-    }
-  };
 
-  const logoutButtonStyle = {
-    backgroundColor: "#FF0000",
-    color: "white",
-    margin: "4px",
-    '&:hover': {
-      backgroundColor: alpha("#FF0000", 0.8)
-    }
-  };
-
- 
 
   
   return (
