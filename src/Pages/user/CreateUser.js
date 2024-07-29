@@ -127,7 +127,7 @@ export default function CreateUser() {
           >
       
             <Typography component="h5" variant="h5">
-              {uId && <>Update</>} Sign up
+              {uId ? <>Update</> : <>Create</>} User
             </Typography>
             <Box component="form" noValidate onSubmit={(e) => handleSubmit(e, formData, navigate)} sx={{ mt: 2 }}>
               <Grid container spacing={2}>
