@@ -327,13 +327,7 @@ export default function CreateUser() {
                   Update User
                 </Button>
               }
-              <Grid container justifyContent="center">
-                <Grid item>
-                  <Link to="/reset" style={{ cursor: "pointer" }} variant="body2">
-                    Forgot Password?
-                  </Link>
-                </Grid>
-              </Grid>
+             
             </Box>
           </Box>
         </div>
