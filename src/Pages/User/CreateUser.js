@@ -329,8 +329,8 @@ export default function CreateUser() {
               }
               <Grid container justifyContent="center">
                 <Grid item>
-                  <Link to="/login" style={{ cursor: "pointer" }} variant="body2">
-                    Already have an account? Sign in
+                  <Link to="/reset" style={{ cursor: "pointer" }} variant="body2">
+                    Forgot Password?
                   </Link>
                 </Grid>
               </Grid>
