@@ -39,7 +39,7 @@ function UserDashboard(){
 
     const editDetail = (detail) => {
         console.log("edit detail is ", detail.empId);
-        navigate(`/signup/${detail.empId}`)
+        navigate(`/CreateUser/${detail.empId}`)
       };
      
         const paginate = (items)=>{
