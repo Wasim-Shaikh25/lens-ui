@@ -58,17 +58,17 @@
       
   
       try{
-        const res = await axios.post(`${baseUrl}/user/createAccount`,formData);
+        const res = await axiosInstance.post(`${baseUrl}/user/createAccount`,formData);
         const{data} = res;
         console.log("response Data ",data);
-        navigate('/reset')
+        navigate('/user')
       }
       catch(err){
         console.log(err);
   
-      }
-  
+      }  
     };
+
   
     
 
