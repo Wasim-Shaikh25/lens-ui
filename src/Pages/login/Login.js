@@ -117,11 +117,11 @@ export default function Login() {
                     Forgot Password?
                   </Link>
                 </Grid> */}
-                <Grid item>
+                {/* <Grid item>
                   <Link  to="/reset" style={{cursor:"pointer"}} variant="body2">
                     Forgot Password ?
                   </Link>
-                </Grid>
+                </Grid> */}
               </Grid>
             </Box>
           </Box>
@@ -130,3 +130,4 @@ export default function Login() {
     </ThemeProvider>
   );
 }
+

@@ -15,6 +15,8 @@ import hassan_usmani21 from "../../assets/hassan_usmani21.webp"; // Adjust the i
 import { useAuth } from "../../contextApi/AuthContext";
 import GroupIcon from '@mui/icons-material/Group';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 
 
 
@@ -29,7 +31,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
     
       const [activeSubMenu, setActiveSubMenu] = useState("");
       const [activeItemMenu, setActiveItemMenu] = useState("");
-    
+
       
       useEffect(() => {
         document.body.style.backgroundColor = backgroundColor;
@@ -123,15 +125,15 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
           <Menu iconShape="square">
             {!isSidebar && (
               <Box mb="25px">
-                <Box display="flex" justifyContent="center" alignItems="center">
+                {/* <Box display="flex" justifyContent="center" alignItems="center">
                   <Avatar alt="profile-user" src={hassan_usmani21} sx={{ width: 80, height: 80, cursor: "pointer", boxShadow: 3, marginTop: "1.5rem" }} />
-                </Box>
+                </Box> */}
                 <Box textAlign="center" mt={2}>
                   <Typography variant="h6" color="black" fontWeight="bold">
-                    PK
+                    Leak Proof
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
-                    Hassan Admin
+                    Engineering 
                   </Typography>
                 </Box>
               </Box>
@@ -265,7 +267,48 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                     </MenuItem>
                   </Link>
                 </SubMenu>
-                <SubMenu label="Sales Order" style={getSubMenuStyle("SalesOrder")} onClick={() => handleSubMenuClick("SalesOrder")} icon={<MonetizationOnIcon />}>
+
+                <SubMenu label={<Typography variant="body1">Quotation</Typography>} style={getSubMenuStyle("quotation")} onClick={() => handleSubMenuClick("quotation")} icon={<MonetizationOnIcon />}>
+                  <Link to="/quotation" style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getMenuItemStyle("quotation")} onClick={() => setActiveItemMenu("quotation")}
+                    >
+                      New
+                    </MenuItem>
+                  </Link>
+                  <Link to="/editQuotation" style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<EditIcon />}
+                      style={getMenuItemStyle("Quotation Edit")} onClick={() => setActiveItemMenu("Quotation Edit")}
+                    >
+                      Edit
+                    </MenuItem>
+                  </Link>
+                </SubMenu>
+
+
+                <SubMenu label={<Typography variant="body1">OFM</Typography>} style={getSubMenuStyle("ofm")} onClick={() => handleSubMenuClick("ofm")} icon={<BusinessCenterIcon />}>
+                  <Link to="/ofm" style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getMenuItemStyle("ofm")} onClick={() => setActiveItemMenu("ofm")}
+                    >
+                      New
+                    </MenuItem>
+                  </Link>
+                  <Link to="/editQuotation" style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<EditIcon />}
+                      style={getMenuItemStyle("ofm Edit")} onClick={() => setActiveItemMenu("ofm Edit")}
+                    >
+                      Edit
+                    </MenuItem>
+                  </Link>
+                </SubMenu>
+
+
+                {/* <SubMenu label="Sales Order" style={getSubMenuStyle("SalesOrder")} onClick={() => handleSubMenuClick("SalesOrder")} icon={<MonetizationOnIcon />}>
                   <Link to='/createOrder' style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
                       icon={<AddBoxIcon />}
@@ -282,8 +325,9 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                       Edit
                     </MenuItem>
                   </Link>
-                </SubMenu>
-                <SubMenu label="Logout" style={{color:'black',fontFamily:"Times New Roman",borderRadius: '8px',margin: '4px 16px',padding: "15px 6px",position:"fixed",bottom:"1px",width:"15.5%",color:"red"}} onClick={userLogout} icon={<PowerSettingsNewIcon />}></SubMenu>
+                </SubMenu> */}
+
+                <SubMenu label="Logout" style={{color:'black',fontFamily:"Times New Roman",borderRadius: '8px',margin: '4px 16px',padding: "15px 6px",width:"88%",color:"red"}} onClick={userLogout} icon={<PowerSettingsNewIcon />}></SubMenu>
               </Menu>
             </Box>
           </Menu>

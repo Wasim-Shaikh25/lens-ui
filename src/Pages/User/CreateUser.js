@@ -383,6 +383,7 @@ export default function CreateUser() {
   const navigate = useNavigate();
   const { uId } = useParams();
 
+  
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -390,6 +391,7 @@ export default function CreateUser() {
     empId: "",
     password: "",
     designation: '',
+    title:"",
     insertedByUseuId: "",
     lastUpdatedByUseuId: "",
     resetPasswordRequired: false,
@@ -440,6 +442,7 @@ export default function CreateUser() {
         empId: "",
         password: "",
         designation: '',
+        title:"",
         insertedByUseuId: "",
         lastUpdatedByUseuId: "",
         resetPasswordRequired: false,
@@ -457,6 +460,7 @@ export default function CreateUser() {
       });
     }
   }, [uId]);
+
 
   useEffect(() => {
     const departmentName = formData.departments[0].departmentName;
@@ -483,9 +487,23 @@ export default function CreateUser() {
             <Typography component="h5" variant="h5">
               {uId ? <>Update</> : <>Create</>} User
             </Typography>
+            
             <Box component="form" noValidate onSubmit={(e) => handleSubmit(e, formData, navigate)} sx={{ mt: 2 }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
+              <Grid container spacing={1.3}>
+                <Grid item xs={12} sm={2}>
+                <select
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            style={{ width: '100%',border:"1px solid #D6D6D6",cursor:'pointer', height: '40px', fontSize:"0.9em",borderRadius:'5px' }}
+
+          >
+            <option value="Mr.">Mr.</option>
+            <option value="Ms.">Ms.</option>
+            <option value="Mrs.">Mrs.</option>
+          </select>
+          </Grid>
+          <Grid item xs={12} sm={5}>
                   <TextField
                     size="small"
                     autoComplete="given-name"
@@ -499,7 +517,7 @@ export default function CreateUser() {
                     autoFocus
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={5}>
                   <TextField
                     value={formData.lastName}
                     size="small"
@@ -570,119 +588,116 @@ export default function CreateUser() {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Autocomplete
-                    size="small"
-                    value={formData.designation || ''}
-                    onChange={(event, newValue) => {
-                      setFormData({
-                        ...formData,
-                        designation: newValue
-                      });
-                    }}
-                    inputValue={formData.designation || ''}
-                    onInputChange={(event, newInputValue) => {
-                      setFormData({
-                        ...formData,
-                        designation: newInputValue
-                      });
-                    }}
-                    options={designation}
-                    onFocus={() => getDesignation(setDesignation)}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        size="small"
-                        label="Designation"
-                        variant="outlined"
-                        fullWidth
-                      />
-                    )}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Autocomplete
-                    size="small"
-                    value={formData.departments[0].departmentName || ''}
-                    onChange={(event, newValue) => {
-                      setFormData({
-                        ...formData,
-                        departments: [{ departmentName: newValue }]
-                      });
-                    }}
-                    inputValue={formData.departments[0].departmentName}
-                    onInputChange={(event, newInputValue) => {
-                      setFormData({
-                        ...formData,
-                        departments: [{ departmentName: newInputValue }]
-                      });
-                    }}
-                    options={departments.map((department) => department.departmentName)}
-                    onFocus={() => getDepartments(setDepartments)}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        size="small"
-                        label="Department"
-                        variant="outlined"
-                        fullWidth
-                      />
-                    )} />
+  <Autocomplete
+    size="small"
+    value={formData.designation || ''}
+    onChange={(event, newValue) => {
+      setFormData({
+        ...formData,
+        designation: newValue || '' // Fallback to empty string
+      });
+    }}
+    inputValue={formData.designation || ''}
+    onInputChange={(event, newInputValue) => {
+      setFormData({
+        ...formData,
+        designation: newInputValue || '' // Fallback to empty string
+      });
+    }}
+    options={designation}
+    onFocus={() => getDesignation(setDesignation)}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        size="small"
+        label="Designation"
+        variant="outlined"
+        fullWidth
+      />
+    )}
+  />
+</Grid>
 
-                </Grid>
+<Grid item xs={12}>
+  <Autocomplete
+    size="small"
+    value={formData.departments[0].departmentName || ''}
+    onChange={(event, newValue) => {
+      setFormData({
+        ...formData,
+        departments: [{ departmentName: newValue || '' }]
+      });
+    }}
+    inputValue={formData.departments[0].departmentName || ''}
+    onInputChange={(event, newInputValue) => {
+      setFormData({
+        ...formData,
+        departments: [{ departmentName: newInputValue || '' }]
+      });
+    }}
+    options={departments.map((department) => department.departmentName)}
+    onFocus={() => getDepartments(setDepartments)}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        size="small"
+        label="Department"
+        variant="outlined"
+        fullWidth
+      />
+    )}
+  />
+</Grid>
 
-                {formData.branches.map((branch, index) => (
-                  <Grid item xs={12} key={index} style={{ display: 'flex', alignItems: 'center' }}>
-                    <Autocomplete
-                      size="small"
-                      style={{ width: '100%' }} // Set the width to 100%
-                      value={branch.branchName || ''}
-                      onChange={(event, newValue) => {
-                        const updatedBranches = [...formData.branches];
-                        updatedBranches[index] = { branchName: newValue, region: newValue };
-                        setFormData({
-                          ...formData,
-                          branches: updatedBranches
-                        });
-                      }}
-
-                      inputValue={branch.branchName || ''}
-                      onInputChange={(event, newInputValue) => {
-                        const updatedBranches = [...formData.branches];
-                        updatedBranches[index] = { branchName: newInputValue, region: newInputValue };
-                        setFormData({
-                          ...formData,
-                          branches: updatedBranches
-                        });
-                      }}
-                      
-                      options={branches.map((branch) => branch.branchName)}
-                      onFocus={() => getBranches(setBranches)}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          size="small"
-                          label={`Branch ${index + 1}`}
-                          variant="outlined"
-                          fullWidth
-                        />
-                      )}
-
-                    />
-                        {showAddBranch && index === formData.branches.length - 1 && (
-                          <IconButton
-                            onClick={handleAddBranch}
-                            aria-label="add branch" style={{backgroundColor:"#1976D2",color:"white",borderRadius:"0px 5px 5px 0px"}}>
-                            <AddIcon />
-                          </IconButton>
-                        )}
-
-                    {index > 0 && (
-                      <IconButton onClick={() => handleDeleteBranch(index)}  aria-label="delete branch" color="error">
-                        <DeleteIcon />
-                      </IconButton>
-                    )}
-                  </Grid>
-                ))}
+{formData.branches.map((branch, index) => (
+  <Grid item xs={12} key={index} style={{ display: 'flex', alignItems: 'center' }}>
+    <Autocomplete
+      size="small"
+      style={{ width: '100%' }}
+      value={branch.branchName || ''}
+      onChange={(event, newValue) => {
+        const updatedBranches = [...formData.branches];
+        updatedBranches[index] = { branchName: newValue || '', region: newValue || '' };
+        setFormData({
+          ...formData,
+          branches: updatedBranches
+        });
+      }}
+      inputValue={branch.branchName || ''}
+      onInputChange={(event, newInputValue) => {
+        const updatedBranches = [...formData.branches];
+        updatedBranches[index] = { branchName: newInputValue || '', region: newInputValue || '' };
+        setFormData({
+          ...formData,
+          branches: updatedBranches
+        });
+      }}
+      options={branches.map((branch) => branch.branchName)}
+      onFocus={() => getBranches(setBranches)}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          size="small"
+          label={`Branch ${index + 1}`}
+          variant="outlined"
+          fullWidth
+        />
+      )}
+    />
+    {showAddBranch && index === formData.branches.length - 1 && (
+      <IconButton
+        onClick={handleAddBranch}
+        aria-label="add branch" style={{backgroundColor:"#1976D2",color:"white",borderRadius:"0px 5px 5px 0px"}}>
+        <AddIcon />
+      </IconButton>
+    )}
+    {index > 0 && (
+      <IconButton onClick={() => handleDeleteBranch(index)}  aria-label="delete branch" color="error">
+        <DeleteIcon />
+      </IconButton>
+    )}
+  </Grid>
+))}
               </Grid>
               {!uId ? <Button
                 type="submit"

@@ -25,6 +25,7 @@ import Login from '../Pages/login/Login.js';
 import ResetPassword from '../Pages/resetPassword/ResetPassword.js';
 import UserDashboard from '../Pages/User/UserDashboard.js';
 import {useLocation} from 'react-router-dom';
+import CreateQuotation from '../Pages/Quotation/CreateQuotation.js';
 
 
 
@@ -86,6 +87,7 @@ const AllRoute = ({isSidebar}) => {
           <Route path="/CreateUser/:uId" element={<CreateUser />} />
           <Route path="/reset" element={<ResetPassword />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/quotation" element={<CreateQuotation />} />
       
     </Routes>
   </div>
