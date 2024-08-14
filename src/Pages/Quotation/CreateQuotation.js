@@ -7,7 +7,8 @@ import '../../App.css'
 import { getBranches, handleSubmit } from '../../apis/SignupApi';
 import { height } from '@mui/system';
 import PersonIcon from "@mui/icons-material/Person";
-
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 
@@ -20,6 +21,7 @@ export default function CreateQuotation() {
   const catOptions = ["API Plan", "Grafoil", "Mechanical Seal", "Re-conditioning","Rotary Joints"]
   const [selectedTab, setSelectedTab] = useState(0);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [savedItems, setSavedItems] = useState([]);
 
   
  
@@ -187,6 +189,25 @@ export default function CreateQuotation() {
     });
   };
 
+
+  const handleSaveItem = (index) => {
+    const newSavedItems = [...savedItems, formData.items[index]];
+    setSavedItems(newSavedItems);
+    formData.items[index] =   { // Static item at index 0
+      itemName: '',
+      itemDescription: '',
+      quantity: '',
+      unitPrice: '',
+      totalPrice: '',
+      currency: '',
+      itemCode: '',
+      uom: '',
+      discount: '',
+      tax: ''
+    }
+    console.log("Saved items:", newSavedItems);
+  };
+  
   
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
@@ -202,7 +223,18 @@ export default function CreateQuotation() {
     window.location.reload();
   }
   }
+  const handleEditItem = (index) => {
+    const itemToEdit = savedItems[index];
+    const items = [...formData.items];
+    items[0] = itemToEdit;
+    setFormData({ ...formData, items });
+    setSavedItems(savedItems.filter((_, i) => i !== index));
+  };
 
+  const handleDelete = (index) => {
+    const updatedItems = savedItems.filter((_, i) => i !== index);
+    setSavedItems(updatedItems);
+  };
 
 
 
@@ -531,6 +563,47 @@ export default function CreateQuotation() {
   <>
   <h2 style={{marginLeft:'2%'}}>Items:</h2>
 
+{(savedItems.length>0)&&<TableContainer component={Paper} style={{ maxWidth: '97%', margin: '1em auto' }}>
+          <Table>
+            <TableHead >
+              <TableRow style={{backgroundColor:"black"}}>
+                <TableCell style={{color:"white"}}>Sr No</TableCell>
+                <TableCell style={{color:"white"}}>Item Name</TableCell>
+                <TableCell style={{color:"white"}}>Item Code</TableCell>
+                <TableCell style={{color:"white"}}>Total Price</TableCell>
+                <TableCell style={{color:"white"}}>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {savedItems?.map((item, index) => (
+                <TableRow key={index}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{item?.itemName}</TableCell>
+                  <TableCell>{item?.itemCode}</TableCell>
+                  <TableCell>{item?.totalPrice}</TableCell>
+                  <TableCell>
+                    <Button 
+                      style={{ backgroundColor: 'treansparent', color: 'white' }} 
+                      onClick={() => handleDelete(index)}
+                    >
+                      <DeleteIcon style={{color:"red"}}/>
+                    </Button>
+
+                    <Button 
+                      style={{ backgroundColor: 'transparent', color: 'white', marginRight: '15px' }} 
+                      onClick={() => handleEditItem(index)}
+                    >
+                      <EditIcon style={{color:"blue"}}/>
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+}
+
         {formData?.items?.map((detail, index) => (
   <Grid container spacing={2} key={index} style={{  maxWidth:'97%',margin:'1em auto', border:"1px solid #C4C4C4",borderRadius:"7px" }}>
 
@@ -656,7 +729,7 @@ export default function CreateQuotation() {
         />
       {/* </Grid> */}
     </Grid>
-    <Button style={{backgroundColor:"black", color:"white",height:"8%",margin:'4% 2%'}}> Save Item</Button>
+    <Button onClick={()=>handleSaveItem(index)} style={{backgroundColor:"black", color:"white",height:"8%",margin:'4% 2%'}}> Save Item</Button>
     <Button style={{backgroundColor:"black", color:"white",height:"8%",margin:'4% 2%'}} onClick={()=>handleDeleteItems(index)}>close</Button>
     </Grid>
     ))}
@@ -664,7 +737,7 @@ export default function CreateQuotation() {
 
 {selectedTab === 1 &&<Button className="add-btn" sx={{margin:"0em 2em", width:"60%"}}  onClick={handleAddItems}><AddIcon/> Add Item Details</Button>
 }
-<h2 style={{marginLeft:'2.5%', width:"100%"}}>Other Charges and Discount:</h2>
+<h2 style={{marginLeft:'4%', width:"100%"}}>Other Charges and Discount:</h2>
 </div>
 
 <Grid container spacing={2} style={{ maxWidth:'97%',margin:'1em auto',padding:"2.5% 10px", border:"1px solid #C4C4C4",borderRadius:"7px" }}>
@@ -680,7 +753,7 @@ export default function CreateQuotation() {
                 onChange={handleChange} />
             </Grid> .
 
-      <Grid item xs={5}>
+      <Grid item xs={6}>
               <InputLabel className="ip-label" >Freight</InputLabel >
               <TextField
               sx={{width:"100%"}}
@@ -691,9 +764,11 @@ export default function CreateQuotation() {
                 onChange={handleChange} />
             </Grid> 
 
-      <Grid item xs={3}>
+      <Grid item xs={2}>
               <InputLabel className="ip-label" >Discount(%)</InputLabel >
               <TextField
+              sx={{width:"100%"}}
+
               size="small"
                 className="text-field"
                 name="discount"
