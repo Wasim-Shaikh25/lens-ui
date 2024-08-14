@@ -107,12 +107,12 @@ export default function CreateQuotation() {
       startStatement: "",
       endStatement: "",
       statement: "",
-      freight: 0,
-      discount: 0,
-      sgst: 0,
-      cgst: 0,
-      igst: 0,
-      grandTotal: 0,
+      freight: '',
+      discount: '',
+      sgst: '',
+      cgst: '',
+      igst: '',
+      grandTotal: '',
       name: "",
       signatoryDesignation: "",
       insertedByUserId: "",
@@ -224,15 +224,15 @@ export default function CreateQuotation() {
         onChange={handleTabChange}
         sx={{
           '& .MuiTabs-flexContainer': {
-            justifyContent: 'center',
+            justifyContent: 'start',
           },
           '& .MuiTab-root': {
             textTransform: 'none',
             fontWeight: 'bold',
-            padding: '5px 12px',            
-            minWidth: '100px',
-            minHeight: '36px',     // Reduced minHeight to decrease overall tab height
-            margin:'0px 3px',
+            padding: '2px 10px',            
+            minWidth: '15%',
+            minHeight: '50px',     // Reduced minHeight to decrease overall tab height
+            margin:'0px 1px',
           },
         }}
         indicatorColor="primary"
@@ -529,6 +529,7 @@ export default function CreateQuotation() {
 
       {selectedTab === 1 && (
   <>
+  <h2 style={{marginLeft:'2%'}}>Items:</h2>
 
         {formData?.items?.map((detail, index) => (
   <Grid container spacing={2} key={index} style={{  maxWidth:'97%',margin:'1em auto', border:"1px solid #C4C4C4",borderRadius:"7px" }}>
@@ -659,11 +660,100 @@ export default function CreateQuotation() {
     <Button style={{backgroundColor:"black", color:"white",height:"8%",margin:'4% 2%'}} onClick={()=>handleDeleteItems(index)}>close</Button>
     </Grid>
     ))}
+<div style={{display:'flex', flexDirection:'column'}}>
+
+{selectedTab === 1 &&<Button className="add-btn" sx={{margin:"0em 2em", width:"60%"}}  onClick={handleAddItems}><AddIcon/> Add Item Details</Button>
+}
+<h2 style={{marginLeft:'2.5%', width:"100%"}}>Other Charges and Discount:</h2>
+</div>
+
+<Grid container spacing={2} style={{ maxWidth:'97%',margin:'1em auto',padding:"2.5% 10px", border:"1px solid #C4C4C4",borderRadius:"7px" }}>
+
+      <Grid item xs={3}>
+              <InputLabel className="ip-label" >P&F.[%]</InputLabel >
+              <TextField
+                // sx={{width:"100%"}}
+              size="small"
+                className="text-field"
+                name="pandF"
+                value={formData.pandF}
+                onChange={handleChange} />
+            </Grid> .
+
+      <Grid item xs={5}>
+              <InputLabel className="ip-label" >Freight</InputLabel >
+              <TextField
+              sx={{width:"100%"}}
+              size="small"
+                className="text-field"
+                name="freight"
+                value={formData.freight}
+                onChange={handleChange} />
+            </Grid> 
+
+      <Grid item xs={3}>
+              <InputLabel className="ip-label" >Discount(%)</InputLabel >
+              <TextField
+              size="small"
+                className="text-field"
+                name="discount"
+                value={formData.discount}
+                onChange={handleChange} />
+            </Grid> 
+
+
+      <Grid item xs={3}>
+              <InputLabel className="ip-label" >SGST[%]</InputLabel >
+              <TextField
+
+              size="small"
+                className="text-field"
+                name="sgst"
+                value={formData.sgst}
+                onChange={handleChange} />
+            </Grid> 
+
+
+      <Grid item xs={3}>
+              <InputLabel className="ip-label" >CGST[%]</InputLabel >
+              <TextField
+
+              size="small"
+                className="text-field"
+                name="cgst"
+                value={formData.cgst}
+                onChange={handleChange} />
+            </Grid> 
+
+      <Grid item xs={3}>
+              <InputLabel className="ip-label" >IGST[%]</InputLabel >
+              <TextField
+
+              size="small"
+                className="text-field"
+                name="igst"
+                value={formData.igst}
+                onChange={handleChange} />
+            </Grid> 
+
+      <Grid item xs={3}>
+              <InputLabel className="ip-label" >Grand Total</InputLabel >
+              <TextField
+                            sx={{width:'100%'}}
+
+              size="small"
+                className="text-field"
+                name="grandTotal"
+                value={formData.grandTotal}
+                onChange={handleChange} />
+            </Grid> 
+
+
+            </Grid> 
   </>
 
 )}
-{selectedTab === 1 &&<Button className="add-btn" sx={{margin:"0em 2em"}}  onClick={handleAddItems}><AddIcon/> Add Item Details</Button>
-}
+
 
 
 {selectedTab === 2 &&
