@@ -276,6 +276,8 @@ export default function CreateQuotation() {
         <Tab icon={<PersonIcon />} label="Terms & Conditions" iconPosition="start" />
         <Tab icon={<PersonIcon />} label="Covering Letter" iconPosition="start" />
       </Tabs>
+      <hr style={{width:'100%'}} />
+
 
     <Grid container spacing={2} sx={{marginTop:"0.5rem"}}>
 
@@ -566,7 +568,7 @@ export default function CreateQuotation() {
 {(savedItems.length>0)&&<TableContainer component={Paper} style={{ maxWidth: '97%', margin: '1em auto' }}>
           <Table>
             <TableHead >
-              <TableRow style={{backgroundColor:"black"}}>
+              <TableRow style={{backgroundColor:"#000045"}}>
                 <TableCell style={{color:"white"}}>Sr No</TableCell>
                 <TableCell style={{color:"white"}}>Item Name</TableCell>
                 <TableCell style={{color:"white"}}>Item Code</TableCell>
@@ -582,18 +584,19 @@ export default function CreateQuotation() {
                   <TableCell>{item?.itemCode}</TableCell>
                   <TableCell>{item?.totalPrice}</TableCell>
                   <TableCell>
-                    <Button 
-                      style={{ backgroundColor: 'treansparent', color: 'white' }} 
-                      onClick={() => handleDelete(index)}
-                    >
-                      <DeleteIcon style={{color:"red"}}/>
-                    </Button>
 
                     <Button 
-                      style={{ backgroundColor: 'transparent', color: 'white', marginRight: '15px' }} 
+                    className='mui-btn--small'
+style={{maxWidth:'25px', maxHeight: '25px',  backgroundColor: '#000050', color:'white', marginRight: '15px' }} 
                       onClick={() => handleEditItem(index)}
                     >
-                      <EditIcon style={{color:"blue"}}/>
+                      Edit
+                    </Button>
+               
+                    <Button style={{maxWidth:'25px', maxHeight: '25px',  backgroundColor: 'red', color:'white', marginRight: '15px' }} 
+onClick={() => handleDelete(index)}
+                    >
+                      Delete
                     </Button>
                   </TableCell>
                 </TableRow>
