@@ -320,7 +320,8 @@ console.log("form Data from outside is ",formData)
     try {
       const res = await axiosInstance.post('lens/Quotation/save',updatedFormData);
       const {data} = res;
-      console.log("Data sent Successfully");
+      console.log("data is ",data)
+      navigate('/quotationSuccess')
     } catch (error) {
       console.log(error)
     }

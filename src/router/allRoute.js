@@ -26,6 +26,7 @@ import ResetPassword from '../Pages/resetPassword/ResetPassword.js';
 import UserDashboard from '../Pages/User/UserDashboard.js';
 import {useLocation} from 'react-router-dom';
 import CreateQuotation from '../Pages/Quotation/CreateQuotation.js';
+import QuotationSuccess from '../Pages/Quotation/QuotationSuceess.js';
 
 
 
@@ -88,6 +89,7 @@ const AllRoute = ({isSidebar}) => {
           <Route path="/reset" element={<ResetPassword />} />
           <Route path="/login" element={<Login />} />
           <Route path="/quotation" element={<CreateQuotation />} />
+          <Route path="/quotationSuccess" element={<QuotationSuccess />} />
       
     </Routes>
   </div>
