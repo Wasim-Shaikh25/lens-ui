@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { TextField ,Tabs, Tab, Box, Button,  Container, Grid, InputLabel , IconButton, Autocomplete, Checkbox, FormControlLabel } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../../App.css'
-import { getBranches, handleSubmit } from '../../apis/SignupApi';
-import { height } from '@mui/system';
+import { getBranches } from '../../apis/SignupApi';
 import PersonIcon from "@mui/icons-material/Person";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
+import { Radio, RadioGroup, FormControl, FormLabel } from '@mui/material';
+import axiosInstance from '../../axios/axiosInstance';
 
 
 
@@ -19,6 +18,7 @@ export default function CreateQuotation() {
   const [cbranch,setcBranch] = useState([]);
   const qOptions = ['Email', 'Phone', 'Verbal', 'Visit'];
   const catOptions = ["API Plan", "Grafoil", "Mechanical Seal", "Re-conditioning","Rotary Joints"]
+  const ptOptions = ["C&F (Cost and Frieght)", "C&I (Cost and Insurance)", "CIF (Cost, Insurance & Frieght)", "Ex-Works(Mumbai)","Ex-Works (Palanpur, Gujrat)","FOB (Free on Board)","FOR (Free on Road/Rail)"]
   const [selectedTab, setSelectedTab] = useState(0);
   const [isInitialized, setIsInitialized] = useState(false);
   const [savedItems, setSavedItems] = useState([]);
@@ -81,6 +81,61 @@ export default function CreateQuotation() {
   
 
    useEffect(()=>{
+    if(savedItems.length>1){
+      setFormData({
+    
+        category: "",
+        customerEnquiryNo: "",
+        branch: "",
+        enquiryNo: "",
+        customer: "",
+        customerAddress: "",
+        kindAttentionTo: "",
+        designation: "",
+        dueOn: "",
+        transport: "",
+        specialComments: "",
+        revisionNo: "",
+        validityWeeks: "",
+        quotationSource: "",
+        deliverySchedule: "",
+        engineer: "",
+        budgetaryOffer: false,
+        paymentTerms: "",
+        priceTerm: "",
+        startStatement: "",
+        endStatement: "",
+        statement: "",
+        freight: 0,
+        discount: 0,
+        sgst: 0,
+        cgst: 0,
+        igst: 0,
+        grandTotal: 0,
+        name: "",
+        signatoryDesignation: "",
+        insertedByUserId: "",
+        lastUpdatedByUserId: "",
+        items: [  { // Static item at index 0
+          itemName: '',
+          itemDescription: '',
+          quantity: '',
+          unitPrice: '',
+          totalPrice: '',
+          currency: '',
+          itemCode: '',
+          uom: '',
+          discount: '',
+          tax: ''
+        }],
+        guaranteeWarranty: true,
+        guarantee: "",
+        warranty: "",
+        pandF: ''
+      
+      })
+    }
+
     if(qId!==undefined){
     // getCustomer(rId, setFormData)
     }else{
@@ -147,7 +202,9 @@ export default function CreateQuotation() {
       // Initialize formData or perform any setup needed
       setIsInitialized(true);
     }
-  }, [isInitialized]);
+  }, [isInitialized, savedItems.length]);
+
+console.log("form Data from outside is ",formData)
 
 
 
@@ -155,14 +212,31 @@ export default function CreateQuotation() {
     const { name, type, checked, value } = e.target;
     const newFormData = { ...formData };
   
+    // if (type === "checkbox") {
+    //   newFormData[name] = checked; // For checkboxes, use 'checked' instead of 'value'
+    // } else if (index === undefined) {
+    //   newFormData[name] = value;
+    // } else {
+    //   // Extract the property name and update the specific item
+    //   newFormData.items[index][name] = value;
+    // }
+
     if (type === "checkbox") {
-      newFormData[name] = checked; // For checkboxes, use 'checked' instead of 'value'
-    } else if (index === undefined) {
+      newFormData[name] = checked;
+  } else if (name === "warranty" || name === "guarantee") {
+      newFormData.guarantee = name === "guarantee" ? value : "";
+      newFormData.warranty = name === "warranty" ? value : "";
+  } else if (index === undefined) {
       newFormData[name] = value;
-    } else {
-      // Extract the property name and update the specific item
-      newFormData.items[index][name] = value;
-    }
+  } else {
+      // Update specific item in items array
+      newFormData.items[index] = {
+          ...newFormData.items[index],
+          [name]: value
+      };
+  }
+  
+
     setFormData(newFormData);
     console.log("Updated form data:", newFormData);
   };
@@ -189,26 +263,16 @@ export default function CreateQuotation() {
     });
   };
 
-
   const handleSaveItem = (index) => {
+    // Save the current item to the savedItems array
     const newSavedItems = [...savedItems, formData.items[index]];
     setSavedItems(newSavedItems);
-    formData.items[index] =   { // Static item at index 0
-      itemName: '',
-      itemDescription: '',
-      quantity: '',
-      unitPrice: '',
-      totalPrice: '',
-      currency: '',
-      itemCode: '',
-      uom: '',
-      discount: '',
-      tax: ''
-    }
     console.log("Saved items:", newSavedItems);
-  };
+};
+
   
   
+
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
   };
@@ -240,10 +304,24 @@ export default function CreateQuotation() {
 
 
 
-  const handleSubmit=(e)=>{
+  const handleSubmit = async(e)=>{
     e.preventDefault();
-    console.log("form data is ",formData);
+    console.log("formData is ",formData);
+      // Update the formData with the new items array
+      setFormData(prevState => ({
+        ...prevState,
+        items: [...savedItems]
+    }));
 
+
+    try {
+      const res = await axiosInstance.post('lens/Quotation/save',formData);
+      const {data} = res;
+      console.log("Data sent Successfully");
+    } catch (error) {
+      console.log(error)
+    }
+  
   }
 
   return (
@@ -834,17 +912,162 @@ onClick={() => handleDelete(index)}
 
 
 
-{selectedTab === 2 &&
-<>
+{selectedTab === 2 &&<>
+<h2 style={{marginLeft:"2%"}}>Terms:</h2>
+<Grid container spacing={1.5} style={{  maxWidth:'97%',margin:'0.5em auto',padding:"1.7%", border:"1px solid #C4C4C4",borderRadius:"7px" }}>
+<Grid item xs={6}>
+    <InputLabel className="ip-label">Price Terms</InputLabel >
+  <Autocomplete
+    size="small"
+    value={formData.priceTerm || ''}
+    onChange={(event, newValue) => {
+      setFormData({
+        ...formData,
+        priceTerm: newValue || ''
+      });
+    }}
 
- terms and condition ka form
+    inputValue={formData.priceTerm || ''}
+    onInputChange={(event, newInputValue) => {
+      setFormData({
+        ...formData,
+        priceTerm: newInputValue || ''
+      });
+    }}
+
+    options={ptOptions.map((src) => src)}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        size="small"
+        variant="outlined"
+        placeholder='select any one transport'
+        fullWidth
+      />
+    )}
+  />
+  </Grid>
+
+  <Grid item xs={6}>
+              <InputLabel className="ip-label" >Payment Terms</InputLabel >
+              <TextField
+               sx={{width:'100%'}}
+              size="small"
+              multiline
+              rows={2}
+                className="text-field"
+                name="paymentTerms"
+                value={formData.paymentTerms}
+                onChange={handleChange} />
+            </Grid> 
+
+  </Grid>
+
+
+
+            <h2 style={{marginLeft:"2%"}}>Guarantee/Warranty:</h2>
+
+            <Grid container spacing={1.5} style={{  maxWidth:'97%',margin:'0.5em auto',padding:"1.7%", border:"1px solid #C4C4C4",borderRadius:"7px" }}>
+
+            <Grid item sx={10}>
+            <FormLabel component="legend">Select Option</FormLabel>
+      <RadioGroup
+        aria-label="warranty-guarantee"
+        name="warrantyGuarantee"
+        value={formData.guarantee ? 'guarantee' : formData.warranty ? 'warranty' : ''}
+        onChange={handleChange}
+        >
+        <FormControlLabel 
+        value="guarantee" 
+        control={<Radio />} 
+        label="Guarantee" 
+        name="guarantee"
+        />
+        <FormControlLabel 
+          value="warranty" 
+          control={<Radio />} 
+          label="Warranty" 
+          name="warranty"
+        />
+      </RadioGroup>
+    </Grid>
+
+            <Grid item xs={10}>
+              <InputLabel className="ip-label" >Statement</InputLabel >
+              <TextField
+               sx={{width:'100%'}}
+              size="small"
+              multiline
+              rows={2}
+                className="text-field"
+                name="statement"
+                value={formData.statement}
+                onChange={handleChange} />
+            </Grid> 
+
+            </Grid>
 
 </>
 }
 
 {selectedTab === 3 &&<>
+<h3 style={{marginLeft:"2%"}}>Start Statement will be printed before item(s) Listing and End Statement Will be printed after Commercial Term(s) Section</h3>
+  <Grid container spacing={1.5} style={{ maxWidth:'97%',margin:'1em auto',padding:"2.5% 10px", border:"1px solid #C4C4C4",borderRadius:"7px" }}>
+  <Grid item xs={6}>
+              <InputLabel className="ip-label" >Start Statement</InputLabel >
+              <TextField
+               sx={{width:'100%'}}
+              size="small"
+              multiline
+              rows={2}
+                className="text-field"
+                name="startStatement"
+                value={formData.startStatement}
+                onChange={handleChange} />
+            </Grid> 
 
- covering letter ka form
+  <Grid item xs={6}>
+              <InputLabel className="ip-label" >End Statement</InputLabel >
+              <TextField
+               sx={{width:'100%'}}
+              size="small"
+              multiline
+              rows={2}
+                className="text-field"
+                name="endStatement"
+                value={formData.endStatement}
+                onChange={handleChange} />
+            </Grid> 
+
+  </Grid>
+
+    <h2 style={{marginLeft:'2%'}}>Signatory</h2>
+  <Grid container spacing={1.5} style={{ maxWidth:'97%',margin:'0.5em auto',padding:"2.5% 10px", border:"1px solid #C4C4C4",borderRadius:"7px" }}>
+  <Grid item xs={6}>
+              <InputLabel className="ip-label" >Name</InputLabel >
+              <TextField
+               sx={{width:'100%'}}
+              size="small"
+                className="text-field"
+                name="name"
+                value={formData.name}
+                onChange={handleChange} />
+            </Grid> 
+
+  <Grid item xs={6}>
+              <InputLabel className="ip-label" >Designation</InputLabel >
+              <TextField
+               sx={{width:'100%'}}
+              size="small"
+                className="text-field"
+                name="designation"
+                value={formData.designation}
+                onChange={handleChange} />
+            </Grid> 
+
+
+
+  </Grid>
 
 </>
 }
@@ -859,7 +1082,7 @@ onClick={() => handleDelete(index)}
 
       {/* {selectedTab === 1?():null} */}
 
-        {!qId && (selectedTab===3) ?( <Button className="update-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} type="submit" variant="contained" >Submit</Button>) : (selectedTab===3) ?(
+        {!qId && (selectedTab===3) ?( <Button className="update-btn" onClick={handleSubmit} sx={{margin:"1rem 1rem 0rem 1rem"}} type="submit" variant="contained" >Submit</Button>) : (selectedTab===3) ?(
           <>
             <Button className="update-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} variant="contained"  >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>):null}
@@ -870,6 +1093,3 @@ onClick={() => handleDelete(index)}
   );
 
 }
-
-
-
