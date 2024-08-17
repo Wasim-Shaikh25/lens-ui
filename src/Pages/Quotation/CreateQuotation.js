@@ -77,6 +77,14 @@ export default function CreateQuotation() {
       pandF: ''
     
     });
+
+    useEffect(() => {
+      if (!isInitialized) {
+        // Initialize formData or perform any setup needed
+        setIsInitialized(true);
+      }
+    }, [isInitialized, savedItems]);
+  
   
   
 
@@ -197,13 +205,7 @@ export default function CreateQuotation() {
     
   },[qId])
 
-  useEffect(() => {
-    if (!isInitialized) {
-      // Initialize formData or perform any setup needed
-      setIsInitialized(true);
-    }
-  }, [isInitialized, savedItems.length]);
-
+ 
 console.log("form Data from outside is ",formData)
 
 
@@ -267,6 +269,9 @@ console.log("form Data from outside is ",formData)
     // Save the current item to the savedItems array
     const newSavedItems = [...savedItems, formData.items[index]];
     setSavedItems(newSavedItems);
+
+    formData.items[index]={ itemName: '', itemDescription: '', quantity: 0, unitPrice: 0, totalPrice: 0, currency: '', itemCode: '', uom: '', discount: 0, tax: 0 }
+
     console.log("Saved items:", newSavedItems);
 };
 
@@ -287,6 +292,7 @@ console.log("form Data from outside is ",formData)
     window.location.reload();
   }
   }
+
   const handleEditItem = (index) => {
     const itemToEdit = savedItems[index];
     const items = [...formData.items];
@@ -306,16 +312,13 @@ console.log("form Data from outside is ",formData)
 
   const handleSubmit = async(e)=>{
     e.preventDefault();
-    console.log("formData is ",formData);
-      // Update the formData with the new items array
-      setFormData(prevState => ({
-        ...prevState,
-        items: [...savedItems]
-    }));
+    // Update the formData with the new items array
+    const updatedFormData = { ...formData, items: savedItems };
 
+    console.log("Updated formData:", updatedFormData);
 
     try {
-      const res = await axiosInstance.post('lens/Quotation/save',formData);
+      const res = await axiosInstance.post('lens/Quotation/save',updatedFormData);
       const {data} = res;
       console.log("Data sent Successfully");
     } catch (error) {
@@ -323,6 +326,8 @@ console.log("form Data from outside is ",formData)
     }
   
   }
+
+
 
   return (
     <Container className="container" sx= {{marginTop:"20px", backgroundColor:"rgb(250, 251, 251)"}}>
