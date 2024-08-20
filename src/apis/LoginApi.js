@@ -3,7 +3,6 @@ import Cookies from 'js-cookie';
 import axiosInstance from "../axios/axiosInstance";
 
 
-const baseUrl = "https://testapp-env.eba-6smrf3fp.ap-south-1.elasticbeanstalk.com";
 
 
 export const handleSubmit = async (e, setToken, formData, navigate) => {
@@ -12,14 +11,25 @@ export const handleSubmit = async (e, setToken, formData, navigate) => {
     const res = await axiosInstance.post(`/auth/authenticate`, formData);
     const { data } = res;
     const token = String(data.access_token); // Ensure token is a string
-    const expiryTime = new Date(new Date().getTime() + 30 * 60 * 1000); // 30 minutes from now
+    const expiryTime = new Date(new Date().getTime() + 10 * 60 * 60* 1000); // 30 minutes from now
 
-    Cookies.set('access_token', token, { expires: expiryTime });
+    // Set the token as a cookie
+    await Cookies.set('access_token', token, { expires: expiryTime });
     setToken(token); // Store the decoded token in global state
 
     console.log("Token is ", token);
-    navigate('/');
+
+    // Check if the access_token is null or an empty string
+    const savedToken = Cookies.get('access_token');
+    if (savedToken === 'null' || !savedToken) {
+      navigate('/reset');
+    } else {
+      setTimeout(() => {
+        navigate('/');
+      }, 1000);    }
+      
   } catch (err) {
     console.log(err);
   }
 };
+
