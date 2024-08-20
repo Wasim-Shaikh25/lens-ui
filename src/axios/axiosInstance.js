@@ -1,21 +1,23 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-
 // Ensure baseURL is correctly defined
-const baseURL = process.env.REACT_APP_BASE_URL ;
-
+// const baseURL = process.env.REACT_APP_BASE_URL ;
+const baseURL = "https://testapp-env.eba-6smrf3fp.ap-south-1.elasticbeanstalk.com";
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL: baseURL
+  baseURL: baseURL,
 });
+
+
 
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = Cookies.get('access_token');
-    if (token) {
+    console.log("token is ",token)
+    if (token!=='null' && token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
@@ -26,3 +28,4 @@ axiosInstance.interceptors.request.use(
 );
 
 export default axiosInstance;
+
