@@ -11,14 +11,17 @@ const axiosInstance = axios.create({
 });
 
 
+
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = Cookies.get('access_token');
-    console.log("token is ",token)
+    console.log("token is ",token) 
     if (token!=='null' && token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
+
     return config;
   },
   (error) => {

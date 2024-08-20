@@ -11,14 +11,16 @@ import axiosInstance from '../../axios/axiosInstance';
 
 
 
-export default function CreateQuotation() {
+export default function CreateOfm() {
 
   const navigate = useNavigate();
-  let {qId} = useParams();
+  let {oId} = useParams();
   const cbranch= ['exports'];
-  const qOptions = ['Email', 'Phone', 'Verbal', 'Visit'];
+  const prOptions= ['High','Medium','Low'];
+  const ivOptions= ['Customer'];
+  const oType = ['Regular', 'Annual rate Contract', 'Tender'];
   const catOptions = ["API Plan", "Grafoil", "Mechanical Seal", "Re-conditioning","Rotary Joints"]
-  const ptOptions = ["C&F (Cost and Frieght)", "C&I (Cost and Insurance)", "CIF (Cost, Insurance & Frieght)", "Ex-Works(Mumbai)","Ex-Works (Palanpur, Gujrat)","FOB (Free on Board)","FOR (Free on Road/Rail)"]
+  const ptOptions = ['Air Frieght', 'Courier', 'Hand Delivery', 'Insured Registered post Parcel', 'Rail','Sea','Speed Post','Value Payable Parcel']
   const [selectedTab, setSelectedTab] = useState(0);
   const [isInitialized, setIsInitialized] = useState(false);
   const [savedItems, setSavedItems] = useState([]);
@@ -26,57 +28,77 @@ export default function CreateQuotation() {
   
  
   const [formData, setFormData] = useState({
-    
-      category: "",
-      customerEnquiryNo: "",
-      branch: "",
-      enquiryNo: "",
-      customer: "",
-      customerAddress: "",
-      kindAttentionTo: "",
-      designation: "",
-      dueOn: "",
-      transport: "",
-      specialComments: "",
-      revisionNo: "",
-      validityWeeks: "",
-      quotationSource: "",
-      deliverySchedule: "",
-      engineer: "",
-      budgetaryOffer: false,
-      paymentTerms: "",
-      priceTerm: "",
-      startStatement: "",
-      endStatement: "",
-      statement: "",
-      freight: 0,
-      discount: 0,
-      sgst: 0,
-      cgst: 0,
-      igst: 0,
-      grandTotal: 0,
-      name: "",
-      signatoryDesignation: "",
-      insertedByUserId: "",
-      lastUpdatedByUserId: "",
-      items: [  { // Static item at index 0
-        itemName: '',
-        itemDescription: '',
-        quantity: '',
-        unitPrice: '',
-        totalPrice: '',
-        currency: '',
-        itemCode: '',
-        uom: '',
-        discount: '',
-        tax: ''
-      }],
-      guaranteeWarranty: true,
-      guarantee: "",
-      warranty: "",
-      pandF: ''
-    
+  
+     // General Section
+     branch: "",
+     poNo: "",
+     orderType: "",
+     category: "",
+     invoiceTo: "",
+     transportThrough: "",
+     customer: "",
+     quotationNo: "",
+     kindAttentionTo: "",
+     customerAddress: "",
+     priority: "",
+     transport: "",
+     deliveryPeriod: "",
+     preQANo: "",
+     statutoryRegulatoryRequirements: true,
+     specialInformation: "",
+     paymentTerms: "",
+     engineer: "",
+     oaNo: "",
+     industry: "",
+     projectOrder: true,
+     penaltyApplicable: true,
+     poReceived: true,
+
+     // Insurance
+     rawMaterialTC: true,
+     qcReport: true,
+     testReport: true,
+     guaranteeCertificate: true,
+     fitmentCertificate: true,
+     complianceCertificate: true,
+ 
+ // Consignee
+     ofmStatus: "",
+     externalInspection: true,
+     externalInspectionWhere: "",
+     externalInspectionByWhom: "",
+     consigneeName: "",
+     insertedByUserId: "",
+     lastUpdatedByUserId: "",
+     insurance: true,
+     insuranceBy: "",
+     insuranceBorneBy: "",
+     ofmItems: [
+       {
+         srNo: 0,
+         factor: "",
+         type: "",
+         size: "",
+         face: "",
+         description: "",
+         ciCode: "",
+         drfNo: "",
+         quantity: 0,
+         unit: "",
+         unitPrice: 0,
+         unitLPrice: 0,
+         discount: 0,
+         totalValue: 0
+       }
+     ]
     });
+   
+ 
+ // General Data No found in PDf
+ // pre OS Date /company / country / tranasction type /  OFM Date / Po date / 
+ 
+ // Insurance Data Not Found in 
+
 
     useEffect(() => {
       if (!isInitialized) {
@@ -91,119 +113,155 @@ export default function CreateQuotation() {
    useEffect(()=>{
     if(savedItems.length>1){
       setFormData({
-    
-        category: "",
-        customerEnquiryNo: "",
-        branch: "",
-        enquiryNo: "",
-        customer: "",
-        customerAddress: "",
-        kindAttentionTo: "",
-        designation: "",
-        dueOn: "",
-        transport: "",
-        specialComments: "",
-        revisionNo: "",
-        validityWeeks: "",
-        quotationSource: "",
-        deliverySchedule: "",
-        engineer: "",
-        budgetaryOffer: false,
-        paymentTerms: "",
-        priceTerm: "",
-        startStatement: "",
-        endStatement: "",
-        statement: "",
-        freight: 0,
-        discount: 0,
-        sgst: 0,
-        cgst: 0,
-        igst: 0,
-        grandTotal: 0,
-        name: "",
-        signatoryDesignation: "",
-        insertedByUserId: "",
-        lastUpdatedByUserId: "",
-        items: [  { // Static item at index 0
-          itemName: '',
-          itemDescription: '',
-          quantity: '',
-          unitPrice: '',
-          totalPrice: '',
-          currency: '',
-          itemCode: '',
-          uom: '',
-          discount: '',
-          tax: ''
-        }],
-        guaranteeWarranty: true,
-        guarantee: "",
-        warranty: "",
-        pandF: ''
-      
-      })
+           // General Section
+     branch: "",
+     poNo: "",
+     orderType: "",
+     category: "",
+     invoiceTo: "",
+     transportThrough: "",
+     customer: "",
+     quotationNo: "",
+     kindAttentionTo: "",
+     customerAddress: "",
+     priority: "",
+     transport: "",
+     deliveryPeriod: "",
+     preQANo: "",
+     statutoryRegulatoryRequirements: true,
+     specialInformation: "",
+     paymentTerms: "",
+     engineer: "",
+     oaNo: "",
+     industry: "",
+     projectOrder: true,
+     penaltyApplicable: true,
+     poReceived: true,
+     
+     // Insurance
+     rawMaterialTC: true,
+     qcReport: true,
+     testReport: true,
+     guaranteeCertificate: true,
+     fitmentCertificate: true,
+     complianceCertificate: true,
+ 
+ // Consignee
+     ofmStatus: "",
+     externalInspection: true,
+     externalInspectionWhere: "",
+     externalInspectionByWhom: "",
+     consigneeName: "",
+     insertedByUserId: "",
+     lastUpdatedByUserId: "",
+     insurance: true,
+     insuranceBy: "",
+     insuranceBorneBy: "",
+     ofmItems: [
+       {
+         srNo: 0,
+         factor: "",
+         type: "",
+         size: "",
+         face: "",
+         description: "",
+         ciCode: "",
+         drfNo: "",
+         quantity: 0,
+         unit: "",
+         unitPrice: 0,
+         unitLPrice: 0,
+         discount: 0,
+         totalValue: 0
+       }
+     ]
+    });
+   
+ 
+ // General Data No found in PDf
+ // pre OS Date /company / country / tranasction type /  OFM Date / Po date / 
+ 
+ // Insurance Data Not Found in 
     }
 
-    if(qId!==undefined){
+    if(oId!==undefined){
     // getCustomer(rId, setFormData)
     }else{
 
       setFormData({
-    
-      category: "",
-      customerEnquiryNo: "",
-      branch: "",
-      enquiryNo: "",
-      customer: "",
-      customerAddress: "",
-      kindAttentionTo: "",
-      designation: "",
-      dueOn: "",
-      transport: "",
-      specialComments: "",
-      revisionNo: "",
-      validityWeeks: "",
-      quotationSource: "",
-      deliverySchedule: "",
-      engineer: "",
-      budgetaryOffer: false,
-      paymentTerms: "",
-      priceTerm: "",
-      startStatement: "",
-      endStatement: "",
-      statement: "",
-      freight: '',
-      discount: '',
-      sgst: '',
-      cgst: '',
-      igst: '',
-      grandTotal: '',
-      name: "",
-      signatoryDesignation: "",
-      insertedByUserId: "",
-      lastUpdatedByUserId: "",
-      items: [  { // Static item at index 0
-        itemName: '',
-        itemDescription: '',
-        quantity: '',
-        unitPrice: '',
-        totalPrice: '',
-        currency: '',
-        itemCode: '',
-        uom: '',
-        discount: '',
-        tax: ''
-      }],
-      guaranteeWarranty: true,
-      guarantee: "",
-      warranty: "",
-      pandF: ''
-    
-    })
+   // General Section
+   branch: "",
+   poNo: "",
+   orderType: "",
+   category: "",
+   invoiceTo: "",
+   transportThrough: "",
+   customer: "",
+   quotationNo: "",
+   kindAttentionTo: "",
+   customerAddress: "",
+   priority: "",
+   transport: "",
+   deliveryPeriod: "",
+   preQANo: "",
+   statutoryRegulatoryRequirements: true,
+   specialInformation: "",
+   paymentTerms: "",
+   engineer: "",
+   oaNo: "",
+   industry: "",
+   projectOrder: true,
+   penaltyApplicable: true,
+   poReceived: true,
+   
+   // Insurance
+   rawMaterialTC: true,
+   qcReport: true,
+   testReport: true,
+   guaranteeCertificate: true,
+   fitmentCertificate: true,
+   complianceCertificate: true,
+
+// Consignee
+   ofmStatus: "",
+   externalInspection: true,
+   externalInspectionWhere: "",
+   externalInspectionByWhom: "",
+   consigneeName: "",
+   insertedByUserId: "",
+   lastUpdatedByUserId: "",
+   insurance: true,
+   insuranceBy: "",
+   insuranceBorneBy: "",
+   ofmItems: [
+     {
+       srNo: 0,
+       factor: "",
+       type: "",
+       size: "",
+       face: "",
+       description: "",
+       ciCode: "",
+       drfNo: "",
+       quantity: 0,
+       unit: "",
+       unitPrice: 0,
+       unitLPrice: 0,
+       discount: 0,
+       totalValue: 0
+     }
+   ]
+  });
+ 
+
+// General Data No found in PDf
+// pre OS Date /company / country / tranasction type /  OFM Date / Po date / 
+
+// Insurance Data Not Found in 
 
     }
     
-  },[qId])
+  },[oId])
 
  
 console.log("form Data from outside is ",formData)
@@ -225,6 +283,9 @@ console.log("form Data from outside is ",formData)
 
     if (type === "checkbox") {
       newFormData[name] = checked;
+    }else if (type === "radio" && name === "statutoryRegulatoryRequirements") {
+        // Handle radio buttons by converting the value to a boolean
+        newFormData[name] = value === "true";
   } else if (name === "warranty" || name === "guarantee") {
       newFormData.guarantee = name === "guarantee" ? value : "";
       newFormData.warranty = name === "warranty" ? value : "";
@@ -248,8 +309,8 @@ console.log("form Data from outside is ",formData)
   const handleAddItems = () => {
     setFormData(prevState => ({
       ...prevState,
-      items: [
-        ...prevState.items,
+      ofmItems: [
+        ...prevState.ofmItems,
         { itemName: '', itemDescription: '', quantity: 0, unitPrice: 0, totalPrice: 0, currency: '', itemCode: '', uom: '', discount: 0, tax: 0 }
       ]
     }));
@@ -259,18 +320,18 @@ console.log("form Data from outside is ",formData)
 
   const handleDeleteItems = index => {
     setFormData(prevState => {
-      const newItemDetails = [...prevState.items];
+      const newItemDetails = [...prevState.ofmItems];
       newItemDetails.splice(index, 1);
-      return { ...prevState, items: newItemDetails };
+      return { ...prevState, ofmItems: newItemDetails };
     });
   };
 
   const handleSaveItem = (index) => {
     // Save the current item to the savedItems array
-    const newSavedItems = [...savedItems, formData.items[index]];
+    const newSavedItems = [...savedItems, formData.ofmItems[index]];
     setSavedItems(newSavedItems);
 
-    formData.items[index]={ itemName: '', itemDescription: '', quantity: 0, unitPrice: 0, totalPrice: 0, currency: '', itemCode: '', uom: '', discount: 0, tax: 0 }
+    formData.ofmItems[index]={ itemName: '', itemDescription: '', quantity: 0, unitPrice: 0, totalPrice: 0, currency: '', itemCode: '', uom: '', discount: 0, tax: 0 }
 
     console.log("Saved items:", newSavedItems);
 };
@@ -295,7 +356,7 @@ console.log("form Data from outside is ",formData)
 
   const handleEditItem = (index) => {
     const itemToEdit = savedItems[index];
-    const items = [...formData.items];
+    const items = [...formData.ofmItems];
     items[0] = itemToEdit;
     setFormData({ ...formData, items });
     setSavedItems(savedItems.filter((_, i) => i !== index));
@@ -313,7 +374,7 @@ console.log("form Data from outside is ",formData)
   const handleSubmit = async(e)=>{
     e.preventDefault();
     // Update the formData with the new items array
-    const updatedFormData = { ...formData, items: savedItems };
+    const updatedFormData = { ...formData, ofmItems: savedItems };
 
     console.log("Updated formData:", updatedFormData);
 
@@ -332,7 +393,7 @@ console.log("form Data from outside is ",formData)
 
   return (
     <Container className="container" sx= {{marginTop:"20px", backgroundColor:"rgb(250, 251, 251)"}}>
-      {!qId?<h1 style={{marginLeft:"20px"}}>Quotation-[New Mode]</h1> : <h1 style={{marginLeft:"20px"}}>Update Quotation</h1> }
+      {!oId?<h1 style={{marginLeft:"20px"}}>OFM-[New Mode]</h1> : <h1 style={{marginLeft:"20px"}}>Update OFM</h1> }
       <form  onSubmit={handleSubmit}>
         <div className='card'>
         <Tabs
@@ -356,20 +417,21 @@ console.log("form Data from outside is ",formData)
         centered
       >
         <Tab icon={<PersonIcon />} label="General" iconPosition="start" />
+        <Tab icon={<PersonIcon />} label="Other" iconPosition="start" />
         <Tab icon={<PersonIcon />} label="Items & Charges" iconPosition="start" />
-        <Tab icon={<PersonIcon />} label="Terms & Conditions" iconPosition="start" />
-        <Tab icon={<PersonIcon />} label="Covering Letter" iconPosition="start" />
       </Tabs>
       <hr style={{width:'100%'}} />
 
 
+
     <Grid container spacing={2} sx={{marginTop:"0.5rem"}}>
+  
+{/* General section from start here */}
 
    {selectedTab === 0 &&<>
     <Grid item xs={4}>
+  <InputLabel className="ip-label" >Branch</InputLabel >
 
-
-  <InputLabel className="ip-label"> Branch</InputLabel >
   <Autocomplete
     size="small"
     value={formData.branch || ''}
@@ -401,19 +463,54 @@ console.log("form Data from outside is ",formData)
   </Grid>
 
 
-
+            
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Revision Number</InputLabel >
+              <InputLabel className="ip-label" >PoNo</InputLabel >
               <TextField
               size="small"
                 className="text-field"
-                name="revisionNo"
-                value={formData.revisionNo}
+                name="poNo"
+                value={formData.poNo}
                 onChange={handleChange} />
             </Grid> 
 
 
-    <Grid item xs={3.5}>
+
+            
+     <Grid item xs={2.8}>
+  <InputLabel className="ip-label" >Order Type</InputLabel >
+
+  <Autocomplete
+    size="small"
+    value={formData.orderType || ''}
+    onChange={(event, newValue) => {
+      setFormData({
+        ...formData,
+        orderType: newValue || ''
+      });
+    }}
+    inputValue={formData.orderType || ''}
+    onInputChange={(event, newInputValue) => {
+      setFormData({
+        ...formData,
+        orderType: newInputValue || ''
+      });
+    }}
+
+    options={oType.map((type) => type)}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        size="small"
+        placeholder='select a branch'
+        variant="outlined"
+        fullWidth
+      />
+    )}
+  />
+  </Grid>
+
+   <Grid item xs={4}>
     <InputLabel className="ip-label" >Category</InputLabel >
   <Autocomplete
     size="small"
@@ -445,7 +542,51 @@ console.log("form Data from outside is ",formData)
     )}
   />
   </Grid>
-            
+
+
+  <Grid item xs={4}>
+    <InputLabel className="ip-label">Invoice To</InputLabel >
+  <Autocomplete
+    size="small"
+    value={formData.invoiceTo || ''}
+    onChange={(event, newValue) => {
+      setFormData({
+        ...formData,
+        invoiceTo: newValue || ''
+      });
+    }}
+    inputValue={formData.category || ''}
+    onInputChange={(event, newInputValue) => {
+      setFormData({
+        ...formData,
+        invoiceTo: newInputValue || ''
+      });
+    }}
+
+
+    options={ivOptions.map((iv) => iv)}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        size="small"
+        placeholder='select a Category'
+        variant="outlined"
+        fullWidth
+      />
+    )}
+  />
+  </Grid>
+
+            <Grid item xs={4}>
+              <InputLabel className="ip-label" >Transport Through</InputLabel >
+              <TextField
+              size="small"
+                className="text-field"
+                name="transportThrough"
+                value={formData.transportThrough}
+                onChange={handleChange} />
+            </Grid>
+
             <Grid item xs={4}>
               <InputLabel className="ip-label" >Customer</InputLabel >
               <TextField
@@ -456,29 +597,22 @@ console.log("form Data from outside is ",formData)
                 onChange={handleChange} />
             </Grid>
 
-            <Grid item xs={4}>
-              <InputLabel className="ip-label" >Customer Enquiry Number</InputLabel >
+<Grid item xs={4}>
+              <InputLabel className="ip-label" >QuotationNo</InputLabel >
               <TextField
               size="small"
                 className="text-field"
-                name="customerEnquiryNo"
-                value={formData.customerEnquiryNo}
-                onChange={handleChange} />
-            </Grid>
-
-            <Grid item xs={4}>
-              <InputLabel className="ip-label" >Customer Address</InputLabel >
-              <TextField
-              size="small"
-                className="text-field"
-                name="customerAddress"
-                value={formData.customerAddress}
-                onChange={handleChange} />
+                name="quotationNo"
+                value={formData.quotationNo}
+                 />
             </Grid>
 
 
-            <Grid item xs={4}>
-              <InputLabel className="ip-label" >Kind Attention To</InputLabel >
+
+
+
+  <Grid item xs={4}>
+              <InputLabel className="ip-label" >kindAttention To</InputLabel >
               <TextField
               size="small"
                 className="text-field"
@@ -487,64 +621,60 @@ console.log("form Data from outside is ",formData)
                 onChange={handleChange} />
             </Grid>
 
-            <Grid item xs={4}>
-              <InputLabel className="ip-label" >Designation</InputLabel >
-              <TextField
-              size="small"
-                className="text-field"
-                name="designation"
-                value={formData.designation}
-                onChange={handleChange} />
-            </Grid>
 
 
-          <Grid item xs={3.2}>
-    <InputLabel className="ip-label" >Quotation Source</InputLabel >
+
+   <Grid item xs={6}>
+  <InputLabel className="ip-label">Customer Address</InputLabel>
+  <TextField
+    size="small"
+    name="customerAddress"
+    value={formData.customerAddress}
+    onChange={handleChange}
+    style={{ width: '100%' }} // Makes the TextField wide
+  />
+
+</Grid>
+
+
+
+
+<Grid item xs={4.8}>
+    <InputLabel className="ip-label" >Priority</InputLabel >
   <Autocomplete
     size="small"
-    value={formData.quotationSource || ''}
+    value={formData.priority || ''}
     onChange={(event, newValue) => {
       setFormData({
         ...formData,
-        quotationSource: newValue || ''
+        priority: newValue || ''
       });
     }}
 
-    inputValue={formData.quotationSource || ''}
+    inputValue={formData.priority || ''}
     onInputChange={(event, newInputValue) => {
       setFormData({
         ...formData,
-        quotationSource: newInputValue || ''
+        priority: newInputValue || ''
       });
     }}
 
-
-    options={qOptions.map((src) => src)}
+    options={prOptions.map((p) => p)}
     renderInput={(params) => (
       <TextField
         {...params}
         size="small"
         variant="outlined"
-        placeholder='select any one source'
+        placeholder='select any one Priority'
         fullWidth
       />
     )}
   />
   </Grid>
 
-  <Grid item xs={4}>
-              <InputLabel className="ip-label" >Due On</InputLabel >
-              <TextField
-              size="small"
-                className="text-field"
-                name="dueOn"
-                value={formData.dueOn}
-                onChange={handleChange} />
-            </Grid>
 
-
-            
-          <Grid item xs={4}>
+         
+<Grid item xs={4.8}>
     <InputLabel className="ip-label" >Transport</InputLabel >
   <Autocomplete
     size="small"
@@ -564,13 +694,13 @@ console.log("form Data from outside is ",formData)
       });
     }}
 
-    options={qOptions.map((src) => src)}
+    options={ptOptions.map((p) => p)}
     renderInput={(params) => (
       <TextField
         {...params}
         size="small"
         variant="outlined"
-        placeholder='select any one transport'
+        placeholder='select any one Priority'
         fullWidth
       />
     )}
@@ -578,51 +708,75 @@ console.log("form Data from outside is ",formData)
   </Grid>
 
 
-  <Grid item xs={4}>
-              <InputLabel className="ip-label" >Validity [weeks]</InputLabel >
+            <Grid item xs={4}>
+              <InputLabel className="ip-label" >Delivery Period</InputLabel >
               <TextField
               size="small"
                 className="text-field"
-                name="validityWeeks"
-                value={formData.validityWeeks}
+                name="deliveryPeriod"
+                value={formData.deliveryPeriod}
+                onChange={handleChange} />
+            </Grid>
+
+            <Grid item xs={5}>
+              <InputLabel className="ip-label" >preQANo</InputLabel >
+              <TextField
+            style={{width:'100%'}}
+              size="small"
+                className="text-field"
+                name="preQANo"
+                value={formData.preQANo}
                 onChange={handleChange} />
             </Grid>
 
 
+            <Grid item xs={4} sx={{ display: "flex", justifyContent: 'center', alignItems: 'center' }}>
+
+  <FormControl component="fieldset">
+    <FormLabel component="legend">Statutory Regulatory Requirements</FormLabel>
+    <RadioGroup
+      aria-label="statutoryRegulatoryRequirements"
+      name="statutoryRegulatoryRequirements"
+      value={formData.statutoryRegulatoryRequirements}
+      onChange={handleChange}
+      row // This makes the radio buttons display horizontally
+    >
+      <FormControlLabel value="true" control={<Radio color="primary" />} label="Yes" />
+      <FormControlLabel value="false" control={<Radio color="primary" />} label="No" />
+    </RadioGroup>
+  </FormControl>
+  </Grid>
 
 
-   <Grid item xs={6}>
-  <InputLabel className="ip-label">Delivery Schedule</InputLabel>
-  <TextField
-    multiline
-    rows={2} // Sets the TextField to be two lines tall
-    size="small"
-    name="deliverySchedule"
-    value={formData.deliverySchedule}
-    onChange={handleChange}
-    style={{ width: '100%' }} // Makes the TextField wide
-  />
-
-</Grid>
-
+            <Grid item xs={6}>
+              <InputLabel className="ip-label" >Special Information</InputLabel >
+              <TextField
+              style={{width:'100%'}}
+                multiline
+                rows={2}
+                size="small"
+                className="text-field"
+                name="specialInformationeer"
+                value={formData.specialInformation}
+                onChange={handleChange} />
+            </Grid>
 
 
+            <Grid item xs={5}>
+              <InputLabel className="ip-label" >Payment Terms</InputLabel >
+              <TextField
+                style={{width:'100%'}}
+                multiline
+                rows={2}
+                size="small"
+                className="text-field"
+                name="engineer"
+                value={formData.paymentTerms}
+                onChange={handleChange} />
+            </Grid>
 
-   <Grid item xs={6}>
-  <InputLabel className="ip-label">Special Comments</InputLabel>
-  <TextField
-    multiline
-    rows={2} // Sets the TextField to be two lines tall
-    size="small"
-    name="specialComments"
-    value={formData.specialComments}
-    onChange={handleChange}
-    style={{ width: '100%' }} // Makes the TextField wide
-  />
-</Grid>
 
-
-<Grid item xs={4}>
+            <Grid item xs={4}>
               <InputLabel className="ip-label" >Engineer</InputLabel >
               <TextField
               size="small"
@@ -632,19 +786,70 @@ console.log("form Data from outside is ",formData)
                 onChange={handleChange} />
             </Grid>
 
-<Grid item xs={4} sx={{display:"flex",justifyContent:'center',alignItems:'center'}}>
-    <FormControlLabel
-      control={
-        <Checkbox
-        value={formData.budgetaryOffer}
-          checked={formData.budgetaryOffer}
-          onChange={handleChange}
-          name="budgetaryOffer"
-          color="primary"
-        />
-      }label="Budgetary Offer"/>
-          </Grid>
-      </>}
+
+            <Grid item xs={4}>
+              <InputLabel className="ip-label" >oaNo</InputLabel >
+              <TextField
+              size="small"
+                className="text-field"
+                name="oaNo"
+                value={formData.oaNo}
+                onChange={handleChange} />
+            </Grid>
+
+            <Grid item xs={4}>
+              <InputLabel className="ip-label" >Industry</InputLabel >
+              <TextField
+              size="small"
+                className="text-field"
+                name="industry"
+                value={formData.industry}
+                onChange={handleChange} />
+            </Grid>
+
+
+            <Grid item xs={4}>
+  <FormControlLabel
+    control={
+      <Checkbox
+        checked={!!formData.projectOrder}  // Convert to boolean for compatibility
+        onChange={handleChange}
+        name="projectOrder"  // Field name
+      />
+    }
+    label="Project Order"
+  />
+</Grid>
+
+<Grid item xs={4}>
+  <FormControlLabel
+    control={
+      <Checkbox
+        checked={!!formData.poReceived}  // Convert to boolean for compatibility
+        onChange={handleChange}
+        name="poReceived"  // Field name
+      />
+    }
+    label="Po Received"
+  />
+</Grid>
+
+<Grid item xs={4}>
+  <FormControlLabel
+    control={
+      <Checkbox
+        checked={!!formData.someOtherField}  // Replace with the actual field
+        onChange={handleChange}
+        name="someOtherField"  // Field name
+      />
+    }
+    label="Some Other Field"
+  />
+</Grid>
+      </>
+      
+      }
+
 
 
       {selectedTab === 1 && (
@@ -693,7 +898,7 @@ onClick={() => handleDelete(index)}
 
 }
 
-        {formData?.items?.map((detail, index) => (
+        {formData?.ofmItems?.map((detail, index) => (
   <Grid container spacing={2} key={index} style={{  maxWidth:'97%',margin:'1em auto', border:"1px solid #C4C4C4",borderRadius:"7px" }}>
 
       <Grid item xs={4} >
@@ -925,6 +1130,7 @@ onClick={() => handleDelete(index)}
 <Grid container spacing={1.5} style={{  maxWidth:'97%',margin:'0.5em auto',padding:"1.7%", border:"1px solid #C4C4C4",borderRadius:"7px" }}>
 <Grid item xs={6}>
     <InputLabel className="ip-label">Price Terms</InputLabel >
+    
   <Autocomplete
     size="small"
     value={formData.priceTerm || ''}
@@ -954,6 +1160,9 @@ onClick={() => handleDelete(index)}
       />
     )}
   />
+
+
+
   </Grid>
 
   <Grid item xs={6}>
@@ -1090,7 +1299,7 @@ onClick={() => handleDelete(index)}
 
       {/* {selectedTab === 1?():null} */}
 
-        {!qId && (selectedTab===3) ?( <Button className="update-btn" onClick={handleSubmit} sx={{margin:"1rem 1rem 0rem 1rem"}} type="submit" variant="contained" >Submit</Button>) : (selectedTab===3) ?(
+        {!oId && (selectedTab===3) ?( <Button className="update-btn" onClick={handleSubmit} sx={{margin:"1rem 1rem 0rem 1rem"}} type="submit" variant="contained" >Submit</Button>) : (selectedTab===3) ?(
           <>
             <Button className="update-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} variant="contained"  >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>):null}
@@ -1101,3 +1310,4 @@ onClick={() => handleDelete(index)}
   );
 
 }
+

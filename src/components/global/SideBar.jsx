@@ -289,7 +289,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
 
 
                 <SubMenu label={<Typography variant="body1">OFM</Typography>} style={getSubMenuStyle("ofm")} onClick={() => handleSubMenuClick("ofm")} icon={<BusinessCenterIcon />}>
-                  <Link to="/ofm" style={{ color: 'inherit', textDecoration: "none" }}>
+                  <Link to="/createOfm" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
                       icon={<AddBoxIcon />}
                       style={getMenuItemStyle("ofm")} onClick={() => setActiveItemMenu("ofm")}
