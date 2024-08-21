@@ -7,7 +7,7 @@ import '../../App.css'
 import PersonIcon from "@mui/icons-material/Person";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { Radio, RadioGroup, FormControl, FormLabel } from '@mui/material';
-import axiosInstance from '../../axios/axiosInstance';
+import { handleSubmit } from '../../apis/QuotationApi';
 
 
 
@@ -310,23 +310,7 @@ console.log("form Data from outside is ",formData)
 
 
 
-  const handleSubmit = async(e)=>{
-    e.preventDefault();
-    // Update the formData with the new items array
-    const updatedFormData = { ...formData, items: savedItems };
-
-    console.log("Updated formData:", updatedFormData);
-
-    try {
-      const res = await axiosInstance.post('lens/Quotation/save',updatedFormData);
-      const {data} = res;
-      console.log("data is ",data)
-      navigate('/quotationSuccess')
-    } catch (error) {
-      console.log(error)
-    }
-  
-  }
+ 
 
 
 
@@ -1090,7 +1074,7 @@ onClick={() => handleDelete(index)}
 
       {/* {selectedTab === 1?():null} */}
 
-        {!qId && (selectedTab===3) ?( <Button className="update-btn" onClick={handleSubmit} sx={{margin:"1rem 1rem 0rem 1rem"}} type="submit" variant="contained" >Submit</Button>) : (selectedTab===3) ?(
+        {!qId && (selectedTab===3) ?( <Button className="update-btn" onClick={(e)=>handleSubmit(e, navigate, formData, savedItems)} sx={{margin:"1rem 1rem 0rem 1rem"}} type="submit" variant="contained" >Submit</Button>) : (selectedTab===3) ?(
           <>
             <Button className="update-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} variant="contained"  >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>):null}

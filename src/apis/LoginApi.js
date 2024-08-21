@@ -29,9 +29,8 @@ export const handleSubmit = async (e, setToken, formData, navigate) => {
     if (savedToken === 'null' || !savedToken) {
       navigate('/reset');
     } else {
-      setTimeout(() => {
         navigate('/');
-      }, 1000);    }
+       }
       
   } catch (err) {
     console.log(err);

@@ -28,6 +28,8 @@ import {useLocation} from 'react-router-dom';
 import CreateQuotation from '../Pages/Quotation/CreateQuotation.js';
 import QuotationSuccess from '../Pages/Quotation/QuotationSuceess.js';
 import CreateOfm from '../Pages/ofm/CreateOfm.js';
+import EditOfm from '../Pages/ofm/EditOfm.js';
+import OfmSuccess from '../Pages/ofm/OfmSuccess.js';
 
 
 
@@ -91,6 +93,9 @@ const AllRoute = ({isSidebar}) => {
           <Route path="/login" element={<Login />} />
           <Route path="/quotation" element={<CreateQuotation />} />
           <Route path="/createOfm" element={<CreateOfm />} />
+          <Route path="/createOfm/:oId" element={<CreateOfm />} />
+          <Route path="/ofmSuccess" element={<OfmSuccess />} />
+          <Route path="/editOfm" element={<EditOfm />} />
           <Route path="/quotationSuccess" element={<QuotationSuccess />} />
       
     </Routes>

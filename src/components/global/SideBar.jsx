@@ -297,7 +297,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                       New
                     </MenuItem>
                   </Link>
-                  <Link to="/editQuotation" style={{ color: 'inherit', textDecoration: "none" }}>
+                  <Link to="/editOfm" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
                       icon={<EditIcon />}
                       style={getMenuItemStyle("ofm Edit")} onClick={() => setActiveItemMenu("ofm Edit")}
