@@ -25,6 +25,11 @@ import Login from '../Pages/login/Login.js';
 import ResetPassword from '../Pages/resetPassword/ResetPassword.js';
 import UserDashboard from '../Pages/User/UserDashboard.js';
 import {useLocation} from 'react-router-dom';
+import CreateQuotation from '../Pages/Quotation/CreateQuotation.js';
+import QuotationSuccess from '../Pages/Quotation/QuotationSuceess.js';
+import CreateOfm from '../Pages/ofm/CreateOfm.js';
+import EditOfm from '../Pages/ofm/EditOfm.js';
+import OfmSuccess from '../Pages/ofm/OfmSuccess.js';
 
 
 
@@ -86,6 +91,12 @@ const AllRoute = ({isSidebar}) => {
           <Route path="/CreateUser/:uId" element={<CreateUser />} />
           <Route path="/reset" element={<ResetPassword />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/quotation" element={<CreateQuotation />} />
+          <Route path="/createOfm" element={<CreateOfm />} />
+          <Route path="/createOfm/:oId" element={<CreateOfm />} />
+          <Route path="/ofmSuccess" element={<OfmSuccess />} />
+          <Route path="/editOfm" element={<EditOfm />} />
+          <Route path="/quotationSuccess" element={<QuotationSuccess />} />
       
     </Routes>
   </div>

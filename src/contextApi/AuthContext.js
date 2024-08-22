@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }) => {
   const getTokenFromCookie = () => {
     return Cookies.get('access_token');
   };
+  
 
   useEffect(() => {
     const token = Cookies.get('access_token');
@@ -38,6 +39,7 @@ export const AuthProvider = ({ children }) => {
       setToken(token);
     }
   }, []);
+
 
   const logout = () => {
     // Clear the access_token cookie and reset authState

@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.bbd54e48.css",
+    "main.js": "/static/js/main.fbe6388d.js",
+    "static/media/hassan_usmani21.webp": "/static/media/hassan_usmani21.a89047663e0bbd8c117b.webp",
+    "index.html": "/index.html",
+    "main.bbd54e48.css.map": "/static/css/main.bbd54e48.css.map",
+    "main.fbe6388d.js.map": "/static/js/main.fbe6388d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bbd54e48.css",
+    "static/js/main.fbe6388d.js"
+  ]
+}

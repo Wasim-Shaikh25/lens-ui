@@ -16,8 +16,7 @@
     catch(err){
       console.log(err);
     }
-  
-   }
+  }
   
   
    //get All Departments
@@ -50,27 +49,45 @@
   
   
   
-   export const handleSubmit = async(e,formData,navigate) => {
+  //  export const handleSubmit = async(e,formData,navigate) => {
       
-      e.preventDefault();
-      formData.departments[0].region = formData.departments[0].departmentName;
-      formData.lastUpdatedByUserId = formData.empId;
-      
+  //     e.preventDefault();
+  //     formData.branches[0].region = formData.branches[0].departmentName;
+  //     formData.lastUpdatedByUserId = formData.empId;
+  //     console.log(formData.middleName)
   
-      try{
-        const res = await axiosInstance.post(`${baseUrl}/user/createAccount`,formData);
-        const{data} = res;
-        console.log("response Data ",data);
-        navigate('/user')
-      }
-      catch(err){
-        console.log(err);
-  
-      }  
-    };
 
+  //     try{
+  //       const res = await axiosInstance.post(`${baseUrl}/user/createAccount`,formData);
+  //       const{data} = res;
+  //       console.log("response Data ",data);
+  //       navigate('/user')
+  //     }
+  //     catch(err){
+  //       console.log(err);
   
-    
+  //     }
+  
+  //   };
+
+
+  export const handleSubmit = async (e, formData, navigate) => {
+    e.preventDefault();
+    formData.lastUpdatedByUserId = formData.empId;
+    formData.branches = formData.branches.map(branch => ({
+      branchName: branch.branchName,
+      region: branch.branchName
+    }));
+  
+    try {
+      const res = await axiosInstance.post(`${baseUrl}/user/createAccount`, formData);
+      const { data } = res;
+      console.log("response Data ", data);
+      navigate('/user');
+    } catch (err) {
+      console.log(err);
+    }
+  }; 
 
     export const getuser = async(uId, setFormData)=>{
 
@@ -86,7 +103,8 @@
       e.preventDefault();
       formData.departments[0].region = formData.departments[0].departmentName;
       formData.lastUpdatedByUserId = formData.empId;
-      
+            console.log(formData.middleName)
+
   
       try{
         const res = await axiosInstance.put(`/user/updateUser`,formData);
@@ -94,9 +112,9 @@
         console.log("response Data ",data);
         navigate('/user')
       }
+      
       catch(err){
         console.log(err);
   
       }
-   
     }
