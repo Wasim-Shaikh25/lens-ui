@@ -10,12 +10,14 @@ export const handleSubmit = async (e, setToken, formData, navigate) => {
   try {
     const res = await axiosInstance.post(`/auth/authenticate`, formData);
     const { data } = res;
+    console.log("the response is ",res);
     const token = String(data.access_token); // Ensure token is a string
     const expiryTime = new Date(new Date().getTime() + 10 * 60 * 60* 1000); // 30 minutes from now
-
     // Set the token as a cookie
-    await Cookies.set('access_token', token, { expires: expiryTime });
+    await Cookies.set('access_token', token, { expires: expiryTime, secure: true  });
+
     setToken(token); // Store the decoded token in global state
+
 
     console.log("Token is ", token);
 
@@ -24,12 +26,10 @@ export const handleSubmit = async (e, setToken, formData, navigate) => {
     if (savedToken === 'null' || !savedToken) {
       navigate('/reset');
     } else {
-      setTimeout(() => {
         navigate('/');
-      }, 1000);    }
+       }
       
   } catch (err) {
     console.log(err);
   }
 };
-

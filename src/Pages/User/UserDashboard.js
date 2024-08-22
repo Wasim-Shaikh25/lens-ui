@@ -118,4 +118,4 @@ return (
 )
 }
 
-export default UserDashboard
+export default UserDashboard;

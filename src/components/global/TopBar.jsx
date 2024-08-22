@@ -15,7 +15,7 @@ const Topbar = ({ isSidebar, setIsSidebar }) => {
   const { authState, logout } = useAuth();
   const navigate = useNavigate();
   const token = useToken();
-
+  console.log("authState is ",authState);
 
   const iconStyle = { 
     width: "1.6em",
@@ -26,9 +26,6 @@ const Topbar = ({ isSidebar, setIsSidebar }) => {
     borderRadius: "5px",
     cursor: "pointer",
   };
-
-
-
   
   return (
     <Box 
@@ -67,7 +64,7 @@ const Topbar = ({ isSidebar, setIsSidebar }) => {
           <PersonOutlinedIcon />
           {authState ? 
             <span style={{ fontSize: '0.8rem', marginLeft: '0.5rem' }}>
-              Welcome, <b>{authState.authorities}</b>
+              Welcome, <b>{authState.sub}</b>
             </span> 
             : null}
         </IconButton>
