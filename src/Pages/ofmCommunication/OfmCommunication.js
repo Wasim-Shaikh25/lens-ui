@@ -87,16 +87,22 @@ function OfmCommunication() {
 
 
       const showData = async(ofmNo) =>{
-        try{
-         const res = await axiosInstance.get(`lens/ofmCommunication/getAll?ofmNo=${ofmNo}`);
-         const {data} = res;
-         setData(data)
-         console.log("response is ",res);   
-
+        if(ofmNo == undefined || ''){
+            alert("invalid OFM No");
+        }else{
+            try{
+                const res = await axiosInstance.get(`lens/ofmCommunication/getAll?ofmNo=${ofmNo}`);
+                const {data} = res;
+                setData(data)
+                console.log("response is ",res);   
+       
+               }
+               catch(err){
+                   console.log(err)
+               }
         }
-        catch(err){
-            console.log(err)
-        }
+        
+    
 
       }
 
@@ -148,6 +154,7 @@ function OfmCommunication() {
     style={{width:'100%'}}
       size="small"
       className="text-field"
+      required
       name="ofmNo"
       placeholder='Search or Create By OFM Number'
       value={formDataState.ofmNo}
@@ -156,7 +163,7 @@ function OfmCommunication() {
   </Grid>
 
   <Grid item xs={1} sx={{marginTop:'1.1%'}}>
-    <Button className='cancel-btn' onClick={()=>showData(formDataState.ofmNo)}>Search</Button>
+    <Button disabled={formDataState.ofmNo==''||formDataState.ofmNo===undefined} className='cancel-btn' onClick={()=>showData(formDataState.ofmNo)}>Search</Button>
   </Grid>
   
   </Grid>
