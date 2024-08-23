@@ -17,6 +17,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
+import ChatIcon from '@mui/icons-material/Chat';
 
 
 
@@ -307,6 +308,16 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                 </SubMenu>
 
+                <SubMenu label={<Typography variant="body1">OFM Communication</Typography>} style={getSubMenuStyle("ofmcomm")} onClick={() => handleSubMenuClick("ofmcomm")} icon={<ChatIcon />}>
+                  <Link to="/ofmComm" style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getMenuItemStyle("ofmComs")} onClick={() => setActiveItemMenu("ofmComs")}
+                    >
+                      Create
+                    </MenuItem>
+                  </Link>
+                  </SubMenu>
 
                 {/* <SubMenu label="Sales Order" style={getSubMenuStyle("SalesOrder")} onClick={() => handleSubMenuClick("SalesOrder")} icon={<MonetizationOnIcon />}>
                   <Link to='/createOrder' style={{ color: 'inherit', textDecoration: "none" }}>

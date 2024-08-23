@@ -486,6 +486,16 @@ console.log("form Data from outside is ",formData)
   />
   </Grid>
 
+              {oId&&<Grid item xs={4}>
+                <InputLabel className="ip-label" >Ofm Number</InputLabel >
+                <TextField
+                size="small"
+                  className="text-field"
+                  name="ofmNo"
+                  value={formData.ofmNo}
+                   />
+              </Grid>
+  }
 
             
             <Grid item xs={4}>
@@ -497,7 +507,6 @@ console.log("form Data from outside is ",formData)
                 value={formData.poNo}
                 onChange={handleChange} />
             </Grid> 
-
 
 
             
@@ -621,16 +630,7 @@ console.log("form Data from outside is ",formData)
                 onChange={handleChange} />
             </Grid>
 
-{oId&&<Grid item xs={4}>
-              <InputLabel className="ip-label" >QuotationNo</InputLabel >
-              <TextField
-              size="small"
-                className="text-field"
-                name="quotationNo"
-                value={formData.quotationNo}
-                 />
-            </Grid>
-}
+
 
 
 

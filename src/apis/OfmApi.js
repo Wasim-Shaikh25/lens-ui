@@ -30,8 +30,8 @@ export const getOfm = async(oId,setFormData)=>{
   try{
     const res = await axiosInstance.get(`lens/OrderForwardingMemo/get?ofmNo=${oId}`)
     const {data} = res;
+    console.log("the oId fetched data is ",data)
     setFormData(data);
-    console.log("the apId fetched data is ",data)
     }
     catch(err){
       console.log(err);
