@@ -138,8 +138,6 @@ function OfmCommunication() {
       }
 
 
-
-
   return (
     <div>
     <h1 style={{margin:"1rem 6rem"}}>OFM Communication-[New Mode] </h1>

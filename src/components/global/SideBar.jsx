@@ -142,7 +142,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
             <Box pl={isSidebar ? 0 : 3}>
               <Menu>
 
-                {authState?.authorities === 'ADMIN' && (
+                {authState?.designation === 'ADMIN' && (
                 <SubMenu label={<Typography variant="body1">Users</Typography>} style={getSubMenuStyle("Users")} onClick={() => handleSubMenuClick("Users")} icon={<GroupIcon />}>
                   <Link to="/CreateUser" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
@@ -161,8 +161,8 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                       Edit
                     </MenuItem>
                   </Link>
-                </SubMenu>)
-                }
+                </SubMenu>
+                 ) } 
 
 
 
@@ -278,14 +278,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                       New
                     </MenuItem>
                   </Link>
-                  <Link to="/editQuotation" style={{ color: 'inherit', textDecoration: "none" }}>
-                    <MenuItem
-                      icon={<EditIcon />}
-                      style={getMenuItemStyle("Quotation Edit")} onClick={() => setActiveItemMenu("Quotation Edit")}
-                    >
-                      Edit
-                    </MenuItem>
-                  </Link>
+                 
                 </SubMenu>
 
 
