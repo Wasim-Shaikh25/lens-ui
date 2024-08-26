@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { alpha } from '@mui/material/styles';
 import { useAuth } from '../../contextApi/AuthContext';
 import useToken from "../../contextApi/useToken";
+import Logo from '../../assets/Picture1.svg';
 
 
 
@@ -56,17 +57,15 @@ const Topbar = ({ isSidebar, setIsSidebar }) => {
         <KeyboardBackspaceIcon onClick={() => setIsSidebar(!isSidebar)} sx={iconStyle} />
       }
       </>}
+      
+
+        <img src={Logo} style={{maxWidth:'3%',height:'1%', marginLeft:'2%',boxShadow:'rgba(0, 0, 0, 0.1) 1px 4px 7px',borderRadius:'3px'}} alt="Logo" />
+        <span style={{ marginLeft: '1%', fontSize: '1.85em', fontFamily: 'Crillee Italic Std, sans-serif', fontWeight:'700' }}>Leak-Proof</span><span>®</span>
 
 
       {/* ICONS */}
       <Box display="flex"  justifyContent='flex-end' alignItems="center"  sx={{ ml: "auto" }}>
       
-        <IconButton>
-          <NotificationsOutlinedIcon /> 
-        </IconButton> 
-        <IconButton>
-          <SettingsOutlinedIcon />
-        </IconButton>
         <IconButton>
           <PersonOutlinedIcon />
           {authState ? 

@@ -11,7 +11,6 @@ import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import DescriptionIcon from "@mui/icons-material/Description";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { Link, useNavigate } from "react-router-dom";
-import hassan_usmani21 from "../../assets/hassan_usmani21.webp"; // Adjust the import according to your project
 import { useAuth } from "../../contextApi/AuthContext";
 import GroupIcon from '@mui/icons-material/Group';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
@@ -130,15 +129,16 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   <Avatar alt="profile-user" src={hassan_usmani21} sx={{ width: 80, height: 80, cursor: "pointer", boxShadow: 3, marginTop: "1.5rem" }} />
                 </Box> */}
                 <Box textAlign="center" mt={2}>
-                  <Typography variant="h6" color="black" fontWeight="bold">
-                    Leak Proof
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    Engineering 
+                <Typography sx={{ fontSize: '0.7rem' }} color="textSecondary">
+                    Created By
+                </Typography>
+                  <Typography variant="h5" color="black" fontWeight="bold">
+                    Synterra
                   </Typography>
                 </Box>
               </Box>
             )}
+            
             <Box pl={isSidebar ? 0 : 3}>
               <Menu>
 

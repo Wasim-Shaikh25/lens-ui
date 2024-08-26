@@ -89,6 +89,7 @@ export default function CreateUser() {
     }));
   };
 
+  
   const handleDeleteBranch = (index) => {
     setFormData(prevState => {
       const updatedBranches = [...prevState.branches];
