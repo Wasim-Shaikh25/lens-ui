@@ -11,12 +11,12 @@ import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import DescriptionIcon from "@mui/icons-material/Description";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { Link, useNavigate } from "react-router-dom";
-import hassan_usmani21 from "../../assets/hassan_usmani21.webp"; // Adjust the import according to your project
 import { useAuth } from "../../contextApi/AuthContext";
 import GroupIcon from '@mui/icons-material/Group';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
+import ChatIcon from '@mui/icons-material/Chat';
 
 
 
@@ -28,8 +28,10 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
       const sidebarRef = useRef(null);
       const {logout, authState} = useAuth();
       const navigate = useNavigate();
+    
       const [activeSubMenu, setActiveSubMenu] = useState("");
       const [activeItemMenu, setActiveItemMenu] = useState("");
+
       
       useEffect(() => {
         document.body.style.backgroundColor = backgroundColor;
@@ -63,6 +65,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
       const userLogout = () => {
             logout();
             navigate('/login'); // Redirect to login page after logout
+
       };
 
   return (
@@ -126,19 +129,20 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   <Avatar alt="profile-user" src={hassan_usmani21} sx={{ width: 80, height: 80, cursor: "pointer", boxShadow: 3, marginTop: "1.5rem" }} />
                 </Box> */}
                 <Box textAlign="center" mt={2}>
-                  <Typography variant="h6" color="black" fontWeight="bold">
-                    Leak Proof
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    Engineering 
+                <Typography sx={{ fontSize: '0.7rem' }} color="textSecondary">
+                    Created By
+                </Typography>
+                  <Typography variant="h5" color="black" fontWeight="bold">
+                    Synterra
                   </Typography>
                 </Box>
               </Box>
             )}
+            
             <Box pl={isSidebar ? 0 : 3}>
               <Menu>
 
-                {authState?.authorities === 'ADMIN' && (
+                {authState?.designation === 'ADMIN' && (
                 <SubMenu label={<Typography variant="body1">Users</Typography>} style={getSubMenuStyle("Users")} onClick={() => handleSubMenuClick("Users")} icon={<GroupIcon />}>
                   <Link to="/CreateUser" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
@@ -157,8 +161,8 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                       Edit
                     </MenuItem>
                   </Link>
-                </SubMenu>)
-                }
+                </SubMenu>
+                 ) } 
 
 
 
@@ -274,14 +278,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                       New
                     </MenuItem>
                   </Link>
-                  <Link to="/editQuotation" style={{ color: 'inherit', textDecoration: "none" }}>
-                    <MenuItem
-                      icon={<EditIcon />}
-                      style={getMenuItemStyle("Quotation Edit")} onClick={() => setActiveItemMenu("Quotation Edit")}
-                    >
-                      Edit
-                    </MenuItem>
-                  </Link>
+                 
                 </SubMenu>
 
 
@@ -304,6 +301,16 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                 </SubMenu>
 
+                <SubMenu label={<Typography variant="body1">OFM Communication</Typography>} style={getSubMenuStyle("ofmcomm")} onClick={() => handleSubMenuClick("ofmcomm")} icon={<ChatIcon />}>
+                  <Link to="/ofmComm" style={{ color: 'inherit', textDecoration: "none" }}>
+                    <MenuItem
+                      icon={<AddBoxIcon />}
+                      style={getMenuItemStyle("ofmComs")} onClick={() => setActiveItemMenu("ofmComs")}
+                    >
+                      Create
+                    </MenuItem>
+                  </Link>
+                  </SubMenu>
 
                 {/* <SubMenu label="Sales Order" style={getSubMenuStyle("SalesOrder")} onClick={() => handleSubMenuClick("SalesOrder")} icon={<MonetizationOnIcon />}>
                   <Link to='/createOrder' style={{ color: 'inherit', textDecoration: "none" }}>
@@ -323,6 +330,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                     </MenuItem>
                   </Link>
                 </SubMenu> */}
+
                 <SubMenu label="Logout" style={{color:'black',fontFamily:"Times New Roman",borderRadius: '8px',margin: '4px 16px',padding: "15px 6px",width:"88%",color:"red"}} onClick={userLogout} icon={<PowerSettingsNewIcon />}></SubMenu>
               </Menu>
             </Box>
