@@ -180,6 +180,8 @@ export default function CreateOfm() {
      }
    ]
   });
+  setSavedItems([]);
+  
 }
  },[oId])
 
