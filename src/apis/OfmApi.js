@@ -25,13 +25,14 @@ export const handleSubmit = async(e,formData, navigate, savedItems)=>{
 
 
 //getApi
-export const getOfm = async(oId,setFormData)=>{
+export const getOfm = async(oId,setFormData, setSavedItems)=>{
 
   try{
     const res = await axiosInstance.get(`lens/OrderForwardingMemo/get?ofmNo=${oId}`)
     const {data} = res;
     console.log("the oId fetched data is ",data)
-    setFormData(data);
+    setFormData({...data,ofmItems:[]});
+    setSavedItems(data.ofmItems);
     }
     catch(err){
       console.log(err);

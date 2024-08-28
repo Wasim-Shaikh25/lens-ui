@@ -26,8 +26,8 @@ export default function CreateOfm() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [isInitialized, setIsInitialized] = useState(false);
   const [savedItems, setSavedItems] = useState([]);
-  const [inspection, setInspection] = useState(false);
-  const [insurance, setInsurance] = useState(false);
+  const [inspection, setInspection] = useState(oId!==undefined);
+  const [insurance, setInsurance] = useState(oId!==undefined);
 
   console.log("oId is ",oId);
 
@@ -98,99 +98,23 @@ export default function CreateOfm() {
     });
    
  
- // General Data No found in PDf
- // pre OS Date /company / country / tranasction type /  OFM Date / Po date / 
- 
- // Insurance Data Not Found in 
 
 
-    useEffect(() => {
-      if (!isInitialized) {
-        // Initialize formData or perform any setup needed
-        setIsInitialized(true);
-      }
-    }, [isInitialized, savedItems]);
+    // useEffect(() => {
+    //   if (!isInitialized) {
+    //     // Initialize formData or perform any setup needed
+    //     setIsInitialized(true);
+    //   }
+    // }, [isInitialized, savedItems]);
   
   
-  
-
-   useEffect(()=>{
-    if(savedItems.length>1){
-      setFormData({
-           // General Section
-     branch: "",
-     poNo: "",
-     orderType: "",
-     category: "",
-     invoiceTo: "",
-     transportThrough: "",
-     customer: "",
-     quotationNo: "",
-     kindAttentionTo: "",
-     customerAddress: "",
-     priority: "",
-     transport: "",
-     deliveryPeriod: "",
-     preQANo: "",
-     statutoryRegulatoryRequirements: true,
-     specialInformation: "",
-     paymentTerms: "",
-     engineer: "",
-     oaNo: "",
-     industry: "",
-     projectOrder: true,
-     penaltyApplicable: true,
-     poReceived: true,
-     
-     // Insurance
-     rawMaterialTC: true,
-     qcReport: true,
-     testReport: true,
-     guaranteeCertificate: true,
-     fitmentCertificate: true,
-     complianceCertificate: true,
- 
- // Consignee
-     ofmStatus: "",
-     externalInspection: inspection,
-     externalInspectionWhere: "",
-     externalInspectionByWhom: "",
-     consigneeName: "",
-     insertedByUserId: "",
-     lastUpdatedByUserId: "",
-     insuranceBy: "",
-     insuranceBorneBy: "",
-     ofmItems: [
-       {
-         srNo: 0,
-         factor: "",
-         type: "",
-         size: "",
-         face: "",
-         description: "",
-         ciCode: "",
-         drfNo: "",
-         quantity: 0,
-         unit: "",
-         unitPrice: 0,
-         unitLPrice: 0,
-         discount: 0,
-         totalValue: 0
-       }
-     ]
-    });
-   
- 
- // General Data No found in PDf
- // pre OS Date /company / country / tranasction type /  OFM Date / Po date / 
- 
- // Insurance Data Not Found in 
-    }
-
+  useEffect(()=>{
     if(oId!==undefined){
-    getOfm(oId, setFormData)
-    
-    }else{
+    getOfm(oId, setFormData,setSavedItems)
+  
+
+
+  }else{
 
       setFormData({
    // General Section
@@ -256,21 +180,51 @@ export default function CreateOfm() {
      }
    ]
   });
- 
-
-// General Data No found in PDf
-// pre OS Date /company / country / tranasction type /  OFM Date / Po date / 
-
-// Insurance Data Not Found in 
-
-    }
-    
-  },[oId])
+}
+ },[oId])
 
 
+  useEffect(()=>{
+    console.log("Saved Items is ",savedItems)
+  },[savedItems])
 
 
-console.log("form Data from outside is ",formData)
+  
+//  useEffect(() => {
+
+//   if (formData?.ofmItems?.length > 1) {
+
+//     const newSavedItems = [...savedItems, formData.ofmItems];
+//     console.log("Saved items updated:", savedItems);
+//     setSavedItems(newSavedItems);
+
+
+//     console.log("Saved items from is ",savedItems)
+
+
+//    // Reset formData.ofmItems after saving to avoid duplicates
+//     setFormData(prevFormData => ({
+//       ...prevFormData,
+//       ofmItems: [{
+//         srNo: 0,
+//         factor: "",
+//         type: "",
+//         size: "",
+//         face: "",
+//         description: "",
+//         ciCode: "",
+//         drfNo: "",
+//         quantity: 0,
+//         unit: "",
+//         unitPrice: 0,
+//         unitLPrice: 0,
+//         discount: 0,
+//         totalValue: 0
+//       }]
+//     }));
+//   }
+
+// }, [oId,formData.ofmItems.length,savedItems]); 
 
 
 
@@ -278,15 +232,6 @@ console.log("form Data from outside is ",formData)
     const { name, type, checked, value } = e.target;
     const newFormData = { ...formData };
   
-    // if (type === "checkbox") {
-    //   newFormData[name] = checked; // For checkboxes, use 'checked' instead of 'value'
-    // } else if (index === undefined) {
-    //   newFormData[name] = value;
-    // } else {
-    //   // Extract the property name and update the specific item
-    //   newFormData.items[index][name] = value;
-    // }
-
     if (type === "checkbox") {
       newFormData[name] = checked;
     }else if (type === "radio" && name === "statutoryRegulatoryRequirements") {
@@ -305,13 +250,12 @@ console.log("form Data from outside is ",formData)
       };
   }
   
-
     setFormData(newFormData);
     console.log("Updated form data:", newFormData);
   };
 
 
-  
+
   const handleAddItems = () => {
     setFormData(prevState => ({
       ...prevState,
@@ -347,9 +291,11 @@ console.log("form Data from outside is ",formData)
     });
   };
 
+
   const handleSaveItem = (index) => {
     // Save the current item to the savedItems array
     const newSavedItems = [...savedItems, formData.ofmItems[index]];
+    console.log("SaveItems is ", newSavedItems)
     setSavedItems(newSavedItems);
 
     formData.ofmItems[index]={
@@ -411,41 +357,52 @@ console.log("form Data from outside is ",formData)
 
 
 
-
-
-
-
   return (
     <Container className="container" sx= {{marginTop:"20px", backgroundColor:"rgb(250, 251, 251)"}}>
-      {!oId?<h1 style={{marginLeft:"20px"}}>OFM-[New Mode]</h1> : <h1 style={{marginLeft:"20px"}}>Update OFM</h1> }
       <form  onSubmit={handleSubmit}>
         <div className='card'>
-        <Tabs
-        value={selectedTab}
-        onChange={handleTabChange}
-        sx={{
-          '& .MuiTabs-flexContainer': {
-            justifyContent: 'start',
-          },
-          '& .MuiTab-root': {
-            textTransform: 'none',
-            fontWeight: 'bold',
-            padding: '2px 10px',            
-            minWidth: '15%',
-            minHeight: '50px',     // Reduced minHeight to decrease overall tab height
-            margin:'0px 1px',
-          },
-        }}
-        indicatorColor="primary"
-        textColor="primary"
-        centered
-      >
+      {!oId?<h1 style={{marginLeft:"20px"}}>OFM-[New Mode]</h1> : <h1 style={{marginLeft:"20px"}}>Update OFM</h1> }
+      
+      <Tabs
+  value={selectedTab}
+  onChange={handleTabChange}
+  underline="none"
+  sx={{
+    '& .MuiTabs-flexContainer': {
+      justifyContent: 'start',
+      gap: '8px', // Adjust spacing as needed
+      border:'1px solid #C4C4C4',
+      borderRadius:'10px 10px 0px 0px',
+      padding:'5px 6px',
+    },
+    '& .MuiTab-root': {
+      textTransform: 'none',
+      fontWeight: '500', // Reduce font weight for a more subtle look
+      padding: '7px 15px',
+      minWidth: '100px',
+      minHeight: '40px',
+      transition: 'background-color 0.4s ease-in-out',
+    },
+    '& .MuiTabs-indicator': {
+      backgroundColor: 'transparent',
+      transition: 'transform 0.3s ease-in-out',
+    },
+    '& .MuiTab-root.Mui-selected': {
+      borderRadius: '4px 4px 0px 0px',
+      border: '2px solid #5B99C2', // Add a subtle border
+      boxShadow: '0 4px 4px rgba(0, 0, 0, 0.1)',
+      backgroundColor: '#5B99C2', // Set background color for selected tab
+      color: 'white', // Set text color for selected tab
+    },
+  }}
+  indicatorColor="transparent"
+  textColor="primary"
+  centered
+>
         <Tab icon={<PersonIcon />} label="General" iconPosition="start" />
         <Tab icon={<PersonIcon />} label="Other" iconPosition="start" />
         <Tab icon={<PersonIcon />} label="Items & Charges" iconPosition="start" />
       </Tabs>
-      <hr style={{width:'100%'}} />
-
 
 
     <Grid container spacing={2} sx={{marginTop:"0.5rem"}}>
@@ -876,7 +833,7 @@ console.log("form Data from outside is ",formData)
 
 
 {selectedTab === 1 &&<>
- <h2 style={{marginLeft:"2%"}}><input type="checkbox" onClick={()=>setInspection(!inspection)} /> External Inspection:</h2>
+ <h2 style={{marginLeft:"2%"}}><input type="checkbox" checked={inspection} onClick={()=>setInspection(!inspection)} /> External Inspection:</h2>
 <Grid container spacing={1.5} style={{  maxWidth:'97%',margin:'0.5em auto',padding:"1.7%", border:"1px solid #C4C4C4",borderRadius:"7px" }}>
 
 {inspection?<>  
@@ -909,7 +866,7 @@ console.log("form Data from outside is ",formData)
 }
   </Grid>
 
-  <h2 style={{marginLeft:"2%"}}><input type="checkbox" onClick={()=>setInsurance(!insurance)} /> Insurance:</h2>
+  <h2 style={{marginLeft:"2%"}}><input type="checkbox" checked={insurance} onClick={()=>setInsurance(!insurance)} /> Insurance:</h2>
 <Grid container spacing={1.5} style={{  maxWidth:'97%',margin:'0.5em auto',padding:"1.7%", border:"1px solid #C4C4C4",borderRadius:"7px" }}>
 
 {insurance?<> 
@@ -1153,7 +1110,7 @@ console.log("form Data from outside is ",formData)
   <>
   <h2 style={{marginLeft:'2%'}}>Items:</h2>
 
-{(savedItems.length>0)&&<TableContainer component={Paper} style={{ maxWidth: '97%', margin: '1em auto' }}>
+{(savedItems?.length>0)&&<TableContainer component={Paper} style={{ maxWidth: '97%', margin: '1em auto' }}>
           <Table>
             <TableHead >
               <TableRow style={{backgroundColor:"#000045"}}>
@@ -1176,14 +1133,12 @@ console.log("form Data from outside is ",formData)
                     <Button 
                     className='mui-btn--small'
 style={{maxWidth:'25px', maxHeight: '25px',  backgroundColor: '#000050', color:'white', marginRight: '15px' }} 
-                      onClick={() => handleEditItem(index)}
-                    >
+                      onClick={() => handleEditItem(index)}>
                       Edit
                     </Button>
                
                     <Button style={{maxWidth:'25px', maxHeight: '25px',  backgroundColor: 'red', color:'white', marginRight: '15px' }} 
-onClick={() => handleDelete(index)}
-                    >
+onClick={() => handleDelete(index)}>
                       Delete
                     </Button>
                   </TableCell>
