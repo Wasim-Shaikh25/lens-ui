@@ -30,6 +30,8 @@ import QuotationSuccess from '../Pages/Quotation/QuotationSuceess.js';
 import CreateOfm from '../Pages/ofm/CreateOfm.js';
 import EditOfm from '../Pages/ofm/EditOfm.js';
 import OfmSuccess from '../Pages/ofm/OfmSuccess.js';
+import OfmCommunication from '../Pages/ofmCommunication/OfmCommunication.js';
+import UpdatePassword from '../Pages/resetPassword/UpdateReset.js';
 
 
 
@@ -97,6 +99,8 @@ const AllRoute = ({isSidebar}) => {
           <Route path="/ofmSuccess" element={<OfmSuccess />} />
           <Route path="/editOfm" element={<EditOfm />} />
           <Route path="/quotationSuccess" element={<QuotationSuccess />} />
+          <Route path="/ofmComm" element={<OfmCommunication />} />
+          <Route path="/updatePassword" element={<UpdatePassword />} />
       
     </Routes>
   </div>
