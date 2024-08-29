@@ -315,36 +315,24 @@ console.log("form Data from outside is ",formData)
 
 
   return (
-    <Container className="container" sx= {{marginTop:"20px", backgroundColor:"rgb(250, 251, 251)"}}>
-      {!qId?<h1 style={{marginLeft:"20px"}}>Quotation-[New Mode]</h1> : <h1 style={{marginLeft:"20px"}}>Update Quotation</h1> }
+    <Container className="container" sx= {{marginTop:"10px", backgroundColor:"rgb(250, 251, 251)"}}>
       <form  onSubmit={handleSubmit}>
         <div className='card'>
+      {!qId?<h1 style={{marginLeft:"8px",color:"#03346E"}}>Quotation</h1> : <h1 style={{marginLeft:"15px"}}>Update Quotation</h1> }
         <Tabs
-        value={selectedTab}
-        onChange={handleTabChange}
-        sx={{
-          '& .MuiTabs-flexContainer': {
-            justifyContent: 'start',
-          },
-          '& .MuiTab-root': {
-            textTransform: 'none',
-            fontWeight: 'bold',
-            padding: '2px 10px',            
-            minWidth: '15%',
-            minHeight: '50px',     // Reduced minHeight to decrease overall tab height
-            margin:'0px 1px',
-          },
-        }}
-        indicatorColor="primary"
-        textColor="primary"
-        centered
-      >
+  value={selectedTab}
+  onChange={handleTabChange}
+  underline="none"
+  indicatorColor="transparent"
+  textColor="primary"
+  centered
+>
         <Tab icon={<PersonIcon />} label="General" iconPosition="start" />
         <Tab icon={<PersonIcon />} label="Items & Charges" iconPosition="start" />
         <Tab icon={<PersonIcon />} label="Terms & Conditions" iconPosition="start" />
         <Tab icon={<PersonIcon />} label="Covering Letter" iconPosition="start" />
       </Tabs>
-      <hr style={{width:'100%'}} />
+      {/* <hr style={{width:'100%'}} /> */}
 
 
     <Grid container spacing={2} sx={{marginTop:"0.5rem"}}>
@@ -353,7 +341,7 @@ console.log("form Data from outside is ",formData)
     <Grid item xs={4}>
 
 
-  <InputLabel className="ip-label"> Branch</InputLabel >
+  {/* <InputLabel className="ip-label"> Branch</InputLabel > */}
   <Autocomplete
     size="small"
     value={formData.branch || ''}
@@ -387,18 +375,29 @@ console.log("form Data from outside is ",formData)
 
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Revision Number</InputLabel >
+              {/* <InputLabel className="ip-label" >Revision Number</InputLabel > */}
               <TextField
-              size="small"
-                className="text-field"
-                name="revisionNo"
-                value={formData.revisionNo}
-                onChange={handleChange} />
+  size="small"
+  variant="outlined"
+  fullWidth
+  sx={{
+    borderRadius: "4px",
+    borderColor: "#ccc",
+    "& .MuiOutlinedInput-root": {
+      paddingRight: "10px",
+      paddingLeft: "10px",
+    },
+  }}
+  name="revisionNo"
+  value={formData.revisionNo}
+  onChange={handleChange}
+  label="Revision Number"
+/>
             </Grid> 
 
 
-    <Grid item xs={3.5}>
-    <InputLabel className="ip-label" >Category</InputLabel >
+    <Grid item xs={4}>
+    {/* <InputLabel className="ip-label" >Category</InputLabel > */}
   <Autocomplete
     size="small"
     value={formData.category || ''}
@@ -431,59 +430,105 @@ console.log("form Data from outside is ",formData)
   </Grid>
             
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Customer</InputLabel >
+              {/* <InputLabel className="ip-label" >Customer</InputLabel >
               <TextField
               size="small"
                 className="text-field"
                 name="customer"
                 value={formData.customer}
-                onChange={handleChange} />
+                onChange={handleChange} /> */}
+<TextField
+  size="small"
+  variant="outlined"
+  fullWidth
+  className='custom-text-field'   //form css class applied
+  name="customer"
+  value={formData.customer}
+  onChange={handleChange}
+  label="Customer"
+/>
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Customer Enquiry Number</InputLabel >
-              <TextField
-              size="small"
-                className="text-field"
-                name="customerEnquiryNo"
-                value={formData.customerEnquiryNo}
-                onChange={handleChange} />
+              {/* <InputLabel className="ip-label" >Customer Enquiry Number</InputLabel > */}
+  <TextField
+  size="small"
+  variant="outlined"
+  className='custom-text-field'      // form css class applied          
+  fullWidth
+  name="customerEnquiryNo"
+  value={formData.customerEnquiryNo}
+  onChange={handleChange}
+  label="Customer Enquiry Number"
+/>
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Customer Address</InputLabel >
+              {/* <InputLabel className="ip-label" >Customer Address</InputLabel > */}
               <TextField
-              size="small"
-                className="text-field"
-                name="customerAddress"
-                value={formData.customerAddress}
-                onChange={handleChange} />
+  size="small"
+  variant="outlined"
+  fullWidth
+  sx={{
+    borderRadius: "4px",
+    borderColor: "#ccc",
+    "& .MuiOutlinedInput-root": {
+      paddingRight: "10px",
+      paddingLeft: "10px",
+    },
+  }}
+  name="customerAddress"
+  value={formData.customerAddress}
+  onChange={handleChange}
+  label="Customer Address"
+/>
             </Grid>
 
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Kind Attention To</InputLabel >
-              <TextField
-              size="small"
-                className="text-field"
-                name="kindAttentionTo"
-                value={formData.kindAttentionTo}
-                onChange={handleChange} />
+            <TextField
+  size="small"
+  variant="outlined"
+  fullWidth
+  sx={{
+    borderRadius: "4px",
+    borderColor: "#ccc",
+    "& .MuiOutlinedInput-root": {
+      paddingRight: "10px",
+      paddingLeft: "10px",
+    },
+  }}
+  name="kindAttentionTo"
+  value={formData.kindAttentionTo}
+  onChange={handleChange}
+  label="Kind Attention To"
+/>
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Designation</InputLabel >
+              {/* <InputLabel className="ip-label" >Designation</InputLabel > */}
               <TextField
-              size="small"
-                className="text-field"
-                name="designation"
-                value={formData.designation}
-                onChange={handleChange} />
+  size="small"
+  variant="outlined"
+  fullWidth
+  sx={{
+    borderRadius: "4px",
+    borderColor: "#ccc",
+    "& .MuiOutlinedInput-root": {
+      paddingRight: "10px",
+      paddingLeft: "10px",
+    },
+  }}
+  name="designation"
+  value={formData.designation}
+  onChange={handleChange}
+  label="Designation"
+/>
             </Grid>
 
 
-          <Grid item xs={3.2}>
-    <InputLabel className="ip-label" >Quotation Source</InputLabel >
+          <Grid item xs={4}>
+    {/* <InputLabel className="ip-label" >Quotation Source</InputLabel > */}
   <Autocomplete
     size="small"
     value={formData.quotationSource || ''}
@@ -517,19 +562,30 @@ console.log("form Data from outside is ",formData)
   </Grid>
 
   <Grid item xs={4}>
-              <InputLabel className="ip-label" >Due On</InputLabel >
+              {/* <InputLabel className="ip-label" >Due On</InputLabel > */}
               <TextField
-              size="small"
-                className="text-field"
-                name="dueOn"
-                value={formData.dueOn}
-                onChange={handleChange} />
+  size="small"
+  variant="outlined"
+  fullWidth
+  sx={{
+    borderRadius: "4px",
+    borderColor: "#ccc",
+    "& .MuiOutlinedInput-root": {
+      paddingRight: "10px",
+      paddingLeft: "10px",
+    },
+  }}
+  name="dueOn"
+  value={formData.dueOn}
+  onChange={handleChange}
+  label="Due On"
+/>
             </Grid>
 
 
             
           <Grid item xs={4}>
-    <InputLabel className="ip-label" >Transport</InputLabel >
+    {/* <InputLabel className="ip-label" >Transport</InputLabel > */}
   <Autocomplete
     size="small"
     value={formData.transport || ''}
@@ -563,37 +619,59 @@ console.log("form Data from outside is ",formData)
 
 
   <Grid item xs={4}>
-              <InputLabel className="ip-label" >Validity [weeks]</InputLabel >
+              {/* <InputLabel className="ip-label" >Validity [weeks]</InputLabel > */}
               <TextField
-              size="small"
-                className="text-field"
-                name="validityWeeks"
-                value={formData.validityWeeks}
-                onChange={handleChange} />
+  size="small"
+  variant="outlined"
+  fullWidth
+  sx={{
+    borderRadius: "4px",
+    borderColor: "#ccc",
+    "& .MuiOutlinedInput-root": {
+      paddingRight: "10px",
+      paddingLeft: "10px",
+    },
+  }}
+  name="validityWeeks"
+  value={formData.validityWeeks}
+  onChange={handleChange}
+  label="Validity [weeks]"
+/>
             </Grid>
 
 
 
 
    <Grid item xs={6}>
-  <InputLabel className="ip-label">Delivery Schedule</InputLabel>
+  {/* <InputLabel className="ip-label">Delivery Schedule</InputLabel> */}
   <TextField
-    multiline
-    rows={2} // Sets the TextField to be two lines tall
-    size="small"
-    name="deliverySchedule"
-    value={formData.deliverySchedule}
-    onChange={handleChange}
-    style={{ width: '100%' }} // Makes the TextField wide
-  />
+  size="small"
+  variant="outlined"
+  multiline
+  rows={2}
+  fullWidth
+  sx={{
+    borderRadius: "4px",
+    borderColor: "#ccc",
+    "& .MuiOutlinedInput-root": {
+      paddingRight: "10px",
+      paddingLeft: "10px",
+    },
+  }}
+  name="deliverySchedule"
+  value={formData.deliverySchedule}
+  onChange={handleChange}
+  label="Delivery Schedule"
+/>
 
 </Grid>
 
 
 
 
+
    <Grid item xs={6}>
-  <InputLabel className="ip-label">Special Comments</InputLabel>
+  {/* <InputLabel className="ip-label">Special Comments</InputLabel> */}
   <TextField
     multiline
     rows={2} // Sets the TextField to be two lines tall
@@ -602,17 +680,19 @@ console.log("form Data from outside is ",formData)
     value={formData.specialComments}
     onChange={handleChange}
     style={{ width: '100%' }} // Makes the TextField wide
+    label="Special Comments"
   />
 </Grid>
 
 
 <Grid item xs={4}>
-              <InputLabel className="ip-label" >Engineer</InputLabel >
+              {/* <InputLabel className="ip-label" >Engineer</InputLabel > */}
               <TextField
               size="small"
                 className="text-field"
                 name="engineer"
                 value={formData.engineer}
+                label="Engineer"
                 onChange={handleChange} />
             </Grid>
 
