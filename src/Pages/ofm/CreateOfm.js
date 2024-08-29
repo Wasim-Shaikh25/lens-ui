@@ -192,41 +192,6 @@ export default function CreateOfm() {
 
 
   
-//  useEffect(() => {
-
-//   if (formData?.ofmItems?.length > 1) {
-
-//     const newSavedItems = [...savedItems, formData.ofmItems];
-//     console.log("Saved items updated:", savedItems);
-//     setSavedItems(newSavedItems);
-
-
-//     console.log("Saved items from is ",savedItems)
-
-
-//    // Reset formData.ofmItems after saving to avoid duplicates
-//     setFormData(prevFormData => ({
-//       ...prevFormData,
-//       ofmItems: [{
-//         srNo: 0,
-//         factor: "",
-//         type: "",
-//         size: "",
-//         face: "",
-//         description: "",
-//         ciCode: "",
-//         drfNo: "",
-//         quantity: 0,
-//         unit: "",
-//         unitPrice: 0,
-//         unitLPrice: 0,
-//         discount: 0,
-//         totalValue: 0
-//       }]
-//     }));
-//   }
-
-// }, [oId,formData.ofmItems.length,savedItems]); 
 
 
 

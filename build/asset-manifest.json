@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.bbd54e48.css",
-    "main.js": "/static/js/main.fbe6388d.js",
-    "static/media/hassan_usmani21.webp": "/static/media/hassan_usmani21.a89047663e0bbd8c117b.webp",
+    "main.css": "/static/css/main.4be79fe4.css",
+    "main.js": "/static/js/main.24021f73.js",
+    "static/media/Picture1.svg": "/static/media/Picture1.97e300f7e09c61cd471e0e01ec0232b4.svg",
     "index.html": "/index.html",
-    "main.bbd54e48.css.map": "/static/css/main.bbd54e48.css.map",
-    "main.fbe6388d.js.map": "/static/js/main.fbe6388d.js.map"
+    "main.4be79fe4.css.map": "/static/css/main.4be79fe4.css.map",
+    "main.24021f73.js.map": "/static/js/main.24021f73.js.map"
   },
   "entrypoints": [
-    "static/css/main.bbd54e48.css",
-    "static/js/main.fbe6388d.js"
+    "static/css/main.4be79fe4.css",
+    "static/js/main.24021f73.js"
   ]
 }
