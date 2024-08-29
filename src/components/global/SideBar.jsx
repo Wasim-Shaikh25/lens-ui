@@ -302,7 +302,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                 </SubMenu>
 
                 <SubMenu label={<Typography variant="body1">OFM Communication</Typography>} style={getSubMenuStyle("ofmcomm")} onClick={() => handleSubMenuClick("ofmcomm")} icon={<ChatIcon />}>
-                  <Link to="ofmComm" style={{ color: 'inherit', textDecoration: "none" }}>
+                  <Link to="/ofmComm" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
                       icon={<AddBoxIcon />}
                       style={getMenuItemStyle("ofmComs")} onClick={() => setActiveItemMenu("ofmComs")}
