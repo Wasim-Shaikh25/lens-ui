@@ -6,6 +6,16 @@ body{
     letter-spacing: 0.00938em !important;
   }
   
+  /* heading */
+
+  h1{
+    margin-left:5px;
+    color:#03346E;
+    font-family: 'Sans-serif fonts', Times, serif !important;
+  }
+
+ 
+
   
   .css-1tqrhto >.ps-menu-button {
     display: -webkit-box;
@@ -41,10 +51,31 @@ body{
     background-color: rgb(250, 251, 251) !important;
     max-width:85% !important;
   }
-  
+
+
+
+  .editContainer{
+    background-color:white;
+    border:1px solid #ddd;
+    box-shadow:rgba(90, 114, 123, 0.11) 0px 7px 30px 0px;
+    margin:1rem auto;
+     border-radius:8px;
+     width:85%;
+  }
+
+.editContainer>h2{
+margin-left: 2.5%;
+font-weight: 600;  
+font-size : 1.5em;  
+color:#03346E;
+font-family: 'Sans-serif fonts', Times, serif !important;
+
+}
+
+
   .form-style {
     background-color: #F5F7F8;
-    padding: 25px;
+    padding: 11px 25px 25px 25px;
     border: 1px solid lightgray;
     border-radius: 10px;
     box-shadow: rgba(90, 114, 123, 0.11) 0px 7px 30px 0px;
@@ -61,9 +92,9 @@ body{
     margin:20px 20px 0px 20px !important;
     padding:10px 25px 25px 25px !important;
     border-radius: 8px !important;
-     border:1px solid #ddd !important;
-     background-color: white !important;
-      box-shadow:rgba(90, 114, 123, 0.11) 0px 7px 30px 0px !important;
+    border:1px solid #ddd !important;
+    background-color: white !important;
+    box-shadow:rgba(90, 114, 123, 0.11) 0px 7px 30px 0px !important;
   }
   
   
@@ -188,12 +219,95 @@ body{
       background: gray; 
     }
 
+/* Sidebar Css */
+.sidebarBox {
+  overflow-y: auto; /* Ensure the sidebar is scrollable */
+}
+
+.sidebarBox .css-dip3t8 {
+  background-color: transparent !important;
+}
+
+.sidebarBox ul,
+.sidebarBox ul ul {
+  padding: 0;
+  margin: 0;
+  list-style: none !important; /* Remove bullet points */
+}
+
+.sidebarBox li {
+  list-style: none !important; /* Remove bullet points */
+}
+
+.sidebarBox .pro-sidebar-content {
+  padding: 0; /* Additional specificity */
+}
+
+.sidebarBox .pro-menu {
+  padding: 0; /* Additional specificity */
+}
+
+.sidebarBox .pro-menu-item {
+  padding: 5px 10px;
+  border-radius: 8px;
+  margin: 4px 0;
+}
+
+.sidebarBox .pro-menu-item:hover {
+  background-color: #03C9D7;
+  color: white;
+}
+
+.sidebarBox .pro-menu-item-active {
+  background-color: #03C9D7 !important;
+  color: white !important;
+}
 
 
+.sideBarContent{
+  display:flex;
+  border-radius:20px;
+  height:100vh;
+   width: 20%;
+  justify-content:center
+}
 
 
+#custom-sidebar{
+    background-color: #FFFFFF;
+    flex: 1;
+    box-shadow:0px 2px 4px rgba(0, 0, 0, 0.3);
+    overflow-y: auto
+  }
 
     
+
+/* Logout Button */
+
+.logoutBtn {
+  font-family: Times New Roman;
+  border-radius: 8px;
+  margin: 2px 0px;
+  padding: 15px 0px;
+  width: 98% !important;
+  color: red;
+}
+
+/* logo */
+.logoImg{
+max-width:3%;
+height:1%;
+margin-left:2%;
+box-shadow:rgba(0, 0, 0, 0.1) 1px 4px 7px',borderRadius:'3px 
+}
+
+.logoName{
+  margin-left:1%;
+  font-size: 1.8em;
+  font-family: Crillee Italic Std, sans-serif;
+  font-weight:700
+}
+
 /* table css */
 
 /* Add these styles to your CSS file or style block */
@@ -339,23 +453,94 @@ body{
   width: 100%; /* Apply fullWidth behavior */
 }
 
+
 .custom-text-field .MuiOutlinedInput-root {
   padding-top: 3px;
   color: black;
 }
+
 
 .custom-text-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
   /* border color after clicking on text field  */
   border: 2px solid #5b99c2;    
 }
 
+
 .custom-text-field .MuiOutlinedInput-input:focus {
   /* Background color after clicking on text field  */
-  background-color: #e0e3ec21;
+  /* background-color: #e0e3ec21; */
   width: 100%;
 }
+
 
 .custom-text-field .MuiInputLabel-root.Mui-focused {
   /* Label color on Clicking the field */
   color: #5b99c2; 
+}
+
+
+
+
+
+
+/* Successpage */
+.successContainer{
+  text-align:center !important;
+  margin-top: 50px !important;
+}
+
+.checkIcon{
+  font-size:5rem  !important;
+  color:green !important;
+  width: 100% !important;
+}
+
+.typoSuccess{
+  margin-top: 20px !important;
+}
+
+.typoBody{
+  margin-bottom: 20px !important;
+}
+
+
+/* Tab Css */
+.MuiTabs-flexContainer {
+  display: flex !important;
+  justify-content: start !important;
+  gap: 8px !important; /* Adjust spacing as needed */
+  border: 1px solid #C4C4C4 !important;
+  border-radius: 10px 10px 0px 0px !important;
+  padding: 5px 6px !important;
+}
+
+.MuiTab-root {
+  text-transform: none;
+  font-weight: 500  !important; /* Reduce font weight for a more subtle look */
+  padding: 7px 15px !important;
+  min-width: 80px !important;
+  min-height: 40px !important;
+  transition: background-color 0.4s ease-in-out !important;
+}
+
+.MuiTabs-indicator {
+  background-color: transparent !important;
+  transition: transform 0.3s ease-in-out !important; 
+}
+
+.MuiTab-root.Mui-selected {
+  border-radius: 4px 4px 0px 0px !important;
+  border: 2px solid #5B99C2 !important; /* Add a subtle border */
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1) !important;
+  background-color: #5B99C2 !important; /* Set background color for selected tab */
+  color: white !important; /* Set text color for selected tab */
+}
+
+
+/* login */
+.loginBox{
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

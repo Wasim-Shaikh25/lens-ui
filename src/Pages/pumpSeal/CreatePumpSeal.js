@@ -235,10 +235,10 @@ export default function CreatePumpSeal() {
 
   return (
 
-    <Container className="container" sx={{ marginTop: '20px', backgroundColor: 'rgb(250, 251, 251)' }}>
-      {!pId ? <h1 style={{ marginLeft: '20px' }}>New Pump Seal :</h1> : <h1 style={{ marginLeft: '20px' }}>Update Pump Seal :</h1>}
+    <Container className="container">
       <form  className="">
         <div className='card'>
+      {!pId ? <h1 >New Pump Seal :</h1> : <h1>Update Pump Seal :</h1>}
           <h3>Drawing Requisition - Pump Seal :-</h3>
           <hr />
           <Grid container spacing={2}>

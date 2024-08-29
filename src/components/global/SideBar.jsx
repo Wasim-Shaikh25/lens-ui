@@ -76,58 +76,16 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
       className="sidebarBox"
       bgcolor={backgroundColor}
       pr={2}
-      sx={{
-        overflowY: 'auto', // Ensure the sidebar is scrollable
-        "& .css-dip3t8": {
-          backgroundColor: "transparent !important",
-        },
-        "& ul, & ul ul": {
-          padding: 0,
-          margin: 0,
-          listStyle: "none !important", // Remove bullet points
-        },
-        "& li": {
-          listStyle: "none !important", // Remove bullet points
-        },
-        "& .pro-sidebar-content": {
-          padding: 0, // Additional specificity
-        },
-        "& .pro-menu": {
-          padding: 0, // Additional specificity
-        },
-        "& .pro-menu-item": {
-          padding: "5px 10px",
-          borderRadius: '8px',
-          margin: '4px 0',
-          "&:hover": {
-            backgroundColor: '#03C9D7',
-            color: 'white',
-          },
-        },
-        "& .pro-menu-item-active": {
-          backgroundColor: '#03C9D7 !important',
-          color: 'white !important',
-        },
-      }}
     >
       
-      <div style={{ display: "flex", borderRadius: "20px", height: "100vh", width: "20%", justifyContent: "center" }}>
+      <div className="sideBarContent">
         <Sidebar
           id="custom-sidebar"
-          collapsed={isSidebar}
-          style={{
-            backgroundColor: "#FFFFFF",
-            flex: 1,
-            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.3)",
-            overflowY: 'auto', // Ensure the sidebar is scrollable
-          }}
-        >
+          collapsed={isSidebar}>
           <Menu iconShape="square">
             {!isSidebar && (
               <Box mb="25px">
-                {/* <Box display="flex" justifyContent="center" alignItems="center">
-                  <Avatar alt="profile-user" src={hassan_usmani21} sx={{ width: 80, height: 80, cursor: "pointer", boxShadow: 3, marginTop: "1.5rem" }} />
-                </Box> */}
+
                 <Box textAlign="center" mt={2}>
                 <Typography sx={{ fontSize: '0.7rem' }} color="textSecondary">
                     Created By
@@ -331,7 +289,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                 </SubMenu> */}
 
-                <SubMenu label="Logout" style={{color:'black',fontFamily:"Times New Roman",borderRadius: '8px',margin: '4px 16px',padding: "15px 6px",width:"88%",color:"red"}} onClick={userLogout} icon={<PowerSettingsNewIcon />}></SubMenu>
+                <SubMenu label="Logout" className="logoutBtn"  onClick={userLogout} icon={<PowerSettingsNewIcon />}></SubMenu>
               </Menu>
             </Box>
           </Menu>

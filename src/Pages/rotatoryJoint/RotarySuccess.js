@@ -10,12 +10,12 @@ const RotarySuccessPage = () => {
     
     
     return (
-    <Container maxWidth="sm" style={{ textAlign: 'center', marginTop: '50px' }}>
-      <CheckCircleOutlineIcon style={{ fontSize: 100, color: 'green' }} />
-      <Typography variant="h3" gutterBottom style={{ marginTop: '20px' }}>
+    <Container maxWidth="sm"className="successContainer">
+      <CheckCircleOutlineIcon className="checkIcon" />
+      <Typography variant="h3" gutterBottom className="typoSuccess">
         Rotary Joint Created Successfully!
       </Typography>
-      <Typography variant="body1" style={{ marginBottom: '20px' }}>
+      <Typography variant="body1" className='typoBody'>
           Rotary DRF Number is <b>: {id}</b>
       </Typography>
       <Button variant="contained" color="primary" onClick={()=>navigate('/editRotary')}>

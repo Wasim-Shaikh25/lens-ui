@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TextField ,Button,  Container, Grid, InputLabel , IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
-import "./customerFrom.css";
+import "./CustomerForm.css";
 import { useNavigate, useParams } from 'react-router-dom';
 import { getCustomer, handleSubmit } from '../../../apis/CustomerApi';
 import { handleUpdate } from '../../../apis/CustomerApi';
@@ -108,43 +108,45 @@ export default function Customer() {
 
  
     <Container className="container" sx= {{marginTop:"20px", backgroundColor:"rgb(250, 251, 251)"}}>
-      {!rId?<h1 style={{marginLeft:"20px"}}>New Customer Registration :</h1> : <h1 style={{marginLeft:"20px"}}>Update Customer :</h1> }
       <form >
         <Grid container spacing={2} >
-          <div style={{display:"flex", justifyContent:"space-between", gap:"16px",padding:"25px",backgroundColor:"white",border:"1px solid #ddd",boxShadow:"rgba(90, 114, 123, 0.11) 0px 7px 30px 0px",margin:"1rem 1.3rem", borderRadius:"8px",width:"100%"}}>
-
-            {rId && (
-        <Grid item xs={12} sm={4}>
+          <div className='card' style={{width:'100%'}}>
+          {!rId ? <h1>New Customer Registration :</h1> : <h1>Update Customer :</h1>}
+          <Grid container spacing={2} alignItems="center">
+    {rId && (
+      <Grid item xs={4}>
         <InputLabel className="ip-label">Customer Reference No</InputLabel>
-                <TextField
-                  size="small"
-                  className="text-field"
-                  name="customerReferenceNumber"
-                  value={formData.customerReferenceNumber}
-                />
-              </Grid>
-            )}
-        <Grid item xs={12} sm={4}>
-              <InputLabel className="ip-label">Branch</InputLabel>
-              <TextField
-                size="small"
-                className="text-field"
-                name="branch"
-                value={formData.branch}
-                onChange={handleChange}
-              />
-            </Grid>
+        <TextField
+          size="small"
+          className="text-field"
+          name="customerReferenceNumber"
+          value={formData.customerReferenceNumber}
+        />
+      </Grid>
+    )}
 
-            <Grid item xs={12} sm={4}>
-              <InputLabel className="ip-label">Customer Name</InputLabel>
-              <TextField
-                size="small"
-                className="text-field"
-                name="customerName"
-                value={formData.customerName}
-                onChange={handleChange}
-              />
-            </Grid>
+    <Grid item xs={4}>
+      <InputLabel className="ip-label">Branch</InputLabel>
+      <TextField
+        size="small"
+        className="text-field"
+        name="branch"
+        value={formData.branch}
+        onChange={handleChange}
+      />
+    </Grid>
+
+    <Grid item xs={4}>
+      <InputLabel className="ip-label">Customer Name</InputLabel>
+      <TextField
+        size="small"
+        className="text-field"
+        name="customerName"
+        value={formData.customerName}
+        onChange={handleChange}
+      />
+    </Grid>
+  </Grid>
             </div>
           {/* </Box> */}
           {formData?.customerDetail?.map((detail, index) => (

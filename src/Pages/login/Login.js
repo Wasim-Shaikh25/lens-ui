@@ -50,22 +50,10 @@ export default function Login() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
-        <div className='card' sx={{
-           padding: "2px", borderRadius: "8px", border: "1px solid #ddd",
-          backgroundColor: "white", boxShadow: "rgba(90, 114, 123, 0.11) 0px 7px 30px 0px",
-        }}>
+        <div className='card'>
           <CssBaseline />
           <Box
-            sx={{
-              marginTop: 0,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar> */}
+          className="loginBox">
             <Typography component="h5" variant="h5">
               Login
             </Typography>
@@ -112,16 +100,7 @@ export default function Login() {
                 Login
               </Button>
               <Grid container justifyContent="center" flexDirection="column" alignItems="center">
-              {/* <Grid item>
-                  <Link to={`/reset/${formData.empId}`} style={{cursor:"pointer"}}  variant="body2">
-                    Forgot Password?
-                  </Link>
-                </Grid> */}
-                {/* <Grid item>
-                  <Link  to="/reset" style={{cursor:"pointer"}} variant="body2">
-                    Forgot Password ?
-                  </Link>
-                </Grid> */}
+
               </Grid>
             </Box>
           </Box>

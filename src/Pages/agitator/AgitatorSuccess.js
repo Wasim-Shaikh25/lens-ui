@@ -9,13 +9,13 @@ const AgitatorSuccessPage = () => {
     const navigate = useNavigate();
     
     return (
-    <Container maxWidth="sm" style={{ textAlign: 'center', marginTop: '50px' }}>
-      <CheckCircleOutlineIcon style={{ fontSize: 100, color: 'green' }} />
-      <Typography variant="h3" gutterBottom style={{ marginTop: '20px' }}>
+    <Container maxWidth="sm" className="successContainer">
+      <CheckCircleOutlineIcon  className="checkIcon"/>
+      <Typography variant="h3" className="typoSuccess" gutterBottom >
         Agitator Seal Created Successfully!
       </Typography>
           Agitator DRF Number is <b>: {id}</b>
-      <Typography variant="body1" style={{ marginBottom: '20px' }}>
+      <Typography variant="body1" className='typoBody'>
       </Typography>
       <Button variant="contained" color="primary" onClick={()=>navigate('/editAgitator')}>
          Agitator Details

@@ -8,9 +8,9 @@ const OfmSuccess = () => {
     const navigate = useNavigate();
 
     return (
-    <Container maxWidth="sm" style={{ textAlign: 'center', marginTop: '50px' }}>
-      <CheckCircleOutlineIcon style={{ fontSize: 100, color: 'green' }} />
-      <Typography variant="h3" gutterBottom style={{ marginTop: '20px' }}>
+    <Container maxWidth="sm" className="successContainer">
+      <CheckCircleOutlineIcon  className="checkIcon"/>
+      <Typography variant="h3" gutterBottom className="typoSuccess">
         Order Forwading Memo Updated Successfully!
       </Typography>
       <Button variant="contained" color="primary" onClick={()=>navigate('/editOfm')}>

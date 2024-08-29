@@ -323,34 +323,6 @@ console.log("form Data from outside is ",formData)
   value={selectedTab}
   onChange={handleTabChange}
   underline="none"
-  sx={{
-    '& .MuiTabs-flexContainer': {
-      justifyContent: 'start',
-      gap: '8px', // Adjust spacing as needed
-      border:'1px solid #C4C4C4',
-      borderRadius:'10px 10px 0px 0px',
-      padding:'5px 6px',
-    },
-    '& .MuiTab-root': {
-      textTransform: 'none',
-      fontWeight: '500', // Reduce font weight for a more subtle look
-      padding: '7px 15px',
-      minWidth: '100px',
-      minHeight: '40px',
-      transition: 'background-color 0.4s ease-in-out',
-    },
-    '& .MuiTabs-indicator': {
-      backgroundColor: 'transparent',
-      transition: 'transform 0.3s ease-in-out',
-    },
-    '& .MuiTab-root.Mui-selected': {
-      borderRadius: '4px 4px 0px 0px',
-      border: '2px solid #5B99C2', // Add a subtle border
-      boxShadow: '0 4px 4px rgba(0, 0, 0, 0.1)',
-      backgroundColor: '#5B99C2', // Set background color for selected tab
-      color: 'white', // Set text color for selected tab
-    },
-  }}
   indicatorColor="transparent"
   textColor="primary"
   centered
