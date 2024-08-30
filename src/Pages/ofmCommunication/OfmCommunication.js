@@ -142,7 +142,7 @@ function OfmCommunication() {
     <div>
 <div className='editContainer'>
     <h2 >OFM Communication </h2>
-<div style={{display:"flex", justifyContent:"space-between",flexWrap:"wrap",gap:"18px",padding:"25px",}}>
+<div style={{display:"flex", justifyContent:"space-between",flexWrap:"wrap",gap:"18px",padding:"25px"}}>
 
 <Grid container spacing={2} sx={{marginLeft:'1%'}}>
 
