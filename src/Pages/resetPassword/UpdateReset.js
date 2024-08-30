@@ -16,19 +16,16 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import useToken from '../../contextApi/useToken';
-import { handleSubmit } from '../../apis/ResetPassword';
+import axiosInstance from '../../axios/axiosInstance';
 
 
-function ResetPassword() {
+function UpdatePassword() {
 
     const defaultTheme = createTheme();
-    const token = useToken();
     
     const[formData,setFormData]= useState({
-
         empId: '',
-        oldPassword: "",
-        newPassword: "",
+        password: "",
        }) 
      const navigate = useNavigate();
 
@@ -41,6 +38,20 @@ function ResetPassword() {
     }));
   };
 
+  const handleSubmit = async(e)=>{
+    e.preventDefault();
+    
+    try{
+       const res = await  axiosInstance.post('user/userResetPassword',formData);
+       const{data} = res;
+       console.log(data);  
+       navigate('/CreateUser')
+    }
+    catch(err){
+        console.log(err);
+    }
+
+  }
  
 
   return (
@@ -82,30 +93,15 @@ function ResetPassword() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                  value={formData.oldPassword}
+                  value={formData.password}
                     size="small"
                     required
                     onChange={(e)=>handleChange(e)}
                     fullWidth
-                    name="oldPassword"
-                    label="Old Password"
+                    name="password"
+                    label="password"
                     type="password"
                     id="password"
-                    autoComplete="new-password"
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                  value={formData.newPassword}
-                    size="small"
-                    required
-                    onChange={(e)=>handleChange(e)}
-                    fullWidth
-                    name="newPassword"
-                    label="New Password"
-                    type="password"
-                    id="newPassword"
                     autoComplete="new-password"
                   />
                 </Grid>
@@ -129,7 +125,7 @@ function ResetPassword() {
   )
 }
 
-export default ResetPassword
+export default UpdatePassword
 
 
 
