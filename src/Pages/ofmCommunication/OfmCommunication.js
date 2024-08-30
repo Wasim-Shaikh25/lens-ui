@@ -140,8 +140,8 @@ function OfmCommunication() {
 
   return (
     <div>
-    <h1 style={{margin:"1rem 6rem"}}>OFM Communication-[New Mode] </h1>
-<div style={{backgroundColor:"white",border:"1px solid #ddd",boxShadow:"rgba(90, 114, 123, 0.11) 0px 7px 30px 0px",margin:"1rem auto", borderRadius:"8px",width:"85%"}}>
+<div className='editContainer'>
+    <h2 >OFM Communication </h2>
 <div style={{display:"flex", justifyContent:"space-between",flexWrap:"wrap",gap:"18px",padding:"25px",}}>
 
 <Grid container spacing={2} sx={{marginLeft:'1%'}}>
