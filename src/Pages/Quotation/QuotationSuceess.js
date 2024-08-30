@@ -9,9 +9,9 @@ const QuotationSuccess = () => {
     
     
     return (
-    <Container maxWidth="sm" style={{ textAlign: 'center', marginTop: '50px' }}>
-      <CheckCircleOutlineIcon style={{ fontSize: 100, color: 'green' }} />
-      <Typography variant="h3" gutterBottom style={{ marginTop: '20px' }}>
+    <Container maxWidth="sm" className="successContainer">
+      <CheckCircleOutlineIcon className="checkIcon" />
+      <Typography variant="h3" gutterBottom className="typoSuccess">
         Quotation Created Successfully!
       </Typography>
       

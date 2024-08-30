@@ -132,10 +132,10 @@ export default function AgitatorSeal() {
 
  
   return (
-      <Container className="container" sx={{ marginTop: "20px", backgroundColor: "rgb(250, 251, 251)" }}>
-        {!aId ? <h1 style={{ marginLeft: '20px' }}>Agitator Seal</h1> : <h1 style={{ marginLeft: '20px' }}>Update Agitator Seal :</h1>}
+      <Container className="container">
         <form >
           <div className='card'>
+        {!aId ? <h1 >Agitator Seal</h1> : <h1>Update Agitator Seal :</h1>}
             <h3>Agitator Seal:-</h3>
             <Grid container spacing={2}>
               {aId &&

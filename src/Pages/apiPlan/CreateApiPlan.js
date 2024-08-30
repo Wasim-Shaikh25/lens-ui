@@ -191,9 +191,9 @@ export default function CreateApi() {
  
   return (
       <Container className="container" sx={{ marginTop: "20px", backgroundColor: "rgb(250, 251, 251)" }}>
-        {!apId ? <h1 style={{ marginLeft: '20px' }}>Create API Plan :</h1> : <h1 style={{ marginLeft: '20px' }}>Update Api Plan :</h1>}
         <form onSubmit={handleSubmit} >
           <div className='card'>
+        {!apId ? <h1>Create API Plan :</h1> : <h1>Update Api Plan :</h1>}
             <h3>API Plan:-</h3>
             <Grid container spacing={2}>
               {apId &&

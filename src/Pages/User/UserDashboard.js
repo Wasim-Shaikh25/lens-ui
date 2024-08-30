@@ -58,7 +58,6 @@ return (
             <TableCell>Sr No</TableCell>
             <TableCell align="right">Employee ID</TableCell>
             <TableCell align="right">First Name</TableCell>
-            <TableCell align="right">Department</TableCell>
             <TableCell align="right">Inserted On</TableCell>
             <TableCell align="right">Last Updated On</TableCell>
             <TableCell align="right">Action</TableCell>
@@ -75,7 +74,6 @@ return (
                 </TableCell>
                 <TableCell align="right">{row.empId}</TableCell>
                 <TableCell align="right">{row.firstName}</TableCell>
-                <TableCell align="right">{row.departments[0].departmentName}</TableCell>
                 <TableCell align="right">{row.insertedOn}</TableCell>
                 <TableCell align="right">{row.lastUpdatedOn}</TableCell>
                 <TableCell align="right">

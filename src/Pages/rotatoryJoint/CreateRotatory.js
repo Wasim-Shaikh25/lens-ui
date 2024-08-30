@@ -103,13 +103,11 @@ export default function CreateRotatory() {
 
  
   return (
-    <Container className="container" sx= {{marginTop:"20px", backgroundColor:"rgb(250, 251, 251)"}}>
-   {!rjId ? <h1 style={{ marginLeft: '20px' }}>New Rotary Joint :</h1> : <h1 style={{ marginLeft: '20px' }}>Update Rotary Joint :</h1>}
-
-
+    <Container className="container">
    <form >
      
         <div className='card'>
+   {!rjId ? <h1>New Rotary Joint :</h1> : <h1>Update Rotary Joint :</h1>}
           <h3>Rotary Joint New Mode:-</h3>
           <Grid container spacing={2}>
             {rjId && <Grid item xs={4}>

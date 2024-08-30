@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { TextField ,Button,  Container, Grid, InputLabel , IconButton } from '@mui/material';
+import { TextField ,Button,Paper,Typography,Container, Grid, InputLabel , IconButton } from '@mui/material';
 // import '../../css/CustomerFrom.css';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getSales, handleSubmit, handleUpdate } from '../../apis/SalesInquiryApi';
-
+import '../../App.css'
 
 
 
@@ -161,9 +161,9 @@ export default function CreateSales() {
 
  
   return (
-    <Container className="container" sx= {{marginTop:"20px", backgroundColor:"rgb(250, 251, 251)"}}>
-   {!sId?<h1 style={{marginLeft:"20px"}}>New Sales Inquiry :</h1> : <h1 style={{marginLeft:"20px"}}>Update Sales Inquiry :</h1> }
-      <form  className="form-style">
+    <Container className="container">
+      <form  className="card">
+   {!sId?<h1>New Sales Inquiry :</h1> : <h1>Update Sales Inquiry :</h1> }
         <Grid container spacing={2}>
          {sId &&<Grid item xs={4}>
             <InputLabel className="ip-label">Sales Inquiry Number</InputLabel >

@@ -63,7 +63,7 @@
   border-color: #DEE3E9 !important;
   border-radius: 10px !important;
   background-color: white !important;
-
+  padding:0px !important;
 }
 
 .deleteIcon{
@@ -74,4 +74,23 @@
 
 
 
+
+/* Successpage */
+.successContainer{
+  text-align:center !important;
+  margin-top: 50px !important;
+}
+
+CheckCircleOutlineIcon{
+  font-size:100  !important;
+  color:green !important;
+}
+
+.typoSuccess{
+  margin-top: 20px;
+}
+
+.typoBody{
+  margin-bottom: 20px;
+}
 
