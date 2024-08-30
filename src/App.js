@@ -42,7 +42,7 @@ function App() {
   console.log("isSidebar is ",isSidebar)
 
   return (
-      <ColorModeContext.Provider value={colorMode}>
+    <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
@@ -59,4 +59,3 @@ function App() {
 }
 
 export default App;
-

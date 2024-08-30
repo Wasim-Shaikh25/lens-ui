@@ -1284,11 +1284,6 @@ onClick={() => handleDelete(index)}>
 
 )}
 
-
-
-
-
-
           </Grid>
             </div>
 
