@@ -44,10 +44,11 @@ const AllRoute = ({isSidebar}) => {
 
 
   const sidebarOpenStyle = {
-    width: "80%", // Sidebar open, adjust width
+    width: "86%", // Sidebar open, adjust width
     position: "absolute",
-    right: 0,
+    right: '-5.8em',
     marginTop: "5.4rem",
+    overflow:"hidden"
   };
 
 

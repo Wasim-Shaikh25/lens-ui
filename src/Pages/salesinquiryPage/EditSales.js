@@ -48,7 +48,8 @@ export default function EditSales() {
 
 
 return (
-  <div style={{width:"85%" , margin:'2rem auto'}}>
+  <div className='editContainer' style={{ width:'83%', marginLeft:'5%'}} >
+  {/* <div style={{width:"85%" , margin:'2rem auto'}}> */}
 
 {/* <div style={{backgroundColor:"white",border:"1px solid #ddd",boxShadow:"rgba(90, 114, 123, 0.11) 0px 7px 30px 0px",margin:"1rem auto", borderRadius:"8px",width:"85%"}}>
 <div style={{display:"flex", justifyContent:"space-between",flexWrap:"wrap",gap:"18px",padding:"25px",}}>
@@ -114,7 +115,7 @@ return (
 </Button>
 
 </div> */}
-
+  <h1 style={{marginLeft:'3%'}}>Sales Enquiry Details :</h1>
 
     <TableContainer component={Paper} className="table-container">
       <Table sx={{ minWidth: 500 }} aria-label="customized table">
@@ -180,6 +181,7 @@ return (
       <hr style={{ border: '1px solid lightGray' }} />
     </TableContainer>
   </div>
+  // </div>
 );
 }
 

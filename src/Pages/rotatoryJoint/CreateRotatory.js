@@ -104,8 +104,7 @@ export default function CreateRotatory() {
  
   return (
     <Container className="container">
-   <form >
-     
+   {/* <form > */}
         <div className='card'>
    {!rjId ? <h1>New Rotary Joint :</h1> : <h1>Update Rotary Joint :</h1>}
           <h3>Rotary Joint New Mode:-</h3>
@@ -417,7 +416,7 @@ export default function CreateRotatory() {
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
         </Grid>
-      </form>
+      {/* </form> */}
     </Container>
   );
 

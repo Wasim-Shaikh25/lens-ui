@@ -138,8 +138,8 @@ export default function AgitatorSeal() {
           <div className='card'>
         {!aId ? <h1 >Agitator Seal</h1> : <h1>Update Agitator Seal :</h1>}
             {/* <h3>Agitator Seal:-</h3> */}
-            <div className="MuiBox-root css-2e6lci"><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb">Agitator Seal:-</div></div>
-            <Grid container spacing={2}>
+            <div className="MuiBox-root css-2e6lci" style={{marginTop:'1.5em'}}><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb">Agitator Seal:-</div></div>
+            <Grid container spacing={3}>
               {aId &&
                 <Grid item xs={4}>
                   {/* <InputLabel className="ip-label">Agitator Drf Number</InputLabel> */}
@@ -268,12 +268,7 @@ export default function AgitatorSeal() {
             </Grid> 
 
             </Grid>
-          </div>
-
-          
-
-         {/*  General  */}
-          <div className="card">
+      
              {/* <h3>General</h3> */}
              <div className="MuiBox-root css-2e6lci"><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb">General:-</div></div>
             <Grid container spacing={2}>
@@ -289,14 +284,7 @@ export default function AgitatorSeal() {
                   />
               </Grid>
    </Grid>
-</div>
-    
 
-
-       
-      {/* Agitator Data */}
-
-        <div className="card">
            {/* <h3>Agitator Data</h3> */}
            <div className="MuiBox-root css-2e6lci"><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb">Agitator Data:-</div></div>
            
@@ -349,11 +337,7 @@ export default function AgitatorSeal() {
     />
   </Grid>
  </Grid>
-</div>    
 
-{/*  Opration Parameter*/}
-
-          <div className="card">
             {/* <h3>Operation Parameters</h3> */}
             <div className="MuiBox-root css-2e6lci"><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb">Operation Parameters:-</div></div>
             <Grid container spacing={2}>
@@ -407,13 +391,7 @@ export default function AgitatorSeal() {
             </Grid>
 
             </Grid>
-            </div>
-
-
-            
-{/* MOC*/}
-
-          <div className="card">
+         
             {/* <h3>MOC</h3> */}
             <div className="MuiBox-root css-2e6lci"><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb">MOC:-</div></div>
             <Grid container spacing={2}>
