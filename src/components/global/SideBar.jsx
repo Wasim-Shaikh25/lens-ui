@@ -16,8 +16,11 @@ import GroupIcon from '@mui/icons-material/Group';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
-import ChatIcon from '@mui/icons-material/Chat';
-
+import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
+import BrushOutlinedIcon from '@mui/icons-material/BrushOutlined';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
+import BusinessCenterOutlinedIcon from '@mui/icons-material/BusinessCenterOutlined';
 
 
 const CustomSidebar = ({isSidebar,setIsSidebar}) => {
@@ -44,17 +47,20 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
 
     
       const getSubMenuStyle = (menuName) => ({
-        backgroundColor: activeSubMenu === menuName ? '#00CEC3' : 'transparent',
-        color: activeSubMenu === menuName ? 'white' : 'black',
+        backgroundColor: activeSubMenu === menuName ? 'rgb(3, 201, 215)' : 'transparent',
+        color: activeSubMenu === menuName ? 'white' : 'rgba(0, 0, 0, 0.54)',
         borderRadius: '8px',
         margin: '4px 16px',
         padding:"6px",
+        fontFamily:'DM Sans, sans-serif'
       });
     
       const getMenuItemStyle = (menuName) => ({
-        color: activeItemMenu === menuName ? '#00CEC3' : 'black',
+        color: activeItemMenu === menuName ? 'rgb(3, 201, 215)' : 'rgba(0, 0, 0, 0.54)',
         margin: '4px 18px',
         borderRadius: '6px',
+        fontFamily:'DM Sans, sans-serif'
+
       });
     
       const handleSubMenuClick = (menuName) => {
@@ -74,7 +80,6 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
       id="sidebar"
       height="80vh"
       className="sidebarBox"
-      bgcolor={backgroundColor}
       pr={2}
     >
       
@@ -87,11 +92,11 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
               <Box mb="25px">
 
                 <Box textAlign="center" mt={2}>
-                <Typography sx={{ fontSize: '0.7rem' }} color="textSecondary">
+                {/* <Typography sx={{ fontSize: '0.7rem' }} color="textSecondary">
                     Created By
-                </Typography>
-                  <Typography variant="h5" color="black" fontWeight="bold">
-                    Synterra
+                </Typography> */}
+                  <Typography variant="h6" color="textSecondary" fontWeight="bold">
+                    Menu Bar
                   </Typography>
                 </Box>
               </Box>
@@ -104,7 +109,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                 <SubMenu label={<Typography variant="body1">Users</Typography>} style={getSubMenuStyle("Users")} onClick={() => handleSubMenuClick("Users")} icon={<GroupIcon />}>
                   <Link to="/CreateUser" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<AddBoxIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit "><g><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></g></svg>}
                       style={getMenuItemStyle("Users")} onClick={() => setActiveItemMenu("Users")}
                     >
                       New
@@ -113,7 +118,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
 
                   <Link to="/user" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<EditIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list "><g><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></g></svg>}
                       style={getMenuItemStyle("editUser")} onClick={() => setActiveItemMenu("editUser")}
                     >
                       Edit
@@ -124,10 +129,10 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
 
 
 
-                <SubMenu label={<Typography variant="body1">Customer</Typography>} style={getSubMenuStyle("Customer")} onClick={() => handleSubMenuClick("Customer")} icon={<PersonIcon />}>
+                <SubMenu label={<Typography variant="body1">Customer</Typography>} style={getSubMenuStyle("Customer")} onClick={() => handleSubMenuClick("Customer")} icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users "><g><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></g></svg>}>
                   <Link to="/Customer" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<AddBoxIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit "><g><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></g></svg>}
                       style={getMenuItemStyle("Customer")} onClick={() => setActiveItemMenu("Customer")}
                     >
                       Create
@@ -135,17 +140,17 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                   <Link to="/editCustomer" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<EditIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list "><g><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></g></svg>}
                       style={getMenuItemStyle("Customer Edit")} onClick={() => setActiveItemMenu("Customer Edit")}
                     >
                       Edit
                     </MenuItem>
                   </Link>
                 </SubMenu>
-                <SubMenu label={<Typography variant="body1">Sales Inquiry</Typography>} style={getSubMenuStyle("Sales")} onClick={() => handleSubMenuClick("Sales")} icon={<LoyaltyIcon />}>
+                <SubMenu label={<Typography variant="body1">Sales Inquiry</Typography>} style={getSubMenuStyle("Sales")} onClick={() => handleSubMenuClick("Sales")} icon={<LocalPhoneOutlinedIcon />}>
                   <Link to="/SalesInquiry" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<AddBoxIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit "><g><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></g></svg>}
                       style={getMenuItemStyle("Sales Inquiry Create")} onClick={() => setActiveItemMenu("Sales Inquiry Create")}
                     >
                       Create
@@ -153,17 +158,17 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                   <Link to="/editSales" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<EditIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list "><g><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></g></svg>}
                       style={getMenuItemStyle("Sales Inquiry Edit")} onClick={() => setActiveItemMenu("Sales Inquiry Edit")}
                     >
                       Edit
                     </MenuItem>
                   </Link>
                 </SubMenu>
-                <SubMenu label="Drawing Requisition" style={getSubMenuStyle("Drawing")} onClick={() => handleSubMenuClick("Drawing")} icon={<DescriptionIcon />}>
+                <SubMenu label="Drawing Requisition" style={getSubMenuStyle("Drawing")} onClick={() => handleSubMenuClick("Drawing")} icon={<DescriptionOutlinedIcon />}>
                   <Link to='/createPump' style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<AddBoxIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit "><g><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></g></svg>}
                       style={getMenuItemStyle("Pump Seal Create")} onClick={() => setActiveItemMenu("Pump Seal Create")}
                     >
                       Create PumpSeal
@@ -171,7 +176,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                   <Link to='/editPump' style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<EditIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list "><g><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></g></svg>}
                       style={getMenuItemStyle("Pump Seal Edit")} onClick={() => setActiveItemMenu("Pump Seal Edit")}
                     >
                       Edit Pump Seal
@@ -179,7 +184,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                   <Link to='/createRotary' style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<AddBoxIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit "><g><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></g></svg>}
                       style={getMenuItemStyle("Rotary Create")} onClick={() => setActiveItemMenu("Rotary Create")}
                     >
                       Create Rotary Join
@@ -187,7 +192,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                   <Link to='/editRotary' style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<EditIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list "><g><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></g></svg>}
                       style={getMenuItemStyle("Rotary Edit")} onClick={() => setActiveItemMenu("Rotary Edit")}
                     >
                       Edit Rotary Join
@@ -195,7 +200,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                   <Link to='/createApi' style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<AddBoxIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit "><g><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></g></svg>}
                       style={getMenuItemStyle("Create Api")} onClick={() => setActiveItemMenu("Create Api")}
                     >
                       Create API Plan
@@ -203,7 +208,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                   <Link to='/editApi' style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<EditIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list "><g><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></g></svg>}
                       style={getMenuItemStyle("Edit Api")} onClick={() => setActiveItemMenu("Edit Api")}
                     >
                       Edit API Plan
@@ -211,7 +216,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                   <Link to="/createAgitator" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<AddBoxIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit "><g><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></g></svg>}
                       style={getMenuItemStyle("Create Agitator")} onClick={() => setActiveItemMenu("Create Agitator")}
                     >
                       Create Agitator Seal
@@ -219,7 +224,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                   <Link to="/editAgitator" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<EditIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list "><g><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></g></svg>}
                       style={getMenuItemStyle("Edit Agitator")} onClick={() => setActiveItemMenu("Edit Agitator")}
                     >
                       Edit Agitator Seal
@@ -227,10 +232,10 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                 </SubMenu>
 
-                <SubMenu label={<Typography variant="body1">Quotation</Typography>} style={getSubMenuStyle("quotation")} onClick={() => handleSubMenuClick("quotation")} icon={<MonetizationOnIcon />}>
+                <SubMenu label={<Typography variant="body1">Quotation</Typography>} style={getSubMenuStyle("quotation")} onClick={() => handleSubMenuClick("quotation")} icon={<MonetizationOnOutlinedIcon />}>
                   <Link to="/quotation" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<AddBoxIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit "><g><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></g></svg>}
                       style={getMenuItemStyle("quotation")} onClick={() => setActiveItemMenu("quotation")}
                     >
                       New
@@ -240,10 +245,10 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                 </SubMenu>
 
 
-                <SubMenu label={<Typography variant="body1">OFM</Typography>} style={getSubMenuStyle("ofm")} onClick={() => handleSubMenuClick("ofm")} icon={<BusinessCenterIcon />}>
+                <SubMenu label={<Typography variant="body1">OFM</Typography>} style={getSubMenuStyle("ofm")} onClick={() => handleSubMenuClick("ofm")} icon={<BusinessCenterOutlinedIcon />}>
                   <Link to="/createOfm" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<AddBoxIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit "><g><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></g></svg>}
                       style={getMenuItemStyle("ofm")} onClick={() => setActiveItemMenu("ofm")}
                     >
                       New
@@ -251,7 +256,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                   <Link to="/editOfm" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<EditIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list "><g><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></g></svg>}
                       style={getMenuItemStyle("ofm Edit")} onClick={() => setActiveItemMenu("ofm Edit")}
                     >
                       Edit
@@ -259,10 +264,10 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                 </SubMenu>
 
-                <SubMenu label={<Typography variant="body1">OFM Communication</Typography>} style={getSubMenuStyle("ofmcomm")} onClick={() => handleSubMenuClick("ofmcomm")} icon={<ChatIcon />}>
+                <SubMenu label={<Typography variant="body1">OFM Communication</Typography>} style={getSubMenuStyle("ofmcomm")} onClick={() => handleSubMenuClick("ofmcomm")} icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square "><g><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></g></svg>}>
                   <Link to="/ofmComm" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<AddBoxIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit "><g><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></g></svg>}
                       style={getMenuItemStyle("ofmComs")} onClick={() => setActiveItemMenu("ofmComs")}
                     >
                       Create
@@ -273,7 +278,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                 {/* <SubMenu label="Sales Order" style={getSubMenuStyle("SalesOrder")} onClick={() => handleSubMenuClick("SalesOrder")} icon={<MonetizationOnIcon />}>
                   <Link to='/createOrder' style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<AddBoxIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit "><g><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></g></svg>}
                       style={getMenuItemStyle("Create Order")} onClick={() => setActiveItemMenu("Create Order")}
                     >
                       Create
@@ -281,7 +286,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                   <Link to='/editOrder' style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem
-                      icon={<EditIcon />}
+                      icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list "><g><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></g></svg>}
                       style={getMenuItemStyle("Edit Order")} onClick={() => setActiveItemMenu("Edit Order")}
                     >
                       Edit
@@ -289,7 +294,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   </Link>
                 </SubMenu> */}
 
-                <SubMenu label="Logout" className="logoutBtn"  onClick={userLogout} icon={<PowerSettingsNewIcon />}></SubMenu>
+                <SubMenu label="Logout" className="logoutBtn"  onClick={userLogout} icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out "><g><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></g></svg>}></SubMenu>
               </Menu>
             </Box>
           </Menu>

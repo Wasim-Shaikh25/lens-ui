@@ -115,35 +115,40 @@ export default function Customer() {
           <Grid container spacing={2} alignItems="center">
     {rId && (
       <Grid item xs={4}>
-        <InputLabel className="ip-label">Customer Reference No</InputLabel>
         <TextField
           size="small"
-          className="text-field"
           name="customerReferenceNumber"
+          className="custom-text-field"
           value={formData.customerReferenceNumber}
+          label="Customer Reference No"
+          InputLabelProps={{
+            shrink: Boolean(formData.customerReferenceNumber),
+          }}
+          autoFocus={!formData.customerReferenceNumber} // Autofocus if the value exists
         />
       </Grid>
     )}
 
     <Grid item xs={4}>
-      <InputLabel className="ip-label">Branch</InputLabel>
       <TextField
         size="small"
-        className="text-field"
+        // className="custom-text-field"
         name="branch"
+        className='custom-text-field'
         value={formData.branch}
         onChange={handleChange}
+        label="Branch"
       />
     </Grid>
 
     <Grid item xs={4}>
-      <InputLabel className="ip-label">Customer Name</InputLabel>
       <TextField
         size="small"
-        className="text-field"
+        className="custom-text-field"
         name="customerName"
         value={formData.customerName}
         onChange={handleChange}
+        label="Customer Name"
       />
     </Grid>
   </Grid>
@@ -157,7 +162,7 @@ export default function Customer() {
           <InputLabel className="ip-label"  >Customer Address</InputLabel >
           <TextField
             size="small" 
-            className="text-field" 
+            className="custom-text-field" 
             name="customerAddress"
             value={detail.customerAddress}
             onChange={e => handleChange(e, index)}
@@ -168,7 +173,7 @@ export default function Customer() {
           <InputLabel className="ip-label"  >Contact Person</InputLabel >
           <TextField
             size="small" 
-            className="text-field" 
+            className="custom-text-field" 
             name="contactPerson"
             value={detail.contactPerson}
             onChange={e => handleChange(e, index)}
@@ -179,7 +184,7 @@ export default function Customer() {
           <InputLabel className="ip-label"  >Industry Id</InputLabel >
           <TextField
             size="small" 
-            className="text-field" 
+            className="custom-text-field" 
             name="industryId"
             value={detail.industryId}
             onChange={e => handleChange(e, index)}
@@ -187,10 +192,10 @@ export default function Customer() {
           />
         </Grid>
         <Grid item xs={12} sm={4}>
-          <InputLabel className="ip-label"  >Designation</InputLabel >
+          <InputLabel className="ip-label"> Designation</InputLabel >
           <TextField
             size="small" 
-            className="text-field" 
+            className="custom-text-field" 
             name="designation"
             value={detail.designation}
             onChange={e => handleChange(e, index)}
@@ -201,7 +206,7 @@ export default function Customer() {
           <InputLabel className="ip-label"  >Telephone Number</InputLabel >
           <TextField
             size="small" 
-            className="text-field" 
+            className="custom-text-field" 
             name="telephoneNos"
             value={detail.telephoneNos}
             onChange={e => handleChange(e, index)}
@@ -212,7 +217,7 @@ export default function Customer() {
           <InputLabel className="ip-label"  >Ecc No</InputLabel >
           <TextField
             size="small" 
-            className="text-field" 
+            className="custom-text-field" 
             name="eccNo"
             value={detail.eccNo}
             onChange={e => handleChange(e, index)}
@@ -223,7 +228,7 @@ export default function Customer() {
           <InputLabel className="ip-label"  >SSt No</InputLabel >
           <TextField
             size="small" 
-            className="text-field" 
+            className="custom-text-field" 
             name="sstNo"
             value={detail.sstNo}
             onChange={e => handleChange(e, index)}
@@ -234,7 +239,7 @@ export default function Customer() {
           <InputLabel className="ip-label"  >GST No</InputLabel >
           <TextField
             size="small" 
-            className="text-field" 
+            className="custom-text-field" 
             name="gstNo"
             value={detail.gstNo}
             onChange={e => handleChange(e, index)}
@@ -245,7 +250,7 @@ export default function Customer() {
           <InputLabel className="ip-label"  >Pan No</InputLabel >
           <TextField
             size="small" 
-            className="text-field" 
+            className="custom-text-field" 
             name="panNo"
             value={detail.panNo}
             onChange={e => handleChange(e, index)}
@@ -256,7 +261,7 @@ export default function Customer() {
           <InputLabel className="ip-label"  >CST No</InputLabel >
           <TextField
             size="small" 
-            className="text-field" 
+            className="custom-text-field" 
             name="cstNo"
             value={detail.cstNo}
             onChange={e => handleChange(e, index)}

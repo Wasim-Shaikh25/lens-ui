@@ -18,12 +18,20 @@ export const handleSubmit = async (e, formData, navigate) => {
     formData.lastUpdatedOn = dateTime;
   }
 
-  const res = await axiosInstance.post(`/lens/customer/save`, formData);
+  try{
 
-  console.log("response is ", res.data);
-  navigate(`/registerSuccess/${res.data}`);
-  console.log(formData);
+    const res = await axiosInstance.post(`/lens/customer/save`, formData);
+  
+    console.log("response is ", res.data);
+    navigate(`/registerSuccess/${res.data}`);
+    console.log(formData);
+  }
+  catch(err){
+    console.log(err)
+  }
 };
+
+
 
 // edit detail
 export const editDetail = (detail, navigate) => {
@@ -81,6 +89,7 @@ export const deleteDetail = (crId, data, setIsDeleted, setData) => {
 
   console.log("customer reference id of deletion elem is ", crId);
 };
+
 
 
 // Customer filter Search

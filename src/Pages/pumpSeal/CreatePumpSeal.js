@@ -239,7 +239,10 @@ export default function CreatePumpSeal() {
       <form  className="">
         <div className='card'>
       {!pId ? <h1 >New Pump Seal :</h1> : <h1>Update Pump Seal :</h1>}
-          <h3>Drawing Requisition - Pump Seal :-</h3>
+
+
+          {/* <h3>Drawing Requisition - Pump Seal :-</h3> */}
+          <div className="MuiBox-root css-2e6lci"><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb">Drawing Requisition - Pump Seal :-</div></div>
           <hr />
           <Grid container spacing={2}>
             {pId && <Grid item xs={4}>
@@ -390,9 +393,10 @@ export default function CreatePumpSeal() {
             </Grid>
 
             <Grid item xs={4}>
-<InputLabel className="ip-label" >Arrangement</InputLabel >
+              
+{/* <InputLabel className="ip-label" >Arrangement</InputLabel > */}
 
-<Autocomplete style={{width:'62%'}}
+<Autocomplete style={{width:'78%'}}
   value={formData.arrangement}
   onChange={(event, newValue) => {
     setFormData({
@@ -415,7 +419,9 @@ export default function CreatePumpSeal() {
       {...params}
       placeholder="Select Arrangement"
       variant="outlined"
+      className='custom-text-field'
       fullWidth
+      label="Arrangement"
     />
   )}
 />
@@ -427,7 +433,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
 <InputLabel className="ip-label" >Pump Type</InputLabel >
 
-<Autocomplete style={{width:'62%'}}
+<Autocomplete style={{width:'78%'}}
   value={formData.pumpType}
   onChange={(event, newValue) => {
     setFormData({
@@ -469,7 +475,7 @@ export default function CreatePumpSeal() {
 
             <Grid item xs={4}>
               <InputLabel className="ip-label">Stage</InputLabel >
-              <Autocomplete style={{width:'62%'}}
+              <Autocomplete style={{width:'78%'}}
   value={formData.stage}
   onChange={(event, newValue) => {
     setFormData({
@@ -501,7 +507,7 @@ export default function CreatePumpSeal() {
 
             <Grid item xs={4}>
               <InputLabel className="ip-label">Casing</InputLabel >
-              <Autocomplete style={{width:'62%'}}
+              <Autocomplete style={{width:'78%'}}
   value={formData.casting}
   onChange={(event, newValue) => {
     setFormData({
@@ -551,8 +557,9 @@ export default function CreatePumpSeal() {
               <Grid item xs={4}>
 <InputLabel className="ip-label" >Performance</InputLabel >
 
-<Autocomplete style={{width:'62%'}}
+<Autocomplete style={{width:'78%'}}
   value={formData.performance}
+  className="custom-autocomplete"
   onChange={(event, newValue) => {
     setFormData({
       ...formData,
@@ -584,7 +591,7 @@ export default function CreatePumpSeal() {
               <Grid item xs={4}>
 <InputLabel className="ip-label" >Seal Arrangement</InputLabel >
 
-<Autocomplete style={{width:'62%'}}
+<Autocomplete style={{width:'78%'}}
   value={formData.sealArrangement}
   onChange={(event, newValue) => {
     setFormData({
@@ -617,7 +624,7 @@ export default function CreatePumpSeal() {
               <Grid item xs={4}>
 <InputLabel className="ip-label" >Seal Type</InputLabel >
 
-<Autocomplete style={{width:'62%'}}
+<Autocomplete style={{width:'78%'}}
   value={formData.sealType}
   onChange={(event, newValue) => {
     setFormData({
@@ -761,7 +768,7 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
 <InputLabel className="ip-label" >Nature</InputLabel >
 
-<Autocomplete style={{width:'62%'}}
+<Autocomplete style={{width:'78%'}}
   value={formData.nature}
   onChange={(event, newValue) => {
     setFormData({

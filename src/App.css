@@ -1,5 +1,5 @@
 body{
-    font-family: 'Sans-serif fonts', Times, serif !important;
+    font-family: "DM Sans", sans-serif !important;
     font-weight: 400;
     font-size: 0.8rem !important;
     line-height: 1.5 !important;
@@ -39,10 +39,10 @@ body{
 
   .css-17w9904-MuiTypography-root {
     margin: 0 !important;
-    font-family: Times New Roman !important;
-    /* font-weight: 400 !important;
-    font-size: 0.717143rem !important;
-    line-height: 1.5 !important; */
+    font-family: "DM Sans", sans-serif !important;
+    font-weight: 450 !important;
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important; 
 }
 
 
@@ -65,8 +65,9 @@ body{
 
 .editContainer>h2{
 margin-left: 2.5%;
-font-weight: 600;  
-font-size : 1.5em;  
+font-size: 1.125rem;
+    line-height: 1.5;
+    font-weight: 550;
 color:#03346E;
 font-family: 'Sans-serif fonts', Times, serif !important;
 
@@ -112,6 +113,10 @@ font-family: 'Sans-serif fonts', Times, serif !important;
     right:-6px !important;
     top: 50% !important;
   }
+
+  .css-1ns5f5t {
+    padding-left: 7px !important;
+}
   
   
   .css-honxw6 {
@@ -144,6 +149,20 @@ font-family: 'Sans-serif fonts', Times, serif !important;
     margin-bottom: 3px !important;
   }
   
+
+  .css-2e6lci {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    gap:8px;
+    padding: 15px;
+    margin: 1em 0;
+    font-weight: 550;
+    background-color: rgb(229, 250, 251);
+    color: rgb(3, 201, 215);
+    border-radius: 10px 10px 0 0 ;
+}
+
   
   
   .submit-btn{
@@ -184,45 +203,52 @@ font-family: 'Sans-serif fonts', Times, serif !important;
   
   
   .sidebarBox{
-    overflow-y: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     bottom: 0;
     display: flex;
-    max-height: 100vh;
     padding-right: 0px;
-    margin: 5rem 1rem 1rem 1rem;
-  
+    margin: 5rem 1rem 1rem 1rem; 
   }
   
-    ::-webkit-scrollbar {
-      max-height:0.5rem !important;
-      width: 0.3rem;
-    }
-  
-    ::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 5px white; 
-      border-radius: 10px;
-    }
-     
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-      background: #d3d3d3; 
-      border-radius: 10px;
-      
-    }
-    
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-      background: gray; 
-    }
+  .sidebarBox:hover {
+    overflow-y: auto; /* Show scrollbar on hover */
+}
+
+/* Webkit Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 0.3rem !important; /* Set the scrollbar width */
+    height: 0.1rem !important; /* Set the scrollbar height (for horizontal scrollbar) */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px white;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #d3d3d3;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: gray;
+}
+
 
 /* Sidebar Css */
 .sidebarBox {
   overflow-y: auto; /* Ensure the sidebar is scrollable */
+  overflow-x: hidden; /* Ensure the sidebar is scrollable */
 }
+
 
 .sidebarBox .css-dip3t8 {
   background-color: transparent !important;
@@ -245,13 +271,18 @@ font-family: 'Sans-serif fonts', Times, serif !important;
 
 .sidebarBox .pro-menu {
   padding: 0; /* Additional specificity */
+  overflow: hidden;
 }
+
 
 .sidebarBox .pro-menu-item {
   padding: 5px 10px;
   border-radius: 8px;
   margin: 4px 0;
+  overflow: hidden;
+
 }
+
 
 .sidebarBox .pro-menu-item:hover {
   background-color: #03C9D7;
@@ -267,30 +298,38 @@ font-family: 'Sans-serif fonts', Times, serif !important;
 .sideBarContent{
   display:flex;
   border-radius:20px;
-  height:100vh;
+  /* max-height:50vh !important; */
    width: 20%;
   justify-content:center
 }
 
 
 #custom-sidebar{
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     flex: 1;
-    box-shadow:0px 2px 4px rgba(0, 0, 0, 0.3);
-    overflow-y: auto
-  }
+    color:#B0B0B0;
+    position: fixed;
+    max-height: 82vh !important;
+    box-shadow:rgba(90, 114, 123, 0.11) 0px 7px 30px 0px;
+    transition: box-shadow 0.3s ease; /* Smooth transition */
+    overflow-y: auto;
+    z-index: 50000;
+    margin-left:2%;
+    margin-top:0.8%;
+    border-radius: 18px;
+}
 
-    
+
+
 
 /* Logout Button */
-
 .logoutBtn {
-  font-family: Times New Roman;
+  font-family: "DM Sans", sans-serif;
   border-radius: 8px;
   margin: 2px 0px;
   padding: 15px 0px;
   width: 98% !important;
-  color: red;
+  color: #f1001c;
 }
 
 /* logo */
@@ -298,7 +337,8 @@ font-family: 'Sans-serif fonts', Times, serif !important;
 max-width:3%;
 height:1%;
 margin-left:2%;
-box-shadow:rgba(0, 0, 0, 0.1) 1px 4px 7px',borderRadius:'3px 
+box-shadow:rgba(0, 0, 0, 0.1) 1px 4px 7px;
+border-radius:3px 
 }
 
 .logoName{
@@ -456,6 +496,7 @@ box-shadow:rgba(0, 0, 0, 0.1) 1px 4px 7px',borderRadius:'3px
 }
 
 
+
 .custom-text-field .MuiOutlinedInput-root {
   padding-top: 3px;
   color: black;
@@ -464,8 +505,9 @@ box-shadow:rgba(0, 0, 0, 0.1) 1px 4px 7px',borderRadius:'3px
 
 .custom-text-field .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
   /* border color after clicking on text field  */
-  border: 2px solid #5b99c2;    
+  border: 1px solid rgb(3, 201, 215);    
 }
+
 
 
 .custom-text-field .MuiOutlinedInput-input:focus {
@@ -477,10 +519,29 @@ box-shadow:rgba(0, 0, 0, 0.1) 1px 4px 7px',borderRadius:'3px
 
 .custom-text-field .MuiInputLabel-root.Mui-focused {
   /* Label color on Clicking the field */
-  color: #5b99c2; 
+  color: rgb(3, 201, 215); 
 }
 
 
+/* Auto Complete */
+.custom-autocomplete .MuiAutocomplete-inputRoot {
+  padding: 0 !important; /* Reduce padding inside the input */
+  min-height: 30px; /* Set a minimum height */
+}
+
+.custom-autocomplete .MuiInputBase-input {
+  padding: 4px 8px !important; /* Adjust padding inside the input */
+  font-size: 14px; /* Adjust font size if necessary */
+}
+
+.custom-autocomplete .MuiOutlinedInput-root {
+  padding: 0; /* Reduce padding in the outlined input */
+  min-height: 30px; /* Set the desired height */
+}
+
+.custom-autocomplete .MuiAutocomplete-endAdornment {
+  top: calc(50% - 12px); /* Adjust the position of the dropdown arrow */
+}
 
 
 
