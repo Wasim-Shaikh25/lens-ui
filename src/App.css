@@ -52,6 +52,13 @@ body{
     max-width:93% !important;
   }
 
+  .searchBtn{
+    background-color:#e74545 !important;
+    color:white !important;
+     margin:1rem 0 1rem 1rem !important;
+     padding:8px !important;
+
+  }
 
 
   .editContainer{
@@ -98,7 +105,7 @@ font-family: 'Sans-serif fonts', Times, serif !important;
     display:flex !important;
     flex-direction:column !important;
     margin:20px 25px 0px 0px !important;
-    padding:10px 25px 25px 25px !important;
+    padding:10px 32px 25px 32px !important;
     border-radius: 8px !important;
     border:1px solid #ddd !important;
     background-color: white !important;
@@ -140,6 +147,7 @@ font-family: 'Sans-serif fonts', Times, serif !important;
     transform: rotate(-45deg) !important;
     margin-right: 9px  !important;
   }
+  
   
   .css-jn69v9 {
     display: inline-block !important;

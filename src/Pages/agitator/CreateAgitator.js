@@ -3,14 +3,88 @@ import { TextField ,Button,  Container, Grid, InputLabel , IconButton, Autocompl
 import '../../App.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { getApi, handleSubmit, handleUpdate } from '../../apis/AgitatorApi';
+import { PDFDownloadLink,Image,Document, Page, Text, View, StyleSheet, Svg, Path } from '@react-pdf/renderer';
+import Logo from '../../assets/Picture1.png'
 
 
+// Define styles for PDF
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: 'column',
+    padding: 30,
+    fontFamily: 'Helvetica',
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    border: 1,
+    borderRadius: 5,
+  },
+  table: {
+    display: 'flex',
+    flexDirection: 'column',
+    border: '1px solid black',
+    marginBottom: 20,
+  },
+  tableRow: {
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+  },
+  tableCellHeader: {
+    fontSize: 12,
+    fontWeight: 500,
+    flex: 1,
+    padding: 5,
+  },
+  tableCell: {
+    fontSize: 12,
+    flex: 1,
+    padding: 5,
+  },
+  header: {
+    fontSize: 18,
+    textAlign: 'center',
+    padding: 5,
+    borderWidth: 1,
+  },
+  title: {
+    fontSize: 18,
+    marginLeft: 20,
+    fontWeight:500 
+  },
+  logoImg: {
+    width: 40, // Set a fixed width for the logo
+    height: 40, // Set a fixed height for the logo
+  },
+  compDetails: {
+    flexDirection: 'row', // Set to row to align items horizontally
+    justifyContent: 'flex-start', // Align children to the start
+    alignItems: 'center', // Vertically center the children
+    marginBottom: 20,
+    border:'1px solid black',
+    padding:'10px',
+    marginLeft:15,
+    flexWrap:'wrap',
+    borderRadius:'8px',
+    maxWidth:'95%'
+  },
+  compSec:{
+    display:'flex',
+    flexDirection:'column'
+  },
+  compDesc:{
+    fontSize:11,
+    fontWeight:450,
+    marginLeft:22,
+    marginTop:6
+  }
+});
 
 export default function AgitatorSeal() {
 
   const navigate = useNavigate();
   let {aId} = useParams();
-  const costReq = ['Yes', 'No'];
+  const costReq = ['true', 'false'];
 
 
   const [formData, setFormData] = useState({
@@ -130,7 +204,76 @@ export default function AgitatorSeal() {
   }
 
 
+  // PDF Component
+  const PDFFile = ({ formData }) => (
+    <Document>
+      <Page size="A4" style={styles.page}>
 
+      <View style={styles.compDetails}> 
+      <Image style={styles.logoImg} src={Logo} alt = "logo" />
+      <View style={styles.compSec}> 
+        <Text style={styles.title}>Agitator Seal Information</Text>
+        <Text style={styles.compDesc}>Leak-Proof® Engineering Pvt. Ltd.</Text>
+        </View>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.header}>General Information</Text>
+          <View style={styles.table}>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Branch</Text>
+              <Text style={styles.tableCell}>{formData.branch || 'N/A'}</Text>
+            </View>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Customer Name</Text>
+              <Text style={styles.tableCell}>{formData.customerName || 'N/A'}</Text>
+            </View>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Customer Address</Text>
+              <Text style={styles.tableCell}>{formData.customerAddress || 'N/A'}</Text>
+            </View>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Costing Requirement</Text>
+              <Text style={styles.tableCell}>{String(formData.costingRequirement)}</Text>
+            </View>
+          </View>
+  
+          <Text style={styles.header}>Agitator Data</Text>
+          <View style={styles.table}>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Make</Text>
+              <Text style={styles.tableCell}>{formData.make || 'N/A'}</Text>
+            </View>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Model</Text>
+              <Text style={styles.tableCell}>{formData.model || 'N/A'}</Text>
+            </View>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Tag No</Text>
+              <Text style={styles.tableCell}>{formData.tagNo || 'N/A'}</Text>
+            </View>
+          </View>
+  
+          <Text style={styles.header}>Operation Parameters</Text>
+          <View style={styles.table}>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Proposed Seal Series</Text>
+              <Text style={styles.tableCell}>{formData.proposedSealSeries || 'N/A'}</Text>
+            </View>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Proposed Seal Size</Text>
+              <Text style={styles.tableCell}>{formData.proposedSealSize || 'N/A'}</Text>
+            </View>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Pad Plate</Text>
+              <Text style={styles.tableCell}>{formData.padPlate || 'N/A'}</Text>
+            </View>
+          </View>
+          </View>
+        </Page>
+      </Document>
+  );
+  
  
   return (
       <Container className="container">
@@ -138,7 +281,7 @@ export default function AgitatorSeal() {
           <div className='card'>
         {!aId ? <h1 >Agitator Seal</h1> : <h1>Update Agitator Seal :</h1>}
             {/* <h3>Agitator Seal:-</h3> */}
-            <div className="MuiBox-root css-2e6lci" style={{marginTop:'1.5em'}}><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb">Agitator Seal:-</div></div>
+            <div className="MuiBox-root css-2e6lci" style={{marginTop:'1rem'}}><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb">Agitator Seal:-</div></div>
             <Grid container spacing={3}>
               {aId &&
                 <Grid item xs={4}>
@@ -150,6 +293,10 @@ export default function AgitatorSeal() {
                     value={formData.agitatorSealDrfNumber}
                     onChange={handleChange}
                     label="Agitator Drf Number"
+                    InputLabelProps={{
+                      shrink: Boolean(formData.agitatorSealDrfNumber),
+                    }}
+                    autoFocus={!formData.agitatorSealDrfNumber} // Autofocus if the value exists
                     />
                 </Grid>
               }
@@ -187,85 +334,40 @@ export default function AgitatorSeal() {
                 />
               </Grid>
               <Grid item xs={4}>
-              {/* <InputLabel className="ip-label">Costing Requirement</InputLabel> */}
-              {/* <select
-                className="custom-text-field" style={{ width: "55%", padding: "10px" }}
-                name="costingRequirement"
-                value={formData.costingRequirement}
-                onChange={handleChange}
-              >
-                <option value={true}>Yes</option>
-                <option value={false}>No</option>
-              </select> */}
-
-<Autocomplete
- sx={{
-  width: '78%',
-  '.MuiAutocomplete-inputRoot': {
-    minHeight: '30px',                // Control height of the input root
-    padding: '0px',                   // Remove internal padding
-  },
-  '.MuiInputBase-input': {
-    minHeight: '30px',                // Control height of the outlined input
-    padding: '0px',  
-  },
-  '.MuiFormLabel-root': {
-    fontSize: '0.75rem',              // Default font size of the label
-    top: '50%',                       // Default vertical position
-    left: '8px',                      // Default horizontal position
-    transform: 'translateY(-50%)',   // Center vertically
-    transition: 'all 0.3s ease',      // Smooth transition for positioning and font size
-  },
-  '.MuiFormLabel-root.Mui-focused': {
-    top: '-9px',                     // Position when focused
-    left: '13px',                      // Horizontal position remains the same
-    fontSize: '0.65rem',              // Shrink the font size when focused
-    transform: 'translateY(0)',      // Remove vertical transform when focused
-    // borderBottom:'0.5px solid transparent'
-  },
-
-  // '.MuiFormLabel-root.MuiInputLabelShrink': {
-  //   top: '-10px',                     // Ensure label is on top when shrunk
-  //   left: '8px',                      // Horizontal position remains the same
-  //   fontSize: '0.5rem',              // Shrink font size when label is shrunk
-  //   // transform: 'translateY(0)',      // Remove vertical transform
-  // },
-}}
-
-  value={formData.costingRequirement}
-  onChange={(event, newValue) => {
-    setFormData({
-      ...formData,
-      costingRequirement: newValue
-    });
-  }}
-  
-
-  inputValue={formData.costingRequirement || ''}
-  onInputChange={(event, newInputValue) => {
-    setFormData({
-      ...formData,
-      costingRequirement:newInputValue
-    });
-  }}
-  options={costReq}
-  renderInput={(params) => (
-    <TextField
+    {/* <InputLabel className="ip-label" >Transport</InputLabel > */}
+  <Autocomplete
     size="small"
-      {...params}
-      variant="outlined"
-      fullWidth
-      className='custom-text-field'
-      label="Costing Requirement"
-      InputLabelProps={{
-        shrink: Boolean(formData.customerReferenceNumber),
-      }}
-      autoFocus={!!formData.customerReferenceNumber} // Autofocus if the value exists
-    />
-  )}
-/>
+    value={formData.costingRequirement || ''}
+    onChange={(event, newValue) => {
+      setFormData({
+        ...formData,
+        costingRequirement: newValue || ''
+      });
+    }}
 
-            </Grid> 
+    inputValue={formData.costingRequirement || ''}
+    onInputChange={(event, newInputValue) => {
+      setFormData({
+        ...formData,
+        costingRequirement: newInputValue || ''
+      });
+    }}
+
+    options={costReq.map((src) => src)}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        size="small"
+        variant="outlined"
+        placeholder='select Costing Requirement'
+        fullWidth
+        className='custom-text-field'
+        label="Costing Requirement"
+      />
+    )}
+  />
+  </Grid>
+
 
             </Grid>
       
@@ -475,6 +577,11 @@ export default function AgitatorSeal() {
             <Button className="update-btn" variant="contained" onClick={(e)=>handleUpdate(e,formData,navigate,aId)} >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
+        </Grid>
+        <Grid container justifyContent="flex-end" style={{ marginTop: '20px' }}>
+        <PDFDownloadLink document={<PDFFile formData={formData} />} fileName="AgitatorSeal.pdf">
+          {({ loading }) => (loading ? 'Loading document...' : 'Download PDF')}
+        </PDFDownloadLink>
         </Grid>
       </form>
     </Container>

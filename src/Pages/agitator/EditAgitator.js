@@ -18,6 +18,7 @@ import { deleteDetail, searchFilter} from '../../apis/AgitatorApi';
 import'../../App.css'
 import useToken from '../../contextApi/useToken';
 
+
 export default function EditAgitator() {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);  
@@ -62,8 +63,7 @@ export default function EditAgitator() {
     
 
 return (
-  <div >
-
+  <div>
 <div className='editContainer'>
   
     <h2>Search and Filter</h2>
@@ -72,59 +72,77 @@ return (
 
 
 <Grid item xs={12} sm={4}>
-<InputLabel className="ip-label">Agitator Drf No</InputLabel>
+{/* <InputLabel className="ip-label">Agitator Drf No</InputLabel> */}
     <TextField
       size="small"
-      className="text-field"
+      className="custom-text-field"
+      label="Agitator Drf No"
       name="agitatorSealDrfNumber"
       value={agitatorSealDrfNumber}
       onChange={(e)=>setAgitatorSealDrfNumber(e.target.value)}
     />
   </Grid>
 <Grid item xs={12} sm={4}>
-  <InputLabel className="ip-label">Branch</InputLabel>
+  {/* <InputLabel className="ip-label">Branch</InputLabel> */}
   <TextField
     size="small"
-    className="text-field"
+    className="custom-text-field"
     name="branch"
+    label="Branch"
     value={branch}
     onChange={(e)=>setBranch(e.target.value)}
   />
 </Grid>
 
 <Grid item xs={12} sm={4}>
-  <InputLabel className="ip-label">Customer Name</InputLabel>
+  {/* <InputLabel className="ip-label">Customer Name</InputLabel> */}
   <TextField
     size="small"
-    className="text-field"
+    label="Customer Name"
+    className="custom-text-field"
     name="customerName"
     value={customerName}
     onChange={(e)=>setcustomerName(e.target.value)}
   />
 </Grid>
 
+<Grid item xs={4}>
+  <TextField
+    size="small"
+    type="datetime-local"
+    className="custom-text-field"
+    value={startDate}
+    onChange={(e) => setStartDate(e.target.value)}
+    label="Start Date"
+    InputLabelProps={{
+      shrink: true, // This will keep the label from overlapping
+      className: startDate ? 'label-focused' : 'label-default', // Conditional class based on value
+    }}
+    inputProps={{
+      placeholder: startDate ? "" : "dd-mm-yyyy", // Show date format when empty
+    }}
+  />
+</Grid>
 
-<Grid item xs={12} sm={5}>
-        <InputLabel className="ip-label">Start Date</InputLabel>
-        <TextField
-        size="small"
-        type="datetime-local"
-        value={startDate}
-        onChange={(e)=>setStartDate(e.target.value)}
-      />
-      </Grid>
 
 <Grid item xs={12} sm={4}>
-        <InputLabel className="ip-label">End Date</InputLabel>
         <TextField
+        className='custom-text-field'
         size="small"
         type="datetime-local"
         value={endDate}
+        InputLabelProps={{
+          shrink: true, // This will keep the label from overlapping
+          className: endDate ? 'label-focused' : 'label-default', // Conditional class based on value
+        }}
+        inputProps={{
+          placeholder: endDate ? "" : "dd-mm-yyyy", // Show date format when empty
+        }}
         onChange={(e)=>setEndDate(e.target.value)}
+        label="End Date"
       />
       </Grid>
-
-</div>
+      </div>
 
 <Button onClick={handleSearch}  style={{width:"15%",margin:"1rem 2rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
   Search
@@ -198,7 +216,6 @@ return (
     </TableContainer>
   </div>
   </div>
-
 );
 }
 

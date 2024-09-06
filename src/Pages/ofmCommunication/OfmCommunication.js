@@ -139,170 +139,166 @@ function OfmCommunication() {
 
 
   return (
-    <div>
-<div className='editContainer'>
-    <h2 >OFM Communication </h2>
-<div style={{display:"flex", justifyContent:"space-between",flexWrap:"wrap",gap:"18px",padding:"25px"}}>
-
-<Grid container spacing={2} sx={{marginLeft:'1%'}}>
-
-<Grid item xs={6} >
-<InputLabel className="ip-label">OFM No</InputLabel>
+<div>
+  <div className='editContainer'>
+    <h2>OFM Communication</h2>
+    <div style={{ display: "flex",alignItems:'center', flexWrap: "wrap"}}>
+    <Grid container spacing={2} sx={{ marginLeft: '1%' }}>
+  <Grid item xs={6}>
     <TextField
-    style={{width:'100%'}}
       size="small"
-      className="text-field"
+      className="custom-text-field"
       required
       name="ofmNo"
+      label="OFM No"
       placeholder='Search or Create By OFM Number'
       value={formDataState.ofmNo}
       onChange={handleChange}
     />
   </Grid>
+    <Button 
+      className="searchBtn"
+      disabled={formDataState.ofmNo === '' || formDataState.ofmNo === undefined} 
+      onClick={() => showData(formDataState.ofmNo)}
+    >
+      Search
+    </Button>
 
-  <Grid item xs={1} sx={{marginTop:'1.1%'}}>
-    <Button disabled={formDataState.ofmNo==''||formDataState.ofmNo===undefined} className='cancel-btn' onClick={()=>showData(formDataState.ofmNo)}>Search</Button>
-  </Grid>
-  
-  </Grid>
+      </Grid>
 
+      <TableContainer component={Paper} className="table-container">
+        <Table sx={{ minWidth: 500 }} aria-label="customized table">
+          <TableHead className="table-header">
+            <TableRow>
+              <TableCell align="right">OFM Number</TableCell>
+              <TableCell align="right">Activity On</TableCell>
+              <TableCell align="right">Previous Activity</TableCell>
+              <TableCell align="right">Current Activity</TableCell>
+              <TableCell align="right">Comments</TableCell>
+              <TableCell align="right">View File</TableCell>
+            </TableRow>
+          </TableHead>
 
- <TableContainer component={Paper} className="table-container">
-      <Table sx={{ minWidth: 500}} aria-label="customized table">
-        <TableHead className="table-header">
-          <TableRow>
-            <TableCell align="right">OFM Number</TableCell>
-            <TableCell align="right">Activity On</TableCell>
-            <TableCell align="right">Previous Activity</TableCell>
-            <TableCell align="right">Current Activity</TableCell>
-            <TableCell align="right">Comments</TableCell>
-            <TableCell align="right">View File</TableCell>
-          </TableRow>
-        </TableHead>
+          {data?.length ? (
+            <TableBody>
+              {data?.map((row, index) => (
+                <TableRow key={index} className="table-row">
+                  <TableCell align="right">{row.ofmNo}</TableCell>
+                  <TableCell align="right">{row?.activityOn}</TableCell>
+                  <TableCell align="right">{row?.previousActivity}</TableCell>
+                  <TableCell align="right">{row?.currentActivity}</TableCell>
+                  <TableCell align="right">{row?.comments}</TableCell>
+                  <TableCell align="right">{row?.fileName ? <Button onClick={() => getFile(row.fileName)}> <Visibility sx={{ color: 'red' }} /></Button> : null}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          ) : (
+            <h2 style={{ textAlign: 'center' }}>No Data Found!</h2>
+          )}
+        </Table>
+        <hr style={{ border: '1px solid lightGray' }} />
+      </TableContainer>
 
+      {data?.previousActivity ?
+        <Grid container spacing={2} sx={{ marginTop: "1rem", marginLeft: '1%' }}>
+          <Grid item xs={4} sm={4}>
+            <TextField
+              size="small"
+              className="custom-text-field"
+              name="previousActivity"
+              label="Previous Activity"
+              value={data.previousActivity}
+              InputLabelProps={{ shrink: true }}
+            />
+          </Grid>
+        </Grid>
+        : null}
 
-        {data?.length ? (
-          <TableBody>
-            {data?.map((row, index) => (
-              <TableRow key={index} className="table-row">
-                <TableCell align="right">{row.ofmNo}</TableCell>
-                <TableCell align="right">{row?.activityOn}</TableCell>
-                <TableCell align="right">{row?.previousActivity}</TableCell>
-                <TableCell align="right">{row?.currentActivity}</TableCell>
-                <TableCell align="right">{row?.comments}</TableCell>
-                <TableCell align="right">{row?.fileName?<Button onClick={()=>getFile(row.fileName)}> <Visibility sx={{ color: 'red' }} /></Button>:null}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        ) : (
-          <h2 style={{ textAlign: 'center' }}>No Data Found!</h2>
-        )}
-      </Table>
-      <hr style={{ border: '1px solid lightGray' }} />
-          </TableContainer>
+      <Grid container spacing={2} sx={{ margin: '1% 0 0 5px' }}>
+        <Grid item xs={8}>
+          <Autocomplete
+            size="small"
+            value={formDataState.currentActivity || ''}
+            onChange={(event, newValue) => {
+              setFormDataState({
+                ...formDataState,
+                currentActivity: newValue || ''
+              });
+            }}
+            inputValue={formDataState.currentActivity || ''}
+            onInputChange={(event, newInputValue) => {
+              setFormDataState({
+                ...formDataState,
+                currentActivity: newInputValue || ''
+              });
+            }}
+            options={activityList.map((act) => act)}
+            renderInput={(params) => (
+              <TextField
+                style={{ width: '100%' }}
+                {...params}
+                size="small"
+                label="Current Activity"
+                placeholder='Select Current Activity'
+                variant="outlined"
+                className='custom-text-field'
+                fullWidth
+                InputLabelProps={{ shrink: true }}
+              />
+            )}
+          />
+        </Grid>
+      </Grid>
 
+      <Grid container spacing={2} sx={{ margin: '1% 0 0 5px' }}>
+        <Grid item xs={8}>
+          <TextField
+            multiline
+            rows={2}
+            style={{ width: '100%' }}
+            size="small"
+            className="custom-text-field"
+            name="comments"
+            label="Comments"
+            value={formDataState.comments}
+            onChange={handleChange}
+            InputLabelProps={{ shrink: true }}
+          />
+        </Grid>
+      </Grid>
 
+      <Grid container spacing={2} sx={{ margin: '1% 0 1.5% 18px' }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2, mt: 2 }}>
+          {/* File Input */}
+          <Button
+            variant="contained"
+            component="label"
+            startIcon={<AttachFileIcon />}
+          >
+            Attach File
+            <input
+              type="file"
+              hidden
+              onChange={handleFileChange}
+            />
+          </Button>
 
- {data?.previousActivity? 
- <Grid container spacing={2} sx={{marginTop:"0.5rem", marginLeft:'1%'}}>
- <Grid item xs={4} sm={4}>
-    <InputLabel className="ip-label">Previous Activity</InputLabel>
-    <TextField
-      size="small"
-      className="text-field"
-      name="ofmNo"
-      value={data.previousActivity}
-    />
-  </Grid>
-  </Grid> : null}
-
-  <Grid container spacing={2} sx={{ marginLeft:'1%'}}>
-  <Grid item xs={8}>
-  <InputLabel className="ip-label" >Current Activity</InputLabel >
-  <Autocomplete
-    size="small"
-    value={formDataState.currentActivity || ''}
-    onChange={(event, newValue) => {
-      setFormDataState({
-        ...formDataState,
-        currentActivity: newValue || ''
-      });
-    }}
-
-    inputValue={formDataState.currentActivity || ''}
-    onInputChange={(event, newInputValue) => {
-      setFormDataState({
-        ...formDataState,
-        currentActivity: newInputValue || ''
-      });
-    }}
-
-    options={activityList.map((act) => act)}
-    renderInput={(params) => (
-      <TextField
-      style={{width:'100%'}}
-        {...params}
-        size="small"
-        placeholder='select Current Activity'
-        variant="outlined"
-        fullWidth
-      />
-    )}
-  />
-  </Grid>
-  </Grid>
-
-  <Grid container spacing={2} sx={{marginLeft:'1%'}}>
-    <Grid item xs={8}>
-  <InputLabel className="ip-label">Comments</InputLabel>
-    <TextField
-    multiline
-    rows={2}
-    style={{width:'100%'}}
-      size="small"
-      className="text-field"
-      name="comments"
-      value={formDataState.comments}
-      onChange={handleChange}
-    />
-  </Grid>
-  </Grid>
-
-
-  <Grid container spacing={2} sx={{marginLeft:'2.8%'}}>
-  <Box sx={{ display: "flex", alignItems: "center", gap: 2, mt: 2 }}>
-
-      {/* File Input */}
-      <Button
-        variant="contained"
-        component="label"
-        startIcon={<AttachFileIcon />}
-      >
-        Attach File
-        <input
-          type="file"
-          hidden
-          onChange={handleFileChange}
-        />
-      </Button>
-
-      {/* Display selected file name and Download button */}
-      {formDataState.file && (
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          <Typography variant="body1">{formDataState.file.name}</Typography>
-          <IconButton color="primary" onClick={handleDownload}>
-            <DownloadIcon />
-          </IconButton>
+          {/* Display selected file name and Download button */}
+          {formDataState.file && (
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+              <Typography variant="body1">{formDataState.file.name}</Typography>
+              <IconButton color="primary" onClick={handleDownload}>
+                <DownloadIcon />
+              </IconButton>
+            </Box>
+          )}
         </Box>
-      )}
-    </Box>
+      </Grid>
+    </div>
+  </div>
+  <Button className="update-btn" sx={{ position: "relative", left: "6%", bottom: "8%" }} type="submit" variant="contained" onClick={handleSubmit}>Submit</Button>
+</div>
 
-</Grid>
-
-  </div>
-  </div>
-  <Button className="update-btn" sx={{position:"relative",left:"6%",bottom:"8%"}} type="submit" variant="contained" onClick={handleSubmit} >Submit</Button>
-  </div>
   )
 }
 

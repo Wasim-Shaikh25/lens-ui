@@ -49,7 +49,8 @@ function UserDashboard(){
 
 
 return (    
-<div style={{width:"85%" , margin:'2rem auto'}}>
+  <div className='editContainer' style={{ width:'83%', marginLeft:'5%'}} >
+    <h1 style={{marginLeft:'2.5%'}}>User Details :</h1>
 
     <TableContainer component={Paper} className="table-container">
       <Table sx={{ minWidth: 500 }} aria-label="customized table">

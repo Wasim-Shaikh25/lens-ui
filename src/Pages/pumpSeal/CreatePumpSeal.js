@@ -26,7 +26,7 @@ export default function CreatePumpSeal() {
   const [formData, setFormData] = useState({
     branch: '',
     endUser: '',
-    costingRequirement: true,
+    costingRequirement: '',
     customerAddress: '',
     customerName:'',
     make: '',
@@ -120,7 +120,7 @@ export default function CreatePumpSeal() {
         {
           branch: '',
           endUser: '',
-          costingRequirement: true,
+          costingRequirement: '',
           customerName: '',
           customerAddress: '',
           make: '',
@@ -249,67 +249,102 @@ export default function CreatePumpSeal() {
               <InputLabel className="ip-label" >PumpSeal Drf Number</InputLabel >
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="pumpSealDrfNumber"
+                InputLabelProps={{
+                  shrink: Boolean(formData.pumpSealDrfNumber),
+                }}
+                autoFocus={!formData.pumpSealDrfNumber}
                 value={formData.pumpSealDrfNumber}
                 onChange={handleChange} />
             </Grid>
             }
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Branch</InputLabel >
+              {/* <InputLabel className="ip-label" >Branch</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="branch"
                 value={formData.branch}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Branch"
+                />
+                
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Name</InputLabel >
+              {/* <InputLabel className="ip-label" >Name</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="customerName"
                 value={formData.customerName}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Name"
+                />
             </Grid>
 
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >endUser</InputLabel >
+              {/* <InputLabel className="ip-label" >endUser</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="endUser"
                 value={formData.endUser}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="endUser"
+                />
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Customer Address</InputLabel >
+              {/* <InputLabel className="ip-label" >Customer Address</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="customerAddress"
                 value={formData.customerAddress}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Customer Address"
+                />
             </Grid>
 
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label">Costing Requirement</InputLabel>
-              <select
-                className="text-field" style={{ width: "55%", padding: "10px" }}
-                name="costingRequirement"
-                value={formData.costingRequirement}
-                onChange={handleChange}
-              >
-                <option value={true}>True</option>
-                <option value={false}>False</option>
-              </select>
-            </Grid>
+  <Autocomplete
+    size="small"
+    value={formData.costingRequirement || ''}
+    onChange={(event, newValue) => {
+      setFormData({
+        ...formData,
+        costingRequirement: newValue || ''
+      });
+    }}
+
+    inputValue={formData.costingRequirement || ''}
+    onInputChange={(event, newInputValue) => {
+      setFormData({
+        ...formData,
+        costingRequirement: newInputValue || ''
+      });
+    }}
+
+    options={["true","false"].map((src) => src)}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        size="small"
+        variant="outlined"
+        placeholder='select Costing Requirement'
+        fullWidth
+        className='custom-text-field'
+        label="Costing Requirement"
+      />
+    )}
+  />
+  </Grid>
+
           </Grid>
         </div>
 
@@ -319,84 +354,99 @@ export default function CreatePumpSeal() {
           <Grid container spacing={2}>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Make</InputLabel >
+              {/* <InputLabel className="ip-label" >Make</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="make"
                 value={formData.make}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Make"
+                />
             </Grid>
 
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Model</InputLabel >
+              {/* <InputLabel className="ip-label" >Model</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="model"
                 value={formData.model}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Model"
+                />
             </Grid>
 
           
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Bearing BKT</InputLabel >
+              {/* <InputLabel className="ip-label" >Bearing BKT</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="bearingBracket"
                 value={formData.bearingBracket}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Bearing BKT"
+                />
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Impeller</InputLabel >
+              {/* <InputLabel className="ip-label" >Impeller</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="impeller"
                 value={formData.impeller}
-                onChange={handleChange} />
+                onChange={handleChange}
+                label="Impeller"
+                />
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Shaft</InputLabel >
+              {/* <InputLabel className="ip-label" >Shaft</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="shaft"
                 value={formData.shaft}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Shaft"
+                />
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Seal Chamber</InputLabel >
+              {/* <InputLabel className="ip-label" >Seal Chamber</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="sealChamber"
                 value={formData.sealChamber}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Seal Chamber"
+                />
             </Grid>
 
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Tag Number</InputLabel >
+              {/* <InputLabel className="ip-label" >Tag Number</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="tagNumber"
                 value={formData.tagNumber}
-                onChange={handleChange} />
+                onChange={handleChange}
+                label="Tag Number"
+                />
             </Grid>
 
             <Grid item xs={4}>
               
 {/* <InputLabel className="ip-label" >Arrangement</InputLabel > */}
 
-<Autocomplete style={{width:'78%'}}
+<Autocomplete style={{width:'100%'}}
+size="small"
   value={formData.arrangement}
   onChange={(event, newValue) => {
     setFormData({
@@ -431,9 +481,8 @@ export default function CreatePumpSeal() {
 
 
             <Grid item xs={4}>
-<InputLabel className="ip-label" >Pump Type</InputLabel >
-
-<Autocomplete style={{width:'78%'}}
+<Autocomplete style={{width:'100%'}}
+size="small"
   value={formData.pumpType}
   onChange={(event, newValue) => {
     setFormData({
@@ -457,6 +506,8 @@ export default function CreatePumpSeal() {
       placeholder="Select Pump Type"
       variant="outlined"
       fullWidth
+      className='custom-text-field'
+      label="Pump Type"
     />
   )}
 />
@@ -464,18 +515,21 @@ export default function CreatePumpSeal() {
 
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label">Stuffing Box</InputLabel >
+              {/* <InputLabel className="ip-label">Stuffing Box</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="stuffingBox"
                 value={formData.stuffingBox}
-                onChange={handleChange} />
+                onChange={handleChange}
+                label="Stuffing Box"
+                />
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label">Stage</InputLabel >
-              <Autocomplete style={{width:'78%'}}
+              {/* <InputLabel className="ip-label">Stage</InputLabel > */}
+<Autocomplete style={{width:'100%'}}
+              size="small"
   value={formData.stage}
   onChange={(event, newValue) => {
     setFormData({
@@ -498,16 +552,19 @@ export default function CreatePumpSeal() {
       {...params}
       placeholder="Select Stage"
       variant="outlined"
+      label="Stage"
+      className='custom-text-field'
       fullWidth
     />
   )}
 />
-            </Grid>
+</Grid>
 
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label">Casing</InputLabel >
-              <Autocomplete style={{width:'78%'}}
+              {/* <InputLabel className="ip-label">Casing</InputLabel > */}
+              <Autocomplete style={{width:'100%'}}
+              size="small"
   value={formData.casting}
   onChange={(event, newValue) => {
     setFormData({
@@ -530,6 +587,8 @@ export default function CreatePumpSeal() {
       {...params}
       placeholder="Select Casing Type"
       variant="outlined"
+      className='custom-text-field'
+      label="Casing"
       fullWidth
     />
   )}
@@ -545,21 +604,22 @@ export default function CreatePumpSeal() {
           <Grid container spacing={2}>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Series</InputLabel >
+              {/* <InputLabel className="ip-label" >Series</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="series"
                 value={formData.series}
+                label="Series"
                 onChange={handleChange} />
             </Grid>
 
               <Grid item xs={4}>
-<InputLabel className="ip-label" >Performance</InputLabel >
+{/* <InputLabel className="ip-label" >Performance</InputLabel > */}
 
-<Autocomplete style={{width:'78%'}}
+<Autocomplete style={{width:'100%'}}
+size="small"
   value={formData.performance}
-  className="custom-autocomplete"
   onChange={(event, newValue) => {
     setFormData({
       ...formData,
@@ -579,8 +639,10 @@ export default function CreatePumpSeal() {
     <TextField
     size="small"
       {...params}
+      className="custom-text-field"
       placeholder="Select Performance Type"
       variant="outlined"
+      label="Performance"
       fullWidth
     />
   )}
@@ -589,9 +651,9 @@ export default function CreatePumpSeal() {
 
 
               <Grid item xs={4}>
-<InputLabel className="ip-label" >Seal Arrangement</InputLabel >
-
-<Autocomplete style={{width:'78%'}}
+{/* <InputLabel className="ip-label" >Seal Arrangement</InputLabel > */}
+<Autocomplete style={{width:'100%'}}
+size="small"
   value={formData.sealArrangement}
   onChange={(event, newValue) => {
     setFormData({
@@ -614,6 +676,8 @@ export default function CreatePumpSeal() {
       {...params}
       placeholder="Select Seal Arrangement"
       variant="outlined"
+      label="Seal Arrangement"
+      className='custom-text-field'
       fullWidth
     />
   )}
@@ -622,9 +686,10 @@ export default function CreatePumpSeal() {
 
 
               <Grid item xs={4}>
-<InputLabel className="ip-label" >Seal Type</InputLabel >
+{/* <InputLabel className="ip-label" >Seal Type</InputLabel > */}
 
-<Autocomplete style={{width:'78%'}}
+<Autocomplete style={{width:'100%'}}
+  size="small"
   value={formData.sealType}
   onChange={(event, newValue) => {
     setFormData({
@@ -647,6 +712,7 @@ export default function CreatePumpSeal() {
       {...params}
       placeholder="Select Seal Type"
       variant="outlined"
+      label="Seal Type"
       fullWidth
     />
   )}
@@ -665,75 +731,89 @@ export default function CreatePumpSeal() {
           <Grid container spacing={2}>
            
            <Grid item xs={4}>
-              <InputLabel className="ip-label" >All Pressure Unit</InputLabel >
+              {/* <InputLabel className="ip-label" >All Pressure Unit</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="allPressureUnit"
                 value={formData.allPressureUnit}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="All Pressure Unit"
+                />
             </Grid>
           
            <Grid item xs={4}>
-              <InputLabel className="ip-label" >Total Heat</InputLabel >
+              {/* <InputLabel className="ip-label" >Total Heat</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="totalHeat"
                 value={formData.totalHeat}
-                onChange={handleChange} />
+                onChange={handleChange}
+                label="Total Heat"
+                />
             </Grid>
           
           
            <Grid item xs={4}>
-              <InputLabel className="ip-label" >Suction Pressure</InputLabel >
+              {/* <InputLabel className="ip-label" >Suction Pressure</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="suctionPressure"
                 value={formData.suctionPressure}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Suction Pressure"
+                />
             </Grid>
 
            <Grid item xs={4}>
-              <InputLabel className="ip-label" >Discharge Pressure</InputLabel >
+              {/* <InputLabel className="ip-label" >Discharge Pressure</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="dischargePressure"
                 value={formData.dischargePressure}
-                onChange={handleChange} />
+                onChange={handleChange}
+                label="Discharge Pressure"
+                />
             </Grid>
 
            <Grid item xs={4}>
-              <InputLabel className="ip-label" >Direction of Rortation</InputLabel >
+              {/* <InputLabel className="ip-label" >Direction of Rortation</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="directionOfRotation"
                 value={formData.directionOfRotation}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Direction of Rortation"
+                />
             </Grid>
 
            <Grid item xs={4}>
-              <InputLabel className="ip-label" >Speed</InputLabel >
+              {/* <InputLabel className="ip-label" >Speed</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="speed"
                 value={formData.speed}
-                onChange={handleChange} />
+                onChange={handleChange}
+                label="Speed"
+                />
             </Grid>
 
             
            <Grid item xs={4}>
-              <InputLabel className="ip-label" >Box Pressure</InputLabel >
+              {/* <InputLabel className="ip-label" >Box Pressure</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="boxPressure"
                 value={formData.boxPressure}
-                onChange={handleChange} />
+                onChange={handleChange}
+                label="Box Pressure"
+                />
             </Grid>
             
             </Grid>
@@ -745,30 +825,35 @@ export default function CreatePumpSeal() {
         <Grid container spacing={2}>
         
            <Grid item xs={4}>
-              <InputLabel className="ip-label" >Operating Fluid</InputLabel >
+              {/* <InputLabel className="ip-label" >Operating Fluid</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="operatingFluid"
                 value={formData.operatingFluid}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Operating Fluid"
+                />
             </Grid>
            
            <Grid item xs={4}>
-              <InputLabel className="ip-label" >All Temprature Unit</InputLabel >
+              {/* <InputLabel className="ip-label" >All Temprature Unit</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="allTempPressureUnit"
                 value={formData.allTempPressureUnit}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="All Temprature Unit"
+                />
             </Grid>
 
 
             <Grid item xs={4}>
-<InputLabel className="ip-label" >Nature</InputLabel >
+{/* <InputLabel className="ip-label" >Nature</InputLabel > */}
 
-<Autocomplete style={{width:'78%'}}
+<Autocomplete style={{width:'100%'}}
+size="small"
   value={formData.nature}
   onChange={(event, newValue) => {
     setFormData({
@@ -791,6 +876,7 @@ export default function CreatePumpSeal() {
       {...params}
       placeholder="Select Fluid Nature"
       variant="outlined"
+      label="Nature"
       fullWidth
     />
   )}
@@ -799,105 +885,124 @@ export default function CreatePumpSeal() {
 
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Opearating Temprature</InputLabel >
+              {/* <InputLabel className="ip-label" >Opearating Temprature</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="operatingTemperature"
                 value={formData.operatingTemperature}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Opearating Temprature"
+                />
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Minimum Operating Temprature</InputLabel >
+              {/* <InputLabel className="ip-label" >Minimum Operating Temprature</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="minOperatingTemperature"
                 value={formData.minOperatingTemperature}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Minimum Operating Temprature"
+                />
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >SP Gravity</InputLabel >
+              {/* <InputLabel className="ip-label" >SP Gravity</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="spGravity"
                 value={formData.spGravity}
-                onChange={handleChange} />
+                onChange={handleChange}
+                label="SP Gravity"
+                />
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Freez Point</InputLabel >
+              {/* <InputLabel className="ip-label" >Freez Point</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="freezePoint"
                 value={formData.freezePoint}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Freez Point"
+                />
             </Grid>
 
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Boiling Point</InputLabel >
+              {/* <InputLabel className="ip-label" >Boiling Point</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="boilPoint"
                 value={formData.boilPoint}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Boiling Point"
+                />
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Viscosity</InputLabel >
+              {/* <InputLabel className="ip-label" >Viscosity</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="viscosity"
                 value={formData.viscosity}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Viscosity"
+                />
             </Grid>
 
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Viscosity Unit</InputLabel >
+              {/* <InputLabel className="ip-label" >Viscosity Unit</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+              className="custom-text-field"
                 name="viscosityUnit"
                 value={formData.viscosityUnit}
+                label="Viscosity Unit"
                 onChange={handleChange} />
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >percentage Of Solid</InputLabel >
+              {/* <InputLabel className="ip-label" >percentage Of Solid</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="percentageOfSolid"
                 value={formData.percentageOfSolid}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="percentage Of Solid"
+                />
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Grain Point</InputLabel >
+              {/* <InputLabel className="ip-label" >Grain Point</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="grainPoint"
                 value={formData.grainPoint}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Grain Point"
+                />
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label" >Description</InputLabel >
+              {/* <InputLabel className="ip-label" >Description</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="description"
                 value={formData.description}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Description"
+                />
             </Grid>
 
             </Grid>
@@ -912,115 +1017,137 @@ export default function CreatePumpSeal() {
           <Grid container spacing={2}>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >flush plan:</InputLabel >
+           {/* <InputLabel className="ip-label" >flush plan:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="flushPlan"
              value={formData.flushPlan}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="flush plan:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Barrier OR Buffer plan:</InputLabel >
+           {/* <InputLabel className="ip-label" >Barrier OR Buffer plan:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="barrierOrBufferFluid"
              value={formData.barrierOrBufferFluid}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Barrier OR Buffer plan:"
+             />
          </Grid>
          
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Quench plan:</InputLabel >
+           {/* <InputLabel className="ip-label" >Quench plan:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="quenchPlan"
              value={formData.quenchPlan}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Quench plan:"
+             />
          </Grid>
 
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Design Offered:</InputLabel >
+           {/* <InputLabel className="ip-label" >Design Offered:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="designOffered"
              value={formData.designOffered}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Design Offered:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Size Available:</InputLabel >
+           {/* <InputLabel className="ip-label" >Size Available:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="sizeAvailable"
              value={formData.sizeAvailable}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Size Available:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Material Code:</InputLabel >
+           {/* <InputLabel className="ip-label" >Material Code:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="materialCode"
              value={formData.materialCode}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Material Code:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Seal Series:</InputLabel >
+           {/* <InputLabel className="ip-label" >Seal Series:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="sealSeries"
              value={formData.sealSeries}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Seal Series:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Shaft Size:</InputLabel >
+           {/* <InputLabel className="ip-label" >Shaft Size:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="shaftSize"
              value={formData.shaftSize}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Shaft Size:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Bore Dia:</InputLabel >
+           {/* <InputLabel className="ip-label" >Bore Dia:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="boreDia"
              value={formData.boreDia}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Bore Dia:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Bore Depth:</InputLabel >
+           {/* <InputLabel className="ip-label" >Bore Depth:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="boreDepth"
              value={formData.boreDepth}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Bore Depth:"
+             />
          </Grid>
 
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Nearest Obstruction:</InputLabel >
+           {/* <InputLabel className="ip-label" >Nearest Obstruction:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="nearestObstruction"
              value={formData.nearestObstruction}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Nearest Obstruction:"
+             />
          </Grid>
 
 
@@ -1041,314 +1168,374 @@ export default function CreatePumpSeal() {
 
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >d1-Sleev OD:</InputLabel >
+           {/* <InputLabel className="ip-label" >d1-Sleev OD:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="d1SleeveOd"
              value={formData.d1SleeveOd}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="d1-Sleev OD:"
+             />
          </Grid>
      
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Stud Holes:</InputLabel >
+           {/* <InputLabel className="ip-label" >Stud Holes:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="studHoles"
              value={formData.studHoles}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Stud Holes:"
+             />
          </Grid>
 
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >D2 Stuffing Box ID:</InputLabel >
+           {/* <InputLabel className="ip-label" >D2 Stuffing Box ID:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="d2StuffingBoxId"
              value={formData.d2StuffingBoxId}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="D2 Stuffing Box ID:"
+             />
          </Grid>
 
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >D4 Stuffing Box Bore:</InputLabel >
+           {/* <InputLabel className="ip-label" >D4 Stuffing Box Bore:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="d4StuffingBoxBore"
              value={formData.d4StuffingBoxBore}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="D4 Stuffing Box Bore:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >D5 Spogit Dia:</InputLabel >
+           {/* <InputLabel className="ip-label" >D5 Spogit Dia:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="d5SpigotDia"
              value={formData.d5SpigotDia}
-             onChange={handleChange} />
+             onChange={handleChange}
+             label="D5 Spogit Dia:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >D51:</InputLabel >
+           {/* <InputLabel className="ip-label" >D51:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="d51"
              value={formData.d51}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="D51:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >D52:</InputLabel >
+           {/* <InputLabel className="ip-label" >D52:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="d52"
              value={formData.d52}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="D52:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >D9 Bolt Circle:</InputLabel >
+           {/* <InputLabel className="ip-label" >D9 Bolt Circle:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="d9BoltCircle"
              value={formData.d9BoltCircle}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="D9 Bolt Circle:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Bolt Size:</InputLabel >
+           {/* <InputLabel className="ip-label" >Bolt Size:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="boltSize"
              value={formData.boltSize}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Bolt Size:"
+             />
          </Grid>
 
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >l11:</InputLabel >
+           {/* <InputLabel className="ip-label" >l11:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="l11"
              value={formData.l11}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="l11:"
+             />
          </Grid>
 
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >l12:</InputLabel >
+           {/* <InputLabel className="ip-label" >l12:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="l12"
              value={formData.l12}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="l12:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >l1 Sleeve Exten:</InputLabel >
+           {/* <InputLabel className="ip-label" >l1 Sleeve Exten:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="l1SleeveExten"
              value={formData.l1SleeveExten}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="l1 Sleeve Exten:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >l2 Shaft Hub:</InputLabel >
+           {/* <InputLabel className="ip-label" >l2 Shaft Hub:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="l2ShaftHub"
              value={formData.l2ShaftHub}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="l2 Shaft Hub:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >l3 Thread Length:</InputLabel >
+           {/* <InputLabel className="ip-label" >l3 Thread Length:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="l3ThreadLength"
              value={formData.l3ThreadLength}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="l3 Thread Length:"
+             />
          </Grid>
 
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >l8 SB Depth:</InputLabel >
+           {/* <InputLabel className="ip-label" >l8 SB Depth:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="l8sbDepth"
              value={formData.l8sbDepth}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="l8 SB Depth:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >l9 Nearest Obstruction:</InputLabel >
+           {/* <InputLabel className="ip-label" >l9 Nearest Obstruction:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="l9NearObstr"
              value={formData.l9NearObstr}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="l9 Nearest Obstruction:"
+             />
          </Grid>
          
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Alpha:</InputLabel >
+           {/* <InputLabel className="ip-label" >Alpha:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="alpha"
              value={formData.alpha}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Alpha:"
+             />
          </Grid>
          
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Beta:</InputLabel >
+           {/* <InputLabel className="ip-label" >Beta:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="beta"
              value={formData.beta}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Beta:"
+             />
          </Grid>
          
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Theta:</InputLabel >
+           {/* <InputLabel className="ip-label" >Theta:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="theta"
              value={formData.theta}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Theta:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Created By User GUID:</InputLabel >
+           {/* <InputLabel className="ip-label" >Created By User GUID:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="createdByUserGUID"
              value={formData.createdByUserGUID}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Created By User GUID:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Last Edited By User GUID:</InputLabel >
+           {/* <InputLabel className="ip-label" >Last Edited By User GUID:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="lastEditedByUserGUID"
              value={formData.lastEditedByUserGUID}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Last Edited By User GUID:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Row GUID:</InputLabel >
+           {/* <InputLabel className="ip-label" >Row GUID:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="rowguid"
              value={formData.rowguid}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Row GUID:"
+             />
          </Grid>
 
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Email Id:</InputLabel >
+           {/* <InputLabel className="ip-label" >Email Id:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="emailId"
              value={formData.emailId}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Email Id:"
+             />
          </Grid>
 
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Region:</InputLabel >
+           {/* <InputLabel className="ip-label" >Region:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="region"
              value={formData.region}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Region"
+             />
          </Grid>
          
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Address:</InputLabel >
+           {/* <InputLabel className="ip-label" >Address:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="address"
              value={formData.address}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Address"
+             />
          </Grid>
 
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Sr No:</InputLabel >
+           {/* <InputLabel className="ip-label" >Sr No:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="srNo"
              value={formData.srNo}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Sr No:"
+             />
          </Grid>
 
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >Dshaft OD:</InputLabel >
+           {/* <InputLabel className="ip-label" >Dshaft OD:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="dshaftOd"
              value={formData.dshaftOd}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="Dshaft OD:"
+             />
          </Grid>
          
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >SBox Cover:</InputLabel >
+           {/* <InputLabel className="ip-label" >SBox Cover:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="sboxCover"
              value={formData.sboxCover}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="SBox Cover:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >M Number Of Bolts:</InputLabel >
+           {/* <InputLabel className="ip-label" >M Number Of Bolts:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="mnumberOfBolts"
              value={formData.mnumberOfBolts}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="M Number Of Bolts:"
+             />
          </Grid>
 
         <Grid item xs={4}>
-           <InputLabel className="ip-label" >L Raised Col:</InputLabel >
+           {/* <InputLabel className="ip-label" >L Raised Col:</InputLabel > */}
            <TextField
            size="small"
-             className="text-field"
+             className="custom-text-field"
              name="lraisedCol"
              value={formData.lraisedCol}
-             onChange={handleChange} />
+             onChange={handleChange} 
+             label="L Raised Col:"
+             />
          </Grid>
          
 

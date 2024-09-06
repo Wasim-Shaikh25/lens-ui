@@ -2,7 +2,9 @@ import React from 'react';
 import { Container, Typography, Button } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useNavigate, useParams } from 'react-router-dom';
-import './CustomerForm.css';
+import '../../../App.css';
+
+
 
 const RegistrationSuccessPage = () => {
     const {id} = useParams();
@@ -10,8 +12,8 @@ const RegistrationSuccessPage = () => {
     
     return (
     <Container maxWidth="sm" className="successContainer">
-      <CheckCircleOutlineIcon  />
-      <Typography variant="h3" gutterBottom  className="typoSuccess">
+      <CheckCircleOutlineIcon  className="checkIcon"/>
+      <Typography variant="h3" gutterBottom className="typoSuccess">
         Registration Successful!
       </Typography>
       <Typography variant="body1" className='typoBody'>

@@ -6,7 +6,6 @@ import '../../App.css';
 
 
 
-
 const SalesSuccessPage = () => {
     const {sId} = useParams();
     const navigate = useNavigate();

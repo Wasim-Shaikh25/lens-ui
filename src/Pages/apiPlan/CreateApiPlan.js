@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField ,Button,  Container, Grid, InputLabel } from '@mui/material';
+import { TextField ,Button,  Container, Grid, InputLabel, Autocomplete } from '@mui/material';
 import { getApi, handleSubmit } from '../../apis/ApiPlan';
 import { useNavigate, useParams } from 'react-router-dom';
 import { handleUpdate } from '../../apis/ApiPlan';
@@ -198,40 +198,44 @@ export default function CreateApi() {
             <Grid container spacing={2}>
               {apId &&
                 <Grid item xs={4}>
-                  <InputLabel className="ip-label">API Plan Drf Number</InputLabel>
+                  {/* <InputLabel className="ip-label">API Plan Drf Number</InputLabel> */}
                   <TextField
                   size="small"
-                    className="text-field"
+                    className="custom-text-field"
+                    label='API Plan Drf Number'
                     name="apiPlanDrfNumber"
-                    value={formData.apiPlanDrfNumber}
+                    value={formData?.apiPlanDrfNumber}
                     onChange={handleChange} />
                 </Grid>
               }
               <Grid item xs={4}>
-                <InputLabel className="ip-label">Branch</InputLabel>
+                {/* <InputLabel className="ip-label">Branch</InputLabel> */}
                 <TextField
                 size="small"
-                  className="text-field"
+                  className="custom-text-field"
+                  label='Branch'
                   name="branch"
                   value={formData.branch}
                   onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={4}>
-                <InputLabel className="ip-label">Customer</InputLabel>
+                {/* <InputLabel className="ip-label">Customer</InputLabel> */}
                 <TextField
                 size="small"
-                  className="text-field"
+                  className="custom-text-field"
+                  label='Customer'
                   name="customer"
                   value={formData.customer}
                   onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={4}>
-                <InputLabel className="ip-label">Customer Address</InputLabel>
+                {/* <InputLabel className="ip-label">Customer Address</InputLabel> */}
                 <TextField
                 size="small"
-                  className="text-field"
+                  className="custom-text-field"
+                  label='Customer Address'
                   name="customerAddress"
                   value={formData.customerAddress}
                   onChange={handleChange}
@@ -239,18 +243,39 @@ export default function CreateApi() {
               </Grid>
 
 
-              <Grid item xs={4}>
-              <InputLabel className="ip-label">Costing Requirement</InputLabel>
-              <select
-                className="text-field" style={{ width: "63%",height:"2rem", padding: "10px" }}
-                name="costingRequirement"
-                value={formData.costingRequirement}
-                onChange={handleChange}
-              >
-                <option value={true}>True</option>
-                <option value={false}>False</option>
-              </select>
-            </Grid> 
+<Grid item xs={4}>
+  <Autocomplete
+    size="small"
+    value={formData.costingRequirement || ''}
+    onChange={(event, newValue) => {
+      setFormData({
+        ...formData,
+        costingRequirement: newValue || ''
+      });
+    }}
+
+    inputValue={formData.costingRequirement || ''}
+    onInputChange={(event, newInputValue) => {
+      setFormData({
+        ...formData,
+        costingRequirement: newInputValue || ''
+      });
+    }}
+
+    options={["true","false"].map((src) => src)}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        size="small"
+        variant="outlined"
+        placeholder='select Costing Requirement'
+        fullWidth
+        className='custom-text-field'
+        label="Costing Requirement"
+      />
+    )}
+  />
+  </Grid>
 
             </Grid>
             </div>
@@ -262,20 +287,22 @@ export default function CreateApi() {
              <h3>Equipment Details</h3>
             <Grid container spacing={2}>
               <Grid item xs={4}>      
-                  <InputLabel className="ip-label" >Existing Make</InputLabel >
+                  {/* <InputLabel className="ip-label" >Existing Make</InputLabel > */}
                 <TextField
                 size="small"
-                  className="text-field"
+                  className="custom-text-field"
+                  label='Existing Make'
                   name="existingMake"
                   value={formData.existingMake}
                   onChange={handleChange} />
               </Grid>
 
               <Grid item xs={4}>
-                <InputLabel className="ip-label">Type</InputLabel>
+                {/* <InputLabel className="ip-label">Type</InputLabel> */}
                 <TextField
                 size="small" // Consider using Dropdown for options if applicable
-                  className="text-field"
+                  className="custom-text-field"
+                  label='Type'
                   name="type"
                   value={formData.type}
                   onChange={handleChange}
@@ -283,50 +310,55 @@ export default function CreateApi() {
              </Grid>
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label">Make</InputLabel>
+              {/* <InputLabel className="ip-label">Make</InputLabel> */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
+                label='Make'
                 name="make"
                 value={formData.make}
                 onChange={handleChange}
               />
             </Grid>
             <Grid item xs={4}>
-              <InputLabel className="ip-label">Model</InputLabel>
+              {/* <InputLabel className="ip-label">Model</InputLabel> */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
+                label='Model'
                 name="model"
                 value={formData.model}
                 onChange={handleChange}
               />
             </Grid>
             <Grid item xs={4}>
-              <InputLabel className="ip-label">Tag Number</InputLabel>
+              {/* <InputLabel className="ip-label">Tag Number</InputLabel> */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
+                label='Tag Number'
                 name="tagNumber"
                 value={formData.tagNumber}
                 onChange={handleChange}
               />
             </Grid>
             <Grid item xs={4}>
-              <InputLabel className="ip-label">Arrangement</InputLabel>
+              {/* <InputLabel className="ip-label">Arrangement</InputLabel> */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
+                label='Arrangement'
                 name="arrangement"
                 value={formData.arrangement}
                 onChange={handleChange}
               />
             </Grid>
             <Grid item xs={4}>
-              <InputLabel className="ip-label">Max Dynamic Sealing Pressure</InputLabel>
+              {/* <InputLabel className="ip-label">Max Dynamic Sealing Pressure</InputLabel> */}
               <TextField
               size="small" // Consider using number input type
-                className="text-field"
+                className="custom-text-field"
+                label='Max Dynamic Sealing Pressure'
                 name="maxDynamicSealingPressure"
                 value={formData.maxDynamicSealingPressure}
                 onChange={handleChange}
@@ -334,10 +366,11 @@ export default function CreateApi() {
               />
             </Grid>
             <Grid item xs={4}>
-              <InputLabel className="ip-label">Max Static Sealing Pressure</InputLabel>
+              {/* <InputLabel className="ip-label">Max Static Sealing Pressure</InputLabel> */}
               <TextField
               size="small" // Consider using number input type
-                className="text-field"
+                className="custom-text-field"
+                label='Max Static Sealing Pressure'
                 name="maxStaticSealingPressure"
                 value={formData.maxStaticSealingPressure}
                 onChange={handleChange}
@@ -359,10 +392,11 @@ export default function CreateApi() {
 
   {/* Existing text fields (replace with your previous code) */}
   <Grid item xs={4}>
-    <InputLabel className="ip-label">Mechanical Seal Make</InputLabel>
+    {/* <InputLabel className="ip-label">Mechanical Seal Make</InputLabel> */}
     <TextField
     size="small"
-      className="text-field"
+      className="custom-text-field"
+      label='Mechanical Seal Make'
       name="mechanicalSealMake"
       value={formData.mechanicalSealMake}
       onChange={handleChange}
@@ -370,50 +404,55 @@ export default function CreateApi() {
   </Grid>
 
   <Grid item xs={4}>
-    <InputLabel className="ip-label">Mechanical Seal Series</InputLabel>
+    {/* <InputLabel className="ip-label">Mechanical Seal Series</InputLabel> */}
     <TextField
     size="small"
-      className="text-field"
+      className="custom-text-field"
+      label='Mechanical Seal Series'
       name="mechanicalSealSeries"
       value={formData.mechanicalSealSeries}
       onChange={handleChange}
     />
   </Grid>
   <Grid item xs={4}>
-    <InputLabel className="ip-label">Connection Size</InputLabel>
+    {/* <InputLabel className="ip-label">Connection Size</InputLabel> */}
     <TextField
     size="small"
-      className="text-field"
+      className="custom-text-field"
+      label='Connection Size'
       name="connectionSize"
       value={formData.connectionSize}
       onChange={handleChange}
     />
   </Grid>
   <Grid item xs={4}>
-    <InputLabel className="ip-label">Connection Size Unit</InputLabel>
+    {/* <InputLabel className="ip-label">Connection Size Unit</InputLabel> */}
     <TextField
     size="small"
-      className="text-field"
+      className="custom-text-field"
+      label='Connection Size Unit'
       name="connectionSizeUnit"
       value={formData.connectionSizeUnit}
       onChange={handleChange}
     />
   </Grid>
   <Grid item xs={4}>
-    <InputLabel className="ip-label">Drawing Number</InputLabel>
+    {/* <InputLabel className="ip-label">Drawing Number</InputLabel> */}
     <TextField
     size="small"
-      className="text-field"
+      className="custom-text-field"
+      label='Drawing Number'
       name="drawingNumber"
       value={formData.drawingNumber}
       onChange={handleChange}
     />
   </Grid>
   <Grid item xs={4}>
-    <InputLabel className="ip-label">Shaft Size</InputLabel>
+    {/* <InputLabel className="ip-label">Shaft Size</InputLabel> */}
     <TextField
     size="small"
-      className="text-field"
+      className="custom-text-field"
+      label='Shaft Size'
       name="shaftSize"
       value={formData.shaftSize}
       onChange={handleChange}
@@ -435,30 +474,33 @@ export default function CreateApi() {
             <h3>MOC</h3>
             <Grid container spacing={2}>
             <Grid item xs={4}>
-            <InputLabel className="ip-label">Shell</InputLabel>
+            {/* <InputLabel className="ip-label">Shell</InputLabel> */}
             <TextField
             size="small"
-              className="text-field"
+              className="custom-text-field"
+              label='Shell'
               name="shell"
               value={formData.shell}
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={4}>
-            <InputLabel className="ip-label">Cooling Coil</InputLabel>
+            {/* <InputLabel className="ip-label">Cooling Coil</InputLabel> */}
             <TextField
             size="small"
-              className="text-field"
+              className="custom-text-field"
+              label='Cooling Coil'
               name="coolingCoil"
               value={formData.coolingCoil}
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={4}>
-            <InputLabel className="ip-label">Bladder</InputLabel>
+            {/* <InputLabel className="ip-label">Bladder</InputLabel> */}
             <TextField
             size="small"
-              className="text-field"
+              className="custom-text-field"
+              label='Bladder'
               name="bladder"
               value={formData.bladder}
               onChange={handleChange}
@@ -466,20 +508,22 @@ export default function CreateApi() {
           </Grid>
    
     <Grid item xs={4}>
-    <InputLabel className="ip-label">Heat Exchanger Type</InputLabel>
+    {/* <InputLabel className="ip-label">Heat Exchanger Type</InputLabel> */}
     <TextField
     size="small" // Consider using Dropdown for options if applicable
-      className="text-field"
+      className="custom-text-field"
+      label='Heat Exchanger Type'
       name="heatExchangerType"
       value={formData.heatExchangerType}
       onChange={handleChange}
     />
   </Grid>
   <Grid item xs={4}>
-    <InputLabel className="ip-label">Heat Exchanger Area</InputLabel>
+    {/* <InputLabel className="ip-label">Heat Exchanger Area</InputLabel> */}
     <TextField
     size="small" // Consider using number input type
-      className="text-field"
+      className="custom-text-field"
+      label='Heat Exchanger Area'
       name="heatExchangerArea"
       value={formData.heatExchangerArea}
       onChange={handleChange}
@@ -487,10 +531,11 @@ export default function CreateApi() {
     />
   </Grid>
   <Grid item xs={4}>
-    <InputLabel className="ip-label">Standard</InputLabel>
+    {/* <InputLabel className="ip-label">Standard</InputLabel> */}
     <TextField
     size="small" // Consider using Dropdown for options if applicable
-      className="text-field"
+      className="custom-text-field"
+      label='Standard'
       name="standard"
       value={formData.standard}
       onChange={handleChange}

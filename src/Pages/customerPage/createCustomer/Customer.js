@@ -158,116 +158,141 @@ export default function Customer() {
             <div className='card'  key = {index}>
           <h3 >Customer Detail {index + 1}</h3>
       <Grid container  spacing={2}>
+
         <Grid item xs={12} sm={4}>
-          <InputLabel className="ip-label"  >Customer Address</InputLabel >
+          {/* <InputLabel className="ip-label">Customer Address</InputLabel > */}
           <TextField
             size="small" 
             className="custom-text-field" 
             name="customerAddress"
             value={detail.customerAddress}
             onChange={e => handleChange(e, index)}
+            label="Customer Address"
             fullWidth
           />
+
         </Grid>
         <Grid item xs={12} sm={4}>
-          <InputLabel className="ip-label"  >Contact Person</InputLabel >
+          {/* <InputLabel className="ip-label"  >Contact Person</InputLabel > */}
           <TextField
             size="small" 
             className="custom-text-field" 
             name="contactPerson"
             value={detail.contactPerson}
             onChange={e => handleChange(e, index)}
+            label='Contact Person'
             fullWidth
           />
         </Grid>
+
+
         <Grid item xs={12} sm={4}>
-          <InputLabel className="ip-label"  >Industry Id</InputLabel >
+          {/* <InputLabel className="ip-label">Industry Id</InputLabel > */}
           <TextField
             size="small" 
             className="custom-text-field" 
             name="industryId"
             value={detail.industryId}
             onChange={e => handleChange(e, index)}
+            label="Industry Id"
             fullWidth
           />
+
         </Grid>
         <Grid item xs={12} sm={4}>
-          <InputLabel className="ip-label"> Designation</InputLabel >
+          {/* <InputLabel className="ip-label"> Designation</InputLabel > */}
           <TextField
             size="small" 
             className="custom-text-field" 
             name="designation"
             value={detail.designation}
             onChange={e => handleChange(e, index)}
+            label="Designation"
             fullWidth
           />
         </Grid>
+
+
         <Grid item xs={12} sm={4}>
-          <InputLabel className="ip-label"  >Telephone Number</InputLabel >
+          {/* <InputLabel className="ip-label"  >Telephone Number</InputLabel > */}
           <TextField
             size="small" 
             className="custom-text-field" 
             name="telephoneNos"
             value={detail.telephoneNos}
             onChange={e => handleChange(e, index)}
+            label="Telephone Number"
             fullWidth
           />
         </Grid>
+
+
         <Grid item xs={12} sm={4}>
-          <InputLabel className="ip-label"  >Ecc No</InputLabel >
+          {/* <InputLabel className="ip-label">Ecc No</InputLabel > */}
           <TextField
             size="small" 
             className="custom-text-field" 
             name="eccNo"
             value={detail.eccNo}
             onChange={e => handleChange(e, index)}
+            label="Ecc No"
             fullWidth
           />
         </Grid>
+
+
         <Grid item xs={12} sm={4}>
-          <InputLabel className="ip-label"  >SSt No</InputLabel >
+          {/* <InputLabel className="ip-label"  >SSt No</InputLabel > */}
           <TextField
             size="small" 
             className="custom-text-field" 
             name="sstNo"
             value={detail.sstNo}
             onChange={e => handleChange(e, index)}
+            label="SSt No"
             fullWidth
           />
         </Grid>
+
         <Grid item xs={12} sm={4}>
-          <InputLabel className="ip-label"  >GST No</InputLabel >
+          {/* <InputLabel className="ip-label"  >GST No</InputLabel > */}
           <TextField
             size="small" 
             className="custom-text-field" 
             name="gstNo"
             value={detail.gstNo}
             onChange={e => handleChange(e, index)}
+            label="GST No"
             fullWidth
           />
         </Grid>
+
         <Grid item xs={12} sm={4}>
-          <InputLabel className="ip-label"  >Pan No</InputLabel >
+          {/* <InputLabel className="ip-label"  >Pan No</InputLabel > */}
           <TextField
             size="small" 
             className="custom-text-field" 
             name="panNo"
             value={detail.panNo}
             onChange={e => handleChange(e, index)}
+            label="Pan No"
             fullWidth
           />
+
         </Grid>
         <Grid item xs={12} sm={4}>
-          <InputLabel className="ip-label"  >CST No</InputLabel >
+          {/* <InputLabel className="ip-label"  >CST No</InputLabel > */}
           <TextField
             size="small" 
             className="custom-text-field" 
             name="cstNo"
             value={detail.cstNo}
             onChange={e => handleChange(e, index)}
+            label="CST No"
             fullWidth
           />
         </Grid>
+        
         <Grid item xs={12}>
           <IconButton className="deleteIcon" onClick={() => handleDeleteCustomerDetail(index)} >
             <DeleteIcon />

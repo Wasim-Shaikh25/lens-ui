@@ -64,55 +64,78 @@ return (
 
 
 
-<Grid item xs={12} sm={4}>
-<InputLabel className="ip-label">Customer Reference No</InputLabel>
+<Grid item xs={4} >
+{/* <InputLabel className="ip-label">Customer Reference No</InputLabel> */}
     <TextField
       size="small"
-      className="text-field"
+      className="custom-text-field"
       name="customerRef"
       value={customerRef}
       onChange={(e)=>setcustomerRef(e.target.value)}
+      label="Customer Reference No"
     />
   </Grid>
-<Grid item xs={12} sm={4}>
-  <InputLabel className="ip-label">Branch</InputLabel>
+
+
+  
+
+<Grid item xs={4} >
+  {/* <InputLabel className="ip-label">Branch</InputLabel> */}
   <TextField
     size="small"
-    className="text-field"
+    className="custom-text-field"
     name="branch"
     value={branch}
     onChange={(e)=>setBranch(e.target.value)}
+    label="Branch"
   />
 </Grid>
 
-<Grid item xs={12} sm={4}>
-  <InputLabel className="ip-label">Customer Name</InputLabel>
+<Grid item xs={4}>
+  {/* <InputLabel className="ip-label">Customer Name</InputLabel> */}
   <TextField
     size="small"
-    className="text-field"
+    className="custom-text-field"
     name="customerName"
     value={customerName}
     onChange={(e)=>setcustomerName(e.target.value)}
+    label="Customer Name"
   />
 </Grid>
 
-<Grid item xs={12} sm={5}>
-        <InputLabel className="ip-label">Start Date</InputLabel>
-        <TextField
-        size="small"
-        type="datetime-local"
-        value={startDate}
-        onChange={(e)=>setStartDate(e.target.value)}
-      />
-      </Grid>
+<Grid item xs={4}>
+  <TextField
+    size="small"
+    type="datetime-local"
+    className="custom-text-field"
+    value={startDate}
+    onChange={(e) => setStartDate(e.target.value)}
+    label="Start Date"
+    InputLabelProps={{
+      shrink: true, // This will keep the label from overlapping
+      className: startDate ? 'label-focused' : 'label-default', // Conditional class based on value
+    }}
+    inputProps={{
+      placeholder: startDate ? "" : "dd-mm-yyyy", // Show date format when empty
+    }}
+  />
+</Grid>
 
 <Grid item xs={12} sm={4}>
-        <InputLabel className="ip-label">End Date</InputLabel>
         <TextField
+        className='custom-text-field'
         size="small"
         type="datetime-local"
         value={endDate}
+        InputLabelProps={{
+          shrink: true, // This will keep the label from overlapping
+          className: endDate ? 'label-focused' : 'label-default', // Conditional class based on value
+        }}
+        inputProps={{
+          placeholder: endDate ? "" : "dd-mm-yyyy", // Show date format when empty
+        }}
         onChange={(e)=>setEndDate(e.target.value)}
+        label="End Date"
       />
       </Grid>
 

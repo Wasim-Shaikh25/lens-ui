@@ -62,6 +62,7 @@ export default function Login() {
               
                 <Grid item xs={12}>
                   <TextField
+                  className='custom-text-field'
                     size="small"
                     value={formData.empId}
                     required
@@ -75,6 +76,7 @@ export default function Login() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                  className='custom-text-field'
                     size="small"
                     value={formData.password}
                     required

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField ,Button,  Container, Grid, InputLabel} from '@mui/material';
+import { TextField ,Button,  Container, Grid, InputLabel, Autocomplete} from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getRotary, handleSubmit, handleUpdate } from '../../apis/RotaryApi';
 
@@ -110,76 +110,109 @@ export default function CreateRotatory() {
           <h3>Rotary Joint New Mode:-</h3>
           <Grid container spacing={2}>
             {rjId && <Grid item xs={4}>
-              <InputLabel className="ip-label" >Rotatory Joint Drf Number</InputLabel >
+              {/* <InputLabel className="ip-label" >Rotatory Joint Drf Number</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="rotaryDrfNumber"
+                InputLabelProps={{
+                  shrink: Boolean(formData.rotaryDrfNumber),
+                }}
+                autoFocus={!formData.rotaryDrfNumber}
                 value={formData.rotaryDrfNumber}
+                label="Rotatory Joint Drf Number"
                 onChange={handleChange} />
             </Grid>
             } 
 
-
-            <Grid item xs={4}>      
-                <InputLabel className="ip-label" >branch</InputLabel >
+<Grid item xs={4}>      
+                {/* <InputLabel className="ip-label" >branch</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="branch"
                 value={formData.branch}
-                onChange={handleChange} />
+                onChange={handleChange}
+                label="branch"
+                />
             </Grid>
 
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Enquiry Number</InputLabel >
+                {/* <InputLabel className="ip-label" >Enquiry Number</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="enquiryNumber"
                 value={formData.enquiryNumber}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Enquiry Number"
+                />
             </Grid>
 
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Customer</InputLabel >
+                {/* <InputLabel className="ip-label" >Customer</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="customerName"
                 value={formData.customerName}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Customer"
+                />
             </Grid>
 
 
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Customer Address</InputLabel >
+                {/* <InputLabel className="ip-label" >Customer Address</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="customerAddress"
                 value={formData.customerAddress}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Customer Address"
+                />
             </Grid>
 
 
                
 
             <Grid item xs={4}>
-              <InputLabel className="ip-label">Costing Requirement</InputLabel>
-              <select
-                className="text-field" style={{ width: "55%", padding: "10px" }}
-                name="costingRequirement"
-                value={formData.costingRequirement}
-                onChange={handleChange}
-              >
-                <option value={true}>True</option>
-                <option value={false}>False</option>
-              </select>
-            </Grid> 
+  <Autocomplete
+    size="small"
+    value={formData.costingRequirement || ''}
+    onChange={(event, newValue) => {
+      setFormData({
+        ...formData,
+        costingRequirement: newValue || ''
+      });
+    }}
+
+    inputValue={formData.costingRequirement || ''}
+    onInputChange={(event, newInputValue) => {
+      setFormData({
+        ...formData,
+        costingRequirement: newInputValue || ''
+      });
+    }}
+
+    options={["true","false"].map((src) => src)}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        size="small"
+        variant="outlined"
+        placeholder='select Costing Requirement'
+        fullWidth
+        className='custom-text-field'
+        label="Costing Requirement"
+      />
+    )}
+  />
+  </Grid>
 
             </Grid>
             </div>
@@ -189,110 +222,131 @@ export default function CreateRotatory() {
             <div className="card">
             <h3>Application Details :-</h3>
           <Grid container spacing={2}>
-            <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Equipment</InputLabel >
+            <Grid item xs={4}>     
+
+                {/* <InputLabel className="ip-label" >Equipment</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="equipment"
                 value={formData.equipment}
-                onChange={handleChange} />
+                onChange={handleChange}
+                label="Equipment"
+                />
             </Grid>
 
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Make</InputLabel >
+                {/* <InputLabel className="ip-label" >Make</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="make"
                 value={formData.make}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Make"
+                />
             </Grid>
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Model</InputLabel >
+                {/* <InputLabel className="ip-label" >Model</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="model"
                 value={formData.model}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Model"
+                />
             </Grid>
 
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Fluid</InputLabel >
+                {/* <InputLabel className="ip-label" >Fluid</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="fluid"
                 value={formData.fluid}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Fluid"
+                />
             </Grid>
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Operating Temprature</InputLabel >
+                {/* <InputLabel className="ip-label" >Operating Temprature</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="operatingTemperature"
                 value={formData.operatingTemperature}
-                onChange={handleChange} />
+                onChange={handleChange}
+                label="Operating Temprature"
+                />
             </Grid>
 
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Operating Temprature Unit</InputLabel >
+                {/* <InputLabel className="ip-label" >Operating Temprature Unit</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="operatingTemperatureUnit"
                 value={formData.operatingTemperatureUnit}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Operating Temprature Unit"
+                />
             </Grid>
 
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Flow Rate</InputLabel >
+                {/* <InputLabel className="ip-label" >Flow Rate</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="flowRate"
                 value={formData.flowRate}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Flow Rate"
+                />
             </Grid>
 
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Speed</InputLabel >
+                {/* <InputLabel className="ip-label" >Speed</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="speed"
                 value={formData.speed}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Speed"
+                />
             </Grid>
 
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Operating Pressure</InputLabel >
+                {/* <InputLabel className="ip-label" >Operating Pressure</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="operatingPressure"
                 value={formData.operatingPressure}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Operating Pressure"
+                />
             </Grid>
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Operating Pressure Unit</InputLabel >
+                {/* <InputLabel className="ip-label" >Operating Pressure Unit</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="operatingPressureUnit"
                 value={formData.operatingPressureUnit}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Operating Pressure Unit"
+                />
             </Grid>
 
             </Grid>
@@ -305,56 +359,66 @@ export default function CreateRotatory() {
                       <Grid container spacing={2}>
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Existing Make</InputLabel >
+                {/* <InputLabel className="ip-label" >Existing Make</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="existingMake"
                 value={formData.existingMake}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Existing Make"
+                />
             </Grid>
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Existing Model</InputLabel >
+                {/* <InputLabel className="ip-label" >Existing Model</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="existingModel"
                 value={formData.existingModel}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Existing Model"
+                />
             </Grid>
 
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Connection Type</InputLabel >
+                {/* <InputLabel className="ip-label" >Connection Type</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="connectionType"
                 value={formData.connectionType}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Connection Type"
+                />
             </Grid>
             
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Connection Size</InputLabel >
+                {/* <InputLabel className="ip-label" >Connection Size</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="connectionSize"
                 value={formData.connectionSize}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Connection Size"
+                />
             </Grid>
 
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label" >Flange Type</InputLabel >
+                {/* <InputLabel className="ip-label" >Flange Type</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="flangeType"
                 value={formData.flangeType}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Flange Type"
+                />
             </Grid>
             </Grid>
 </div>
@@ -362,47 +426,55 @@ export default function CreateRotatory() {
             <div className="card">
                 <h3>Inlet Connection</h3>
             <Grid container spacing={2}>
-            <Grid item xs={4}>      
-                <InputLabel className="ip-label">Center Type</InputLabel >
+            <Grid item xs={4}>  
+
+                {/* <InputLabel className="ip-label">Center Type</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="centerType"
                 value={formData.centerType}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Center Type"
+                />
             </Grid>
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label">Rotary Joint Type</InputLabel >
+                {/* <InputLabel className="ip-label">Rotary Joint Type</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="rotaryJointType"
                 value={formData.rotaryJointType}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Rotary Joint Type"
+                />
             </Grid>
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label">Syphon Pipe Type</InputLabel >
+                {/* <InputLabel className="ip-label">Syphon Pipe Type</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="syphonPipeType"
                 value={formData.syphonPipeType}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Syphon Pipe Type"
+                />
             </Grid>
 
 
             <Grid item xs={4}>      
-                <InputLabel className="ip-label">Syphon Pipe Diameter</InputLabel >
+                {/* <InputLabel className="ip-label">Syphon Pipe Diameter</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="syphonPipeDiameter"
                 value={formData.syphonPipeDiameter}
-                onChange={handleChange} />
+                onChange={handleChange} 
+                label="Syphon Pipe Diameter"
+                />
             </Grid>
-
 
             </Grid>
             </div>

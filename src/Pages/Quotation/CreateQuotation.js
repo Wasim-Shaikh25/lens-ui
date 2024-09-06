@@ -364,6 +364,8 @@ console.log("form Data from outside is ",formData)
       <TextField
         {...params}
         size="small"
+        label="Branch"
+        className="custom-text-field"
         placeholder='select a branch'
         variant="outlined"
         fullWidth
@@ -380,14 +382,7 @@ console.log("form Data from outside is ",formData)
   size="small"
   variant="outlined"
   fullWidth
-  sx={{
-    borderRadius: "4px",
-    borderColor: "#ccc",
-    "& .MuiOutlinedInput-root": {
-      paddingRight: "10px",
-      paddingLeft: "10px",
-    },
-  }}
+ className="custom-text-field"
   name="revisionNo"
   value={formData.revisionNo}
   onChange={handleChange}
@@ -423,6 +418,8 @@ console.log("form Data from outside is ",formData)
         size="small"
         placeholder='select a Category'
         variant="outlined"
+        label="Category"
+        className='custom-text-field'
         fullWidth
       />
     )}
@@ -433,7 +430,7 @@ console.log("form Data from outside is ",formData)
               {/* <InputLabel className="ip-label" >Customer</InputLabel >
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="customer"
                 value={formData.customer}
                 onChange={handleChange} /> */}
@@ -469,14 +466,7 @@ console.log("form Data from outside is ",formData)
   size="small"
   variant="outlined"
   fullWidth
-  sx={{
-    borderRadius: "4px",
-    borderColor: "#ccc",
-    "& .MuiOutlinedInput-root": {
-      paddingRight: "10px",
-      paddingLeft: "10px",
-    },
-  }}
+ className="custom-text-field"
   name="customerAddress"
   value={formData.customerAddress}
   onChange={handleChange}
@@ -490,14 +480,7 @@ console.log("form Data from outside is ",formData)
   size="small"
   variant="outlined"
   fullWidth
-  sx={{
-    borderRadius: "4px",
-    borderColor: "#ccc",
-    "& .MuiOutlinedInput-root": {
-      paddingRight: "10px",
-      paddingLeft: "10px",
-    },
-  }}
+ className="custom-text-field"
   name="kindAttentionTo"
   value={formData.kindAttentionTo}
   onChange={handleChange}
@@ -511,14 +494,7 @@ console.log("form Data from outside is ",formData)
   size="small"
   variant="outlined"
   fullWidth
-  sx={{
-    borderRadius: "4px",
-    borderColor: "#ccc",
-    "& .MuiOutlinedInput-root": {
-      paddingRight: "10px",
-      paddingLeft: "10px",
-    },
-  }}
+  className='custom-text-field'
   name="designation"
   value={formData.designation}
   onChange={handleChange}
@@ -554,6 +530,8 @@ console.log("form Data from outside is ",formData)
         {...params}
         size="small"
         variant="outlined"
+        className='custom-text-field'
+        label="Quotation Source"
         placeholder='select any one source'
         fullWidth
       />
@@ -567,14 +545,7 @@ console.log("form Data from outside is ",formData)
   size="small"
   variant="outlined"
   fullWidth
-  sx={{
-    borderRadius: "4px",
-    borderColor: "#ccc",
-    "& .MuiOutlinedInput-root": {
-      paddingRight: "10px",
-      paddingLeft: "10px",
-    },
-  }}
+ className="custom-text-field"
   name="dueOn"
   value={formData.dueOn}
   onChange={handleChange}
@@ -609,6 +580,8 @@ console.log("form Data from outside is ",formData)
       <TextField
         {...params}
         size="small"
+        label="Transport"
+        className="custom-text-field"
         variant="outlined"
         placeholder='select any one transport'
         fullWidth
@@ -624,14 +597,7 @@ console.log("form Data from outside is ",formData)
   size="small"
   variant="outlined"
   fullWidth
-  sx={{
-    borderRadius: "4px",
-    borderColor: "#ccc",
-    "& .MuiOutlinedInput-root": {
-      paddingRight: "10px",
-      paddingLeft: "10px",
-    },
-  }}
+ className="custom-text-field"
   name="validityWeeks"
   value={formData.validityWeeks}
   onChange={handleChange}
@@ -648,16 +614,9 @@ console.log("form Data from outside is ",formData)
   size="small"
   variant="outlined"
   multiline
-  rows={2}
+  rows={3}
   fullWidth
-  sx={{
-    borderRadius: "4px",
-    borderColor: "#ccc",
-    "& .MuiOutlinedInput-root": {
-      paddingRight: "10px",
-      paddingLeft: "10px",
-    },
-  }}
+ className="custom-text-field"
   name="deliverySchedule"
   value={formData.deliverySchedule}
   onChange={handleChange}
@@ -674,12 +633,12 @@ console.log("form Data from outside is ",formData)
   {/* <InputLabel className="ip-label">Special Comments</InputLabel> */}
   <TextField
     multiline
-    rows={2} // Sets the TextField to be two lines tall
+    rows={3} // Sets the TextField to be two lines tall
     size="small"
     name="specialComments"
     value={formData.specialComments}
     onChange={handleChange}
-    style={{ width: '100%' }} // Makes the TextField wide
+    className='custom-text-field'
     label="Special Comments"
   />
 </Grid>
@@ -689,7 +648,7 @@ console.log("form Data from outside is ",formData)
               {/* <InputLabel className="ip-label" >Engineer</InputLabel > */}
               <TextField
               size="small"
-                className="text-field"
+                className="custom-text-field"
                 name="engineer"
                 value={formData.engineer}
                 label="Engineer"
@@ -757,131 +716,130 @@ onClick={() => handleDelete(index)}
 
 }
 
-        {formData?.items?.map((detail, index) => (
-  <Grid container spacing={2} key={index} style={{  maxWidth:'97%',margin:'1em auto', border:"1px solid #C4C4C4",borderRadius:"7px" }}>
+{formData?.items?.map((detail, index) => (
+  <Grid container spacing={2} key={index} style={{ maxWidth: '100%', margin: '0px 1.8em', border: "1px solid #C4C4C4", borderRadius: "7px", padding:'1px 12px' }}>
 
-      <Grid item xs={4} >
-        <InputLabel className="ip-label">Sr Number</InputLabel>
-        <TextField
-          size="small"
-          className="text-field"
-          value={index+1} // Access detail for each item
-          />
-      </Grid>
-      <Grid item xs={4} >
-        <InputLabel className="ip-label">Item Name</InputLabel>
-        <TextField
-          size="small"
-          className="text-field"
-          name={`itemName`} // Unique name for each item
-          value={detail.itemName || ''} // Access detail for each item
-          onChange={(e) => handleChange(e, index)} />
-      </Grid>
-
-      <Grid item xs={4} >
-        <InputLabel className="ip-label">Quantity</InputLabel>
-        <TextField
-          size="small"
-          className="text-field"
-          name={`quantity`} // Unique name for each item
-          value={detail.quantity || ''} // Access detail for each item
-          onChange={(e) => handleChange(e, index)} // Handle item change
-        />
-      </Grid>
-
-      <Grid item xs={8} >
-        <InputLabel className="ip-label">Item Description</InputLabel>
-        <TextField
-        rows={2}
-        style={{width:"100%"}}
-          size="small"
-          className="text-field"
-          name={`itemDescription`} // Unique name for each item
-          value={detail.itemDescription || ''} // Access detail for each item
-          onChange={(e) => handleChange(e, index)} // Handle item change
-        />
-      </Grid>
-
-     
-
-      <Grid item xs={4}>
-        <InputLabel className="ip-label">Unit Price</InputLabel>
-        <TextField
-          size="small"
-          className="text-field"
-          name={`unitPrice`} // Unique name for each item
-          value={detail.unitPrice || ''} // Access detail for each item
-          onChange={(e) => handleChange(e, index)} // Handle item change
-        />
-      </Grid>
-
-      <Grid item xs={4}>
-        <InputLabel className="ip-label">Total Price</InputLabel>
-        <TextField
-          size="small"
-          className="text-field"
-          name={`totalPrice`} // Unique name for each item
-          value={detail.totalPrice || ''} // Access detail for each item
-          onChange={(e) => handleChange(e, index)} // Handle item change
-        />
-      </Grid>
-
-      <Grid item xs={4}>
-        <InputLabel className="ip-label">Currency</InputLabel>
-        <TextField
-          size="small"
-          className="text-field"
-          name={`currency`} // Unique name for each item
-          value={detail.currency || ''} // Access detail for each item
-          onChange={(e) => handleChange(e, index)} // Handle item change
-        />
-      </Grid>
-
-      <Grid item xs={4}>
-        <InputLabel className="ip-label">Item Code</InputLabel>
-        <TextField
-          size="small"
-          className="text-field"
-          name={`itemCode`} // Unique name for each item
-          value={detail.itemCode || ''} // Access detail for each item
-          onChange={(e) => handleChange(e, index)} // Handle item change
-        />
-      </Grid>
-
-      <Grid item xs={4}>
-        <InputLabel className="ip-label">UOM</InputLabel>
-        <TextField
-          size="small"
-          className="text-field"
-          name={`uom`} // Unique name for each item
-          value={detail.uom || ''} // Access detail for each item
-          onChange={(e) => handleChange(e, index)} // Handle item change
-        />
-      </Grid>
-
-      <Grid item xs={4}>
-        <InputLabel className="ip-label">Discount</InputLabel>
-        <TextField
-          size="small"
-          className="text-field"
-          name={`discount`} // Unique name for each item
-          value={detail.discount || ''} // Access detail for each item
-          onChange={(e) => handleChange(e, index)} // Handle item change
-        />
-      </Grid>
-
-
-      <Grid item xs={4}>
-        <InputLabel className="ip-label">Tax</InputLabel>
-        <TextField
-          size="small"
-          className="text-field"
-          name={`tax`} // Unique name for each item
-          value={detail.tax || ''} // Access detail for each item
-          onChange={(e) => handleChange(e, index)} // Handle item change
-        />
-      {/* </Grid> */}
+    <Grid item xs={4}>
+      <TextField
+        size="small"
+        className="custom-text-field"
+        label="Sr Number"
+        value={index + 1} // Access detail for each item
+      />
     </Grid>
+
+    <Grid item xs={4}>
+      <TextField
+        size="small"
+        className="custom-text-field"
+        name="itemName" // Unique name for each item
+        label="Item Name"
+        value={detail.itemName || ''} // Access detail for each item
+        onChange={(e) => handleChange(e, index)}
+      />
+    </Grid>
+
+    <Grid item xs={4}>
+      <TextField
+        size="small"
+        className="custom-text-field"
+        name="quantity" // Unique name for each item
+        label="Quantity"
+        value={detail.quantity || ''} // Access detail for each item
+        onChange={(e) => handleChange(e, index)} // Handle item change
+      />
+    </Grid>
+
+    <Grid item xs={8}>
+      <TextField
+        rows={2}
+        style={{ width: "100%" }}
+        size="small"
+        className="custom-text-field"
+        name="itemDescription" // Unique name for each item
+        label="Item Description"
+        value={detail.itemDescription || ''} // Access detail for each item
+        onChange={(e) => handleChange(e, index)} // Handle item change
+      />
+    </Grid>
+
+    <Grid item xs={4}>
+      <TextField
+        size="small"
+        className="custom-text-field"
+        name="unitPrice" // Unique name for each item
+        label="Unit Price"
+        value={detail.unitPrice || ''} // Access detail for each item
+        onChange={(e) => handleChange(e, index)} // Handle item change
+      />
+    </Grid>
+
+    <Grid item xs={4}>
+      <TextField
+        size="small"
+        className="custom-text-field"
+        name="totalPrice" // Unique name for each item
+        label="Total Price"
+        value={detail.totalPrice || ''} // Access detail for each item
+        onChange={(e) => handleChange(e, index)} // Handle item change
+      />
+    </Grid>
+
+    <Grid item xs={4}>
+      <TextField
+        size="small"
+        className="custom-text-field"
+        name="currency" // Unique name for each item
+        label="Currency"
+        value={detail.currency || ''} // Access detail for each item
+        onChange={(e) => handleChange(e, index)} // Handle item change
+      />
+    </Grid>
+
+    <Grid item xs={4}>
+      <TextField
+        size="small"
+        className="custom-text-field"
+        name="itemCode" // Unique name for each item
+        label="Item Code"
+        value={detail.itemCode || ''} // Access detail for each item
+        onChange={(e) => handleChange(e, index)} // Handle item change
+      />
+    </Grid>
+
+    <Grid item xs={4}>
+      <TextField
+        size="small"
+        className="custom-text-field"
+        name="uom" // Unique name for each item
+        label="UOM"
+        value={detail.uom || ''} // Access detail for each item
+        onChange={(e) => handleChange(e, index)} // Handle item change
+      />
+    </Grid>
+
+    <Grid item xs={4}>
+      <TextField
+        size="small"
+        className="custom-text-field"
+        name="discount" // Unique name for each item
+        label="Discount"
+        value={detail.discount || ''} // Access detail for each item
+        onChange={(e) => handleChange(e, index)} // Handle item change
+      />
+    </Grid>
+
+    <Grid item xs={4}>
+      <TextField
+        size="small"
+        className="custom-text-field"
+        name="tax" // Unique name for each item
+        label="Tax"
+        value={detail.tax || ''} // Access detail for each item
+        onChange={(e) => handleChange(e, index)} // Handle item change
+      />
+    </Grid>
+    
     <Button onClick={()=>handleSaveItem(index)} style={{backgroundColor:"black", color:"white",height:"8%",margin:'4% 2%'}}> Save Item</Button>
     <Button style={{backgroundColor:"black", color:"white",height:"8%",margin:'4% 2%'}} onClick={()=>handleDeleteItems(index)}>close</Button>
     </Grid>
@@ -893,91 +851,89 @@ onClick={() => handleDelete(index)}
 <h2 style={{marginLeft:'4%', width:"100%"}}>Other Charges and Discount:</h2>
 </div>
 
-<Grid container spacing={2} style={{ maxWidth:'97%',margin:'1em auto',padding:"2.5% 10px", border:"1px solid #C4C4C4",borderRadius:"7px" }}>
+<Grid container spacing={2} style={{ maxWidth: '97%', margin: '1em auto', padding: "2.5% 10px", border: "1px solid #C4C4C4", borderRadius: "7px" }}>
 
-      <Grid item xs={3}>
-              <InputLabel className="ip-label" >P&F.[%]</InputLabel >
-              <TextField
-                // sx={{width:"100%"}}
-              size="small"
-                className="text-field"
-                name="pandF"
-                value={formData.pandF}
-                onChange={handleChange} />
-            </Grid> .
+  <Grid item xs={3}>
+    <TextField
+      size="small"
+      className="custom-text-field"
+      name="pandF"
+      label="P&F [%]"
+      value={formData.pandF}
+      onChange={handleChange}
+    />
+  </Grid>
 
-      <Grid item xs={6}>
-              <InputLabel className="ip-label" >Freight</InputLabel >
-              <TextField
-              sx={{width:"100%"}}
-              size="small"
-                className="text-field"
-                name="freight"
-                value={formData.freight}
-                onChange={handleChange} />
-            </Grid> 
+  <Grid item xs={6}>
+    <TextField
+      sx={{ width: "100%" }}
+      size="small"
+      className="custom-text-field"
+      name="freight"
+      label="Freight"
+      value={formData.freight}
+      onChange={handleChange}
+    />
+  </Grid>
 
-      <Grid item xs={2}>
-              <InputLabel className="ip-label" >Discount(%)</InputLabel >
-              <TextField
-              sx={{width:"100%"}}
+  <Grid item xs={3}>
+    <TextField
+      size="small"
+      className="custom-text-field"
+      name="discount"
+      label="Discount (%)"
+      value={formData.discount}
+      onChange={handleChange}
+    />
+  </Grid>
 
-              size="small"
-                className="text-field"
-                name="discount"
-                value={formData.discount}
-                onChange={handleChange} />
-            </Grid> 
+  <Grid item xs={3}>
+    <TextField
+      size="small"
+      className="custom-text-field"
+      name="sgst"
+      label="SGST [%]"
+      value={formData.sgst}
+      onChange={handleChange}
+    />
+  </Grid>
 
+  <Grid item xs={3}>
+    <TextField
+      size="small"
+      className="custom-text-field"
+      name="cgst"
+      label="CGST [%]"
+      value={formData.cgst}
+      onChange={handleChange}
+    />
+  </Grid>
 
-      <Grid item xs={3}>
-              <InputLabel className="ip-label" >SGST[%]</InputLabel >
-              <TextField
+  <Grid item xs={3}>
+    <TextField
+      size="small"
+      className="custom-text-field"
+      name="igst"
+      label="IGST [%]"
+      value={formData.igst}
+      onChange={handleChange}
+    />
+  </Grid>
 
-              size="small"
-                className="text-field"
-                name="sgst"
-                value={formData.sgst}
-                onChange={handleChange} />
-            </Grid> 
+  <Grid item xs={3}>
+    <TextField
+      sx={{ width: '100%' }}
+      size="small"
+      className="custom-text-field"
+      name="grandTotal"
+      label="Grand Total"
+      value={formData.grandTotal}
+      onChange={handleChange}
+    />
+  </Grid>
 
+</Grid>
 
-      <Grid item xs={3}>
-              <InputLabel className="ip-label" >CGST[%]</InputLabel >
-              <TextField
-
-              size="small"
-                className="text-field"
-                name="cgst"
-                value={formData.cgst}
-                onChange={handleChange} />
-            </Grid> 
-
-      <Grid item xs={3}>
-              <InputLabel className="ip-label" >IGST[%]</InputLabel >
-              <TextField
-
-              size="small"
-                className="text-field"
-                name="igst"
-                value={formData.igst}
-                onChange={handleChange} />
-            </Grid> 
-
-      <Grid item xs={3}>
-              <InputLabel className="ip-label" >Grand Total</InputLabel >
-              <TextField
-                            sx={{width:'100%'}}
-
-              size="small"
-                className="text-field"
-                name="grandTotal"
-                value={formData.grandTotal}
-                onChange={handleChange} />
-            </Grid> 
-
-
-            </Grid> 
   </>
 
 )}
@@ -988,7 +944,7 @@ onClick={() => handleDelete(index)}
 <h2 style={{marginLeft:"2%"}}>Terms:</h2>
 <Grid container spacing={1.5} style={{  maxWidth:'97%',margin:'0.5em auto',padding:"1.7%", border:"1px solid #C4C4C4",borderRadius:"7px" }}>
 <Grid item xs={6}>
-    <InputLabel className="ip-label">Price Terms</InputLabel >
+    {/* <InputLabel className="ip-label">Price Terms</InputLabel > */}
   <Autocomplete
     size="small"
     value={formData.priceTerm || ''}
@@ -1013,6 +969,8 @@ onClick={() => handleDelete(index)}
         {...params}
         size="small"
         variant="outlined"
+        className='custom-text-field'
+        label="Price Terms"
         placeholder='select any one transport'
         fullWidth
       />
@@ -1020,15 +978,16 @@ onClick={() => handleDelete(index)}
   />
   </Grid>
 
+
   <Grid item xs={6}>
-              <InputLabel className="ip-label" >Payment Terms</InputLabel >
+              {/* <InputLabel className="ip-label" >Payment Terms</InputLabel > */}
               <TextField
-               sx={{width:'100%'}}
               size="small"
               multiline
               rows={2}
-                className="text-field"
+                className="custom-text-field"
                 name="paymentTerms"
+                label="Payment Terms"
                 value={formData.paymentTerms}
                 onChange={handleChange} />
             </Grid> 
@@ -1042,7 +1001,7 @@ onClick={() => handleDelete(index)}
             <Grid container spacing={1.5} style={{  maxWidth:'97%',margin:'0.5em auto',padding:"1.7%", border:"1px solid #C4C4C4",borderRadius:"7px" }}>
 
             <Grid item sx={10}>
-            <FormLabel component="legend">Select Option</FormLabel>
+            {/* <FormLabel component="legend">Select Option</FormLabel> */}
       <RadioGroup
         aria-label="warranty-guarantee"
         name="warrantyGuarantee"
@@ -1065,14 +1024,14 @@ onClick={() => handleDelete(index)}
     </Grid>
 
             <Grid item xs={10}>
-              <InputLabel className="ip-label" >Statement</InputLabel >
+              {/* <InputLabel className="ip-label" >Statement</InputLabel > */}
               <TextField
-               sx={{width:'100%'}}
               size="small"
               multiline
-              rows={2}
-                className="text-field"
+              rows={3}
+                className="custom-text-field"
                 name="statement"
+                label="Statement"
                 value={formData.statement}
                 onChange={handleChange} />
             </Grid> 
@@ -1086,26 +1045,27 @@ onClick={() => handleDelete(index)}
 <h3 style={{marginLeft:"2%"}}>Start Statement will be printed before item(s) Listing and End Statement Will be printed after Commercial Term(s) Section</h3>
   <Grid container spacing={1.5} style={{ maxWidth:'97%',margin:'1em auto',padding:"2.5% 10px", border:"1px solid #C4C4C4",borderRadius:"7px" }}>
   <Grid item xs={6}>
-              <InputLabel className="ip-label" >Start Statement</InputLabel >
+              {/* <InputLabel className="ip-label" >Start Statement</InputLabel > */}
               <TextField
                sx={{width:'100%'}}
               size="small"
               multiline
               rows={2}
-                className="text-field"
+              label="Start Statement"
+                className="custom-text-field"
                 name="startStatement"
                 value={formData.startStatement}
                 onChange={handleChange} />
             </Grid> 
 
   <Grid item xs={6}>
-              <InputLabel className="ip-label" >End Statement</InputLabel >
+              {/* <InputLabel className="ip-label" >End Statement</InputLabel > */}
               <TextField
-               sx={{width:'100%'}}
               size="small"
+              label="End Statement"
               multiline
               rows={2}
-                className="text-field"
+                className="custom-text-field"
                 name="endStatement"
                 value={formData.endStatement}
                 onChange={handleChange} />
@@ -1116,22 +1076,22 @@ onClick={() => handleDelete(index)}
     <h2 style={{marginLeft:'2%'}}>Signatory</h2>
   <Grid container spacing={1.5} style={{ maxWidth:'97%',margin:'0.5em auto',padding:"2.5% 10px", border:"1px solid #C4C4C4",borderRadius:"7px" }}>
   <Grid item xs={6}>
-              <InputLabel className="ip-label" >Name</InputLabel >
+              {/* <InputLabel className="ip-label" >Name</InputLabel > */}
               <TextField
-               sx={{width:'100%'}}
               size="small"
-                className="text-field"
+              label="Name"
+                className="custom-text-field"
                 name="name"
                 value={formData.name}
                 onChange={handleChange} />
             </Grid> 
 
   <Grid item xs={6}>
-              <InputLabel className="ip-label" >Designation</InputLabel >
+              {/* <InputLabel className="ip-label" >Designation</InputLabel > */}
               <TextField
-               sx={{width:'100%'}}
               size="small"
-                className="text-field"
+                className="custom-text-field"
+                label="Designation"
                 name="designation"
                 value={formData.designation}
                 onChange={handleChange} />

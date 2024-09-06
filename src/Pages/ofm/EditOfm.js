@@ -88,101 +88,109 @@ return (
 <div style={{display:"flex", justifyContent:"space-between",flexWrap:"wrap",gap:"18px",padding:"25px",}}>
 
 <Grid item xs={12} sm={4}>
-<InputLabel className="ip-label">OFM No</InputLabel>
-    <TextField
-      size="small"
-      className="text-field"
-      name="ofmNo"
-      value={ofmNo}
-      onChange={(e)=>setOfmNo(e.target.value)}
-    />
-  </Grid>
-<Grid item xs={12} sm={4}>
-  <InputLabel className="ip-label">Branch</InputLabel>
   <TextField
     size="small"
-    className="text-field"
+    className="custom-text-field"
+    name="ofmNo"
+    label="OFM No"
+    value={ofmNo}
+    onChange={(e) => setOfmNo(e.target.value)}
+  />
+</Grid>
+
+<Grid item xs={12} sm={4}>
+  <TextField
+    size="small"
+    className="custom-text-field"
     name="branch"
+    label="Branch"
     value={branch}
-    onChange={(e)=>setBranch(e.target.value)}
+    onChange={(e) => setBranch(e.target.value)}
   />
 </Grid>
 
 <Grid item xs={12} sm={4}>
-  <InputLabel className="ip-label">Po No</InputLabel>
   <TextField
     size="small"
-    className="text-field"
+    className="custom-text-field"
     name="poNo"
+    label="Po No"
     value={poNo}
-    onChange={(e)=>setPoNo(e.target.value)}
+    onChange={(e) => setPoNo(e.target.value)}
   />
 </Grid>
 
 <Grid item xs={12} sm={4}>
-  <InputLabel className="ip-label">Category</InputLabel>
   <TextField
     size="small"
-    className="text-field"
+    className="custom-text-field"
     name="category"
+    label="Category"
     value={category}
-    onChange={(e)=>setCategory(e.target.value)}
+    onChange={(e) => setCategory(e.target.value)}
+
   />
 </Grid>
 
 <Grid item xs={12} sm={4}>
-  <InputLabel className="ip-label">Industry</InputLabel>
   <TextField
     size="small"
-    className="text-field"
+    className="custom-text-field"
     name="industry"
+    label="Industry"
     value={industry}
-    onChange={(e)=>setIndustry(e.target.value)}
+    onChange={(e) => setIndustry(e.target.value)}
+
   />
 </Grid>
 
 <Grid item xs={12} sm={4}>
-  <InputLabel className="ip-label">Customer</InputLabel>
   <TextField
     size="small"
-    className="text-field"
+    className="custom-text-field"
     name="customer"
+    label="Customer"
     value={customer}
-    onChange={(e)=>setCustomer(e.target.value)}
+    onChange={(e) => setCustomer(e.target.value)}
+
   />
 </Grid>
 
-
 <Grid item xs={12} sm={4}>
-  <InputLabel className="ip-label">Engineer</InputLabel>
   <TextField
     size="small"
-    className="text-field"
+    className="custom-text-field"
     name="engineer"
+    label="Engineer"
     value={engineer}
-    onChange={(e)=>setEngineer(e.target.value)}
+    onChange={(e) => setEngineer(e.target.value)}
+ 
   />
 </Grid>
 
 <Grid item xs={12} sm={5}>
-        <InputLabel className="ip-label">Start Date</InputLabel>
-        <TextField
-        size="small"
-        type="datetime-local"
-        value={startDate}
-        onChange={(e)=>setStartDate(e.target.value)}
-      />
-      </Grid>
+  <TextField
+    size="small"
+    type="datetime-local"
+    label="Start Date"
+    value={startDate}
+    onChange={(e) => setStartDate(e.target.value)}
+    InputLabelProps={{ shrink: true }}
+    InputProps={{ style: { fontSize: 14 } }}
+  />
+</Grid>
 
 <Grid item xs={12} sm={4}>
-        <InputLabel className="ip-label">End Date</InputLabel>
-        <TextField
-        size="small"
-        type="datetime-local"
-        value={endDate}
-        onChange={(e)=>setEndDate(e.target.value)}
-      />
-      </Grid>
+  <TextField
+    size="small"
+    type="datetime-local"
+    label="End Date"
+    value={endDate}
+    onChange={(e) => setEndDate(e.target.value)}
+    InputLabelProps={{ shrink: true }}
+    InputProps={{ style: { fontSize: 14 } }}
+  />
+</Grid>
 
 </div>
 
