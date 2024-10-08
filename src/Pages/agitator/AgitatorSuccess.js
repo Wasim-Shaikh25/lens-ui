@@ -8,6 +8,7 @@ const AgitatorSuccessPage = () => {
     const {id} = useParams();
     const navigate = useNavigate();
     
+    
     return (
     <Container maxWidth="sm" className="successContainer">
       <CheckCircleOutlineIcon  className="checkIcon"/>
@@ -25,3 +26,4 @@ const AgitatorSuccessPage = () => {
 };
 
 export default AgitatorSuccessPage;
+ 

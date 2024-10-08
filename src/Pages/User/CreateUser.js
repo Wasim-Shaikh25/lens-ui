@@ -172,6 +172,7 @@ export default function CreateUser() {
           </Grid>
           <Grid item xs={12} sm={5}>
                   <TextField
+                  className='custom-text-field'
                     size="small"
                     autoComplete="given-name"
                     name="firstName"
@@ -186,6 +187,7 @@ export default function CreateUser() {
                 </Grid>
                 <Grid item xs={12} sm={5}>
                   <TextField
+                  className='custom-text-field'
                     value={formData.lastName}
                     size="small"
                     onChange={(e) => handleChange(e)}
@@ -199,6 +201,7 @@ export default function CreateUser() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                  className='custom-text-field'
                     value={formData.middleName}
                     size="small"
                     required
@@ -212,6 +215,7 @@ export default function CreateUser() {
 
                 <Grid item xs={12} >
                   <TextField
+                  className='custom-text-field'
                     value={formData.empId}
                     size="small"
                     required
@@ -229,6 +233,7 @@ export default function CreateUser() {
                     <>
                       <Grid item xs={12}>
                         <TextField
+                        className='custom-text-field'
                           value={formData.email}
                           size="small"
                           required
@@ -266,6 +271,7 @@ export default function CreateUser() {
 
 {!uId&&<Grid item xs={12}>
                   <TextField
+                  className='custom-text-field'
                     value={formData.password}
                     size="small"
                     required
@@ -301,6 +307,7 @@ export default function CreateUser() {
     onFocus={() => getDesignation(setDesignation)}
     renderInput={(params) => (
       <TextField
+      className='custom-text-field'
         {...params}
         size="small"
         label="Designation"
@@ -333,6 +340,7 @@ export default function CreateUser() {
     onFocus={() => getDepartments(setDepartments)}
     renderInput={(params) => (
       <TextField
+      className='custom-text-field'
         {...params}
         size="small"
         label="Department"
@@ -370,6 +378,7 @@ export default function CreateUser() {
       onFocus={() => getBranches(setBranches)}
       renderInput={(params) => (
         <TextField
+        className='custom-text-field'
           {...params}
           size="small"
           label={`Branch ${index + 1}`}

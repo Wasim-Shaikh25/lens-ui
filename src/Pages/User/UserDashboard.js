@@ -73,10 +73,10 @@ return (
                 <TableCell component="th" scope="row">
                   {index + 1}
                 </TableCell>
-                <TableCell align="right">{row.empId}</TableCell>
-                <TableCell align="right">{row.firstName}</TableCell>
-                <TableCell align="right">{row.insertedOn}</TableCell>
-                <TableCell align="right">{row.lastUpdatedOn}</TableCell>
+                <TableCell align="right">{row?.empId}</TableCell>
+                <TableCell align="right">{row?.firstName}</TableCell>
+                <TableCell align="right">{row?.insertedOn}</TableCell>
+                <TableCell align="right">{row?.lastUpdatedOn}</TableCell>
                 <TableCell align="right">
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
                     <EditIcon style={{ color: 'blue' }} />
@@ -107,7 +107,7 @@ return (
           <KeyboardDoubleArrowLeftIcon style={{ height: '0.9rem', marginTop:'0.1rem' }} />
         </button>
         <span className="pagination-span">{currentPage + 1}</span>
-        <button className="pagination-button" disabled={data.length < itemsPerPage && !isDeleted} onClick={() => setCurrentPage(currentPage + 1)}>
+        <button className="pagination-button" disabled={data?.length < itemsPerPage && !isDeleted} onClick={() => setCurrentPage(currentPage + 1)}>
           <KeyboardDoubleArrowRightIcon style={{ height: '0.9rem', marginTop:'0.1rem' }} />
         </button>
       </div>

@@ -77,6 +77,9 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
 
       };
 
+
+      console.log("authstate is ",authState)
+
   return (
     <Box
       ref={sidebarRef}
@@ -98,9 +101,9 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                 {/* <Typography sx={{ fontSize: '0.7rem' }} color="textSecondary">
                     Created By
                 </Typography> */}
-                  <Typography variant="h6" color="textSecondary" fontWeight="bold">
+                  {/* <Typography variant="h6" color="textSecondary" fontWeight="bold">
                     Menu Bar
-                  </Typography>
+                  </Typography> */}
                 </Box>
               </Box>
             )}
@@ -108,7 +111,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
             <Box pl={isSidebar ? 0 : 3}>
               <Menu>
 
-                {authState?.designation === 'ADMIN' && (
+                {authState?.designation?.designationName === 'ADMIN' && (
                <SubMenu label={<Typography variant="body1">Users</Typography>} style={getSubMenuStyle("Users")} onClick={() => handleSubMenuClick("Users")} icon={<AccountCircleOutlinedIcon />}>
                   <Link to="/CreateUser" style={{ color: 'inherit', textDecoration: "none" }}>
                     <MenuItem

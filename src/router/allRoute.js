@@ -46,9 +46,10 @@ const AllRoute = ({isSidebar}) => {
   const sidebarOpenStyle = {
     width: "86%", // Sidebar open, adjust width
     position: "absolute",
-    right: '-5.8em',
+    right: '-5em',
     marginTop: "5.4rem",
-    overflow:"hidden"
+    overflow:"hidden",
+
   };
 
 

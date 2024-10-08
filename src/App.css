@@ -4,6 +4,8 @@ body{
     font-size: 0.8rem !important;
     line-height: 1.5 !important;
     letter-spacing: 0.00938em !important;
+    overflow-x: hidden;
+    width: 100%;
   }
   
   /* heading */
@@ -72,12 +74,11 @@ body{
 
 .editContainer>h2{
 margin-left: 2.5%;
-font-size: 1.125rem;
+font-size: 1.4rem;
     line-height: 1.5;
     font-weight: 550;
 color:#03346E;
 font-family: 'Sans-serif fonts', Times, serif !important;
-
 }
 
 
@@ -112,7 +113,13 @@ font-family: 'Sans-serif fonts', Times, serif !important;
     box-shadow:rgba(90, 114, 123, 0.11) 0px 7px 30px 0px !important;
     max-width: 100%;
   }
+
   
+  .card>h4{
+    color: #03346E;
+    font-size: 0.9rem;
+    font-weight:600;
+  }
   
   .add-btn{
     background-color: #00C292 !important;
@@ -228,7 +235,7 @@ font-family: 'Sans-serif fonts', Times, serif !important;
     bottom: 0;
     display: flex;
     padding-right: 0px;
-    margin: 5rem 1rem 1rem 1rem; 
+    margin: 5rem 1rem 1rem 0.5rem; 
   }
   
   .sidebarBox:hover {
@@ -325,13 +332,13 @@ font-family: 'Sans-serif fonts', Times, serif !important;
     flex: 1;
     color:#B0B0B0;
     position: fixed;
-    max-height: 82vh !important;
+    max-height: 85vh !important;
     box-shadow:rgba(90, 114, 123, 0.11) 0px 7px 30px 0px;
     transition: box-shadow 0.3s ease; /* Smooth transition */
     overflow-y: auto;
     z-index: 50000;
-    margin-left:2%;
-    margin-top:0.8%;
+    margin-left:0.8%;
+    margin-top:0.5%;
     border-radius: 18px;
 }
 
@@ -510,6 +517,7 @@ border-radius:3px
   border-color: #ccc;
   color: black;
   width: 100%; /* Apply fullWidth behavior */
+  
 }
 
 

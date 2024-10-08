@@ -13,10 +13,11 @@ export const handleSubmit = async (e, formData, navigate) => {
   if (formData.customerDetail && formData.customerDetail.length > 0) {
     formData.customerDetail[formData.customerDetail.length - 1].lastUpdatedOn = dateTime;
     formData.customerDetail[formData.customerDetail.length - 1].insertedOn = dateTime;
-  } else {
+  }
+  
     formData.insertedOn = dateTime;
     formData.lastUpdatedOn = dateTime;
-  }
+  
 
   try{
 
@@ -47,9 +48,9 @@ export const handleUpdate = async (e, formData, rId, navigate) => {
 
   if (formData.customerDetail && formData.customerDetail.length > 0) {
     formData.customerDetail[formData.customerDetail.length - 1].lastUpdatedOn = dateTime;
-  } else {
-    formData.lastUpdatedOn = dateTime;
   }
+  
+    formData.lastUpdatedOn = dateTime;
 
   const res = await axiosInstance.put(`lens/customer/Update`, formData);
 
