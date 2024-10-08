@@ -9,6 +9,8 @@ import { handleUpdate } from '../../../apis/CustomerApi';
 import { black } from '@mui/material/colors';
 import moment from 'moment';
 import axiosInstance from '../../../axios/axiosInstance';
+import { useAuth } from '../../../contextApi/AuthContext';
+
 
 
 export default function Customer() {
@@ -19,6 +21,7 @@ export default function Customer() {
   const [options, setOptions] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [errors, setErrors] = useState({});
+    const { authState } = useAuth();
 
 
 
@@ -62,6 +65,7 @@ export default function Customer() {
     const { name, value } = e.target;
     const newFormData = { ...formData };
     let validationError = validateField(name, value);
+
 
 
     if (index === undefined) {
@@ -172,6 +176,7 @@ export default function Customer() {
   }
 
 
+
 const getDataByName = async (newInputValue) => {
   const validInputRegex = /^[a-zA-Z\s]*$/;
 
@@ -189,6 +194,7 @@ const getDataByName = async (newInputValue) => {
     console.error(err);
   }
 };
+
 
 
  // Fetch customer data when a customer is selected
@@ -210,10 +216,10 @@ const getDataByName = async (newInputValue) => {
 
   return (
     <Container className="container" sx= {{marginTop:"20px", backgroundColor:"rgb(250, 251, 251)"}}>
-      <form >
+      <form onSubmit={(e)=>handleSubmit(e,formData,navigate,setErrors,validateField)}>
         <Grid container spacing={2} >
           <div className='card' style={{width:'100%'}}>
-          {!rId ? <h1>New Customer Registration :</h1> : <h1>Update Customer :</h1>}
+          {!rId ? <h1>New Customer Registration </h1> : <h1>Update Customer </h1>}
           <Grid container spacing={2} alignItems="center">
 
     {/* {rId && ( */}
@@ -221,31 +227,40 @@ const getDataByName = async (newInputValue) => {
         <TextField
           size="small"
           name="customerReferenceNumber"
-          className="custom-text-field text-dark"
-          value={formData.customerReferenceNumber}
+          className="custom-text-field"
+          id="disableItem"
+          value={rId?formData.customerReferenceNumber:''}
           label="Customer Reference No"
           InputLabelProps={{
             shrink: Boolean(formData.customerReferenceNumber),
           }}
-          autoFocus={!formData.customerReferenceNumber} // Autofocus if the value exists
-          disabled
+          autoFocus={formData.customerReferenceNumber} // Autofocus if the value exists
+          InputProps={{
+            readOnly: true,  // Prevent user input
+          }}
         />
       </Grid>
+
+
+
     {/* )} */}
 
-    {/* <Grid item xs={4}>
+    <Grid item xs={4}>
       <TextField
         size="small"
         className="custom-text-field"
         name="customerName"
         value={formData.customerName}
         onChange={handleChange}
+        error={Boolean(errors['customerName'])}  // Show red border if error exists
+        helperText={errors['customerName']} 
         label="Customer Name"
       />
-    </Grid> */}
+    </Grid>
 
 
-    <Grid item xs={4}>
+          
+    {/* <Grid item xs={4}>
 <Autocomplete
   size="small"
   value={formData.customerName || ''} // This is for the selected value
@@ -278,7 +293,7 @@ const getDataByName = async (newInputValue) => {
 />
 
 
-    </Grid>
+    </Grid> */}
 
 
 
@@ -303,13 +318,32 @@ const getDataByName = async (newInputValue) => {
             size="small" 
             className="custom-text-field" 
             value={dateTime}
-            disabled
             label="Current Date & Time"
+            id="disableItem"
             fullWidth
+            InputProps={{
+              readOnly: true,  // Prevent user input
+            }}
           />
         </Grid>
 
    
+        <Grid item xs={4}>
+        <TextField
+          size="small"
+          className="custom-text-field"
+          id="disableItem"
+          value={authState?.sub}
+          label="Created By UserId"
+          InputLabelProps={{
+            shrink: Boolean(authState?.sub),
+          }}
+          autoFocus={!authState?.sub} // Autofocus if the value exists
+          InputProps={{
+            readOnly: true,  // Prevent user input
+          }}
+        />
+      </Grid>
 
 
   </Grid>
@@ -348,9 +382,9 @@ const getDataByName = async (newInputValue) => {
             label="Industry Name"
             error={Boolean(errors['industryName'])}  // Show red border if error exists
             helperText={errors['industryName']} 
+            required
             fullWidth
           />
-
         </Grid>
        
         <Grid item xs={12} sm={4}>
@@ -388,7 +422,7 @@ const getDataByName = async (newInputValue) => {
 
         <Grid container  spacing={2}>
 
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={8}>
           {/* <InputLabel className="ip-label">Customer Address</InputLabel > */}
           <TextField
             size="small" 
@@ -444,7 +478,7 @@ const getDataByName = async (newInputValue) => {
 
         <Grid container  spacing={2}>
 
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12} sm={8}>
           {/* <InputLabel className="ip-label">Customer Address</InputLabel > */}
           <TextField
             size="small" 
@@ -584,7 +618,7 @@ const getDataByName = async (newInputValue) => {
           <Grid item xs={4}  >
 <Button className="add-btn" sx={{margin:"0rem 1rem 1rem 1rem"}}  onClick={handleAddCustomerDetail}><AddIcon/> Add Customer Details</Button>
         
-        {!rId&&!formData.customerReferenceNumber?(<Button className="submit-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate)} variant="contained" >Submit</Button>) : (
+        {!rId&&!formData.customerReferenceNumber?(<Button className="submit-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate,setErrors,validateField)} variant="contained" >Submit</Button>) : (
           <>
             <Button className="update-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} variant="contained" onClick={(e)=>handleUpdate(e,formData,rId,navigate)} >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}

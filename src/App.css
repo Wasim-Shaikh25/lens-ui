@@ -342,7 +342,34 @@ font-family: 'Sans-serif fonts', Times, serif !important;
     border-radius: 18px;
 }
 
+.custom-text-field .MuiInputLabel-root {
+  /* Your CSS styles here */
+  color: #BBBBBB!important;
+}
 
+.custom-text-field .MuiInputLabel-shrink {
+  color: #03C9D7 !important; 
+}
+
+
+.custom-text-field .MuiFormHelperText-root {
+  color: grey; /* Default color for helper text */
+  font-size: 12px; /* Example of changing the font size */
+}
+
+/* Target helper text when an error exists */
+.custom-text-field .Mui-error {
+  color: red; /* Change to red when there's an error */
+}
+
+#disableItem{
+  background-color: rgb(248, 249, 251) !important; /* Change background color */
+  cursor: not-allowed !important ; /* Change cursor to indicate it's disabled */
+}
+
+.custom-input {
+  cursor: not-allowed !important; /* Apply not-allowed cursor to input field */
+}
 
 
 /* Logout Button */
@@ -505,8 +532,6 @@ border-radius:3px
   color: #4a4a4a;
   font-size: 11px;
 }
-
-
 
 
 

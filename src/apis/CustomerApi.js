@@ -4,31 +4,74 @@ import moment from 'moment';
 
 
 // submit data
-export const handleSubmit = async (e, formData, navigate) => {
+export const handleSubmit = async (e, formData, navigate,setErrors,validateField) => {
 
   e.preventDefault();
   const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
+     
+  
+  // Validation
+  let validationErrors = {};
 
+  
+  if (!formData.customerName || formData.customerName.trim() === "") {
+    validationErrors['customerName'] = "Customer Name cannot be empty.";
+    console.log("Customer Name is empty");
+  } else {
+    // Validate the customerName field
+    const customerNameError = validateField('customerName', formData.customerName);
+    if (customerNameError) {
+      validationErrors['customerName'] = customerNameError;
+      console.log("Customer error is:", customerNameError);
+    }
+  }  
 
-  if (formData.customerDetail && formData.customerDetail.length > 0) {
-    formData.customerDetail[formData.customerDetail.length - 1].lastUpdatedOn = dateTime;
-    formData.customerDetail[formData.customerDetail.length - 1].insertedOn = dateTime;
+  // Iterate over customerDetail array to check each industryName
+  for (const detail of formData.customerDetail) {
+    // Ensure industryName is not empty or undefined
+    if (!detail.industryName || detail.industryName.trim() === "") {
+      validationErrors['industryName'] = "Industry name cannot be empty.";
+      console.log("Industry name is empty");
+    } else {
+      // Validate the industryName field
+      const industryError = validateField('industryName', detail.industryName);
+      if (industryError) {
+        validationErrors['industryName'] = industryError;
+        console.log("Industry error is:", industryError);
+      }
+    }
   }
   
+  // Set the validation errors
+  setErrors(validationErrors);
+  
+  // Proceed with form submission only if there are no validation errors
+  if (Object.keys(validationErrors).length === 0) {       
+    if (formData.customerDetail && formData.customerDetail.length > 0) {
+      formData.customerDetail[formData.customerDetail.length - 1].lastUpdatedOn = dateTime;
+      formData.customerDetail[formData.customerDetail.length - 1].insertedOn = dateTime;
+    }
+    
     formData.insertedOn = dateTime;
     formData.lastUpdatedOn = dateTime;
   
-
-  try{
-
-    const res = await axiosInstance.post(`/lens/customer/save`, formData);
-  
-    console.log("response is ", res.data);
-    navigate(`/registerSuccess/${res.data}`);
-    console.log(formData);
-  }
-  catch(err){
-    console.log(err)
+    console.log("Length of error keys: " + Object.keys(validationErrors).length);
+    
+    try {
+      // Proceed with the submission
+      console.log("Submitting form data:", formData);
+      
+      // Call your submit API function here
+      const res = await axiosInstance.post(`/lens/customer/save`, formData);
+      
+      console.log("response is", res.data);
+      // navigate(`/registerSuccess/${res.data}`);
+      console.log(formData);
+    } catch (err) {
+      console.log("Error during form submission:", err);
+    }
+  } else {
+    console.log("Form submission blocked due to validation errors:", validationErrors);
   }
 };
 
