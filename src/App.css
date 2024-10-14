@@ -13,10 +13,13 @@ body{
   h1{
     margin-left:5px;
     color:#03346E;
-    font-family: 'Sans-serif fonts', Times, serif !important;
+    font-family: "DM Sans", sans-serif !important;
+    font-size: 1.60rem !important;
+    line-height: 1.235 !important;
+
   }
 
- 
+
 
   
   .css-1tqrhto >.ps-menu-button {
@@ -67,16 +70,16 @@ body{
     background-color:white;
     border:1px solid #ddd;
     box-shadow:rgba(90, 114, 123, 0.11) 0px 7px 30px 0px;
-    margin:1.6em 1em 0 5%;
-     border-radius:8px;
-     width:86%;
+    margin:1.5em 1em 0 5%;
+    border-radius:8px;
+     width:88%;
   }
 
 .editContainer>h2{
 margin-left: 2.5%;
 font-size: 1.4rem;
-    line-height: 1.5;
-    font-weight: 550;
+line-height: 1.5;
+ font-weight: 550;
 color:#03346E;
 font-family: 'Sans-serif fonts', Times, serif !important;
 }
@@ -117,16 +120,17 @@ font-family: 'Sans-serif fonts', Times, serif !important;
   
   .card>h4{
     color: #03346E;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     font-weight:600;
   }
+  
   
   .add-btn{
     background-color: #00C292 !important;
     color: white !important;
     height: 20px !important;
-    margin: 3rem 1.5rem !important;
-   
+    margin: 3rem 1.5rem !important;  
+    padding: 8px 12px !important; 
   }
   
   .css-um1o6k{
@@ -191,7 +195,7 @@ font-family: 'Sans-serif fonts', Times, serif !important;
   .submit-btn{
     background-color: #03C9D7 !important;
     padding: 8px 12px !important;
-    margin: 2rem 1.5rem !important;
+    margin: 2rem 0rem !important;
   }
   
   

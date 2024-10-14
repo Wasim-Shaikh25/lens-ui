@@ -50,24 +50,33 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
     
       const getSubMenuStyle = (menuName) => ({
         backgroundColor: activeSubMenu === menuName ? 'rgb(3, 201, 215)' : 'transparent',
-        color: activeSubMenu === menuName ? 'white' : 'rgba(0, 0, 0, 0.54)',
+        color: activeSubMenu === menuName ? 'white' : 'rgba(0, 0, 0, 0.87)',
         borderRadius: '8px',
         margin: '4px 16px',
+        fontSize:'0.8rem',
         padding:"6px",
+        lineHeight:'1.5',
+        fontWeight:'400',
         fontFamily:'DM Sans, sans-serif'
       });
     
       const getMenuItemStyle = (menuName) => ({
-        color: activeItemMenu === menuName ? 'rgb(3, 201, 215)' : 'rgba(0, 0, 0, 0.54)',
+        color: activeItemMenu === menuName ? 'rgb(3, 201, 215)' : 'rgba(0, 0, 0, 0.87)',
         margin: '4px 18px',
         borderRadius: '6px',
         fontFamily:'DM Sans, sans-serif',
       });
 
+      
     
       const handleSubMenuClick = (menuName) => {
         console.log(`SubMenu ${menuName} clicked`);
-        setActiveSubMenu(menuName);
+        // setActiveSubMenu(menuName);
+        if (activeSubMenu === menuName) {
+          setActiveSubMenu(""); // Close the currently active submenu
+        } else {
+          setActiveSubMenu(menuName); // Open the clicked submenu and close others
+        }
       };
 
 
@@ -110,7 +119,6 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
             
             <Box pl={isSidebar ? 0 : 3}>
               <Menu>
-
                 {authState?.designation?.designationName === 'ADMIN' && (
                <SubMenu label={<Typography variant="body1">Users</Typography>} style={getSubMenuStyle("Users")} onClick={() => handleSubMenuClick("Users")} icon={<AccountCircleOutlinedIcon />}>
                   <Link to="/CreateUser" style={{ color: 'inherit', textDecoration: "none" }}>

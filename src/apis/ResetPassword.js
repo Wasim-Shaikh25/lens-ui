@@ -2,7 +2,8 @@
 import axios from "axios";
 
 
-const baseUrl = process.env.REACT_APP_BASE_URL
+// const baseUrl = process.env.REACT_APP_BASE_URL
+const baseUrl = "https://crm-api.synterratech.in/lens-svc"
 
 
 export const handleSubmit = async (e,formData,navigate)=>{

@@ -350,7 +350,7 @@ export default function CreateSales() {
           {formData?.salesItems?.map((detail, index) => (
             <div className='card'  key = {index}>
               {/* <Grid> */}
-          <h4 >Sales Item {index + 1}</h4>
+          <h4>Sales Item {index + 1}</h4>
       <Grid container  spacing={2}>
         <Grid item xs={12} sm={4}>
 
@@ -613,21 +613,16 @@ export default function CreateSales() {
         </Grid>
       </Grid>
     </div>
-
-   
-          ))}
-          <div style={{display:"flex", alignItems:'center',margin:"0px 10px 20px 10px", justifyContent:'space-between'}}>
+))}
+          <div style={{display:"flex", alignItems:'center',margin:"0px 10px 20px 10px"}}>
             
 <Button className="add-btn"  onClick={handleAddSales}><AddIcon/> Add Sales Items</Button>
-          <Grid item xs={4}>
-          <Grid item xs={4}  >
-        
+          <Grid item xs={12}  > 
         {!sId ?( <Button className="submit-btn" type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate)} variant="contained" >Submit</Button>) : (
           <div >
             <Button className="update-btn" variant="contained" onClick={(e)=>handleUpdate(e,formData,sId,navigate)} >Update</Button>
             <Button className="cancel-btn"   variant="contained" onClick={cancelUpdate} >Cancel</Button> </div>)}
           </Grid>
-        </Grid>
           </div>
       
     </Container>

@@ -56,15 +56,16 @@ export default function EditCustomer() {
 
 
 return (
-  <div >
 
+<Container>
 <div className="editContainer">
 <h2>Search and Filter</h2>
-<div style={{display:"flex", justifyContent:"space-between",flexWrap:"wrap",gap:"18px",padding:"25px",}}>
 
+<Grid container spacing={2} >
+{/* <div style={{display:"flex", justifyContent:"space-between",flexWrap:"wrap",gap:"15px",padding:"25px",}}> */}
+<Grid container spacing={2} alignItems="center" sx={{mx:3, my:1}}>
 
-
-<Grid item xs={4} >
+<Grid item  xs={12} sm={3} >
 {/* <InputLabel className="ip-label">Customer Reference No</InputLabel> */}
     <TextField
       size="small"
@@ -79,7 +80,7 @@ return (
 
   
 
-<Grid item xs={4} >
+<Grid item xs={12} sm={3} >
   {/* <InputLabel className="ip-label">Branch</InputLabel> */}
   <TextField
     size="small"
@@ -91,7 +92,7 @@ return (
   />
 </Grid>
 
-<Grid item xs={4}>
+<Grid item  xs={12} sm={3}>
   {/* <InputLabel className="ip-label">Customer Name</InputLabel> */}
   <TextField
     size="small"
@@ -103,7 +104,7 @@ return (
   />
 </Grid>
 
-<Grid item xs={4}>
+<Grid item  xs={12} sm={3}>
   <TextField
     size="small"
     type="datetime-local"
@@ -121,7 +122,7 @@ return (
   />
 </Grid>
 
-<Grid item xs={12} sm={4}>
+<Grid item  xs={12} sm={3}>
         <TextField
         className='custom-text-field'
         size="small"
@@ -138,18 +139,15 @@ return (
         label="End Date"
       />
       </Grid>
+      </Grid>
 
-</div>
+{/* </div> */}
 
-<Button onClick={()=>searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData,token)}  style={{width:"15%",margin:"1rem 2rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
+<Button onClick={()=>searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData,token)}  style={{width:"15%",margin:"0.8rem 2.5rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
   Search
 </Button>
 
-
-
-
-
-    <TableContainer component={Paper} className="table-container">
+    <TableContainer sx={{ml:'4%'}} component={Paper} className="table-container">
       <Table sx={{ minWidth: 500 }} aria-label="customized table">
         <TableHead className="table-header">
           <TableRow>
@@ -205,16 +203,19 @@ return (
         <button className="pagination-button" disabled={currentPage <= 0} onClick={() => setCurrentPage(currentPage - 1)}>
           <KeyboardDoubleArrowLeftIcon style={{ height: '0.9rem', marginTop:'0.1rem' }} />
         </button>
+
         <span className="pagination-span">{currentPage + 1}</span>
         <button className="pagination-button" disabled={data.length < itemsPerPage && !isDeleted} onClick={() => setCurrentPage(currentPage + 1)}>
           <KeyboardDoubleArrowRightIcon style={{ height: '0.9rem', marginTop:'0.1rem' }} />
         </button>
       </div>
+      
       <hr style={{ border: '1px solid lightGray' }} />
     </TableContainer>
     
+    </Grid>
     </div>
-  </div>
+  </Container>
 );
 }
 

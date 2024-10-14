@@ -53,8 +53,15 @@ export default function CreateUser() {
         branchName: "",
         region: ""
       }
+    ],
+    designation: [
+      {
+        designationName: "",
+      }
     ]
   });
+
+
 
   // const handleChange = (e) => {
   //   const { name, value } = e.target;
@@ -63,6 +70,7 @@ export default function CreateUser() {
   //     [name]: value
   //   }));
   // };
+
 
 
   const handleChange = (e) => {
@@ -136,41 +144,29 @@ export default function CreateUser() {
 
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <div className='card' sx={{
-          padding: "2px", marginBottom: "5rem", borderRadius: "8px", border: "1px solid #ddd",
-          backgroundColor: "white", boxShadow: "rgba(90, 114, 123, 0.11) 0px 7px 30px 0px"
-        }}>
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 0,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}>
-
-            <Typography component="h5" variant="h5">
-              {uId ? <>Update</> : <>Create</>} User
-            </Typography>
-            
-            <Box component="form" noValidate onSubmit={(e) => handleSubmit(e, formData, navigate)} sx={{ mt: 2 }}>
-              <Grid container spacing={1.3}>
-                <Grid item xs={12} sm={2}>
+      <Container className="container" sx= {{marginTop:"10px", backgroundColor:"rgb(250, 251, 251)"}} >
+        <div className='card'>              
+        
+            <Box component="form" noValidate onSubmit={(e) => handleSubmit(e, formData, navigate)}>
+                          <Typography component="h5" variant="h5">
+                            {uId ? <h1>Update User</h1> : <h1>Create User</h1>} 
+                          </Typography>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={1}>
                 <select
             name="title"
             value={formData.title}
             onChange={handleChange}
-            style={{ width: '100%',border:"1px solid #D6D6D6",cursor:'pointer', height: '40px', fontSize:"0.9em",borderRadius:'5px' }}
-
-          >
+            style={{ width: '100%',border:"1px solid #D6D6D6",cursor:'pointer', height: '40px', fontSize:"0.9em",borderRadius:'5px' }}>
+              
             <option value="Mr.">Mr.</option>
             <option value="Ms.">Ms.</option>
             <option value="Mrs.">Mrs.</option>
           </select>
           </Grid>
-          <Grid item xs={12} sm={5}>
+
+          
+          <Grid item xs={12} sm={5.5}>
                   <TextField
                   className='custom-text-field'
                     size="small"
@@ -185,7 +181,7 @@ export default function CreateUser() {
                     autoFocus
                   />
                 </Grid>
-                <Grid item xs={12} sm={5}>
+                <Grid item xs={12} sm={5.5}>
                   <TextField
                   className='custom-text-field'
                     value={formData.lastName}
@@ -199,7 +195,7 @@ export default function CreateUser() {
                     autoComplete="family-name"
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={4}>
                   <TextField
                   className='custom-text-field'
                     value={formData.middleName}
@@ -213,7 +209,7 @@ export default function CreateUser() {
                   />
                 </Grid>
 
-                <Grid item xs={12} >
+                <Grid item xs={12} sm={4}>
                   <TextField
                   className='custom-text-field'
                     value={formData.empId}
@@ -228,31 +224,13 @@ export default function CreateUser() {
                   />
                 </Grid>
 
-                {
-                  uId === undefined && (
-                    <>
-                      <Grid item xs={12}>
-                        <TextField
-                        className='custom-text-field'
-                          value={formData.email}
-                          size="small"
-                          required
-                          onChange={(e) => handleChange(e)}
-                          fullWidth
-                          id="email"
-                          label="Email Address"
-                          name="email"
-                          autoComplete="email"
-                        />
-                      </Grid>
-                    </>
-                  )}
+
 
 {uId&&(display) &&<Grid container alignItems="center" spacing={1} style={{ display: 'flex', justifyContent:'center', marginLeft:'1%'}}>
   <Grid item>
     <b >Want to Update a Password?</b>
   </Grid>
-  <Grid item>
+  <Grid item xs={12} sm={4}>
     <RadioGroup row name="passwordUpdate" onChange={handleChange} style={{ display: 'flex', alignItems: 'center' }}>
       <FormControlLabel
         value="yes"
@@ -269,7 +247,7 @@ export default function CreateUser() {
 </Grid>}
 
 
-{!uId&&<Grid item xs={12}>
+{!uId&&<Grid item xs={12} sm={4}>
                   <TextField
                   className='custom-text-field'
                     value={formData.password}
@@ -286,28 +264,30 @@ export default function CreateUser() {
                 </Grid>
 }
 
-  <Grid item xs={12} >
+
+<Grid item xs={12} sm={4}>
   <Autocomplete
     size="small"
-    value={formData.designation || ''}
+    value={formData.designation?.designationName || ''} // Use designationName here
     onChange={(event, newValue) => {
       setFormData({
         ...formData,
-        designation: newValue || '' // Fallback to empty string
+        designation: { designationName: newValue || '' } // Store designationName
       });
     }}
-    inputValue={formData.designation || ''}
+    inputValue={formData.designation?.designationName || ''}
     onInputChange={(event, newInputValue) => {
       setFormData({
         ...formData,
-        designation: newInputValue || '' // Fallback to empty string
+        designation: { designationName: newInputValue || '' }
       });
     }}
-    options={designation}
+    options={designation.map((d) => d)} // Ensure options are strings
+    getOptionLabel={(option) => (typeof option === 'string' ? option : option?.designationName || '')} // Ensure string return
     onFocus={() => getDesignation(setDesignation)}
     renderInput={(params) => (
       <TextField
-      className='custom-text-field'
+        className="custom-text-field"
         {...params}
         size="small"
         label="Designation"
@@ -319,28 +299,32 @@ export default function CreateUser() {
 </Grid>
 
 
-<Grid item xs={12}>
+
+<Grid item xs={12} sm={4}>
   <Autocomplete
     size="small"
-    value={formData.departments[0].departmentName || ''}
+    value={formData.departments[0]?.departmentName || ''}
     onChange={(event, newValue) => {
+      const updatedDepartments = [{ departmentName: newValue || '' }];
       setFormData({
         ...formData,
-        departments: [{ departmentName: newValue || '' }]
+        departments: updatedDepartments
       });
     }}
-    inputValue={formData.departments[0].departmentName || ''}
+    inputValue={formData.departments[0]?.departmentName || ''}
     onInputChange={(event, newInputValue) => {
+      const updatedDepartments = [{ departmentName: newInputValue || '' }];
       setFormData({
         ...formData,
-        departments: [{ departmentName: newInputValue || '' }]
+        departments: updatedDepartments
       });
     }}
-    options={departments.map((department) => department.departmentName)}
+    options={departments.map((d) => d.departmentName)}
+    getOptionLabel={(option) => (typeof option === 'string' ? option : option.departmentName || '')}
     onFocus={() => getDepartments(setDepartments)}
     renderInput={(params) => (
       <TextField
-      className='custom-text-field'
+        className="custom-text-field"
         {...params}
         size="small"
         label="Department"
@@ -351,37 +335,40 @@ export default function CreateUser() {
   />
 </Grid>
 
+
+
 {formData.branches.map((branch, index) => (
-  <Grid item xs={12} key={index} style={{ display: 'flex', alignItems: 'center' }}>
+  <Grid item xs={12} sm={4}  key={index} style={{ display: 'flex', alignItems: 'center' }}>
     <Autocomplete
       size="small"
       style={{ width: '100%' }}
-      value={branch.branchName || ''}
+      value={branch?.branchName || ''}
       onChange={(event, newValue) => {
         const updatedBranches = [...formData.branches];
-        updatedBranches[index] = { branchName: newValue || '', region: newValue || '' };
+        updatedBranches[index] = { branchName: newValue || '', region: '' }; // Update branchName
         setFormData({
           ...formData,
           branches: updatedBranches
         });
       }}
-      inputValue={branch.branchName || ''}
+      inputValue={branch?.branchName || ''}
       onInputChange={(event, newInputValue) => {
         const updatedBranches = [...formData.branches];
-        updatedBranches[index] = { branchName: newInputValue || '', region: newInputValue || '' };
+        updatedBranches[index] = { branchName: newInputValue || '', region: '' };
         setFormData({
           ...formData,
           branches: updatedBranches
         });
       }}
-      options={branches.map((branch) => branch.branchName)}
+      options={branches.map((b) => b.branchName)}
+      getOptionLabel={(option) => (typeof option === 'string' ? option : option.branchName || '')}
       onFocus={() => getBranches(setBranches)}
       renderInput={(params) => (
         <TextField
-        className='custom-text-field'
+          className="custom-text-field"
           {...params}
           size="small"
-          label={`Branch ${index + 1}`}
+          label={`Branch ${index > 0 ? index + 1 : ''}`}
           variant="outlined"
           fullWidth
         />
@@ -390,42 +377,43 @@ export default function CreateUser() {
     {showAddBranch && index === formData.branches.length - 1 && (
       <IconButton
         onClick={handleAddBranch}
-        aria-label="add branch" style={{backgroundColor:"#1976D2",color:"white",borderRadius:"0px 5px 5px 0px"}}>
+        aria-label="add branch"
+        style={{ backgroundColor: '#1976D2', color: 'white', borderRadius: '0px 5px 5px 0px' }}
+      >
         <AddIcon />
       </IconButton>
     )}
     {index > 0 && (
-      <IconButton onClick={() => handleDeleteBranch(index)}  aria-label="delete branch" color="error">
+      <IconButton onClick={() => handleDeleteBranch(index)} aria-label="delete branch" color="error">
         <DeleteIcon />
       </IconButton>
     )}
   </Grid>
 ))}
+
               </Grid>
               {!uId ? <Button
                 type="submit"
-                fullWidth
+                className='submit-btn'
                 variant="contained"
-                onClick={(e) => handleSubmit(e, formData, navigate)}
-                sx={{ mt: 1, mb: 1 }}
-              >
+                // onClick={(e) => handleSubmit(e, formData, navigate)}
+                // onClick={handleSubmit} 
+                >
                 Create User
               </Button>
                 :
                 <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
+                type="submit"
+                className='submit-btn'
+                variant="contained"
                   onClick={(e) => handleUpdate(e, formData, navigate)}
-                  sx={{ mt: 1, mb: 1 }}
                 >
                   Update User
                 </Button>
               }
-            </Box>
           </Box>
         </div>
       </Container>
-    </ThemeProvider>
+
   );
 }
