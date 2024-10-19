@@ -129,7 +129,7 @@ font-family: 'Sans-serif fonts', Times, serif !important;
     background-color: #00C292 !important;
     color: white !important;
     height: 20px !important;
-    margin: 3rem 1.5rem !important;  
+    margin: 3rem 1.5rem 3rem 0rem !important;  
     padding: 8px 12px !important; 
   }
   
@@ -367,9 +367,11 @@ font-family: 'Sans-serif fonts', Times, serif !important;
 }
 
 #disableItem{
-  background-color: rgb(248, 249, 251) !important; /* Change background color */
+  /* background-color: rgb(248, 249, 251) !important; Change background color */
+  background-color: #e9eaece3 !important; /* Change background color */
   cursor: not-allowed !important ; /* Change cursor to indicate it's disabled */
 }
+
 
 .custom-input {
   cursor: not-allowed !important; /* Apply not-allowed cursor to input field */

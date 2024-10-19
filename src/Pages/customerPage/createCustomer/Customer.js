@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField ,Button,  Container, Grid, InputLabel ,Typography, IconButton, Autocomplete } from '@mui/material';
+import { TextField ,Button,  Container, Grid, InputLabel ,Typography, IconButton, Autocomplete, FormHelperText   } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import "./CustomerForm.css";
@@ -90,7 +90,7 @@ export default function Customer() {
       customerDetail: [
         ...prevState.customerDetail,
         {
-          alternateCustomerAddress: "",
+          ContactDetailReferenceNo: "",
           contactPerson: "",
           designation: "",
           mobileNumber: "",
@@ -103,7 +103,8 @@ export default function Customer() {
           insertedByUserId: "",
           lastUpdatedByUserId: "",
           gstNo: "",
-          industryName: "",
+          industryType: "",
+          vendorCode:"",
           panNo: "",
           referenceDrawingNo: "",
           customerAddress: ""
@@ -212,6 +213,7 @@ const getDataByName = async (newInputValue) => {
   };
 
 
+
   console.log("Options is "+options)
 
   return (
@@ -225,6 +227,7 @@ const getDataByName = async (newInputValue) => {
     {/* {rId && ( */}
       <Grid item xs={4}>
         <TextField
+          required
           size="small"
           name="customerReferenceNumber"
           className="custom-text-field"
@@ -247,6 +250,7 @@ const getDataByName = async (newInputValue) => {
 
     <Grid item xs={4}>
       <TextField
+        required
         size="small"
         className="custom-text-field"
         name="customerName"
@@ -255,6 +259,19 @@ const getDataByName = async (newInputValue) => {
         error={Boolean(errors['customerName'])}  // Show red border if error exists
         helperText={errors['customerName']} 
         label="Customer Name"
+      />
+    </Grid>
+
+
+    <Grid item xs={4}>
+      <TextField
+        required
+        size="small"
+        className="custom-text-field"
+        name="vendorCode"
+        value={formData.vendorCode}
+        onChange={handleChange}
+        label="Vendor Code"
       />
     </Grid>
 
@@ -275,6 +292,7 @@ const getDataByName = async (newInputValue) => {
   renderInput={(params) => (
     <>
       <TextField
+        required
         {...params}
         size="small"
         variant="outlined"
@@ -297,28 +315,65 @@ const getDataByName = async (newInputValue) => {
 
 
 
+<Grid item xs={12} sm={4}>
+  <Autocomplete
+    size="small"
+    value={formData?.branch || ''}
+    onChange={(event, newValue) => {
+      setFormData({
+        ...formData,
+        branch: formData.branch
+      });
+    }}
+    
+    inputValue={formData?.branch || ''}
+    onInputChange={(event, newInputValue) => {
+      setFormData({
+        ...formData,
+        branch: formData?.branch
+      });
+    }}
+    options={["Mumbai","Ahmadabad"].map((b) => b)}
+    // onFocus={() => getDepartments(setDepartments)}
 
-    <Grid item xs={4}>
+    renderInput={(params) => (
       <TextField
+        required
+        className="custom-text-field"
+        {...params}
         size="small"
-        // className="custom-text-field"
-        name="branch"
-        className='custom-text-field'
-        value={formData.branch}
-        onChange={handleChange}
         label="Branch"
-        error={Boolean(errors['branch'])}  // Show red border if error exists
-        helperText={errors['branch']} 
+        variant="outlined"
+        fullWidth
       />
-    </Grid>
+    )}
+  />
+</Grid>
+
+
 
     <Grid item xs={12} sm={4}>
-          {/* <InputLabel className="ip-label"> Designation</InputLabel > */}
           <TextField
+            required
             size="small" 
             className="custom-text-field" 
             value={dateTime}
-            label="Current Date & Time"
+            label="Created On"
+            id="disableItem"
+            fullWidth
+            InputProps={{
+              readOnly: true,  // Prevent user input
+            }}
+          />
+        </Grid>
+
+    <Grid item xs={12} sm={4}>
+          <TextField
+            required
+            size="small" 
+            className="custom-text-field" 
+            value={dateTime}
+            label="Updated On"
             id="disableItem"
             fullWidth
             InputProps={{
@@ -330,11 +385,31 @@ const getDataByName = async (newInputValue) => {
    
         <Grid item xs={4}>
         <TextField
+          required
           size="small"
           className="custom-text-field"
           id="disableItem"
           value={authState?.sub}
-          label="Created By UserId"
+          label="Created By User"
+          InputLabelProps={{
+            shrink: Boolean(authState?.sub),
+          }}
+          autoFocus={!authState?.sub} // Autofocus if the value exists
+          InputProps={{
+            readOnly: true,  // Prevent user input
+          }}
+        />
+      </Grid>
+
+
+        <Grid item xs={4}>
+        <TextField
+          required
+          size="small"
+          className="custom-text-field"
+          id="disableItem"
+          value={authState?.sub}
+          label="Updated By User"
           InputLabelProps={{
             shrink: Boolean(authState?.sub),
           }}
@@ -350,14 +425,57 @@ const getDataByName = async (newInputValue) => {
             </div>
           {/* </Box> */}
           {formData?.customerDetail?.map((detail, index) => (
-            <div className='card'  key = {index}>
-          <div className="MuiBox-root css-2e6lci"><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb">Customer Detail {index + 1}</div></div>
+            <div className='card' style={{width:'100%'}}  key = {index}>
+<div className="MuiBox-root css-2e6lci">
+  <svg
+    width="20"
+    height="25"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="feather feather-alert-circle"
+  >
+    <g>
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="12" y1="8" x2="12" y2="12"></line>
+      <line x1="12" y1="16" x2="12.01" y2="16"></line>
+    </g>
+  </svg>
+  <div className="MuiBox-root css-1isemmb" style={{ fontSize: '15px' }}> {/* Adjust the font size here */}
+    Contact Detail {index + 1}
+  </div>
+</div>
 
       <Grid container  spacing={2}>
+
+      <Grid item xs={4}>
+        <TextField
+          required
+          size="small"
+          name="ContactDetailReferenceNo"
+          className="custom-text-field"
+          id="disableItem"
+          value={rId?formData.ContactDetailReferenceNo:''}
+          label="Contact Detail ReferenceNo"
+          InputLabelProps={{
+            shrink: Boolean(formData.ContactDetailReferenceNo),
+          }}
+          autoFocus={formData.ContactDetailReferenceNo} // Autofocus if the value exists
+          InputProps={{
+            readOnly: true,  // Prevent user input
+          }}
+        />
+      </Grid>
+
+
 
       <Grid item xs={12} sm={4}>
           {/* <InputLabel className="ip-label"  >Contact Person</InputLabel > */}
           <TextField
+            required
             size="small" 
             className="custom-text-field" 
             name="contactPerson"
@@ -371,25 +489,45 @@ const getDataByName = async (newInputValue) => {
         </Grid>
 
 
-      <Grid item xs={12} sm={4}>
-          {/* <InputLabel className="ip-label">Industry Id</InputLabel > */}
-          <TextField
-            size="small" 
-            className="custom-text-field" 
-            name="industryName"
-            value={detail.industryName}
-            onChange={e => handleChange(e, index)}
-            label="Industry Name"
-            error={Boolean(errors['industryName'])}  // Show red border if error exists
-            helperText={errors['industryName']} 
-            required
-            fullWidth
-          />
-        </Grid>
-       
         <Grid item xs={12} sm={4}>
-          {/* <InputLabel className="ip-label"> Designation</InputLabel > */}
+  <Autocomplete
+    size="small"
+    value={formData?.industryType || ''}
+    onChange={(event, newValue) => {
+      setFormData({
+        ...formData,
+        industryType: formData.industryType
+      });
+    }}
+    
+    inputValue={formData?.industryType || ''}
+    onInputChange={(event, newInputValue) => {
+      setFormData({
+        ...formData,
+        industryType: formData?.industryType
+      });
+    }}
+    options={["Telecom","Textile"].map((b) => b)}
+    // onFocus={() => getDepartments(setDepartments)}
+
+    renderInput={(params) => (
+      <TextField
+        required
+        className="custom-text-field"
+        {...params}
+        size="small"
+        label="Industry Type"
+        variant="outlined"
+        fullWidth
+      />
+    )}
+  />
+</Grid>
+       
+
+        <Grid item xs={12} sm={4}>
           <TextField
+            required
             size="small" 
             className="custom-text-field" 
             name="designation"
@@ -402,29 +540,20 @@ const getDataByName = async (newInputValue) => {
           />
         </Grid>
 
-        <Grid item xs={12} sm={4}>
-          {/* <InputLabel className="ip-label"> Designation</InputLabel > */}
-          <TextField
-            size="small" 
-            className="custom-text-field" 
-            name="referenceDrawingNo"
-            value={detail.referenceDrawingNo}
-            onChange={e => handleChange(e, index)}
-            label="Reference Drawing Number"
-            fullWidth
-          />
-        </Grid>
+  
        
         </Grid>
 
-        <div className="MuiBox-root css-2e6lci"><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb">Address & Contact Details</div></div>
+    
 
 
-        <Grid container  spacing={2}>
+        <Grid container sx={{my:1}} spacing={2}>
+       
 
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={6}>
           {/* <InputLabel className="ip-label">Customer Address</InputLabel > */}
           <TextField
+            required
             size="small" 
             className="custom-text-field" 
             name="customerAddress"
@@ -433,16 +562,20 @@ const getDataByName = async (newInputValue) => {
             value={detail.customerAddress}
             onChange={e => handleChange(e, index)}
             label="Customer Address"
+            inputProps={{ maxLength: 125 }}
             fullWidth
           />
+       <FormHelperText style={{ textAlign: 'right' }}>
+    {`${detail.customerAddress.length}/125`}
+  </FormHelperText>
 
         </Grid>
 
 
-
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={3}>
           {/* <InputLabel className="ip-label"  >Telephone Number</InputLabel > */}
           <TextField
+            required
             size="small" 
             className="custom-text-field" 
             name="mobileNumber"
@@ -456,9 +589,10 @@ const getDataByName = async (newInputValue) => {
         </Grid>
 
 
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={3}>
           {/* <InputLabel className="ip-label"  >Telephone Number</InputLabel > */}
           <TextField
+            required
             size="small" 
             type="email"
             className="custom-text-field" 
@@ -471,101 +605,91 @@ const getDataByName = async (newInputValue) => {
             fullWidth
           />
         </Grid>
-        </Grid>
-
-
-        <div className="MuiBox-root css-2e6lci"><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb">Alternate Address & Contact Details</div></div>
-
-        <Grid container  spacing={2}>
-
-        <Grid item xs={12} sm={8}>
-          {/* <InputLabel className="ip-label">Customer Address</InputLabel > */}
-          <TextField
-            size="small" 
-            className="custom-text-field" 
-            name="alternateCustomerAddress"
-            multiline
-            rows={4}
-            value={detail.alternateCustomerAddress}
-            onChange={e => handleChange(e, index)}
-            label="Alternate Customer Address"
-            fullWidth
-          />
-
-        </Grid>
-
-
 
         <Grid item xs={12} sm={4}>
-          {/* <InputLabel className="ip-label"  >Telephone Number</InputLabel > */}
           <TextField
+            required
             size="small" 
             className="custom-text-field" 
-            name="alternateMobileNumber"
-            value={detail.alternateMobileNumber}
-            onChange={e => handleChange(e, index)}
-            label="Alternate Mobile Number"
-            error={Boolean(errors['alternateMobileNumber'])}  // Show red border if error exists
-            helperText={errors['alternateMobileNumber']} 
+            value={dateTime}
+            label="Created On"
+            id="disableItem"
             fullWidth
+            InputProps={{
+              readOnly: true,  // Prevent user input
+            }}
           />
         </Grid>
 
-
-        <Grid item xs={12} sm={4}>
-          {/* <InputLabel className="ip-label"  >Telephone Number</InputLabel > */}
+    <Grid item xs={12} sm={4}>
           <TextField
+            required
             size="small" 
-            type="email"
             className="custom-text-field" 
-            name="alternateemailId"
-            value={detail.alternateemailId}
-            onChange={e => handleChange(e, index)}
-            label="Alternate Email Id"
-            error={Boolean(errors['alternateemailId'])}  // Show red border if error exists
-            helperText={errors['alternateemailId']} 
+            value={dateTime}
+            label="Updated On"
+            id="disableItem"
             fullWidth
+            InputProps={{
+              readOnly: true,  // Prevent user input
+            }}
           />
         </Grid>
 
+   
+        <Grid item xs={4}>
+        <TextField
+          required
+          size="small"
+          className="custom-text-field"
+          id="disableItem"
+          value={authState?.sub}
+          label="Created By User"
+          InputLabelProps={{
+            shrink: Boolean(authState?.sub),
+          }}
+          autoFocus={!authState?.sub} // Autofocus if the value exists
+          InputProps={{
+            readOnly: true,  // Prevent user input
+          }}
+        />
+      </Grid>
+
+
+        <Grid item xs={4}>
+        <TextField
+          required
+          size="small"
+          className="custom-text-field"
+          id="disableItem"
+          value={authState?.sub}
+          label="Updated By User"
+          InputLabelProps={{
+            shrink: Boolean(authState?.sub),
+          }}
+          autoFocus={!authState?.sub} // Autofocus if the value exists
+          InputProps={{
+            readOnly: true,  // Prevent user input
+          }}
+        />
+      </Grid>
+
         </Grid>
 
+
+       
 
 
         <div className="MuiBox-root css-2e6lci"><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb">Other Details</div></div>
 
         <Grid container  spacing={2}>
 
-        <Grid item xs={12} sm={4}>
-          {/* <InputLabel className="ip-label">Ecc No</InputLabel > */}
-          <TextField
-            size="small" 
-            className="custom-text-field" 
-            name="eccNo"
-            value={detail.eccNo}
-            onChange={e => handleChange(e, index)}
-            label="Ecc No"
-            fullWidth
-          />
-        </Grid>
-
-
-        <Grid item xs={12} sm={4}>
-          {/* <InputLabel className="ip-label"  >SSt No</InputLabel > */}
-          <TextField
-            size="small" 
-            className="custom-text-field" 
-            name="sstNo"
-            value={detail.sstNo}
-            onChange={e => handleChange(e, index)}
-            label="SSt No"
-            fullWidth
-          />
-        </Grid>
+       
 
         <Grid item xs={12} sm={4}>
           {/* <InputLabel className="ip-label"  >GST No</InputLabel > */}
           <TextField
+            required
             size="small" 
             className="custom-text-field" 
             name="gstNo"
@@ -579,6 +703,7 @@ const getDataByName = async (newInputValue) => {
         <Grid item xs={12} sm={4}>
           {/* <InputLabel className="ip-label"  >Pan No</InputLabel > */}
           <TextField
+            required
             size="small" 
             className="custom-text-field" 
             name="panNo"
@@ -589,18 +714,7 @@ const getDataByName = async (newInputValue) => {
           />
 
         </Grid>
-        <Grid item xs={12} sm={4}>
-          {/* <InputLabel className="ip-label"  >CST No</InputLabel > */}
-          <TextField
-            size="small" 
-            className="custom-text-field" 
-            name="cstNo"
-            value={detail.cstNo}
-            onChange={e => handleChange(e, index)}
-            label="CST No"
-            fullWidth
-          />
-        </Grid>
+       
         
         <Grid item xs={12}>
           <IconButton className="deleteIcon" onClick={() => handleDeleteCustomerDetail(index)} >
@@ -616,7 +730,7 @@ const getDataByName = async (newInputValue) => {
           </Grid>
           <Grid item xs={4}>
           <Grid item xs={4}  >
-<Button className="add-btn" sx={{margin:"0rem 1rem 1rem 1rem"}}  onClick={handleAddCustomerDetail}><AddIcon/> Add Customer Details</Button>
+<Button className="add-btn" sx={{margin:"0rem 1rem 1rem 0rem"}}  onClick={handleAddCustomerDetail}><AddIcon/> Add Customer Details</Button>
         
         {!rId&&!formData.customerReferenceNumber?(<Button className="submit-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate,setErrors,validateField)} variant="contained" >Submit</Button>) : (
           <>
