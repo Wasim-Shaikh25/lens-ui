@@ -63,8 +63,8 @@ const AllRoute = ({isSidebar}) => {
   
   return (
 
-    // <div style={!isSidebar&&!isLogin&&!reset ? sidebarOpenStyle : sidebarClosedStyle}>
-    <div style={!isSidebar? sidebarOpenStyle : sidebarClosedStyle}>
+    <div style={!isSidebar&&!isLogin&&!reset ? sidebarOpenStyle : sidebarClosedStyle}>
+    {/* // <div style={!isSidebar? sidebarOpenStyle : sidebarClosedStyle}> */}
     <Routes>
           <Route path="/user" element={<UserDashboard />} />
           <Route path="/createAgitator" element={<AgitatorSeal />} />

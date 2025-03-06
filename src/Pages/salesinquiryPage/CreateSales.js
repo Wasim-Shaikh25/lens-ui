@@ -27,6 +27,9 @@ import { getColumnData } from '../../apis/PumpSealApi';
 import dayjs from "dayjs";
 import moment from "moment";
 import { useAuth } from "../../contextApi/AuthContext";
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 
 export default function CreatePumpSeal() {
@@ -72,161 +75,6 @@ export default function CreatePumpSeal() {
 
 
   
-  // const [formData, setFormData] = useState({
-  //   salesInquiryRef: '',
-  //   customerRef: '',
-  //   customerName: '',  // Not editable
-  //   customerAddress: '', // Editable
-  //   contactPerson: '', // Editable
-  //   mobileNumber: '', // Editable
-  //   sourceOfInquiry: '',
-  //   industry: '', // Not editable
-  //   branch: '', // Selectable
-  //   createdBy: authState?.sub, // Selectable
-  //   createdOn: dateTime, // Auto-generated
-  //   updatedBy: authState?.sub, // Selectable
-  //   updatedOn: dateTime, // Auto-generated
-  //   branch: '',
-  //   endUser: '',
-  //   sealArrangement: "",
-  //   costingRequirement: '',
-  //   customerAddress: '',
-  //   customerName: '',
-  //   make: '',
-  //   model: '',
-  //   impeller: '',
-  //   shaft: '',
-  //   sealChamber: '',
-  //   bearingBracket: '',
-  //   tagNumber: '',
-  //   arrangement: '',
-  //   pumpType: '',
-  //   stuffingBox: '',
-  //   stage: '',
-  //   casting: '',
-  //   series: '',
-  //   sealType: '',
-  //   performance: '',
-  //   flushPlan: '',
-  //   barrierOrBufferPlan: '',
-  //   quenchPlan: '',
-  //   barrierOrBufferFluid: '',
-  //   designOffered: '',
-  //   sizeAvailable: '',
-  //   materialCode: '',
-  //   sealSeries: '',
-  //   shaftSize: '',
-  //   boreDia: '',
-  //   boreDepth: '',
-  //   nearestObstruction: '',
-  //   allPressureUnit: '',
-  //   totalHeat: '',
-  //   suctionPressure: '',
-  //   dischargePressure: '',
-  //   directionOfRotation: '',
-  //   speed: '',
-  //   boxPressure: '',
-  //   operatingFluid: '',
-  //   allTempPressureUnit: '',
-  //   nature: '',
-  //   operatingTemperature: '',
-  //   minOperatingTemperature: '',
-  //   spGravity: '',
-  //   freezePoint: '',
-  //   boilPoint: '',
-  //   viscosity: '',
-  //   viscosityUnit: '',
-  //   percentageOfSolid: '',
-  //   grainPoint: '',
-  //   description: '',
-  //   d1SleeveOd: '',
-  //   studHoles: '',
-  //   d2StuffingBoxId: '',
-  //   d4StuffingBoxBore: '',
-  //   d5SpigotDia: '',
-  //   d51: '',
-  //   d52: '',
-  //   d9BoltCircle: '',
-  //   boltSize: '',
-  //   l11: '',
-  //   l12: '',
-  //   l1SleeveExten: '',
-  //   l2ShaftHub: '',
-  //   l3ThreadLength: '',
-  //   l8sbDepth: '',
-  //   l9NearObstr: '',
-  //   alpha: '',
-  //   beta: '',
-  //   theta: '',
-  //   createdByUserGUID: '',
-  //   lastEditedByUserGUID: '',
-  //   rowguid: '',
-  //   region: '',
-  //   address: '',
-  //   emailId: '',
-  //   srNo: '',
-  //   dshaftOd: '',
-  //   sboxCover: '',
-  //   mnumberOfBolts: '',
-  //   lraisedCol: '',
-  //   existingSeal: {
-  //     gaNumber: '',
-  //     sealSeries: '',
-  //     shaftDia: '',
-  //     sealSize: '',
-  //     sealType: 'single',
-  //     ibMoc: {
-  //       face: '',
-  //       elastomer: '',
-  //       springElement: '',
-  //       contactHardware: '',
-  //       nonContactHardware: ''
-  //     },
-  //     obMoc: {
-  //       face: '',
-  //       elastomer: '',
-  //       springElement: '',
-  //       contactHardware: '',
-  //       nonContactHardware: ''
-  //     }
-  //   },
-  //   newSeal: {
-  //     shaftDia: '',
-  //     boreDia: '',
-  //     boreDepth: '',
-  //     nearestObstruction: '',
-  //     sealType: 'single',
-  //     ibMoc: {
-  //       face: '',
-  //       elastomer: '',
-  //       springElement: '',
-  //       contactHardware: '',
-  //       nonContactHardware: ''
-  //     },
-  //     obMoc: {
-  //       face: '',
-  //       elastomer: '',
-  //       springElement: '',
-  //       contactHardware: '',
-  //       nonContactHardware: ''
-  //     },
-
-  //     pump: {
-  //       make: '',
-  //       model: '',
-  //       moc: '',
-  //       impellerCasingMoc: '',
-  //       shaftMoc: '',
-  //       bearingBkt: '',
-  //       tagNumber: '',
-  //       arrangement: '',
-  //       pumpType: '',
-  //       stage: '',
-  //       casingType: ''
-  //     }
-
-  //   }
-  // });
 
 
 const [formData, setFormData] = useState({
@@ -241,216 +89,10 @@ const [formData, setFormData] = useState({
   branch: "",
   createdByUser: "",
   updatedByUser: "",
-  pumpInquiries: [
-    {
-      pumpInquiryReferenceNo: "",
-      createdByUser: "",
-      updatedByUser: "",
-      branch: "",
-      make: "",
-      model: "",
-      pumpMOC: "",
-      impellerCasingMOC: "",
-      shaftMOC: "",
-      bearingBKT: "",
-      tagNumber: "",
-      arrangement: "",
-      pumpType: "",
-      stage: "",
-      casingType: "",
-      series: "",
-      performance: "",
-      sealArrangement: "",
-      existingSealMake: "",
-      existingSealSize: "",
-      existingSealMOC: "",
-      existingSealApiPlan: "",
-      suctionPressure: {  
-        value: "",
-        unit: ""
-      },
-      dischargePressure: {
-        value: "",
-        unit: ""
-      },
-      boxPressure: {
-        value: "",
-        unit: ""
-      },
-      totalHead: {
-        value: "",
-        unit: ""
-      },
-      pumpingTemperature: {
-        value: "",
-        unit: ""
-      },
-      maximumTemperature: {
-       
-        value: "",
-        unit: ""
-      },
-      directionOfRotation: "",
-      speed: "",
-      fluid: "",
-      nature: "",
-      spGravity: "",
-      freezingPoint: "",
-      boilingPoint: "",
-      viscosity: "",
-      percentageOfSolid: "",
-      solidSize: "",
-      specialNote: "",
-      salesInquiryId: 0
-    }
-  ],
-  agitatorInquiries: [
-    {
-      series: "",
-      performance: "",
-      sealArrangement: "",
-      existingSealMake: "",
-      existingSealSize: "",
-      existingSealMOC: "",
-      existingSealApiPlan: "",
-      vesselPressureOperating: "",
-      vesselPressureOperatingUnit: "",
-      vesselPressureDesign: "",
-      vesselPressureDesignUnit: "",
-      directionOfRotation: "",
-      speed: "",
-      fluid: "",
-      nature: "",
-      branch: "",
-      pumpingTemperature: {
-        value: "",
-        unit: ""
-      },
-      maximumTemperature: {
-        value: "",
-        unit: ""
-      },
-      spGravity: "",
-      freezingPoint: "",
-      boilingPoint: "",
-      viscosity: "",
-      percentageOfSolid: "",
-      solidSize: "",
-      specialNote: "",
-      createdByUser: "",
-      updatedByUser: "",
-      salesInquiryId: 0
-    }
-  ],
-  apiPlanInquiries: [
-    {
-      apiPlanInquiryId: "",
-      apiPlanInquiryReferenceNo: "",
-      equipmentMake: "",
-      equipmentModel: "",
-      equipmentType: "",
-      arrangement: "",
-      tagNumber: "",
-      pumpMOC: "",
-      drawingNumber: "",
-      mechanicalSealMake: "",
-      mechanicalSealSeries: "",
-      connectionSize: "",
-      shaftSize: "",
-      rotation: "",
-      mawp: {
-        value: "",
-        unit: ""
-      },
-      mawt: {
-       
-        value: "",
-        unit: ""
-      },
-      suctionPressurePump: {
-       
-        value: "",
-        unit: ""
-      },
-      dischargePressurePump: {
-        value: "",
-        unit: ""
-      },
-      boxPressurePump: {
-       
-        value: "",
-        unit: ""
-      },
-      vesselPressureAgitator: {
-       
-        value: "",
-        unit: ""
-      },
-      operatingTemperature: {
-       
-        value: "",
-        unit: ""
-      },
-      maxTemperature: {
-       
-        value: "",
-        unit: ""
-      },
-      fluid: "",
-      speed: "",
-      viscosity: "",
-      spGravity: "",
-      percentageOfSolid: "",
-      solidSize: "",
-      freezingPoint: "",
-      boilingPoint: "",
-      leakProofProposalApiPlan: "",
-      capacity: "",
-      heatExchangeType: "",
-      heatExchangeArea: "",
-      standard: "",
-      createdByUser: "",
-      branch: "",
-      updatedByUser: "",
-      salesInquiryId: 0
-    }
-  ],
-  rotaryJointInquiries: [
-    {
-      rotaryJointInquiryId: "",
-      rotaryJointInquiryReferenceNo: "",
-      createdByUser: "",
-
-      updatedByUser: "",
-      branch: "",
-      equipment: "",
-      make: "",
-      model: "",
-      fluid: "",
-      operatingTemperature: "",
-      operatingTemperatureUnit: "",
-      flowRate: "",
-      speed: "",
-      operatingPressure: "",
-      operatingPressureUnit: "",
-      existingRotaryJointMake: "",
-      existingRotaryJointModelType: "",
-      existingRotaryJointConnectionSize: "",
-      existingRotaryJointConnectionType: "",
-      jointType: "",
-      proposedRotaryJointMake: "",
-      proposedRotaryJointModelType: "",
-      inletConnectionSize: "",
-      outletConnectionSize: "",
-      connectionType: "",
-      handing: "",
-      inletFlangedSize: "",
-      outletFlangedSize: "",
-      referenceDrawing: "",
-      salesInquiryId: "",
-      fileName: ""
-    }
-  ]
+  pumpInquiries: [],
+  agitatorInquiries: [],
+  apiPlanInquiries: [],
+  rotaryJointInquiries: []
 })
 
   useEffect(() => {
@@ -460,63 +102,263 @@ const [formData, setFormData] = useState({
   }, [pId]);
 
 
+  const addItem = (inquiryType) => {
+    const newItemTemplates = {
+      agitatorInquiries:  {
+        series: "",
+        performance: "",
+        createdByUser: authState?.sub,
+        updatedByUser: authState?.sub,
+        sealArrangement: "",
+        sealType:"",
+        branch:"",
+        existingSealMake: "",
+        existingSealSize: "",
+        existingSealMOC: "",
+        existingSealApiPlan: "",
+        vesselPressureOperating: "",
+        vesselPressureOperatingUnit: "",
+        vesselPressureDesign: "",
+        vesselPressureDesignUnit: "",
+        directionOfRotation: "",
+        speed: "",
+        fluid: "",
+        nature: "",
+        branch: "",
+        pumpingTemperature: {
+          value: "",
+          unit: ""
+        },
+        maximumTemperature: {
+          value: "",
+          unit: ""
+        },
+        spGravity: "",
+        freezingPoint: "",
+        boilingPoint: "",
+        viscosity: "",
+        percentageOfSolid: "",
+        solidSize: "",
+        specialNote: "",
+        createdByUser: "",
+        updatedByUser: "",
+        salesInquiryId: 0
+      },
+      pumpInquiries: {
+        pumpInquiryReferenceNo: "",
+        createdByUser: authState?.sub,
+        updatedByUser: authState?.sub,
+        sealType:"",
+        branch: "",
+        make: "",
+        model: "",
+        pumpMOC: "",
+        impellerCasingMOC: "",
+        shaftMOC: "",
+        bearingBKT: "",
+        tagNumber: "",
+        arrangement: "",
+        pumpType: "",
+        stage: "",
+        casingType: "",
+        series: "",
+        performance: "",
+        sealArrangement: "",
+        existingSealMake: "",
+        existingSealSize: "",
+        existingSealMOC: "",
+        existingSealApiPlan: "",
+        suctionPressure: {  
+          value: "",
+          unit: ""
+        },
+        dischargePressure: {
+          value: "",
+          unit: ""
+        },
+        boxPressure: {
+          value: "",
+          unit: ""
+        },
+        totalHead: {
+          value: "",
+          unit: ""
+        },
+        pumpingTemperature: {
+          value: "",
+          unit: ""
+        },
+        maximumTemperature: {
+         
+          value: "",
+          unit: ""
+        },
+        directionOfRotation: "",
+        speed: "",
+        fluid: "",
+        nature: "",
+        spGravity: "",
+        freezingPoint: "",
+        boilingPoint: "",
+        viscosity: "",
+        percentageOfSolid: "",
+        solidSize: "",
+        specialNote: "",
+        salesInquiryId: 0
+      },
 
-  // const handleChange = (field, index = null) => (event) => {
-  //   const { value } = event.target;
-  
-  //     console.log("value is ", value);
-      
-  //   setFormData((prevState) => {
-  //     if (index !== null && Array.isArray(prevState.agitatorInquiries)) {
-  //       // Handle updates to nested fields (agitatorInquiries)
-  //       return {
-  //         ...prevState,
-  //         agitatorInquiries: prevState.agitatorInquiries[0]?.map((item, idx) =>
-  //           idx === index ? { ...item, [field]: value } : item
-  //         ),
-  //       };
-  //     }
-  
-  //     // Handle direct updates to formData
-  //     return {
-  //       ...prevState,
-  //       [field]: value,
-  //     };
-  //   });
-  // };
-  
-  
-  const handleChange = (arrayName = null, index = null) => (event) => {
-    const { name, value } = event.target;
-  
-    setFormData((prevState) => {
-      if (arrayName) {
-        // If the input belongs to an array
-        const updatedArray = [...prevState[arrayName]];
-        
-        // If `index` is provided, update the specific item in the array
-        if (index !== null) {
-          updatedArray[index] = {
-            ...updatedArray[index],
-            [name]: value,
-          };
-        }
-  
-        return {
-          ...prevState,
-          [arrayName]: updatedArray,
-        };
-      } else {
-        // If the input belongs to a top-level property
-        return {
-          ...prevState,
-          [name]: value,
-        };
+
+      apiPlanInquiries: {
+        apiPlanInquiryId: "",
+        apiPlanInquiryReferenceNo: "",
+        equipmentMake: "",
+        createdByUser: authState?.sub,
+        updatedByUser: authState?.sub,
+        sealType:"",
+        branch:"",
+        equipmentModel: "",
+        equipmentType: "",
+        arrangement: "",
+        tagNumber: "",
+        pumpMOC: "",
+        drawingNumber: "",
+        mechanicalSealMake: "",
+        mechanicalSealSeries: "",
+        connectionSize: "",
+        shaftSize: "",
+        rotation: "",
+        mawp: {
+          value: "",
+          unit: ""
+        },
+        mawt: {
+         
+          value: "",
+          unit: ""
+        },
+        suctionPressurePump: {
+         
+          value: "",
+          unit: ""
+        },
+        dischargePressurePump: {
+          value: "",
+          unit: ""
+        },
+        boxPressurePump: {
+         
+          value: "",
+          unit: ""
+        },
+        vesselPressureAgitator: {
+         
+          value: "",
+          unit: ""
+        },
+        operatingTemperature: {
+         
+          value: "",
+          unit: ""
+        },
+        maxTemperature: {
+         
+          value: "",
+          unit: ""
+        },
+        fluid: "",
+        speed: "",
+        viscosity: "",
+        spGravity: "",
+        percentageOfSolid: "",
+        solidSize: "",
+        freezingPoint: "",
+        boilingPoint: "",
+        leakProofProposalApiPlan: "",
+        capacity: "",
+        heatExchangeType: "",
+        heatExchangeArea: "",
+        standard: "",
+        createdByUser: "",
+        branch: "",
+        updatedByUser: "",
+        salesInquiryId: 0
+      },
+      rotaryJointInquiries:{
+        rotaryJointInquiryId: "",
+        rotaryJointInquiryReferenceNo: "",
+        sealType:"",
+        createdByUser: authState?.sub,
+        updatedByUser: authState?.sub,
+        branch: "",
+        equipment: "",
+        make: "",
+        model: "",
+        fluid: "",
+        operatingTemperature: "",
+        operatingTemperatureUnit: "",
+        flowRate: "",
+        speed: "",
+        operatingPressure: "",
+        operatingPressureUnit: "",
+        existingRotaryJointMake: "",
+        existingRotaryJointModelType: "",
+        existingRotaryJointConnectionSize: "",
+        existingRotaryJointConnectionType: "",
+        jointType: "",
+        proposedRotaryJointMake: "",
+        proposedRotaryJointModelType: "",
+        inletConnectionSize: "",
+        outletConnectionSize: "",
+        connectionType: "",
+        handing: "",
+        inletFlangedSize: "",
+        outletFlangedSize: "",
+        referenceDrawing: "",
+        salesInquiryId: "",
+        fileName: ""
       }
-    });
+    };
+    console.log("the add button is from",inquiryType)
+    setFormData((prevData) => ({
+      ...prevData,
+      [inquiryType]: [...prevData[inquiryType], newItemTemplates[inquiryType]],
+    }));
+  };
+
+  const removeItem = (inquiryType, index) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [inquiryType]: prevData[inquiryType].filter((_, i) => i !== index),
+    }));
+  };
+
+  
+ 
+  const handleFieldChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,  // Dynamically updating formData based on name
+    }));
   };
   
-  
+
+
+const handleChange = (arrayName = null, index = null) => (event) => {
+  const { name, value } = event.target;
+
+  const updatedInquiries = [...formData[arrayName]];
+  updatedInquiries[index] = {
+    ...updatedInquiries[index],
+    [name]: value
+  };
+  setFormData({
+    ...formData,
+    [arrayName]: updatedInquiries
+  });
+};
+
+
       console.log("formData after vp is",formData);  
   
 
@@ -527,44 +369,7 @@ const [formData, setFormData] = useState({
   };
 
 
-  // const handleSealConfigChange = (event) => {
-  //   const newValue = event.target.value;
-  //   setSelectedSealType(newValue);
 
-  //   if (sealType === 'existing') {
-  //     setFormData(prev => ({
-  //       ...prev,
-  //       existingSeal: {
-  //         ...prev.existingSeal,
-  //         sealType: newValue || ""
-  //       }
-  //     }));
-  //   } else {
-  //     setFormData(prev => ({
-  //       ...prev,
-  //       newSeal: {
-  //         ...prev.newSeal,
-  //         sealType: newValue || ""
-  //       }
-  //     }));
-  //   }
-  // };
-
-
-
-
-  const handleMocChange = (section, type, field, value) => {
-    setFormData(prev => ({
-      ...prev,
-      [section]: {
-        ...prev[section],
-        [type]: {
-          ...prev[section][type],
-          [field]: value
-        }
-      }
-    }));
-  };
 
   const cancelUpdate = () => {
     const confirmCancel = window.confirm("Are you sure you want to cancel the update?");
@@ -575,1564 +380,1560 @@ const [formData, setFormData] = useState({
   };
 
 
-  const PumpData = (section, type) => (
+//   const PumpData = ({index}) => (
 
-    <form>
-      <Grid container spacing={2} sx={{ marginTop: '10px' }}>
-        {/* Autogenerated Reference Number */}
-        <Grid item xs={4}>
-          <TextField
-            size="small"
-            className="custom-text-field"
-            label="Pump Inquiry Reference No."
-            value={formData?.pumpInquiries[0]?.pumpInquiryReferenceNo}
-            disabled
-            fullWidth
-            InputProps={{ readOnly: true }}
-          />
-        </Grid>
+//     <form>
+//       <Grid container spacing={2} sx={{ marginTop: '10px' }}>
+//         {/* Autogenerated Reference Number */}
+//         <Grid item xs={4}>
+//           <TextField
+//             size="small"
+//             className="custom-text-field"
+//             label="Pump Inquiry Reference No."
+//             value={item?.pumpInquiryReferenceNo}
+//             disabled
+//             fullWidth
+//             InputProps={{ readOnly: true }}
+//           />
+//         </Grid>
 
-        <Grid item xs={12} sm={4}>
-  <Autocomplete
-    size="small"
-    value={formData?.pumpInquiries[0]?.branch || ''}
-    onChange={(event, newValue) => handleChange('pumpInquiries', 0)({ target: { name: 'branch', value: newValue || '' } })}
-    options={Array.isArray(authState?.branchs) ? authState.branchs.map((b) => b.branchName) : []}
-    renderInput={(params) => (
-      <TextField
-        required
-        className="custom-text-field"
-        {...params}
-        size="small"
-        label="Branch"
-        variant="outlined"
-        fullWidth
-      />
-    )}
-  />
-</Grid>
-
-
-        {/* Created On (Autogenerated) */}
-        <Grid item xs={4}>
-          <TextField
-            size="small"
-            className="custom-text-field"
-            label="Created On"
-            value={dateTime} // Auto-generated value
-            disabled
-            fullWidth
-            InputProps={{ readOnly: true }}
-          />
-        </Grid>
+//         <Grid item xs={12} sm={4}>
+//   <Autocomplete
+//     size="small"
+//     value={item?.branch || ''}
+//     onChange={(event, newValue) => handleChange('pumpInquiries', index)({ target: { name: 'branch', value: newValue || '' } })}
+//     options={Array.isArray(authState?.branchs) ? authState.branchs.map((b) => b.branchName) : []}
+//     renderInput={(params) => (
+//       <TextField
+//         required
+//         className="custom-text-field"
+//         {...params}
+//         size="small"
+//         label="Branch"
+//         variant="outlined"
+//         fullWidth
+//       />
+//     )}
+//   />
+// </Grid>
 
 
-            {/* Updated By User */}
-            <Grid item xs={4}>
-              <TextField
-                size="small"
-                className="custom-text-field"
-                label="Created By User"
-                value={authState?.sub}
-                id="disableItem"
-                InputLabelProps={{
-                  shrink: Boolean(authState?.sub),
-                }}
-                autoFocus={authState?.sub} 
-                InputProps={{
-                  readOnly: true, // Read-only for auto-generated field
-                }}
-                disabled
-                fullWidth />
-            </Grid>
+//         {/* Created On (Autogenerated) */}
+//         <Grid item xs={4}>
+//           <TextField
+//             size="small"
+//             className="custom-text-field"
+//             label="Created On"
+//             value={dateTime} // Auto-generated value
+//             disabled
+//             fullWidth
+//             InputProps={{ readOnly: true }}
+//           />
+//         </Grid>
 
 
-            <Grid item xs={4}>
-              <TextField
-                size="small"
-                className="custom-text-field"
-                label="Updated By User"
-                value={authState?.sub}
-                id="disableItem"
-                InputLabelProps={{
-                  shrink: Boolean(authState?.sub),
-                }}
-                autoFocus={authState?.sub} 
-                InputProps={{
-                  readOnly: true, // Read-only for auto-generated field
-                }}
-                disabled
-                fullWidth />
-            </Grid>
+//             {/* Updated By User */}
+//             <Grid item xs={4}>
+//               <TextField
+//                 size="small"
+//                 className="custom-text-field"
+//                 label="Created By User"
+//                 value={authState?.sub}
+//                 id="disableItem"
+//                 InputLabelProps={{
+//                   shrink: Boolean(authState?.sub),
+//                 }}
+//                 autoFocus={authState?.sub} 
+//                 InputProps={{
+//                   readOnly: true, // Read-only for auto-generated field
+//                 }}
+//                 disabled
+//                 fullWidth />
+//             </Grid>
 
 
-
-        {/* Updated On (Autogenerated) */}
-        <Grid item xs={4}>
-          <TextField
-            size="small"
-            className="custom-text-field"
-            label="Updated On"
-            value={dateTime} // Auto-generated value
-            disabled
-            fullWidth
-            InputProps={{ readOnly: true }}
-          />
-        </Grid>
+//             <Grid item xs={4}>
+//               <TextField
+//                 size="small"
+//                 className="custom-text-field"
+//                 label="Updated By User"
+//                 value={authState?.sub}
+//                 id="disableItem"
+//                 InputLabelProps={{
+//                   shrink: Boolean(authState?.sub),
+//                 }}
+//                 autoFocus={authState?.sub} 
+//                 InputProps={{
+//                   readOnly: true, // Read-only for auto-generated field
+//                 }}
+//                 disabled
+//                 fullWidth />
+//             </Grid>
 
 
 
-      </Grid>
+//         {/* Updated On (Autogenerated) */}
+//         <Grid item xs={4}>
+//           <TextField
+//             size="small"
+//             className="custom-text-field"
+//             label="Updated On"
+//             value={dateTime} // Auto-generated value
+//             disabled
+//             fullWidth
+//             InputProps={{ readOnly: true }}
+//           />
+//         </Grid>
 
 
-      {/*////////////////// 2nd form staring here   ///////  */}
 
-      <h3 style={{ padding: '10px 0' }}>Pump Data :-</h3>
-      <Grid container spacing={2}>
-        {/* Make */}
+//       </Grid>
 
-       {/* Pump Make */}
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    label="Make"
-    name="make"
-    value={formData.pumpInquiries[0]?.make || ''}
-    onChange={handleChange('pumpInquiries', 0)}
-    fullWidth
-    variant="outlined"
-    className="custom-text-field"
-  />
-</Grid>
 
-        {/* Model */}
-        <Grid item xs={4}>
-  <TextField
-    size="small"
-    label="Model"
-    name="model"
-    value={formData.pumpInquiries[0]?.model || ''}
-    onChange={handleChange('pumpInquiries', 0)}
-    fullWidth
-    variant="outlined"
-    className="custom-text-field"
-  />
-</Grid>
-        {/* Pump MOC */}
+//       {/*////////////////// 2nd form staring here   ///////  */}
+
+//       <h3 style={{ padding: '10px 0' }}>Pump Data :-</h3>
+//       <Grid container spacing={2}>
+//         {/* Make */}
+
+//        {/* Pump Make */}
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     label="Make"
+//     name="make"
+//     value={item?.make || ''}
+//     onChange={handleChange('pumpInquiries', index)}
+//     fullWidth
+//     variant="outlined"
+//     className="custom-text-field"
+//   />
+// </Grid>
+
+//         {/* Model */}
+//         <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     label="Model"
+//     name="model"
+//     value={item?.model || ''}
+//     onChange={handleChange('pumpInquiries', index)}
+//     fullWidth
+//     variant="outlined"
+//     className="custom-text-field"
+//   />
+// </Grid>
+//         {/* Pump MOC */}
  
 
-        {/* Impeller/Casing MOC */}
-        {/* Impeller/Casing MOC */}
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    label="Impeller/Casing MOC"
-    name="impellerCasingMOC"
-    value={formData.pumpInquiries[0]?.impellerCasingMOC || ''}
-    onChange={handleChange("pumpInquiries", 0)}
-    fullWidth
-    variant="outlined"
-    className="custom-text-field"
-  />
-</Grid>
+//         {/* Impeller/Casing MOC */}
+//         {/* Impeller/Casing MOC */}
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     label="Impeller/Casing MOC"
+//     name="impellerCasingMOC"
+//     value={item?.impellerCasingMOC || ''}
+//     onChange={handleChange("pumpInquiries", index)}
+//     fullWidth
+//     variant="outlined"
+//     className="custom-text-field"
+//   />
+// </Grid>
 
-{/* Shaft MOC */}
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    label="Shaft MOC"
-    name="shaftMOC"
-    value={formData.pumpInquiries[0]?.shaftMOC || ''}
-    onChange={handleChange("pumpInquiries", 0)}
-    fullWidth
-    variant="outlined"
-    className="custom-text-field"
-  />
-</Grid>
+// {/* Shaft MOC */}
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     label="Shaft MOC"
+//     name="shaftMOC"
+//     value={item?.shaftMOC || ''}
+//     onChange={handleChange("pumpInquiries", index)}
+//     fullWidth
+//     variant="outlined"
+//     className="custom-text-field"
+//   />
+// </Grid>
 
-{/* Bearing BKT */}
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    label="Bearing BKT"
-    name="bearingBKT"
-    value={formData.pumpInquiries[0]?.bearingBKT || ''}
-    onChange={handleChange("pumpInquiries", 0)}
-    fullWidth
-    variant="outlined"
-    className="custom-text-field"
-  />
-</Grid>
+// {/* Bearing BKT */}
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     label="Bearing BKT"
+//     name="bearingBKT"
+//     value={item?.bearingBKT || ''}
+//     onChange={handleChange("pumpInquiries", index)}
+//     fullWidth
+//     variant="outlined"
+//     className="custom-text-field"
+//   />
+// </Grid>
 
-{/* Tag Number */}
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    label="Tag Number"
-    name="tagNumber"
-    value={formData.pumpInquiries[0]?.tagNumber || ''}
-    onChange={handleChange("pumpInquiries", 0)}
-    fullWidth
-    variant="outlined"
-    className="custom-text-field"
-  />
-</Grid>
-
-
-        {/* Arrangement (Autocomplete Dropdown) */}
-        <Grid item xs={4}>
-  <Autocomplete
-    size="small"
-    options={['Horizontal', 'Vertical']}
-    value={formData.pumpInquiries?.[0]?.arrangement || null} 
-    onChange={(event, newValue) => {
-      setFormData((prev) => {
-        const updatedPumpInquiry = [...prev.pumpInquiries];
-        updatedPumpInquiry[0] = {
-          ...updatedPumpInquiry[0],
-          arrangement: newValue, // Correctly update state
-        };
-        return { ...prev, pumpInquiries: updatedPumpInquiry };
-      });
-    }}
-    renderInput={(params) => (
-      <TextField
-        {...params}
-        size="small"
-        label="Arrangement"
-        variant="outlined"
-        fullWidth
-        className="custom-text-field"
-      />
-    )}
-  />
-</Grid>
+// {/* Tag Number */}
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     label="Tag Number"
+//     name="tagNumber"
+//     value={item?.tagNumber || ''}
+//     onChange={handleChange("pumpInquiries", index)}
+//     fullWidth
+//     variant="outlined"
+//     className="custom-text-field"
+//   />
+// </Grid>
 
 
-        {/* Pump Type (Autocomplete Dropdown) */}
-       {/* Pump Type */}
-<Grid item xs={4}>
-  <Autocomplete
-    value={formData.pumpInquiries[0]?.pumpType || ''}
-    onChange={(event, newValue) => {
-      setFormData((prev) => {
-        const updatedPumpInquiries = [...prev.pumpInquiries];
-        updatedPumpInquiries[0] = {
-          ...updatedPumpInquiries[0],
-          pumpType: newValue || "",
-        };
-        return { ...prev, pumpInquiries: updatedPumpInquiries };
-      });
-    }}
-    options={['Centrifugal', 'Positive Displacement']}
-    renderInput={(params) => (
-      <TextField
-        {...params}
-        size="small"
-        label="Pump Type"
-        variant="outlined"
-        fullWidth
-        className="custom-text-field"
-      />
-    )}
-  />
-</Grid>
+//         {/* Arrangement (Autocomplete Dropdown) */}
+//         <Grid item xs={4}>
+//   <Autocomplete
+//     size="small"
+//     options={['Horizontal', 'Vertical']}
+//     value={item?.arrangement || null} 
+//     onChange={(event, newValue) => {
+//       setFormData((prev) => {
+//         const updatedPumpInquiry = [...prev.pumpInquiries];
+//         updatedPumpInquiry[index] = {
+//           ...updatedPumpInquiry[index],
+//           arrangement: newValue, // Correctly update state
+//         };
+//         return { ...prev, pumpInquiries: updatedPumpInquiry };
+//       });
+//     }}
+//     renderInput={(params) => (
+//       <TextField
+//         {...params}
+//         size="small"
+//         label="Arrangement"
+//         variant="outlined"
+//         fullWidth
+//         className="custom-text-field"
+//       />
+//     )}
+//   />
+// </Grid>
 
-{/* Stage */}
-<Grid item xs={4}>
-  <Autocomplete
-    value={formData.pumpInquiries[0]?.stage || ''}
-    onChange={(event, newValue) => {
-      setFormData((prev) => {
-        const updatedPumpInquiries = [...prev.pumpInquiries];
-        updatedPumpInquiries[0] = {
-          ...updatedPumpInquiries[0],
-          stage: newValue || "",
-        };
-        return { ...prev, pumpInquiries: updatedPumpInquiries };
-      });
-    }}
-    options={['Single', 'Multiple']}
-    renderInput={(params) => (
-      <TextField
-        {...params}
-        size="small"
-        label="Stage"
-        variant="outlined"
-        fullWidth
-        className="custom-text-field"
-      />
-    )}
-  />
-</Grid>
 
-{/* Casing Type */}
-<Grid item xs={4}>
-  <Autocomplete
-    value={formData.pumpInquiries[0]?.casingType || ''}
-    onChange={(event, newValue) => {
-      setFormData((prev) => {
-        const updatedPumpInquiries = [...prev.pumpInquiries];
-        updatedPumpInquiries[0] = {
-          ...updatedPumpInquiries[0],
-          casingType: newValue || "",
-        };
-        return { ...prev, pumpInquiries: updatedPumpInquiries };
-      });
-    }}
-    options={['Split', 'Unsplitted']}
-    renderInput={(params) => (
-      <TextField
-        {...params}
-        size="small"
-        label="Casing Type"
-        variant="outlined"
-        fullWidth
-        className="custom-text-field"
-      />
-    )}
-  />
-</Grid>
+//         {/* Pump Type (Autocomplete Dropdown) */}
+//        {/* Pump Type */}
+// <Grid item xs={4}>
+//   <Autocomplete
+//     value={item?.pumpType || ''}
+//     onChange={(event, newValue) => {
+//       setFormData((prev) => {
+//         const updatedPumpInquiries = [...prev.pumpInquiries];
+//         updatedPumpInquiries[index] = {
+//           ...updatedPumpInquiries[index],
+//           pumpType: newValue || "",
+//         };
+//         return { ...prev, pumpInquiries: updatedPumpInquiries };
+//       });
+//     }}
+//     options={['Centrifugal', 'Positive Displacement']}
+//     renderInput={(params) => (
+//       <TextField
+//         {...params}
+//         size="small"
+//         label="Pump Type"
+//         variant="outlined"
+//         fullWidth
+//         className="custom-text-field"
+//       />
+//     )}
+//   />
+// </Grid>
 
-      </Grid>
+// {/* Stage */}
+// <Grid item xs={4}>
+//   <Autocomplete
+//     value={item?.stage || ''}
+//     onChange={(event, newValue) => {
+//       setFormData((prev) => {
+//         const updatedPumpInquiries = [...prev.pumpInquiries];
+//         updatedPumpInquiries[index] = {
+//           ...updatedPumpInquiries[index],
+//           stage: newValue || "",
+//         };
+//         return { ...prev, pumpInquiries: updatedPumpInquiries };
+//       });
+//     }}
+//     options={['Single', 'Multiple']}
+//     renderInput={(params) => (
+//       <TextField
+//         {...params}
+//         size="small"
+//         label="Stage"
+//         variant="outlined"
+//         fullWidth
+//         className="custom-text-field"
+//       />
+//     )}
+//   />
+// </Grid>
 
-      {/* //////////////////////////////////3rd form ////////////////////// */}
+// {/* Casing Type */}
+// <Grid item xs={4}>
+//   <Autocomplete
+//     value={item?.casingType || ''}
+//     onChange={(event, newValue) => {
+//       setFormData((prev) => {
+//         const updatedPumpInquiries = [...prev.pumpInquiries];
+//         updatedPumpInquiries[index] = {
+//           ...updatedPumpInquiries[index],
+//           casingType: newValue || "",
+//         };
+//         return { ...prev, pumpInquiries: updatedPumpInquiries };
+//       });
+//     }}
+//     options={['Split', 'Unsplitted']}
+//     renderInput={(params) => (
+//       <TextField
+//         {...params}
+//         size="small"
+//         label="Casing Type"
+//         variant="outlined"
+//         fullWidth
+//         className="custom-text-field"
+//       />
+//     )}
+//   />
+// </Grid>
 
-      <h3 style={{ padding: '10px 0' }}>Existing Seal :-</h3>
-      <Grid container spacing={2}>
-        {/* Series */}
-        <Grid item xs={4}>
-        <TextField
-    size="small"
-    label="Series"
-    name="series"
-    value={formData.pumpInquiries[0]?.series || ''}
-    onChange={handleChange("pumpInquiries", 0)}
-    fullWidth
-    variant="outlined"
-    className="custom-text-field"
-  />
+//       </Grid>
+
+//       {/* //////////////////////////////////3rd form ////////////////////// */}
+
+//       <h3 style={{ padding: '10px 0' }}>Existing Seal :-</h3>
+//       <Grid container spacing={2}>
+//         {/* Series */}
+//         <Grid item xs={4}>
+//         <TextField
+//     size="small"
+//     label="Series"
+//     name="series"
+//     value={item?.series || ''}
+//     onChange={handleChange("pumpInquiries", index)}
+//     fullWidth
+//     variant="outlined"
+//     className="custom-text-field"
+//   />
    
-  </Grid>
+//   </Grid>
 
-        {/* Performance (Dropdown) */}
-        <Grid item xs={4}>
-    <Autocomplete
-      size="small"
-      options={['Satisfactory', 'Unsatisfactory']}
-      value={formData?.pumpInquiries[0]?.performance || ''}
-      onChange={(event, newValue) => {
-        setFormData((prev) => {
-          const updatedPumpInquiry = [...prev.pumpInquiries];
-          updatedPumpInquiry[0] = {
-            ...updatedPumpInquiry[0],
-             performance: newValue ,
-          };
-          return { ...prev, pumpInquiries: updatedPumpInquiry };
-        });
-      }}
-      renderInput={(params) => <TextField {...params} label="Performance" variant="outlined" fullWidth className="custom-text-field" />}
-    />
-  </Grid>
+//         {/* Performance (Dropdown) */}
+//         <Grid item xs={4}>
+//     <Autocomplete
+//       size="small"
+//       options={['Satisfactory', 'Unsatisfactory']}
+//       value={item?.performance || ''}
+//       onChange={(event, newValue) => {
+//         setFormData((prev) => {
+//           const updatedPumpInquiry = [...prev.pumpInquiries];
+//           updatedPumpInquiry[index] = {
+//             ...updatedPumpInquiry[index],
+//              performance: newValue ,
+//           };
+//           return { ...prev, pumpInquiries: updatedPumpInquiry };
+//         });
+//       }}
+//       renderInput={(params) => <TextField {...params} label="Performance" variant="outlined" fullWidth className="custom-text-field" />}
+//     />
+//   </Grid>
 
 
-        {/* Seal Arrangement (Dropdown) */}
-        <Grid item xs={4}>
-    <Autocomplete
-      size="small"
-      options={['Single', 'Double']}
-      value={formData.pumpInquiries[0]?.sealArrangement || ''}
-      onChange={(event, newValue) => {
-        setFormData((prev) => {
-          const updatedPumpInquiry = [...prev.pumpInquiries];
-          updatedPumpInquiry[0] = {
-            ...updatedPumpInquiry[0],
-            sealArrangement: newValue || "" ,
-          };
-          return { ...prev, pumpInquiries: updatedPumpInquiry };
-        });
-      }}
-      renderInput={(params) => <TextField {...params} label="Seal Arrangement" variant="outlined" fullWidth className="custom-text-field" />}
-    />
-  </Grid>
+//         {/* Seal Arrangement (Dropdown) */}
+//         <Grid item xs={4}>
+//     <Autocomplete
+//       size="small"
+//       options={['Single', 'Double']}
+//       value={item?.sealArrangement || ''}
+//       onChange={(event, newValue) => {
+//         setFormData((prev) => {
+//           const updatedPumpInquiry = [...prev.pumpInquiries];
+//           updatedPumpInquiry[index] = {
+//             ...updatedPumpInquiry[index],
+//             sealArrangement: newValue || "" ,
+//           };
+//           return { ...prev, pumpInquiries: updatedPumpInquiry };
+//         });
+//       }}
+//       renderInput={(params) => <TextField {...params} label="Seal Arrangement" variant="outlined" fullWidth className="custom-text-field" />}
+//     />
+//   </Grid>
 
-        {/* Make */}
-  {/* Make */}
-  <Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    label="Make"
-    name="existingSealMake"
-    value={formData.pumpInquiries[0].existingSealMake || ""}
-    onChange={handleChange("pumpInquiries", 0)}
-    fullWidth
-  />
-</Grid>
+//         {/* Make */}
+//   {/* Make */}
+//   <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     label="Make"
+//     name="existingSealMake"
+//     value={item?.existingSealMake || ""}
+//     onChange={handleChange("pumpInquiries", index)}
+//     fullWidth
+//   />
+// </Grid>
 
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    label="Size"
-    name="existingSealSize"
-    value={formData.pumpInquiries[0]?.existingSealSize || ""}
-    onChange={handleChange("pumpInquiries", 0)}
-    fullWidth
-  />
-</Grid>
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     label="Size"
+//     name="existingSealSize"
+//     value={item?.existingSealSize || ""}
+//     onChange={handleChange("pumpInquiries", index)}
+//     fullWidth
+//   />
+// </Grid>
 
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    label="MOC"
-    name="existingSealMOC"
-    value={formData.pumpInquiries[0]?.existingSealMOC || ""}
-    onChange={handleChange("pumpInquiries", 0)}
-    fullWidth
-  />
-</Grid>
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     label="MOC"
+//     name="existingSealMOC"
+//     value={item?.existingSealMOC || ""}
+//     onChange={handleChange("pumpInquiries", index)}
+//     fullWidth
+//   />
+// </Grid>
 
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    label="API Plan"
-    name="existingSealApiPlan"
-    value={formData.pumpInquiries[0]?.existingSealApiPlan || ""}
-    onChange={handleChange("pumpInquiries", 0)}
-    fullWidth
-  />
-</Grid>
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     label="API Plan"
+//     name="existingSealApiPlan"
+//     value={item?.existingSealApiPlan || ""}
+//     onChange={handleChange("pumpInquiries", index)}
+//     fullWidth
+//   />
+// </Grid>
 
- </Grid>
+//  </Grid>
 
- <h3 style={{ padding: '10px 0' }}>Parameters :-</h3>
+//  <h3 style={{ padding: '10px 0' }}>Parameters :-</h3>
 
-      <Grid container spacing={2}>
+//       <Grid container spacing={2}>
    
-      <Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="suctionPressure"
-    value={formData.pumpInquiries[0].suctionPressure?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        pumpInquiries: [
-          {
-            ...prev.pumpInquiries[0],
-            suctionPressure: {
-              ...prev.pumpInquiries[0].suctionPressure,
-              value
-            }
-          }
-        ]
-      }));
-    }}
-    label="Suction Pressure"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.pumpInquiries[0].suctionPressure?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [
-                    {
-                      ...prev.pumpInquiries[0],
-                      suctionPressure: {
-                        ...prev.pumpInquiries[0].suctionPressure,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.pumpInquiries[0].suctionPressure?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              {!formData.pumpInquiries[0].suctionPressure?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
-                <MenuItem key={unit} value={unit}>
-                  {unit}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
+//       <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="suctionPressure"
+//     value={item?.suctionPressure?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         pumpInquiries: [
+//           {
+//             ...prev.pumpInquiries[index],
+//             suctionPressure: {
+//               ...prev.pumpInquiries[index].suctionPressure,
+//               value
+//             }
+//           }
+//         ]
+//       }));
+//     }}
+//     label="Suction Pressure"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={item?.suctionPressure?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   pumpInquiries: [
+//                     {
+//                       ...prev.pumpInquiries[index],
+//                       suctionPressure: {
+//                         ...prev.pumpInquiries[index].suctionPressure,
+//                         unit: selectedUnit
+//                       }
+//                     }
+//                   ]
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!item?.suctionPressure?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               {!item?.suctionPressure?.value && <MenuItem>Unit</MenuItem>}
+//               {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+//                 <MenuItem key={unit} value={unit}>
+//                   {unit}
+//                 </MenuItem>
+//               ))}
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
 
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="boxPressure"
-    value={formData.pumpInquiries[0].boxPressure?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        pumpInquiries: [
-          {
-            ...prev.pumpInquiries[0],
-            boxPressure: {
-              ...prev.pumpInquiries[0].boxPressure,
-              value
-            }
-          }
-        ]
-      }));
-    }}
-    label="Box Pressure"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.pumpInquiries[0].boxPressure?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [
-                    {
-                      ...prev.pumpInquiries[0],
-                      boxPressure: {
-                        ...prev.pumpInquiries[0].boxPressure,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.pumpInquiries[0].boxPressure?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              {!formData.pumpInquiries[0].dischargePressure?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
-                <MenuItem key={unit} value={unit}>
-                  {unit}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="boxPressure"
+//     value={item?.boxPressure?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         pumpInquiries: [
+//           {
+//             ...prev.pumpInquiries[index],
+//             boxPressure: {
+//               ...prev.pumpInquiries[index].boxPressure,
+//               value
+//             }
+//           }
+//         ]
+//       }));
+//     }}
+//     label="Box Pressure"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={item?.boxPressure?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   pumpInquiries: [
+//                     {
+//                       ...prev.pumpInquiries[index],
+//                       boxPressure: {
+//                         ...prev.pumpInquiries[index].boxPressure,
+//                         unit: selectedUnit
+//                       }
+//                     }
+//                   ]
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!item?.boxPressure?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               {!item?.dischargePressure?.value && <MenuItem>Unit</MenuItem>}
+//               {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+//                 <MenuItem key={unit} value={unit}>
+//                   {unit}
+//                 </MenuItem>
+//               ))}
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
 
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="dischargePressure"
-    value={formData.pumpInquiries[0].dischargePressure?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        pumpInquiries: [
-          {
-            ...prev.pumpInquiries[0],
-            dischargePressure: {
-              ...prev.pumpInquiries[0].dischargePressure,
-              value
-            }
-          }
-        ]
-      }));
-    }}
-    label="Discharge Pressure"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.pumpInquiries[0].dischargePressure?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [
-                    {
-                      ...prev.pumpInquiries[0],
-                      dischargePressure: {
-                        ...prev.pumpInquiries[0].dischargePressure,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.pumpInquiries[0].dischargePressure?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              {!formData.pumpInquiries[0].dischargePressure?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
-                <MenuItem key={unit} value={unit}>
-                  {unit}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
-
-
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="totalHead"
-    value={formData.pumpInquiries[0].totalHead?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        pumpInquiries: [
-          {
-            ...prev.pumpInquiries[0],
-            totalHead: {
-              ...prev.pumpInquiries[0].totalHead,
-              value
-            }
-          }
-        ]
-      }));
-    }}
-    label="Total Head"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.pumpInquiries[0].totalHead?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [
-                    {
-                      ...prev.pumpInquiries[0],
-                      totalHead: {
-                        ...prev.pumpInquiries[0].totalHead,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.pumpInquiries[0].totalHead?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              {!formData.pumpInquiries[0].totalHead?.value && <MenuItem>Unit</MenuItem>}
-              {["Meter", "MWC", "MLC", "kg/cm2"].map((unit) => (
-                <MenuItem key={unit} value={unit}>
-                  {unit}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="dischargePressure"
+//     value={item?.dischargePressure?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         pumpInquiries: [
+//           {
+//             ...prev.pumpInquiries[index],
+//             dischargePressure: {
+//               ...prev.pumpInquiries[index].dischargePressure,
+//               value
+//             }
+//           }
+//         ]
+//       }));
+//     }}
+//     label="Discharge Pressure"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={item?.dischargePressure?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   pumpInquiries: [
+//                     {
+//                       ...prev.pumpInquiries[index],
+//                       dischargePressure: {
+//                         ...prev.pumpInquiries[index].dischargePressure,
+//                         unit: selectedUnit
+//                       }
+//                     }
+//                   ]
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!item?.dischargePressure?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               {!item?.dischargePressure?.value && <MenuItem>Unit</MenuItem>}
+//               {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+//                 <MenuItem key={unit} value={unit}>
+//                   {unit}
+//                 </MenuItem>
+//               ))}
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
 
 
-
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="directionOfRotation"
-    value={formData.pumpInquiries[0].directionOfRotation || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        pumpInquiries: [
-          {
-            ...prev.pumpInquiries[0],
-            directionOfRotation: value
-          }
-        ]
-      }));
-    }}
-    label="Direction of Rotation"
-    fullWidth
-    select
-  >
-    <MenuItem value="CW">CW</MenuItem>
-    <MenuItem value="CCW">CCW</MenuItem>
-  </TextField>
-</Grid>
-
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="speed"
-    value={formData.pumpInquiries[0].speed || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        pumpInquiries: [
-          {
-            ...prev.pumpInquiries[0],
-            speed: value
-          }
-        ]
-      }));
-    }}
-    label="Speed"
-    fullWidth
-  />
-</Grid>
-
-      </Grid>
-
-
-      {/* //////////// 5th section start ///////// */}
-
-      <h3 style={{ padding: '10px 0' }}>Fluid :-</h3>
-      <Grid container spacing={2}>
-  <Grid item xs={4}>
-    <TextField
-      size="small"
-      label="Fluid"
-      name="fluid"
-      value={formData.pumpInquiries[0].fluid || ""}
-      onChange={(e) => {
-        const value = e.target.value;
-        setFormData((prev) => ({
-          ...prev,
-          pumpInquiries: [
-            {
-              ...prev.pumpInquiries[0],
-              fluid: value,
-            },
-          ],
-        }));
-      }}
-      fullWidth
-      className="custom-text-field"
-    />
-  </Grid>
-
-  {/* Nature */}
-  <Grid item xs={4}>
-    <Autocomplete
-      options={["Option 1", "Option 2", "Option 3"]} // Replace with actual options
-      renderInput={(params) => (
-        <TextField {...params} label="Nature" size="small" fullWidth className="custom-text-field" />
-      )}
-      onChange={(event, value) =>
-        setFormData((prev) => ({
-          ...prev,
-          pumpInquiries: [{ ...prev.pumpInquiries[0], nature: value }],
-        }))
-      }
-    />
-  </Grid>
-
-  {/* Pumping Temperature */}
-{/* Pumping Temperature */}
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="pumpingTemperature"
-    value={formData.pumpInquiries[0].pumpingTemperature?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        pumpInquiries: [
-          {
-            ...prev.pumpInquiries[0],
-            pumpingTemperature: {
-              ...prev.pumpInquiries[0].pumpingTemperature,
-              value,
-            },
-          },
-        ],
-      }));
-    }}
-    label="Pumping Temperature"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.pumpInquiries[0].pumpingTemperature?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [
-                    {
-                      ...prev.pumpInquiries[0],
-                      pumpingTemperature: {
-                        ...prev.pumpInquiries[0].pumpingTemperature,
-                        unit: selectedUnit,
-                      },
-                    },
-                  ],
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.pumpInquiries[0].pumpingTemperature?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                },
-                minWidth: 60,
-              }}
-            >
-              {!formData.pumpInquiries[0].pumpingTemperature?.value && <MenuItem>Unit</MenuItem>}
-              <MenuItem value="℃">℃</MenuItem>
-              <MenuItem value="℉">℉</MenuItem>
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
-
-{/* Maximum Temperature */}
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="maximumTemperature"
-    value={formData.pumpInquiries[0].maximumTemperature?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        pumpInquiries: [
-          {
-            ...prev.pumpInquiries[0],
-            maximumTemperature: {
-              ...prev.pumpInquiries[0].maximumTemperature,
-              value,
-            },
-          },
-        ],
-      }));
-    }}
-    label="Maximum Temperature"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.pumpInquiries[0].maximumTemperature?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [
-                    {
-                      ...prev.pumpInquiries[0],
-                      maximumTemperature: {
-                        ...prev.pumpInquiries[0].maximumTemperature,
-                        unit: selectedUnit,
-                      },
-                    },
-                  ],
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.pumpInquiries[0].maximumTemperature?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                },
-                minWidth: 60,
-              }}
-            >
-              {!formData.pumpInquiries[0].maximumTemperature?.value && <MenuItem>Unit</MenuItem>}
-              <MenuItem value="℃">℃</MenuItem>
-              <MenuItem value="℉">℉</MenuItem>
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="totalHead"
+//     value={item?.totalHead?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         pumpInquiries: [
+//           {
+//             ...prev.pumpInquiries[index],
+//             totalHead: {
+//               ...prev.pumpInquiries[index].totalHead,
+//               value
+//             }
+//           }
+//         ]
+//       }));
+//     }}
+//     label="Total Head"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={item?.totalHead?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   pumpInquiries: [
+//                     {
+//                       ...prev.pumpInquiries[index],
+//                       totalHead: {
+//                         ...prev.pumpInquiries[index].totalHead,
+//                         unit: selectedUnit
+//                       }
+//                     }
+//                   ]
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!item?.totalHead?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               {!item?.totalHead?.value && <MenuItem>Unit</MenuItem>}
+//               {["Meter", "MWC", "MLC", "kg/cm2"].map((unit) => (
+//                 <MenuItem key={unit} value={unit}>
+//                   {unit}
+//                 </MenuItem>
+//               ))}
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
 
 
-  {/* SP Gravity */}
-  <Grid item xs={4}>
-    <TextField
-      size="small"
-      label="SP Gravity"
-      name="spGravity"
-      value={formData.pumpInquiries[0].spGravity || ""}
-      onChange={(e) => {
-        const value = e.target.value;
-        setFormData((prev) => ({
-          ...prev,
-          pumpInquiries: [{ ...prev.pumpInquiries[0], spGravity: value }],
-        }));
-      }}
-      fullWidth
-      className="custom-text-field"
-    />
-  </Grid>
 
-  {/* Freezing Point */}
-  <Grid item xs={4}>
-    <TextField
-      size="small"
-      label="Freezing Point"
-      name="freezingPoint"
-      value={formData.pumpInquiries[0].freezingPoint || ""}
-      onChange={(e) => {
-        const value = e.target.value;
-        setFormData((prev) => ({
-          ...prev,
-          pumpInquiries: [{ ...prev.pumpInquiries[0], freezingPoint: value }],
-        }));
-      }}
-      fullWidth
-      className="custom-text-field"
-    />
-  </Grid>
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="directionOfRotation"
+//     value={item?.directionOfRotation || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         pumpInquiries: [
+//           {
+//             ...prev.pumpInquiries[index],
+//             directionOfRotation: value
+//           }
+//         ]
+//       }));
+//     }}
+//     label="Direction of Rotation"
+//     fullWidth
+//     select
+//   >
+//     <MenuItem value="CW">CW</MenuItem>
+//     <MenuItem value="CCW">CCW</MenuItem>
+//   </TextField>
+// </Grid>
 
-  {/* Boiling Point */}
-  <Grid item xs={4}>
-    <TextField
-      size="small"
-      label="Boiling Point"
-      name="boilingPoint"
-      value={formData.pumpInquiries[0].boilingPoint || ""}
-      onChange={(e) => {
-        const value = e.target.value;
-        setFormData((prev) => ({
-          ...prev,
-          pumpInquiries: [{ ...prev.pumpInquiries[0], boilingPoint: value }],
-        }));
-      }}
-      fullWidth
-      className="custom-text-field"
-    />
-  </Grid>
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="speed"
+//     value={item?.speed || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         pumpInquiries: [
+//           {
+//             ...prev.pumpInquiries[index],
+//             speed: value
+//           }
+//         ]
+//       }));
+//     }}
+//     label="Speed"
+//     fullWidth
+//   />
+// </Grid>
 
-  {/* Viscosity */}
-  <Grid item xs={4}>
-    <TextField
-      size="small"
-      label="Viscosity"
-      name="viscosity"
-      value={formData.pumpInquiries[0].viscosity || ""}
-      onChange={(e) => {
-        const value = e.target.value;
-        setFormData((prev) => ({
-          ...prev,
-          pumpInquiries: [{ ...prev.pumpInquiries[0], viscosity: value }],
-        }));
-      }}
-      fullWidth
-      className="custom-text-field"
-    />
-  </Grid>
+//       </Grid>
 
-  {/* Percentage of Solid */}
-  <Grid item xs={4}>
-    <TextField
-      size="small"
-      label="Percentage of Solid"
-      name="percentageOfSolid"
-      value={formData.pumpInquiries[0].percentageOfSolid || ""}
-      onChange={(e) => {
-        const value = e.target.value;
-        setFormData((prev) => ({
-          ...prev,
-          pumpInquiries: [{ ...prev.pumpInquiries[0], percentageOfSolid: value }],
-        }));
-      }}
-      fullWidth
-      className="custom-text-field"
-    />
-  </Grid>
 
-  {/* Solid Size */}
-  <Grid item xs={4}>
-    <TextField
-      size="small"
-      label="Solid Size"
-      name="solidSize"
-      value={formData.pumpInquiries[0].solidSize || ""}
-      onChange={(e) => {
-        const value = e.target.value;
-        setFormData((prev) => ({
-          ...prev,
-          pumpInquiries: [{ ...prev.pumpInquiries[0], solidSize: value }],
-        }));
-      }}
-      fullWidth
-      className="custom-text-field"
-    />
-  </Grid>
+//       {/* //////////// 5th section start ///////// */}
 
-  {/* Special Note */}
-  <Grid item xs={4}>
-    <TextField
-      size="small"
-      label="Special Note"
-      name="specialNote"
-      value={formData.pumpInquiries[0].specialNote || ""}
-      onChange={(e) => {
-        const value = e.target.value;
-        setFormData((prev) => ({
-          ...prev,
-          pumpInquiries: [{ ...prev.pumpInquiries[0], specialNote: value }],
-        }));
-      }}
-      fullWidth
-      className="custom-text-field"
-      inputProps={{ maxLength: 150 }}
-    />
-  </Grid>
-</Grid>
+//       <h3 style={{ padding: '10px 0' }}>Fluid :-</h3>
+//       <Grid container spacing={2}>
+//   <Grid item xs={4}>
+//     <TextField
+//       size="small"
+//       label="Fluid"
+//       name="fluid"
+//       value={item?.fluid || ""}
+//       onChange={(e) => {
+//         const value = e.target.value;
+//         setFormData((prev) => ({
+//           ...prev,
+//           pumpInquiries: [
+//             {
+//               ...prev.pumpInquiries[index],
+//               fluid: value,
+//             },
+//           ],
+//         }));
+//       }}
+//       fullWidth
+//       className="custom-text-field"
+//     />
+//   </Grid>
 
-    </form>
-  );
+//   {/* Nature */}
+//   <Grid item xs={4}>
+//     <Autocomplete
+//       options={["Option 1", "Option 2", "Option 3"]} // Replace with actual options
+//       renderInput={(params) => (
+//         <TextField {...params} label="Nature" size="small" fullWidth className="custom-text-field" />
+//       )}
+//       onChange={(event, value) =>
+//         setFormData((prev) => ({
+//           ...prev,
+//           pumpInquiries: [{ ...prev.pumpInquiries[index], nature: value }],
+//         }))
+//       }
+//     />
+//   </Grid>
+
+//   {/* Pumping Temperature */}
+// {/* Pumping Temperature */}
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="pumpingTemperature"
+//     value={item?.pumpingTemperature?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         pumpInquiries: [
+//           {
+//             ...prev.pumpInquiries[index],
+//             pumpingTemperature: {
+//               ...prev.pumpInquiries[index].pumpingTemperature,
+//               value,
+//             },
+//           },
+//         ],
+//       }));
+//     }}
+//     label="Pumping Temperature"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={item?.pumpingTemperature?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   pumpInquiries: [
+//                     {
+//                       ...prev.pumpInquiries[index],
+//                       pumpingTemperature: {
+//                         ...prev.pumpInquiries[index].pumpingTemperature,
+//                         unit: selectedUnit,
+//                       },
+//                     },
+//                   ],
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!item?.pumpingTemperature?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center",
+//                 },
+//                 minWidth: 60,
+//               }}
+//             >
+//               {!item?.pumpingTemperature?.value && <MenuItem>Unit</MenuItem>}
+//               <MenuItem value="℃">℃</MenuItem>
+//               <MenuItem value="℉">℉</MenuItem>
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
+
+// {/* Maximum Temperature */}
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="maximumTemperature"
+//     value={item?.maximumTemperature?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         pumpInquiries: [
+//           {
+//             ...prev.pumpInquiries[index],
+//             maximumTemperature: {
+//               ...prev.pumpInquiries[index].maximumTemperature,
+//               value,
+//             },
+//           },
+//         ],
+//       }));
+//     }}
+//     label="Maximum Temperature"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={item?.maximumTemperature?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   pumpInquiries: [
+//                     {
+//                       ...prev.pumpInquiries[index],
+//                       maximumTemperature: {
+//                         ...prev.pumpInquiries[index].maximumTemperature,
+//                         unit: selectedUnit,
+//                       },
+//                     },
+//                   ],
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!item?.maximumTemperature?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center",
+//                 },
+//                 minWidth: 60,
+//               }}
+//             >
+//               {!item?.maximumTemperature?.value && <MenuItem>Unit</MenuItem>}
+//               <MenuItem value="℃">℃</MenuItem>
+//               <MenuItem value="℉">℉</MenuItem>
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
+
+
+//   {/* SP Gravity */}
+//   <Grid item xs={4}>
+//     <TextField
+//       size="small"
+//       label="SP Gravity"
+//       name="spGravity"
+//       value={item?.spGravity || ""}
+//       onChange={(e) => {
+//         const value = e.target.value;
+//         setFormData((prev) => ({
+//           ...prev,
+//           pumpInquiries: [{ ...prev.pumpInquiries[index], spGravity: value }],
+//         }));
+//       }}
+//       fullWidth
+//       className="custom-text-field"
+//     />
+//   </Grid>
+
+//   {/* Freezing Point */}
+//   <Grid item xs={4}>
+//     <TextField
+//       size="small"
+//       label="Freezing Point"
+//       name="freezingPoint"
+//       value={item?.freezingPoint || ""}
+//       onChange={(e) => {
+//         const value = e.target.value;
+//         setFormData((prev) => ({
+//           ...prev,
+//           pumpInquiries: [{ ...prev.pumpInquiries[index], freezingPoint: value }],
+//         }));
+//       }}
+//       fullWidth
+//       className="custom-text-field"
+//     />
+//   </Grid>
+
+//   {/* Boiling Point */}
+//   <Grid item xs={4}>
+//     <TextField
+//       size="small"
+//       label="Boiling Point"
+//       name="boilingPoint"
+//       value={item?.boilingPoint || ""}
+//       onChange={(e) => {
+//         const value = e.target.value;
+//         setFormData((prev) => ({
+//           ...prev,
+//           pumpInquiries: [{ ...prev.pumpInquiries[index], boilingPoint: value }],
+//         }));
+//       }}
+//       fullWidth
+//       className="custom-text-field"
+//     />
+//   </Grid>
+
+//   {/* Viscosity */}
+//   <Grid item xs={4}>
+//     <TextField
+//       size="small"
+//       label="Viscosity"
+//       name="viscosity"
+//       value={item?.viscosity || ""}
+//       onChange={(e) => {
+//         const value = e.target.value;
+//         setFormData((prev) => ({
+//           ...prev,
+//           pumpInquiries: [{ ...prev.pumpInquiries[index], viscosity: value }],
+//         }));
+//       }}
+//       fullWidth
+//       className="custom-text-field"
+//     />
+//   </Grid>
+
+//   {/* Percentage of Solid */}
+//   <Grid item xs={4}>
+//     <TextField
+//       size="small"
+//       label="Percentage of Solid"
+//       name="percentageOfSolid"
+//       value={item?.percentageOfSolid || ""}
+//       onChange={(e) => {
+//         const value = e.target.value;
+//         setFormData((prev) => ({
+//           ...prev,
+//           pumpInquiries: [{ ...prev.pumpInquiries[index], percentageOfSolid: value }],
+//         }));
+//       }}
+//       fullWidth
+//       className="custom-text-field"
+//     />
+//   </Grid>
+
+//   {/* Solid Size */}
+//   <Grid item xs={4}>
+//     <TextField
+//       size="small"
+//       label="Solid Size"
+//       name="solidSize"
+//       value={item?.solidSize || ""}
+//       onChange={(e) => {
+//         const value = e.target.value;
+//         setFormData((prev) => ({
+//           ...prev,
+//           pumpInquiries: [{ ...prev.pumpInquiries[index], solidSize: value }],
+//         }));
+//       }}
+//       fullWidth
+//       className="custom-text-field"
+//     />
+//   </Grid>
+
+//   {/* Special Note */}
+//   <Grid item xs={4}>
+//     <TextField
+//       size="small"
+//       label="Special Note"
+//       name="specialNote"
+//       value={item?.specialNote || ""}
+//       onChange={(e) => {
+//         const value = e.target.value;
+//         setFormData((prev) => ({
+//           ...prev,
+//           pumpInquiries: [{ ...prev.pumpInquiries[index], specialNote: value }],
+//         }));
+//       }}
+//       fullWidth
+//       className="custom-text-field"
+//       inputProps={{ maxLength: 150 }}
+//     />
+//   </Grid>
+// </Grid>
+
+//     </form>
+//   );
 
 
 
   ///////////////// Agitor from ////////////////////
+   //pass the index as a parameter here so that it can be dynamically managed   
+//   const Agitator =React.memo (({index, item}) => (
 
-  const Agitator = (section, type) => (
 
-    <div>
-      <Grid container spacing={2} style={{ marginTop: "10px" }}>
-        {/* Sales Inquiry Item Reference No */}
-        <Grid item xs={4}>
-          <TextField
-            label="Sales Inquiry Item Reference No."
-            value={formData.agitatorInquiries[0]?.agitatorInquiryReferenceNo}
-            InputProps={{ readOnly: true }}
-            size="small"
-            fullWidth
-            id="disableItem"
-            disabled
-            className="custom-text-field"
-          />
-        </Grid>
+//     <div key={index}>
+//       <Grid container spacing={2} style={{ marginTop: "10px" }}>
+//         {/* Sales Inquiry Item Reference No */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="Sales Inquiry Item Reference No."
+//             value={item?.agitatorInquiryReferenceNo}
+//             InputProps={{ readOnly: true }}
+//             size="small"
+//             fullWidth
+//             id="disableItem"
+//             disabled
+//             className="custom-text-field"
+//           />
+//         </Grid>
 
-        <Grid item xs={12} sm={4}>
-  <Autocomplete
-    size="small"
-    value={formData.agitatorInquiries[0]?.branch || ''}
-    onChange={(event, newValue) => {
-      setFormData((prevState) => ({
-        ...prevState,
-        agitatorInquiries: [
-          {
-            ...prevState.agitatorInquiries[0], // Keep the other fields of the first object intact
-            branch: newValue || "", // Update the 'branch' property
-          },
-        ],
-      }));
-    }}
+//         <Grid item xs={12} sm={4}>
+//   <Autocomplete
+//     size="small"
+//     value={item?.branch || ''}
+//     onChange={(event, newValue) => {
+//       setFormData((prevState) => ({
+//         ...prevState,
+//         agitatorInquiries: [
+//           {
+//             ...prevState.agitatorInquiries[index], // Keep the other fields of the first object intact
+//             branch: newValue || "", // Update the 'branch' property
+//           },
+//         ],
+//       }));
+//     }}
     
-    inputValue={formData?.agitatorInquiries[0]?.branch || ''}
-    onInputChange={(event, newInputValue) => {
-      setFormData((prevState) => ({
-        ...prevState,
-        agitatorInquiries: [
-          {
-            ...prevState.agitatorInquiries[0], // Keep the other fields of the first object intact
-            branch: newInputValue || "", // Update the 'branch' property
-          },
-        ],
-      }));
-    }}
-    options={Array.isArray(authState?.branchs) ? authState.branchs.map((b) => b.branchName) : []}
-    renderInput={(params) => (
-      <TextField
-        required
-        className="custom-text-field"
-        {...params}
-        size="small"
-        label="Branch"
-        variant="outlined"
-        fullWidth
+//     inputValue={formData?.agitatorInquiries[index]?.branch || ''}
+//     onInputChange={(event, newInputValue) => {
+//       setFormData((prevState) => ({
+//         ...prevState,
+//         agitatorInquiries: [
+//           {
+//             ...prevState.agitatorInquiries[index], // Keep the other fields of the first object intact
+//             branch: newInputValue || "", // Update the 'branch' property
+//           },
+//         ],
+//       }));
+//     }}
+//     options={Array.isArray(authState?.branchs) ? authState.branchs.map((b) => b.branchName) : []}
+//     renderInput={(params) => (
+//       <TextField
+//         required
+//         className="custom-text-field"
+//         {...params}
+//         size="small"
+//         label="Branch"
+//         variant="outlined"
+//         fullWidth
 
-      />
-    )}
-  />
-</Grid>
+//       />
+//     )}
+//   />
+// </Grid>
 
-        {/* Created By User */}
-        <Grid item xs={4}>
-          <TextField
-            label="Created By User"
-            value={authState?.sub}
-            InputProps={{ readOnly: true }}
-            size="small"
-            fullWidth
-            id="disableItem"
-            disabled
-            className="custom-text-field"
-          />
-        </Grid>
-
-
-
-        {/* Created On */}
-        <Grid item xs={4}>
-          <TextField
-            label="Created On"
-            value={dateTime}
-            InputProps={{ readOnly: true }}
-            size="small"
-            id="disableItem"
-            fullWidth
-            disabled
-            className="custom-text-field"
-          />
-        </Grid>
-
-        {/* Updated By User */}
-        <Grid item xs={4}>
-          <TextField
-            label="Updated By User"
-            value={authState?.sub}
-            InputProps={{ readOnly: true }}
-            size="small"
-            fullWidth
-            id="disableItem"
-            disabled
-            className="custom-text-field"
-          />
-        </Grid>
-
-        {/* Updated On */}
-        <Grid item xs={4}>
-          <TextField
-            label="Updated On"
-            value={dateTime}
-            id="disableItem"
-            InputProps={{ readOnly: true }}
-            size="small"
-            fullWidth
-            disabled
-            className="custom-text-field"
-          />
-        </Grid>
-      </Grid>
-
-      {/* //////// 2nd form ///////////// */}
-
-      <h3 style={{ padding: '10px 0' }}>Existing Seal :-</h3>
-
-      <Grid container spacing={2}>
-        {/* Series */}
-        <Grid item xs={4}>
-                <TextField
-          label="Series"
-          name="series" // This is used to identify the property dynamically
-          value={formData.agitatorInquiries[0]?.series || ""}
-          onChange={handleChange("agitatorInquiries",0)} // Specify array name and index
-          size="small"
-          fullWidth
-          className="custom-text-field" />
-        </Grid>
+//         {/* Created By User */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="Created By User"
+//             value={authState?.sub}
+//             InputProps={{ readOnly: true }}
+//             size="small"
+//             fullWidth
+//             id="disableItem"
+//             disabled
+//             className="custom-text-field"
+//           />
+//         </Grid>
 
 
 
-<Grid item xs={4}>
-  <Autocomplete
-    style={{ width: '100%' }}
-    size="small"
-    value={formData?.agitatorInquiries[0]?.sealArrangement || ""}
-    onChange={(event, newValue) => {
-      setFormData({
-        ...formData,
-        agitatorInquiries: [
-          {
-            ...formData.agitatorInquiries[0],
-            sealArrangement: newValue || "" , // Update the sealArrangement field
-          },
-        ],
-      });
-    }}
-    options={['Single', 'Double']}
-    renderInput={(params) => (
-      <TextField
-        size="small"
-        {...params}
-        placeholder="Seal Arrangement"
-        variant="outlined"
-        className="custom-text-field"
-        fullWidth
-        label="Seal Arrangement"
-      />
-    )}
-  />
-</Grid>
+//         {/* Created On */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="Created On"
+//             value={dateTime}
+//             InputProps={{ readOnly: true }}
+//             size="small"
+//             id="disableItem"
+//             fullWidth
+//             disabled
+//             className="custom-text-field"
+//           />
+//         </Grid>
+
+//         {/* Updated By User */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="Updated By User"
+//             value={authState?.sub}
+//             InputProps={{ readOnly: true }}
+//             size="small"
+//             fullWidth
+//             id="disableItem"
+//             disabled
+//             className="custom-text-field"
+//           />
+//         </Grid>
+
+//         {/* Updated On */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="Updated On"
+//             value={dateTime}
+//             id="disableItem"
+//             InputProps={{ readOnly: true }}
+//             size="small"
+//             fullWidth
+//             disabled
+//             className="custom-text-field"
+//           />
+//         </Grid>
+//       </Grid>
+
+//       {/* //////// 2nd form ///////////// */}
+
+//       <h3 style={{ padding: '10px 0' }}>Existing Seal :-</h3>
+
+//       <Grid container spacing={2}>
+//         {/* Series */}
+//         <Grid item xs={4}>
+//        <TextField
+//           label="Series"
+//           name="series" // This is used to identify the property dynamically
+//           value={item?.series || ""}
+//           onChange={handleChange("agitatorInquiries",index)} // Specify array name and index
+//           size="small"
+//           fullWidth
+//           className="custom-text-field" />
+//         </Grid>
 
 
-        <Grid item xs={4}>
-          <Autocomplete
-            style={{ width: '100%' }}
-            size="small"
-        value={formData?.agitatorInquiries[0]?.performance || ""}
-            onChange={(event, newValue) => {
-              setFormData({
-                ...formData,
-                agitatorInquiries: [
-                  {
-                    ...formData.agitatorInquiries[0],
-                    performance: newValue || "", // Update the sealArrangement field
-                  },
-                ],
-              });
-            }}
-            options={['Satisfactory', 'Unsatisfactory']}
-            renderInput={(params) => (
-              <TextField
-                size="small"
-                {...params}
-                placeholder="Performance"
-                variant="outlined"
-                className='custom-text-field'
-                fullWidth
-                label="Performance"
-              />
-            )}
-          />
-        </Grid>
+
+// <Grid item xs={4}>
+// <Autocomplete
+//   style={{ width: "100%" }}
+//   size="small"
+//   value={formData?.agitatorInquiries[index]?.sealArrangement || ""}
+//   onChange={(event, newValue) =>
+//     handleChange("agitatorInquiries", index)({
+//       target: { name: "sealArrangement", value: newValue || "" },
+//     })
+//   }
+//   options={["Single", "Double"]}
+//   renderInput={(params) => (
+//     <TextField
+//       size="small"
+//       {...params}
+//       placeholder="Seal Arrangement"
+//       variant="outlined"
+//       className="custom-text-field"
+//       fullWidth
+//       label="Seal Arrangement"
+//     />
+//   )}
+// />
+
+// </Grid>
 
 
-        {/* Make */}
-        <Grid item xs={4}>
-          <TextField
-            label="Make"
-            name="existingSealMake"
-          value={formData?.agitatorInquiries[0]?.existingSealMake}
-            onChange={handleChange("agitatorInquiries",0)}
-            size="small"
-            fullWidth
-            className="custom-text-field"
-          />
-        </Grid>
-
-        {/* Size */}
-        <Grid item xs={4}>
-          <TextField
-            label="Size"
-            name="existingSealSize"
-            value={formData.agitatorInquiries[0]?.existingSealSize}
-            onChange={handleChange("agitatorInquiries",0)}
-            size="small"
-            fullWidth
-            className="custom-text-field"
-          />
-        </Grid>
-
-        {/* MOC */}
-        <Grid item xs={4}>
-          <TextField
-            label="MOC"
-            name="existingSealMOC"
-            value={formData.agitatorInquiries[0]?.existingSealMOC}
-            onChange={handleChange("agitatorInquiries",0)}
-            size="small"
-            fullWidth
-            className="custom-text-field"
-          />
-        </Grid>
-
-        {/* API Plan */}
-        <Grid item xs={4}>
-          <TextField
-            label="API Plan"
-            name="existingSealApiPlan"
-            value={formData.agitatorInquiries[0]?.existingSealApiPlan}
-            onChange={handleChange("agitatorInquiries",0)}
-            size="small"
-            fullWidth
-            className="custom-text-field"
-          />
-        </Grid>
-      </Grid>
-
-      {/*///////////////3rd form ////////////// */}
-
-      <h3 style={{ padding: '10px 0' }}>Operating Parameters And Fluid Detail :-</h3>
-
-      <Grid container spacing={2}>
-        {/* Vessel Pressure (Operating) */}
+//         <Grid item xs={4}>
+//           <Autocomplete
+//             style={{ width: '100%' }}
+//             size="small"
+//         value={formData?.agitatorInquiries[index]?.performance || ""}
+//             onChange={(event, newValue) => {
+//               setFormData({
+//                 ...formData,
+//                 agitatorInquiries: [
+//                   {
+//                     ...item,
+//                     performance: newValue || "", // Update the sealArrangement field
+//                   },
+//                 ],
+//               });
+//             }}
+//             options={['Satisfactory', 'Unsatisfactory']}
+//             renderInput={(params) => (
+//               <TextField
+//                 size="small"
+//                 {...params}
+//                 placeholder="Performance"
+//                 variant="outlined"
+//                 className='custom-text-field'
+//                 fullWidth
+//                 label="Performance"
+//               />
+//             )}
+//           />
+//         </Grid>
 
 
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="vesselPressureOperating"
-    value={formData.agitatorInquiries[0].vesselPressureOperating}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        agitatorInquiries: [
-          {
-            ...prev.agitatorInquiries[0],
-            vesselPressureOperating: +value
-          }
-        ]
-      }));
-    }}
-    label="Vessel Pressure (Operating)"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.agitatorInquiries[0].vesselPressureOperatingUnit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  agitatorInquiries: [
-                    {
-                      ...prev.agitatorInquiries[0],
-                      vesselPressureOperatingUnit: selectedUnit
-                    }
-                  ]
-                }));
+//         {/* Make */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="Make"
+//             name="existingSealMake"
+//           value={formData?.agitatorInquiries[index]?.existingSealMake}
+//             onChange={handleChange("agitatorInquiries",index)}
+//             size="small"
+//             fullWidth
+//             className="custom-text-field"
+//           />
+//         </Grid>
+
+//         {/* Size */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="Size"
+//             name="existingSealSize"
+//             value={item?.existingSealSize}
+//             onChange={handleChange("agitatorInquiries",index)}
+//             size="small"
+//             fullWidth
+//             className="custom-text-field"
+//           />
+//         </Grid>
+
+//         {/* MOC */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="MOC"
+//             name="existingSealMOC"
+//             value={item?.existingSealMOC}
+//             onChange={handleChange("agitatorInquiries",index)}
+//             size="small"
+//             fullWidth
+//             className="custom-text-field"
+//           />
+//         </Grid>
+
+//         {/* API Plan */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="API Plan"
+//             name="existingSealApiPlan"
+//             value={item?.existingSealApiPlan}
+//             onChange={handleChange("agitatorInquiries",index)}
+//             size="small"
+//             fullWidth
+//             className="custom-text-field"
+//           />
+//         </Grid>
+//       </Grid>
+
+//       {/*///////////////3rd form ////////////// */}
+
+//       <h3 style={{ padding: '10px 0' }}>Operating Parameters And Fluid Detail :-</h3>
+
+//       <Grid container spacing={2}>
+//         {/* Vessel Pressure (Operating) */}
+
+
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="vesselPressureOperating"
+//     value={item?.vesselPressureOperating}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         agitatorInquiries: [
+//           {
+//             ...prev.agitatorInquiries[index],
+//             vesselPressureOperating: +value
+//           }
+//         ]
+//       }));
+//     }}
+//     label="Vessel Pressure (Operating)"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={item?.vesselPressureOperatingUnit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   agitatorInquiries: [
+//                     {
+//                       ...prev.agitatorInquiries[index],
+//                       vesselPressureOperatingUnit: selectedUnit
+//                     }
+//                   ]
+//                 }));
           
                 
-              }}
-              displayEmpty
-              disabled={!formData.agitatorInquiries[0].vesselPressureOperating}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              <MenuItem value="" disabled>
-                Unit
-              </MenuItem>
-              <MenuItem value="kg/cm2">kg/cm²</MenuItem>
-              <MenuItem value="kg/cm2 a">kg/cm² (a)</MenuItem>
-              <MenuItem value="kg/cm2 g">kg/cm² (g)</MenuItem>
-              <MenuItem value="bar">bar</MenuItem>
-              <MenuItem value="bar (a)">bar (a)</MenuItem>
-              <MenuItem value="bar (g)">bar (g)</MenuItem>
-              <MenuItem value="Mpa">MPa</MenuItem>
-              <MenuItem value="Mpa (a)">MPa (a)</MenuItem>
-              <MenuItem value="Mpa (g)">MPa (g)</MenuItem>
-              <MenuItem value="Kpa">kPa</MenuItem>
-              <MenuItem value="Kpa (g)">kPa (g)</MenuItem>
-              <MenuItem value="PSI">PSI</MenuItem>
-              <MenuItem value="PSIG">PSIG</MenuItem>
-              <MenuItem value="MLC">MLC</MenuItem>
-              <MenuItem value="MWC">MWC</MenuItem>
-              <MenuItem value="Meter">Meter</MenuItem>
-              <MenuItem value="kgf/cm2">kgf/cm²</MenuItem>
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      )
-    }}
-  />
-</Grid>
+//               }}
+//               displayEmpty
+//               disabled={!item?.vesselPressureOperating}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               <MenuItem value="" disabled>
+//                 Unit
+//               </MenuItem>
+//               <MenuItem value="kg/cm2">kg/cm²</MenuItem>
+//               <MenuItem value="kg/cm2 a">kg/cm² (a)</MenuItem>
+//               <MenuItem value="kg/cm2 g">kg/cm² (g)</MenuItem>
+//               <MenuItem value="bar">bar</MenuItem>
+//               <MenuItem value="bar (a)">bar (a)</MenuItem>
+//               <MenuItem value="bar (g)">bar (g)</MenuItem>
+//               <MenuItem value="Mpa">MPa</MenuItem>
+//               <MenuItem value="Mpa (a)">MPa (a)</MenuItem>
+//               <MenuItem value="Mpa (g)">MPa (g)</MenuItem>
+//               <MenuItem value="Kpa">kPa</MenuItem>
+//               <MenuItem value="Kpa (g)">kPa (g)</MenuItem>
+//               <MenuItem value="PSI">PSI</MenuItem>
+//               <MenuItem value="PSIG">PSIG</MenuItem>
+//               <MenuItem value="MLC">MLC</MenuItem>
+//               <MenuItem value="MWC">MWC</MenuItem>
+//               <MenuItem value="Meter">Meter</MenuItem>
+//               <MenuItem value="kgf/cm2">kgf/cm²</MenuItem>
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       )
+//     }}
+//   />
+// </Grid>
 
 
 
-        <Grid item xs={4}>
-        <TextField
-    size="small"
-    type="number"
-    className="custom-text-field"
-    name="vesselPressureDesign"
-    value={formData.agitatorInquiries[0].vesselPressureDesign}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        agitatorInquiries: [
-          {
-            ...prev.agitatorInquiries[0],
-            vesselPressureDesign: +value
-          }
-        ]
-      }));
-    }}
-    label="Vessel Pressure (Design)"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.agitatorInquiries[0].vesselPressureDesignUnit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  agitatorInquiries: [
-                    {
-                      ...prev.agitatorInquiries[0],
-                      vesselPressureDesignUnit: selectedUnit
-                    }
-                  ]
-                }));
+//         <Grid item xs={4}>
+//         <TextField
+//     size="small"
+//     type="number"
+//     className="custom-text-field"
+//     name="vesselPressureDesign"
+//     value={item?.vesselPressureDesign}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         agitatorInquiries: [
+//           {
+//             ...prev.agitatorInquiries[index],
+//             vesselPressureDesign: +value
+//           }
+//         ]
+//       }));
+//     }}
+//     label="Vessel Pressure (Design)"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={item?.vesselPressureDesignUnit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   agitatorInquiries: [
+//                     {
+//                       ...prev.agitatorInquiries[index],
+//                       vesselPressureDesignUnit: selectedUnit
+//                     }
+//                   ]
+//                 }));
           
                 
-              }}
-              displayEmpty
-              disabled={!formData.agitatorInquiries[0].vesselPressureDesign}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              <MenuItem value="" disabled>
-                Unit
-              </MenuItem>
-              <MenuItem value="MLC">MLC</MenuItem>
-              <MenuItem value="MWC">MWC</MenuItem>
-              <MenuItem value="Meter">Meter</MenuItem>
-              <MenuItem value="kgf/cm2">kgf/cm2</MenuItem>
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
+//               }}
+//               displayEmpty
+//               disabled={!item?.vesselPressureDesign}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               <MenuItem value="" disabled>
+//                 Unit
+//               </MenuItem>
+//               <MenuItem value="MLC">MLC</MenuItem>
+//               <MenuItem value="MWC">MWC</MenuItem>
+//               <MenuItem value="Meter">Meter</MenuItem>
+//               <MenuItem value="kgf/cm2">kgf/cm2</MenuItem>
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
 
 
 
@@ -2142,1474 +1943,1475 @@ const [formData, setFormData] = useState({
 
 
 
-        {/* Direction of Rotation */}
-        <Grid item xs={4}>
-          <Autocomplete
-            size="small"
-            value={formData.agitatorInquiries[0]?.directionOfRotation}
-            onChange={(event, newValue) => {
-              setFormData((prevState) => ({
-                ...prevState,
-                agitatorInquiries: [
-                  {
-                    ...prevState.agitatorInquiries[0], // Keep the other fields of the first object intact
-                    directionOfRotation: newValue || "", // Update the 'branch' property
-                  },
-                ],
-              }));
-            }}
-            options={['CW', 'CCW']}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Direction of Rotation"
-                variant="outlined"
-                size="small"
-                fullWidth
-                className="custom-text-field"
-              />
-            )}
-          />
-        </Grid>
+//         {/* Direction of Rotation */}
+//         <Grid item xs={4}>
+//           <Autocomplete
+//             size="small"
+//             value={item?.directionOfRotation}
+//             onChange={(event, newValue) => {
+//               setFormData((prevState) => ({
+//                 ...prevState,
+//                 agitatorInquiries: [
+//                   {
+//                     ...prevState.agitatorInquiries[index], // Keep the other fields of the first object intact
+//                     directionOfRotation: newValue || "", // Update the 'branch' property
+//                   },
+//                 ],
+//               }));
+//             }}
+//             options={['CW', 'CCW']}
+//             renderInput={(params) => (
+//               <TextField
+//                 {...params}
+//                 label="Direction of Rotation"
+//                 variant="outlined"
+//                 size="small"
+//                 fullWidth
+//                 className="custom-text-field"
+//               />
+//             )}
+//           />
+//         </Grid>
 
-        {/* Speed */}
-        <Grid item xs={4}>
-          <TextField
-            label="Speed"
-            type="number"
-            name="speed"
-            value={formData.agitatorInquiries[0]?.speed}
-            onChange={handleChange("agitatorInquiries",0)}
-            fullWidth
-            size="small"
-            variant="outlined"
-            className="custom-text-field"
-          />
-        </Grid>
-      </Grid>
+//         {/* Speed */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="Speed"
+//             type="number"
+//             name="speed"
+//             value={item?.speed}
+//             onChange={handleChange("agitatorInquiries",index)}
+//             fullWidth
+//             size="small"
+//             variant="outlined"
+//             className="custom-text-field"
+//           />
+//         </Grid>
+//       </Grid>
 
-      {/*/////////////// 4th form /////////////// */}
-      <h3 style={{ padding: '10px 0' }}>Fluid :-</h3>
-      <Grid container spacing={2}>
-        {/* Fluid */}
-        <Grid item xs={4}>
-          <TextField
-            label="Fluid"
-            name="fluid"
-            value={formData.agitatorInquiries[0]?.fluid}
-            onChange={handleChange("agitatorInquiries",0)}
-            fullWidth
-            size="small"
-            variant="outlined"
-            className="custom-text-field"
-          />
-        </Grid>
-
-
-        {/* Nature */}
-        <Grid item xs={4}>
-          <Autocomplete
-            size="small"
-            value={formData.agitatorInquiries[0]?.nature}
-            onChange={(event, newValue) => {
-              setFormData((prevState) => ({
-                ...prevState,
-                agitatorInquiries: [
-                  {
-                    ...prevState.agitatorInquiries[0], // Keep the other fields of the first object intact
-                    nature: newValue || "", // Update the 'branch' property
-                  },
-                ],
-              }));
-            }}
-            options={['Option1', 'Option2']} // Replace with actual nature options
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Nature"
-                variant="outlined"
-                size="small"
-                fullWidth
-                className="custom-text-field"
-              />
-            )}
-          />
-        </Grid>
-
-        {/* Pumping Temperature */}
-         <Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="pumpingTemperature"
-    value={formData.agitatorInquiries[0].pumpingTemperature?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        agitatorInquiries: [
-          {
-            ...prev.agitatorInquiries[0],
-            pumpingTemperature: {
-              ...prev.agitatorInquiries[0].pumpingTemperature,
-              value
-            }
-          }
-        ]
-      }));
-    }}
-    label="Pumping Temperature"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.agitatorInquiries[0].pumpingTemperature?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  agitatorInquiries: [
-                    {
-                      ...prev.agitatorInquiries[0],
-                      pumpingTemperature: {
-                        ...prev.agitatorInquiries[0].pumpingTemperature,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.agitatorInquiries[0].pumpingTemperature?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              <MenuItem value="" disabled>
-                Unit
-              </MenuItem>
-              <MenuItem value="℃">℃ </MenuItem>
-              <MenuItem value="℉">℉</MenuItem>
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
+//       {/*/////////////// 4th form /////////////// */}
+//       <h3 style={{ padding: '10px 0' }}>Fluid :-</h3>
+//       <Grid container spacing={2}>
+//         {/* Fluid */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="Fluid"
+//             name="fluid"
+//             value={item?.fluid}
+//             onChange={handleChange("agitatorInquiries",index)}
+//             fullWidth
+//             size="small"
+//             variant="outlined"
+//             className="custom-text-field"
+//           />
+//         </Grid>
 
 
-        {/* Maximum Temperature */}
-  <Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="maximumTemperature"
-    value={formData.agitatorInquiries[0].maximumTemperature?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        agitatorInquiries: [
-          {
-            ...prev.agitatorInquiries[0],
-            maximumTemperature: {
-              ...prev.agitatorInquiries[0].maximumTemperature,
-              value
-            }
-          }
-        ]
-      }));
-    }}
-    label="Maximum Temperature"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.agitatorInquiries[0].maximumTemperature?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  agitatorInquiries: [
-                    {
-                      ...prev.agitatorInquiries[0],
-                      maximumTemperature: {
-                        ...prev.agitatorInquiries[0].maximumTemperature,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.agitatorInquiries[0].maximumTemperature?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              <MenuItem value="" disabled>
-                Unit
-              </MenuItem>
-              <MenuItem value="℃">℃ </MenuItem>
-              <MenuItem value="℉">℉</MenuItem>
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
+//         {/* Nature */}
+//         <Grid item xs={4}>
+//           <Autocomplete
+//             size="small"
+//             value={item?.nature}
+//             onChange={(event, newValue) => {
+//               setFormData((prevState) => ({
+//                 ...prevState,
+//                 agitatorInquiries: [
+//                   {
+//                     ...prevState.agitatorInquiries[index], // Keep the other fields of the first object intact
+//                     nature: newValue || "", // Update the 'branch' property
+//                   },
+//                 ],
+//               }));
+//             }}
+//             options={['Option1', 'Option2']} // Replace with actual nature options
+//             renderInput={(params) => (
+//               <TextField
+//                 {...params}
+//                 label="Nature"
+//                 variant="outlined"
+//                 size="small"
+//                 fullWidth
+//                 className="custom-text-field"
+//               />
+//             )}
+//           />
+//         </Grid>
+
+//         {/* Pumping Temperature */}
+//          <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="pumpingTemperature"
+//     value={item?.pumpingTemperature?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         agitatorInquiries: [
+//           {
+//             ...prev.agitatorInquiries[index],
+//             pumpingTemperature: {
+//               ...prev.agitatorInquiries[index]?.pumpingTemperature,
+//               value
+//             }
+//           }
+//         ]
+//       }));
+//     }}
+//     label="Pumping Temperature"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={item?.pumpingTemperature?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   agitatorInquiries: [
+//                     {
+//                       ...prev.agitatorInquiries[index],
+//                       pumpingTemperature: {
+//                         ...prev.agitatorInquiries[index]?.pumpingTemperature,
+//                         unit: selectedUnit
+//                       }
+//                     }
+//                   ]
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!item?.pumpingTemperature?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               <MenuItem value="" disabled>
+//                 Unit
+//               </MenuItem>
+//               <MenuItem value="℃">℃ </MenuItem>
+//               <MenuItem value="℉">℉</MenuItem>
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
+
+
+//         {/* Maximum Temperature */}
+//   <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="maximumTemperature"
+//     value={item?.maximumTemperature?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         agitatorInquiries: [
+//           {
+//             ...prev.agitatorInquiries[index],
+//             maximumTemperature: {
+//               ...prev.agitatorInquiries[index]?.maximumTemperature,
+//               value
+//             }
+//           }
+//         ]
+//       }));
+//     }}
+//     label="Maximum Temperature"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={item?.maximumTemperature?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   agitatorInquiries: [
+//                     {
+//                       ...prev.agitatorInquiries[index],
+//                       maximumTemperature: {
+//                         ...prev.agitatorInquiries[index]?.maximumTemperature,
+//                         unit: selectedUnit
+//                       }
+//                     }
+//                   ]
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!item?.maximumTemperature?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               <MenuItem value="" disabled>
+//                 Unit
+//               </MenuItem>
+//               <MenuItem value="℃">℃ </MenuItem>
+//               <MenuItem value="℉">℉</MenuItem>
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
 
 
 
-        {/* SP Gravity */}
-        <Grid item xs={4}>
-          <TextField
-            label="SP Gravity"
-            name="spGravity"
-            value={formData.agitatorInquiries[0]?.spGravity}
-            onChange={handleChange("agitatorInquiries",0)}
-            fullWidth
-            size="small"
-            variant="outlined"
-            className="custom-text-field"
-          />
-        </Grid>
+//         {/* SP Gravity */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="SP Gravity"
+//             name="spGravity"
+//             value={item?.spGravity}
+//             onChange={handleChange("agitatorInquiries",index)}
+//             fullWidth
+//             size="small"
+//             variant="outlined"
+//             className="custom-text-field"
+//           />
+//         </Grid>
 
-        {/* Freezing Point */}
-        <Grid item xs={4}>
-          <TextField
-            label="Freezing Point"
-            name="freezingPoint"
-            value={formData.agitatorInquiries[0]?.freezingPoint}
-            onChange={handleChange("agitatorInquiries",0)}
-            fullWidth
-            size="small"
-            variant="outlined"
-            className="custom-text-field"
-          />
-        </Grid>
+//         {/* Freezing Point */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="Freezing Point"
+//             name="freezingPoint"
+//             value={item?.freezingPoint}
+//             onChange={handleChange("agitatorInquiries",index)}
+//             fullWidth
+//             size="small"
+//             variant="outlined"
+//             className="custom-text-field"
+//           />
+//         </Grid>
 
-        {/* Boiling Point */}
-        <Grid item xs={4}>
-          <TextField
-            label="Boiling Point"
-            name="boilingPoint"
-            value={formData.agitatorInquiries[0]?.boilingPoint}
-            onChange={handleChange("agitatorInquiries",0)}
-            fullWidth
-            size="small"
-            variant="outlined"
-            className="custom-text-field"
-          />
-        </Grid>
+//         {/* Boiling Point */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="Boiling Point"
+//             name="boilingPoint"
+//             value={item?.boilingPoint}
+//             onChange={handleChange("agitatorInquiries",index)}
+//             fullWidth
+//             size="small"
+//             variant="outlined"
+//             className="custom-text-field"
+//           />
+//         </Grid>
 
-        {/* Viscosity */}
-        <Grid item xs={4}>
-          <TextField
-            label="Viscosity"
-            name="viscosity"
-            value={formData.agitatorInquiries[0]?.viscosity}
-            onChange={handleChange("agitatorInquiries",0)}
-            fullWidth
-            size="small"
-            variant="outlined"
-            className="custom-text-field"
-          />
-        </Grid>
+//         {/* Viscosity */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="Viscosity"
+//             name="viscosity"
+//             value={item?.viscosity}
+//             onChange={handleChange("agitatorInquiries",index)}
+//             fullWidth
+//             size="small"
+//             variant="outlined"
+//             className="custom-text-field"
+//           />
+//         </Grid>
 
-        {/* Percentage Of Solid */}
-        <Grid item xs={4}>
-          <TextField
-            label="Percentage Of Solid"
-            name="percentageOfSolid"
-            value={formData.agitatorInquiries[0]?.percentageOfSolid}
-            onChange={handleChange("agitatorInquiries",0)}
-            fullWidth
-            size="small"
-            variant="outlined"
-            className="custom-text-field"
-          />
-        </Grid>
+//         {/* Percentage Of Solid */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="Percentage Of Solid"
+//             name="percentageOfSolid"
+//             value={item?.percentageOfSolid}
+//             onChange={handleChange("agitatorInquiries",index)}
+//             fullWidth
+//             size="small"
+//             variant="outlined"
+//             className="custom-text-field"
+//           />
+//         </Grid>
 
-        {/* Solid Size */}
-        <Grid item xs={4}>
-          <TextField
-            label="Solid Size"
-            name="solidSize"
-            value={formData.agitatorInquiries[0]?.solidSize}
-            onChange={handleChange("agitatorInquiries",0)}
-            fullWidth
-            size="small"
-            variant="outlined"
-            className="custom-text-field"
-          />
-        </Grid>
+//         {/* Solid Size */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="Solid Size"
+//             name="solidSize"
+//             value={item?.solidSize}
+//             onChange={handleChange("agitatorInquiries",index)}
+//             fullWidth
+//             size="small"
+//             variant="outlined"
+//             className="custom-text-field"
+//           />
+//         </Grid>
 
-        {/* Special Note */}
-        <Grid item xs={4}>
-          <TextField
-            label="Special Note"
-            name="specialNote"
-            value={formData.agitatorInquiries?.specialNote}
-            onChange={handleChange("agitatorInquiries",0)}
-            fullWidth
-            size="small"
-            variant="outlined"
-            className="custom-text-field"
-            inputProps={{ maxLength: 150 }}
-          />
-        </Grid>
-      </Grid>
+//         {/* Special Note */}
+//         <Grid item xs={4}>
+//           <TextField
+//             label="Special Note"
+//             name="specialNote"
+//             value={formData.agitatorInquiries?.specialNote}
+//             onChange={handleChange("agitatorInquiries",index)}
+//             fullWidth
+//             size="small"
+//             variant="outlined"
+//             className="custom-text-field"
+//             inputProps={{ maxLength: 150 }}
+//           />
+//         </Grid>
+//       </Grid>
+      
 
-    </div>
-  )
-
+//     </div>
+//   )
+// )
   // Api plane Section
 
-  const ApiPlane = (section, type) => (
-    <form>
-      <div>
-        <Grid container spacing={2} style={{ marginTop: "10px" }}>
-          {/* Sales Inquiry Item Reference No. */}
-          <Grid item xs={4}>
-            <TextField
-              label="Sales Inquiry Item Reference No."
-              name="salesInquiryRefNo"
-              value={formData?.apiPlanInquiries[0]?.salesInquiryRefNo}
-              fullWidth
-              disabled
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-              id="disableItem"
-              InputProps={{ readOnly: true }}
-            />
-          </Grid>
+//   const ApiPlane = ({index}) => (
+//     <form>
+//       <div>
+//         <Grid container spacing={2} style={{ marginTop: "10px" }}>
+//           {/* Sales Inquiry Item Reference No. */}
+//           <Grid item xs={4}>
+//             <TextField
+//               label="Sales Inquiry Item Reference No."
+//               name="salesInquiryRefNo"
+//               value={formData?.apiPlanInquiries[index]?.salesInquiryRefNo}
+//               fullWidth
+//               disabled
+//               size="small"
+//               variant="outlined"
+//               className="custom-text-field"
+//               id="disableItem"
+//               InputProps={{ readOnly: true }}
+//             />
+//           </Grid>
 
 
-          {/* Created On */}
-          <Grid item xs={4}>
-            <TextField
-              label="Created On *"
-              name="createdOn"
-              value={dateTime}
-              fullWidth
-              id="disableItem"
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-              InputProps={{ readOnly: true }}
-            />
-          </Grid>
+//           {/* Created On */}
+//           <Grid item xs={4}>
+//             <TextField
+//               label="Created On *"
+//               name="createdOn"
+//               value={dateTime}
+//               fullWidth
+//               id="disableItem"
+//               size="small"
+//               variant="outlined"
+//               className="custom-text-field"
+//               InputProps={{ readOnly: true }}
+//             />
+//           </Grid>
 
 
-          {/* Updated On */}
-          <Grid item xs={4}>
-            <TextField
-              label="Updated On"
-              name="updatedOn"
-              value={dateTime}
-              id="disableItem"
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-              InputProps={{ readOnly: true }}
-            />
-          </Grid>
+//           {/* Updated On */}
+//           <Grid item xs={4}>
+//             <TextField
+//               label="Updated On"
+//               name="updatedOn"
+//               value={dateTime}
+//               id="disableItem"
+//               fullWidth
+//               size="small"
+//               variant="outlined"
+//               className="custom-text-field"
+//               InputProps={{ readOnly: true }}
+//             />
+//           </Grid>
 
-          <Grid item xs={4}>
-            <TextField
-              label="Created By"
-              value={authState?.sub}
-              id="disableItem"
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-              InputProps={{ readOnly: true }}
-            />
-          </Grid>
+//           <Grid item xs={4}>
+//             <TextField
+//               label="Created By"
+//               value={authState?.sub}
+//               id="disableItem"
+//               fullWidth
+//               size="small"
+//               variant="outlined"
+//               className="custom-text-field"
+//               InputProps={{ readOnly: true }}
+//             />
+//           </Grid>
 
-          <Grid item xs={4}>
-            <TextField
-              label="Updated By"
-              value={authState?.sub}
-              id="disableItem"
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-              InputProps={{ readOnly: true }}
-            />
-          </Grid>
-
-
-        </Grid>
-
-        {/* 1st Form ll */}
-        <h3 style={{ padding: '10px 0' }}>Equipment Detail :-</h3>
-<Grid container spacing={2}>
-  {/* Make */}
-  <Grid item xs={4}>
-    <TextField
-      label="Make"
-      name="make"
-      value={formData?.apiPlanInquiries?.[0]?.make || ""}
-      onChange={handleChange("apiPlanInquiries", 0)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
-
-  {/* Model */}
-  <Grid item xs={4}>
-    <TextField
-      label="Model"
-      name="model"
-      value={formData?.apiPlanInquiries?.[0]?.model || ""}
-      onChange={handleChange("apiPlanInquiries", 0)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
-
-  {/* Type */}
-  <Grid item xs={4}>
-    <TextField
-      label="Type"
-      name="type"
-      value={formData?.apiPlanInquiries?.[0]?.type || ""}
-      onChange={handleChange("apiPlanInquiries", 0)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
-
-  {/* Arrangement */}
-  <Grid item xs={4}>
-    <Autocomplete
-      size="small"
-      options={["Horizontal", "Vertical"]}
-      getOptionLabel={(option) => option}
-      value={formData?.apiPlanInquiries?.[0]?.arrangement || null}
-      onChange={(event, newValue) => {
-        setFormData((prev) => {
-          const updatedApiPlanInquiry = [...prev.apiPlanInquiries];
-          updatedApiPlanInquiry[0] = {
-            ...updatedApiPlanInquiry[0],
-            arrangement: newValue || "",
-          };
-          return { ...prev, apiPlanInquiries: updatedApiPlanInquiry };
-        });
-      }}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Arrangement"
-          variant="outlined"
-          className="custom-text-field"
-          fullWidth
-        />
-      )}
-    />
-  </Grid>
-
-  {/* Tag Number */}
-  <Grid item xs={4}>
-    <TextField
-      label="Tag Number"
-      name="tagNumber"
-      value={formData?.apiPlanInquiries?.[0]?.tagNumber || ""}
-      onChange={handleChange("apiPlanInquiries", 0)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
-
-  {/* Pump MOC */}
-  <Grid item xs={4}>
-    <TextField
-      label="Pump MOC"
-      name="pumpMoc"
-      value={formData?.apiPlanInquiries?.[0]?.pumpMoc || ""}
-      onChange={handleChange("apiPlanInquiries", 0)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
-</Grid>
+//           <Grid item xs={4}>
+//             <TextField
+//               label="Updated By"
+//               value={authState?.sub}
+//               id="disableItem"
+//               fullWidth
+//               size="small"
+//               variant="outlined"
+//               className="custom-text-field"
+//               InputProps={{ readOnly: true }}
+//             />
+//           </Grid>
 
 
-        {/*////////////// 3rd from //////////////// */}
+//         </Grid>
 
-        <h3 style={{ padding: '10px 0' }}>Mechanical Seal Data :-</h3>
-        <Grid container spacing={2}>
-  {/* Drawing Number */}
-  <Grid item xs={4}>
-    <TextField
-      label="Drawing Number"
-      name="drawingNumber"
-      value={formData?.apiPlanInquiries?.[0]?.drawingNumber || ""}
-      onChange={handleChange("apiPlanInquiries", 0)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
+//         {/* 1st Form ll */}
+//         <h3 style={{ padding: '10px 0' }}>Equipment Detail :-</h3>
+// <Grid container spacing={2}>
+//   {/* Make */}
+//   <Grid item xs={4}>
+//     <TextField
+//       label="Make"
+//       name="make"
+//       value={formData?.apiPlanInquiries?.[index]?.make || ""}
+//       onChange={handleChange("apiPlanInquiries", 0)}
+//       fullWidth
+//       size="small"
+//       variant="outlined"
+//       className="custom-text-field"
+//     />
+//   </Grid>
 
-  {/* Mechanical Seal Make */}
-  <Grid item xs={4}>
-    <TextField
-      label="Mechanical Seal Make"
-      name="mechanicalSealMake"
-      value={formData?.apiPlanInquiries?.[0]?.mechanicalSealMake || ""}
-      onChange={handleChange("apiPlanInquiries", 0)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
+//   {/* Model */}
+//   <Grid item xs={4}>
+//     <TextField
+//       label="Model"
+//       name="model"
+//       value={formData?.apiPlanInquiries?.[index]?.model || ""}
+//       onChange={handleChange("apiPlanInquiries", 0)}
+//       fullWidth
+//       size="small"
+//       variant="outlined"
+//       className="custom-text-field"
+//     />
+//   </Grid>
 
-  {/* Mechanical Seal Series */}
-  <Grid item xs={4}>
-    <TextField
-      label="Mechanical Seal Series"
-      name="mechanicalSealSeries"
-      value={formData?.apiPlanInquiries?.[0]?.mechanicalSealSeries || ""}
-      onChange={handleChange("apiPlanInquiries", 0)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
+//   {/* Type */}
+//   <Grid item xs={4}>
+//     <TextField
+//       label="Type"
+//       name="type"
+//       value={formData?.apiPlanInquiries?.[index]?.type || ""}
+//       onChange={handleChange("apiPlanInquiries", 0)}
+//       fullWidth
+//       size="small"
+//       variant="outlined"
+//       className="custom-text-field"
+//     />
+//   </Grid>
 
-  {/* Connection Size */}
-  <Grid item xs={4}>
-    <TextField
-      label="Connection Size"
-      name="connectionSize"
-      value={formData?.apiPlanInquiries?.[0]?.connectionSize || ""}
-      onChange={handleChange("apiPlanInquiries", 0)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
+//   {/* Arrangement */}
+//   <Grid item xs={4}>
+//     <Autocomplete
+//       size="small"
+//       options={["Horizontal", "Vertical"]}
+//       getOptionLabel={(option) => option}
+//       value={formData?.apiPlanInquiries?.[index]?.arrangement || null}
+//       onChange={(event, newValue) => {
+//         setFormData((prev) => {
+//           const updatedApiPlanInquiry = [...prev.apiPlanInquiries];
+//           updatedApiPlanInquiry[index] = {
+//             ...updatedApiPlanInquiry[index],
+//             arrangement: newValue || "",
+//           };
+//           return { ...prev, apiPlanInquiries: updatedApiPlanInquiry };
+//         });
+//       }}
+//       renderInput={(params) => (
+//         <TextField
+//           {...params}
+//           label="Arrangement"
+//           variant="outlined"
+//           className="custom-text-field"
+//           fullWidth
+//         />
+//       )}
+//     />
+//   </Grid>
 
-  {/* Shaft Size */}
-  <Grid item xs={4}>
-    <TextField
-      label="Shaft Size"
-      name="shaftSize"
-      value={formData?.apiPlanInquiries?.[0]?.shaftSize || ""}
-      onChange={handleChange("apiPlanInquiries", 0)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
-</Grid>
+//   {/* Tag Number */}
+//   <Grid item xs={4}>
+//     <TextField
+//       label="Tag Number"
+//       name="tagNumber"
+//       value={formData?.apiPlanInquiries?.[index]?.tagNumber || ""}
+//       onChange={handleChange("apiPlanInquiries", 0)}
+//       fullWidth
+//       size="small"
+//       variant="outlined"
+//       className="custom-text-field"
+//     />
+//   </Grid>
 
-
-        {/*//////////// 4th From section /////////////// */}
-
-        <h3 style={{ padding: '10px 0' }}>Operating Parameters :-</h3>
-        <Grid container spacing={2}>
-          {/* Rotation */}
-          <Grid item xs={4}>
-            <TextField
-              label="Rotation"
-              name="rotation"
-              value={formData.apiPlanInquiries[0]?.rotation}
-              onChange={handleChange("apiPlanInquiries",0)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
-
-          {/* MAWP */}
-          <Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="mawp"
-    value={formData.apiPlanInquiries[0].mawp?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        apiPlanInquiries: [
-          {
-            ...prev.apiPlanInquiries[0],
-            mawp: {
-              ...prev.apiPlanInquiries[0].mawp,
-              value
-            }
-          }
-        ]
-      }));
-    }}
-    label="MAWP"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.apiPlanInquiries[0].mawp?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  apiPlanInquiries: [
-                    {
-                      ...prev.apiPlanInquiries[0],
-                      mawp: {
-                        ...prev.apiPlanInquiries[0].mawp,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.apiPlanInquiries[0].mawp?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              {!formData.apiPlanInquiries[0].mawp?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
-                <MenuItem key={unit} value={unit}>
-                  {unit}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
-
-          {/* MAWT */}
-          <Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="mawt"
-    value={formData.apiPlanInquiries[0].mawt?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        apiPlanInquiries: [
-          {
-            ...prev.apiPlanInquiries[0],
-            mawt: {
-              ...prev.apiPlanInquiries[0].mawt,
-              value
-            }
-          }
-        ]
-      }));
-    }}
-    label="MAWT"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.apiPlanInquiries[0].mawt?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  apiPlanInquiries: [
-                    {
-                      ...prev.apiPlanInquiries[0],
-                      mawt: {
-                        ...prev.apiPlanInquiries[0].mawt,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.apiPlanInquiries[0].mawt?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              {!formData.apiPlanInquiries[0].mawt?.value && <MenuItem>Unit</MenuItem>}
-              {["℃","℉"].map((unit) => (
-                <MenuItem key={unit} value={unit}>
-                  {unit}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
-
-          {/* Suction Pressure */}
-          <Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="suctionPressure"
-    value={formData.pumpInquiries[0].suctionPressure?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        pumpInquiries: [
-          {
-            ...prev.pumpInquiries[0],
-            suctionPressure: {
-              ...prev.pumpInquiries[0].suctionPressure,
-              value
-            }
-          }
-        ]
-      }));
-    }}
-    label="Suction Pressure"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.pumpInquiries[0].suctionPressure?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [
-                    {
-                      ...prev.pumpInquiries[0],
-                      suctionPressure: {
-                        ...prev.pumpInquiries[0].suctionPressure,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.pumpInquiries[0].suctionPressure?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              {!formData.pumpInquiries[0].suctionPressure?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
-                <MenuItem key={unit} value={unit}>
-                  {unit}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
-
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="boxPressure"
-    value={formData.apiPlanInquiries[0].boxPressure?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        apiPlanInquiries: [
-          {
-            ...prev.apiPlanInquiries[0],
-            boxPressure: {
-              ...prev.apiPlanInquiries[0].boxPressure,
-              value
-            }
-          }
-        ]
-      }));
-    }}
-    label="Box Pressure"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.apiPlanInquiries[0].boxPressure?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  apiPlanInquiries: [
-                    {
-                      ...prev.apiPlanInquiries[0],
-                      boxPressure: {
-                        ...prev.apiPlanInquiries[0].boxPressure,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.apiPlanInquiries[0].boxPressure?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              {!formData.pumpInquiries[0].dischargePressure?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
-                <MenuItem key={unit} value={unit}>
-                  {unit}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
-
-<Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="dischargePressurePump"
-    value={formData.apiPlanInquiries[0].dischargePressurePump?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        apiPlanInquiries: [
-          {
-            ...prev.apiPlanInquiries[0],
-            dischargePressurePump: {
-              ...prev.apiPlanInquiries[0].dischargePressurePump,
-              value
-            }
-          }
-        ]
-      }));
-    }}
-    label="Discharge Pressure"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.apiPlanInquiries[0].dischargePressurePump?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  apiPlanInquiries: [
-                    {
-                      ...prev.apiPlanInquiries[0],
-                      dischargePressurePump: {
-                        ...prev.apiPlanInquiries[0].dischargePressurePump,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.apiPlanInquiries[0].dischargePressurePump?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              {!formData.pumpInquiries[0].dischargePressurePump?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
-                <MenuItem key={unit} value={unit}>
-                  {unit}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
-
-          {/* Speed */}
-          <Grid item xs={4}>
-            <TextField
-              label="Speed"
-              name="speed"
-              value={formData?.apiPlanInquiries[0]?.speed}
-              onChange={handleChange("apiPlanInquiries",0)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
-
-          {/* Vessel Pressure */}
-          <Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="vesselPressureAgitator"
-    value={formData.apiPlanInquiries[0].vesselPressureAgitator?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        apiPlanInquiries: [
-          {
-            ...prev.apiPlanInquiries[0],
-            vesselPressureAgitator: {
-              ...prev.apiPlanInquiries[0].vesselPressureAgitator,
-              value
-            }
-          }
-        ]
-      }));
-    }}
-    label="Vessel Pressure(Agitator)"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.apiPlanInquiries[0].vesselPressureAgitator?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  apiPlanInquiries: [
-                    {
-                      ...prev.apiPlanInquiries[0],
-                      vesselPressureAgitator: {
-                        ...prev.apiPlanInquiries[0].vesselPressureAgitator,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.apiPlanInquiries[0].vesselPressureAgitator?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              {!formData.apiPlanInquiries[0].vesselPressureAgitator?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
-                <MenuItem key={unit} value={unit}>
-                  {unit}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
-
-        </Grid>
-
-        {/*/////////// 5th from/////////////////// */}
-        <h3 style={{ padding: '10px 0' }}>Fluid Details :-</h3>
-        <Grid container spacing={2}>
-          {/* Fluid */}
-          <Grid item xs={4}>
-            <TextField
-              label="Fluid"
-              name="fluid"
-              value={formData?.apiPlanInquiries[0]?.fluid}
-              onChange={handleChange("apiPlanInquiries",0)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
-
-          {/* Operating Temperature */}
-          <Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="operatingTemperature"
-    value={formData.apiPlanInquiries[0].operatingTemperature?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        apiPlanInquiries: [
-          {
-            ...prev.apiPlanInquiries[0],
-            operatingTemperature: {
-              ...prev.apiPlanInquiries[0].operatingTemperature,
-              value
-            }
-          }
-        ]
-      }));
-    }}
-    label="OP.Temprature"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.apiPlanInquiries[0].operatingTemperature?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  apiPlanInquiries: [
-                    {
-                      ...prev.apiPlanInquiries[0],
-                      operatingTemperature: {
-                        ...prev.apiPlanInquiries[0].operatingTemperature,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.apiPlanInquiries[0].operatingTemperature?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              {!formData.apiPlanInquiries[0].operatingTemperature?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
-                <MenuItem key={unit} value={unit}>
-                  {unit}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
-
-          {/* Max Temperature */}
-          <Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="maxTemperature"
-    value={formData.apiPlanInquiries[0].maxTemperature?.value || ""}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        apiPlanInquiries: [
-          {
-            ...prev.apiPlanInquiries[0],
-            maxTemperature: {
-              ...prev.apiPlanInquiries[0].maxTemperature,
-              value
-            }
-          }
-        ]
-      }));
-    }}
-    label="Max Temprature"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={formData.apiPlanInquiries[0].maxTemperature?.unit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  apiPlanInquiries: [
-                    {
-                      ...prev.apiPlanInquiries[0],
-                      maxTemperature: {
-                        ...prev.apiPlanInquiries[0].maxTemperature,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
-                }));
-              }}
-              displayEmpty
-              disabled={!formData.apiPlanInquiries[0].maxTemperature?.value}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              {!formData.apiPlanInquiries[0].maxTemperature?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
-                <MenuItem key={unit} value={unit}>
-                  {unit}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      ),
-    }}
-  />
-</Grid>
-
-          {/* Viscosity */}
-          <Grid item xs={4}>
-            <TextField
-              label="Viscosity"
-              name="viscosity"
-              value={formData?.apiPlanInquiries?.[0]?.viscosity || ""}
-              onChange={handleChange("apiPlanInquiries", 0)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
-
-          {/* Specific Gravity */}
-          <Grid item xs={4}>
-            <TextField
-              label="Sp. Gravity"
-              name="specificGravity"
-              value={formData?.apiPlanInquiries?.[0]?.specificGravity || ""}
-              onChange={handleChange("apiPlanInquiries", 0)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
-
-          {/* Percentage of Solid */}
-          <Grid item xs={4}>
-            <TextField
-              label="Percentage of Solid"
-              name="percentageSolid"
-              value={formData?.apiPlanInquiries?.[0]?.percentageSolid || ""}
-              onChange={handleChange("apiPlanInquiries", 0)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
-
-          {/* Size of Solid Particles */}
-          <Grid item xs={4}>
-            <TextField
-              label="Size of Solid Particles"
-              name="solidParticleSize"
-              value={formData?.apiPlanInquiries?.[0]?.solidParticleSize || ""}
-              onChange={handleChange("apiPlanInquiries", 0)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
-
-          {/* Freezing Point */}
-          <Grid item xs={4}>
-            <TextField
-              label="Freezing Point"
-              name="freezingPoint"
-              value={formData?.apiPlanInquiries?.[0]?.freezingPoint || ""}
-              onChange={handleChange("apiPlanInquiries", 0)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
-
-          {/* Boiling Point */}
-          <Grid item xs={4}>
-            <TextField
-              label="Boiling Point"
-              name="boilingPoint"
-              value={formData?.apiPlanInquiries?.[0]?.boilingPoint || ""}
-              onChange={handleChange("apiPlanInquiries", 0)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
-
-        </Grid>
-
-        {/*//////////// 6th form //////////////////// */}
-
-        <h3 style={{ padding: '10px 0' }}>Leak Proof Proposal :-</h3>
-        <Grid container spacing={2}>
-  {/* API Plan */}
-  <Grid item xs={4}>
-    <TextField
-      label="API Plan"
-      name="leakProofProposalApiPlan"
-      value={formData?.apiPlanInquiries?.[0]?.leakProofProposalApiPlan || ""}
-      onChange={handleChange("apiPlanInquiries", 0)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
-
-  {/* Capacity */}
-  <Grid item xs={4}>
-    <TextField
-      label="Capacity"
-      name="capacity"
-      value={formData?.apiPlanInquiries?.[0]?.capacity || ""}
-      onChange={handleChange("apiPlanInquiries", 0)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
-
-  {/* Heat Exchange Type */}
-  <Grid item xs={4}>
-    <TextField
-      label="Heat Exchange Type"
-      name="heatExchangeType"
-      value={formData?.apiPlanInquiries?.[0]?.heatExchangeType || ""}
-      onChange={ handleChange("apiPlanInquiries", 0)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
-
-  {/* Heat Exchange Area */}
-  <Grid item xs={4}>
-    <TextField
-      label="Heat Exchange Area"
-      name="heatExchangeArea"
-      value={formData?.apiPlanInquiries?.[0]?.heatExchangeArea || ""}
-      onChange={handleChange("apiPlanInquiries",0)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
-
-  {/* Standard */}
-  <Grid item xs={4}>
-          <Autocomplete
-            style={{ width: '100%' }}
-            size="small"
-        value={formData?.apiPlanInquiries[0]?.standard || ""}
-            onChange={(event, newValue) => {
-              setFormData({
-                ...formData,
-                apiPlanInquiries: [
-                  {
-                    ...formData.apiPlanInquiries[0],
-                    standard: newValue || "", // Update the sealArrangement field
-                  },
-                ],
-              });
-            }}
-            options={['API', 'Non-API']}
-            renderInput={(params) => (
-              <TextField
-                size="small"
-                {...params}
-                placeholder="Standard"
-                variant="outlined"
-                className='custom-text-field'
-                fullWidth
-                label="Standard"
-              />
-            )}
-          />
-        </Grid>
+//   {/* Pump MOC */}
+//   <Grid item xs={4}>
+//     <TextField
+//       label="Pump MOC"
+//       name="pumpMoc"
+//       value={formData?.apiPlanInquiries?.[index]?.pumpMoc || ""}
+//       onChange={handleChange("apiPlanInquiries", 0)}
+//       fullWidth
+//       size="small"
+//       variant="outlined"
+//       className="custom-text-field"
+//     />
+//   </Grid>
+// </Grid>
 
 
-</Grid>
+//         {/*////////////// 3rd from //////////////// */}
+
+//         <h3 style={{ padding: '10px 0' }}>Mechanical Seal Data :-</h3>
+//         <Grid container spacing={2}>
+//   {/* Drawing Number */}
+//   <Grid item xs={4}>
+//     <TextField
+//       label="Drawing Number"
+//       name="drawingNumber"
+//       value={formData?.apiPlanInquiries?.[index]?.drawingNumber || ""}
+//       onChange={handleChange("apiPlanInquiries", 0)}
+//       fullWidth
+//       size="small"
+//       variant="outlined"
+//       className="custom-text-field"
+//     />
+//   </Grid>
+
+//   {/* Mechanical Seal Make */}
+//   <Grid item xs={4}>
+//     <TextField
+//       label="Mechanical Seal Make"
+//       name="mechanicalSealMake"
+//       value={formData?.apiPlanInquiries?.[index]?.mechanicalSealMake || ""}
+//       onChange={handleChange("apiPlanInquiries", 0)}
+//       fullWidth
+//       size="small"
+//       variant="outlined"
+//       className="custom-text-field"
+//     />
+//   </Grid>
+
+//   {/* Mechanical Seal Series */}
+//   <Grid item xs={4}>
+//     <TextField
+//       label="Mechanical Seal Series"
+//       name="mechanicalSealSeries"
+//       value={formData?.apiPlanInquiries?.[index]?.mechanicalSealSeries || ""}
+//       onChange={handleChange("apiPlanInquiries", 0)}
+//       fullWidth
+//       size="small"
+//       variant="outlined"
+//       className="custom-text-field"
+//     />
+//   </Grid>
+
+//   {/* Connection Size */}
+//   <Grid item xs={4}>
+//     <TextField
+//       label="Connection Size"
+//       name="connectionSize"
+//       value={formData?.apiPlanInquiries?.[index]?.connectionSize || ""}
+//       onChange={handleChange("apiPlanInquiries", 0)}
+//       fullWidth
+//       size="small"
+//       variant="outlined"
+//       className="custom-text-field"
+//     />
+//   </Grid>
+
+//   {/* Shaft Size */}
+//   <Grid item xs={4}>
+//     <TextField
+//       label="Shaft Size"
+//       name="shaftSize"
+//       value={formData?.apiPlanInquiries?.[index]?.shaftSize || ""}
+//       onChange={handleChange("apiPlanInquiries", 0)}
+//       fullWidth
+//       size="small"
+//       variant="outlined"
+//       className="custom-text-field"
+//     />
+//   </Grid>
+// </Grid>
+
+
+//         {/*//////////// 4th From section /////////////// */}
+
+//         <h3 style={{ padding: '10px 0' }}>Operating Parameters :-</h3>
+//         <Grid container spacing={2}>
+//           {/* Rotation */}
+//           <Grid item xs={4}>
+//             <TextField
+//               label="Rotation"
+//               name="rotation"
+//               value={formData.apiPlanInquiries[index]?.rotation}
+//               onChange={handleChange("apiPlanInquiries",0)}
+//               fullWidth
+//               size="small"
+//               variant="outlined"
+//               className="custom-text-field"
+//             />
+//           </Grid>
+
+//           {/* MAWP */}
+//           <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="mawp"
+//     value={formData.apiPlanInquiries[index].mawp?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         apiPlanInquiries: [
+//           {
+//             ...prev.apiPlanInquiries[index],
+//             mawp: {
+//               ...prev.apiPlanInquiries[index].mawp,
+//               value
+//             }
+//           }
+//         ]
+//       }));
+//     }}
+//     label="MAWP"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={formData.apiPlanInquiries[index].mawp?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   apiPlanInquiries: [
+//                     {
+//                       ...prev.apiPlanInquiries[index],
+//                       mawp: {
+//                         ...prev.apiPlanInquiries[index].mawp,
+//                         unit: selectedUnit
+//                       }
+//                     }
+//                   ]
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!formData.apiPlanInquiries[index].mawp?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               {!formData.apiPlanInquiries[index].mawp?.value && <MenuItem>Unit</MenuItem>}
+//               {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+//                 <MenuItem key={unit} value={unit}>
+//                   {unit}
+//                 </MenuItem>
+//               ))}
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
+
+//           {/* MAWT */}
+//           <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="mawt"
+//     value={formData.apiPlanInquiries[index].mawt?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         apiPlanInquiries: [
+//           {
+//             ...prev.apiPlanInquiries[index],
+//             mawt: {
+//               ...prev.apiPlanInquiries[index].mawt,
+//               value
+//             }
+//           }
+//         ]
+//       }));
+//     }}
+//     label="MAWT"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={formData.apiPlanInquiries[index].mawt?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   apiPlanInquiries: [
+//                     {
+//                       ...prev.apiPlanInquiries[index],
+//                       mawt: {
+//                         ...prev.apiPlanInquiries[index].mawt,
+//                         unit: selectedUnit
+//                       }
+//                     }
+//                   ]
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!formData.apiPlanInquiries[index].mawt?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               {!formData.apiPlanInquiries[index].mawt?.value && <MenuItem>Unit</MenuItem>}
+//               {["℃","℉"].map((unit) => (
+//                 <MenuItem key={unit} value={unit}>
+//                   {unit}
+//                 </MenuItem>
+//               ))}
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
+
+//           {/* Suction Pressure */}
+//           <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="suctionPressure"
+//     value={item?.suctionPressure?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         pumpInquiries: [
+//           {
+//             ...prev.pumpInquiries[index],
+//             suctionPressure: {
+//               ...prev.pumpInquiries[index].suctionPressure,
+//               value
+//             }
+//           }
+//         ]
+//       }));
+//     }}
+//     label="Suction Pressure"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={item?.suctionPressure?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   pumpInquiries: [
+//                     {
+//                       ...prev.pumpInquiries[index],
+//                       suctionPressure: {
+//                         ...prev.pumpInquiries[index].suctionPressure,
+//                         unit: selectedUnit
+//                       }
+//                     }
+//                   ]
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!item?.suctionPressure?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               {!item?.suctionPressure?.value && <MenuItem>Unit</MenuItem>}
+//               {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+//                 <MenuItem key={unit} value={unit}>
+//                   {unit}
+//                 </MenuItem>
+//               ))}
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
+
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="boxPressure"
+//     value={formData.apiPlanInquiries[index].boxPressure?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         apiPlanInquiries: [
+//           {
+//             ...prev.apiPlanInquiries[index],
+//             boxPressure: {
+//               ...prev.apiPlanInquiries[index].boxPressure,
+//               value
+//             }
+//           }
+//         ]
+//       }));
+//     }}
+//     label="Box Pressure"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={formData.apiPlanInquiries[index].boxPressure?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   apiPlanInquiries: [
+//                     {
+//                       ...prev.apiPlanInquiries[index],
+//                       boxPressure: {
+//                         ...prev.apiPlanInquiries[index].boxPressure,
+//                         unit: selectedUnit
+//                       }
+//                     }
+//                   ]
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!formData.apiPlanInquiries[index].boxPressure?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               {!item?.dischargePressure?.value && <MenuItem>Unit</MenuItem>}
+//               {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+//                 <MenuItem key={unit} value={unit}>
+//                   {unit}
+//                 </MenuItem>
+//               ))}
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
+
+// <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="dischargePressurePump"
+//     value={formData.apiPlanInquiries[index].dischargePressurePump?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         apiPlanInquiries: [
+//           {
+//             ...prev.apiPlanInquiries[index],
+//             dischargePressurePump: {
+//               ...prev.apiPlanInquiries[index].dischargePressurePump,
+//               value
+//             }
+//           }
+//         ]
+//       }));
+//     }}
+//     label="Discharge Pressure"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={formData.apiPlanInquiries[index].dischargePressurePump?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   apiPlanInquiries: [
+//                     {
+//                       ...prev.apiPlanInquiries[index],
+//                       dischargePressurePump: {
+//                         ...prev.apiPlanInquiries[index].dischargePressurePump,
+//                         unit: selectedUnit
+//                       }
+//                     }
+//                   ]
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!formData.apiPlanInquiries[index].dischargePressurePump?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               {!item?.dischargePressurePump?.value && <MenuItem>Unit</MenuItem>}
+//               {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+//                 <MenuItem key={unit} value={unit}>
+//                   {unit}
+//                 </MenuItem>
+//               ))}
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
+
+//           {/* Speed */}
+//           <Grid item xs={4}>
+//             <TextField
+//               label="Speed"
+//               name="speed"
+//               value={formData?.apiPlanInquiries[index]?.speed}
+//               onChange={handleChange("apiPlanInquiries",0)}
+//               fullWidth
+//               size="small"
+//               variant="outlined"
+//               className="custom-text-field"
+//             />
+//           </Grid>
+
+//           {/* Vessel Pressure */}
+//           <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="vesselPressureAgitator"
+//     value={formData.apiPlanInquiries[index].vesselPressureAgitator?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         apiPlanInquiries: [
+//           {
+//             ...prev.apiPlanInquiries[index],
+//             vesselPressureAgitator: {
+//               ...prev.apiPlanInquiries[index].vesselPressureAgitator,
+//               value
+//             }
+//           }
+//         ]
+//       }));
+//     }}
+//     label="Vessel Pressure(Agitator)"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={formData.apiPlanInquiries[index].vesselPressureAgitator?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   apiPlanInquiries: [
+//                     {
+//                       ...prev.apiPlanInquiries[index],
+//                       vesselPressureAgitator: {
+//                         ...prev.apiPlanInquiries[index].vesselPressureAgitator,
+//                         unit: selectedUnit
+//                       }
+//                     }
+//                   ]
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!formData.apiPlanInquiries[index].vesselPressureAgitator?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               {!formData.apiPlanInquiries[index].vesselPressureAgitator?.value && <MenuItem>Unit</MenuItem>}
+//               {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+//                 <MenuItem key={unit} value={unit}>
+//                   {unit}
+//                 </MenuItem>
+//               ))}
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
+
+//         </Grid>
+
+//         {/*/////////// 5th from/////////////////// */}
+//         <h3 style={{ padding: '10px 0' }}>Fluid Details :-</h3>
+//         <Grid container spacing={2}>
+//           {/* Fluid */}
+//           <Grid item xs={4}>
+//             <TextField
+//               label="Fluid"
+//               name="fluid"
+//               value={formData?.apiPlanInquiries[index]?.fluid}
+//               onChange={handleChange("apiPlanInquiries",0)}
+//               fullWidth
+//               size="small"
+//               variant="outlined"
+//               className="custom-text-field"
+//             />
+//           </Grid>
+
+//           {/* Operating Temperature */}
+//           <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="operatingTemperature"
+//     value={formData.apiPlanInquiries[index].operatingTemperature?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         apiPlanInquiries: [
+//           {
+//             ...prev.apiPlanInquiries[index],
+//             operatingTemperature: {
+//               ...prev.apiPlanInquiries[index].operatingTemperature,
+//               value
+//             }
+//           }
+//         ]
+//       }));
+//     }}
+//     label="OP.Temprature"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={formData.apiPlanInquiries[index].operatingTemperature?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   apiPlanInquiries: [
+//                     {
+//                       ...prev.apiPlanInquiries[index],
+//                       operatingTemperature: {
+//                         ...prev.apiPlanInquiries[index].operatingTemperature,
+//                         unit: selectedUnit
+//                       }
+//                     }
+//                   ]
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!formData.apiPlanInquiries[index].operatingTemperature?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               {!formData.apiPlanInquiries[index].operatingTemperature?.value && <MenuItem>Unit</MenuItem>}
+//               {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+//                 <MenuItem key={unit} value={unit}>
+//                   {unit}
+//                 </MenuItem>
+//               ))}
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
+
+//           {/* Max Temperature */}
+//           <Grid item xs={4}>
+//   <TextField
+//     size="small"
+//     className="custom-text-field"
+//     name="maxTemperature"
+//     value={formData.apiPlanInquiries[index].maxTemperature?.value || ""}
+//     onChange={(e) => {
+//       const value = e.target.value;
+//       setFormData((prev) => ({
+//         ...prev,
+//         apiPlanInquiries: [
+//           {
+//             ...prev.apiPlanInquiries[index],
+//             maxTemperature: {
+//               ...prev.apiPlanInquiries[index].maxTemperature,
+//               value
+//             }
+//           }
+//         ]
+//       }));
+//     }}
+//     label="Max Temprature"
+//     fullWidth
+//     InputProps={{
+//       endAdornment: (
+//         <InputAdornment position="end">
+//           <FormControl size="small" variant="outlined">
+//             <Select
+//               value={formData.apiPlanInquiries[index].maxTemperature?.unit || ""}
+//               onChange={(e) => {
+//                 const selectedUnit = e.target.value;
+//                 setFormData((prev) => ({
+//                   ...prev,
+//                   apiPlanInquiries: [
+//                     {
+//                       ...prev.apiPlanInquiries[index],
+//                       maxTemperature: {
+//                         ...prev.apiPlanInquiries[index].maxTemperature,
+//                         unit: selectedUnit
+//                       }
+//                     }
+//                   ]
+//                 }));
+//               }}
+//               displayEmpty
+//               disabled={!formData.apiPlanInquiries[index].maxTemperature?.value}
+//               sx={{
+//                 height: "100%",
+//                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+//                 borderRadius: 0,
+//                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+//                 "& .MuiSelect-select": {
+//                   padding: "0 8px",
+//                   outline: "none",
+//                   border: "none",
+//                   height: "100%",
+//                   display: "flex",
+//                   alignItems: "center"
+//                 },
+//                 minWidth: 60
+//               }}
+//             >
+//               {!formData.apiPlanInquiries[index].maxTemperature?.value && <MenuItem>Unit</MenuItem>}
+//               {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+//                 <MenuItem key={unit} value={unit}>
+//                   {unit}
+//                 </MenuItem>
+//               ))}
+//             </Select>
+//           </FormControl>
+//         </InputAdornment>
+//       ),
+//     }}
+//   />
+// </Grid>
+
+//           {/* Viscosity */}
+//           <Grid item xs={4}>
+//             <TextField
+//               label="Viscosity"
+//               name="viscosity"
+//               value={formData?.apiPlanInquiries?.[index]?.viscosity || ""}
+//               onChange={handleChange("apiPlanInquiries", 0)}
+//               fullWidth
+//               size="small"
+//               variant="outlined"
+//               className="custom-text-field"
+//             />
+//           </Grid>
+
+//           {/* Specific Gravity */}
+//           <Grid item xs={4}>
+//             <TextField
+//               label="Sp. Gravity"
+//               name="specificGravity"
+//               value={formData?.apiPlanInquiries?.[index]?.specificGravity || ""}
+//               onChange={handleChange("apiPlanInquiries", 0)}
+//               fullWidth
+//               size="small"
+//               variant="outlined"
+//               className="custom-text-field"
+//             />
+//           </Grid>
+
+//           {/* Percentage of Solid */}
+//           <Grid item xs={4}>
+//             <TextField
+//               label="Percentage of Solid"
+//               name="percentageSolid"
+//               value={formData?.apiPlanInquiries?.[index]?.percentageSolid || ""}
+//               onChange={handleChange("apiPlanInquiries", 0)}
+//               fullWidth
+//               size="small"
+//               variant="outlined"
+//               className="custom-text-field"
+//             />
+//           </Grid>
+
+//           {/* Size of Solid Particles */}
+//           <Grid item xs={4}>
+//             <TextField
+//               label="Size of Solid Particles"
+//               name="solidParticleSize"
+//               value={formData?.apiPlanInquiries?.[index]?.solidParticleSize || ""}
+//               onChange={handleChange("apiPlanInquiries", 0)}
+//               fullWidth
+//               size="small"
+//               variant="outlined"
+//               className="custom-text-field"
+//             />
+//           </Grid>
+
+//           {/* Freezing Point */}
+//           <Grid item xs={4}>
+//             <TextField
+//               label="Freezing Point"
+//               name="freezingPoint"
+//               value={formData?.apiPlanInquiries?.[index]?.freezingPoint || ""}
+//               onChange={handleChange("apiPlanInquiries", 0)}
+//               fullWidth
+//               size="small"
+//               variant="outlined"
+//               className="custom-text-field"
+//             />
+//           </Grid>
+
+//           {/* Boiling Point */}
+//           <Grid item xs={4}>
+//             <TextField
+//               label="Boiling Point"
+//               name="boilingPoint"
+//               value={formData?.apiPlanInquiries?.[index]?.boilingPoint || ""}
+//               onChange={handleChange("apiPlanInquiries", 0)}
+//               fullWidth
+//               size="small"
+//               variant="outlined"
+//               className="custom-text-field"
+//             />
+//           </Grid>
+
+//         </Grid>
+
+//         {/*//////////// 6th form //////////////////// */}
+
+//         <h3 style={{ padding: '10px 0' }}>Leak Proof Proposal :-</h3>
+//         <Grid container spacing={2}>
+//   {/* API Plan */}
+//   <Grid item xs={4}>
+//     <TextField
+//       label="API Plan"
+//       name="leakProofProposalApiPlan"
+//       value={formData?.apiPlanInquiries?.[index]?.leakProofProposalApiPlan || ""}
+//       onChange={handleChange("apiPlanInquiries", 0)}
+//       fullWidth
+//       size="small"
+//       variant="outlined"
+//       className="custom-text-field"
+//     />
+//   </Grid>
+
+//   {/* Capacity */}
+//   <Grid item xs={4}>
+//     <TextField
+//       label="Capacity"
+//       name="capacity"
+//       value={formData?.apiPlanInquiries?.[index]?.capacity || ""}
+//       onChange={handleChange("apiPlanInquiries", 0)}
+//       fullWidth
+//       size="small"
+//       variant="outlined"
+//       className="custom-text-field"
+//     />
+//   </Grid>
+
+//   {/* Heat Exchange Type */}
+//   <Grid item xs={4}>
+//     <TextField
+//       label="Heat Exchange Type"
+//       name="heatExchangeType"
+//       value={formData?.apiPlanInquiries?.[index]?.heatExchangeType || ""}
+//       onChange={ handleChange("apiPlanInquiries", 0)}
+//       fullWidth
+//       size="small"
+//       variant="outlined"
+//       className="custom-text-field"
+//     />
+//   </Grid>
+
+//   {/* Heat Exchange Area */}
+//   <Grid item xs={4}>
+//     <TextField
+//       label="Heat Exchange Area"
+//       name="heatExchangeArea"
+//       value={formData?.apiPlanInquiries?.[index]?.heatExchangeArea || ""}
+//       onChange={handleChange("apiPlanInquiries",0)}
+//       fullWidth
+//       size="small"
+//       variant="outlined"
+//       className="custom-text-field"
+//     />
+//   </Grid>
+
+//   {/* Standard */}
+//   <Grid item xs={4}>
+//           <Autocomplete
+//             style={{ width: '100%' }}
+//             size="small"
+//         value={formData?.apiPlanInquiries[index]?.standard || ""}
+//             onChange={(event, newValue) => {
+//               setFormData({
+//                 ...formData,
+//                 apiPlanInquiries: [
+//                   {
+//                     ...formData.apiPlanInquiries[index],
+//                     standard: newValue || "", // Update the sealArrangement field
+//                   },
+//                 ],
+//               });
+//             }}
+//             options={['API', 'Non-API']}
+//             renderInput={(params) => (
+//               <TextField
+//                 size="small"
+//                 {...params}
+//                 placeholder="Standard"
+//                 variant="outlined"
+//                 className='custom-text-field'
+//                 fullWidth
+//                 label="Standard"
+//               />
+//             )}
+//           />
+//         </Grid>
+
+
+// </Grid>
 
 
 
-      </div>
-    </form>
-  );
+//       </div>
+//     </form>
+//   );
 
-  const Rotatoryjoin = (section, type) => (
+  const Rotatoryjoin = ({index}) => (
     <form>
       <div>
         
@@ -3618,7 +3420,7 @@ const [formData, setFormData] = useState({
         <Grid item xs={4}>
           <TextField
             label="Sales Inquiry Item Reference No."
-            value={formData.rotaryJointInquiries[0]?.rotaryJointInquiryReferenceNo}
+            value={formData.rotaryJointInquiries[index]?.rotaryJointInquiryReferenceNo}
             InputProps={{ readOnly: true }}
             size="small"
             fullWidth
@@ -3631,26 +3433,26 @@ const [formData, setFormData] = useState({
         <Grid item xs={12} sm={4}>
   <Autocomplete
     size="small"
-    value={formData.rotaryJointInquiries[0]?.branch || ''}
+    value={formData.rotaryJointInquiries[index]?.branch || ''}
     onChange={(event, newValue) => {
       setFormData((prevState) => ({
         ...prevState,
         rotaryJointInquiries: [
           {
-            ...prevState.rotaryJointInquiries[0], // Keep the other fields of the first object intact
+            ...prevState.rotaryJointInquiries[index], // Keep the other fields of the first object intact
             branch: newValue || "", // Update the 'branch' property
           },
         ],
       }));
     }}
     
-    inputValue={formData?.rotaryJointInquiries[0]?.branch || ''}
+    inputValue={formData?.rotaryJointInquiries[index]?.branch || ''}
     onInputChange={(event, newInputValue) => {
       setFormData((prevState) => ({
         ...prevState,
         rotaryJointInquiries: [
           {
-            ...prevState.rotaryJointInquiries[0], // Keep the other fields of the first object intact
+            ...prevState.rotaryJointInquiries[index], // Keep the other fields of the first object intact
             branch: newInputValue || "", // Update the 'branch' property
           },
         ],
@@ -4182,11 +3984,7 @@ const [formData, setFormData] = useState({
                 label="Customer Reference No."
                 name="customerRef"
                 value={formData.customerRef}
-                onChange={
-                  // (e)=>{
-                  // setFormData({...formData,customerRef:e.target.value})  }
-                  handleChange
-              }
+                onChange={handleFieldChange}
                 required
                 fullWidth
               />
@@ -4281,7 +4079,7 @@ const [formData, setFormData] = useState({
                 className="custom-text-field"
                 name="sourceOfInquiry"
                 value={formData.sourceOfInquiry}
-                onChange={handleChange()}
+                onChange={handleFieldChange}
                 label="Source of Inquiry"
                 required
                 fullWidth
@@ -4455,56 +4253,5624 @@ const [formData, setFormData] = useState({
 
 
           {/* Wrapper div with consistent height */}
+          {/* this is where the form is getting rendered conditionally  */}
           <div style={{ minHeight: '200px' }}>
-              <div>
-                <Grid container spacing={2}>
-                  {/* Option selector */}
-                  <Grid item xs={4}>
-                    <FormControl fullWidth>
-                      <InputLabel>Seal Type</InputLabel>
-                      <Select
-                        size="small"
-                        value={sealType}
-                        onChange={(e)=>setSealType(e.target.value)}
-                        label="Seal Type" >
-                        <MenuItem value="agitator">Agitator</MenuItem>
-                        <MenuItem value="Pump">Pump</MenuItem>
-                        <MenuItem value="apiplane">API Plan</MenuItem>
-                        <MenuItem value="rotatoryjoin">Rotatory join</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Grid>
-                </Grid>
+          <div>
+
+{sealType === 'agitator' && (
+ <div>
+  {formData?.agitatorInquiries.length === 0 && addItem("agitatorInquiries")}
+
+ {formData?.agitatorInquiries.map((item, index) => (
+   <div key={index} style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "25px", borderRadius: "5px" }}>
+    
+ 
 
 
-                {/* Conditionally render fields based on seal type */}
-                {sealType === 'agitator' && (
-                  <div>
-                    {Agitator()}
-                    {/* Add more fields/components for single seal if needed */}
-                  </div>
-                )}
+<Grid item xs={2}>
+      <Autocomplete
+        size="small"
+        value={item?.sealType || ""}
+        onChange={(event, newValue) =>
+          handleChange("agitatorInquiries", index)({ target: { name: "sealType", value: newValue || "" } })
+        }
+        options={["agitatorInquiries", "pumpInquiries", "apiPlanInquiries", "rotaryJointInquiries"]}
+        renderInput={(params) => (
+          <TextField
+            required
+            className="custom-text-field"
+            {...params}
+            size="small"
+            label="Seal Type"
+            variant="outlined"
+            fullWidth
+          />
+        )}
+      />
+    </Grid>
 
-                {sealType === 'Pump' && (
-                  <div>
-                    {PumpData()}
-                    {/* Add more fields/components for double seal if needed */}
-                  </div>
-                )}
 
-                {sealType === 'apiplane' && (
-                  <div>
-                    {ApiPlane()}
-                    {/* Add more fields/components for double seal if needed */}
-                  </div>
-                )}
+     {/* Conditionally Render Inquiry Type Form Based on sealType */}
+   {/* Conditionally Render Inquiry Type Form Based on sealType */}
+   {item?.sealType === "agitatorInquiries" && (
+     <div key={index}>
+     <Grid container spacing={2} style={{ marginTop: "10px" }}>
+       {/* Sales Inquiry Item Reference No */}
+       <Grid item xs={4}>
+         <TextField
+           label="Sales Inquiry Item Reference No."
+           value={item?.agitatorInquiryReferenceNo}
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           id="disableItem"
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
 
-                {sealType === 'rotatoryjoin' && (
-                  <div>
-                    {Rotatoryjoin()}
-                    {/* Add more fields/components for double seal if needed */}
-                  </div>
-                )}
+       <Grid item xs={12} sm={4}>
+  <Autocomplete
+    size="small"
+    value={item?.branch || ''}
+    onChange={(event, newValue) => {
+      const updatedInquiries = [...formData.agitatorInquiries];
+      updatedInquiries[index] = {
+        ...updatedInquiries[index], // Preserve other fields
+        branch: newValue || "", // Update only the branch field
+      };
+      setFormData((prevState) => ({
+        ...prevState,
+        agitatorInquiries: updatedInquiries,
+      }));
+    }}
+    inputValue={formData?.agitatorInquiries[index]?.branch || ''}
+    onInputChange={(event, newInputValue) => {
+      const updatedInquiries = [...formData.agitatorInquiries];
+      updatedInquiries[index] = {
+        ...updatedInquiries[index], // Preserve other fields
+        branch: newInputValue || "", // Update only the branch field
+      };
+      setFormData((prevState) => ({
+        ...prevState,
+        agitatorInquiries: updatedInquiries,
+      }));
+    }}
+    options={Array.isArray(authState?.branchs) ? authState.branchs.map((b) => b.branchName) : []}
+    renderInput={(params) => (
+      <TextField
+        required
+        className="custom-text-field"
+        {...params}
+        size="small"
+        label="Branch"
+        variant="outlined"
+        fullWidth
+      />
+    )}
+  />
+</Grid>
+
+
+       {/* Created By User */}
+       <Grid item xs={4}>
+         <TextField
+           label="Created By User"
+           value={authState?.sub}
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           id="disableItem"
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+
+
+
+       {/* Created On */}
+       <Grid item xs={4}>
+         <TextField
+           label="Created On"
+           value={dateTime}
+           InputProps={{ readOnly: true }}
+           size="small"
+           id="disableItem"
+           fullWidth
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Updated By User */}
+       <Grid item xs={4}>
+         <TextField
+           label="Updated By User"
+           value={authState?.sub}
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           id="disableItem"
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Updated On */}
+       <Grid item xs={4}>
+         <TextField
+           label="Updated On"
+           value={dateTime}
+           id="disableItem"
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+     </Grid>
+
+     {/* //////// 2nd form ///////////// */}
+
+     <h3 style={{ padding: '10px 0' }}>Existing Seal :-</h3>
+
+     <Grid container spacing={2}>
+       {/* Series */}
+       <Grid item xs={4}>
+      <TextField
+         label="Series"
+         name="series" // This is used to identify the property dynamically
+         value={item?.series || ""}
+         onChange={handleChange("agitatorInquiries",index)} // Specify array name and index
+         size="small"
+         fullWidth
+         className="custom-text-field" />
+       </Grid>
+
+
+
+<Grid item xs={4}>
+<Autocomplete
+ style={{ width: "100%" }}
+ size="small"
+ value={formData?.agitatorInquiries[index]?.sealArrangement || ""}
+ onChange={(event, newValue) =>
+   handleChange("agitatorInquiries", index)({
+     target: { name: "sealArrangement", value: newValue || "" },
+   })
+ }
+ options={["Single", "Double"]}
+ renderInput={(params) => (
+   <TextField
+     size="small"
+     {...params}
+     placeholder="Seal Arrangement"
+     variant="outlined"
+     className="custom-text-field"
+     fullWidth
+     label="Seal Arrangement"
+   />
+ )}
+/>
+
+</Grid>
+
+
+       <Grid item xs={4}>
+         <Autocomplete
+           style={{ width: '100%' }}
+           size="small"
+       value={formData?.agitatorInquiries[index]?.performance || ""}
+           onChange={(event, newValue) => {
+             setFormData({
+               ...formData,
+               agitatorInquiries: [
+                 {
+                   ...item,
+                   performance: newValue || "", // Update the sealArrangement field
+                 },
+               ],
+             });
+           }}
+           options={['Satisfactory', 'Unsatisfactory']}
+           renderInput={(params) => (
+             <TextField
+               size="small"
+               {...params}
+               placeholder="Performance"
+               variant="outlined"
+               className='custom-text-field'
+               fullWidth
+               label="Performance"
+             />
+           )}
+         />
+       </Grid>
+
+
+       {/* Make */}
+       <Grid item xs={4}>
+         <TextField
+           label="Make"
+           name="existingSealMake"
+         value={formData?.agitatorInquiries[index]?.existingSealMake}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Size */}
+       <Grid item xs={4}>
+         <TextField
+           label="Size"
+           name="existingSealSize"
+           value={item?.existingSealSize}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* MOC */}
+       <Grid item xs={4}>
+         <TextField
+           label="MOC"
+           name="existingSealMOC"
+           value={item?.existingSealMOC}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* API Plan */}
+       <Grid item xs={4}>
+         <TextField
+           label="API Plan"
+           name="existingSealApiPlan"
+           value={item?.existingSealApiPlan}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+     </Grid>
+
+     {/*///////////////3rd form ////////////// */}
+
+     <h3 style={{ padding: '10px 0' }}>Operating Parameters And Fluid Detail :-</h3>
+
+     <Grid container spacing={2}>
+       {/* Vessel Pressure (Operating) */}
+
+
+<Grid item xs={4}>
+ <TextField
+   size="small"
+   className="custom-text-field"
+   name="vesselPressureOperating"
+   value={item?.vesselPressureOperating}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           vesselPressureOperating: +value
+         }
+       ]
+     }));
+   }}
+   label="Vessel Pressure (Operating)"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.vesselPressureOperatingUnit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     vesselPressureOperatingUnit: selectedUnit
+                   }
+                 ]
+               }));
+         
+               
+             }}
+             displayEmpty
+             disabled={!item?.vesselPressureOperating}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="kg/cm2">kg/cm²</MenuItem>
+             <MenuItem value="kg/cm2 a">kg/cm² (a)</MenuItem>
+             <MenuItem value="kg/cm2 g">kg/cm² (g)</MenuItem>
+             <MenuItem value="bar">bar</MenuItem>
+             <MenuItem value="bar (a)">bar (a)</MenuItem>
+             <MenuItem value="bar (g)">bar (g)</MenuItem>
+             <MenuItem value="Mpa">MPa</MenuItem>
+             <MenuItem value="Mpa (a)">MPa (a)</MenuItem>
+             <MenuItem value="Mpa (g)">MPa (g)</MenuItem>
+             <MenuItem value="Kpa">kPa</MenuItem>
+             <MenuItem value="Kpa (g)">kPa (g)</MenuItem>
+             <MenuItem value="PSI">PSI</MenuItem>
+             <MenuItem value="PSIG">PSIG</MenuItem>
+             <MenuItem value="MLC">MLC</MenuItem>
+             <MenuItem value="MWC">MWC</MenuItem>
+             <MenuItem value="Meter">Meter</MenuItem>
+             <MenuItem value="kgf/cm2">kgf/cm²</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     )
+   }}
+ />
+</Grid>
+
+
+
+       <Grid item xs={4}>
+       <TextField
+   size="small"
+   type="number"
+   className="custom-text-field"
+   name="vesselPressureDesign"
+   value={item?.vesselPressureDesign}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           vesselPressureDesign: +value
+         }
+       ]
+     }));
+   }}
+   label="Vessel Pressure (Design)"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.vesselPressureDesignUnit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     vesselPressureDesignUnit: selectedUnit
+                   }
+                 ]
+               }));
+         
+               
+             }}
+             displayEmpty
+             disabled={!item?.vesselPressureDesign}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="MLC">MLC</MenuItem>
+             <MenuItem value="MWC">MWC</MenuItem>
+             <MenuItem value="Meter">Meter</MenuItem>
+             <MenuItem value="kgf/cm2">kgf/cm2</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     ),
+   }}
+ />
+</Grid>
+
+
+
+
+     
+
+
+
+
+       {/* Direction of Rotation */}
+       <Grid item xs={4}>
+         <Autocomplete
+           size="small"
+           value={item?.directionOfRotation}
+           onChange={(event, newValue) => {
+             setFormData((prevState) => ({
+               ...prevState,
+               agitatorInquiries: [
+                 {
+                   ...prevState.agitatorInquiries[index], // Keep the other fields of the first object intact
+                   directionOfRotation: newValue || "", // Update the 'branch' property
+                 },
+               ],
+             }));
+           }}
+           options={['CW', 'CCW']}
+           renderInput={(params) => (
+             <TextField
+               {...params}
+               label="Direction of Rotation"
+               variant="outlined"
+               size="small"
+               fullWidth
+               className="custom-text-field"
+             />
+           )}
+         />
+       </Grid>
+
+       {/* Speed */}
+       <Grid item xs={4}>
+         <TextField
+           label="Speed"
+           type="number"
+           name="speed"
+           value={item?.speed}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+     </Grid>
+
+     {/*/////////////// 4th form /////////////// */}
+     <h3 style={{ padding: '10px 0' }}>Fluid :-</h3>
+     <Grid container spacing={2}>
+       {/* Fluid */}
+       <Grid item xs={4}>
+         <TextField
+           label="Fluid"
+           name="fluid"
+           value={item?.fluid}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+
+       {/* Nature */}
+       <Grid item xs={4}>
+         <Autocomplete
+           size="small"
+           value={item?.nature}
+           onChange={(event, newValue) => {
+             setFormData((prevState) => ({
+               ...prevState,
+               agitatorInquiries: [
+                 {
+                   ...prevState.agitatorInquiries[index], // Keep the other fields of the first object intact
+                   nature: newValue || "", // Update the 'branch' property
+                 },
+               ],
+             }));
+           }}
+           options={['Option1', 'Option2']} // Replace with actual nature options
+           renderInput={(params) => (
+             <TextField
+               {...params}
+               label="Nature"
+               variant="outlined"
+               size="small"
+               fullWidth
+               className="custom-text-field"
+             />
+           )}
+         />
+       </Grid>
+
+       {/* Pumping Temperature */}
+        <Grid item xs={4}>
+ <TextField
+   size="small"
+   className="custom-text-field"
+   name="pumpingTemperature"
+   value={item?.pumpingTemperature?.value || ""}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           pumpingTemperature: {
+             ...prev.agitatorInquiries[index]?.pumpingTemperature,
+             value
+           }
+         }
+       ]
+     }));
+   }}
+   label="Pumping Temperature"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.pumpingTemperature?.unit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     pumpingTemperature: {
+                       ...prev.agitatorInquiries[index]?.pumpingTemperature,
+                       unit: selectedUnit
+                     }
+                   }
+                 ]
+               }));
+             }}
+             displayEmpty
+             disabled={!item?.pumpingTemperature?.value}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="℃">℃ </MenuItem>
+             <MenuItem value="℉">℉</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     ),
+   }}
+ />
+</Grid>
+
+
+       {/* Maximum Temperature */}
+ <Grid item xs={4}>
+ <TextField
+   size="small"
+   className="custom-text-field"
+   name="maximumTemperature"
+   value={item?.maximumTemperature?.value || ""}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           maximumTemperature: {
+             ...prev.agitatorInquiries[index]?.maximumTemperature,
+             value
+           }
+         }
+       ]
+     }));
+   }}
+   label="Maximum Temperature"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.maximumTemperature?.unit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     maximumTemperature: {
+                       ...prev.agitatorInquiries[index]?.maximumTemperature,
+                       unit: selectedUnit
+                     }
+                   }
+                 ]
+               }));
+             }}
+             displayEmpty
+             disabled={!item?.maximumTemperature?.value}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="℃">℃ </MenuItem>
+             <MenuItem value="℉">℉</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     ),
+   }}
+ />
+</Grid>
+
+
+
+       {/* SP Gravity */}
+       <Grid item xs={4}>
+         <TextField
+           label="SP Gravity"
+           name="spGravity"
+           value={item?.spGravity}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Freezing Point */}
+       <Grid item xs={4}>
+         <TextField
+           label="Freezing Point"
+           name="freezingPoint"
+           value={item?.freezingPoint}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Boiling Point */}
+       <Grid item xs={4}>
+         <TextField
+           label="Boiling Point"
+           name="boilingPoint"
+           value={item?.boilingPoint}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Viscosity */}
+       <Grid item xs={4}>
+         <TextField
+           label="Viscosity"
+           name="viscosity"
+           value={item?.viscosity}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Percentage Of Solid */}
+       <Grid item xs={4}>
+         <TextField
+           label="Percentage Of Solid"
+           name="percentageOfSolid"
+           value={item?.percentageOfSolid}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Solid Size */}
+       <Grid item xs={4}>
+         <TextField
+           label="Solid Size"
+           name="solidSize"
+           value={item?.solidSize}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Special Note */}
+       <Grid item xs={4}>
+         <TextField
+           label="Special Note"
+           name="specialNote"
+           value={formData.agitatorInquiries?.specialNote}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+           inputProps={{ maxLength: 150 }}
+         />
+       </Grid>
+     </Grid>
+     
+
+   </div>
+   )}
+    {item?.sealType === "pumpInquiries" && (
+         <form>
+         <Grid container spacing={2} sx={{ marginTop: '10px' }}>
+           {/* Autogenerated Reference Number */}
+           <Grid item xs={4}>
+             <TextField
+               size="small"
+               className="custom-text-field"
+               label="Pump Inquiry Reference No."
+               value={item?.pumpInquiryReferenceNo}
+               disabled
+               fullWidth
+               InputProps={{ readOnly: true }}
+             />
+           </Grid>
+   
+           <Grid item xs={12} sm={4}>
+     <Autocomplete
+       size="small"
+       value={item?.branch || ''}
+       onChange={(event, newValue) => handleChange('pumpInquiries', index)({ target: { name: 'branch', value: newValue || '' } })}
+       options={Array.isArray(authState?.branchs) ? authState.branchs.map((b) => b.branchName) : []}
+       renderInput={(params) => (
+         <TextField
+           required
+           className="custom-text-field"
+           {...params}
+           size="small"
+           label="Branch"
+           variant="outlined"
+           fullWidth
+         />
+       )}
+     />
+   </Grid>
+   
+   
+           {/* Created On (Autogenerated) */}
+           <Grid item xs={4}>
+             <TextField
+               size="small"
+               className="custom-text-field"
+               label="Created On"
+               value={dateTime} // Auto-generated value
+               disabled
+               fullWidth
+               InputProps={{ readOnly: true }}
+             />
+           </Grid>
+   
+   
+               {/* Updated By User */}
+               <Grid item xs={4}>
+                 <TextField
+                   size="small"
+                   className="custom-text-field"
+                   label="Created By User"
+                   value={authState?.sub}
+                   id="disableItem"
+                   InputLabelProps={{
+                     shrink: Boolean(authState?.sub),
+                   }}
+                   autoFocus={authState?.sub} 
+                   InputProps={{
+                     readOnly: true, // Read-only for auto-generated field
+                   }}
+                   disabled
+                   fullWidth />
+               </Grid>
+   
+   
+               <Grid item xs={4}>
+                 <TextField
+                   size="small"
+                   className="custom-text-field"
+                   label="Updated By User"
+                   value={authState?.sub}
+                   id="disableItem"
+                   InputLabelProps={{
+                     shrink: Boolean(authState?.sub),
+                   }}
+                   autoFocus={authState?.sub} 
+                   InputProps={{
+                     readOnly: true, // Read-only for auto-generated field
+                   }}
+                   disabled
+                   fullWidth />
+               </Grid>
+   
+   
+   
+           {/* Updated On (Autogenerated) */}
+           <Grid item xs={4}>
+             <TextField
+               size="small"
+               className="custom-text-field"
+               label="Updated On"
+               value={dateTime} // Auto-generated value
+               disabled
+               fullWidth
+               InputProps={{ readOnly: true }}
+             />
+           </Grid>
+   
+   
+   
+         </Grid>
+   
+   
+         {/*////////////////// 2nd form staring here   ///////  */}
+   
+         <h3 style={{ padding: '10px 0' }}>Pump Data :-</h3>
+         <Grid container spacing={2}>
+           {/* Make */}
+   
+          {/* Pump Make */}
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       label="Make"
+       name="make"
+       value={item?.make || ''}
+       onChange={handleChange('pumpInquiries', index)}
+       fullWidth
+       variant="outlined"
+       className="custom-text-field"
+     />
+   </Grid>
+   
+           {/* Model */}
+           <Grid item xs={4}>
+     <TextField
+       size="small"
+       label="Model"
+       name="model"
+       value={item?.model || ''}
+       onChange={handleChange('pumpInquiries', index)}
+       fullWidth
+       variant="outlined"
+       className="custom-text-field"
+     />
+   </Grid>
+           {/* Pump MOC */}
+    
+   
+           {/* Impeller/Casing MOC */}
+           {/* Impeller/Casing MOC */}
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       label="Impeller/Casing MOC"
+       name="impellerCasingMOC"
+       value={item?.impellerCasingMOC || ''}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+       variant="outlined"
+       className="custom-text-field"
+     />
+   </Grid>
+   
+   {/* Shaft MOC */}
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       label="Shaft MOC"
+       name="shaftMOC"
+       value={item?.shaftMOC || ''}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+       variant="outlined"
+       className="custom-text-field"
+     />
+   </Grid>
+   
+   {/* Bearing BKT */}
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       label="Bearing BKT"
+       name="bearingBKT"
+       value={item?.bearingBKT || ''}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+       variant="outlined"
+       className="custom-text-field"
+     />
+   </Grid>
+   
+   {/* Tag Number */}
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       label="Tag Number"
+       name="tagNumber"
+       value={item?.tagNumber || ''}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+       variant="outlined"
+       className="custom-text-field"
+     />
+   </Grid>
+   
+   
+           {/* Arrangement (Autocomplete Dropdown) */}
+           <Grid item xs={4}>
+     <Autocomplete
+       size="small"
+       options={['Horizontal', 'Vertical']}
+       value={item?.arrangement || null} 
+       onChange={(event, newValue) => {
+         setFormData((prev) => {
+           const updatedPumpInquiry = [...prev.pumpInquiries];
+           updatedPumpInquiry[index] = {
+             ...updatedPumpInquiry[index],
+             arrangement: newValue, // Correctly update state
+           };
+           return { ...prev, pumpInquiries: updatedPumpInquiry };
+         });
+       }}
+       renderInput={(params) => (
+         <TextField
+           {...params}
+           size="small"
+           label="Arrangement"
+           variant="outlined"
+           fullWidth
+           className="custom-text-field"
+         />
+       )}
+     />
+   </Grid>
+   
+   
+           {/* Pump Type (Autocomplete Dropdown) */}
+          {/* Pump Type */}
+   <Grid item xs={4}>
+     <Autocomplete
+       value={item?.pumpType || ''}
+       onChange={(event, newValue) => {
+         setFormData((prev) => {
+           const updatedPumpInquiries = [...prev.pumpInquiries];
+           updatedPumpInquiries[index] = {
+             ...updatedPumpInquiries[index],
+             pumpType: newValue || "",
+           };
+           return { ...prev, pumpInquiries: updatedPumpInquiries };
+         });
+       }}
+       options={['Centrifugal', 'Positive Displacement']}
+       renderInput={(params) => (
+         <TextField
+           {...params}
+           size="small"
+           label="Pump Type"
+           variant="outlined"
+           fullWidth
+           className="custom-text-field"
+         />
+       )}
+     />
+   </Grid>
+   
+   {/* Stage */}
+   <Grid item xs={4}>
+     <Autocomplete
+       value={item?.stage || ''}
+       onChange={(event, newValue) => {
+         setFormData((prev) => {
+           const updatedPumpInquiries = [...prev.pumpInquiries];
+           updatedPumpInquiries[index] = {
+             ...updatedPumpInquiries[index],
+             stage: newValue || "",
+           };
+           return { ...prev, pumpInquiries: updatedPumpInquiries };
+         });
+       }}
+       options={['Single', 'Multiple']}
+       renderInput={(params) => (
+         <TextField
+           {...params}
+           size="small"
+           label="Stage"
+           variant="outlined"
+           fullWidth
+           className="custom-text-field"
+         />
+       )}
+     />
+   </Grid>
+   
+   {/* Casing Type */}
+   <Grid item xs={4}>
+     <Autocomplete
+       value={item?.casingType || ''}
+       onChange={(event, newValue) => {
+         setFormData((prev) => {
+           const updatedPumpInquiries = [...prev.pumpInquiries];
+           updatedPumpInquiries[index] = {
+             ...updatedPumpInquiries[index],
+             casingType: newValue || "",
+           };
+           return { ...prev, pumpInquiries: updatedPumpInquiries };
+         });
+       }}
+       options={['Split', 'Unsplitted']}
+       renderInput={(params) => (
+         <TextField
+           {...params}
+           size="small"
+           label="Casing Type"
+           variant="outlined"
+           fullWidth
+           className="custom-text-field"
+         />
+       )}
+     />
+   </Grid>
+   
+         </Grid>
+   
+         {/* //////////////////////////////////3rd form ////////////////////// */}
+   
+         <h3 style={{ padding: '10px 0' }}>Existing Seal :-</h3>
+         <Grid container spacing={2}>
+           {/* Series */}
+           <Grid item xs={4}>
+           <TextField
+       size="small"
+       label="Series"
+       name="series"
+       value={item?.series || ''}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+       variant="outlined"
+       className="custom-text-field"
+     />
+      
+     </Grid>
+   
+           {/* Performance (Dropdown) */}
+           <Grid item xs={4}>
+       <Autocomplete
+         size="small"
+         options={['Satisfactory', 'Unsatisfactory']}
+         value={item?.performance || ''}
+         onChange={(event, newValue) => {
+           setFormData((prev) => {
+             const updatedPumpInquiry = [...prev.pumpInquiries];
+             updatedPumpInquiry[index] = {
+               ...updatedPumpInquiry[index],
+                performance: newValue ,
+             };
+             return { ...prev, pumpInquiries: updatedPumpInquiry };
+           });
+         }}
+         renderInput={(params) => <TextField {...params} label="Performance" variant="outlined" fullWidth className="custom-text-field" />}
+       />
+     </Grid>
+   
+   
+           {/* Seal Arrangement (Dropdown) */}
+           <Grid item xs={4}>
+       <Autocomplete
+         size="small"
+         options={['Single', 'Double']}
+         value={item?.sealArrangement || ''}
+         onChange={(event, newValue) => {
+           setFormData((prev) => {
+             const updatedPumpInquiry = [...prev.pumpInquiries];
+             updatedPumpInquiry[index] = {
+               ...updatedPumpInquiry[index],
+               sealArrangement: newValue || "" ,
+             };
+             return { ...prev, pumpInquiries: updatedPumpInquiry };
+           });
+         }}
+         renderInput={(params) => <TextField {...params} label="Seal Arrangement" variant="outlined" fullWidth className="custom-text-field" />}
+       />
+     </Grid>
+   
+           {/* Make */}
+     {/* Make */}
+     <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       label="Make"
+       name="existingSealMake"
+       value={item?.existingSealMake || ""}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+     />
+   </Grid>
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       label="Size"
+       name="existingSealSize"
+       value={item?.existingSealSize || ""}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+     />
+   </Grid>
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       label="MOC"
+       name="existingSealMOC"
+       value={item?.existingSealMOC || ""}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+     />
+   </Grid>
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       label="API Plan"
+       name="existingSealApiPlan"
+       value={item?.existingSealApiPlan || ""}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+     />
+   </Grid>
+   
+    </Grid>
+   
+    <h3 style={{ padding: '10px 0' }}>Parameters :-</h3>
+   
+         <Grid container spacing={2}>
+      
+         <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="suctionPressure"
+       value={item?.suctionPressure?.value || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               suctionPressure: {
+                 ...prev.pumpInquiries[index].suctionPressure,
+                 value
+               }
+             }
+           ]
+         }));
+       }}
+       label="Suction Pressure"
+       fullWidth
+       InputProps={{
+         endAdornment: (
+           <InputAdornment position="end">
+             <FormControl size="small" variant="outlined">
+               <Select
+                 value={item?.suctionPressure?.unit || ""}
+                 onChange={(e) => {
+                   const selectedUnit = e.target.value;
+                   setFormData((prev) => ({
+                     ...prev,
+                     pumpInquiries: [
+                       {
+                         ...prev.pumpInquiries[index],
+                         suctionPressure: {
+                           ...prev.pumpInquiries[index].suctionPressure,
+                           unit: selectedUnit
+                         }
+                       }
+                     ]
+                   }));
+                 }}
+                 displayEmpty
+                 disabled={!item?.suctionPressure?.value}
+                 sx={{
+                   height: "100%",
+                   borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                   borderRadius: 0,
+                   "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                   "& .MuiSelect-select": {
+                     padding: "0 8px",
+                     outline: "none",
+                     border: "none",
+                     height: "100%",
+                     display: "flex",
+                     alignItems: "center"
+                   },
+                   minWidth: 60
+                 }}
+               >
+                 {!item?.suctionPressure?.value && <MenuItem>Unit</MenuItem>}
+                 {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+                   <MenuItem key={unit} value={unit}>
+                     {unit}
+                   </MenuItem>
+                 ))}
+               </Select>
+             </FormControl>
+           </InputAdornment>
+         ),
+       }}
+     />
+   </Grid>
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="boxPressure"
+       value={item?.boxPressure?.value || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               boxPressure: {
+                 ...prev.pumpInquiries[index].boxPressure,
+                 value
+               }
+             }
+           ]
+         }));
+       }}
+       label="Box Pressure"
+       fullWidth
+       InputProps={{
+         endAdornment: (
+           <InputAdornment position="end">
+             <FormControl size="small" variant="outlined">
+               <Select
+                 value={item?.boxPressure?.unit || ""}
+                 onChange={(e) => {
+                   const selectedUnit = e.target.value;
+                   setFormData((prev) => ({
+                     ...prev,
+                     pumpInquiries: [
+                       {
+                         ...prev.pumpInquiries[index],
+                         boxPressure: {
+                           ...prev.pumpInquiries[index].boxPressure,
+                           unit: selectedUnit
+                         }
+                       }
+                     ]
+                   }));
+                 }}
+                 displayEmpty
+                 disabled={!item?.boxPressure?.value}
+                 sx={{
+                   height: "100%",
+                   borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                   borderRadius: 0,
+                   "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                   "& .MuiSelect-select": {
+                     padding: "0 8px",
+                     outline: "none",
+                     border: "none",
+                     height: "100%",
+                     display: "flex",
+                     alignItems: "center"
+                   },
+                   minWidth: 60
+                 }}
+               >
+                 {!item?.dischargePressure?.value && <MenuItem>Unit</MenuItem>}
+                 {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+                   <MenuItem key={unit} value={unit}>
+                     {unit}
+                   </MenuItem>
+                 ))}
+               </Select>
+             </FormControl>
+           </InputAdornment>
+         ),
+       }}
+     />
+   </Grid>
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="dischargePressure"
+       value={item?.dischargePressure?.value || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               dischargePressure: {
+                 ...prev.pumpInquiries[index].dischargePressure,
+                 value
+               }
+             }
+           ]
+         }));
+       }}
+       label="Discharge Pressure"
+       fullWidth
+       InputProps={{
+         endAdornment: (
+           <InputAdornment position="end">
+             <FormControl size="small" variant="outlined">
+               <Select
+                 value={item?.dischargePressure?.unit || ""}
+                 onChange={(e) => {
+                   const selectedUnit = e.target.value;
+                   setFormData((prev) => ({
+                     ...prev,
+                     pumpInquiries: [
+                       {
+                         ...prev.pumpInquiries[index],
+                         dischargePressure: {
+                           ...prev.pumpInquiries[index].dischargePressure,
+                           unit: selectedUnit
+                         }
+                       }
+                     ]
+                   }));
+                 }}
+                 displayEmpty
+                 disabled={!item?.dischargePressure?.value}
+                 sx={{
+                   height: "100%",
+                   borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                   borderRadius: 0,
+                   "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                   "& .MuiSelect-select": {
+                     padding: "0 8px",
+                     outline: "none",
+                     border: "none",
+                     height: "100%",
+                     display: "flex",
+                     alignItems: "center"
+                   },
+                   minWidth: 60
+                 }}
+               >
+                 {!item?.dischargePressure?.value && <MenuItem>Unit</MenuItem>}
+                 {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+                   <MenuItem key={unit} value={unit}>
+                     {unit}
+                   </MenuItem>
+                 ))}
+               </Select>
+             </FormControl>
+           </InputAdornment>
+         ),
+       }}
+     />
+   </Grid>
+   
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="totalHead"
+       value={item?.totalHead?.value || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               totalHead: {
+                 ...prev.pumpInquiries[index].totalHead,
+                 value
+               }
+             }
+           ]
+         }));
+       }}
+       label="Total Head"
+       fullWidth
+       InputProps={{
+         endAdornment: (
+           <InputAdornment position="end">
+             <FormControl size="small" variant="outlined">
+               <Select
+                 value={item?.totalHead?.unit || ""}
+                 onChange={(e) => {
+                   const selectedUnit = e.target.value;
+                   setFormData((prev) => ({
+                     ...prev,
+                     pumpInquiries: [
+                       {
+                         ...prev.pumpInquiries[index],
+                         totalHead: {
+                           ...prev.pumpInquiries[index].totalHead,
+                           unit: selectedUnit
+                         }
+                       }
+                     ]
+                   }));
+                 }}
+                 displayEmpty
+                 disabled={!item?.totalHead?.value}
+                 sx={{
+                   height: "100%",
+                   borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                   borderRadius: 0,
+                   "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                   "& .MuiSelect-select": {
+                     padding: "0 8px",
+                     outline: "none",
+                     border: "none",
+                     height: "100%",
+                     display: "flex",
+                     alignItems: "center"
+                   },
+                   minWidth: 60
+                 }}
+               >
+                 {!item?.totalHead?.value && <MenuItem>Unit</MenuItem>}
+                 {["Meter", "MWC", "MLC", "kg/cm2"].map((unit) => (
+                   <MenuItem key={unit} value={unit}>
+                     {unit}
+                   </MenuItem>
+                 ))}
+               </Select>
+             </FormControl>
+           </InputAdornment>
+         ),
+       }}
+     />
+   </Grid>
+   
+   
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="directionOfRotation"
+       value={item?.directionOfRotation || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               directionOfRotation: value
+             }
+           ]
+         }));
+       }}
+       label="Direction of Rotation"
+       fullWidth
+       select
+     >
+       <MenuItem value="CW">CW</MenuItem>
+       <MenuItem value="CCW">CCW</MenuItem>
+     </TextField>
+   </Grid>
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="speed"
+       value={item?.speed || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               speed: value
+             }
+           ]
+         }));
+       }}
+       label="Speed"
+       fullWidth
+     />
+   </Grid>
+   
+         </Grid>
+   
+   
+         {/* //////////// 5th section start ///////// */}
+   
+         <h3 style={{ padding: '10px 0' }}>Fluid :-</h3>
+         <Grid container spacing={2}>
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="Fluid"
+         name="fluid"
+         value={item?.fluid || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [
+               {
+                 ...prev.pumpInquiries[index],
+                 fluid: value,
+               },
+             ],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+       />
+     </Grid>
+   
+     {/* Nature */}
+     <Grid item xs={4}>
+       <Autocomplete
+         options={["Option 1", "Option 2", "Option 3"]} // Replace with actual options
+         renderInput={(params) => (
+           <TextField {...params} label="Nature" size="small" fullWidth className="custom-text-field" />
+         )}
+         onChange={(event, value) =>
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], nature: value }],
+           }))
+         }
+       />
+     </Grid>
+   
+     {/* Pumping Temperature */}
+   {/* Pumping Temperature */}
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="pumpingTemperature"
+       value={item?.pumpingTemperature?.value || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               pumpingTemperature: {
+                 ...prev.pumpInquiries[index].pumpingTemperature,
+                 value,
+               },
+             },
+           ],
+         }));
+       }}
+       label="Pumping Temperature"
+       fullWidth
+       InputProps={{
+         endAdornment: (
+           <InputAdornment position="end">
+             <FormControl size="small" variant="outlined">
+               <Select
+                 value={item?.pumpingTemperature?.unit || ""}
+                 onChange={(e) => {
+                   const selectedUnit = e.target.value;
+                   setFormData((prev) => ({
+                     ...prev,
+                     pumpInquiries: [
+                       {
+                         ...prev.pumpInquiries[index],
+                         pumpingTemperature: {
+                           ...prev.pumpInquiries[index].pumpingTemperature,
+                           unit: selectedUnit,
+                         },
+                       },
+                     ],
+                   }));
+                 }}
+                 displayEmpty
+                 disabled={!item?.pumpingTemperature?.value}
+                 sx={{
+                   height: "100%",
+                   borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                   borderRadius: 0,
+                   "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                   "& .MuiSelect-select": {
+                     padding: "0 8px",
+                     outline: "none",
+                     border: "none",
+                     height: "100%",
+                     display: "flex",
+                     alignItems: "center",
+                   },
+                   minWidth: 60,
+                 }}
+               >
+                 {!item?.pumpingTemperature?.value && <MenuItem>Unit</MenuItem>}
+                 <MenuItem value="℃">℃</MenuItem>
+                 <MenuItem value="℉">℉</MenuItem>
+               </Select>
+             </FormControl>
+           </InputAdornment>
+         ),
+       }}
+     />
+   </Grid>
+   
+   {/* Maximum Temperature */}
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="maximumTemperature"
+       value={item?.maximumTemperature?.value || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               maximumTemperature: {
+                 ...prev.pumpInquiries[index].maximumTemperature,
+                 value,
+               },
+             },
+           ],
+         }));
+       }}
+       label="Maximum Temperature"
+       fullWidth
+       InputProps={{
+         endAdornment: (
+           <InputAdornment position="end">
+             <FormControl size="small" variant="outlined">
+               <Select
+                 value={item?.maximumTemperature?.unit || ""}
+                 onChange={(e) => {
+                   const selectedUnit = e.target.value;
+                   setFormData((prev) => ({
+                     ...prev,
+                     pumpInquiries: [
+                       {
+                         ...prev.pumpInquiries[index],
+                         maximumTemperature: {
+                           ...prev.pumpInquiries[index].maximumTemperature,
+                           unit: selectedUnit,
+                         },
+                       },
+                     ],
+                   }));
+                 }}
+                 displayEmpty
+                 disabled={!item?.maximumTemperature?.value}
+                 sx={{
+                   height: "100%",
+                   borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                   borderRadius: 0,
+                   "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                   "& .MuiSelect-select": {
+                     padding: "0 8px",
+                     outline: "none",
+                     border: "none",
+                     height: "100%",
+                     display: "flex",
+                     alignItems: "center",
+                   },
+                   minWidth: 60,
+                 }}
+               >
+                 {!item?.maximumTemperature?.value && <MenuItem>Unit</MenuItem>}
+                 <MenuItem value="℃">℃</MenuItem>
+                 <MenuItem value="℉">℉</MenuItem>
+               </Select>
+             </FormControl>
+           </InputAdornment>
+         ),
+       }}
+     />
+   </Grid>
+   
+   
+     {/* SP Gravity */}
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="SP Gravity"
+         name="spGravity"
+         value={item?.spGravity || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], spGravity: value }],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+       />
+     </Grid>
+   
+     {/* Freezing Point */}
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="Freezing Point"
+         name="freezingPoint"
+         value={item?.freezingPoint || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], freezingPoint: value }],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+       />
+     </Grid>
+   
+     {/* Boiling Point */}
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="Boiling Point"
+         name="boilingPoint"
+         value={item?.boilingPoint || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], boilingPoint: value }],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+       />
+     </Grid>
+   
+     {/* Viscosity */}
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="Viscosity"
+         name="viscosity"
+         value={item?.viscosity || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], viscosity: value }],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+       />
+     </Grid>
+   
+     {/* Percentage of Solid */}
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="Percentage of Solid"
+         name="percentageOfSolid"
+         value={item?.percentageOfSolid || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], percentageOfSolid: value }],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+       />
+     </Grid>
+   
+     {/* Solid Size */}
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="Solid Size"
+         name="solidSize"
+         value={item?.solidSize || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], solidSize: value }],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+       />
+     </Grid>
+   
+     {/* Special Note */}
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="Special Note"
+         name="specialNote"
+         value={item?.specialNote || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], specialNote: value }],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+         inputProps={{ maxLength: 150 }}
+       />
+     </Grid>
+   </Grid>
+   
+       </form>
+
+    )}
+
+    {/* {item?.sealType === "ApiPlan" && <ApiPlane index={index} item={item} handleChange={handleChange} />}
+    {item?.sealType === "Rotatoryjoin" && <Rotatoryjoin index={index} item={item} handleChange={handleChange} />} */}
+
+
+     {/* Remove Item Button */}
+     <IconButton
+       variant="contained"
+       color="secondary"
+       className="deleteIcon"
+       onClick={() => removeItem(`${item?.sealType}`, index)}
+       style={{ marginTop: "10px", backgroundColor: "red", color: "white", borderRadius: "5px" }}
+     >
+       <DeleteIcon />
+     </IconButton>
+   </div>
+ ))}
+
+ {/* Add Item Button */}
+ <IconButton
+  variant="contained"
+  color="primary"
+  onClick={()=>addItem()}
+  disabled={!formData?.agitatorInquiries?.at(-1)?.sealType} 
+  style={{
+    marginTop: "10px",
+    fontSize: "0.8rem",
+    backgroundColor: formData?.agitatorInquiries?.at(-1)?.sealType ? "black" : "gray",
+    color: "white",
+    borderRadius: "5px",
+  }}
+>
+  <AddIcon /> Add Item
+</IconButton>
+</div>
+
+
+)}
+
+{sealType === 'Pump' && (
+  <div>
+    {formData?.pumpInquiries.map((item, index) => (
+      <div key={index}>
+        
+
+     {/* Conditionally Render Inquiry Type Form Based on sealType */}
+     {item?.sealType === "Agitator" && (
+     <div key={index}>
+     <Grid container spacing={2} style={{ marginTop: "10px" }}>
+       {/* Sales Inquiry Item Reference No */}
+       <Grid item xs={4}>
+         <TextField
+           label="Sales Inquiry Item Reference No."
+           value={item?.agitatorInquiryReferenceNo}
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           id="disableItem"
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+
+       <Grid item xs={12} sm={4}>
+  <Autocomplete
+    size="small"
+    value={item?.branch || ''}
+    onChange={(event, newValue) => {
+      const updatedInquiries = [...formData.agitatorInquiries];
+      updatedInquiries[index] = {
+        ...updatedInquiries[index], // Preserve other fields
+        branch: newValue || "", // Update only the branch field
+      };
+      setFormData((prevState) => ({
+        ...prevState,
+        agitatorInquiries: updatedInquiries,
+      }));
+    }}
+    inputValue={formData?.agitatorInquiries[index]?.branch || ''}
+    onInputChange={(event, newInputValue) => {
+      const updatedInquiries = [...formData.agitatorInquiries];
+      updatedInquiries[index] = {
+        ...updatedInquiries[index], // Preserve other fields
+        branch: newInputValue || "", // Update only the branch field
+      };
+      setFormData((prevState) => ({
+        ...prevState,
+        agitatorInquiries: updatedInquiries,
+      }));
+    }}
+    options={Array.isArray(authState?.branchs) ? authState.branchs.map((b) => b.branchName) : []}
+    renderInput={(params) => (
+      <TextField
+        required
+        className="custom-text-field"
+        {...params}
+        size="small"
+        label="Branch"
+        variant="outlined"
+        fullWidth
+      />
+    )}
+  />
+</Grid>
+
+
+       {/* Created By User */}
+       <Grid item xs={4}>
+         <TextField
+           label="Created By User"
+           value={authState?.sub}
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           id="disableItem"
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+
+
+
+       {/* Created On */}
+       <Grid item xs={4}>
+         <TextField
+           label="Created On"
+           value={dateTime}
+           InputProps={{ readOnly: true }}
+           size="small"
+           id="disableItem"
+           fullWidth
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Updated By User */}
+       <Grid item xs={4}>
+         <TextField
+           label="Updated By User"
+           value={authState?.sub}
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           id="disableItem"
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Updated On */}
+       <Grid item xs={4}>
+         <TextField
+           label="Updated On"
+           value={dateTime}
+           id="disableItem"
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+     </Grid>
+
+     {/* //////// 2nd form ///////////// */}
+
+     <h3 style={{ padding: '10px 0' }}>Existing Seal :-</h3>
+
+     <Grid container spacing={2}>
+       {/* Series */}
+       <Grid item xs={4}>
+      <TextField
+         label="Series"
+         name="series" // This is used to identify the property dynamically
+         value={item?.series || ""}
+         onChange={handleChange("agitatorInquiries",index)} // Specify array name and index
+         size="small"
+         fullWidth
+         className="custom-text-field" />
+       </Grid>
+
+
+
+<Grid item xs={4}>
+<Autocomplete
+ style={{ width: "100%" }}
+ size="small"
+ value={formData?.agitatorInquiries[index]?.sealArrangement || ""}
+ onChange={(event, newValue) =>
+   handleChange("agitatorInquiries", index)({
+     target: { name: "sealArrangement", value: newValue || "" },
+   })
+ }
+ options={["Single", "Double"]}
+ renderInput={(params) => (
+   <TextField
+     size="small"
+     {...params}
+     placeholder="Seal Arrangement"
+     variant="outlined"
+     className="custom-text-field"
+     fullWidth
+     label="Seal Arrangement"
+   />
+ )}
+/>
+
+</Grid>
+
+
+       <Grid item xs={4}>
+         <Autocomplete
+           style={{ width: '100%' }}
+           size="small"
+       value={formData?.agitatorInquiries[index]?.performance || ""}
+           onChange={(event, newValue) => {
+             setFormData({
+               ...formData,
+               agitatorInquiries: [
+                 {
+                   ...item,
+                   performance: newValue || "", // Update the sealArrangement field
+                 },
+               ],
+             });
+           }}
+           options={['Satisfactory', 'Unsatisfactory']}
+           renderInput={(params) => (
+             <TextField
+               size="small"
+               {...params}
+               placeholder="Performance"
+               variant="outlined"
+               className='custom-text-field'
+               fullWidth
+               label="Performance"
+             />
+           )}
+         />
+       </Grid>
+
+
+       {/* Make */}
+       <Grid item xs={4}>
+         <TextField
+           label="Make"
+           name="existingSealMake"
+         value={formData?.agitatorInquiries[index]?.existingSealMake}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Size */}
+       <Grid item xs={4}>
+         <TextField
+           label="Size"
+           name="existingSealSize"
+           value={item?.existingSealSize}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* MOC */}
+       <Grid item xs={4}>
+         <TextField
+           label="MOC"
+           name="existingSealMOC"
+           value={item?.existingSealMOC}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* API Plan */}
+       <Grid item xs={4}>
+         <TextField
+           label="API Plan"
+           name="existingSealApiPlan"
+           value={item?.existingSealApiPlan}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+     </Grid>
+
+     {/*///////////////3rd form ////////////// */}
+
+     <h3 style={{ padding: '10px 0' }}>Operating Parameters And Fluid Detail :-</h3>
+
+     <Grid container spacing={2}>
+       {/* Vessel Pressure (Operating) */}
+
+
+<Grid item xs={4}>
+ <TextField
+   size="small"
+   className="custom-text-field"
+   name="vesselPressureOperating"
+   value={item?.vesselPressureOperating}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           vesselPressureOperating: +value
+         }
+       ]
+     }));
+   }}
+   label="Vessel Pressure (Operating)"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.vesselPressureOperatingUnit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     vesselPressureOperatingUnit: selectedUnit
+                   }
+                 ]
+               }));
+         
+               
+             }}
+             displayEmpty
+             disabled={!item?.vesselPressureOperating}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="kg/cm2">kg/cm²</MenuItem>
+             <MenuItem value="kg/cm2 a">kg/cm² (a)</MenuItem>
+             <MenuItem value="kg/cm2 g">kg/cm² (g)</MenuItem>
+             <MenuItem value="bar">bar</MenuItem>
+             <MenuItem value="bar (a)">bar (a)</MenuItem>
+             <MenuItem value="bar (g)">bar (g)</MenuItem>
+             <MenuItem value="Mpa">MPa</MenuItem>
+             <MenuItem value="Mpa (a)">MPa (a)</MenuItem>
+             <MenuItem value="Mpa (g)">MPa (g)</MenuItem>
+             <MenuItem value="Kpa">kPa</MenuItem>
+             <MenuItem value="Kpa (g)">kPa (g)</MenuItem>
+             <MenuItem value="PSI">PSI</MenuItem>
+             <MenuItem value="PSIG">PSIG</MenuItem>
+             <MenuItem value="MLC">MLC</MenuItem>
+             <MenuItem value="MWC">MWC</MenuItem>
+             <MenuItem value="Meter">Meter</MenuItem>
+             <MenuItem value="kgf/cm2">kgf/cm²</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     )
+   }}
+ />
+</Grid>
+
+
+
+       <Grid item xs={4}>
+       <TextField
+   size="small"
+   type="number"
+   className="custom-text-field"
+   name="vesselPressureDesign"
+   value={item?.vesselPressureDesign}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           vesselPressureDesign: +value
+         }
+       ]
+     }));
+   }}
+   label="Vessel Pressure (Design)"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.vesselPressureDesignUnit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     vesselPressureDesignUnit: selectedUnit
+                   }
+                 ]
+               }));
+         
+               
+             }}
+             displayEmpty
+             disabled={!item?.vesselPressureDesign}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="MLC">MLC</MenuItem>
+             <MenuItem value="MWC">MWC</MenuItem>
+             <MenuItem value="Meter">Meter</MenuItem>
+             <MenuItem value="kgf/cm2">kgf/cm2</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     ),
+   }}
+ />
+</Grid>
+
+
+
+
+     
+
+
+
+
+       {/* Direction of Rotation */}
+       <Grid item xs={4}>
+         <Autocomplete
+           size="small"
+           value={item?.directionOfRotation}
+           onChange={(event, newValue) => {
+             setFormData((prevState) => ({
+               ...prevState,
+               agitatorInquiries: [
+                 {
+                   ...prevState.agitatorInquiries[index], // Keep the other fields of the first object intact
+                   directionOfRotation: newValue || "", // Update the 'branch' property
+                 },
+               ],
+             }));
+           }}
+           options={['CW', 'CCW']}
+           renderInput={(params) => (
+             <TextField
+               {...params}
+               label="Direction of Rotation"
+               variant="outlined"
+               size="small"
+               fullWidth
+               className="custom-text-field"
+             />
+           )}
+         />
+       </Grid>
+
+       {/* Speed */}
+       <Grid item xs={4}>
+         <TextField
+           label="Speed"
+           type="number"
+           name="speed"
+           value={item?.speed}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+     </Grid>
+
+     {/*/////////////// 4th form /////////////// */}
+     <h3 style={{ padding: '10px 0' }}>Fluid :-</h3>
+     <Grid container spacing={2}>
+       {/* Fluid */}
+       <Grid item xs={4}>
+         <TextField
+           label="Fluid"
+           name="fluid"
+           value={item?.fluid}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+
+       {/* Nature */}
+       <Grid item xs={4}>
+         <Autocomplete
+           size="small"
+           value={item?.nature}
+           onChange={(event, newValue) => {
+             setFormData((prevState) => ({
+               ...prevState,
+               agitatorInquiries: [
+                 {
+                   ...prevState.agitatorInquiries[index], // Keep the other fields of the first object intact
+                   nature: newValue || "", // Update the 'branch' property
+                 },
+               ],
+             }));
+           }}
+           options={['Option1', 'Option2']} // Replace with actual nature options
+           renderInput={(params) => (
+             <TextField
+               {...params}
+               label="Nature"
+               variant="outlined"
+               size="small"
+               fullWidth
+               className="custom-text-field"
+             />
+           )}
+         />
+       </Grid>
+
+       {/* Pumping Temperature */}
+        <Grid item xs={4}>
+ <TextField
+   size="small"
+   className="custom-text-field"
+   name="pumpingTemperature"
+   value={item?.pumpingTemperature?.value || ""}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           pumpingTemperature: {
+             ...prev.agitatorInquiries[index]?.pumpingTemperature,
+             value
+           }
+         }
+       ]
+     }));
+   }}
+   label="Pumping Temperature"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.pumpingTemperature?.unit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     pumpingTemperature: {
+                       ...prev.agitatorInquiries[index]?.pumpingTemperature,
+                       unit: selectedUnit
+                     }
+                   }
+                 ]
+               }));
+             }}
+             displayEmpty
+             disabled={!item?.pumpingTemperature?.value}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="℃">℃ </MenuItem>
+             <MenuItem value="℉">℉</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     ),
+   }}
+ />
+</Grid>
+
+
+       {/* Maximum Temperature */}
+ <Grid item xs={4}>
+ <TextField
+   size="small"
+   className="custom-text-field"
+   name="maximumTemperature"
+   value={item?.maximumTemperature?.value || ""}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           maximumTemperature: {
+             ...prev.agitatorInquiries[index]?.maximumTemperature,
+             value
+           }
+         }
+       ]
+     }));
+   }}
+   label="Maximum Temperature"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.maximumTemperature?.unit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     maximumTemperature: {
+                       ...prev.agitatorInquiries[index]?.maximumTemperature,
+                       unit: selectedUnit
+                     }
+                   }
+                 ]
+               }));
+             }}
+             displayEmpty
+             disabled={!item?.maximumTemperature?.value}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="℃">℃ </MenuItem>
+             <MenuItem value="℉">℉</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     ),
+   }}
+ />
+</Grid>
+
+
+
+       {/* SP Gravity */}
+       <Grid item xs={4}>
+         <TextField
+           label="SP Gravity"
+           name="spGravity"
+           value={item?.spGravity}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Freezing Point */}
+       <Grid item xs={4}>
+         <TextField
+           label="Freezing Point"
+           name="freezingPoint"
+           value={item?.freezingPoint}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Boiling Point */}
+       <Grid item xs={4}>
+         <TextField
+           label="Boiling Point"
+           name="boilingPoint"
+           value={item?.boilingPoint}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Viscosity */}
+       <Grid item xs={4}>
+         <TextField
+           label="Viscosity"
+           name="viscosity"
+           value={item?.viscosity}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Percentage Of Solid */}
+       <Grid item xs={4}>
+         <TextField
+           label="Percentage Of Solid"
+           name="percentageOfSolid"
+           value={item?.percentageOfSolid}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Solid Size */}
+       <Grid item xs={4}>
+         <TextField
+           label="Solid Size"
+           name="solidSize"
+           value={item?.solidSize}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Special Note */}
+       <Grid item xs={4}>
+         <TextField
+           label="Special Note"
+           name="specialNote"
+           value={formData.agitatorInquiries?.specialNote}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+           inputProps={{ maxLength: 150 }}
+         />
+       </Grid>
+     </Grid>
+     
+
+   </div>
+   )}
+  {item?.sealType === "Pump" && (
+         <form>
+         <Grid container spacing={2} sx={{ marginTop: '10px' }}>
+           {/* Autogenerated Reference Number */}
+           <Grid item xs={4}>
+             <TextField
+               size="small"
+               className="custom-text-field"
+               label="Pump Inquiry Reference No."
+               value={item?.pumpInquiryReferenceNo}
+               disabled
+               fullWidth
+               InputProps={{ readOnly: true }}
+             />
+           </Grid>
+   
+           <Grid item xs={12} sm={4}>
+     <Autocomplete
+       size="small"
+       value={item?.branch || ''}
+       onChange={(event, newValue) => handleChange('pumpInquiries', index)({ target: { name: 'branch', value: newValue || '' } })}
+       options={Array.isArray(authState?.branchs) ? authState.branchs.map((b) => b.branchName) : []}
+       renderInput={(params) => (
+         <TextField
+           required
+           className="custom-text-field"
+           {...params}
+           size="small"
+           label="Branch"
+           variant="outlined"
+           fullWidth
+         />
+       )}
+     />
+   </Grid>
+   
+   
+           {/* Created On (Autogenerated) */}
+           <Grid item xs={4}>
+             <TextField
+               size="small"
+               className="custom-text-field"
+               label="Created On"
+               value={dateTime} // Auto-generated value
+               disabled
+               fullWidth
+               InputProps={{ readOnly: true }}
+             />
+           </Grid>
+   
+   
+               {/* Updated By User */}
+               <Grid item xs={4}>
+                 <TextField
+                   size="small"
+                   className="custom-text-field"
+                   label="Created By User"
+                   value={authState?.sub}
+                   id="disableItem"
+                   InputLabelProps={{
+                     shrink: Boolean(authState?.sub),
+                   }}
+                   autoFocus={authState?.sub} 
+                   InputProps={{
+                     readOnly: true, // Read-only for auto-generated field
+                   }}
+                   disabled
+                   fullWidth />
+               </Grid>
+   
+   
+               <Grid item xs={4}>
+                 <TextField
+                   size="small"
+                   className="custom-text-field"
+                   label="Updated By User"
+                   value={authState?.sub}
+                   id="disableItem"
+                   InputLabelProps={{
+                     shrink: Boolean(authState?.sub),
+                   }}
+                   autoFocus={authState?.sub} 
+                   InputProps={{
+                     readOnly: true, // Read-only for auto-generated field
+                   }}
+                   disabled
+                   fullWidth />
+               </Grid>
+   
+   
+   
+           {/* Updated On (Autogenerated) */}
+           <Grid item xs={4}>
+             <TextField
+               size="small"
+               className="custom-text-field"
+               label="Updated On"
+               value={dateTime} // Auto-generated value
+               disabled
+               fullWidth
+               InputProps={{ readOnly: true }}
+             />
+           </Grid>
+   
+   
+   
+         </Grid>
+   
+   
+         {/*////////////////// 2nd form staring here   ///////  */}
+   
+         <h3 style={{ padding: '10px 0' }}>Pump Data :-</h3>
+         <Grid container spacing={2}>
+           {/* Make */}
+   
+          {/* Pump Make */}
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       label="Make"
+       name="make"
+       value={item?.make || ''}
+       onChange={handleChange('pumpInquiries', index)}
+       fullWidth
+       variant="outlined"
+       className="custom-text-field"
+     />
+   </Grid>
+   
+           {/* Model */}
+           <Grid item xs={4}>
+     <TextField
+       size="small"
+       label="Model"
+       name="model"
+       value={item?.model || ''}
+       onChange={handleChange('pumpInquiries', index)}
+       fullWidth
+       variant="outlined"
+       className="custom-text-field"
+     />
+   </Grid>
+           {/* Pump MOC */}
+    
+   
+           {/* Impeller/Casing MOC */}
+           {/* Impeller/Casing MOC */}
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       label="Impeller/Casing MOC"
+       name="impellerCasingMOC"
+       value={item?.impellerCasingMOC || ''}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+       variant="outlined"
+       className="custom-text-field"
+     />
+   </Grid>
+   
+   {/* Shaft MOC */}
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       label="Shaft MOC"
+       name="shaftMOC"
+       value={item?.shaftMOC || ''}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+       variant="outlined"
+       className="custom-text-field"
+     />
+   </Grid>
+   
+   {/* Bearing BKT */}
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       label="Bearing BKT"
+       name="bearingBKT"
+       value={item?.bearingBKT || ''}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+       variant="outlined"
+       className="custom-text-field"
+     />
+   </Grid>
+   
+   {/* Tag Number */}
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       label="Tag Number"
+       name="tagNumber"
+       value={item?.tagNumber || ''}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+       variant="outlined"
+       className="custom-text-field"
+     />
+   </Grid>
+   
+   
+           {/* Arrangement (Autocomplete Dropdown) */}
+           <Grid item xs={4}>
+     <Autocomplete
+       size="small"
+       options={['Horizontal', 'Vertical']}
+       value={item?.arrangement || null} 
+       onChange={(event, newValue) => {
+         setFormData((prev) => {
+           const updatedPumpInquiry = [...prev.pumpInquiries];
+           updatedPumpInquiry[index] = {
+             ...updatedPumpInquiry[index],
+             arrangement: newValue, // Correctly update state
+           };
+           return { ...prev, pumpInquiries: updatedPumpInquiry };
+         });
+       }}
+       renderInput={(params) => (
+         <TextField
+           {...params}
+           size="small"
+           label="Arrangement"
+           variant="outlined"
+           fullWidth
+           className="custom-text-field"
+         />
+       )}
+     />
+   </Grid>
+   
+   
+           {/* Pump Type (Autocomplete Dropdown) */}
+          {/* Pump Type */}
+   <Grid item xs={4}>
+     <Autocomplete
+       value={item?.pumpType || ''}
+       onChange={(event, newValue) => {
+         setFormData((prev) => {
+           const updatedPumpInquiries = [...prev.pumpInquiries];
+           updatedPumpInquiries[index] = {
+             ...updatedPumpInquiries[index],
+             pumpType: newValue || "",
+           };
+           return { ...prev, pumpInquiries: updatedPumpInquiries };
+         });
+       }}
+       options={['Centrifugal', 'Positive Displacement']}
+       renderInput={(params) => (
+         <TextField
+           {...params}
+           size="small"
+           label="Pump Type"
+           variant="outlined"
+           fullWidth
+           className="custom-text-field"
+         />
+       )}
+     />
+   </Grid>
+   
+   {/* Stage */}
+   <Grid item xs={4}>
+     <Autocomplete
+       value={item?.stage || ''}
+       onChange={(event, newValue) => {
+         setFormData((prev) => {
+           const updatedPumpInquiries = [...prev.pumpInquiries];
+           updatedPumpInquiries[index] = {
+             ...updatedPumpInquiries[index],
+             stage: newValue || "",
+           };
+           return { ...prev, pumpInquiries: updatedPumpInquiries };
+         });
+       }}
+       options={['Single', 'Multiple']}
+       renderInput={(params) => (
+         <TextField
+           {...params}
+           size="small"
+           label="Stage"
+           variant="outlined"
+           fullWidth
+           className="custom-text-field"
+         />
+       )}
+     />
+   </Grid>
+   
+   {/* Casing Type */}
+   <Grid item xs={4}>
+     <Autocomplete
+       value={item?.casingType || ''}
+       onChange={(event, newValue) => {
+         setFormData((prev) => {
+           const updatedPumpInquiries = [...prev.pumpInquiries];
+           updatedPumpInquiries[index] = {
+             ...updatedPumpInquiries[index],
+             casingType: newValue || "",
+           };
+           return { ...prev, pumpInquiries: updatedPumpInquiries };
+         });
+       }}
+       options={['Split', 'Unsplitted']}
+       renderInput={(params) => (
+         <TextField
+           {...params}
+           size="small"
+           label="Casing Type"
+           variant="outlined"
+           fullWidth
+           className="custom-text-field"
+         />
+       )}
+     />
+   </Grid>
+   
+         </Grid>
+   
+         {/* //////////////////////////////////3rd form ////////////////////// */}
+   
+         <h3 style={{ padding: '10px 0' }}>Existing Seal :-</h3>
+         <Grid container spacing={2}>
+           {/* Series */}
+           <Grid item xs={4}>
+           <TextField
+       size="small"
+       label="Series"
+       name="series"
+       value={item?.series || ''}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+       variant="outlined"
+       className="custom-text-field"
+     />
+      
+     </Grid>
+   
+           {/* Performance (Dropdown) */}
+           <Grid item xs={4}>
+       <Autocomplete
+         size="small"
+         options={['Satisfactory', 'Unsatisfactory']}
+         value={item?.performance || ''}
+         onChange={(event, newValue) => {
+           setFormData((prev) => {
+             const updatedPumpInquiry = [...prev.pumpInquiries];
+             updatedPumpInquiry[index] = {
+               ...updatedPumpInquiry[index],
+                performance: newValue ,
+             };
+             return { ...prev, pumpInquiries: updatedPumpInquiry };
+           });
+         }}
+         renderInput={(params) => <TextField {...params} label="Performance" variant="outlined" fullWidth className="custom-text-field" />}
+       />
+     </Grid>
+   
+   
+           {/* Seal Arrangement (Dropdown) */}
+           <Grid item xs={4}>
+       <Autocomplete
+         size="small"
+         options={['Single', 'Double']}
+         value={item?.sealArrangement || ''}
+         onChange={(event, newValue) => {
+           setFormData((prev) => {
+             const updatedPumpInquiry = [...prev.pumpInquiries];
+             updatedPumpInquiry[index] = {
+               ...updatedPumpInquiry[index],
+               sealArrangement: newValue || "" ,
+             };
+             return { ...prev, pumpInquiries: updatedPumpInquiry };
+           });
+         }}
+         renderInput={(params) => <TextField {...params} label="Seal Arrangement" variant="outlined" fullWidth className="custom-text-field" />}
+       />
+     </Grid>
+   
+           {/* Make */}
+     {/* Make */}
+     <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       label="Make"
+       name="existingSealMake"
+       value={item?.existingSealMake || ""}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+     />
+   </Grid>
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       label="Size"
+       name="existingSealSize"
+       value={item?.existingSealSize || ""}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+     />
+   </Grid>
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       label="MOC"
+       name="existingSealMOC"
+       value={item?.existingSealMOC || ""}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+     />
+   </Grid>
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       label="API Plan"
+       name="existingSealApiPlan"
+       value={item?.existingSealApiPlan || ""}
+       onChange={handleChange("pumpInquiries", index)}
+       fullWidth
+     />
+   </Grid>
+   
+    </Grid>
+   
+    <h3 style={{ padding: '10px 0' }}>Parameters :-</h3>
+   
+         <Grid container spacing={2}>
+      
+         <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="suctionPressure"
+       value={item?.suctionPressure?.value || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               suctionPressure: {
+                 ...prev.pumpInquiries[index].suctionPressure,
+                 value
+               }
+             }
+           ]
+         }));
+       }}
+       label="Suction Pressure"
+       fullWidth
+       InputProps={{
+         endAdornment: (
+           <InputAdornment position="end">
+             <FormControl size="small" variant="outlined">
+               <Select
+                 value={item?.suctionPressure?.unit || ""}
+                 onChange={(e) => {
+                   const selectedUnit = e.target.value;
+                   setFormData((prev) => ({
+                     ...prev,
+                     pumpInquiries: [
+                       {
+                         ...prev.pumpInquiries[index],
+                         suctionPressure: {
+                           ...prev.pumpInquiries[index].suctionPressure,
+                           unit: selectedUnit
+                         }
+                       }
+                     ]
+                   }));
+                 }}
+                 displayEmpty
+                 disabled={!item?.suctionPressure?.value}
+                 sx={{
+                   height: "100%",
+                   borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                   borderRadius: 0,
+                   "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                   "& .MuiSelect-select": {
+                     padding: "0 8px",
+                     outline: "none",
+                     border: "none",
+                     height: "100%",
+                     display: "flex",
+                     alignItems: "center"
+                   },
+                   minWidth: 60
+                 }}
+               >
+                 {!item?.suctionPressure?.value && <MenuItem>Unit</MenuItem>}
+                 {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+                   <MenuItem key={unit} value={unit}>
+                     {unit}
+                   </MenuItem>
+                 ))}
+               </Select>
+             </FormControl>
+           </InputAdornment>
+         ),
+       }}
+     />
+   </Grid>
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="boxPressure"
+       value={item?.boxPressure?.value || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               boxPressure: {
+                 ...prev.pumpInquiries[index].boxPressure,
+                 value
+               }
+             }
+           ]
+         }));
+       }}
+       label="Box Pressure"
+       fullWidth
+       InputProps={{
+         endAdornment: (
+           <InputAdornment position="end">
+             <FormControl size="small" variant="outlined">
+               <Select
+                 value={item?.boxPressure?.unit || ""}
+                 onChange={(e) => {
+                   const selectedUnit = e.target.value;
+                   setFormData((prev) => ({
+                     ...prev,
+                     pumpInquiries: [
+                       {
+                         ...prev.pumpInquiries[index],
+                         boxPressure: {
+                           ...prev.pumpInquiries[index].boxPressure,
+                           unit: selectedUnit
+                         }
+                       }
+                     ]
+                   }));
+                 }}
+                 displayEmpty
+                 disabled={!item?.boxPressure?.value}
+                 sx={{
+                   height: "100%",
+                   borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                   borderRadius: 0,
+                   "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                   "& .MuiSelect-select": {
+                     padding: "0 8px",
+                     outline: "none",
+                     border: "none",
+                     height: "100%",
+                     display: "flex",
+                     alignItems: "center"
+                   },
+                   minWidth: 60
+                 }}
+               >
+                 {!item?.dischargePressure?.value && <MenuItem>Unit</MenuItem>}
+                 {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+                   <MenuItem key={unit} value={unit}>
+                     {unit}
+                   </MenuItem>
+                 ))}
+               </Select>
+             </FormControl>
+           </InputAdornment>
+         ),
+       }}
+     />
+   </Grid>
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="dischargePressure"
+       value={item?.dischargePressure?.value || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               dischargePressure: {
+                 ...prev.pumpInquiries[index].dischargePressure,
+                 value
+               }
+             }
+           ]
+         }));
+       }}
+       label="Discharge Pressure"
+       fullWidth
+       InputProps={{
+         endAdornment: (
+           <InputAdornment position="end">
+             <FormControl size="small" variant="outlined">
+               <Select
+                 value={item?.dischargePressure?.unit || ""}
+                 onChange={(e) => {
+                   const selectedUnit = e.target.value;
+                   setFormData((prev) => ({
+                     ...prev,
+                     pumpInquiries: [
+                       {
+                         ...prev.pumpInquiries[index],
+                         dischargePressure: {
+                           ...prev.pumpInquiries[index].dischargePressure,
+                           unit: selectedUnit
+                         }
+                       }
+                     ]
+                   }));
+                 }}
+                 displayEmpty
+                 disabled={!item?.dischargePressure?.value}
+                 sx={{
+                   height: "100%",
+                   borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                   borderRadius: 0,
+                   "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                   "& .MuiSelect-select": {
+                     padding: "0 8px",
+                     outline: "none",
+                     border: "none",
+                     height: "100%",
+                     display: "flex",
+                     alignItems: "center"
+                   },
+                   minWidth: 60
+                 }}
+               >
+                 {!item?.dischargePressure?.value && <MenuItem>Unit</MenuItem>}
+                 {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+                   <MenuItem key={unit} value={unit}>
+                     {unit}
+                   </MenuItem>
+                 ))}
+               </Select>
+             </FormControl>
+           </InputAdornment>
+         ),
+       }}
+     />
+   </Grid>
+   
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="totalHead"
+       value={item?.totalHead?.value || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               totalHead: {
+                 ...prev.pumpInquiries[index].totalHead,
+                 value
+               }
+             }
+           ]
+         }));
+       }}
+       label="Total Head"
+       fullWidth
+       InputProps={{
+         endAdornment: (
+           <InputAdornment position="end">
+             <FormControl size="small" variant="outlined">
+               <Select
+                 value={item?.totalHead?.unit || ""}
+                 onChange={(e) => {
+                   const selectedUnit = e.target.value;
+                   setFormData((prev) => ({
+                     ...prev,
+                     pumpInquiries: [
+                       {
+                         ...prev.pumpInquiries[index],
+                         totalHead: {
+                           ...prev.pumpInquiries[index].totalHead,
+                           unit: selectedUnit
+                         }
+                       }
+                     ]
+                   }));
+                 }}
+                 displayEmpty
+                 disabled={!item?.totalHead?.value}
+                 sx={{
+                   height: "100%",
+                   borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                   borderRadius: 0,
+                   "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                   "& .MuiSelect-select": {
+                     padding: "0 8px",
+                     outline: "none",
+                     border: "none",
+                     height: "100%",
+                     display: "flex",
+                     alignItems: "center"
+                   },
+                   minWidth: 60
+                 }}
+               >
+                 {!item?.totalHead?.value && <MenuItem>Unit</MenuItem>}
+                 {["Meter", "MWC", "MLC", "kg/cm2"].map((unit) => (
+                   <MenuItem key={unit} value={unit}>
+                     {unit}
+                   </MenuItem>
+                 ))}
+               </Select>
+             </FormControl>
+           </InputAdornment>
+         ),
+       }}
+     />
+   </Grid>
+   
+   
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="directionOfRotation"
+       value={item?.directionOfRotation || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               directionOfRotation: value
+             }
+           ]
+         }));
+       }}
+       label="Direction of Rotation"
+       fullWidth
+       select
+     >
+       <MenuItem value="CW">CW</MenuItem>
+       <MenuItem value="CCW">CCW</MenuItem>
+     </TextField>
+   </Grid>
+   
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="speed"
+       value={item?.speed || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               speed: value
+             }
+           ]
+         }));
+       }}
+       label="Speed"
+       fullWidth
+     />
+   </Grid>
+   
+         </Grid>
+   
+   
+         {/* //////////// 5th section start ///////// */}
+   
+         <h3 style={{ padding: '10px 0' }}>Fluid :-</h3>
+         <Grid container spacing={2}>
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="Fluid"
+         name="fluid"
+         value={item?.fluid || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [
+               {
+                 ...prev.pumpInquiries[index],
+                 fluid: value,
+               },
+             ],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+       />
+     </Grid>
+   
+     {/* Nature */}
+     <Grid item xs={4}>
+       <Autocomplete
+         options={["Option 1", "Option 2", "Option 3"]} // Replace with actual options
+         renderInput={(params) => (
+           <TextField {...params} label="Nature" size="small" fullWidth className="custom-text-field" />
+         )}
+         onChange={(event, value) =>
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], nature: value }],
+           }))
+         }
+       />
+     </Grid>
+   
+     {/* Pumping Temperature */}
+   {/* Pumping Temperature */}
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="pumpingTemperature"
+       value={item?.pumpingTemperature?.value || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               pumpingTemperature: {
+                 ...prev.pumpInquiries[index].pumpingTemperature,
+                 value,
+               },
+             },
+           ],
+         }));
+       }}
+       label="Pumping Temperature"
+       fullWidth
+       InputProps={{
+         endAdornment: (
+           <InputAdornment position="end">
+             <FormControl size="small" variant="outlined">
+               <Select
+                 value={item?.pumpingTemperature?.unit || ""}
+                 onChange={(e) => {
+                   const selectedUnit = e.target.value;
+                   setFormData((prev) => ({
+                     ...prev,
+                     pumpInquiries: [
+                       {
+                         ...prev.pumpInquiries[index],
+                         pumpingTemperature: {
+                           ...prev.pumpInquiries[index].pumpingTemperature,
+                           unit: selectedUnit,
+                         },
+                       },
+                     ],
+                   }));
+                 }}
+                 displayEmpty
+                 disabled={!item?.pumpingTemperature?.value}
+                 sx={{
+                   height: "100%",
+                   borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                   borderRadius: 0,
+                   "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                   "& .MuiSelect-select": {
+                     padding: "0 8px",
+                     outline: "none",
+                     border: "none",
+                     height: "100%",
+                     display: "flex",
+                     alignItems: "center",
+                   },
+                   minWidth: 60,
+                 }}
+               >
+                 {!item?.pumpingTemperature?.value && <MenuItem>Unit</MenuItem>}
+                 <MenuItem value="℃">℃</MenuItem>
+                 <MenuItem value="℉">℉</MenuItem>
+               </Select>
+             </FormControl>
+           </InputAdornment>
+         ),
+       }}
+     />
+   </Grid>
+   
+   {/* Maximum Temperature */}
+   <Grid item xs={4}>
+     <TextField
+       size="small"
+       className="custom-text-field"
+       name="maximumTemperature"
+       value={item?.maximumTemperature?.value || ""}
+       onChange={(e) => {
+         const value = e.target.value;
+         setFormData((prev) => ({
+           ...prev,
+           pumpInquiries: [
+             {
+               ...prev.pumpInquiries[index],
+               maximumTemperature: {
+                 ...prev.pumpInquiries[index].maximumTemperature,
+                 value,
+               },
+             },
+           ],
+         }));
+       }}
+       label="Maximum Temperature"
+       fullWidth
+       InputProps={{
+         endAdornment: (
+           <InputAdornment position="end">
+             <FormControl size="small" variant="outlined">
+               <Select
+                 value={item?.maximumTemperature?.unit || ""}
+                 onChange={(e) => {
+                   const selectedUnit = e.target.value;
+                   setFormData((prev) => ({
+                     ...prev,
+                     pumpInquiries: [
+                       {
+                         ...prev.pumpInquiries[index],
+                         maximumTemperature: {
+                           ...prev.pumpInquiries[index].maximumTemperature,
+                           unit: selectedUnit,
+                         },
+                       },
+                     ],
+                   }));
+                 }}
+                 displayEmpty
+                 disabled={!item?.maximumTemperature?.value}
+                 sx={{
+                   height: "100%",
+                   borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                   borderRadius: 0,
+                   "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                   "& .MuiSelect-select": {
+                     padding: "0 8px",
+                     outline: "none",
+                     border: "none",
+                     height: "100%",
+                     display: "flex",
+                     alignItems: "center",
+                   },
+                   minWidth: 60,
+                 }}
+               >
+                 {!item?.maximumTemperature?.value && <MenuItem>Unit</MenuItem>}
+                 <MenuItem value="℃">℃</MenuItem>
+                 <MenuItem value="℉">℉</MenuItem>
+               </Select>
+             </FormControl>
+           </InputAdornment>
+         ),
+       }}
+     />
+   </Grid>
+   
+   
+     {/* SP Gravity */}
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="SP Gravity"
+         name="spGravity"
+         value={item?.spGravity || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], spGravity: value }],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+       />
+     </Grid>
+   
+     {/* Freezing Point */}
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="Freezing Point"
+         name="freezingPoint"
+         value={item?.freezingPoint || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], freezingPoint: value }],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+       />
+     </Grid>
+   
+     {/* Boiling Point */}
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="Boiling Point"
+         name="boilingPoint"
+         value={item?.boilingPoint || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], boilingPoint: value }],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+       />
+     </Grid>
+   
+     {/* Viscosity */}
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="Viscosity"
+         name="viscosity"
+         value={item?.viscosity || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], viscosity: value }],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+       />
+     </Grid>
+   
+     {/* Percentage of Solid */}
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="Percentage of Solid"
+         name="percentageOfSolid"
+         value={item?.percentageOfSolid || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], percentageOfSolid: value }],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+       />
+     </Grid>
+   
+     {/* Solid Size */}
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="Solid Size"
+         name="solidSize"
+         value={item?.solidSize || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], solidSize: value }],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+       />
+     </Grid>
+   
+     {/* Special Note */}
+     <Grid item xs={4}>
+       <TextField
+         size="small"
+         label="Special Note"
+         name="specialNote"
+         value={item?.specialNote || ""}
+         onChange={(e) => {
+           const value = e.target.value;
+           setFormData((prev) => ({
+             ...prev,
+             pumpInquiries: [{ ...prev.pumpInquiries[index], specialNote: value }],
+           }));
+         }}
+         fullWidth
+         className="custom-text-field"
+         inputProps={{ maxLength: 150 }}
+       />
+     </Grid>
+   </Grid>
+   
+       </form>
+
+    )}
+    {/* {item?.sealType === "ApiPlan" && <ApiPlane index={index} />}
+    {item?.sealType === "Rotatoryjoin" && <Rotatoryjoin index={index} />} */}
+
+
+     {/* Remove Item Button */}
+     <IconButton
+       variant="contained"
+       color="secondary"
+       className="deleteIcon"
+       onClick={() => removeItem("agitatorInquiries", index)}
+       style={{ marginTop: "10px", backgroundColor: "red", color: "white", borderRadius: "5px" }}
+     >
+       <DeleteIcon />
+     </IconButton>
+   </div>
+ ))}
+
+ {/* Add Item Button */}
+ <IconButton
+   variant="contained"
+   color="primary"
+   onClick={() => addItem("agitatorInquiries")}
+   style={{ marginTop: "10px", fontSize: "0.8rem", backgroundColor: "black", color: "white", borderRadius: "5px" }}
+ >
+   <AddIcon /> Add Item
+ </IconButton>
+  </div>
+)}
+
+{sealType === 'apiplane' && (
+  <div>
+    {formData.apiPlanInquiries.map((item, index) => (
+      <div key={index}>
+        {console.log("index from item",index)}
+       
+        <Grid item xs={2}>
+       <Autocomplete
+         size="small"
+         value={item?.sealType || ""}
+         onChange={(event, newValue) => {
+           setFormData((prevState) => {
+             const updatedItems = [...prevState.apiPlanInquiries];
+             updatedItems[index] = { ...updatedItems[index], sealType: newValue || "" };
+             return { ...prevState, apiPlanInquiries: updatedItems };
+           });
+         }}
+         options={["Agitator", "Pump", "ApiPlan", "Rotatoryjoin"]}
+         renderInput={(params) => (
+           <TextField
+           
+             required
+             className="custom-text-field"
+             {...params}
+             size="small"
+             label="Seal Type"
+             variant="outlined"
+             fullWidth
+           />
+         )}
+       />
+     </Grid>
+
+     {/* Conditionally Render Inquiry Type Form Based on sealType */}
+     {item?.sealType === "Agitator" && (
+     <div key={index}>
+     <Grid container spacing={2} style={{ marginTop: "10px" }}>
+       {/* Sales Inquiry Item Reference No */}
+       <Grid item xs={4}>
+         <TextField
+           label="Sales Inquiry Item Reference No."
+           value={item?.agitatorInquiryReferenceNo}
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           id="disableItem"
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+
+       <Grid item xs={12} sm={4}>
+  <Autocomplete
+    size="small"
+    value={item?.branch || ''}
+    onChange={(event, newValue) => {
+      const updatedInquiries = [...formData.agitatorInquiries];
+      updatedInquiries[index] = {
+        ...updatedInquiries[index], // Preserve other fields
+        branch: newValue || "", // Update only the branch field
+      };
+      setFormData((prevState) => ({
+        ...prevState,
+        agitatorInquiries: updatedInquiries,
+      }));
+    }}
+    inputValue={formData?.agitatorInquiries[index]?.branch || ''}
+    onInputChange={(event, newInputValue) => {
+      const updatedInquiries = [...formData.agitatorInquiries];
+      updatedInquiries[index] = {
+        ...updatedInquiries[index], // Preserve other fields
+        branch: newInputValue || "", // Update only the branch field
+      };
+      setFormData((prevState) => ({
+        ...prevState,
+        agitatorInquiries: updatedInquiries,
+      }));
+    }}
+    options={Array.isArray(authState?.branchs) ? authState.branchs.map((b) => b.branchName) : []}
+    renderInput={(params) => (
+      <TextField
+        required
+        className="custom-text-field"
+        {...params}
+        size="small"
+        label="Branch"
+        variant="outlined"
+        fullWidth
+      />
+    )}
+  />
+</Grid>
+
+
+       {/* Created By User */}
+       <Grid item xs={4}>
+         <TextField
+           label="Created By User"
+           value={authState?.sub}
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           id="disableItem"
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+
+
+
+       {/* Created On */}
+       <Grid item xs={4}>
+         <TextField
+           label="Created On"
+           value={dateTime}
+           InputProps={{ readOnly: true }}
+           size="small"
+           id="disableItem"
+           fullWidth
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Updated By User */}
+       <Grid item xs={4}>
+         <TextField
+           label="Updated By User"
+           value={authState?.sub}
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           id="disableItem"
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Updated On */}
+       <Grid item xs={4}>
+         <TextField
+           label="Updated On"
+           value={dateTime}
+           id="disableItem"
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+     </Grid>
+
+     {/* //////// 2nd form ///////////// */}
+
+     <h3 style={{ padding: '10px 0' }}>Existing Seal :-</h3>
+
+     <Grid container spacing={2}>
+       {/* Series */}
+       <Grid item xs={4}>
+      <TextField
+         label="Series"
+         name="series" // This is used to identify the property dynamically
+         value={item?.series || ""}
+         onChange={handleChange("agitatorInquiries",index)} // Specify array name and index
+         size="small"
+         fullWidth
+         className="custom-text-field" />
+       </Grid>
+
+
+
+<Grid item xs={4}>
+<Autocomplete
+ style={{ width: "100%" }}
+ size="small"
+ value={formData?.agitatorInquiries[index]?.sealArrangement || ""}
+ onChange={(event, newValue) =>
+   handleChange("agitatorInquiries", index)({
+     target: { name: "sealArrangement", value: newValue || "" },
+   })
+ }
+ options={["Single", "Double"]}
+ renderInput={(params) => (
+   <TextField
+     size="small"
+     {...params}
+     placeholder="Seal Arrangement"
+     variant="outlined"
+     className="custom-text-field"
+     fullWidth
+     label="Seal Arrangement"
+   />
+ )}
+/>
+
+</Grid>
+
+
+       <Grid item xs={4}>
+         <Autocomplete
+           style={{ width: '100%' }}
+           size="small"
+       value={formData?.agitatorInquiries[index]?.performance || ""}
+           onChange={(event, newValue) => {
+             setFormData({
+               ...formData,
+               agitatorInquiries: [
+                 {
+                   ...item,
+                   performance: newValue || "", // Update the sealArrangement field
+                 },
+               ],
+             });
+           }}
+           options={['Satisfactory', 'Unsatisfactory']}
+           renderInput={(params) => (
+             <TextField
+               size="small"
+               {...params}
+               placeholder="Performance"
+               variant="outlined"
+               className='custom-text-field'
+               fullWidth
+               label="Performance"
+             />
+           )}
+         />
+       </Grid>
+
+
+       {/* Make */}
+       <Grid item xs={4}>
+         <TextField
+           label="Make"
+           name="existingSealMake"
+         value={formData?.agitatorInquiries[index]?.existingSealMake}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Size */}
+       <Grid item xs={4}>
+         <TextField
+           label="Size"
+           name="existingSealSize"
+           value={item?.existingSealSize}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* MOC */}
+       <Grid item xs={4}>
+         <TextField
+           label="MOC"
+           name="existingSealMOC"
+           value={item?.existingSealMOC}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* API Plan */}
+       <Grid item xs={4}>
+         <TextField
+           label="API Plan"
+           name="existingSealApiPlan"
+           value={item?.existingSealApiPlan}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+     </Grid>
+
+     {/*///////////////3rd form ////////////// */}
+
+     <h3 style={{ padding: '10px 0' }}>Operating Parameters And Fluid Detail :-</h3>
+
+     <Grid container spacing={2}>
+       {/* Vessel Pressure (Operating) */}
+
+
+<Grid item xs={4}>
+ <TextField
+   size="small"
+   className="custom-text-field"
+   name="vesselPressureOperating"
+   value={item?.vesselPressureOperating}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           vesselPressureOperating: +value
+         }
+       ]
+     }));
+   }}
+   label="Vessel Pressure (Operating)"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.vesselPressureOperatingUnit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     vesselPressureOperatingUnit: selectedUnit
+                   }
+                 ]
+               }));
+         
+               
+             }}
+             displayEmpty
+             disabled={!item?.vesselPressureOperating}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="kg/cm2">kg/cm²</MenuItem>
+             <MenuItem value="kg/cm2 a">kg/cm² (a)</MenuItem>
+             <MenuItem value="kg/cm2 g">kg/cm² (g)</MenuItem>
+             <MenuItem value="bar">bar</MenuItem>
+             <MenuItem value="bar (a)">bar (a)</MenuItem>
+             <MenuItem value="bar (g)">bar (g)</MenuItem>
+             <MenuItem value="Mpa">MPa</MenuItem>
+             <MenuItem value="Mpa (a)">MPa (a)</MenuItem>
+             <MenuItem value="Mpa (g)">MPa (g)</MenuItem>
+             <MenuItem value="Kpa">kPa</MenuItem>
+             <MenuItem value="Kpa (g)">kPa (g)</MenuItem>
+             <MenuItem value="PSI">PSI</MenuItem>
+             <MenuItem value="PSIG">PSIG</MenuItem>
+             <MenuItem value="MLC">MLC</MenuItem>
+             <MenuItem value="MWC">MWC</MenuItem>
+             <MenuItem value="Meter">Meter</MenuItem>
+             <MenuItem value="kgf/cm2">kgf/cm²</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     )
+   }}
+ />
+</Grid>
+
+
+
+       <Grid item xs={4}>
+       <TextField
+   size="small"
+   type="number"
+   className="custom-text-field"
+   name="vesselPressureDesign"
+   value={item?.vesselPressureDesign}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           vesselPressureDesign: +value
+         }
+       ]
+     }));
+   }}
+   label="Vessel Pressure (Design)"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.vesselPressureDesignUnit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     vesselPressureDesignUnit: selectedUnit
+                   }
+                 ]
+               }));
+         
+               
+             }}
+             displayEmpty
+             disabled={!item?.vesselPressureDesign}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="MLC">MLC</MenuItem>
+             <MenuItem value="MWC">MWC</MenuItem>
+             <MenuItem value="Meter">Meter</MenuItem>
+             <MenuItem value="kgf/cm2">kgf/cm2</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     ),
+   }}
+ />
+</Grid>
+
+
+
+
+     
+
+
+
+
+       {/* Direction of Rotation */}
+       <Grid item xs={4}>
+         <Autocomplete
+           size="small"
+           value={item?.directionOfRotation}
+           onChange={(event, newValue) => {
+             setFormData((prevState) => ({
+               ...prevState,
+               agitatorInquiries: [
+                 {
+                   ...prevState.agitatorInquiries[index], // Keep the other fields of the first object intact
+                   directionOfRotation: newValue || "", // Update the 'branch' property
+                 },
+               ],
+             }));
+           }}
+           options={['CW', 'CCW']}
+           renderInput={(params) => (
+             <TextField
+               {...params}
+               label="Direction of Rotation"
+               variant="outlined"
+               size="small"
+               fullWidth
+               className="custom-text-field"
+             />
+           )}
+         />
+       </Grid>
+
+       {/* Speed */}
+       <Grid item xs={4}>
+         <TextField
+           label="Speed"
+           type="number"
+           name="speed"
+           value={item?.speed}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+     </Grid>
+
+     {/*/////////////// 4th form /////////////// */}
+     <h3 style={{ padding: '10px 0' }}>Fluid :-</h3>
+     <Grid container spacing={2}>
+       {/* Fluid */}
+       <Grid item xs={4}>
+         <TextField
+           label="Fluid"
+           name="fluid"
+           value={item?.fluid}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+
+       {/* Nature */}
+       <Grid item xs={4}>
+         <Autocomplete
+           size="small"
+           value={item?.nature}
+           onChange={(event, newValue) => {
+             setFormData((prevState) => ({
+               ...prevState,
+               agitatorInquiries: [
+                 {
+                   ...prevState.agitatorInquiries[index], // Keep the other fields of the first object intact
+                   nature: newValue || "", // Update the 'branch' property
+                 },
+               ],
+             }));
+           }}
+           options={['Option1', 'Option2']} // Replace with actual nature options
+           renderInput={(params) => (
+             <TextField
+               {...params}
+               label="Nature"
+               variant="outlined"
+               size="small"
+               fullWidth
+               className="custom-text-field"
+             />
+           )}
+         />
+       </Grid>
+
+       {/* Pumping Temperature */}
+        <Grid item xs={4}>
+ <TextField
+   size="small"
+   className="custom-text-field"
+   name="pumpingTemperature"
+   value={item?.pumpingTemperature?.value || ""}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           pumpingTemperature: {
+             ...prev.agitatorInquiries[index]?.pumpingTemperature,
+             value
+           }
+         }
+       ]
+     }));
+   }}
+   label="Pumping Temperature"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.pumpingTemperature?.unit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     pumpingTemperature: {
+                       ...prev.agitatorInquiries[index]?.pumpingTemperature,
+                       unit: selectedUnit
+                     }
+                   }
+                 ]
+               }));
+             }}
+             displayEmpty
+             disabled={!item?.pumpingTemperature?.value}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="℃">℃ </MenuItem>
+             <MenuItem value="℉">℉</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     ),
+   }}
+ />
+</Grid>
+
+
+       {/* Maximum Temperature */}
+ <Grid item xs={4}>
+ <TextField
+   size="small"
+   className="custom-text-field"
+   name="maximumTemperature"
+   value={item?.maximumTemperature?.value || ""}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           maximumTemperature: {
+             ...prev.agitatorInquiries[index]?.maximumTemperature,
+             value
+           }
+         }
+       ]
+     }));
+   }}
+   label="Maximum Temperature"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.maximumTemperature?.unit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     maximumTemperature: {
+                       ...prev.agitatorInquiries[index]?.maximumTemperature,
+                       unit: selectedUnit
+                     }
+                   }
+                 ]
+               }));
+             }}
+             displayEmpty
+             disabled={!item?.maximumTemperature?.value}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="℃">℃ </MenuItem>
+             <MenuItem value="℉">℉</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     ),
+   }}
+ />
+</Grid>
+
+
+
+       {/* SP Gravity */}
+       <Grid item xs={4}>
+         <TextField
+           label="SP Gravity"
+           name="spGravity"
+           value={item?.spGravity}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Freezing Point */}
+       <Grid item xs={4}>
+         <TextField
+           label="Freezing Point"
+           name="freezingPoint"
+           value={item?.freezingPoint}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Boiling Point */}
+       <Grid item xs={4}>
+         <TextField
+           label="Boiling Point"
+           name="boilingPoint"
+           value={item?.boilingPoint}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Viscosity */}
+       <Grid item xs={4}>
+         <TextField
+           label="Viscosity"
+           name="viscosity"
+           value={item?.viscosity}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Percentage Of Solid */}
+       <Grid item xs={4}>
+         <TextField
+           label="Percentage Of Solid"
+           name="percentageOfSolid"
+           value={item?.percentageOfSolid}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Solid Size */}
+       <Grid item xs={4}>
+         <TextField
+           label="Solid Size"
+           name="solidSize"
+           value={item?.solidSize}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Special Note */}
+       <Grid item xs={4}>
+         <TextField
+           label="Special Note"
+           name="specialNote"
+           value={formData.agitatorInquiries?.specialNote}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+           inputProps={{ maxLength: 150 }}
+         />
+       </Grid>
+     </Grid>
+     
+
+   </div>
+   )}
+     {/* {item?.sealType === "Pump" && 
+     <PumpData index={index} />}
+     {item?.sealType === "ApiPlan" && 
+     <ApiPlane index={index} />}
+     {item?.sealType === "Rotatoryjoin" && <Rotatoryjoin index={index} />} */}
+
+     {/* Remove Item Button */}
+     <IconButton
+       variant="contained"
+       color="secondary"
+       className="deleteIcon"
+       onClick={() => removeItem("agitatorInquiries", index)}
+       style={{ marginTop: "10px", backgroundColor: "red", color: "white", borderRadius: "5px" }}
+     >
+       <DeleteIcon />
+     </IconButton>
+   </div>
+ ))}
+
+ {/* Add Item Button */}
+ <IconButton
+   variant="contained"
+   color="primary"
+   onClick={() => addItem("agitatorInquiries")}
+   style={{ marginTop: "10px", fontSize: "0.8rem", backgroundColor: "black", color: "white", borderRadius: "5px" }}
+ >
+   <AddIcon /> Add Item
+ </IconButton>
+  </div>
+)}
+
+{sealType === 'rotatoryjoin' && (
+  <div>
+  {formData.rotaryJointInquiries.map((item, index) => (
+      <div key={index}>
+        {Rotatoryjoin(index)}
+        <Grid item xs={2}>
+       <Autocomplete
+         size="small"
+         value={item?.sealType || ""}
+         onChange={(event, newValue) => {
+           setFormData((prevState) => {
+             const updatedItems = [...prevState.apiPlanInquiries];
+             updatedItems[index] = { ...updatedItems[index], sealType: newValue || "" };
+             return { ...prevState, apiPlanInquiries: updatedItems };
+           });
+         }}
+         options={["Agitator", "Pump", "ApiPlan", "Rotatoryjoin"]}
+         renderInput={(params) => (
+           <TextField
+           
+             required
+             className="custom-text-field"
+             {...params}
+             size="small"
+             label="Seal Type"
+             variant="outlined"
+             fullWidth
+           />
+         )}
+       />
+     </Grid>
+
+     {/* Conditionally Render Inquiry Type Form Based on sealType */}
+     {item?.sealType === "Agitator" && (
+     <div key={index}>
+     <Grid container spacing={2} style={{ marginTop: "10px" }}>
+       {/* Sales Inquiry Item Reference No */}
+       <Grid item xs={4}>
+         <TextField
+           label="Sales Inquiry Item Reference No."
+           value={item?.agitatorInquiryReferenceNo}
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           id="disableItem"
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+
+       <Grid item xs={12} sm={4}>
+  <Autocomplete
+    size="small"
+    value={item?.branch || ''}
+    onChange={(event, newValue) => {
+      const updatedInquiries = [...formData.agitatorInquiries];
+      updatedInquiries[index] = {
+        ...updatedInquiries[index], // Preserve other fields
+        branch: newValue || "", // Update only the branch field
+      };
+      setFormData((prevState) => ({
+        ...prevState,
+        agitatorInquiries: updatedInquiries,
+      }));
+    }}
+    inputValue={formData?.agitatorInquiries[index]?.branch || ''}
+    onInputChange={(event, newInputValue) => {
+      const updatedInquiries = [...formData.agitatorInquiries];
+      updatedInquiries[index] = {
+        ...updatedInquiries[index], // Preserve other fields
+        branch: newInputValue || "", // Update only the branch field
+      };
+      setFormData((prevState) => ({
+        ...prevState,
+        agitatorInquiries: updatedInquiries,
+      }));
+    }}
+    options={Array.isArray(authState?.branchs) ? authState.branchs.map((b) => b.branchName) : []}
+    renderInput={(params) => (
+      <TextField
+        required
+        className="custom-text-field"
+        {...params}
+        size="small"
+        label="Branch"
+        variant="outlined"
+        fullWidth
+      />
+    )}
+  />
+</Grid>
+
+
+       {/* Created By User */}
+       <Grid item xs={4}>
+         <TextField
+           label="Created By User"
+           value={authState?.sub}
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           id="disableItem"
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+
+
+
+       {/* Created On */}
+       <Grid item xs={4}>
+         <TextField
+           label="Created On"
+           value={dateTime}
+           InputProps={{ readOnly: true }}
+           size="small"
+           id="disableItem"
+           fullWidth
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Updated By User */}
+       <Grid item xs={4}>
+         <TextField
+           label="Updated By User"
+           value={authState?.sub}
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           id="disableItem"
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Updated On */}
+       <Grid item xs={4}>
+         <TextField
+           label="Updated On"
+           value={dateTime}
+           id="disableItem"
+           InputProps={{ readOnly: true }}
+           size="small"
+           fullWidth
+           disabled
+           className="custom-text-field"
+         />
+       </Grid>
+     </Grid>
+
+     {/* //////// 2nd form ///////////// */}
+
+     <h3 style={{ padding: '10px 0' }}>Existing Seal :-</h3>
+
+     <Grid container spacing={2}>
+       {/* Series */}
+       <Grid item xs={4}>
+      <TextField
+         label="Series"
+         name="series" // This is used to identify the property dynamically
+         value={item?.series || ""}
+         onChange={handleChange("agitatorInquiries",index)} // Specify array name and index
+         size="small"
+         fullWidth
+         className="custom-text-field" />
+       </Grid>
+
+
+
+<Grid item xs={4}>
+<Autocomplete
+ style={{ width: "100%" }}
+ size="small"
+ value={formData?.agitatorInquiries[index]?.sealArrangement || ""}
+ onChange={(event, newValue) =>
+   handleChange("agitatorInquiries", index)({
+     target: { name: "sealArrangement", value: newValue || "" },
+   })
+ }
+ options={["Single", "Double"]}
+ renderInput={(params) => (
+   <TextField
+     size="small"
+     {...params}
+     placeholder="Seal Arrangement"
+     variant="outlined"
+     className="custom-text-field"
+     fullWidth
+     label="Seal Arrangement"
+   />
+ )}
+/>
+
+</Grid>
+
+
+       <Grid item xs={4}>
+         <Autocomplete
+           style={{ width: '100%' }}
+           size="small"
+       value={formData?.agitatorInquiries[index]?.performance || ""}
+           onChange={(event, newValue) => {
+             setFormData({
+               ...formData,
+               agitatorInquiries: [
+                 {
+                   ...item,
+                   performance: newValue || "", // Update the sealArrangement field
+                 },
+               ],
+             });
+           }}
+           options={['Satisfactory', 'Unsatisfactory']}
+           renderInput={(params) => (
+             <TextField
+               size="small"
+               {...params}
+               placeholder="Performance"
+               variant="outlined"
+               className='custom-text-field'
+               fullWidth
+               label="Performance"
+             />
+           )}
+         />
+       </Grid>
+
+
+       {/* Make */}
+       <Grid item xs={4}>
+         <TextField
+           label="Make"
+           name="existingSealMake"
+         value={formData?.agitatorInquiries[index]?.existingSealMake}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Size */}
+       <Grid item xs={4}>
+         <TextField
+           label="Size"
+           name="existingSealSize"
+           value={item?.existingSealSize}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* MOC */}
+       <Grid item xs={4}>
+         <TextField
+           label="MOC"
+           name="existingSealMOC"
+           value={item?.existingSealMOC}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* API Plan */}
+       <Grid item xs={4}>
+         <TextField
+           label="API Plan"
+           name="existingSealApiPlan"
+           value={item?.existingSealApiPlan}
+           onChange={handleChange("agitatorInquiries",index)}
+           size="small"
+           fullWidth
+           className="custom-text-field"
+         />
+       </Grid>
+     </Grid>
+
+     {/*///////////////3rd form ////////////// */}
+
+     <h3 style={{ padding: '10px 0' }}>Operating Parameters And Fluid Detail :-</h3>
+
+     <Grid container spacing={2}>
+       {/* Vessel Pressure (Operating) */}
+
+
+<Grid item xs={4}>
+ <TextField
+   size="small"
+   className="custom-text-field"
+   name="vesselPressureOperating"
+   value={item?.vesselPressureOperating}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           vesselPressureOperating: +value
+         }
+       ]
+     }));
+   }}
+   label="Vessel Pressure (Operating)"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.vesselPressureOperatingUnit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     vesselPressureOperatingUnit: selectedUnit
+                   }
+                 ]
+               }));
+         
+               
+             }}
+             displayEmpty
+             disabled={!item?.vesselPressureOperating}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="kg/cm2">kg/cm²</MenuItem>
+             <MenuItem value="kg/cm2 a">kg/cm² (a)</MenuItem>
+             <MenuItem value="kg/cm2 g">kg/cm² (g)</MenuItem>
+             <MenuItem value="bar">bar</MenuItem>
+             <MenuItem value="bar (a)">bar (a)</MenuItem>
+             <MenuItem value="bar (g)">bar (g)</MenuItem>
+             <MenuItem value="Mpa">MPa</MenuItem>
+             <MenuItem value="Mpa (a)">MPa (a)</MenuItem>
+             <MenuItem value="Mpa (g)">MPa (g)</MenuItem>
+             <MenuItem value="Kpa">kPa</MenuItem>
+             <MenuItem value="Kpa (g)">kPa (g)</MenuItem>
+             <MenuItem value="PSI">PSI</MenuItem>
+             <MenuItem value="PSIG">PSIG</MenuItem>
+             <MenuItem value="MLC">MLC</MenuItem>
+             <MenuItem value="MWC">MWC</MenuItem>
+             <MenuItem value="Meter">Meter</MenuItem>
+             <MenuItem value="kgf/cm2">kgf/cm²</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     )
+   }}
+ />
+</Grid>
+
+
+
+       <Grid item xs={4}>
+       <TextField
+   size="small"
+   type="number"
+   className="custom-text-field"
+   name="vesselPressureDesign"
+   value={item?.vesselPressureDesign}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           vesselPressureDesign: +value
+         }
+       ]
+     }));
+   }}
+   label="Vessel Pressure (Design)"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.vesselPressureDesignUnit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     vesselPressureDesignUnit: selectedUnit
+                   }
+                 ]
+               }));
+         
+               
+             }}
+             displayEmpty
+             disabled={!item?.vesselPressureDesign}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="MLC">MLC</MenuItem>
+             <MenuItem value="MWC">MWC</MenuItem>
+             <MenuItem value="Meter">Meter</MenuItem>
+             <MenuItem value="kgf/cm2">kgf/cm2</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     ),
+   }}
+ />
+</Grid>
+
+
+
+
+     
+
+
+
+
+       {/* Direction of Rotation */}
+       <Grid item xs={4}>
+         <Autocomplete
+           size="small"
+           value={item?.directionOfRotation}
+           onChange={(event, newValue) => {
+             setFormData((prevState) => ({
+               ...prevState,
+               agitatorInquiries: [
+                 {
+                   ...prevState.agitatorInquiries[index], // Keep the other fields of the first object intact
+                   directionOfRotation: newValue || "", // Update the 'branch' property
+                 },
+               ],
+             }));
+           }}
+           options={['CW', 'CCW']}
+           renderInput={(params) => (
+             <TextField
+               {...params}
+               label="Direction of Rotation"
+               variant="outlined"
+               size="small"
+               fullWidth
+               className="custom-text-field"
+             />
+           )}
+         />
+       </Grid>
+
+       {/* Speed */}
+       <Grid item xs={4}>
+         <TextField
+           label="Speed"
+           type="number"
+           name="speed"
+           value={item?.speed}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+     </Grid>
+
+     {/*/////////////// 4th form /////////////// */}
+     <h3 style={{ padding: '10px 0' }}>Fluid :-</h3>
+     <Grid container spacing={2}>
+       {/* Fluid */}
+       <Grid item xs={4}>
+         <TextField
+           label="Fluid"
+           name="fluid"
+           value={item?.fluid}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+
+       {/* Nature */}
+       <Grid item xs={4}>
+         <Autocomplete
+           size="small"
+           value={item?.nature}
+           onChange={(event, newValue) => {
+             setFormData((prevState) => ({
+               ...prevState,
+               agitatorInquiries: [
+                 {
+                   ...prevState.agitatorInquiries[index], // Keep the other fields of the first object intact
+                   nature: newValue || "", // Update the 'branch' property
+                 },
+               ],
+             }));
+           }}
+           options={['Option1', 'Option2']} // Replace with actual nature options
+           renderInput={(params) => (
+             <TextField
+               {...params}
+               label="Nature"
+               variant="outlined"
+               size="small"
+               fullWidth
+               className="custom-text-field"
+             />
+           )}
+         />
+       </Grid>
+
+       {/* Pumping Temperature */}
+        <Grid item xs={4}>
+ <TextField
+   size="small"
+   className="custom-text-field"
+   name="pumpingTemperature"
+   value={item?.pumpingTemperature?.value || ""}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           pumpingTemperature: {
+             ...prev.agitatorInquiries[index]?.pumpingTemperature,
+             value
+           }
+         }
+       ]
+     }));
+   }}
+   label="Pumping Temperature"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.pumpingTemperature?.unit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     pumpingTemperature: {
+                       ...prev.agitatorInquiries[index]?.pumpingTemperature,
+                       unit: selectedUnit
+                     }
+                   }
+                 ]
+               }));
+             }}
+             displayEmpty
+             disabled={!item?.pumpingTemperature?.value}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="℃">℃ </MenuItem>
+             <MenuItem value="℉">℉</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     ),
+   }}
+ />
+</Grid>
+
+
+       {/* Maximum Temperature */}
+ <Grid item xs={4}>
+ <TextField
+   size="small"
+   className="custom-text-field"
+   name="maximumTemperature"
+   value={item?.maximumTemperature?.value || ""}
+   onChange={(e) => {
+     const value = e.target.value;
+     setFormData((prev) => ({
+       ...prev,
+       agitatorInquiries: [
+         {
+           ...prev.agitatorInquiries[index],
+           maximumTemperature: {
+             ...prev.agitatorInquiries[index]?.maximumTemperature,
+             value
+           }
+         }
+       ]
+     }));
+   }}
+   label="Maximum Temperature"
+   fullWidth
+   InputProps={{
+     endAdornment: (
+       <InputAdornment position="end">
+         <FormControl size="small" variant="outlined">
+           <Select
+             value={item?.maximumTemperature?.unit || ""}
+             onChange={(e) => {
+               const selectedUnit = e.target.value;
+               setFormData((prev) => ({
+                 ...prev,
+                 agitatorInquiries: [
+                   {
+                     ...prev.agitatorInquiries[index],
+                     maximumTemperature: {
+                       ...prev.agitatorInquiries[index]?.maximumTemperature,
+                       unit: selectedUnit
+                     }
+                   }
+                 ]
+               }));
+             }}
+             displayEmpty
+             disabled={!item?.maximumTemperature?.value}
+             sx={{
+               height: "100%",
+               borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+               borderRadius: 0,
+               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+               "& .MuiSelect-select": {
+                 padding: "0 8px",
+                 outline: "none",
+                 border: "none",
+                 height: "100%",
+                 display: "flex",
+                 alignItems: "center"
+               },
+               minWidth: 60
+             }}
+           >
+             <MenuItem value="" disabled>
+               Unit
+             </MenuItem>
+             <MenuItem value="℃">℃ </MenuItem>
+             <MenuItem value="℉">℉</MenuItem>
+           </Select>
+         </FormControl>
+       </InputAdornment>
+     ),
+   }}
+ />
+</Grid>
+
+
+
+       {/* SP Gravity */}
+       <Grid item xs={4}>
+         <TextField
+           label="SP Gravity"
+           name="spGravity"
+           value={item?.spGravity}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Freezing Point */}
+       <Grid item xs={4}>
+         <TextField
+           label="Freezing Point"
+           name="freezingPoint"
+           value={item?.freezingPoint}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Boiling Point */}
+       <Grid item xs={4}>
+         <TextField
+           label="Boiling Point"
+           name="boilingPoint"
+           value={item?.boilingPoint}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Viscosity */}
+       <Grid item xs={4}>
+         <TextField
+           label="Viscosity"
+           name="viscosity"
+           value={item?.viscosity}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Percentage Of Solid */}
+       <Grid item xs={4}>
+         <TextField
+           label="Percentage Of Solid"
+           name="percentageOfSolid"
+           value={item?.percentageOfSolid}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Solid Size */}
+       <Grid item xs={4}>
+         <TextField
+           label="Solid Size"
+           name="solidSize"
+           value={item?.solidSize}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+         />
+       </Grid>
+
+       {/* Special Note */}
+       <Grid item xs={4}>
+         <TextField
+           label="Special Note"
+           name="specialNote"
+           value={formData.agitatorInquiries?.specialNote}
+           onChange={handleChange("agitatorInquiries",index)}
+           fullWidth
+           size="small"
+           variant="outlined"
+           className="custom-text-field"
+           inputProps={{ maxLength: 150 }}
+         />
+       </Grid>
+     </Grid>
+     
+
+   </div>
+   )}
+     {/* {item?.sealType === "Pump" && 
+     <PumpData index={index} />}
+     {item?.sealType === "ApiPlan" && 
+     <ApiPlane index={index} />}
+     {item?.sealType === "Rotatoryjoin" && <Rotatoryjoin index={index} />} */}
+
+     {/* Remove Item Button */}
+     <IconButton
+       variant="contained"
+       color="secondary"
+       className="deleteIcon"
+       onClick={() => removeItem("agitatorInquiries", index)}
+       style={{ marginTop: "10px", backgroundColor: "red", color: "white", borderRadius: "5px" }}
+     >
+       <DeleteIcon />
+     </IconButton>
+   </div>
+ ))}
+
+ {/* Add Item Button */}
+ <IconButton
+   variant="contained"
+   color="primary"
+   onClick={() => addItem("agitatorInquiries")}
+   style={{ marginTop: "10px", fontSize: "0.8rem", backgroundColor: "black", color: "white", borderRadius: "5px" }}
+ >
+   <AddIcon /> Add Item
+ </IconButton>
+  </div>
+)}
+
+
               </div>
     
           </div>

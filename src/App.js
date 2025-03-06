@@ -26,12 +26,13 @@ function AppContent() {
 
   const isLogin = location.pathname === "/login";
   const resetPath = location.pathname === "/reset";
+  
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     navigate("/login");
-  //   }
-  // }, [token, navigate]);
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, [token, navigate]);
 
   
   useEffect(() => {
@@ -47,10 +48,14 @@ function AppContent() {
         <div className="app">
           <GlobalError />
           <main className="content">
-          {/* {!isSidebar&&(savedToken!=='null' && savedToken)&&!resetPath&&<CustomSidebar  isSidebar={isSidebar} setIsSidebar={setIsSidebar} />} */}
-          <CustomSidebar  isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
-        {/* {(isLogin===false&&resetPath==false)?(<Topbar isSidebar={isSidebar} setIsSidebar={setIsSidebar} />):null } */}
-        <Topbar isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
+          {!isSidebar&&(savedToken!=='null' && savedToken)&&!resetPath&&<CustomSidebar  isSidebar={isSidebar} setIsSidebar={setIsSidebar} />}
+
+          {/* <CustomSidebar  isSidebar={isSidebar} setIsSidebar={setIsSidebar} /> */}
+
+
+        {(isLogin===false&&resetPath==false)?(<Topbar isSidebar={isSidebar} setIsSidebar={setIsSidebar} />):null }
+
+        {/* <Topbar isSidebar={isSidebar} setIsSidebar={setIsSidebar} /> */}
 
             <AllRoute isSidebar={isSidebar} />
           </main>

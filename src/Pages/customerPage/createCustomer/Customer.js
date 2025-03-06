@@ -397,8 +397,8 @@ const getDataByName = async (newInputValue) => {
 </div>
 
 
-          {formData?.contactDetail?.map((detail, index) => (
-            <div className='card' style={{width:'100%'}}  key = {index}>
+ {formData?.contactDetail?.map((detail, index) => (
+    <div className='card' style={{width:'100%'}}  key = {index}>
 <div className="MuiBox-root css-2e6lci">
   <svg
     width="20"
@@ -444,9 +444,7 @@ const getDataByName = async (newInputValue) => {
       </Grid>
 
 
-
-
-      <Grid item xs={12} sm={4}>
+  <Grid item xs={12} sm={4}>
   <TextField
     required
     size="small"
