@@ -1,18 +1,24 @@
-import axios from 'axios';
+import axiosInstance from '../axios/axiosInstance';
 
 export const getPumpSeal = async (pId, setFormData) => {
   try {
-    const response = await axios.get(`/api/pump-seal/${pId}`);
+    const response = await axiosInstance.get(`/lens/pumpseal/get?pumpSealReferenceNo=${pId}`);
+    console.log("single pump is ",response.data);
     setFormData(response.data);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Error loading data');
   }
 };
+
+
 export const handleSubmit = async (e, formData, navigate) => {
   try {
-    const response = await axios.post('/api/pump-seal', formData);
-    navigate('/');
+    e.preventDefault();
+    const response = await axiosInstance.post('/lens/pumSeal/save', formData);
+    // navigate('/');
+    console.log("response is ",response.data)
+    navigate(`/editDrf`);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Error submitting form');
@@ -21,8 +27,9 @@ export const handleSubmit = async (e, formData, navigate) => {
 
 export const handleUpdatePumpSeal = async (e, formData, pId, navigate) => {
   try {
-    const response = await axios.put(`/api/pump-seal/${pId}`, formData);
-    navigate('/');
+    e.preventDefault()
+    const response = await axiosInstance.put(`/lens/pumSeal/Update`, formData);
+    navigate(`/editDrf`);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Error updating form');
@@ -31,53 +38,60 @@ export const handleUpdatePumpSeal = async (e, formData, pId, navigate) => {
 
 export const getColumnData = async () => {
   try {
-    const response = await axios.get('/api/column-data');
+    const response = await axiosInstance.get('/api/column-data');
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Error loading column data');
   }
 };
 
-export const getAll = async () => {
+
+
+export const getAll = async (setData) => {
   try {
-    const response = await axios.get('/api/pump-seal');
-    return response.data;
+    const response = await axiosInstance.get('lens/pumSeal/getAll');
+    console.log("response is ",response.data)
+    setData(response.data);
+
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Error loading data');
   }
 };
 
-export const searchFilter = async (startDate, endDate, branch, customerName, pumpSealDrfNumber, page, limit, setData) => {
+
+
+// export const searchFilter = async (startDate, endDate, branch, customerName, pumpSealDrfNumber, page, limit, setData) => {
+//   try {
+//     const params = {
+//       startDate: startDate || '',
+//       endDate: endDate || '',
+//       branch: branch || '',
+//       customerName: customerName || '',
+//       pumpSealDrfNumber: pumpSealDrfNumber || '',
+//       page: page || 0,
+//       limit: limit || 10
+//     };
+
+//     const queryString = Object.keys(params)
+//       .map(key => `${key}=${encodeURIComponent(params[key])}`)
+//       .join('&');
+
+//     const response = await axiosInstance.get(`/api/pump-seal/search?${queryString}`);
+//     if (setData) {
+//       setData(response.data);
+//     }
+//     return response.data;
+//   } catch (error) {
+//     throw new Error(error.response?.data?.message || 'Error searching data');
+//   }
+// };
+
+
+export const deletePumpDetail = async (id, data, setData) => {
   try {
-    const params = {
-      startDate: startDate || '',
-      endDate: endDate || '',
-      branch: branch || '',
-      customerName: customerName || '',
-      pumpSealDrfNumber: pumpSealDrfNumber || '',
-      page: page || 0,
-      limit: limit || 10
-    };
-
-    const queryString = Object.keys(params)
-      .map(key => `${key}=${encodeURIComponent(params[key])}`)
-      .join('&');
-
-    const response = await axios.get(`/api/pump-seal/search?${queryString}`);
-    if (setData) {
-      setData(response.data);
-    }
-    return response.data;
-  } catch (error) {
-    throw new Error(error.response?.data?.message || 'Error searching data');
-  }
-};
-
-export const deleteDetail = async (id, data, setData) => {
-  try {
-    await axios.delete(`/api/pump-seal/${id}`);
+    await axiosInstance.delete(`lens/pumSeal/delete?pumSealDrfNo=${encodeURIComponent(id)}`);
     if (data && setData) {
-      const updatedData = data.filter(item => item.pumpSealDrfNumber !== id);
+      const updatedData = data.filter(item => item.drfNumber !== id);
       setData(updatedData);
     }
     return { message: 'Record deleted successfully' };
@@ -85,3 +99,4 @@ export const deleteDetail = async (id, data, setData) => {
     throw new Error(error.response?.data?.message || 'Error deleting data');
   }
 };
+

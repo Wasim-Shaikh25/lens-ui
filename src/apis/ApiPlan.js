@@ -14,7 +14,7 @@ export const handleSubmit = async (e, formData,navigate) => {
     try {
       const res = await axiosInstance.post(`lens/apiPlan/save`, formData);
       console.log("response is ", res.data);
-      navigate(`/apiSuccess/${res.data}`);
+      navigate(`/editDrf`);
     } catch (err) {
       console.log(err);
     }
@@ -26,7 +26,7 @@ export const handleSubmit = async (e, formData,navigate) => {
 export const getApi = async(apId,setFormData)=>{
 
   try{
-    const res = await axiosInstance.get(`lens/apiPlan/get?apiPlanDrfNumber=${apId}`)
+    const res = await axiosInstance.get(`lens/apiPlan/get?apiPlanReferenceNo=${apId}`)
     const {data} = res;
     setFormData(data);
     console.log("the apId fetched data is ",data)
@@ -46,7 +46,8 @@ export const handleUpdate = async (e, formData, apId, navigate)=>{
         const res = await axiosInstance.put(`lens/apiPlan/update`, formData);
         console.log("response from update is ",res.data);
         apId="";
-        navigate(`/apiSuccess/${formData.apiPlanDrfNumber}`);
+        navigate(`/editDrf`);
+
     }
     catch(err){
       console.log(err)
@@ -55,9 +56,9 @@ export const handleUpdate = async (e, formData, apId, navigate)=>{
   
 }
 
+
 //get All 
 export const getAllApi = async(currentPage, itemsPerPage, setData, setIsDeleted)=>{
-
   try{
     const res = await axiosInstance.get(`lens/apiPlan/getAll`)
     setData(res.data);
@@ -73,10 +74,11 @@ export const getAllApi = async(currentPage, itemsPerPage, setData, setIsDeleted)
 
 
 // delete One
-export const deleteDetail = async (crId,data, setData,) => {
+export const deleteApiDetail = async (crId,data, setData,) => {
   try {
-    await axiosInstance.delete(`lens/apiPlan/delete?apiPlanId=${crId}`);
-    const newData = data.filter(item => item.apiPlanDrfNumber !== crId);
+    
+    await axiosInstance.delete(`lens/apiPlan/delete?apiPlanId=${encodeURIComponent(crId)}`);
+    const newData = data.filter(item => item.drfNumber !== crId);
     console.log("data is ",data)
     console.log("New data is ",newData)
     setData(newData);
@@ -85,6 +87,8 @@ export const deleteDetail = async (crId,data, setData,) => {
   }
 
 }
+
+
 
 
 export const searchFilter = async (startDate,endDate,branch,customerName,apiPlanDrfNumber,currentPage,itemsPerPage,setData,) => {

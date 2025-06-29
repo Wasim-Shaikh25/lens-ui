@@ -275,7 +275,7 @@ export default function CreateQuotation() {
     console.log("Saved items:", newSavedItems);
   };
 
-
+console.log("formData",formData)
 
 
   const handleTabChange = (event, newValue) => {

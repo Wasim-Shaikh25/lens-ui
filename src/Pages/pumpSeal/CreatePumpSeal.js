@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef,  useEffect } from 'react';
 import {
   TextField,
   Button,
@@ -20,6 +20,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getPumpSeal, handleSubmit } from '../../apis/PumpSealApi';
 import { handleUpdatePumpSeal } from '../../apis/PumpSealApi';
 import { getColumnData } from '../../apis/PumpSealApi';
+import { useAuth } from '../../contextApi/AuthContext';
+import moment from 'moment';
+import axiosInstance from '../../axios/axiosInstance';
+import DownloadIcon from '@mui/icons-material/Download';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
 
 
 
@@ -33,157 +38,242 @@ export default function CreatePumpSeal() {
   const [stgOption, setstgOption] = useState([]);
   const [cstOption, setcstOption] = useState([]);
   const [pfOption, setpfOption] = useState([]);
-  const [fnOption, setfnOption] = useState([]);
+  const [fnOption, setfnOption]  = useState([]);
 
+  const atRefmSeal = useRef(null);
+  const atStuffBoxRef = useRef(null);
+
+
+  const [atmSeal, setAtmSeal] = useState("")
+  const [atStuff, setAtStuff] = useState("")
+
+
+
+const handleFileDelete = (fieldName)=>{
+
+    setFormData({
+      ...formData,
+      [fieldName]:""
+    })
+
+
+  switch(fieldName){
+
+   case "attachmentReferenceMechanicalSealDrawing":
+        setAtmSeal("");
+        break;
+
+      case "attachmentStuffingBoxDetails":
+        setAtStuff("");
+        break;
+
+        default:
+          break 
+};
+}
   // Add new state for mechanical seal section
   const [sealType, setSealType] = useState('existing');
   const [selectedSealType, setSelectedSealType] = useState('single');
 
-  
-  const [formData, setFormData] = useState({
-    branch: '',
-    endUser: '',
-    costingRequirement: '',
-    customerAddress: '',
-    customerName: '',
-    make: '',
-    model: '',
-    impeller: '',
-    shaft: '',
-    sealChamber: '',
-    bearingBracket: '',
-    tagNumber: '',
-    arrangement: '',
-    pumpType: '',
-    stuffingBox: '',
-    stage: '',
-    casting: '',
-    series: '',
-    sealArrangement: '',
-    sealType: '',
-    performance: '',
-    flushPlan: '',
-    barrierOrBufferPlan: '',
-    quenchPlan: '',
-    barrierOrBufferFluid: '',
-    designOffered: '',
-    sizeAvailable: '',
-    materialCode: '',
-    sealSeries: '',
-    shaftSize: '',
-    boreDia: '',
-    boreDepth: '',
-    nearestObstruction: '',
-    allPressureUnit: '',
-    totalHeat: '',
-    suctionPressure: '',
-    dischargePressure: '',
-    directionOfRotation: '',
-    speed: '',
-    boxPressure: '',
-    operatingFluid: '',
-    allTempPressureUnit: '',
-    nature: '',
-    operatingTemperature: '',
-    minOperatingTemperature: '',
-    spGravity: '',
-    freezePoint: '',
-    boilPoint: '',
-    viscosity: '',
-    viscosityUnit: '',
-    percentageOfSolid: '',
-    grainPoint: '',
-    description: '',
-    d1SleeveOd: '',
-    studHoles: '',
-    d2StuffingBoxId: '',
-    d4StuffingBoxBore: '',
-    d5SpigotDia: '',
-    d51: '',
-    d52: '',
-    d9BoltCircle: '',
-    boltSize: '',
-    l11: '',
-    l12: '',
-    l1SleeveExten: '',
-    l2ShaftHub: '',
-    l3ThreadLength: '',
-    l8sbDepth: '',
-    l9NearObstr: '',
-    alpha: '',
-    beta: '',
-    theta: '',
-    createdByUserGUID: '',
-    lastEditedByUserGUID: '',
-    rowguid: '',
-    region: '',
-    address: '',
-    emailId: '',
-    srNo: '',
-    dshaftOd: '',
-    sboxCover: '',
-    mnumberOfBolts: '',
-    lraisedCol: '',
-    existingSeal: {
-      gaNumber: '',
-      sealSeries: '',
-      shaftDia: '',
-      sealSize: '',
-      sealType: 'single',
-      ibMoc: {
-        face: '',
-        elastomer: '',
-        springElement: '',
-        contactHardware: '',
-        nonContactHardware: ''
-      },
-      obMoc: {
-        face: '',
-        elastomer: '',
-        springElement: '',
-        contactHardware: '',
-        nonContactHardware: ''
-      }
-    },
-    newSeal: {
-      shaftDia: '',
-      boreDia: '',
-      boreDepth: '',
-      nearestObstruction: '',
-      sealType: 'single',
-      ibMoc: {
-        face: '',
-        elastomer: '',
-        springElement: '',
-        contactHardware: '',
-        nonContactHardware: ''
-      },
-      obMoc: {
-        face: '',
-        elastomer: '',
-        springElement: '',
-        contactHardware: '',
-        nonContactHardware: ''
+  const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
+  const { authState } = useAuth();
+
+
+  const [formData, setFormData] = useState(
+    {
+      pumpSealId: "",
+      drfNumber: "",
+      branch: "",
+      salesInquiryItemReferenceNo: "",
+      createdOn: dateTime,
+      updatedOn: dateTime,
+      createdByUser: authState?.sub,
+      updatedByUser: authState?.sub,
+      customerName: "",
+      endUser: "",
+      costingRequirement: "",
+      proposedMechanicalSeal: "",
+      sealType: "",
+      existingSealGA: "",
+      existingSealSeries: "",
+      existingSealShaftDia: "",
+      existingSealSize: "",
+      existingSealType: "",
+      existingSealIBFace: "",
+      existingSealIBElastomer: "",
+      existingSealIBSpringElement: "",
+      existingSealIBContactHardware: "",
+      existingSealIBNonContactHardware: "",
+      existingSealOBFace: "",
+      existingSealOBElastomer: "",
+      existingSealOBSpringElement: "",
+      existingSealOBContactHardware: "",
+      existingSealOBNonContactHardware: "",
+      newSealShaftDia: "",
+      newSealBoreDia: "",
+      newSealBoreDepth: "",
+      newSealNearestObstruction: "",
+      newSealType: "",
+      newSealIBFace: "",
+      newSealIBElastomer: "",
+      newSealIBSpringElement: "",
+      newSealIBContactHardware: "",
+      newSealIBNonContactHardware: "",
+      newSealOBFace: "",
+      newSealOBElastomer: "",
+      newSealOBSpringElement: "",
+      newSealOBContactHardware: "",
+      newSealOBNonContactHardware: "",
+      apiFlushingPlans: "",
+      apiBarrierBufferPlans: "",
+      apiAtmosphericPlans: "",
+      apiCollectionPlans: "",
+      measurementTypeOfStuffingBox: "",
+      measurementShaftOd: "",
+      measurementStuffingBoxId: "",
+      measurementStuffingBoxDepth: "",
+      measurementNearestObstruction: "",
+      measurementSpigotDia: "",
+      measurementSocketDepth: "",
+      measurementShaftSleeveAvailable: "",
+      measurementSleeveOd: "",
+      measurementStuffingBoxThroatDia: "",
+      measurementSleeveShoulderLength: "",
+      measurementSleeveExtensionLength: "",
+      measurementShaftHubDistance: "",
+      measurementNumberOfStuds: "",
+      measurementStudSize: "",
+      measurementBoltCircleDiameter: "",
+      measurementStartAngle: "",
+      measurementFlushSize: "",
+      measurementFlushAngle: "",
+      measurementQuenchSize: "",
+      measurementQuenchAngle: "",
+      measurementDrainSize: "",
+      measurementDrainAngle: "",
+      measurementStuffingBox: "",
+      otherDetailsAccessories: "",
+      otherDetailsRemarks: "",
+      attachmentReferenceMechanicalSealDrawing: "",
+      attachmentStuffingBoxDetails: "",
+      pumpInquiryItem: {
+        pumpInquiryId: "",
+        pumpInquiryReferenceNo: "",
+        createdByUser: "",
+        createdOn: "",
+        updatedByUser: "",
+        updatedOn: "",
+        branch: "",
+        make: "",
+        model: "",
+        pumpMOC: "",
+        impellerCasingMOC: "",
+        shaftMOC: "",
+        bearingBKT: "",
+        tagNumber: "",
+        arrangement: "",
+        pumpType: "",
+        stage: "",
+        casingType: "",
+        series: "",
+        performance: "",
+        sealArrangement: "",
+        existingSealMake: "",
+        existingSealSize: "",
+        existingSealMOC: "",
+        existingSealApiPlan: "",
+        suctionPressure: {
+          id: "",
+          value: "",
+          unit: ""
+        },
+        dischargePressure: {
+          id: "",
+          value: "",
+          unit: ""
+        },
+        boxPressure: {
+          id: "",
+          value: "",
+          unit: ""
+        },
+        totalHead: {
+          id: "",
+          value: "",
+          unit: ""
+        },
+        pumpingTemperature: {
+          id: "",
+          value: "",
+          unit: ""
+        },
+        maximumTemperature: {
+          id: "",
+          value: "",
+          unit: ""
+        },
+        directionOfRotation: "",
+        speed: "",
+        fluid: "",
+        nature: "",
+        spGravity: "",
+        freezingPoint: "",
+        boilingPoint: "",
+        viscosity: "",
+        percentageOfSolid: "",
+        solidSize: "",
+        specialNote: "",
+        salesInquiryId: ""
       }
     }
-  });
+  );
+
 
   useEffect(() => {
     if (pId !== undefined) {
+      console.log("pId is ",pId);
       getPumpSeal(pId, setFormData);
     }
   }, [pId]);
 
+
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
     }));
   };
 
+
+console.log("FormData is ",formData);
+
+
+  const handleFetch = async (apiItem) => {
+
+    try {
+      const { data } = await axiosInstance(`lens/salesInquiry/get?itemReferenceNo=${apiItem}`)
+
+      console.log("response is ", data)
+      setFormData({
+        ...formData,
+        pumpInquiryItem: { ...data?.pumpInquiry }
+      })
+
+    } catch (err) {
+      console.log(err)
+    }
+
+  }
+
   const handleSealTypeChange = (event) => {
     setSealType(event.target.value);
+    setFormData((prev)=>({
+      ...prev,
+      sealType:event.target.value
+    }))
   };
 
   const handleSealConfigChange = (event) => {
@@ -193,34 +283,31 @@ export default function CreatePumpSeal() {
     if (sealType === 'existing') {
       setFormData(prev => ({
         ...prev,
-        existingSeal: {
-          ...prev.existingSeal,
-          sealType: newValue
-        }
+        existingSealType: newValue,
+        sealType:"existing"
+
       }));
     } else {
       setFormData(prev => ({
         ...prev,
-        newSeal: {
-          ...prev.newSeal,
-          sealType: newValue
-        }
+        newSealType: newValue,
+        sealType:"new"
       }));
     }
   };
 
-  const handleMocChange = (section, type, field, value) => {
-    setFormData(prev => ({
-      ...prev,
-      [section]: {
-        ...prev[section],
-        [type]: {
-          ...prev[section][type],
-          [field]: value
-        }
-      }
-    }));
-  };
+  // const handleMocChange = (section, type, field, value) => {
+  //   setFormData(prev => ({
+  //     ...prev,
+  //     [section]: {
+  //       ...prev[section],
+  //       [type]: {
+  //         ...prev[section][type],
+  //         [field]: value
+  //       }
+  //     }
+  //   }));
+  // };
 
   const cancelUpdate = () => {
     const confirmCancel = window.confirm("Are you sure you want to cancel the update?");
@@ -233,14 +320,18 @@ export default function CreatePumpSeal() {
   const renderMocFields = (section, type) => (
     <Grid container spacing={2}>
       <Grid item xs={12}>
-        <h3 style={{ paddingTop: '12px' }}>{type === 'ibMoc' ? 'IB MOC' : 'OB MOC'}</h3>      </Grid>
+        <h3 style={{ paddingTop: "12px" }}>
+          {type === "IB" ? "IB MOC" : "OB MOC"}
+        </h3>
+      </Grid>
       <Grid item xs={4}>
         <TextField
           size="small"
           className="custom-text-field"
           label="Face"
-          value={formData[section][type].face}
-          onChange={(e) => handleMocChange(section, type, 'face', e.target.value)}
+          name={`${section}${type}Face`}
+          value={formData[`${section}${type}Face`] || ""}
+          onChange={(e) => handleChange(e)}
           fullWidth
         />
       </Grid>
@@ -249,8 +340,9 @@ export default function CreatePumpSeal() {
           size="small"
           className="custom-text-field"
           label="Elastomer"
-          value={formData[section][type].elastomer}
-          onChange={(e) => handleMocChange(section, type, 'elastomer', e.target.value)}
+          name={`${section}${type}Elastomer`}
+          value={formData[`${section}${type}Elastomer`] || ""}
+          onChange={(e) => handleChange(e)}
           fullWidth
         />
       </Grid>
@@ -259,8 +351,9 @@ export default function CreatePumpSeal() {
           size="small"
           className="custom-text-field"
           label="Spring Element"
-          value={formData[section][type].springElement}
-          onChange={(e) => handleMocChange(section, type, 'springElement', e.target.value)}
+          name={`${section}${type}SpringElement`}
+          value={formData[`${section}${type}SpringElement`] || ""}
+          onChange={(e) => handleChange(e)}
           fullWidth
         />
       </Grid>
@@ -269,8 +362,9 @@ export default function CreatePumpSeal() {
           size="small"
           className="custom-text-field"
           label="Contact Hardware"
-          value={formData[section][type].contactHardware}
-          onChange={(e) => handleMocChange(section, type, 'contactHardware', e.target.value)}
+          name={`${section}${type}ContactHardware`}
+          value={formData[`${section}${type}ContactHardware`] || ""}
+          onChange={(e) => handleChange(e)}
           fullWidth
         />
       </Grid>
@@ -279,16 +373,18 @@ export default function CreatePumpSeal() {
           size="small"
           className="custom-text-field"
           label="Non-Contact Hardware"
-          value={formData[section][type].nonContactHardware}
-          onChange={(e) => handleMocChange(section, type, 'nonContactHardware', e.target.value)}
+          name={`${section}${type}NonContactHardware`}
+          value={formData[`${section}${type}NonContactHardware`] || ""}
+          onChange={(e) => handleChange(e)}
           fullWidth
         />
       </Grid>
     </Grid>
   );
 
+
   return (
-    
+
     <Container className="container">
       <form>
         {/* Existing Drawing Requisition Section */}
@@ -307,179 +403,225 @@ export default function CreatePumpSeal() {
           <hr />
           {/* Your existing Drawing Requisition form fields */}
           <Grid container spacing={2}>
-            {pId && <Grid item xs={4}>
-              <InputLabel className="ip-label" >PumpSeal Drf Number</InputLabel >
+           <Grid item xs={4}>
+            
               <TextField
                 size="small"
                 className="custom-text-field"
+                disabled
+                id="disableItem"
                 name="pumpSealDrfNumber"
                 InputLabelProps={{
-                  shrink: Boolean(formData.pumpSealDrfNumber),
+                  shrink: Boolean(formData?.drfNumber),
                 }}
-                autoFocus={!formData.pumpSealDrfNumber}
-                value={formData.pumpSealDrfNumber}
-                onChange={handleChange} />
+                label="Pump Seal Drf Number"
+                autoFocus={!formData?.drfNumber}
+                value={formData?.drfNumber}
+                onChange={(e) => handleChange(e)} />
             </Grid>
-            }
+            
 
             <Grid item xs={4}>
-              {/* <InputLabel className="ip-label" >Name</InputLabel > */}
               <TextField
                 size="small"
                 className="custom-text-field"
-                name="customerName"
-                value={formData.customerName}
-                onChange={handleChange}
-                label="Custormer Name"
+                label="Sales Inquiry Reference No."
+                name="salesInquiryItemReferenceNo"
+                value={formData.salesInquiryItemReferenceNo}
+                onChange={(e) => handleChange(e)}
+                required
+                fullWidth
+                InputProps={{
+                  endAdornment: (
+                    <Button
+                      variant="contained"
+                      size="small"
+                      style={{
+                        backgroundColor: "#38c0d0",
+                        color: "white",
+                        padding: "3px 10px",
+                        minWidth: "auto",
+                        height: "24px", // Adjust to fit inside the field
+                        fontSize: "0.75rem", // Smaller text
+                        borderRadius: "5px",
+                        marginRight: "-8px", // Keeps button inside the border
+                        cursor: "pointer"
+                      }}
+                      disabled={!formData.salesInquiryItemReferenceNo}
+                      onClick={() => handleFetch(formData?.salesInquiryItemReferenceNo)} // Your function here
+                    >
+                      Fetch
+                    </Button>
+                  )
+                }}
               />
             </Grid>
 
-            <Grid item xs={4}>
-              {/* <InputLabel className="ip-label" >Name</InputLabel > */}
-              <TextField
-                size="small"
-                className="custom-text-field"
-                name="customerName"
-                value={formData.customerName}
-                onChange={handleChange}
-                label="Drf Number"
-              />
-            </Grid>
-
-            <Grid item xs={4}>
-              {/* <InputLabel className="ip-label" >Name</InputLabel > */}
-              <TextField
-                size="small"
-                className="custom-text-field"
-                name="customerName"
-                value={formData.customerName}
-                onChange={handleChange}
-                label="Sales Inquiry"
-              />
-            </Grid>
-
-            <Grid item xs={4}>
-              {/* <InputLabel className="ip-label" >Name</InputLabel > */}
-              <TextField
-                size="small"
-                className="custom-text-field"
-                name="customerName"
-                value={formData.customerName}
-                onChange={handleChange}
-                label="Created By User"
-              />
-            </Grid>
-
-
-            <Grid item xs={4}>
-              {/* <InputLabel className="ip-label" >Name</InputLabel > */}
-              <TextField
-                size="small"
-                className="custom-text-field"
-                name="customerName"
-                value={formData.customerName}
-                onChange={handleChange}
-                label="Updated By user"
-              />
-            </Grid>
-
-            <Grid item xs={4}>
-              {/* <InputLabel className="ip-label" >Name</InputLabel > */}
-              <TextField
-                size="small"
-                className="custom-text-field"
-                name="customerName"
-                value={formData.customerName}
-                onChange={handleChange}
-                label="Updated On"
-              />
-            </Grid>
-
-
-            <Grid item xs={4}>
-              {/* <InputLabel className="ip-label" >Branch</InputLabel > */}
-              <TextField
-                size="small"
-                className="custom-text-field"
-                name="branch"
-                value={formData.branch}
-                onChange={handleChange}
-                label="Branch"
-              />
-
-            </Grid>
-
-            <Grid item xs={4}>
-              {/* <InputLabel className="ip-label" >Name</InputLabel > */}
-              <TextField
-                size="small"
-                className="custom-text-field"
-                name="customerName"
-                value={formData.customerName}
-                onChange={handleChange}
-                label="Name"
-              />
-            </Grid>
-
-
-            <Grid item xs={4}>
-              {/* <InputLabel className="ip-label" >endUser</InputLabel > */}
-              <TextField
-                size="small"
-                className="custom-text-field"
-                name="endUser"
-                value={formData.endUser}
-                onChange={handleChange}
-                label="endUser"
-              />
-            </Grid>
-
-            <Grid item xs={4}>
-              {/* <InputLabel className="ip-label" >Customer Address</InputLabel > */}
-              <TextField
-                size="small"
-                className="custom-text-field"
-                name="customerAddress"
-                value={formData.customerAddress}
-                onChange={handleChange}
-                label="Customer Address"
-              />
-            </Grid>
-
-
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={4}>
               <Autocomplete
                 size="small"
-                value={formData.costingRequirement || ''}
+                value={formData?.branch || ''}
                 onChange={(event, newValue) => {
                   setFormData({
                     ...formData,
-                    costingRequirement: newValue || ''
+                    branch: newValue || ""
                   });
                 }}
-
-                inputValue={formData.costingRequirement || ''}
+                inputValue={formData?.branch || ''}
                 onInputChange={(event, newInputValue) => {
                   setFormData({
                     ...formData,
-                    costingRequirement: newInputValue || ''
+                    branch: newInputValue
                   });
                 }}
-
-                options={["true", "false"].map((src) => src)}
+                options={Array.isArray(authState?.branchs) ? authState.branchs.map((b) => b.branchName) : []}
                 renderInput={(params) => (
                   <TextField
+                    required
+                    className="custom-text-field"
                     {...params}
                     size="small"
+                    label="Branch"
                     variant="outlined"
-                    placeholder='select Costing Requirement'
                     fullWidth
-                    className='custom-text-field'
-                    label="Costing Requirement"
+
                   />
                 )}
               />
             </Grid>
+
+           
+
+
+            <Grid item xs={4}>
+              <TextField
+                size="small"
+                className="custom-text-field"
+                name="createdOn"
+                disabled
+                id="disableItem"
+                value={formData?.createdOn || ''}
+                onChange={(e) => handleChange(e)}
+                label="Created On"
+                variant="outlined"
+                fullWidth
+                InputProps={{ readOnly: true }}
+              />
+            </Grid>
+
+            <Grid item xs={4}>
+              <TextField
+                size="small"
+                className="custom-text-field"
+                name="updatedOn"
+                disabled
+                id="disableItem"
+                InputLabelProps={{
+                  shrink: Boolean(formData?.updatedOn),
+                }}
+                value={formData?.updatedOn || ''}
+                onChange={(e) => handleChange(e)}
+                label="Updated On"
+                variant="outlined"
+                fullWidth
+                InputProps={{ readOnly: true }}
+              />
+            </Grid>
+
+
+
+            <Grid item xs={4}>
+              <TextField
+                size="small"
+                className="custom-text-field"
+                name="customerName"
+                value={formData?.customerName}
+                onChange={(e) => handleChange(e)}
+                label="Customer Name"
+              />
+            </Grid>
+
+
+            <Grid item xs={4}>
+             
+              <TextField
+                size="small"
+                disabled
+                id="disableItem"
+                className="custom-text-field"
+                naeme="createdByUser"
+                InputLabelProps={{
+                  shrink: Boolean(formData?.createdByUser),
+                }}
+                value={formData?.createdByUser}
+                onChange={(e) => handleChange(e)}
+                label="Created By User"
+              />
+            </Grid>
+
+            <Grid item xs={4}>
+             
+              <TextField
+                size="small"
+                disabled
+                id="disableItem"
+                className="custom-text-field"
+                name="updatedByUser"
+                InputLabelProps={{
+                  shrink: Boolean(formData?.updatedByUser),
+                }}
+                value={formData?.updatedByUser}
+                onChange={(e) => handleChange(e)}
+                label="Updated By User"
+              />
+            </Grid>
+
+            <Grid item xs={4}>
+             
+              <TextField
+                size="small"
+                className="custom-text-field"
+                name="endUser"
+                value={formData?.endUser}
+                onChange={(e) => handleChange(e)}
+                label="End User"
+              />
+            </Grid>
+
+
+
+            <Grid item xs={4}>
+  <Autocomplete
+    size="small"
+    value={formData.costingRequirement === true ? "Yes" : "No"}
+    onChange={(event, newValue) => {
+      setFormData({
+        ...formData,
+        costingRequirement: newValue === "Yes"
+      });
+    }}
+    inputValue={formData.costingRequirement === true ? "Yes" : "No"}
+    onInputChange={(event, newInputValue) => {
+      if (newInputValue === "Yes" || newInputValue === "No") {
+        setFormData({
+          ...formData,
+          costingRequirement: newInputValue === "Yes"
+        });
+      }
+    }}
+    options={["Yes", "No"]}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        size="small"
+        placeholder="Select Costing Requirement"
+        fullWidth
+        className="custom-text-field"
+        label="Costing Requirement"
+      />
+    )}
+  />
+</Grid>
 
           </Grid>
         </div>
@@ -494,9 +636,11 @@ export default function CreatePumpSeal() {
               <TextField
                 size="small"
                 className="custom-text-field"
+                disabled
+                id="disableItem"
                 name="make"
-                value={formData.make}
-                onChange={handleChange}
+                value={formData?.pumpInquiryItem?.make}
+                onChange={(e) => handleChange(e)}
                 label="Make"
               />
             </Grid>
@@ -504,10 +648,12 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <TextField
                 size="small"
+                disabled
+                id="disableItem"
                 className="custom-text-field"
                 name="model"
-                value={formData.model}
-                onChange={handleChange}
+                value={formData?.pumpInquiryItem?.model}
+                onChange={(e) => handleChange(e)}
                 label="Model"
               />
             </Grid>
@@ -515,10 +661,12 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <TextField
                 size="small"
+                disabled
+                id="disableItem"
                 className="custom-text-field"
                 name="pumpMOC"
-                value={formData.pumpMOC}
-                onChange={handleChange}
+                value={formData?.pumpInquiryItem.pumpMOC}
+                onChange={(e) => handleChange(e)}
                 label="Pump MOC"
               />
             </Grid>
@@ -526,10 +674,12 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <TextField
                 size="small"
+                disabled
+                id="disableItem"
                 className="custom-text-field"
                 name="impellerCasingMOC"
-                value={formData.impellerCasingMOC}
-                onChange={handleChange}
+                value={formData?.pumpInquiryItem.impellerCasingMOC}
+                onChange={(e) => handleChange(e)}
                 label="Impeller/Casing MOC"
               />
             </Grid>
@@ -538,9 +688,11 @@ export default function CreatePumpSeal() {
               <TextField
                 size="small"
                 className="custom-text-field"
+                disabled
+                id="disableItem"
                 name="shaftMOC"
-                value={formData.shaftMOC}
-                onChange={handleChange}
+                value={formData?.pumpInquiryItem.shaftMOC}
+                onChange={(e) => handleChange(e)}
                 label="Shaft MOC"
               />
             </Grid>
@@ -548,10 +700,12 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <TextField
                 size="small"
+                disabled
+                id="disableItem"
                 className="custom-text-field"
-                name="bearingBracket"
-                value={formData.bearingBracket}
-                onChange={handleChange}
+                name="bearingBKT"
+                value={formData?.pumpInquiryItem.bearingBKT}
+                onChange={(e) => handleChange(e)}
                 label="Bearing BKT"
               />
             </Grid>
@@ -559,10 +713,12 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <TextField
                 size="small"
+                disabled
+                id="disableItem"
                 className="custom-text-field"
                 name="tagNumber"
-                value={formData.tagNumber}
-                onChange={handleChange}
+                value={formData?.pumpInquiryItem.tagNumber}
+                onChange={(e) => handleChange(e)}
                 label="Tag Number"
               />
             </Grid>
@@ -570,12 +726,17 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <Autocomplete
                 style={{ width: '100%' }}
+                disabled
+                id="disableItem"
                 size="small"
-                value={formData.arrangement}
+                value={formData?.pumpInquiryItem.arrangement}
                 onChange={(event, newValue) => {
                   setFormData({
                     ...formData,
-                    arrangement: newValue
+                    pumpInquiryItem: {
+                      ...formData.pumpInquiryItem,
+                      arrangement: newValue
+                    }
                   });
                 }}
                 options={['Horizontal', 'Vertical']}
@@ -592,16 +753,22 @@ export default function CreatePumpSeal() {
                 )}
               />
             </Grid>
+            
 
             <Grid item xs={4}>
               <Autocomplete
                 style={{ width: '100%' }}
                 size="small"
-                value={formData.pumpType}
+                disabled
+                id="disableItem"
+                value={formData?.pumpInquiryItem.pumpType}
                 onChange={(event, newValue) => {
                   setFormData({
                     ...formData,
-                    pumpType: newValue
+                    pumpInquiryItem: {
+                      ...formData.pumpInquiryItem,
+                      pumpType: newValue
+                    }
                   });
                 }}
                 options={ptOption}
@@ -622,12 +789,17 @@ export default function CreatePumpSeal() {
             <Grid item xs={4}>
               <Autocomplete
                 style={{ width: '100%' }}
+                disabled
+                id="disableItem"
                 size="small"
-                value={formData.stage}
+                value={formData?.pumpInquiryItem.stage}
                 onChange={(event, newValue) => {
                   setFormData({
                     ...formData,
-                    stage: newValue
+                    pumpInquiryItem: {
+                      ...formData.pumpInquiryItem,
+                      stage: newValue
+                    }
                   });
                 }}
                 options={stgOption}
@@ -647,13 +819,18 @@ export default function CreatePumpSeal() {
 
             <Grid item xs={4}>
               <Autocomplete
+                disabled
+                id="disableItem"
                 style={{ width: '100%' }}
                 size="small"
-                value={formData.casing}
+                value={formData?.pumpInquiryItem.casingType}
                 onChange={(event, newValue) => {
                   setFormData({
                     ...formData,
-                    casing: newValue
+                    pumpInquiryItem: {
+                      ...formData.pumpInquiryItem,
+                      casingType: newValue
+                    }
                   });
                 }}
                 options={cstOption}
@@ -664,22 +841,10 @@ export default function CreatePumpSeal() {
                     placeholder="Select Casing Type"
                     variant="outlined"
                     className='custom-text-field'
-                    label="Casing"
+                    label="Casing Type"
                     fullWidth
                   />
                 )}
-              />
-            </Grid>
-
-            <Grid item xs={4}>
-              <TextField
-                multiline
-                className="custom-text-field"
-                name="casingDetails"
-                value={formData.casingDetails}
-                onChange={handleChange}
-                label="Casing Details"
-                fullWidth
               />
             </Grid>
 
@@ -687,6 +852,7 @@ export default function CreatePumpSeal() {
         </div>
 
         {/* Existing Seal Section */}
+
         <div className='card'>
           {/* Your existing Seal form fields */}
           <div className="MuiBox-root css-2e6lci"><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb">Existing Seal :-</div></div>
@@ -695,32 +861,43 @@ export default function CreatePumpSeal() {
 
             <Grid item xs={4}>
               <TextField
+                disabled
+                id="disableItem"
                 size="small"
                 className="custom-text-field"
                 name="series"
-                value={formData.series}
+                value={formData?.pumpInquiryItem.series}
                 label="Series"
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </Grid>
 
+
             <Grid item xs={4}>
               <Autocomplete
+                disabled
+                id="disableItem"
                 style={{ width: '100%' }}
                 size="small"
-                value={formData.performance}
+                value={formData?.pumpInquiryItem.performance}
                 onChange={(event, newValue) => {
                   setFormData({
                     ...formData,
-                    performance: newValue
+                    pumpInquiryItem: {
+                      ...formData.pumpInquiryItem,
+                      performance: newValue
+                    }
                   });
                 }}
                 onFocus={() => getColumnData('Performance', setptOption, setarOption, setsaOption, setstOption, setstgOption, setcstOption, setpfOption, setfnOption)}
-                inputValue={formData.performance || ''}
+                // inputValue={formData?.performance || ''}
                 onInputChange={(event, newInputValue) => {
                   setFormData({
                     ...formData,
-                    performance: newInputValue
+                    pumpInquiryItem: {
+                      ...formData.pumpInquiryItem,
+                      performance: newInputValue
+                    }
                   });
                 }}
                 options={['Satisfactory', 'Unsatisfactory']}
@@ -737,30 +914,37 @@ export default function CreatePumpSeal() {
                 )}
               />
             </Grid>
-              
+
 
 
             <Grid item xs={4}>
               <Autocomplete
+                disabled
+                id="disableItem"
                 style={{ width: '100%' }}
                 size="small"
-                value={formData.sealArrangement}
+                value={formData?.pumpInquiryItem.sealArrangement}
                 onChange={(event, newValue) => {
                   setFormData({
                     ...formData,
-                    sealArrangement: newValue
+                    pumpInquiryItem: {
+                      ...formData.pumpInquiryItem,
+                      sealArrangement: newValue
+                    }
                   });
                 }}
-
                 onFocus={() => getColumnData('Seal Arrangement', setptOption, setarOption, setsaOption, setstOption, setstgOption, setcstOption, setpfOption, setfnOption)}
-                inputValue={formData.sealArrangement || ''}
+                // inputValue={formData?.sealArrangement || ''}
                 onInputChange={(event, newInputValue) => {
                   setFormData({
                     ...formData,
-                    sealArrangement: newInputValue
+                    pumpInquiryItem: {
+                      ...formData.pumpInquiryItem,
+                      sealArrangement: newInputValue
+                    }
                   });
                 }}
-                
+
                 options={['Single', 'Double']}
                 renderInput={(params) => (
                   <TextField
@@ -778,46 +962,54 @@ export default function CreatePumpSeal() {
 
             <Grid item xs={4}>
               <TextField
+                disabled
+                id="disableItem"
                 size="small"
                 className="custom-text-field"
-                name="make"
-                value={formData.make}
+                name="existingSealMake"
+                value={formData?.pumpInquiryItem.existingSealMake}
                 label="Make"
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </Grid>
 
             <Grid item xs={4}>
               <TextField
+                disabled
+                id="disableItem"
                 size="small"
                 className="custom-text-field"
-                name="size"
-                value={formData.size}
+                name="existingSealSize"
+                value={formData?.pumpInquiryItem.existingSealSize}
                 label="Size"
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </Grid>
 
             <Grid item xs={4}>
               <TextField
+                disabled
+                id="disableItem"
                 size="small"
                 className="custom-text-field"
-                name="moc"
-                value={formData.moc}
+                name="existingSealMOC"
+                value={formData?.pumpInquiryItem.existingSealMOC}
                 label="MOC"
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </Grid>
 
             <Grid item xs={4}>
               <TextField
+                disabled
+                id="disableItem"
                 size="small"
                 className="custom-text-field"
-                name="apiPlan"
-                value={formData.apiPlan}
+                name="existingSealApiPlan"
+                value={formData?.pumpInquiryItem.existingSealApiPlan}
                 label="API Plan"
                 multiline
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
                 fullWidth
               />
             </Grid>
@@ -826,7 +1018,7 @@ export default function CreatePumpSeal() {
         </div>
 
         {/* Operating Parameters And Fluid Detail Section */}
-        
+
         <div className='card'>
           <div className="MuiBox-root css-2e6lci"><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb">Operating Parameters And Fluid Detail :-</div></div>
           <div className=''>
@@ -835,244 +1027,87 @@ export default function CreatePumpSeal() {
 
               <Grid item xs={4}>
                 <TextField
+                  disabled
+                  id="disableItem"
                   size="small"
                   className="custom-text-field"
                   name="suctionPressure"
-                  value={formData.suctionPressure}
-                  onChange={handleChange}
+                  value={formData.pumpInquiryItem?.suctionPressure?.value || ""}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    setFormData((prev) => ({
+                      ...prev,
+                      pumpInquiryItem: {
+                        ...prev.pumpInquiryItem,
+                        suctionPressure: {
+                          ...prev.pumpInquiryItem.suctionPressure,
+                          value: newValue,
+                        },
+                      }
+                    }));
+                  }}
                   label="Suction Pressure"
                   fullWidth
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <FormControl size="small" variant="outlined">
+                        <FormControl size="small">
                           <Select
+
+                            id="disableItem"
+                            value={formData.pumpInquiryItem?.suctionPressure?.unit || ""}
                             onChange={(e) => {
                               const selectedUnit = e.target.value;
                               setFormData((prev) => ({
-                                ...prev, suctionPressure: `${prev.suctionPressure.split(' ')[0]} ${selectedUnit}`
+                                ...prev,
+                                pumpInquiryItem: {
+                                  ...prev.pumpInquiryItem,
+                                  suctionPressure: {
+                                    ...prev.pumpInquiryItem.suctionPressure,
+                                    unit: selectedUnit,
+                                  },
+                                }
                               }));
                             }}
                             displayEmpty
-                            disabled={!formData.suctionPressure}
+                            disabled={!formData.pumpInquiryItem?.suctionPressure?.value?.length} // Check if input has a value
                             disableUnderline
                             sx={{
-                              height: '100%', // Set dropdown height to match TextField
-                              borderLeft: '1px solid rgba(0, 0, 0, 0.23)', // Show left border only
-                              borderRadius: 0, // Remove other borders
-                              '& .MuiOutlinedInput-notchedOutline': { border: 'none' }, // Disable outline
-                              '& .MuiSelect-select': {
-                                padding: '0 8px',
-                                outline: 'none',
-                                border: 'none',
-                                height: '100%', // Match height to TextField
-                                display: 'flex',
-                                alignItems: 'center',
-                              },
-                              minWidth: 60, // Set width for dropdown
-                            }}
-                          >
-                            {!formData.suctionPressure && <MenuItem>Unit</MenuItem>}
-                            <MenuItem value="kg/cm2">kg/cm2</MenuItem>
-                            <MenuItem value="kg/cm2 a">kg/cm2 a</MenuItem>
-                            <MenuItem value="kg/cm2 g">kg/cm2 g</MenuItem>
-                            <MenuItem value="bar">bar</MenuItem>
-                            <MenuItem value="bar (a)">bar (a)</MenuItem>
-                            <MenuItem value="bar (g)">bar (g)</MenuItem>
-                            <MenuItem value="Mpa">Mpa</MenuItem>
-                            <MenuItem value="Mpa (a)">Mpa (a)</MenuItem>
-                            <MenuItem value="Mpa (g)">Mpa (g)</MenuItem>
-                            <MenuItem value="Kpa">Kpa</MenuItem>
-                            <MenuItem value="Kpa (g)">Kpa (g)</MenuItem>
-                            <MenuItem value="PSI">PSI</MenuItem>
-                            <MenuItem value="PSIG">PSIG</MenuItem>
-                            <MenuItem value="MLC">MLC</MenuItem>
-                            <MenuItem value="MWC">MWC</MenuItem>
-                            <MenuItem value="Meter">Meter</MenuItem>
-                            <MenuItem value="kgf/cm2">kgf/cm2</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-
-
-              <Grid item xs={4}>
-                <TextField
-                  size="small"
-                  className="custom-text-field"
-                  name="suctionPressure"
-                  value={formData.suctionPressure}
-                  onChange={handleChange}
-                  label="Discharge Pressure"
-                  fullWidth
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <FormControl size="small" variant="outlined">
-                          <Select
-                            onChange={(e) => {
-                              const selectedUnit = e.target.value;
-                              setFormData((prev) => ({
-                                ...prev, suctionPressure: `${prev.suctionPressure.split(' ')[0]} ${selectedUnit}`
-                              }));
-                            }}
-                            displayEmpty
-                            disabled={!formData.suctionPressure}
-                            disableUnderline
-                            sx={{
-                              height: '100%', // Set dropdown height to match TextField
-                              borderLeft: '1px solid rgba(0, 0, 0, 0.23)', // Show left border only
-                              borderRadius: 0, // Remove other borders
-                              '& .MuiOutlinedInput-notchedOutline': { border: 'none' }, // Disable outline
-                              '& .MuiSelect-select': {
-                                padding: '0 8px',
-                                outline: 'none',
-                                border: 'none',
-                                height: '100%', // Match height to TextField
-                                display: 'flex',
-                                alignItems: 'center',
-                              },
-                              minWidth: 60, // Set width for dropdown
-                            }}
-                          >
-                            {!formData.suctionPressure && <MenuItem>Unit</MenuItem>}
-                            <MenuItem value="kg/cm2">kg/cm2</MenuItem>
-                            <MenuItem value="kg/cm2 a">kg/cm2 a</MenuItem>
-                            <MenuItem value="kg/cm2 g">kg/cm2 g</MenuItem>
-                            <MenuItem value="bar">bar</MenuItem>
-                            <MenuItem value="bar (a)">bar (a)</MenuItem>
-                            <MenuItem value="bar (g)">bar (g)</MenuItem>
-                            <MenuItem value="Mpa">Mpa</MenuItem>
-                            <MenuItem value="Mpa (a)">Mpa (a)</MenuItem>
-                            <MenuItem value="Mpa (g)">Mpa (g)</MenuItem>
-                            <MenuItem value="Kpa">Kpa</MenuItem>
-                            <MenuItem value="Kpa (g)">Kpa (g)</MenuItem>
-                            <MenuItem value="PSI">PSI</MenuItem>
-                            <MenuItem value="PSIG">PSIG</MenuItem>
-                            <MenuItem value="MLC">MLC</MenuItem>
-                            <MenuItem value="MWC">MWC</MenuItem>
-                            <MenuItem value="Meter">Meter</MenuItem>
-                            <MenuItem value="kgf/cm2">kgf/cm2</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-
-              <Grid item xs={4}>
-                <TextField
-                  size="small"
-                  className="custom-text-field"
-                  name="suctionPressure"
-                  value={formData.suctionPressure}
-                  onChange={handleChange}
-                  label="Box Pressure "
-                  fullWidth
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <FormControl size="small" variant="outlined">
-                          <Select
-                            onChange={(e) => {
-                              const selectedUnit = e.target.value;
-                              setFormData((prev) => ({
-                                ...prev, suctionPressure: `${prev.suctionPressure.split(' ')[0]} ${selectedUnit}`
-                              }));
-                            }}
-                            displayEmpty
-                            disabled={!formData.suctionPressure}
-                            disableUnderline
-                            sx={{
-                              height: '100%', // Set dropdown height to match TextField
-                              borderLeft: '1px solid rgba(0, 0, 0, 0.23)', // Show left border only
-                              borderRadius: 0, // Remove other borders
-                              '& .MuiOutlinedInput-notchedOutline': { border: 'none' }, // Disable outline
-                              '& .MuiSelect-select': {
-                                padding: '0 8px',
-                                outline: 'none',
-                                border: 'none',
-                                height: '100%', // Match height to TextField
-                                display: 'flex',
-                                alignItems: 'center',
-                              },
-                              minWidth: 60, // Set width for dropdown
-                            }}
-                          >
-                            {!formData.suctionPressure && <MenuItem>Unit</MenuItem>}
-                            <MenuItem value="kg/cm2">kg/cm2</MenuItem>
-                            <MenuItem value="kg/cm2 a">kg/cm2 a</MenuItem>
-                            <MenuItem value="kg/cm2 g">kg/cm2 g</MenuItem>
-                            <MenuItem value="bar">bar</MenuItem>
-                            <MenuItem value="bar (a)">bar (a)</MenuItem>
-                            <MenuItem value="bar (g)">bar (g)</MenuItem>
-                            <MenuItem value="Mpa">Mpa</MenuItem>
-                            <MenuItem value="Mpa (a)">Mpa (a)</MenuItem>
-                            <MenuItem value="Mpa (g)">Mpa (g)</MenuItem>
-                            <MenuItem value="Kpa">Kpa</MenuItem>
-                            <MenuItem value="Kpa (g)">Kpa (g)</MenuItem>
-                            <MenuItem value="PSI">PSI</MenuItem>
-                            <MenuItem value="PSIG">PSIG</MenuItem>
-                            <MenuItem value="MLC">MLC</MenuItem>
-                            <MenuItem value="MWC">MWC</MenuItem>
-                            <MenuItem value="Meter">Meter</MenuItem>
-                            <MenuItem value="kgf/cm2">kgf/cm2</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-
-
-              <Grid item xs={4}>
-                <TextField
-                  size="small"
-                  className="custom-text-field"
-                  name="totalHead"
-                  value={formData.totalHead}
-                  onChange={handleChange}
-                  label="Total Head"
-                  fullWidth
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <FormControl size="small" variant="outlined">
-                          <Select
-                            onChange={(e) => {
-                              const selectedUnit = e.target.value;
-                              setFormData((prev) => ({
-                                ...prev, totalHead: `${prev.totalHead.split(' ')[0]} ${selectedUnit}`
-                              }))
-                            }}
-                            displayEmpty
-                            disabled={!formData.totalHead}
-                            disableUnderline
-                            sx={{
-                              height: '100%',
-                              borderLeft: '1px solid rgba(0, 0, 0, 0.23)',
+                              height: "100%", // Matches TextField height
+                              borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
                               borderRadius: 0,
-                              '& .MuiOutlinedInput-notchedOutline': { border: 'none' },
-                              '& .MuiSelect-select': {
-                                padding: '0 8px',
-                                outline: 'none',
-                                border: 'none',
-                                height: '100%',
-                                display: 'flex',
-                                alignItems: 'center',
+                              "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                              "& .MuiSelect-select": {
+                                padding: "0 8px",
+                                outline: "none",
+                                border: "none",
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "center",
                               },
-                              minWidth: 60,
-                            }}>
-                            {!formData.totalHead && <MenuItem>Unit</MenuItem>}
-                            <MenuItem value="Meter">Meter</MenuItem>
-                            <MenuItem value="MWC">MWC</MenuItem>
+                              minWidth: 60, // Width of dropdown
+                            }}
+                          >
+
+                            {!formData.pumpInquiryItem?.suctionPressure && <MenuItem>Unit</MenuItem>}
+
+                            <MenuItem value="kg/cm2">kg/cm²</MenuItem>
+                            <MenuItem value="kg/cm2 a">kg/cm² (a)</MenuItem>
+                            <MenuItem value="kg/cm2 g">kg/cm² (g)</MenuItem>
+                            <MenuItem value="bar">bar</MenuItem>
+                            <MenuItem value="bar (a)">bar (a)</MenuItem>
+                            <MenuItem value="bar (g)">bar (g)</MenuItem>
+                            <MenuItem value="Mpa">MPa</MenuItem>
+                            <MenuItem value="Mpa (a)">MPa (a)</MenuItem>
+                            <MenuItem value="Mpa (g)">MPa (g)</MenuItem>
+                            <MenuItem value="Kpa">kPa</MenuItem>
+                            <MenuItem value="Kpa (g)">kPa (g)</MenuItem>
+                            <MenuItem value="PSI">PSI</MenuItem>
+                            <MenuItem value="PSIG">PSIG</MenuItem>
                             <MenuItem value="MLC">MLC</MenuItem>
-                            <MenuItem value="kg/cm2">kg/cm2</MenuItem>
+                            <MenuItem value="MWC">MWC</MenuItem>
+                            <MenuItem value="Meter">Meter</MenuItem>
+                            <MenuItem value="kgf/cm2">kgf/cm²</MenuItem>
                           </Select>
                         </FormControl>
                       </InputAdornment>
@@ -1083,92 +1118,322 @@ export default function CreatePumpSeal() {
 
 
 
-
-
-
               <Grid item xs={4}>
-                {/* <InputLabel className="ip-label" >All Pressure Unit</InputLabel > */}
                 <TextField
-                  size="small"
-                  className="custom-text-field"
-                  name="allPressureUnit"
-                  value={formData.allPressureUnit}
-                  onChange={handleChange}
-                  label="All Pressure Unit"
-                />
-              </Grid>
-
-              <Grid item xs={4}>
-                {/* <InputLabel className="ip-label" >Total Heat</InputLabel > */}
-                <TextField
-                  size="small"
-                  className="custom-text-field"
-                  name="totalHeat"
-                  value={formData.totalHeat}
-                  onChange={handleChange}
-                  label="Total Heat"
-                />
-              </Grid>
-
-
-              <Grid item xs={4}>
-                {/* <InputLabel className="ip-label" >Suction Pressure</InputLabel > */}
-                <TextField
+                  disabled
+                  id="disableItem"
                   size="small"
                   className="custom-text-field"
                   name="suctionPressure"
-                  value={formData.suctionPressure}
-                  onChange={handleChange}
-                  label="Suction Pressure"
-                />
-              </Grid>
-
-              <Grid item xs={4}>
-                {/* <InputLabel className="ip-label" >Discharge Pressure</InputLabel > */}
-                <TextField
-                  size="small"
-                  className="custom-text-field"
-                  name="dischargePressure"
-                  value={formData.dischargePressure}
-                  onChange={handleChange}
+                  value={formData.pumpInquiryItem?.dischargePressure?.value || ""}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    setFormData((prev) => ({
+                      ...prev,
+                      pumpInquiryItem: {
+                        ...prev.pumpInquiryItem,
+                        dischargePressure: {
+                          ...prev.pumpInquiryItem.dischargePressure,
+                          value: newValue,
+                        },
+                      }
+                    }));
+                  }}
                   label="Discharge Pressure"
+                  fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <FormControl size="small">
+                          <Select
+
+                            id="disableItem"
+                            value={formData.pumpInquiryItem?.dischargePressure?.unit || ""}
+                            onChange={(e) => {
+                              const selectedUnit = e.target.value;
+                              setFormData((prev) => ({
+                                ...prev,
+                                pumpInquiryItem: {
+                                  ...prev.pumpInquiryItem,
+                                  dischargePressure: {
+                                    ...prev.pumpInquiryItem.dischargePressure,
+                                    unit: selectedUnit,
+                                  },
+                                }
+                              }));
+                            }}
+                            displayEmpty
+                            disabled={!formData.pumpInquiryItem?.dischargePressure?.value?.length} // Check if input has a value
+                            disableUnderline
+                            sx={{
+                              height: "100%", // Matches TextField height
+                              borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                              borderRadius: 0,
+                              "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                              "& .MuiSelect-select": {
+                                padding: "0 8px",
+                                outline: "none",
+                                border: "none",
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "center",
+                              },
+                              minWidth: 60, // Width of dropdown
+                            }}
+                          >
+
+                            {!formData.pumpInquiryItem?.dischargePressure && <MenuItem>Unit</MenuItem>}
+
+                            <MenuItem value="kg/cm2">kg/cm²</MenuItem>
+                            <MenuItem value="kg/cm2 a">kg/cm² (a)</MenuItem>
+                            <MenuItem value="kg/cm2 g">kg/cm² (g)</MenuItem>
+                            <MenuItem value="bar">bar</MenuItem>
+                            <MenuItem value="bar (a)">bar (a)</MenuItem>
+                            <MenuItem value="bar (g)">bar (g)</MenuItem>
+                            <MenuItem value="Mpa">MPa</MenuItem>
+                            <MenuItem value="Mpa (a)">MPa (a)</MenuItem>
+                            <MenuItem value="Mpa (g)">MPa (g)</MenuItem>
+                            <MenuItem value="Kpa">kPa</MenuItem>
+                            <MenuItem value="Kpa (g)">kPa (g)</MenuItem>
+                            <MenuItem value="PSI">PSI</MenuItem>
+                            <MenuItem value="PSIG">PSIG</MenuItem>
+                            <MenuItem value="MLC">MLC</MenuItem>
+                            <MenuItem value="MWC">MWC</MenuItem>
+                            <MenuItem value="Meter">Meter</MenuItem>
+                            <MenuItem value="kgf/cm2">kgf/cm²</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </InputAdornment>
+                    )
+                  }}
                 />
               </Grid>
 
-              <Grid item xs={4}>
-                {/* <InputLabel className="ip-label" >Direction of Rortation</InputLabel > */}
-                <TextField
-                  size="small"
-                  className="custom-text-field"
-                  name="directionOfRotation"
-                  value={formData.directionOfRotation}
-                  onChange={handleChange}
-                  label="Direction of Rortation"
-                />
-              </Grid>
 
               <Grid item xs={4}>
-                {/* <InputLabel className="ip-label" >Speed</InputLabel > */}
                 <TextField
-                  size="small"
-                  className="custom-text-field"
-                  name="speed"
-                  value={formData.speed}
-                  onChange={handleChange}
-                  label="Speed"
-                />
-              </Grid>
-
-
-              <Grid item xs={4}>
-                {/* <InputLabel className="ip-label" >Box Pressure</InputLabel > */}
-                <TextField
+                  disabled
+                  id="disableItem"
                   size="small"
                   className="custom-text-field"
                   name="boxPressure"
-                  value={formData.boxPressure}
-                  onChange={handleChange}
+                  value={formData.pumpInquiryItem?.boxPressure?.value || ""}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    setFormData((prev) => ({
+                      ...prev,
+                      pumpInquiryItem: {
+                        ...prev.pumpInquiryItem,
+                        boxPressure: {
+                          ...prev.pumpInquiryItem.boxPressure,
+                          value: newValue,
+                        },
+                      }
+                    }));
+                  }}
                   label="Box Pressure"
+                  fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <FormControl size="small">
+                          <Select
+
+                            id="disableItem"
+                            value={formData.pumpInquiryItem?.boxPressure?.unit || ""}
+                            onChange={(e) => {
+                              const selectedUnit = e.target.value;
+                              setFormData((prev) => ({
+                                ...prev,
+                                pumpInquiryItem: {
+                                  ...prev.pumpInquiryItem,
+                                  boxPressure: {
+                                    ...prev.pumpInquiryItem.boxPressure,
+                                    unit: selectedUnit,
+                                  },
+                                }
+                              }));
+                            }}
+                            displayEmpty
+                            disabled={!formData.pumpInquiryItem?.boxPressure?.value?.length} // Check if input has a value
+                            disableUnderline
+                            sx={{
+                              height: "100%", // Matches TextField height
+                              borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                              borderRadius: 0,
+                              "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                              "& .MuiSelect-select": {
+                                padding: "0 8px",
+                                outline: "none",
+                                border: "none",
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "center",
+                              },
+                              minWidth: 60, // Width of dropdown
+                            }}
+                          >
+
+                            {!formData.pumpInquiryItem?.boxPressure && <MenuItem>Unit</MenuItem>}
+
+                            <MenuItem value="kg/cm2">kg/cm²</MenuItem>
+                            <MenuItem value="kg/cm2 a">kg/cm² (a)</MenuItem>
+                            <MenuItem value="kg/cm2 g">kg/cm² (g)</MenuItem>
+                            <MenuItem value="bar">bar</MenuItem>
+                            <MenuItem value="bar (a)">bar (a)</MenuItem>
+                            <MenuItem value="bar (g)">bar (g)</MenuItem>
+                            <MenuItem value="Mpa">MPa</MenuItem>
+                            <MenuItem value="Mpa (a)">MPa (a)</MenuItem>
+                            <MenuItem value="Mpa (g)">MPa (g)</MenuItem>
+                            <MenuItem value="Kpa">kPa</MenuItem>
+                            <MenuItem value="Kpa (g)">kPa (g)</MenuItem>
+                            <MenuItem value="PSI">PSI</MenuItem>
+                            <MenuItem value="PSIG">PSIG</MenuItem>
+                            <MenuItem value="MLC">MLC</MenuItem>
+                            <MenuItem value="MWC">MWC</MenuItem>
+                            <MenuItem value="Meter">Meter</MenuItem>
+                            <MenuItem value="kgf/cm2">kgf/cm²</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+
+
+              <Grid item xs={4}>
+                <TextField
+                  disabled
+                  id="disableItem"
+                  size="small"
+                  className="custom-text-field"
+                  name="totalHead"
+                  value={formData.pumpInquiryItem?.totalHead?.value || ""}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    setFormData((prev) => ({
+                      ...prev,
+                      pumpInquiryItem: {
+                        ...prev.pumpInquiryItem,
+                        totalHead: {
+                          ...prev.pumpInquiryItem.totalHead,
+                          value: newValue,
+                        },
+                      }
+                    }));
+                  }}
+                  label="Total Head"
+                  fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <FormControl size="small">
+                          <Select
+
+                            id="disableItem"
+                            value={formData.pumpInquiryItem?.totalHead?.unit || ""}
+                            onChange={(e) => {
+                              const selectedUnit = e.target.value;
+                              setFormData((prev) => ({
+                                ...prev,
+                                pumpInquiryItem: {
+                                  ...prev.pumpInquiryItem,
+                                  totalHead: {
+                                    ...prev.pumpInquiryItem.totalHead,
+                                    unit: selectedUnit,
+                                  },
+                                }
+                              }));
+                            }}
+                            displayEmpty
+                            disabled={!formData.pumpInquiryItem?.totalHead?.value?.length} // Check if input has a value
+                            disableUnderline
+                            sx={{
+                              height: "100%", // Matches TextField height
+                              borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                              borderRadius: 0,
+                              "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                              "& .MuiSelect-select": {
+                                padding: "0 8px",
+                                outline: "none",
+                                border: "none",
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "center",
+                              },
+                              minWidth: 60, // Width of dropdown
+                            }}
+                          >
+
+                            {!formData.pumpInquiryItem?.totalHead && <MenuItem>Unit</MenuItem>}
+
+                            <MenuItem value="MWC">MWC</MenuItem>
+                            <MenuItem value="MLC">MLC</MenuItem>
+                            <MenuItem value="kg/cm2 g">kg/cm² (g)</MenuItem>
+
+                          </Select>
+                        </FormControl>
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+
+
+              <Grid item xs={4}>
+                <Autocomplete
+                  disabled
+                  id="disableItem"
+                  size="small"
+                  value={formData.pumpInquiryItem.directionOfRotation || ''}
+                  onChange={(event, newValue) => {
+                    setFormData({
+                      ...formData,
+                      pumpInquiryItem: {
+                        ...formData.pumpInquiryItem,
+                        directionOfRotation: newValue || ''
+                      }
+                    });
+                  }}
+
+                  inputValue={formData.pumpInquiryItem.directionOfRotation || ''}
+                  onInputChange={(event, newInputValue) => {
+                    setFormData({
+                      ...formData,
+                      pumpInquiryItem: {
+                        ...formData.pumpInquiryItem,
+                        directionOfRotation: newInputValue || ''
+                      }
+                    });
+                  }}
+
+                  options={["CW", "CCW"].map((src) => src)}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      size="small"
+
+                      placeholder='select Direction of Rotation'
+                      fullWidth
+                      className='custom-text-field'
+                      label="Direction of Rotation"
+                    />
+                  )}
+                />
+              </Grid>
+
+
+              <Grid item xs={4}>
+                <TextField
+                  disabled
+                  id="disableItem"
+                  size="small"
+                  className="custom-text-field"
+                  name="speed"
+                  value={formData?.pumpInquiryItem.speed}
+                  onChange={(e) => handleChange(e)}
+                  label="Speed"
                 />
               </Grid>
 
@@ -1183,33 +1448,42 @@ export default function CreatePumpSeal() {
               {/* Fluid */}
               <Grid item xs={4}>
                 <TextField
+                  disabled
+                  id="disableItem"
                   size="small"
                   className="custom-text-field"
                   name="fluid"
-                  value={formData.fluid}
-                  onChange={handleChange}
+                  value={formData?.pumpInquiryItem.fluid}
+                  onChange={(e) => handleChange(e)}
                   label="Fluid"
                   fullWidth
                 />
               </Grid>
+
 
               {/* Nature (Dropdown) */}
               <Grid item xs={4}>
                 <Autocomplete
                   style={{ width: '100%' }}
                   size="small"
-                  value={formData.nature}
+                  value={formData?.pumpInquiryItem.nature}
                   onChange={(event, newValue) => {
                     setFormData({
                       ...formData,
-                      nature: newValue
+                      pumpInquiryItem: {
+                        ...formData.pumpInquiryItem,
+                        nature: newValue
+                      }
                     });
                   }}
-                  inputValue={formData.nature || ''}
+                  // inputValue={formData?.nature || ''}
                   onInputChange={(event, newInputValue) => {
                     setFormData({
                       ...formData,
-                      nature: newInputValue
+                      pumpInquiryItem: {
+                        ...formData.pumpInquiryItem,
+                        nature: newInputValue
+                      }
                     });
                   }}
                   options={['Option1', 'Option2', 'Option3']} // Replace with actual options
@@ -1230,31 +1504,72 @@ export default function CreatePumpSeal() {
               {/* Pumping Temperature */}
               <Grid item xs={4}>
                 <TextField
+                  disabled
+                  id="disableItem"
                   size="small"
                   className="custom-text-field"
                   name="pumpingTemperature"
-                  value={formData.pumpingTemperature}
-                  onChange={handleChange}
-                  label="Pumping Temperature"
+                  value={formData.pumpInquiryItem?.pumpingTemperature?.value || ""}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    setFormData((prev) => ({
+                      ...prev,
+                      pumpInquiryItem: {
+                        ...prev.pumpInquiryItem,
+                        pumpingTemperature: {
+                          ...prev.pumpInquiryItem.pumpingTemperature,
+                          value: newValue,
+                        },
+                      }
+                    }));
+                  }}
+                  label="Pumping Temprature"
                   fullWidth
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <FormControl size="small" variant="outlined">
+                        <FormControl size="small">
                           <Select
+
+                            id="disableItem"
+                            value={formData.pumpInquiryItem?.pumpingTemperature?.unit || ""}
                             onChange={(e) => {
                               const selectedUnit = e.target.value;
                               setFormData((prev) => ({
-                                ...prev, pumpingTemperature: `${prev.pumpingTemperature.split(' ')[0]} ${selectedUnit}`
+                                ...prev,
+                                pumpInquiryItem: {
+                                  ...prev.pumpInquiryItem,
+                                  pumpingTemperature: {
+                                    ...prev.pumpInquiryItem.pumpingTemperature,
+                                    unit: selectedUnit,
+                                  },
+                                }
                               }));
                             }}
                             displayEmpty
-                            disabled={!formData.pumpingTemperature}
+                            disabled={!formData.pumpInquiryItem?.pumpingTemperature?.value?.length} // Check if input has a value
                             disableUnderline
-                            sx={{ minWidth: 60 }}
+                            sx={{
+                              height: "100%", // Matches TextField height
+                              borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                              borderRadius: 0,
+                              "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                              "& .MuiSelect-select": {
+                                padding: "0 8px",
+                                outline: "none",
+                                border: "none",
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "center",
+                              },
+                              minWidth: 60, // Width of dropdown
+                            }}
                           >
-                            <MenuItem value="℃">℃</MenuItem>
-                            <MenuItem value="℉">℉</MenuItem>
+
+                            {!formData.pumpInquiryItem?.pumpingTemperature && <MenuItem>Unit</MenuItem>}
+
+                            <MenuItem value="C">℃ </MenuItem>
+                            <MenuItem value="F">℉</MenuItem>
                           </Select>
                         </FormControl>
                       </InputAdornment>
@@ -1266,31 +1581,72 @@ export default function CreatePumpSeal() {
               {/* Maximum Temperature */}
               <Grid item xs={4}>
                 <TextField
+                  disabled
+                  id="disableItem"
                   size="small"
                   className="custom-text-field"
                   name="maximumTemperature"
-                  value={formData.maximumTemperature}
-                  onChange={handleChange}
-                  label="Maximum Temperature"
+                  value={formData.pumpInquiryItem?.maximumTemperature?.value || ""}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    setFormData((prev) => ({
+                      ...prev,
+                      pumpInquiryItem: {
+                        ...prev.pumpInquiryItem,
+                        maximumTemperature: {
+                          ...prev.pumpInquiryItem.maximumTemperature,
+                          value: newValue,
+                        },
+                      }
+                    }));
+                  }}
+                  label="Maximum Temprature"
                   fullWidth
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <FormControl size="small" variant="outlined">
+                        <FormControl size="small">
                           <Select
+
+                            id="disableItem"
+                            value={formData.pumpInquiryItem?.maximumTemperature?.unit || ""}
                             onChange={(e) => {
                               const selectedUnit = e.target.value;
                               setFormData((prev) => ({
-                                ...prev, maximumTemperature: `${prev.maximumTemperature.split(' ')[0]} ${selectedUnit}`
+                                ...prev,
+                                pumpInquiryItem: {
+                                  ...prev.pumpInquiryItem,
+                                  maximumTemperature: {
+                                    ...prev.pumpInquiryItem.maximumTemperature,
+                                    unit: selectedUnit,
+                                  },
+                                }
                               }));
                             }}
                             displayEmpty
-                            disabled={!formData.maximumTemperature}
+                            disabled={!formData.pumpInquiryItem?.maximumTemperature?.value?.length} // Check if input has a value
                             disableUnderline
-                            sx={{ minWidth: 60 }}
+                            sx={{
+                              height: "100%", // Matches TextField height
+                              borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                              borderRadius: 0,
+                              "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                              "& .MuiSelect-select": {
+                                padding: "0 8px",
+                                outline: "none",
+                                border: "none",
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "center",
+                              },
+                              minWidth: 60, // Width of dropdown
+                            }}
                           >
-                            <MenuItem value="℃">℃</MenuItem>
-                            <MenuItem value="℉">℉</MenuItem>
+
+                            {!formData.pumpInquiryItem?.pumpingTemperature && <MenuItem>Unit</MenuItem>}
+
+                            <MenuItem value="C">℃ </MenuItem>
+                            <MenuItem value="F">℉</MenuItem>
                           </Select>
                         </FormControl>
                       </InputAdornment>
@@ -1302,11 +1658,13 @@ export default function CreatePumpSeal() {
               {/* SP Gravity */}
               <Grid item xs={4}>
                 <TextField
+                  disabled
+                  id="disableItem"
                   size="small"
                   className="custom-text-field"
                   name="spGravity"
-                  value={formData.spGravity}
-                  onChange={handleChange}
+                  value={formData?.pumpInquiryItem.spGravity}
+                  onChange={(e) => handleChange(e)}
                   label="SP Gravity"
                   fullWidth
                 />
@@ -1315,11 +1673,13 @@ export default function CreatePumpSeal() {
               {/* Freezing Point */}
               <Grid item xs={4}>
                 <TextField
+                  disabled
+                  id="disableItem"
                   size="small"
                   className="custom-text-field"
                   name="freezingPoint"
-                  value={formData.freezingPoint}
-                  onChange={handleChange}
+                  value={formData?.pumpInquiryItem.freezingPoint}
+                  onChange={(e) => handleChange(e)}
                   label="Freezing Point"
                   fullWidth
                 />
@@ -1328,11 +1688,13 @@ export default function CreatePumpSeal() {
               {/* Boiling Point */}
               <Grid item xs={4}>
                 <TextField
+                  disabled
+                  id="disableItem"
                   size="small"
                   className="custom-text-field"
                   name="boilingPoint"
-                  value={formData.boilingPoint}
-                  onChange={handleChange}
+                  value={formData?.pumpInquiryItem.boilingPoint}
+                  onChange={(e) => handleChange(e)}
                   label="Boiling Point"
                   fullWidth
                 />
@@ -1341,11 +1703,13 @@ export default function CreatePumpSeal() {
               {/* Viscosity */}
               <Grid item xs={4}>
                 <TextField
+                  disabled
+                  id="disableItem"
                   size="small"
                   className="custom-text-field"
                   name="viscosity"
-                  value={formData.viscosity}
-                  onChange={handleChange}
+                  value={formData?.pumpInquiryItem.viscosity}
+                  onChange={(e) => handleChange(e)}
                   label="Viscosity"
                   fullWidth
                 />
@@ -1354,11 +1718,13 @@ export default function CreatePumpSeal() {
               {/* Percentage Of Solid */}
               <Grid item xs={4}>
                 <TextField
+                  disabled
+                  id="disableItem"
                   size="small"
                   className="custom-text-field"
                   name="percentageOfSolid"
-                  value={formData.percentageOfSolid}
-                  onChange={handleChange}
+                  value={formData?.pumpInquiryItem.percentageOfSolid}
+                  onChange={(e) => handleChange(e)}
                   label="Percentage Of Solid"
                   fullWidth
                 />
@@ -1367,11 +1733,13 @@ export default function CreatePumpSeal() {
               {/* Solid Size */}
               <Grid item xs={4}>
                 <TextField
+                  disabled
+                  id="disableItem"
                   size="small"
                   className="custom-text-field"
                   name="solidSize"
-                  value={formData.solidSize}
-                  onChange={handleChange}
+                  value={formData?.pumpInquiryItem.solidSize}
+                  onChange={(e) => handleChange(e)}
                   label="Solid Size"
                   fullWidth
                 />
@@ -1380,11 +1748,13 @@ export default function CreatePumpSeal() {
               {/* Special Note */}
               <Grid item xs={4}>
                 <TextField
+                  disabled
+                  id="disableItem"
                   size="small"
                   className="custom-text-field"
                   name="specialNote"
-                  value={formData.specialNote}
-                  onChange={handleChange}
+                  value={formData?.pumpInquiryItem.specialNote}
+                  onChange={(e) => handleChange(e)}
                   label="Special Note"
                   inputProps={{ maxLength: 150 }}
                   fullWidth
@@ -1417,23 +1787,25 @@ export default function CreatePumpSeal() {
                     size="small"
                     className="custom-text-field"
                     label="G.A Number"
-                    value={formData.existingSeal.gaNumber}
+                    name="existingSealGA"
+                    value={formData?.existingSealGA}
                     onChange={(e) => setFormData(prev => ({
                       ...prev,
-                      existingSeal: { ...prev.existingSeal, gaNumber: e.target.value }
+                      existingSealGA: e.target.value
                     }))}
                     fullWidth
                   />
                 </Grid>
+
                 <Grid item xs={4}>
                   <TextField
                     size="small"
                     className="custom-text-field"
                     label="Seal Series"
-                    value={formData.existingSeal.sealSeries}
+                    value={formData?.existingSealSeries}
                     onChange={(e) => setFormData(prev => ({
                       ...prev,
-                      existingSeal: { ...prev.existingSeal, sealSeries: e.target.value }
+                      existingSealSeries: e.target.value
                     }))}
                     fullWidth
                   />
@@ -1443,23 +1815,23 @@ export default function CreatePumpSeal() {
                     size="small"
                     className="custom-text-field"
                     label="Shaft Dia"
-                    value={formData.existingSeal.shaftDia}
+                    value={formData?.existingSealShaftDia}
                     onChange={(e) => setFormData(prev => ({
                       ...prev,
-                      existingSeal: { ...prev.existingSeal, shaftDia: e.target.value }
+                      existingSealShaftDia: e.target.value
                     }))}
-                    fullWidth
-                  />
+                    fullWidth />
                 </Grid>
+
                 <Grid item xs={4}>
                   <TextField
                     size="small"
                     className="custom-text-field"
                     label="Seal Size"
-                    value={formData.existingSeal.sealSize}
+                    value={formData?.existingSealSize}
                     onChange={(e) => setFormData(prev => ({
                       ...prev,
-                      existingSeal: { ...prev.existingSeal, sealSize: e.target.value }
+                      existingSealSize: e.target.value
                     }))}
                     fullWidth
                   />
@@ -1468,12 +1840,13 @@ export default function CreatePumpSeal() {
                 {/* Option selector */}
 
                 <Grid item xs={4}>
-                  <FormControl fullWidth>
-                    <InputLabel>Seal Type</InputLabel>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="seal-type-label">Seal Type</InputLabel>
                     <Select
-                      size="small"
-                      value={formData.existingSeal.sealType}
-                      onChange={handleSealConfigChange}
+                      labelId="seal-type-label"
+                      id="seal-type"
+                      value={formData?.existingSealType}
+                      onChange={(e) => handleSealConfigChange(e)}
                       label="Seal Type"
                     >
                       <MenuItem value="single">Single</MenuItem>
@@ -1482,13 +1855,14 @@ export default function CreatePumpSeal() {
                   </FormControl>
                 </Grid>
 
-                
+
               </Grid>
 
-              {renderMocFields('existingSeal', 'ibMoc')}
-              {formData.existingSeal.sealType === 'double' && renderMocFields('existingSeal', 'obMoc')}
+              {renderMocFields('existingSeal', 'IB')}
+              {formData?.existingSealType === 'double' && renderMocFields('existingSeal', 'OB')}
             </div>
           )}
+
 
           {sealType === 'new' && (
             <div>
@@ -1498,10 +1872,10 @@ export default function CreatePumpSeal() {
                     size="small"
                     className="custom-text-field"
                     label="Shaft Dia"
-                    value={formData.newSeal.shaftDia}
+                    value={formData?.newSealShaftDia}
                     onChange={(e) => setFormData(prev => ({
                       ...prev,
-                      newSeal: { ...prev.newSeal, shaftDia: e.target.value }
+                      newSealShaftDia: e.target.value
                     }))}
                     fullWidth
                   />
@@ -1511,10 +1885,10 @@ export default function CreatePumpSeal() {
                     size="small"
                     className="custom-text-field"
                     label="Bore Dia"
-                    value={formData.newSeal.boreDia}
+                    value={formData?.newSealBoreDia}
                     onChange={(e) => setFormData(prev => ({
                       ...prev,
-                      newSeal: { ...prev.newSeal, boreDia: e.target.value }
+                      newSealBoreDia: e.target.value
                     }))}
                     fullWidth
                   />
@@ -1525,10 +1899,10 @@ export default function CreatePumpSeal() {
                     size="small"
                     className="custom-text-field"
                     label="Bore Depth"
-                    value={formData.newSeal.boreDepth}
+                    value={formData?.newSealBoreDepth}
                     onChange={(e) => setFormData(prev => ({
                       ...prev,
-                      newSeal: { ...prev.newSeal, boreDepth: e.target.value }
+                      newSealBoreDepth: e.target.value
                     }))}
                     fullWidth
                   />
@@ -1540,10 +1914,10 @@ export default function CreatePumpSeal() {
                     size="small"
                     className="custom-text-field"
                     label="Nearest Obstruction"
-                    value={formData.newSeal.nearestObstruction}
+                    value={formData?.newSealNearestObstruction}
                     onChange={(e) => setFormData(prev => ({
                       ...prev,
-                      newSeal: { ...prev.newSeal, nearestObstruction: e.target.value }
+                      newSealNearestObstruction: e.target.value
                     }))}
                     fullWidth
                   />
@@ -1551,12 +1925,13 @@ export default function CreatePumpSeal() {
 
 
                 <Grid item xs={4}>
-                  <FormControl fullWidth>
-                    <InputLabel>Seal Type</InputLabel>
+                  <FormControl fullWidth size="small">
+                    <InputLabel id="seal-type-label">Seal Type</InputLabel>
                     <Select
-                      size="small"
-                      value={formData.newSeal.sealType}
-                      onChange={handleSealConfigChange}
+                      labelId="seal-type-label"
+                      id="seal-type"
+                      value={formData?.newSealType}
+                      onChange={(e) => handleSealConfigChange(e)}
                       label="Seal Type"
                     >
                       <MenuItem value="single">Single</MenuItem>
@@ -1564,12 +1939,16 @@ export default function CreatePumpSeal() {
                     </Select>
                   </FormControl>
                 </Grid>
+
+
               </Grid>
 
-              {renderMocFields('newSeal', 'ibMoc')}
-              {formData.newSeal.sealType === 'double' && renderMocFields('newSeal', 'obMoc')}
+              {renderMocFields('newSeal', 'IB')}
+              {formData?.newSealType === 'double' && renderMocFields('newSeal', 'OB')}
             </div>
           )}
+
+
         </div>
 
         {/* Api Plane */}
@@ -1585,9 +1964,9 @@ export default function CreatePumpSeal() {
               <TextField
                 size="small"
                 className="custom-text-field"
-                name="flushingPlan"
-                value={formData.flushingPlan || ''}
-                onChange={handleChange}
+                name="apiFlushingPlans"
+                value={formData?.apiFlushingPlans || ''}
+                onChange={(e) => handleChange(e)}
                 label="Flushing Plan"
                 variant="outlined"
                 fullWidth
@@ -1599,9 +1978,9 @@ export default function CreatePumpSeal() {
               <TextField
                 size="small"
                 className="custom-text-field"
-                name="barrierBufferPlan"
-                value={formData.barrierBufferPlan || ''}
-                onChange={handleChange}
+                name="apiBarrierBufferPlans"
+                value={formData?.apiBarrierBufferPlans || ''}
+                onChange={(e) => handleChange(e)}
                 label="Barrier/Buffer Plan"
                 variant="outlined"
                 fullWidth
@@ -1613,9 +1992,9 @@ export default function CreatePumpSeal() {
               <TextField
                 size="small"
                 className="custom-text-field"
-                name="atmosphericPlan"
-                value={formData.atmosphericPlan || ''}
-                onChange={handleChange}
+                name="apiAtmosphericPlans"
+                value={formData?.apiAtmosphericPlans || ''}
+                onChange={(e) => handleChange(e)}
                 label="Atmospheric Plan"
                 variant="outlined"
                 fullWidth
@@ -1627,9 +2006,9 @@ export default function CreatePumpSeal() {
               <TextField
                 size="small"
                 className="custom-text-field"
-                name="collectionPlan"
-                value={formData.collectionPlan || ''}
-                onChange={handleChange}
+                name="apiCollectionPlans"
+                value={formData?.apiCollectionPlans || ''}
+                onChange={(e) => handleChange(e)}
                 label="Collection Plan"
                 variant="outlined"
                 fullWidth
@@ -1661,8 +2040,8 @@ export default function CreatePumpSeal() {
                 <RadioGroup
                   row
                   aria-label="typeOfStuffingBox"
-                  name="typeOfStuffingBox"
-                  value={formData.typeOfStuffingBox}
+                  name="measurementTypeOfStuffingBox"
+                  value={formData?.measurementTypeOfStuffingBox}
                   onChange={(e) => {
                     handleChange(e);
                     // Logic for displaying different images based on selection
@@ -1672,9 +2051,9 @@ export default function CreatePumpSeal() {
                   <FormControlLabel value="Type II" control={<Radio />} label="Type II" />
                   <FormControlLabel value="Type III" control={<Radio />} label="Type III" />
                 </RadioGroup>
-                {/* {formData.typeOfStuffingBox && (
+                {/* {formData?.typeOfStuffingBox && (
                   <div>
-                    <img src={`/path/to/${formData.typeOfStuffingBox}-image.jpg`} alt={formData.typeOfStuffingBox} />
+                    <img src={`/path/to/${formData?.typeOfStuffingBox}-image.jpg`} alt={formData?.typeOfStuffingBox} />
                   </div>
                 )} */}
               </FormControl>
@@ -1685,10 +2064,10 @@ export default function CreatePumpSeal() {
               <TextField
                 className="custom-text-field"
                 size="small"
-                name="shaftOD"
+                name="measurementShaftOd"
                 label="Shaft OD"
-                value={formData.shaftOD || ''}
-                onChange={handleChange}
+                value={formData?.measurementShaftOd || ''}
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
                 required
@@ -1698,10 +2077,10 @@ export default function CreatePumpSeal() {
               <TextField
                 className="custom-text-field"
                 size="small"
-                name="stuffingBoxID"
+                name="measurementStuffingBoxId"
                 label="Stuffing Box ID"
-                value={formData.stuffingBoxID || ''}
-                onChange={handleChange}
+                value={formData?.measurementStuffingBoxId || ''}
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
                 required
@@ -1711,10 +2090,10 @@ export default function CreatePumpSeal() {
               <TextField
                 className="custom-text-field"
                 size="small"
-                name="stuffingBoxDepth"
+                name="measurementStuffingBoxDepth"
                 label="Stuffing Box Depth"
-                value={formData.stuffingBoxDepth || ''}
-                onChange={handleChange}
+                value={formData?.measurementStuffingBoxDepth || ''}
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
                 required
@@ -1724,10 +2103,10 @@ export default function CreatePumpSeal() {
               <TextField
                 className="custom-text-field"
                 size="small"
-                name="nearestObstruction"
+                name="measurementNearestObstruction"
                 label="Nearest Obstruction"
-                value={formData.nearestObstruction || ''}
-                onChange={handleChange}
+                value={formData?.measurementNearestObstruction || ''}
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
                 required
@@ -1739,10 +2118,10 @@ export default function CreatePumpSeal() {
               <TextField
                 className="custom-text-field"
                 size="small"
-                name="spigotDia"
+                name="measurementSpigotDia"
                 label="Spigot Dia"
-                value={formData.spigotDia || ''}
-                onChange={handleChange}
+                value={formData?.measurementSpigotDia || ''}
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
               />
@@ -1751,10 +2130,10 @@ export default function CreatePumpSeal() {
               <TextField
                 className="custom-text-field"
                 size="small"
-                name="socketDepth"
+                name="measurementSocketDepth"
                 label="Socket Depth"
-                value={formData.socketDepth || ''}
-                onChange={handleChange}
+                value={formData?.measurementSocketDepth || ''}
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
               />
@@ -1766,25 +2145,25 @@ export default function CreatePumpSeal() {
                 <h3 style={{ padding: '1px 0' }}>Shaft Sleeve Available?</h3>
                 <RadioGroup
                   row
-                  name="shaftSleeveAvailable"
-                  value={formData.shaftSleeveAvailable}
-                  onChange={handleChange}
+                  name="measurementShaftSleeveAvailable"
+                  value={formData?.measurementShaftSleeveAvailable}
+                  onChange={(e) => handleChange(e)}
                 >
                   <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
                   <FormControlLabel value="No" control={<Radio />} label="No" />
                 </RadioGroup>
               </FormControl>
             </Grid>
-            {formData.shaftSleeveAvailable === 'Yes' && (
+            {formData?.measurementShaftSleeveAvailable === 'Yes' && (
               <>
                 <Grid item xs={4}>
                   <TextField
                     className="custom-text-field"
                     size="small"
-                    name="sleeveOD"
+                    name="measurementSleeveOd"
                     label="Sleeve OD"
-                    value={formData.sleeveOD || ''}
-                    onChange={handleChange}
+                    value={formData?.measurementSleeveOd || ''}
+                    onChange={(e) => handleChange(e)}
                     variant="outlined"
                     fullWidth
                   />
@@ -1793,10 +2172,10 @@ export default function CreatePumpSeal() {
                   <TextField
                     className="custom-text-field"
                     size="small"
-                    name="stuffingBoxThroatDia"
+                    name="measurementStuffingBoxThroatDia"
                     label="Stuffing Box Throat Dia"
-                    value={formData.stuffingBoxThroatDia || ''}
-                    onChange={handleChange}
+                    value={formData?.measurementStuffingBoxThroatDia || ''}
+                    onChange={(e) => handleChange(e)}
                     variant="outlined"
                     fullWidth
                   />
@@ -1805,10 +2184,10 @@ export default function CreatePumpSeal() {
                   <TextField
                     className="custom-text-field"
                     size="small"
-                    name="sleeveShoulderLength"
+                    name="measurementSleeveShoulderLength"
                     label="Sleeve Shoulder Length"
-                    value={formData.sleeveShoulderLength || ''}
-                    onChange={handleChange}
+                    value={formData?.measurementSleeveShoulderLength || ''}
+                    onChange={(e) => handleChange(e)}
                     variant="outlined"
                     fullWidth
                   />
@@ -1817,10 +2196,10 @@ export default function CreatePumpSeal() {
                   <TextField
                     className="custom-text-field"
                     size="small"
-                    name="sleeveExtensionLength"
+                    name="measurementSleeveExtensionLength"
                     label="Sleeve Extension Length"
-                    value={formData.sleeveExtensionLength || ''}
-                    onChange={handleChange}
+                    value={formData?.measurementSleeveExtensionLength || ''}
+                    onChange={(e) => handleChange(e)}
                     variant="outlined"
                     fullWidth
                   />
@@ -1829,62 +2208,77 @@ export default function CreatePumpSeal() {
                   <TextField
                     className="custom-text-field"
                     size="small"
-                    name="shaftHubDistance"
+                    name="measurementShaftHubDistance"
                     label="Shaft Hub Distance"
-                    value={formData.shaftHubDistance || ''}
-                    onChange={handleChange}
+                    value={formData?.measurementShaftHubDistance || ''}
+                    onChange={(e) => handleChange(e)}
                     variant="outlined"
                     fullWidth
                   />
                 </Grid>
               </>
             )}
+            </Grid>
 
+<div className="MuiBox-root css-2e6lci">
+                <svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-alert-circle">
+                  <g>
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </g>
+                </svg>
+                <div className="MuiBox-root css-1isemmb">Gland Bolting
+                </div>
+                </div>
+
+              <Grid container spacing={2}>
             {/* Gland Bolting */}
-            <Grid item xs={3}>
+
+            <Grid item xs={4}>
               <TextField
                 className="custom-text-field"
                 size="small"
-                name="numberOfStuds"
+                name="measurementNumberOfStuds"
                 label="No. of Studs"
-                value={formData.numberOfStuds || ''}
-                onChange={handleChange}
+                value={formData?.measurementNumberOfStuds || ''}
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               <TextField
                 className="custom-text-field"
                 size="small"
-                name="studSize"
+                name="measurementStudSize"
                 label="Stud Size"
-                value={formData.studSize || ''}
-                onChange={handleChange}
+                value={formData?.measurementStudSize || ''}
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               <TextField
                 className="custom-text-field"
                 size="small"
-                name="boltCircleDiameter"
+                name="measurementBoltCircleDiameter"
                 label="Bolt Circle Diameter"
-                value={formData.boltCircleDiameter || ''}
-                onChange={handleChange}
+                value={formData?.measurementBoltCircleDiameter || ''}
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               <TextField
                 className="custom-text-field"
                 size="small"
-                name="startAngle"
+                name="measurementStartAngle"
                 label="Start Angle"
-                value={formData.startAngle || ''}
-                onChange={handleChange}
+                value={formData?.measurementStartAngle || ''}
+                onChange={(e) => handleChange(e)}
                 variant="outlined"
                 fullWidth
               />
@@ -1892,17 +2286,27 @@ export default function CreatePumpSeal() {
 
             {/* Connections */}
             <Grid item xs={12}>
-              <h3 style={{ paddingBottom: '10px' }}>Flush Connection:-</h3>
+              <div className="MuiBox-root css-2e6lci">
+                <svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-alert-circle">
+                  <g>
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </g>
+                </svg>
+                <div className="MuiBox-root css-1isemmb"> Connections</div>
+              </div>
+              <h3 style={{ paddingBottom: '10px', marginLeft: "3px" }}>Flush </h3>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   <TextField
                     className="custom-text-field"
                     select
                     size="small"
-                    name="flushSize"
+                    name="measurementFlushSize"
                     label="Size"
-                    value={formData.flushSize || ''}
-                    onChange={handleChange}
+                    value={formData?.measurementFlushSize || ''}
+                    onChange={(e) => handleChange(e)}
                     variant="outlined"
                     fullWidth
                     SelectProps={{ native: true }}
@@ -1917,15 +2321,87 @@ export default function CreatePumpSeal() {
                   <TextField
                     className="custom-text-field"
                     size="small"
-                    name="flushAngle"
+                    name="measurementFlushAngle"
                     label="Angle"
-                    value={formData.flushAngle || ''}
-                    onChange={handleChange}
+                    value={formData?.measurementFlushAngle || ''}
+                    onChange={(e) => handleChange(e)}
                     variant="outlined"
                     fullWidth
                   />
                 </Grid>
               </Grid>
+
+
+              <h3 style={{ paddingBottom: '10px', marginLeft: "3px" }}>Quench </h3>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <TextField
+                    className="custom-text-field"
+                    select
+                    size="small"
+                    name="measurementQuenchSize"
+                    label="Size"
+                    value={formData?.measurementQuenchSize || ''}
+                    onChange={(e) => handleChange(e)}
+                    variant="outlined"
+                    fullWidth
+                    SelectProps={{ native: true }}
+                  >
+                    <option value="" />
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    {/* Add more options as needed */}
+                  </TextField>
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    className="custom-text-field"
+                    size="small"
+                    name="measurementQuenchAngle"
+                    label="Angle"
+                    value={formData?.measurementQuenchAngle || ''}
+                    onChange={(e) => handleChange(e)}
+                    variant="outlined"
+                    fullWidth
+                  />
+                </Grid>
+              </Grid>
+
+              <h3 style={{ paddingBottom: '10px', marginLeft: "3px" }}>Drain </h3>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <TextField
+                    className="custom-text-field"
+                    select
+                    size="small"
+                    name="measurementDrainSize"
+                    label="Size"
+                    value={formData?.measurementDrainSize || ''}
+                    onChange={(e) => handleChange(e)}
+                    variant="outlined"
+                    fullWidth
+                    SelectProps={{ native: true }}
+                  >
+                    <option value="" />
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    {/* Add more options as needed */}
+                  </TextField>
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    className="custom-text-field"
+                    size="small"
+                    name="measurementDrainAngle"
+                    label="Angle"
+                    value={formData?.measurementDrainAngle || ''}
+                    onChange={(e) => handleChange(e)}
+                    variant="outlined"
+                    fullWidth
+                  />
+                </Grid>
+              </Grid>
+
             </Grid>
 
             {/* Repeat the same structure for Quench and Drain connections */}
@@ -1936,21 +2412,432 @@ export default function CreatePumpSeal() {
                 <h3 style={{ padding: '1px 0' }}>Stuffing Box Type:-</h3>
                 <RadioGroup
                   row
-                  name="stuffingBoxType"
-                  value={formData.stuffingBoxType}
-                  onChange={handleChange}
+                  name="measurementStuffingBox"
+                  value={formData?.measurementStuffingBox}
+                  onChange={(e) => handleChange(e)}
                 >
-                  <FormControlLabel value="Stepped" control={<Radio />} label="Stepped" />
-                  <FormControlLabel value="Straight" control={<Radio />} label="Straight" />
+                  <FormControlLabel value="Jacketed" control={<Radio />} label="Jacketed" />
+                  <FormControlLabel value="Non-Jacketed" control={<Radio />} label="Non-Jacketed" />
                 </RadioGroup>
               </FormControl>
             </Grid>
+
           </Grid>
         </div>
 
-
         {/* Mesurment section end */}
 
+        <div className='card'>
+          <Grid container spacing={2}>
+            {/* Type of Stuffing Box */}
+            <Grid item xs={12}>
+              <div className="MuiBox-root css-2e6lci">
+                <svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-alert-circle">
+                  <g>
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </g>
+                </svg>
+                <div className="MuiBox-root css-1isemmb">Other Details</div>
+              </div>
+
+              <Grid container spacing={2}>
+                  {/* otherDetailsRemarks */}
+                  <Grid item xs={8}>
+                  <TextField
+                    size="small"
+                    className="custom-text-field"
+                    label="Other Details Remarks"
+                    multiline
+                    rows={3}
+                    name="otherDetailsRemarks"
+                    value={formData.otherDetailsRemarks || ''}
+                    onChange={(e) => handleChange(e)}
+                    // disabled
+                    // id="disableItem"
+
+                    fullWidth
+                  />
+                </Grid>
+
+                <Grid item xs={4}>
+                  <Autocomplete
+                    size="small"
+                    value={formData.otherDetailsAccessories || ""}
+                    onChange={(event, newValue) => {
+                      setFormData({
+                        ...formData,
+                        otherDetailsAccessories: newValue || "",
+                      });
+                    }}
+                    inputValue={formData.otherDetailsAccessories || ""}
+                    onInputChange={(event, newInputValue) => {
+                      setFormData({
+                        ...formData,
+                        otherDetailsAccessories: newInputValue || "",
+                      });
+                    }}
+                    options={[
+                      "With gland and sleeve",
+                      "Without gland and sleeve",
+                      "With gland without sleeve",
+                      "With sleeve without gland",
+                    ]}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        size="small"
+                        placeholder="Select Accessories"
+                        fullWidth
+                        className="custom-text-field"
+                        label="Accessories"
+                      />
+                    )}
+                  />
+                </Grid>
+
+              
+              </Grid>
+
+
+
+              {/* attachmentReferenceMechanicalSealDrawing */}
+              <div className="MuiBox-root css-2e6lci">
+                <svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-alert-circle">
+                  <g>
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </g>
+                </svg>
+                <div className="MuiBox-root css-1isemmb">Attachments</div>
+              </div>
+
+              <Grid item xs={8}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop:"1rem" }}>
+
+              {/* Hidden File Input */}
+              <input
+        type="file"
+        ref={atRefmSeal}
+        accept="*"
+        style={{ display: "none" }}
+        onChange={async (event) => {
+          const file = event.target.files[0];
+          if (!file) return;
+        
+          console.log("Selected File:", file.name);
+        
+          // Generate a temporary file URL (for frontend preview)
+          const tempFileURL = URL.createObjectURL(file);
+          console.log("Temporary File URL:", tempFileURL);
+        
+          // Prepare FormData
+          const formData = new FormData();
+          formData.append("file", file);
+        
+          try {
+            const { data } = await axiosInstance.post(
+              `http://localhost:8080/lens/fileUpload/file?filelocation=${encodeURIComponent(file.name)}`,
+              formData,
+              {
+                headers: { "Content-Type": "multipart/form-data" },
+              }
+            );
+        
+            console.log("File Upload Response:", data);
+        
+            // ✅ Update `uploadedFileNames` at the correct index
+            setAtmSeal(data);
+        
+            //  Update `rotaryJointInquiries[index]` with the new filename
+            setFormData((prev) => ({
+              ...prev,
+            attachmentReferenceMechanicalSealDrawing:data              
+            }));
+          } catch (err) {
+            console.error("File Upload Error:", err);
+          }
+        }}
+              /> 
+
+              {/* Upload Button */}
+              <button
+        type="button"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "1px",
+          backgroundColor: "black",
+          color: "white",
+          padding: "10px 15px",
+          borderRadius: "5px",
+          cursor: "pointer",
+          border: "none",
+          fontSize: "14px",
+          fontWeight: "bold",
+          width: "100%",
+        }}
+        onClick={() => atRefmSeal.current.click()} // Trigger file input
+      >
+        <AttachFileIcon style={{ fontSize: "16px" }} />
+        Attachment Reference Mechanical Seal Drawing
+      </button>
+      {(formData.attachmentReferenceMechanicalSealDrawing &&atmSeal) || (formData.attachmentReferenceMechanicalSealDrawing && pId)  ? (
+      <button
+        type="button"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          backgroundColor: "#1976d2",
+          color: "white",
+          padding: "10px 15px",
+          borderRadius: "5px",
+          cursor: "pointer",
+          border: "none",
+          fontSize: "14px",
+          fontWeight: "bold",
+        }}
+        onClick={async() => {
+          try {
+            let fileName = formData.attachmentReferenceMechanicalSealDrawing; // Extract filename
+            console.log("Original FileName:", fileName);
+
+            // Send API request with the original filename
+            const res = await axiosInstance.get(`lens/file/download/?fileName=${encodeURIComponent(fileName)}`, {
+                responseType: 'blob' // Handle binary data
+            });
+
+              console.log("Response received:", res);
+        
+            // Extract content type from response headers
+            const contentType = res.headers['content-type'];
+        
+            // Create a downloadable URL
+            const url = window.URL.createObjectURL(new Blob([res.data], { type: contentType }));
+        
+
+            // **Modify filename only for saving** (Ensure extension is at the end)
+            const parts = fileName.split(".");
+            const second = parts[1].split("-");
+            const extension = second.shift(); // Extract extension
+            second.push(`.${extension}`); // Append extension at the end
+            const formattedFileName = parts[0] + "-" + second.join("-");
+        
+            console.log("Formatted FileName for download:", formattedFileName);
+        
+            // Create a link element
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", formattedFileName); // Use formatted name for download
+        
+            // Append to DOM & trigger download
+            document.body.appendChild(link);
+            link.click();
+        
+            // Cleanup
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url); // Free memory
+          } catch (error) {
+            console.error("File download failed:", error);
+          }
+          
+        }}
+      >
+        <DownloadIcon style={{ fontSize: "16px" }} /> Download 
+      </button>
+    ): null}
+  </div>
+
+  {atmSeal || (pId&&formData.attachmentReferenceMechanicalSealDrawing) ? (
+            <p style={{ marginTop: "8px", fontSize: "11px", color: "black", fontWeight: "bold" }}>
+                Uploaded File: {atmSeal?atmSeal : formData.attachmentReferenceMechanicalSealDrawing}
+                <button
+                    style={{
+                        marginLeft: "7px",
+                        background: "transparent",
+                        color: "red",
+                        border: "none",
+                        cursor: "pointer",
+                        padding: "5px",
+                        borderRadius: "3px",
+                        fontSize: "11px",
+                    }}
+                  onClick={() => handleFileDelete("attachmentReferenceMechanicalSealDrawing")}
+                >
+                    X
+                </button>
+            </p>
+      ):null}
+
+</Grid> 
+
+              <Grid item xs={6}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop:"1rem" }}>
+
+              {/* Hidden File Input */}
+              <input
+        type="file"
+        ref={atStuffBoxRef}
+        accept="*"
+        style={{ display: "none" }}
+        onChange={async (event) => {
+          const file = event.target.files[0];
+          if (!file) return;
+        
+          console.log("Selected File:", file.name);
+        
+          // Generate a temporary file URL (for frontend preview)
+          const tempFileURL = URL.createObjectURL(file);
+          console.log("Temporary File URL:", tempFileURL);
+        
+          // Prepare FormData
+          const formData = new FormData();
+          formData.append("file", file);
+        
+          try {
+            const { data } = await axiosInstance.post(
+              `http://localhost:8080/lens/fileUpload/file?filelocation=${encodeURIComponent(file.name)}`,
+              formData,
+              {
+                headers: { "Content-Type": "multipart/form-data" },
+              }
+            );
+        
+            console.log("File Upload Response:", data);
+        
+            // ✅ Update `uploadedFileNames` at the correct index
+            setAtStuff(data);
+        
+            //  Update `rotaryJointInquiries[index]` with the new filename
+            setFormData((prev) => ({
+              ...prev,
+              attachmentStuffingBoxDetails:data              
+            }));
+          } catch (err) {
+            console.error("File Upload Error:", err);
+          }
+        }}
+              /> 
+
+              {/* Upload Button */}
+              <button
+        type="button"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "1px",
+          backgroundColor: "black",
+          color: "white",
+          padding: "10px 15px",
+          borderRadius: "5px",
+          cursor: "pointer",
+          border: "none",
+          fontSize: "14px",
+          fontWeight: "bold",
+          width: "100%",
+        }}
+        onClick={() => atStuffBoxRef.current.click()} // Trigger file input
+      >
+        <AttachFileIcon style={{ fontSize: "16px" }} />
+        Attachment Stuffing Box Details
+      </button>
+      {(formData.attachmentStuffingBoxDetails &&atStuff) ||(formData.attachmentStuffingBoxDetails &&pId) ? (
+      <button
+        type="button"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          backgroundColor: "#1976d2",
+          color: "white",
+          padding: "10px 15px",
+          borderRadius: "5px",
+          cursor: "pointer",
+          border: "none",
+          fontSize: "14px",
+          fontWeight: "bold",
+        }}
+        onClick={async() => {
+          try {
+            let fileName = formData.attachmentStuffingBoxDetails; // Extract filename
+            console.log("Original FileName:", fileName);
+
+            // Send API request with the original filename
+            const res = await axiosInstance.get(`lens/file/download/?fileName=${encodeURIComponent(fileName)}`, {
+                responseType: 'blob' // Handle binary data
+            });
+
+              console.log("Response received:", res);
+        
+            // Extract content type from response headers
+            const contentType = res.headers['content-type'];
+        
+            // Create a downloadable URL
+            const url = window.URL.createObjectURL(new Blob([res.data], { type: contentType }));
+        
+
+            // **Modify filename only for saving** (Ensure extension is at the end)
+            const parts = fileName.split(".");
+            const second = parts[1].split("-");
+            const extension = second.shift(); // Extract extension
+            second.push(`.${extension}`); // Append extension at the end
+            const formattedFileName = parts[0] + "-" + second.join("-");
+        
+            console.log("Formatted FileName for download:", formattedFileName);
+        
+            // Create a link element
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", formattedFileName); // Use formatted name for download
+        
+            // Append to DOM & trigger download
+            document.body.appendChild(link);
+            link.click();
+        
+            // Cleanup
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url); // Free memory
+          } catch (error) {
+            console.error("File download failed:", error);
+          }
+          
+        }}
+      >
+        <DownloadIcon style={{ fontSize: "16px" }} /> Download 
+      </button>
+    ): null}
+  </div>
+
+  {atStuff || (formData.attachmentStuffingBoxDetails) ? (
+            <p style={{ marginTop: "8px", fontSize: "11px", color: "black", fontWeight: "bold" }}>
+                Uploaded File: {atStuff?atStuff:formData.attachmentStuffingBoxDetails}
+                <button
+                    style={{
+                        marginLeft: "7px",
+                        background: "transparent",
+                        color: "red",
+                        border: "none",
+                        cursor: "pointer",
+                        padding: "5px",
+                        borderRadius: "3px",
+                        fontSize: "11px",
+                    }}
+                  onClick={() => handleFileDelete("attachmentStuffingBoxDetails")}
+                >
+                    X
+                </button>
+            </p>
+      ):null}
+
+</Grid> 
+
+
+            </Grid>
+          </Grid>
+        </div>
 
         {/* Submit/Update Buttons */}
         <Grid item xs={4}>
@@ -1970,6 +2857,7 @@ export default function CreatePumpSeal() {
                 <Button
                   className="update-btn"
                   variant="contained"
+                  disabled={(authState?.sub)!==formData.createdByUser}
                   type="submit"
                   onClick={(e) => handleUpdatePumpSeal(e, formData, pId, navigate)}
                 >
@@ -1989,4 +2877,4 @@ export default function CreatePumpSeal() {
       </form>
     </Container>
   );
-}
+            }

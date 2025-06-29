@@ -14,7 +14,9 @@ export const handleSubmit = async(e, formData, navigate) => {
       try{
           const res = await axiosInstance.post(`lens/rotaryJoint/save`, formData);
         console.log("response is ",res.data);
-        navigate(`/rotarySuccess/${res.data}`);
+        navigate(`/editDrf`);
+
+        // navigate(`/rotarySuccess/${res.data}`);
       }  
       catch(err){
         console.log(err)
@@ -36,7 +38,8 @@ export const handleUpdate = async (e,formData,rjId,navigate)=>{
           console.log("response from update is ",res.data);
           
           rjId="";
-          navigate(`/rotarySuccess/${formData.rotaryDrfNumber}`);
+          navigate(`/editDrf`);
+
       }
       catch(err){
         console.log(err)
@@ -49,7 +52,8 @@ export const handleUpdate = async (e,formData,rjId,navigate)=>{
 
     //getRotary
     export const getRotary = (rjId,setFormData)=>{
-        axiosInstance.get(`lens/rotaryJoint/get?rotaryJointDrfNo=${rjId}`)
+      
+        axiosInstance.get(`lens/rotaryJoint/get?rotaryJointReferenceNo=${rjId}`)
         .then(res=>{
           const {data} = res;
             setFormData(data);
@@ -83,10 +87,10 @@ export const getAllRotary = (setData, setIsDeleted) =>{
 
 
 // delete
-export const deleteDetail = async (crId,data,setData) => {
+export const deleteRotaryDetail = async (crId,data,setData) => {
     try {
-      await axiosInstance.delete(`lens/rotaryJoint/delete?rotaryJointDrfNo=${crId}`);
-      const newData = data.filter(item => item.rotaryDrfNumber !== crId);
+      await axiosInstance.delete(`lens/rotaryJoint/delete?rotaryJointDrfNo=${encodeURIComponent(crId)}`);
+      const newData = data.filter(item => item.drfNumber !== crId);
       console.log("data is ",data)
       console.log("New data is ",newData)
       setData(newData);

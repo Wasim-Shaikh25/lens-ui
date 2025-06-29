@@ -139,9 +139,9 @@ return (
                 <TableCell component="th" scope="row">
                   {index + 1}
                 </TableCell>
-                <TableCell align="right">{row.inquiryNumber}</TableCell>
+                <TableCell align="right">{row.salesInquiryReferenceNo}</TableCell>
                 <TableCell align="right">{row.customerName}</TableCell>
-                <TableCell align="right">{row.branchId}</TableCell>
+                <TableCell align="right">{row.branch}</TableCell>
                 <TableCell align="right">{row.insertedOn}</TableCell>
                 <TableCell align="right">{row.lastUpdatedOn}</TableCell>
                 <TableCell align="right">

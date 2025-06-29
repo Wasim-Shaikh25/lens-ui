@@ -12,43 +12,92 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
-import { deleteDetail } from '../../../apis/CustomerApi';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-import { searchFilter } from '../../../apis/CustomerApi';
-import useToken from '../../../contextApi/useToken';
+import { searchDrfFilter } from '../../apis/drfFilterApi';
+import useToken from '../../contextApi/useToken';
+import { useAuth } from '../../contextApi/AuthContext';
+import { deleteAgitatorDetail } from '../../apis/AgitatorApi';
+import { deleteApiDetail } from '../../apis/ApiPlan';
+import { deletePumpDetail } from '../../apis/PumpSealApi';
+import { deleteRotaryDetail } from '../../apis/RotaryApi';
 
 
-
-export default function EditCustomer() {
+export default function EditDrf() {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);  
   const [isDeleted, setIsDeleted] = useState(false);  
   const [itemsPerPage, setItemsPerPage] = useState(5); // Adjust as needed
   const navigate = useNavigate();  
-  const [customerRef, setcustomerRef] = useState();
+  const [drfNum, setDrfNum] = useState();
   const [customerName, setcustomerName] = useState();
   const [branch, setBranch] = useState();
   //added for msearch criteria
-  const [contactDetailReferenceNo,setContactDetailReferenceNo] = useState();
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
   const token = useToken();
+  const { authState } = useAuth();
 
 
 
   useEffect(() => {
-    searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData,token)
+    searchDrfFilter(branch,customerName,drfNum,currentPage,itemsPerPage,setData,token)
 
     }, [currentPage, itemsPerPage]);
     
 
+    const deleteRow=(drfNum,data, setData)=>{
+      const drfKey = drfNum.split("/")[1];
+      console.log("Drf Key is ",drfKey);
+
+      switch(drfKey){
+
+        case "AGS":
+        deleteAgitatorDetail(drfNum,data,setData );    
+        break;
+        case "API":
+          deleteApiDetail(drfNum,data,setData)
+        break;
+        case "PUM":
+        deletePumpDetail(drfNum,data,setData)
+        break;
+        case "ROT":
+          deleteRotaryDetail(drfNum,data,setData)
+        break;
+
+        default:
+          navigate("/editDrf")
+      }
+
+
+    }
+
   
-    const editDetail = (detail) => {
+    const editDetail = (drfNum) => {
       // setEditData(detail.customerReferenceNumber);
-      
-      console.log("edit detail is ", detail.customerReferenceNumber);
-      navigate(`/Customer/${encodeURIComponent(detail. customerReferenceNumber)}`)
+
+      const drfKey = drfNum.split("/")[1];
+      console.log("Drf Key is ",drfKey);
+      drfNum=encodeURIComponent(drfNum)
+
+      switch(drfKey){
+
+        case "AGS":
+          navigate(`/createAgitator/${drfNum}`)
+        break;
+        case "API":
+          navigate(`/createApi/${drfNum}`)
+        break;
+        case "PUM":
+          navigate(`/createPump/${drfNum}`)
+        break;
+        case "ROT":
+          navigate(`/createRotary/${drfNum}`)
+        break;
+
+        default:
+          navigate("/editDrf")
+      }
+
+      // navigate(`/Customer/${detail.customerReferenceNumber}`)
     };
     
 
@@ -57,6 +106,7 @@ export default function EditCustomer() {
       setCurrentPage(0)
   }
 
+  
 
 return (
 
@@ -74,9 +124,9 @@ return (
       size="small"
       className="custom-text-field"
       name="customerRef"
-      value={customerRef}
-      onChange={(e)=>setcustomerRef(e.target.value)}
-      label="Customer Reference No"
+      value={drfNum}
+      onChange={(e)=>setDrfNum(e.target.value)}
+      label="Drf Number"
     />
   </Grid>
 
@@ -94,18 +144,6 @@ return (
   />
 </Grid>
 
-
-<Grid item  xs={12} sm={3} >
-{/* <InputLabel className="ip-label">Customer Reference No</InputLabel> */}
-    <TextField
-      size="small"
-      className="custom-text-field"
-      name="contactDetailReferenceNo"
-      value={contactDetailReferenceNo}
-      onChange={(e)=>setcustomerRef(e.target.value)}
-      label="Contact Detail Reference No"
-    />
-  </Grid>
 
   
 
@@ -126,22 +164,22 @@ return (
 
 {/* </div> */}
 
-<Button onClick={()=>searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData,token)}  style={{width:"15%",margin:"0.8rem 2.5rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
+<Button onClick={()=>searchDrfFilter(branch,customerName,drfNum,currentPage,itemsPerPage,setData,token)}  style={{width:"15%",margin:"0.8rem 2.5rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
   Search
 </Button>
 
-    <TableContainer sx={{ml:'4%'}} component={Paper} className="table-container">
+    <TableContainer sx={{mx:'auto'}} component={Paper} className="table-container">
       <Table sx={{ minWidth: 500 }} aria-label="customized table">
         <TableHead className="table-header">
           <TableRow>
-            <TableCell>Sr No</TableCell>
-            <TableCell align="right">Contact Detail Reference No</TableCell>
-            {/* <TableCell align="right">Reference Number</TableCell> */}
-            <TableCell align="right">Customer Name</TableCell>
-            <TableCell align="right">Contact Person</TableCell>
-            <TableCell align="right">Mobile Number</TableCell>
-            <TableCell align="right">Customer Address</TableCell>
+            <TableCell align="right">Drf No</TableCell>
             <TableCell align="right">Branch</TableCell>
+            <TableCell align="right">Customer Name</TableCell>
+            <TableCell align="right">Shaft Size</TableCell>
+            <TableCell align="right">Created On</TableCell>
+            <TableCell align="right">Created By</TableCell>
+            <TableCell align="right">Last Updated On</TableCell>
+            <TableCell align="right">Updated By</TableCell>
             <TableCell align="right">Action</TableCell>
           </TableRow>
         </TableHead>
@@ -151,22 +189,23 @@ return (
           <TableBody>
             {data?.map((row, index) => (
               <TableRow key={index} className="table-row">
-                <TableCell component="th" scope="row">
-                  {index + 1}
-                </TableCell>
-                <TableCell align="right">{row?.customerReferenceNumber}</TableCell>
-                <TableCell align="right">{row.customerName}</TableCell>
-                <TableCell align="right">{row?.contactPerson}</TableCell>
-                <TableCell align="right">{row?.mobileNumber}</TableCell>
-                <TableCell align="right">{row?.customerAddress}</TableCell>
+                <TableCell align="right">{row?.drfNumber}</TableCell>
                 <TableCell align="right">{row?.branch}</TableCell>
+                <TableCell align="right">{row.customerName}</TableCell>
+                <TableCell align="right">{row?.shaftSize}</TableCell>
+                <TableCell align="right">{row?.createdOn}</TableCell>
+                <TableCell align="right">{row?.createdBy}</TableCell>
+                <TableCell align="right">{row?.lastUpdated}</TableCell>
+                <TableCell align="right">{row?.lastUpdateBy}</TableCell>
                 <TableCell align="right">
-                  <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
-                    <EditIcon style={{ color: 'blue' }} />
+                  <button onClick={() => editDetail(row?.drfNumber)} 
+                  style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer'
+                   }}>
+                    <EditIcon style={{ color:'blue' }} />
                   </button>
-                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.customerReferenceNumber, data, setIsDeleted, setData,token)}>
+              <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteRow(row.drfNumber, data,setData)}>
                     <DeleteIcon style={{ color: 'red' }} />
-                  </button>
+                  </button> 
                 </TableCell>
               </TableRow>
             ))}

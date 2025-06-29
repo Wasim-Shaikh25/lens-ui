@@ -32,6 +32,8 @@ import EditOfm from '../Pages/ofm/EditOfm.js';
 import OfmSuccess from '../Pages/ofm/OfmSuccess.js';
 import OfmCommunication from '../Pages/ofmCommunication/OfmCommunication.js';
 import UpdatePassword from '../Pages/resetPassword/UpdateReset.js';
+import EditDrf from '../Pages/drfFilter/DrfFilter';
+import EditQuotation from '../Pages/Quotation/EditQuotation';
 
 
 
@@ -97,6 +99,9 @@ const AllRoute = ({isSidebar}) => {
           <Route path="/reset" element={<ResetPassword />} />
           <Route path="/login" element={<Login />} />
           <Route path="/quotation" element={<CreateQuotation />} />
+
+          <Route path="/EditQuotation" element={<EditQuotation />} />
+
           <Route path="/createOfm" element={<CreateOfm />} />
           <Route path="/createOfm/:oId" element={<CreateOfm />} />
           <Route path="/ofmSuccess" element={<OfmSuccess />} />
@@ -104,6 +109,7 @@ const AllRoute = ({isSidebar}) => {
           <Route path="/quotationSuccess" element={<QuotationSuccess />} />
           <Route path="/ofmComm" element={<OfmCommunication />} />
           <Route path="/updatePassword" element={<UpdatePassword />} />
+          <Route path="/editDrf" element={<EditDrf />} />
       
     </Routes>
   </div>

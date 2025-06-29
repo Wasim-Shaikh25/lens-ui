@@ -7,23 +7,12 @@ import moment from "moment";
 //handle Submit
 export const handleSubmit = async(e,formData,navigate) => {
     e.preventDefault();
-    const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');  
-
-    // if (formData.salesItems && formData.salesItems.length > "") {
-      // Update insertedOn and lastUpdatedOn for the last item in customerDetail
-      // formData.salesItems[formData.salesItems.length -1].lastUpdatedOn = dateTime;
-      // formData.salesItems[formData.salesItems.length -1].insertedOn = dateTime;
-    // } 
-    
-      // If customerDetail is not defined or empty, set insertedOn and lastUpdatedOn for formData
-      // formData.insertedOn = dateTime;
-      // formData.lastUpdatedOn = dateTime;
-      // formData.inquiryDate = dateTime;
        
       console.log("formData sales is ",formData);
       try{
         const res = await axiosInstance.post(`lens/salesInquiry/save`, formData);
       console.log("response is ",res.data);
+
 
       }
       catch(err){
@@ -66,12 +55,11 @@ export const handleSubmit = async(e,formData,navigate) => {
 //get Sales
 export const getSales=(sId,setFormData) =>{
 
-    axiosInstance.get(`lens/salesInquiry/get/${sId}`)
+    axiosInstance.get(`lens/salesInquiry/get?itemReferenceNo=${sId}`)
     .then(res=>{
       const {data} = res;
         setFormData(data);
         console.log("the sId fetched data is ",data)
-
     }) 
     .catch(err=>{
       console.log(err)
@@ -82,7 +70,7 @@ export const getSales=(sId,setFormData) =>{
 
 //get All sales
 export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted)=>{
-    axiosInstance.get(`lens/salesInquiry/getAll?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
+    axiosInstance.get(`lens/salesInquiry/getAllSalesInquiryByFilter?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
       .then(res => {
         setData(res.data);
         console.log("the fetched data is ",res.data);

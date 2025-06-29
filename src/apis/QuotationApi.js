@@ -19,3 +19,18 @@ export const handleSubmit = async(e, navigate, formData, savedItems)=>{
     }
   
   }
+
+  export const getAllQuotation = async(setData)=>{
+
+    try
+    {
+      const {data} = await axiosInstance.get("lens/Quotation/getAll")
+      setData(data)
+      console.log("Response Data is ",data)
+    }
+    
+    catch(err){
+        console.log(err);   
+    }
+
+  }

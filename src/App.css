@@ -219,6 +219,10 @@ font-family: 'Sans-serif fonts', Times, serif !important;
   }
   
   
+  .update-btn:disabled{
+    background-color: lightgray !important;
+  }
+  
   .cancel-btn{
     background-color: #E46A76 !important;
     padding: 8px 12px !important;
@@ -408,12 +412,12 @@ font-family: 'Sans-serif fonts', Times, serif !important;
 max-width:3%;
 height:1%;
 margin-left:2%;
-box-shadow:rgba(0, 0, 0, 0.1) 1px 4px 7px;
 border-radius:3px 
 }
 
 .logoName{
   margin-left:1%;
+  margin-top: 3px;
   font-size: 1.8em;
   font-family: Crillee Italic Std, sans-serif;
   font-weight:700
@@ -679,5 +683,6 @@ border-radius:3px
   flex-direction: column;
   align-items: center;
 }
+
 
 
