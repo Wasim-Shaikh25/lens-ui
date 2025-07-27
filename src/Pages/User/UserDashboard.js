@@ -31,9 +31,8 @@ function UserDashboard(){
         getAllUser(setData,currentPage,itemsPerPage,setIsDeleted)
         }, [currentPage, itemsPerPage])
         
-  
         
-  
+        console.log("row data is",data)
 
 
 
@@ -59,7 +58,7 @@ return (
             <TableCell>Sr No</TableCell>
             <TableCell align="right">Employee ID</TableCell>
             <TableCell align="right">First Name</TableCell>
-            <TableCell align="right">Inserted On</TableCell>
+            <TableCell align="right">Designation</TableCell>
             <TableCell align="right">Last Updated On</TableCell>
             <TableCell align="right">Action</TableCell>
           </TableRow>
@@ -75,8 +74,8 @@ return (
                 </TableCell>
                 <TableCell align="right">{row?.empId}</TableCell>
                 <TableCell align="right">{row?.firstName}</TableCell>
-                <TableCell align="right">{row?.insertedOn}</TableCell>
-                <TableCell align="right">{row?.lastUpdatedOn}</TableCell>
+                <TableCell align="right">{row?.designation.designationName}</TableCell>
+                <TableCell align="right">{row?.updatedOn}</TableCell>
                 <TableCell align="right">
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
                     <EditIcon style={{ color: 'blue' }} />

@@ -16,15 +16,19 @@ export const  deleteDetail = async(empId,data,setData, setIsDeleted)=>{
 
 
 
-export const getAllUser = (setData,currentPage,itemsPerPage,setIsDeleted)=>{
+export const getAllUser = async(setData,currentPage,itemsPerPage,setIsDeleted)=>{
     
-    axiosInstance.get(`/user/getAllUser?pageNo=${currentPage}&pageSize=${itemsPerPage}`).then(res=>{
+    try{
+        const {data} = await axiosInstance.get(`/user/getAllUser`)
+    
+        setData(data) 
+        setIsDeleted(false)
+        console.log("response  is ",data);
 
-    const {data} = res;
-    setData(data.content) 
-    setIsDeleted(false)
-    console.log("response Data is ",data);
-})
+    }
+    catch(err){
+        console.log(err)
+}
 
 
 }

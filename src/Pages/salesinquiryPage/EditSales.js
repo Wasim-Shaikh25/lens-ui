@@ -12,8 +12,11 @@ import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
-import { deleteDetail, getAllSales } from '../../apis/SalesInquiryApi';
+import { deleteDetail } from '../../apis/SalesInquiryApi';
 import '../../App.css'
+import { searchFilter } from '../../apis/SalesInquiryApi';
+import { TextField ,Button,  Container, Grid, InputLabel , IconButton } from '@mui/material';
+
 
 
 
@@ -24,20 +27,24 @@ export default function EditSales() {
   const [isDeleted, setIsDeleted] = useState(false);  
   const [itemsPerPage, setItemsPerPage] = useState(5); // Adjust as needed
   const navigate = useNavigate();  
-  
+  const [salesRef,setSalesRef] = useState('');
+  const [customerName,setcustomerName] = useState('');
+  const [branch,setBranch] = useState('');
+  const [industry,setIndustry] = useState('');
+
 
 
   useEffect(() => {
-    getAllSales(currentPage,itemsPerPage,setData,setIsDeleted);
+    searchFilter(branch,customerName,industry,salesRef,currentPage,itemsPerPage,setData)
 
     }, [currentPage, itemsPerPage]);
     
 
   
     const editDetail = (detail) => {
-            // setEditData(detail.customerReferenceNumber);
-            console.log("edit detail is ", detail.inquiryNumber);
-            navigate(`/SalesInquiry/${detail.inquiryNumber}`)
+            console.log("edit detail is ", detail.salesInquiryReferenceNo);
+
+            navigate(`/SalesInquiry/${encodeURIComponent(detail.salesInquiryReferenceNo)}`)
           };
           
      
@@ -48,74 +55,68 @@ export default function EditSales() {
 
 
 return (
-  <div className='editContainer' style={{ width:'83%', marginLeft:'5%'}} >
-  {/* <div style={{width:"85%" , margin:'2rem auto'}}> */}
+<Container>
+<div className="editContainer">
 
-{/* <div style={{backgroundColor:"white",border:"1px solid #ddd",boxShadow:"rgba(90, 114, 123, 0.11) 0px 7px 30px 0px",margin:"1rem auto", borderRadius:"8px",width:"85%"}}>
-<div style={{display:"flex", justifyContent:"space-between",flexWrap:"wrap",gap:"18px",padding:"25px",}}>
+<h2>Search and Filter</h2>
 
+<Grid container spacing={2} >
+
+<Grid container spacing={2} alignItems="center" sx={{mx:3, my:1}}>
 
 
 <Grid item xs={12} sm={4}>
-<InputLabel className="ip-label">Customer Reference No</InputLabel>
     <TextField
+      className="custom-text-field"
       size="small"
-      className="text-field"
-      name="customerRef"
-      value={customerRef}
-      onChange={(e)=>setcustomerRef(e.target.value)}
+      name="salesRef"
+      value={salesRef}
+      label="Sales inquiry Item Reference No"
+      onChange={(e)=>setSalesRef(e.target.value)}
     />
   </Grid>
+
 <Grid item xs={12} sm={4}>
-  <InputLabel className="ip-label">Branch</InputLabel>
   <TextField
+    className="custom-text-field"
     size="small"
-    className="text-field"
     name="branch"
     value={branch}
+    label="Branch"
     onChange={(e)=>setBranch(e.target.value)}
   />
 </Grid>
 
 <Grid item xs={12} sm={4}>
-  <InputLabel className="ip-label">Customer Name</InputLabel>
   <TextField
+    className="custom-text-field"
     size="small"
-    className="text-field"
+    label="Customer Name"
     name="customerName"
     value={customerName}
     onChange={(e)=>setcustomerName(e.target.value)}
   />
 </Grid>
 
-<Grid item xs={12} sm={5}>
-        <InputLabel className="ip-label">Start Date</InputLabel>
-        <TextField
-        size="small"
-        type="datetime-local"
-        value={startDate}
-        onChange={(e)=>setStartDate(e.target.value)}
-      />
-      </Grid>
 
 <Grid item xs={12} sm={4}>
-        <InputLabel className="ip-label">End Date</InputLabel>
-        <TextField
-        size="small"
-        type="datetime-local"
-        value={endDate}
-        onChange={(e)=>setEndDate(e.target.value)}
-      />
-      </Grid>
+  <TextField
+    className="custom-text-field"
+    size="small"
+    name="industry"
+    label="Industry"
+    value={industry}
+    onChange={(e)=>setIndustry(e.target.value)}
+  />
+</Grid>
 
-</div>
 
-<Button onClick={()=>searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData)}  style={{width:"15%",margin:"1rem 2rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
+</Grid>
+
+<Button onClick={()=>searchFilter(branch,customerName,industry,salesRef,currentPage,itemsPerPage,setData)}  style={{width:"15%",margin:"0.8rem 2.5rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
   Search
 </Button>
 
-</div> */}
-  <h2>Sales Enquiry Details :</h2>
 
     <TableContainer component={Paper} className="table-container">
       <Table sx={{ minWidth: 500 }} aria-label="customized table">
@@ -123,10 +124,13 @@ return (
           <TableRow>
             <TableCell>Sr No</TableCell>
             <TableCell align="right">Sales Inquiry Number</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Branch ID</TableCell>
-            <TableCell align="right">Inserted On</TableCell>
-            <TableCell align="right">Last Updated On</TableCell>
+            <TableCell align="right">Customer Name</TableCell>
+            <TableCell align="right">Industry</TableCell>
+            <TableCell align="right">Branch</TableCell>
+            <TableCell align="right">Created By</TableCell>
+            <TableCell align="right">Created On</TableCell>
+            <TableCell align="right">Updated By</TableCell>
+            <TableCell align="right">Updated On</TableCell>
             <TableCell align="right">Action</TableCell>
           </TableRow>
         </TableHead>
@@ -139,16 +143,19 @@ return (
                 <TableCell component="th" scope="row">
                   {index + 1}
                 </TableCell>
-                <TableCell align="right">{row.salesInquiryReferenceNo}</TableCell>
-                <TableCell align="right">{row.customerName}</TableCell>
-                <TableCell align="right">{row.branch}</TableCell>
-                <TableCell align="right">{row.insertedOn}</TableCell>
-                <TableCell align="right">{row.lastUpdatedOn}</TableCell>
+                <TableCell align="right">{row?.salesInquiryReferenceNo}</TableCell>
+                <TableCell align="right">{row?.customerName}</TableCell>
+                <TableCell align="right">{row?.industry}</TableCell>
+                <TableCell align="right">{row?.branch}</TableCell>
+                <TableCell align="right">{row?.createdBy}</TableCell>
+                <TableCell align="right">{row?.createdOn}</TableCell>
+                <TableCell align="right">{row?.updatedBy}</TableCell>
+                <TableCell align="right">{row?.updatedOn}</TableCell>
                 <TableCell align="right">
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
                     <EditIcon style={{ color: 'blue' }} />
                   </button>
-                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.inquiryNumber,data,setData, setIsDeleted)}>
+                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row?.salesInquiryReferenceNo,data,setData, setIsDeleted)}>
                     <DeleteIcon style={{ color: 'red' }} />
                   </button>
                 </TableCell>
@@ -180,8 +187,9 @@ return (
       </div>
       <hr style={{ border: '1px solid lightGray' }} />
     </TableContainer>
-  </div>
-  // </div>
+ </Grid>
+ </div>
+ </Container>
 );
 }
 

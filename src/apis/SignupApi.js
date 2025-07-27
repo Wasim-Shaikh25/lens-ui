@@ -1,17 +1,16 @@
- import axios from "axios";
  import axiosInstance from "../axios/axiosInstance";
+ import moment from 'moment';
 
  
  
-//  const baseUrl = process.env.REACT_APP_BASE_URL
  
-const baseUrl = "https://crm-api.synterratech.in/lens-svc"
+
 
 
  //get All Designation
  export const getDesignation = async(setDesignation)=>{
     try{
-      const res = await axios.get(`${baseUrl}/user/allDesignations`)
+      const res = await axiosInstance.get(`user/allDesignations`)
       const{data} = res;
       setDesignation(data);
     }
@@ -24,7 +23,7 @@ const baseUrl = "https://crm-api.synterratech.in/lens-svc"
    //get All Departments
   export  const getDepartments = async(setDepartments)=>{
     try{
-      const res = await axios.get(`${baseUrl}/user/getAllDepartments`)
+      const res = await axiosInstance.get(`user/getAllDepartments`)
       const{data} = res;
       setDepartments(data);
       console.log(data)
@@ -38,7 +37,7 @@ const baseUrl = "https://crm-api.synterratech.in/lens-svc"
    //get All Branches
    export const getBranches = async(setBranches)=>{
     try{
-      const res = await axios.get(`${baseUrl}/user/getAllBranches`)
+      const res = await axiosInstance.get(`user/getAllBranches`)
       const{data} = res;
       setBranches(data);
       console.log(data)
@@ -60,7 +59,7 @@ const baseUrl = "https://crm-api.synterratech.in/lens-svc"
   
 
   //     try{
-  //       const res = await axiosInstance.post(`${baseUrl}/user/createAccount`,formData);
+  //       const res = await axiosInstance.post(`user/createAccount`,formData);
   //       const{data} = res;
   //       console.log("response Data ",data);
   //       navigate('/user')
@@ -75,17 +74,24 @@ const baseUrl = "https://crm-api.synterratech.in/lens-svc"
 
   export const handleSubmit = async (e, formData, navigate) => {
     e.preventDefault();
+    const dateTime = moment().format('YYYY-MM-DD HH:mm:ss');
+
     formData.lastUpdatedByUserId = formData.empId;
+    formData.updatedOn =  dateTime;
+
     formData.branches = formData.branches.map(branch => ({
       branchName: branch.branchName,
       region: branch.branchName
     }));
+
+    console.log("User FormData before submission ",formData);
     
+
     try {
-      const res = await axiosInstance.post(`${baseUrl}/user/createUser`, formData);
+      const res = await axiosInstance.post(`user/createUser`, formData);
       const { data } = res;
       console.log("response Data ", data);
-      navigate('/user');
+      // navigate('/user');
     } catch (err) {
       console.log(err);
     }
@@ -95,10 +101,15 @@ const baseUrl = "https://crm-api.synterratech.in/lens-svc"
 
     export const getuser = async(uId, setFormData)=>{
 
-      const res = await axios.get(`${baseUrl}/user/getUser?empId=${uId}`);
-      const{data} = res;
-      setFormData(data);
-      console.log("single user data is ",data)
+      try{
+        const res = await axiosInstance.get(`user/getUser?empId=${uId}`);
+        const{data} = res;
+        setFormData(data);
+        console.log("single user data is ",data)
+      }
+      catch(err){
+        console.log(err)
+      }
     } 
   
 

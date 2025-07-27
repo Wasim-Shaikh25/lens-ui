@@ -7,7 +7,8 @@ import '../../App.css'
 import PersonIcon from "@mui/icons-material/Person";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { Radio, RadioGroup, FormControl, FormLabel } from '@mui/material';
-import { handleSubmit } from '../../apis/QuotationApi';
+import { handleSubmit, handleUpdate } from '../../apis/QuotationApi';
+import { getQuotation } from '../../apis/QuotationApi';
 
 
 
@@ -145,7 +146,7 @@ export default function CreateQuotation() {
     }
 
     if (qId !== undefined) {
-      // getCustomer(rId, setFormData)
+      getQuotation(qId, setFormData)
     } else {
 
       setFormData({
@@ -307,10 +308,7 @@ console.log("formData",formData)
   };
 
 
-
-
-
-
+  
 
 
 
@@ -1113,7 +1111,7 @@ console.log("formData",formData)
 
             {!qId && (selectedTab === 3) ? (<Button className="update-btn" onClick={(e) => handleSubmit(e, navigate, formData, savedItems)} sx={{ margin: "1rem 1rem 0rem 1rem" }} type="submit" variant="contained" >Submit</Button>) : (selectedTab === 3) ? (
               <>
-                <Button className="update-btn" sx={{ margin: "1rem 1rem 0rem 1rem" }} variant="contained"  >Update</Button>
+                <Button className="update-btn" onClick={(e) => handleUpdate(e, navigate, formData, savedItems)} sx={{ margin: "1rem 1rem 0rem 1rem" }} variant="contained"  >Update</Button>
                 <Button className="cancel-btn" variant="contained" onClick={cancelUpdate} >Cancel</Button> </>) : null}
           </Grid>
         </Grid>

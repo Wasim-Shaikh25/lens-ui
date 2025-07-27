@@ -59,7 +59,7 @@ export const getSales=(sId,setFormData) =>{
     .then(res=>{
       const {data} = res;
         setFormData(data);
-        console.log("the sId fetched data is ",data)
+        console.log("the single sales fetched data is ",data)
     }) 
     .catch(err=>{
       console.log(err)
@@ -69,12 +69,19 @@ export const getSales=(sId,setFormData) =>{
 
 
 //get All sales
-export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted)=>{
-    axiosInstance.get(`lens/salesInquiry/getAllSalesInquiryByFilter?pageNo=${currentPage}&pageSize=${itemsPerPage}`)
+export const searchFilter = (branch,customerName,industry,salesRef,currentPage,itemsPerPage,setData)=>{
+  
+  let url = `lens/salesInquiry/getAllSalesInquiryByFilter?`;
+  if (branch) url += `branch=${branch}&`;
+  if (customerName) url += `customerName=${customerName}&`;
+  if (salesRef) url += `salesInquiryReferenceNo=${salesRef}&`;
+  if (industry) url += `industry=${industry}&`;
+  url += `pageNo=${currentPage}&pageSize=${itemsPerPage}`;
+  
+  axiosInstance.get(url)
       .then(res => {
         setData(res.data);
         console.log("the fetched data is ",res.data);
-        setIsDeleted(false)
       })
       .catch((err)=>{
         console.log(err)
@@ -87,10 +94,10 @@ export const getAllSales = (currentPage,itemsPerPage,setData,setIsDeleted)=>{
 export const deleteDetail = (sId,data,setData, setIsDeleted) => {
     console.log("sId is ", sId)
     
-    axiosInstance.delete(`lens/salesInquiry/delete/:InquiryNumber?InquiryNumber=${sId}`)
+    axiosInstance.delete(`lens/salesInquiry/delete?salesInquiryReferenceNo=${sId}`)
     .then(res=>{
       console.log(res)
-      const newData = data.filter(item => item.inquiryNumber !== sId);
+      const newData = data.filter(item => item.salesInquiryReferenceNo !== sId);
       setIsDeleted(true)
       setData(newData);
 

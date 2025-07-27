@@ -347,19 +347,41 @@ export default function CreateOfm() {
       <Grid container spacing={2} sx={{ marginTop: "0.5rem" }}>
         {selectedTab === 0 && (
           <>
-            <Grid item xs={4}>
-              <TextField
-                label="Branch"
-                size="small"
-                fullWidth
-                className="custom-text-field"
-                variant="outlined"
-                value={formData.branch}
-                onChange={(event) =>
-                  setFormData({ ...formData, branch: event.target.value })
-                }
-              />
-            </Grid>
+             <Grid item xs={4}>
+
+
+{/* <InputLabel className="ip-label"> Branch</InputLabel > */}
+<Autocomplete
+  size="small"
+  value={formData.branch || ''}
+  onChange={(event, newValue) => {
+    setFormData({
+      ...formData,
+      branch: newValue || ''
+    });
+  }}
+  inputValue={formData.branch || ''}
+  onInputChange={(event, newInputValue) => {
+    setFormData({
+      ...formData,
+      branch: newInputValue || ''
+    });
+  }}
+
+  options={cbranch.map((branch) => branch)}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      size="small"
+      label="Branch"
+      className="custom-text-field"
+      placeholder='select a branch'
+      variant="outlined"
+      fullWidth
+    />
+  )}
+/>
+</Grid>
 
             {oId && (
               <Grid item xs={4}>
@@ -394,6 +416,30 @@ export default function CreateOfm() {
                 className="custom-text-field"
                 variant="outlined"
                 value={formData.transportThrough}
+                onChange={handleChange}
+              />
+            </Grid>
+
+            <Grid item xs={4}>
+              <TextField
+                label="Location"
+                size="small"
+                fullWidth
+                className="custom-text-field"
+                variant="outlined"
+                value={formData.location}
+                onChange={handleChange}
+              />
+            </Grid>
+
+            <Grid item xs={4}>
+              <TextField
+                label="End Username"
+                size="small"
+                fullWidth
+                className="custom-text-field"
+                variant="outlined"
+                value={formData.endUserName}
                 onChange={handleChange}
               />
             </Grid>

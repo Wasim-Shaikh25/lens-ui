@@ -137,10 +137,10 @@ export default function CreateUser() {
   }, [uId]);
 
 
-  useEffect(() => {
-    const departmentName = formData.departments[0].departmentName;
-    setShowAddBranch(departmentName === "MARKETING" || departmentName === "SALES");
-  }, [formData.departments]);
+  // useEffect(() => {
+  //   const departmentName = formData.departments[0].departmentName;
+  //   setShowAddBranch(departmentName === "MARKETING" || departmentName === "SALES");
+  // }, [formData.departments]);
 
 
   return (
@@ -226,7 +226,7 @@ export default function CreateUser() {
 
 
 
-{uId&&(display) &&<Grid container alignItems="center" spacing={1} style={{ display: 'flex', justifyContent:'center', marginLeft:'1%'}}>
+{uId&&(display) &&<Grid container alignItems="center" spacing={1} style={{ display: 'flex', justifyContent:'start', margin:'2%'}}>
   <Grid item>
     <b >Want to Update a Password?</b>
   </Grid>

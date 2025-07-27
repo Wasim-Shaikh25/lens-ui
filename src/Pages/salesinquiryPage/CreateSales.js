@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getPumpSeal } from '../../apis/PumpSealApi';
-import {handleSubmit} from '../../apis/SalesInquiryApi'
+import {getSales, handleSubmit} from '../../apis/SalesInquiryApi'
 
 import {handleUpdate} from '../../apis/SalesInquiryApi'
 
@@ -37,7 +37,7 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 
 export default function CreateSales() {
   const navigate = useNavigate();
-  let { pId } = useParams();
+  let { sId } = useParams();
   const [ptOption, setptOption] = useState([]);
   const [arOption, setarOption] = useState([]);
   const [saOption, setsaOption] = useState([]);
@@ -78,9 +78,10 @@ export default function CreateSales() {
 
 
 
-  const latestItemRef = useRef(null); 
+const latestItemRef = useRef(null); 
 const fileInputRef = useRef();
 const [uploadedFileNames, setUploadedFileNames] = useState([])
+
 
 const [formData, setFormData] = useState({
   salesInquiryReferenceNo: "",
@@ -101,10 +102,10 @@ const [formData, setFormData] = useState({
 })
 
   useEffect(() => {
-    if (pId !== undefined) {
-      getPumpSeal(pId, setFormData);
+    if (sId !== undefined) {
+      getSales(sId, setFormData);
     }
-  }, [pId]);
+  }, [sId]);
 
   
 const handleFileDelete = (index) => {
@@ -112,6 +113,7 @@ const handleFileDelete = (index) => {
     newFileNames[index] = ""; // Remove file at the correct index
     setUploadedFileNames(newFileNames); // Update state
 };
+
 
   const addItem = (inquiryType) => {
     const newItemTemplates = {
@@ -358,7 +360,6 @@ const handleFileDelete = (index) => {
 
   }
 
-  // getCustomer("cust/03")
 
   const getDefaultInquiryData = (sealType) => {
     const defaultData = {
@@ -368,7 +369,7 @@ const handleFileDelete = (index) => {
         createdByUser: authState?.sub,
         updatedByUser: authState?.sub,
         sealArrangement: "",
-        sealType: sealType, // ✅ Ensure sealType is stored properly
+        sealType: sealType, 
         branch: "",
         existingSealMake: "",
         existingSealSize: "",
@@ -397,7 +398,7 @@ const handleFileDelete = (index) => {
         pumpInquiryReferenceNo: "",
         createdByUser: authState?.sub,
         updatedByUser: authState?.sub,
-        sealType: sealType, // ✅ Correctly set here
+        sealType: sealType, 
         branch: "",
         make: "",
         model: "",
@@ -514,7 +515,7 @@ const handleFileDelete = (index) => {
       RotaryJoin: {
         rotaryJointInquiryId: "",
         rotaryJointInquiryReferenceNo: "",
-        sealType: sealType, // ✅ Properly assigned
+        sealType: sealType, 
         createdByUser: authState?.sub,
         updatedByUser: authState?.sub,
         branch: "",
@@ -638,7 +639,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
       <form>
         {/* Existing Drawing Requisition Section */}
         <div className='card'>
-          {!pId ? <h1>New Sales Inquiry :</h1> : <h1>Update Sales Inquiry :</h1>}
+          {!sId ? <h1>New Sales Inquiry :</h1> : <h1>Update Sales Inquiry :</h1>}
 
           <div className="MuiBox-root css-2e6lci">
             <svg width="18" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-alert-circle">
@@ -4952,7 +4953,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
         {/* Submit/Update Buttons */}
         <Grid item xs={4}>
           <Grid item xs={4}>
-            {!pId ? (
+            {!sId ? (
               <Button
                 className="submit-btn"
                 style={{ margin: "2rem 1rem" }}
@@ -4967,7 +4968,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                   className="update-btn"
                   variant="contained"
                   type="submit"
-                  onClick={(e) => handleUpdate(e, formData, pId, navigate)}
+                  onClick={(e) => handleUpdate(e, formData, sId, navigate)}
                 >
                   Update
                 </Button>

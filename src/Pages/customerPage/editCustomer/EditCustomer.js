@@ -135,7 +135,7 @@ return (
         <TableHead className="table-header">
           <TableRow>
             <TableCell>Sr No</TableCell>
-            <TableCell align="right">Contact Detail Reference No</TableCell>
+            <TableCell align="right">Customer Contact Detail Reference No</TableCell>
             {/* <TableCell align="right">Reference Number</TableCell> */}
             <TableCell align="right">Customer Name</TableCell>
             <TableCell align="right">Contact Person</TableCell>
@@ -154,7 +154,7 @@ return (
                 <TableCell component="th" scope="row">
                   {index + 1}
                 </TableCell>
-                <TableCell align="right">{row?.customerReferenceNumber}</TableCell>
+                <TableCell align="right">{row?.contactDetailReferenceNo}</TableCell>
                 <TableCell align="right">{row.customerName}</TableCell>
                 <TableCell align="right">{row?.contactPerson}</TableCell>
                 <TableCell align="right">{row?.mobileNumber}</TableCell>

@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import '../../App.css'
 import { getAllQuotation } from '../../apis/QuotationApi';
+import { deleteDetail } from '../../apis/QuotationApi';
 
 
 
@@ -36,7 +37,7 @@ function EditQuotation() {
       const editDetail = (detail) => {
               // setEditData(detail.customerReferenceNumber);
               console.log("edit detail is ", detail.inquiryNumber);
-              navigate(`/SalesInquiry/${detail.inquiryNumber}`)
+              navigate(`/quotation/${detail.quotationId}`)
             };
             
        
@@ -56,8 +57,8 @@ function EditQuotation() {
           <TableHead className="table-header">
             <TableRow>
               <TableCell>Sr No</TableCell>
-              <TableCell align="right">Sales Inquiry Number</TableCell>
-              <TableCell align="right">Name</TableCell>
+              <TableCell align="right">Quotation Id</TableCell>
+              <TableCell align="right">Customer Name</TableCell>
               <TableCell align="right">Branch ID</TableCell>
               <TableCell align="right">Inserted On</TableCell>
               <TableCell align="right">Last Updated On</TableCell>
@@ -73,8 +74,8 @@ function EditQuotation() {
                   <TableCell component="th" scope="row">
                     {index + 1}
                   </TableCell>
-                  <TableCell align="right">{row.salesInquiryReferenceNo}</TableCell>
-                  <TableCell align="right">{row.customerName}</TableCell>
+                  <TableCell align="right">{row.quotationId}</TableCell>
+                  <TableCell align="right">{row.customer}</TableCell>
                   <TableCell align="right">{row.branch}</TableCell>
                   <TableCell align="right">{row.insertedOn}</TableCell>
                   <TableCell align="right">{row.lastUpdatedOn}</TableCell>
@@ -82,9 +83,9 @@ function EditQuotation() {
                     <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
                       <EditIcon style={{ color: 'blue' }} />
                     </button>
-                    {/* <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.inquiryNumber,data,setData, setIsDeleted)}>
+                    <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.quotationId,data,setData, setIsDeleted)}>
                       <DeleteIcon style={{ color: 'red' }} />
-                    </button> */}
+                    </button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -94,9 +95,9 @@ function EditQuotation() {
           )}
         </Table>
 
-        <hr style={{ border: '1px solid lightGray' }} />
+        {/* <hr style={{ border: '1px solid lightGray' }} /> */}
   
-        <div className="pagination-container">
+        {/* <div className="pagination-container">
           <label className="pagination-label">Items Per Page:</label>
           <select value={itemsPerPage} onChange={(e) => paginate(e.target.value)} className="pagination-select">
             <option value="5">5</option>
@@ -113,7 +114,7 @@ function EditQuotation() {
             <KeyboardDoubleArrowRightIcon style={{ height: '0.9rem', marginTop:'0.1rem' }} />
           </button>
         </div>
-        <hr style={{ border: '1px solid lightGray' }} />
+        <hr style={{ border: '1px solid lightGray' }} /> */}
       </TableContainer>
     </div>
     // </div>

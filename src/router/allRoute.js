@@ -99,6 +99,7 @@ const AllRoute = ({isSidebar}) => {
           <Route path="/reset" element={<ResetPassword />} />
           <Route path="/login" element={<Login />} />
           <Route path="/quotation" element={<CreateQuotation />} />
+          <Route path="/quotation/:qId" element={<CreateQuotation />} />
 
           <Route path="/EditQuotation" element={<EditQuotation />} />
 

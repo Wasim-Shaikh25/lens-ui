@@ -446,92 +446,16 @@ export default function AgitatorSeal() {
     }
   }
 
-  // const styles = StyleSheet.create({
-  //   page: {
-  //     flexDirection: 'column',
-  //     padding: 30,
-  //     fontFamily: 'Helvetica',
-  //   },
-  //   section: {
-  //     margin: 10,
-  //     padding: 10,
-  //     border: 1,
-  //     borderRadius: 5,
-  //   },
-  //   table: {
-  //     display: 'flex',
-  //     flexDirection: 'column',
-  //     border: '1px solid black',
-  //     marginBottom: 20,
-  //   },
-  //   tableRow: {
-  //     flexDirection: 'row',
-  //     borderBottomWidth: 1,
-  //   },
-  //   tableCellHeader: {
-  //     fontSize: 12,
-  //     fontWeight: 500,
-  //     flex: 1,
-  //     padding: 5,
-  //   },
-  //   tableCell: {
-  //     fontSize: 12,
-  //     flex: 1,
-  //     padding: 5,
-  //   },
-  //   header: {
-  //     fontSize: 18,
-  //     textAlign: 'center',
-  //     padding: 5,
-  //     borderWidth: 1,
-  //   },
-  //   title: {
-  //     fontSize: 18,
-  //     marginLeft: 20,
-  //     fontWeight: 500
-  //   },
-  //   logoImg: {
-  //     width: 40, // Set a fixed width for the logo
-  //     height: 40, // Set a fixed height for the logo
-  //   },
-  //   compDetails: {
-  //     flexDirection: 'row', // Set to row to align items horizontally
-  //     justifyContent: 'flex-start', // Align children to the start
-  //     alignItems: 'center', // Vertically center the children
-  //     marginBottom: 20,
-  //     border: '1px solid black',
-  //     padding: '10px',
-  //     marginLeft: 15,
-  //     flexWrap: 'wrap',
-  //     borderRadius: '8px',
-  //     maxWidth: '95%'
-  //   },
-  //   compSec: {
-  //     display: 'flex',
-  //     flexDirection: 'column'
-  //   },
-  //   compDesc: {
-  //     fontSize: 11,
-  //     fontWeight: 450,
-  //     marginLeft: 22,
-  //     marginTop: 6
-  //   }
-  // });
-
 
 
 
   const styles = StyleSheet.create({
     page: {
-      padding: 25,
+      padding: 20,
       fontFamily: 'Helvetica',
       fontSize: 10,
       lineHeight: 1.5,
       borderWidth: 2,
-      borderTop: 2,
-      borderBottom: 2,
-      borderRight: 2,
-      borderLeft: 2,
       borderColor: '#000',
       borderStyle: 'solid',
     },
@@ -539,7 +463,7 @@ export default function AgitatorSeal() {
     compDetails: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: 15,
+      marginBottom: 10,
       borderBottom: 1,
       paddingBottom: 10
     },
@@ -559,25 +483,34 @@ export default function AgitatorSeal() {
       fontWeight: 'bold',
     },
 
-    compDesc: {
+    subHeading:{
       fontSize: 10,
+      borderTop:1,
+      borderBottom:1,
+      fontWeight: 'bold',
+      paddingTop:5,
+      paddingLeft:5,
+      marginBottom:3
+    },
+
+    compDesc: {
+      fontSize: 9,
       color: '#333',
       width:"100%"
     },
 
     section: {
-      marginBottom: 10,
+      marginBottom: 3,
       flexDirection: 'column',
       flexWrap: 'wrap',
       wordBreak: 'break-word',
     },
 
     header: {
-      fontSize: 12,
+      fontSize: 10,
       fontWeight: "bold",
       marginBottom: 5,
       borderBottom: 1,
-      paddingLeft: 5,
       paddingBottom: 3,
       paddingTop: 4,
 
@@ -588,69 +521,82 @@ export default function AgitatorSeal() {
       borderWidth: 1,
       borderColor: '#000',
       borderStyle: 'solid',
-      marginBottom: 10,
+      marginBottom: 8,
       
     },
     tableRow: {
       flexDirection: 'row',
-      // flexWrap: 'wrap',
+      flexWrap: 'wrap', 
+      padding:4,
       marginBottom: 2
     },
 
     tableCellHeader: {
       width: '40%',
-      padding: 4,
+      // padding: 4,
       fontWeight: 'bold',
       flexWrap: 'wrap',
       wordBreak: 'break-word'
     },
      
+
     tableCell: {
       width: '60%',
       padding: 4,
-      fontSize: 9,
-      marginLeft:40,
-      flexShrink: 1,        // allow shrink
-      minWidth: 0,          // required in flex row
-      flexWrap: 'wrap',     // allow wrap
+      fontSize: 8,
+      // marginLeft:40,
+      flexShrink: 1,        
+      minWidth: 0,          
+      flexWrap: 'wrap',     
       wordBreak: 'break-word',
-      textOverflow: 'clip'  // safe fallback
+      textOverflow: 'clip'  
     },
 
     subHeader: {
-      fontSize: 11,
+      fontSize: 10,
       fontWeight: 'bold',
       marginTop: 8,
       marginBottom: 4,
       textDecoration: 'underline'
     },
 
+    sharedSplitBoxContainer: {
+      flexDirection: 'row',
+      borderWidth: 1,
+      borderColor: '#000',
+      borderStyle: 'solid',
+      width: '100%',
+      maxWidth: '100%',  
+      marginBottom: 10,
+      alignItems: 'flex-start !important', 
+
+    },
+    
     leftSplitBox: {
       width: '50%',
-      borderStyle: 'solid',
-      borderLeftWidth: 1,
-      borderTopWidth: 1,
-      borderBottomWidth: 1,
       borderRightWidth: 1,
       borderColor: '#000',
+      // padding: 4,
+      flexShrink: 1,
+      flexDirection: 'column',
+      flexWrap: 'nowrap',       
     },
-
+    
     rightSplitBox: {
       width: '50%',
-      borderStyle: 'solid',
-      borderLeftWidth: 1,
-      borderRightWidth: 1,
-      borderTopWidth: 1,
-      borderBottomWidth: 1,
-      borderColor: '#000',
+      // padding: 4,
+      flexDirection: 'column',
+      flexWrap: 'nowrap',
+      gap: 2,
+      boxSizing: 'border-box',
     },
+    
     rightTopHeading: {
       fontSize: 12,
       fontWeight: 'bold',
     }
 
   });
-
 
 
 
@@ -667,6 +613,8 @@ export default function AgitatorSeal() {
             <Text style={styles.compDesc}>Leak-Proof® Engineering Pvt. Ltd.</Text>
               </View>
         </View>
+
+        
 
 
 
@@ -695,6 +643,11 @@ export default function AgitatorSeal() {
               <Text style={styles.tableCell}>{formData.costingRequirement ? "Yes" : "No"}</Text>
             </View>
             <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>End User:</Text>
+              <Text style={styles.tableCell}>{formData.endUser}</Text>
+            </View>
+
+            <View style={styles.tableRow}>
               <Text style={styles.tableCellHeader}>Created By:</Text>
               <Text style={styles.tableCell}>{formData.createdByUser}</Text>
             </View>
@@ -705,12 +658,12 @@ export default function AgitatorSeal() {
           </View>
         </View>
 
-
-        <View style={{ flexDirection: 'row' }}>
+{/* correct section */}
+        <View style={styles.sharedSplitBoxContainer}>
 
           {/* Agitator Data */}
           <View style={styles.leftSplitBox}>
-            <Text style={styles.header}>Agitator Data</Text>
+            <View style={styles.header}> <Text style={{ marginLeft: 3 }}>Agitator Data</Text></View>
             <View style={styles.tableRow}>
               <Text style={styles.tableCellHeader}>Make:</Text>
               <Text style={styles.tableCell}>{formData.agitatorMake}</Text>
@@ -735,7 +688,7 @@ export default function AgitatorSeal() {
 
           {/* Existing Seal */}
           <View style={styles.rightSplitBox}>
-            <Text style={styles.header}>Existing Seal</Text>
+            <View style={styles.header}> <Text style={{ marginLeft: 3 }}>Existing Seal</Text></View>
             <View style={styles.tableRow}>
               <Text style={styles.tableCellHeader}>Series:</Text>
               <Text style={styles.tableCell}>{formData.existingSealSeries}</Text>
@@ -769,16 +722,19 @@ export default function AgitatorSeal() {
         </View>
 
 
-        <View style={{ flexDirection: 'row', marginTop: 20 }}>
-          <View style={styles.section}>
-            <View style={styles.table}>
-              <Text style={styles.header}>Operating Parameters And Fluid Detail</Text>
+      {/* remaining section  */}
+
+        <View style={styles.sharedSplitBoxContainer}>
+        <View style={styles.leftSplitBox}>
+
+  
+              <View style={styles.header}> <Text style={{ marginLeft: 3 }}>Operating Parameters</Text> </View>
 
               {/* Parameters */}
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Vessel Pressure </Text><Text style={styles.tableCell}>{formData.agitatorInquiryItem.vesselPressureOperating} {formData.agitatorInquiryItem.vesselPressureOperatingUnit}</Text></View>
-              <View style={styles.tableRow}>
-                <Text style={styles.tableCell}></Text>
-                </View>
+              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Vessel Pressure (Operating) </Text>
+              <Text style={styles.tableCell}>{formData.agitatorInquiryItem.vesselPressureOperating} {formData.agitatorInquiryItem.vesselPressureOperatingUnit}</Text></View>
+
+
               <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Vessel Pressure (Design)</Text><Text style={styles.tableCell}>{formData.agitatorInquiryItem.vesselPressureDesign} {formData.agitatorInquiryItem.vesselPressureDesignUnit}</Text></View>
               <View style={styles.tableRow}><Text style={styles.tableCell}></Text></View>
               <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Direction of Rotation</Text><Text style={styles.tableCell}>{formData.agitatorInquiryItem.directionOfRotation}</Text></View>
@@ -796,12 +752,13 @@ export default function AgitatorSeal() {
               <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Percentage Of Solid</Text><Text style={styles.tableCell}>{formData.agitatorInquiryItem.percentageOfSolid}</Text></View>
               <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Solid Size</Text><Text style={styles.tableCell}>{formData.agitatorInquiryItem.solidSize}</Text></View>
               <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Special Note</Text><Text style={styles.tableCell}>{formData.agitatorInquiryItem.specialNote}</Text></View>
-            </View>
+        
           </View>
 
-          <View style={styles.section}>
-            <View style={styles.table}>
-              <Text style={styles.header}>Proposed Mechanical Seal</Text>
+
+          <View style={styles.rightSplitBox}>
+
+              <View style={styles.header}> <Text style={{ marginLeft: 3 }}>Proposed Mechanical Seal</Text> </View>
 
               <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Shaft Dia</Text><Text style={styles.tableCell}>{formData.newSealShaftDia}</Text></View>
               <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Bore Dia</Text><Text style={styles.tableCell}>{formData.newSealBoreDia}</Text></View>
@@ -823,101 +780,77 @@ export default function AgitatorSeal() {
               <View style={styles.tableRow}><Text style={styles.tableCellHeader}>OB - Contact Hardware</Text><Text style={styles.tableCell}>{formData.newSealOBContactHardware}</Text></View>
               <View style={styles.tableRow}><Text style={styles.tableCellHeader}>OB - Non-Contact Hardware</Text><Text style={styles.tableCell}>{formData.newSealOBNonContactHardware}</Text></View>
             </View>
+
           </View>
 
-        </View>
 
 
-        <View style={{ flexDirection: 'row', marginTop: 10 }}>
           <View style={styles.section}>
             <View style={styles.table}>
-              <Text style={styles.header}>API Plan</Text>
+              <View style={styles.header}> <Text style={{ marginLeft: 3 }}>API Plan</Text></View>
 
               <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Flushing Plans</Text><Text style={styles.tableCell}>{formData.apiFlushingPlans}</Text></View>
               <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Barrier/Buffer Plans</Text><Text style={styles.tableCell}>{formData.apiBarrierBufferPlans}</Text></View>
               <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Atmospheric Plans</Text><Text style={styles.tableCell}>{formData.apiAtmosphericPlans}</Text></View>
               <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Collection Plans</Text><Text style={styles.tableCell}>{formData.apiCollectionPlans}</Text></View>
-            </View>
           </View>
-
-  {/* Gland Bolting */}
-  <View style={styles.section}>
-            <View style={styles.table}>
-              <Text style={styles.header}>Gland Bolting</Text>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>No. of Studs</Text><Text style={styles.tableCell}>{formData.glandBoltingNumberOfStuds}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Stud Size</Text><Text style={styles.tableCell}>{formData.glandBoltingStudSize}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Bolt Circle Diameter</Text><Text style={styles.tableCell}>{formData.glandBoltingBoltCircleDiameter}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Start Angle</Text><Text style={styles.tableCell}>{formData.glandBoltingStartAngle}</Text></View>
-            </View>
           </View>
 
 
-          {/* Connections */}
-          <View style={styles.section}>
-            <View style={styles.table}>
-              <Text style={styles.header}>Connections</Text>
-
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Flush Size</Text><Text style={styles.tableCell}>{formData.connectionFlushSize}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Flush Angle</Text><Text style={styles.tableCell}>{formData.connectionFlushAngle}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Quench Size</Text><Text style={styles.tableCell}>{formData.connectionQuenchSize}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Quench Angle</Text><Text style={styles.tableCell}>{formData.connectionQuenchAngle}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Drain Size</Text><Text style={styles.tableCell}>{formData.connectionDrainSize}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Drain Angle</Text><Text style={styles.tableCell}>{formData.connectionDrainAngle}</Text></View>
-            </View>
-          </View>
-
-          
-
-        </View>
 
 
 
-        <View style={{ flexDirection: 'row', marginTop: 10 }}>
+      {/* Fix From Here */}
 
-          {/* Left column */}
-          <View style={styles.section}>
-            <View style={styles.table}>
-              <Text style={styles.header}>Measurement (Part 1)</Text>
+       {/* Fix From Here */}
+<View style={styles.sharedSplitBoxContainer}>
+  {/* Left column - Measurement */}
+  <View style={styles.leftSplitBox}>
+    <View style={styles.header}><Text style={{ marginLeft: 3 }}>Measurement</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Type</Text><Text style={styles.tableCell}>{formData.measurementTypeOfPadPlate}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Shaft OD</Text><Text style={styles.tableCell}>{formData.measurementShaftOd}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Pad Plate ID</Text><Text style={styles.tableCell}>{formData.measurementPadPlateId}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Nearest Obstruction</Text><Text style={styles.tableCell}>{formData.measurementNearestObstruction}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Spigot Dia</Text><Text style={styles.tableCell}>{formData.measurementSpigotDia}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Socket Depth</Text><Text style={styles.tableCell}>{formData.measurementSocketDepth}</Text></View>
 
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Type</Text><Text style={styles.tableCell}>{formData.measurementTypeOfPadPlate}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Shaft OD</Text><Text style={styles.tableCell}>{formData.measurementShaftOd}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Pad Plate ID</Text><Text style={styles.tableCell}>{formData.measurementPadPlateId}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Nearest Obstruction</Text><Text style={styles.tableCell}>{formData.measurementNearestObstruction}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Spigot Dia</Text><Text style={styles.tableCell}>{formData.measurementSpigotDia}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Socket Depth</Text><Text style={styles.tableCell}>{formData.measurementSocketDepth}</Text></View>
-            </View>
-          </View>
+    <Text style={styles.subHeading}>Other Dimensions</Text>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Shaft Dia D1</Text><Text style={styles.tableCell}>{formData.measurementShaftDiaD1}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Shaft Dia D2</Text><Text style={styles.tableCell}>{formData.measurementShaftDiaD2}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Shaft Step Distance L1</Text><Text style={styles.tableCell}>{formData.measurementShaftStepDistanceL1}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Distance Between Steps L2</Text><Text style={styles.tableCell}>{formData.measurementDistanceBetweenStepsL2}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Pad Plate Thickness T</Text><Text style={styles.tableCell}>{formData.measurementPadPlateThicknessT}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Radius R</Text><Text style={styles.tableCell}>{formData.measurementRadiusR}</Text></View>
+  </View>
 
+  {/* Right column - Gland Bolting */}
+  <View style={styles.rightSplitBox}>
+    <View style={styles.header}><Text style={{ marginLeft: 3 }}>Gland Bolting</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>No. of Studs</Text><Text style={styles.tableCell}>{formData.glandBoltingNumberOfStuds}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Stud Size</Text><Text style={styles.tableCell}>{formData.glandBoltingStudSize}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Bolt Circle Diameter</Text><Text style={styles.tableCell}>{formData.glandBoltingBoltCircleDiameter}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Start Angle</Text><Text style={styles.tableCell}>{formData.glandBoltingStartAngle}</Text></View>
 
-          {/* Right column */}
-          <View style={styles.section}>
-            <View style={styles.table}>
-              <Text style={styles.header}>Measurement (Part 2)</Text>
+    <Text style={styles.subHeading}>Connections</Text>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Flush Size</Text><Text style={styles.tableCell}>{formData.connectionFlushSize}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Flush Angle</Text><Text style={styles.tableCell}>{formData.connectionFlushAngle}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Quench Size</Text><Text style={styles.tableCell}>{formData.connectionQuenchSize}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Quench Angle</Text><Text style={styles.tableCell}>{formData.connectionQuenchAngle}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Drain Size</Text><Text style={styles.tableCell}>{formData.connectionDrainSize}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Drain Angle</Text><Text style={styles.tableCell}>{formData.connectionDrainAngle}</Text></View>
+  </View>
+</View>
 
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Shaft Dia D1</Text><Text style={styles.tableCell}>{formData.measurementShaftDiaD1}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Shaft Dia D2</Text><Text style={styles.tableCell}>{formData.measurementShaftDiaD2}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Shaft Step Distance L1</Text><Text style={styles.tableCell}>{formData.measurementShaftStepDistanceL1}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Distance Between Steps L2</Text><Text style={styles.tableCell}>{formData.measurementDistanceBetweenStepsL2}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Pad Plate Thickness T</Text><Text style={styles.tableCell}>{formData.measurementPadPlateThicknessT}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Radius R</Text><Text style={styles.tableCell}>{formData.measurementRadiusR}</Text></View>
-            </View>
-          </View>
-
-        </View>
-
-
-        <View style={{ flexDirection: 'row', marginTop: 10 }}>
-        <View style={styles.section}>
-            <View style={styles.table}>
-              <Text style={styles.header}>Other Details</Text>
-
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Accessories</Text><Text style={styles.tableCell}>{formData.otherDetailsAccessories}</Text></View>
-              <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Remarks</Text><Text style={styles.tableCell}>{formData.otherDetailsRemarks}</Text></View>
-            </View>
-          </View>
+{/* Other Details - full width section */}
+<View style={styles.section}>
+  <View style={styles.table}>
+    <View style={styles.header}><Text style={{ marginLeft: 3 }}>Other Details</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Accessories</Text><Text style={styles.tableCell}>{formData.otherDetailsAccessories}</Text></View>
+    <View style={styles.tableRow}><Text style={styles.tableCellHeader}>Remarks</Text><Text style={styles.tableCell}>{formData.otherDetailsRemarks}</Text></View>
+  </View>
+</View>
         
 
-        </View>
 
 
 

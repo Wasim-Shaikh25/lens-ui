@@ -75,7 +75,7 @@ import moment from "moment";
   //get One
 
 export const getApi = (aId,setFormData)=>{
-    axiosInstance.get(`lens/agitatorSeal/get?agitatorSealDrfNumber=${aId}`)
+    axiosInstance.get(`lens/agitatorSeal/get?pumpSealReferenceNo=${aId}`)
     .then(res=>{
       const {data} = res;
         setFormData(data);
