@@ -91,7 +91,7 @@
       const res = await axiosInstance.post(`user/createUser`, formData);
       const { data } = res;
       console.log("response Data ", data);
-      // navigate('/user');
+      navigate(`/CreateUser/${formData.empId}`);
     } catch (err) {
       console.log(err);
     }
@@ -104,6 +104,9 @@
       try{
         const res = await axiosInstance.get(`user/getUser?empId=${uId}`);
         const{data} = res;
+        if(!data.departments.length){
+          data.departments[0].departmentName="";
+        }
         setFormData(data);
         console.log("single user data is ",data)
       }

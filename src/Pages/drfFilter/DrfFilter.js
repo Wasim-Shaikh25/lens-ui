@@ -195,7 +195,7 @@ return (
                 <TableCell align="right">{row?.shaftSize}</TableCell>
                 <TableCell align="right">{row?.createdOn}</TableCell>
                 <TableCell align="right">{row?.createdBy}</TableCell>
-                <TableCell align="right">{row?.lastUpdated}</TableCell>
+                <TableCell align="right">{row?.updatedOn}</TableCell>
                 <TableCell align="right">{row?.lastUpdateBy}</TableCell>
                 <TableCell align="right">
                   <button onClick={() => editDetail(row?.drfNumber)} 

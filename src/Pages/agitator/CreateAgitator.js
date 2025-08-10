@@ -2742,7 +2742,7 @@ export default function AgitatorSeal() {
             <div className="MuiBox-root css-1isemmb">Attachments</div>
           </div>
 
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "1rem" }}>
 
               {/* Hidden File Input */}
@@ -3083,7 +3083,7 @@ export default function AgitatorSeal() {
 
             {!aId ? (<Button className="submit-btn" type="submit" onClick={(e) => handleSubmit(e, formData, navigate)} variant="contained" >Submit</Button>) : (
               <>
-                <Button className="update-btn" variant="contained" onClick={(e) => handleUpdate(e, formData, navigate, aId)} >Update</Button>
+                <Button className="update-btn" variant="contained" disabled={authState?.sub !== formData.createdByUser } onClick={(e) => handleUpdate(e, formData, navigate, aId)} >Update</Button>
                 <Button className="cancel-btn" variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
           <Grid item xs={4} style={{ margin: '12px 0px 0px 20px' }}>

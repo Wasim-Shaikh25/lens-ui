@@ -3049,7 +3049,7 @@ console.log("formData is ",formData)
 
             {!apId ? (<Button className="submit-btn" type="submit" onClick={(e) => handleSubmit(e, formData, navigate)} variant="contained" >Submit</Button>) : (
               <>
-                <Button className="update-btn" variant="contained" onClick={(e) => handleUpdate(e, formData, navigate, apId)} >Update</Button>
+                <Button className="update-btn" variant="contained" disabled={authState?.sub !== formData.createdByUser } onClick={(e) => handleUpdate(e, formData, navigate, apId)} >Update</Button>
                 <Button className="cancel-btn" variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
           <Grid item xs={4} style={{ margin: '12px 0px 0px 20px' }}>

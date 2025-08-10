@@ -1308,10 +1308,10 @@ try {
 
   console.log("File Upload Response:", data);
 
-  // ✅ Update `uploadedFileNames` at the correct index
+  // Update `uploadedFileNames` at the correct index
   setDrInput(data);
 
-  // ✅ Update `rotaryJointInquiries[index]` with the new filename
+  // Update `rotaryJointInquiries[index]` with the new filename
   setFormData((prev) => ({
     ...prev,
     rotaryJointInquiryItem:{
@@ -1346,7 +1346,7 @@ onClick={() => drRef.current.click()} // Trigger file input
 >
 <AttachFileIcon style={{ fontSize: "16px" }} /> Reference Mechanical seal Drawing 
 </button>
-{(formData?.rotaryJointInquiryItem?.referenceDrawing &&drInput) || (formData?.rotaryJointInquiryItem?.referenceDrawing && rjId) ? (
+{(formData?.rotaryJointInquiryItem?.referenceDrawing || drInput) || (formData?.rotaryJointInquiryItem?.referenceDrawing && rjId) ? (
 <button
 type="button"
 style={{
@@ -1445,7 +1445,7 @@ try {
 
         {!rjId ? (<Button className="submit-btn" type="submit" style={{ margin: "20px" }} onClick={(e) => handleSubmit(e, formData, navigate)} variant="contained" >Submit</Button>) : (
           <>
-            <Button className="update-btn" variant="contained" onClick={(e) => handleUpdate(e, formData, rjId, navigate)} >Update</Button>
+            <Button className="update-btn" variant="contained" onClick={(e) => handleUpdate(e, formData, rjId, navigate)} disabled={authState?.sub !== formData.createdByUser }>Update</Button>
             <Button className="cancel-btn" variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
       </Grid>
     </Grid>

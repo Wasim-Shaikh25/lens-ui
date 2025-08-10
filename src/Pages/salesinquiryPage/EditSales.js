@@ -40,11 +40,12 @@ export default function EditSales() {
     }, [currentPage, itemsPerPage]);
     
 
+    console.log("Data List is ",data)
   
     const editDetail = (detail) => {
-            console.log("edit detail is ", detail.salesInquiryReferenceNo);
+            console.log("edit detail is ", detail.salesInquiryItemReferenceNo);
 
-            navigate(`/SalesInquiry/${encodeURIComponent(detail.salesInquiryReferenceNo)}`)
+            navigate(`/SalesInquiry/${encodeURIComponent(detail.salesInquiryItemReferenceNo)}`)
           };
           
      
@@ -122,8 +123,7 @@ return (
       <Table sx={{ minWidth: 500 }} aria-label="customized table">
         <TableHead className="table-header">
           <TableRow>
-            <TableCell>Sr No</TableCell>
-            <TableCell align="right">Sales Inquiry Number</TableCell>
+            <TableCell align="right">Sales Inquiry Item Reference Number</TableCell>
             <TableCell align="right">Customer Name</TableCell>
             <TableCell align="right">Industry</TableCell>
             <TableCell align="right">Branch</TableCell>
@@ -139,17 +139,14 @@ return (
         {data?.length ? (
           <TableBody>
             {data?.map((row, index) => (
-              <TableRow key={index} className="table-row">
-                <TableCell component="th" scope="row">
-                  {index + 1}
-                </TableCell>
-                <TableCell align="right">{row?.salesInquiryReferenceNo}</TableCell>
+              <TableRow key={index} className="table-row">            
+                <TableCell align="right">{row?.salesInquiryItemReferenceNo}</TableCell>
                 <TableCell align="right">{row?.customerName}</TableCell>
                 <TableCell align="right">{row?.industry}</TableCell>
                 <TableCell align="right">{row?.branch}</TableCell>
-                <TableCell align="right">{row?.createdBy}</TableCell>
+                <TableCell align="right">{row?.createdByUser}</TableCell>
                 <TableCell align="right">{row?.createdOn}</TableCell>
-                <TableCell align="right">{row?.updatedBy}</TableCell>
+                <TableCell align="right">{row?.updatedByUser}</TableCell>
                 <TableCell align="right">{row?.updatedOn}</TableCell>
                 <TableCell align="right">
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>

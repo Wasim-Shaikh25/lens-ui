@@ -83,7 +83,7 @@ const fileInputRef = useRef();
 const [uploadedFileNames, setUploadedFileNames] = useState([])
 
 
-const [formData, setFormData] = useState({
+const defaultFormData = {
   salesInquiryReferenceNo: "",
   customerReferenceNo: "",
   customerName: "",
@@ -99,14 +99,20 @@ const [formData, setFormData] = useState({
   agitatorInquiries: [],
   apiPlanInquiries: [],
   rotaryJointInquiries: []
-})
+};
+
+const [formData, setFormData] = useState(defaultFormData)
 
   useEffect(() => {
     if (sId !== undefined) {
-      getSales(sId, setFormData);
+      getSales(sId, setFormData,defaultFormData);
+    }
+    else{
+      setFormData(defaultFormData)
     }
   }, [sId]);
 
+  console.log("Updated FormData ",formData)
   
 const handleFileDelete = (index) => {
     const newFileNames = [...uploadedFileNames]; // Copy existing state
@@ -337,6 +343,8 @@ const handleFileDelete = (index) => {
       [inquiryType]: [...prevData[inquiryType], newItemTemplates[inquiryType]],
     }));
   };
+
+
 
 
   const handleFetch=async(custId)=>{
@@ -659,12 +667,12 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                 size="small"
                 className="custom-text-field"
                 label="Sales Inquiry Reference No."
-                value={formData.salesInquiryRef}
+                value={formData.salesInquiryReferenceNo}
                 id="disableItem"
                 InputLabelProps={{
-                  shrink: Boolean(formData.salesInquiryRef),
+                  shrink: Boolean(formData.salesInquiryReferenceNo),
                 }}
-                autoFocus={formData.salesInquiryRef} 
+                autoFocus={formData.salesInquiryReferenceNo} 
                 InputProps={{
                   readOnly: true, // Read-only for auto-generated field
                 }}
@@ -679,8 +687,8 @@ const handleChange = (arrayName = null, index = null) => (event) => {
     size="small"
     className="custom-text-field"
     label="Customer Reference No."
-    name="customerRef"
-    value={formData.customerRef}
+    name="customerReferenceNo"
+    value={formData.customerReferenceNo}
     onChange={handleFieldChange}
     required
     fullWidth
@@ -700,8 +708,8 @@ const handleChange = (arrayName = null, index = null) => (event) => {
             marginRight: "-8px", // Keeps button inside the border
             cursor:"pointer"
           }}
-          disabled={!formData.customerRef}
-          onClick={()=>handleFetch(formData?.customerRef)} // Your function here
+          disabled={!formData.customerReferenceNo}
+          onClick={()=>handleFetch(formData?.customerReferenceNo)} // Your function here
         >
           Fetch
         </Button>
@@ -993,9 +1001,9 @@ const handleChange = (arrayName = null, index = null) => (event) => {
      
   {Object.keys(inquiryTypes).map((typeKey) => {
     const inquiryKey = inquiryTypes[typeKey]; // Define inquiryKey properly
-
+    if (Array.isArray(formData[inquiryKey]) && formData[inquiryKey].length > 0){
     return formData[inquiryKey]?.map((item, index) => (
-      item?.sealType ? (
+  
         <div 
           key={`${typeKey}-${index}`} 
           style={{ 
@@ -1598,8 +1606,8 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                       <MenuItem value="" disabled>
                         Unit
                       </MenuItem>
-                      <MenuItem value="℃">℃ </MenuItem>
-                      <MenuItem value="℉">℉</MenuItem>
+                      <MenuItem value="C">℃ </MenuItem>
+                      <MenuItem value="F">℉</MenuItem>
                     </Select>
                   </FormControl>
                 </InputAdornment>
@@ -1675,8 +1683,8 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                       <MenuItem value="" disabled>
                         Unit
                       </MenuItem>
-                      <MenuItem value="℃">℃ </MenuItem>
-                      <MenuItem value="℉">℉</MenuItem>
+                      <MenuItem value="C">℃ </MenuItem>
+                      <MenuItem value="F">℉</MenuItem>
                     </Select>
                   </FormControl>
                 </InputAdornment>
@@ -1776,7 +1784,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                   <TextField
                     label="Special Note"
                     name="specialNote"
-                    value={formData.agitatorInquiries?.specialNote}
+                    value={item?.specialNote}
                     onChange={handleChange("agitatorInquiries",index)}
                     fullWidth
                     size="small"
@@ -2708,8 +2716,8 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                       }}
                     >
                       {!item?.pumpingTemperature?.value && <MenuItem>Unit</MenuItem>}
-                      <MenuItem value="℃">℃</MenuItem>
-                      <MenuItem value="℉">℉</MenuItem>
+                      <MenuItem value="C">℃</MenuItem>
+                      <MenuItem value="F">℉</MenuItem>
                     </Select>
                   </FormControl>
                 </InputAdornment>
@@ -2782,8 +2790,8 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                       }}
                     >
                       {!item?.maximumTemperature?.value && <MenuItem>Unit</MenuItem>}
-                      <MenuItem value="℃">℃</MenuItem>
-                      <MenuItem value="℉">℉</MenuItem>
+                      <MenuItem value="C">℃</MenuItem>
+                      <MenuItem value="F">℉</MenuItem>
                     </Select>
                   </FormControl>
                 </InputAdornment>
@@ -2940,7 +2948,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
             <TextField
               label="Sales Inquiry Item Reference No."
               name="salesInquiryRefNo"
-              value={item.salesInquiryRefNo}
+              value={item?.apiPlanInquiryReferenceNo}
               fullWidth
               disabled
               size="small"
@@ -4885,9 +4893,10 @@ const handleChange = (arrayName = null, index = null) => (event) => {
             <DeleteIcon />
           </IconButton>
         </div>
-        ):null
-        ));
+        
+        ));}
       })}
+    
      <Autocomplete
         size="small"
         value={newSealType}

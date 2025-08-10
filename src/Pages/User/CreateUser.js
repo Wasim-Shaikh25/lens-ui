@@ -226,7 +226,7 @@ export default function CreateUser() {
 
 
 
-{uId&&(display) &&<Grid container alignItems="center" spacing={1} style={{ display: 'flex', justifyContent:'start', margin:'2%'}}>
+{uId&&<Grid container alignItems="center" spacing={1} style={{ display: 'flex', justifyContent:'start', margin:'2%'}}>
   <Grid item>
     <b >Want to Update a Password?</b>
   </Grid>
@@ -319,7 +319,7 @@ export default function CreateUser() {
         departments: updatedDepartments
       });
     }}
-    options={departments.map((d) => d.departmentName)}
+    options={departments.map((d) => d?.departmentName)}
     getOptionLabel={(option) => (typeof option === 'string' ? option : option.departmentName || '')}
     onFocus={() => getDepartments(setDepartments)}
     renderInput={(params) => (

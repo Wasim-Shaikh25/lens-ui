@@ -10,7 +10,8 @@ export const searchDrfFilter = async ( branch, customerName, drfNumber, currentP
       let url = `lens/filter?`;
       if (branch) url += `branch=${branch}&`;
       if (customerName) url += `customerName=${customerName}&`;
-      if (drfNumber) url += `drfNumbererenceNumber=${drfNumber}&`;
+      if (drfNumber) url += 
+      `drfNumber=${drfNumber}&`;
       url += `pageNo=${currentPage}&pageSize=${itemsPerPage}`;
   
       console.log("URL is :", url); // Log the constructed URL
