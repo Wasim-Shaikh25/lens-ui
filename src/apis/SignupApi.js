@@ -105,7 +105,7 @@
         const res = await axiosInstance.get(`user/getUser?empId=${uId}`);
         const{data} = res;
         if(!data.departments.length){
-          data.departments[0].departmentName="";
+          data.departments[0]={departmentName:""};
         }
         setFormData(data);
         console.log("single user data is ",data)

@@ -5,7 +5,6 @@ export const getPumpSeal = async (pId, setFormData) => {
     const response = await axiosInstance.get(`/lens/pumpseal/get?pumpSealReferenceNo=${pId}`);
     console.log("single pump is ",response.data);
     setFormData(response.data);
-    return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Error loading data');
   }
@@ -16,10 +15,11 @@ export const handleSubmit = async (e, formData, navigate) => {
   try {
     e.preventDefault();
     const response = await axiosInstance.post('/lens/pumSeal/save', formData);
-    // navigate('/');
+    
     console.log("response is ",response.data)
-    navigate(`/editDrf`);
-    return response.data;
+
+    navigate(`/createPump/${encodeURIComponent(response?.data[0]?.referenceValue)}`);
+  
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Error submitting form');
   }

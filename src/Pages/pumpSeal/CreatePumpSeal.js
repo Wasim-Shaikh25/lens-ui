@@ -25,6 +25,9 @@ import moment from 'moment';
 import axiosInstance from '../../axios/axiosInstance';
 import DownloadIcon from '@mui/icons-material/Download';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
+import { PDFDownloadLink,Document, Page, Text, View, Image, StyleSheet } from '@react-pdf/renderer';
+import SaveIcon from '@mui/icons-material/Save';
+import Logo from '../../assets/Picture1.png'
 
 
 
@@ -231,10 +234,275 @@ const handleFileDelete = (fieldName)=>{
 
   useEffect(() => {
     if (pId !== undefined) {
-      console.log("pId is ",pId);
       getPumpSeal(pId, setFormData);
     }
   }, [pId]);
+
+
+  const styles = StyleSheet.create({
+    page: {
+      padding: 20,
+      fontFamily: 'Helvetica',
+      fontSize: 10,
+      lineHeight: 1.5,
+      borderWidth: 2,
+      borderColor: '#000',
+      borderStyle: 'solid',
+    },
+
+    compDetails: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 10,
+      borderBottom: 1,
+      paddingBottom: 10
+    },
+
+    logoImg: {
+      width: 50,
+      height: 50,
+      marginRight: 14
+    },
+
+    compSec: {
+      flexDirection: 'column'
+    },
+    
+    title: {
+      fontSize: 14,
+      fontWeight: 'bold',
+    },
+
+    subHeading:{
+      fontSize: 10,
+      borderTop:1,
+      borderBottom:1,
+      fontWeight: 'bold',
+      paddingTop:5,
+      paddingLeft:5,
+      marginBottom:3
+    },
+
+    compDesc: {
+      fontSize: 9,
+      color: '#333',
+      width:"100%"
+    },
+
+    section: {
+      marginBottom: 3,
+      flexDirection: 'column',
+      flexWrap: 'wrap',
+      wordBreak: 'break-word',
+    },
+
+    header: {
+      fontSize: 10,
+      fontWeight: "bold",
+      marginBottom: 5,
+      borderBottom: 1,
+      paddingBottom: 3,
+      paddingTop: 4,
+
+    },
+    table: {
+      display: 'table',
+      width: '100%',
+      borderWidth: 1,
+      borderColor: '#000',
+      borderStyle: 'solid',
+      marginBottom: 8,
+      
+    },
+    tableRow: {
+      flexDirection: 'row',
+      flexWrap: 'wrap', 
+      padding:4,
+      marginBottom: 1
+    },
+
+    tableCellHeader: {
+      width: '40%',
+      // padding: 4,
+      fontWeight: 'bold',
+      flexWrap: 'wrap',
+      wordBreak: 'break-word'
+    },
+     
+
+    tableCell: {
+      width: '60%',
+      padding: 4,
+      fontSize: 8,
+      // marginLeft:40,
+      flexShrink: 1,        
+      minWidth: 0,          
+      flexWrap: 'wrap',     
+      wordBreak: 'break-word',
+      textOverflow: 'clip'  
+    },
+
+    subHeader: {
+      fontSize: 10,
+      fontWeight: 'bold',
+      marginTop: 8,
+      marginBottom: 4,
+      textDecoration: 'underline'
+    },
+
+    sharedSplitBoxContainer: {
+      flexDirection: 'row',
+      borderWidth: 1,
+      borderColor: '#000',
+      borderStyle: 'solid',
+      width: '100%',
+      maxWidth: '100%',  
+      marginBottom: 10,
+      alignItems: 'flex-start !important', 
+
+    },
+    
+    leftSplitBox: {
+      width: '50%',
+      borderRightWidth: 1,
+      borderColor: '#000',
+      // padding: 4,
+      flexShrink: 1,
+      flexDirection: 'column',
+      flexWrap: 'nowrap',       
+    },
+    
+    rightSplitBox: {
+      width: '50%',
+      // padding: 4,
+      flexDirection: 'column',
+      flexWrap: 'nowrap',
+      gap: 2,
+      boxSizing: 'border-box',
+    },
+    
+    rightTopHeading: {
+      fontSize: 12,
+      fontWeight: 'bold',
+    }
+
+  });
+
+
+
+  const Row = ({ label, value }) => (
+    <View style={styles.tableRow}>
+      <Text style={styles.tableCellHeader}>{label}</Text>
+      <Text style={styles.tableCell}>{value || "-"}</Text>
+    </View>
+  );
+
+
+  
+  const PDFFile = ({ formData }) => (
+    <Document>
+      <Page size="A4" style={styles.page}>
+        <View style={styles.compDetails}>
+          <Image src={Logo} style={styles.logoImg} />
+          <View style={styles.compSec}>
+            <Text style={styles.title}>Mechanical Seal DRF</Text>
+            <Text style={styles.compDesc}>Generated Report</Text>
+          </View>
+        </View>
+  
+  
+        <View style={styles.section}>
+        
+          <View style={styles.table}>
+            <Row label="DRF Number" value={formData.drfNumber} />
+            <Row label="Branch" value={formData.branch} />
+            <Row label="Sales Inquiry Ref No" value={formData.salesInquiryItemReferenceNo} />
+            <Row label="Created By" value={formData.createdByUser} />
+            <Row label="Created On" value={formData.createdOn} />
+            <Row label="Updated By" value={formData.updatedByUser} />
+            <Row label="Updated On" value={formData.updatedOn} />
+            <Row label="Customer Name" value={formData.customerName} />
+            <Row label="End User" value={formData.endUser} />
+            <Row label="Costing Requirement" value={formData.costingRequirement} />
+          </View>
+        </View>
+
+        <View style={styles.sharedSplitBoxContainer}>
+          <View style={styles.leftSplitBox}>
+            <Text style={styles.subHeading}>Pump Data</Text>
+            <Row label="Make" value={formData.pumpInquiryItem.make} />
+            <Row label="Model" value={formData.pumpInquiryItem.model} />
+            <Row label="Pump MOC" value={formData.pumpInquiryItem.pumpMOC} />
+            <Row label="Impeller/Casing MOC" value={formData.pumpInquiryItem.impellerCasingMOC} />
+            <Row label="Shaft MOC" value={formData.pumpInquiryItem.shaftMOC} />
+            <Row label="Bearing BKT" value={formData.pumpInquiryItem.bearingBKT} />
+            <Row label="Tag Number" value={formData.pumpInquiryItem.tagNumber} />
+            <Row label="Arrangement" value={formData.pumpInquiryItem.arrangement} />
+            <Row label="Pump Type" value={formData.pumpInquiryItem.pumpType} />
+            <Row label="Stage" value={formData.pumpInquiryItem.stage} />
+            <Row label="Casing Type" value={formData.pumpInquiryItem.casingType} />
+          </View>
+  
+          <View style={styles.rightSplitBox}>
+            <Text style={styles.subHeading}>Existing Seal</Text>
+            <Row label="Series" value={formData.existingSealSeries} />
+            <Row label="Performance" value={formData.pumpInquiryItem.performance} />
+            <Row label="Seal Arrangement" value={formData.pumpInquiryItem.sealArrangement} />
+            <Row label="Make" value={formData.pumpInquiryItem.existingSealMake} />
+            <Row label="Size" value={formData.pumpInquiryItem.existingSealSize} />
+            <Row label="MOC" value={formData.pumpInquiryItem.existingSealMOC} />
+            <Row label="API Plan" value={formData.pumpInquiryItem.existingSealApiPlan} />
+          </View>
+        </View>
+  
+       <View style={styles.sharedSplitBoxContainer}>
+          <View style={styles.leftSplitBox}>
+            <Text style={styles.sectionHeader}>Operating Parameters & Fluid</Text>
+            <Text>Pressure: {formData.pressure}</Text>
+            <Text>Temperature: {formData.temperature}</Text>
+            <Text>Fluid: {formData.fluid}</Text>
+          </View>
+          <View style={styles.rightSplitBox}>
+            <Text style={styles.sectionHeader}>Proposed Mechanical Seal</Text>
+            <Text>Seal Type: {formData.sealType}</Text>
+            <Text>Material: {formData.material}</Text>
+            <Text>Size: {formData.size}</Text>
+          </View>
+        </View>
+
+        <View style={{ borderWidth: 1, borderColor: "#000", marginBottom: 6 }}>
+          <Text style={styles.sectionHeader}>API Plan</Text>
+          <Text style={{ padding: 4 }}>{formData.apiPlan}</Text>
+        </View>
+
+        <View style={{ borderWidth: 1, borderColor: "#000" }}>
+          <Text style={styles.sectionHeader}>Measurement</Text>
+
+          <View style={styles.tableHeader}>
+            <Text style={styles.tableHeaderCell}>Parameter</Text>
+            <Text style={styles.tableHeaderLastCell}>Value</Text>
+          </View>
+
+          {formData?.measurements?.map((m, idx) => (
+            <View style={styles.row} key={idx}>
+              <Text style={styles.cell}>{m.parameter}</Text>
+              <Text style={styles.lastCell}>{m.value}</Text>
+            </View>
+          ))}
+        </View>
+
+  
+        <View style={styles.section}>
+          <Text style={styles.subHeading}>Other Details</Text>
+          <View style={styles.table}>
+            <Row label="Accessories" value={formData.otherDetailsAccessories} />
+            <Row label="Remarks" value={formData.otherDetailsRemarks} />
+          </View>
+        </View>
+      </Page>
+    </Document>
+  );
+  
 
 
 
@@ -390,19 +658,9 @@ console.log("FormData is ",formData);
         {/* Existing Drawing Requisition Section */}
         <div className='card'>
           {!pId ? <h1>New Pump Seal :</h1> : <h1>Update Pump Seal :</h1>}
-          <div className="MuiBox-root css-2e6lci">
-            <svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-alert-circle">
-              <g>
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-              </g>
-            </svg>
-            <div className="MuiBox-root css-1isemmb">Drawing Requisition - Pump Seal :-</div>
-          </div>
-          <hr />
+         
           {/* Your existing Drawing Requisition form fields */}
-          <Grid container spacing={2}>
+          <Grid container spacing={2} styles={{marginTop:'1rem'}}>
            <Grid item xs={4}>
             
               <TextField
@@ -2840,7 +3098,7 @@ console.log("FormData is ",formData);
         </div>
 
         {/* Submit/Update Buttons */}
-        <Grid item xs={4}>
+        <Grid item xs={4} style={{display:"flex"}}>
           <Grid item xs={4}>
             {!pId ? (
               <Button
@@ -2873,6 +3131,23 @@ console.log("FormData is ",formData);
               </>
             )}
           </Grid>
+          <Grid item xs={4} style={{margin:'12px 0px 0px 12px'}}>
+  <PDFDownloadLink document={<PDFFile formData={formData} />} fileName="PumpSeal.pdf">
+    {({ loading }) => (
+      <Button
+        variant="contained"
+        startIcon={<SaveIcon />}
+        style={{
+          backgroundColor: '#ff6d6d',
+          color: 'white',
+          textDecoration: 'none',
+          cursor: 'pointer',
+        }}>
+        {loading ? 'Loading document...' : 'Download PDF'}
+      </Button>
+    )}
+  </PDFDownloadLink>
+</Grid>
         </Grid>
       </form>
     </Container>

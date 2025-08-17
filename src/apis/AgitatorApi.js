@@ -42,7 +42,7 @@ import moment from "moment";
           const res = await axiosInstance.post(`lens/agitatorSeal/save`, formData);
         console.log("response is ",res.data);
 
-        navigate(`/editDrf`);
+        navigate(`/createAgitator/${encodeURIComponent(res?.data[0]?.referenceValue)}`);
       }  
       catch(err){
         console.log(err)

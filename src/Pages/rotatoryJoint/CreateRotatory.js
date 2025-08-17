@@ -8,6 +8,11 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import axiosInstance from '../../axios/axiosInstance';
 import DownloadIcon from '@mui/icons-material/Download';
 import { useRef } from 'react';
+import { PDFDownloadLink,Document, Page, Text, View, Image, StyleSheet } from '@react-pdf/renderer';
+import SaveIcon from '@mui/icons-material/Save';
+import Logo from '../../assets/Picture1.png'
+
+
 
 
 
@@ -187,6 +192,306 @@ export default function CreateRotatory() {
     value: '',
     unit: '',
   });
+
+
+  const styles = StyleSheet.create({
+    page: {
+      padding: 20,
+      fontFamily: 'Helvetica',
+      fontSize: 10,
+      lineHeight: 1.5,
+      borderWidth: 2,
+      borderColor: '#000',
+      borderStyle: 'solid',
+    },
+  
+    compDetails: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 10,
+      borderBottom: 1,
+      paddingBottom: 10
+    },
+  
+    logoImg: {
+      width: 50,
+      height: 50,
+      marginRight: 14
+    },
+  
+    compSec: {
+      flexDirection: 'column'
+    },
+    
+    title: {
+      fontSize: 14,
+      fontWeight: 'bold',
+    },
+  
+    subHeading:{
+      fontSize: 9,
+      borderTop:1,
+      borderLeft:0.5,
+      borderRight:1,
+      marginBottom:-1,  
+      fontWeight: 'bold',
+      paddingTop:5,
+      paddingLeft:5,
+    },
+  
+    compDesc: {
+      fontSize: 9,
+      color: '#333',
+      width:"100%"
+    },
+  
+    section: {
+      marginBottom: 3,
+      flexDirection: 'column',
+      flexWrap: 'wrap',
+      wordBreak: 'break-word',
+    },
+  
+    header: {
+      fontSize: 10,
+      fontWeight: "bold",
+      marginBottom: 5,
+      paddingLeft: 4,
+      borderBottom: 1,
+      paddingBottom: 3,
+      paddingTop: 4,
+    },
+    table: {
+      display: 'table',
+      width: '100%',
+      borderWidth: 1,
+      borderColor: '#000',
+      borderStyle: 'solid',
+      marginBottom: 8,
+      
+    },
+    tableRow: {
+      flexDirection: 'row',
+      flexWrap: 'wrap', 
+      padding:4,
+      marginBottom: 1
+    },
+  
+    tableCellHeader: {
+      width: '40%',
+      fontWeight: 'bold',
+      flexWrap: 'wrap',
+      wordBreak: 'break-word',
+      fontSize: 9,
+    },
+     
+  
+    tableCell: {
+      width: '60%',
+      padding: 4,
+      fontSize: 8,
+      // marginLeft:40,
+      flexShrink: 1,        
+      minWidth: 0,          
+      flexWrap: 'wrap',     
+      wordBreak: 'break-word',
+      textOverflow: 'clip'  
+    },
+  
+    subHeader: {
+      fontSize: 10,
+      fontWeight: 'bold',
+      marginTop: 8,
+      marginBottom: 4,
+      borderWidth:1 
+    },
+  
+    sharedSplitBoxContainer: {
+      flexDirection: 'row',
+      borderWidth: 1,
+      borderColor: '#000',
+      borderStyle: 'solid',
+      width: '100%',
+      maxWidth: '100%',  
+      marginBottom: 10,
+      alignItems: 'flex-start !important', 
+  
+    },
+    
+    leftSplitBox: {
+      width: '50%',
+      borderRightWidth: 1,
+      borderColor: '#000',
+      // padding: 4,
+      flexShrink: 1,
+      flexDirection: 'column',
+      flexWrap: 'nowrap',       
+    },
+    
+    rightSplitBox: {
+      width: '50%',
+      // padding: 4,
+      flexDirection: 'column',
+      flexWrap: 'nowrap',
+      gap: 2,
+      boxSizing: 'border-box',
+    },
+    
+    rightTopHeading: {
+      fontSize: 12,
+      fontWeight: 'bold',
+    }
+  
+  });
+
+
+const PDFFile = ({ formData }) => (
+  <Document>
+    <Page size="A4" style={styles.page}>
+
+      {/* ---------- Header Section ---------- */}
+      <View style={styles.compDetails}>
+        <Image style={styles.logoImg} src={Logo} />
+        <View style={styles.compSec}>
+          <Text style={styles.title}>Drawing Requisition Form</Text>
+          <Text style={styles.rightTopHeading}>Rotary Joint DataSheet</Text>
+          <Text style={styles.compDesc}>Leak-Proof® Engineering Pvt. Ltd.</Text>
+        </View>
+      </View>
+
+      {/* ---------- General Information (First Section: Vertical) ---------- */}
+      <View style={styles.table}>
+        {[
+          ["DRF Number", formData.drfNumber],
+          ["Branch", formData.branch],
+          ["Sales Inquiry Item Reference No.", formData.salesInquiryItemReferenceNo],
+          ["Created By User", formData.createdByUser],
+          ["Created On", formData.createdOn],
+          ["Updated By User", formData.updatedByUser],
+          ["Updated On", formData.updatedOn],
+          ["Customer Name", formData.customerName],
+          ["End User", formData.endUser],
+          ["Costing Requirement", formData.costingRequirement ? "Yes" : "No"],
+        ].map(([label, value], idx) => (
+          <View style={styles.tableRow} key={idx}>
+            <Text style={styles.tableCellHeader}>{label}</Text>
+            <Text style={styles.tableCell}>{value}</Text>
+          </View>
+        ))}
+      </View>
+
+      {/* ---------- Application Details (Horizontal Split) ---------- */}
+      <Text style={styles.subHeading}>Application Details</Text>
+      <View style={styles.sharedSplitBoxContainer}>
+        <View style={styles.leftSplitBox}>
+          {[
+            ["Equipment", formData.equipment],
+            ["Make", formData.make],
+            ["Model", formData.model],
+            ["Fluid", formData.fluid],
+          ].map(([label, value], idx) => (
+            <View style={styles.tableRow} key={idx}>
+              <Text style={styles.tableCellHeader}>{label}</Text>
+              <Text style={styles.tableCell}>{value}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={styles.rightSplitBox}>
+          {[
+            ["Operating Temperature", `${formData.operatingTemperature} ${formData.operatingTemperatureUnit}`],
+            ["Flow Rate", formData.flowRate],
+            ["Speed", formData.speed],
+            ["Operating Pressure", `${formData.operatingPressure} ${formData.operatingPressureUnit}`],
+          ].map(([label, value], idx) => (
+            <View style={styles.tableRow} key={idx}>
+              <Text style={styles.tableCellHeader}>{label}</Text>
+              <Text style={styles.tableCell}>{value}</Text>
+            </View>
+          ))}
+        </View>
+      </View>
+
+      {/* ---------- Existing Rotary Joint Details (Horizontal Split) ---------- */}
+      <Text style={styles.subHeading}>Existing Rotary Joint Details</Text>
+      <View style={styles.sharedSplitBoxContainer}>
+        <View style={styles.leftSplitBox}>
+          {[
+            ["Make", formData.existingRotaryJointMake],
+            ["Model Type", formData.existingRotaryJointModelType],
+          ].map(([label, value], idx) => (
+            <View style={styles.tableRow} key={idx}>
+              <Text style={styles.tableCellHeader}>{label}</Text>
+              <Text style={styles.tableCell}>{value}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={styles.rightSplitBox}>
+          {[
+            ["Connection Size", formData.existingRotaryJointConnectionSize],
+            ["Connection Type", formData.existingRotaryJointConnectionType],
+            ["Joint Type", formData.jointType],
+          ].map(([label, value], idx) => (
+            <View style={styles.tableRow} key={idx}>
+              <Text style={styles.tableCellHeader}>{label}</Text>
+              <Text style={styles.tableCell}>{value}</Text>
+            </View>
+          ))}
+        </View>
+      </View>
+
+      {/* ---------- Proposed Rotary Joint Detail (Last Section: Vertical) ---------- */}
+      <Text style={styles.subHeading}>Proposed Rotary Joint Detail</Text>
+      <View style={styles.table}>
+        <View style={styles.tableRow}>
+          <Text style={styles.tableCellHeader}>Make</Text>
+          <Text style={styles.tableCell}>{formData.proposedRotaryJointMake}</Text>
+        </View>
+        <View style={styles.tableRow}>
+          <Text style={styles.tableCellHeader}>Model Type</Text>
+          <Text style={styles.tableCell}>{formData.rotaryJointInquiryItem?.proposedRotaryJointModelType}</Text>
+        </View>
+
+        {/* Threaded or Flanged details */}
+        {formData?.proposedRotaryJointModelType === "Threaded" && (
+          <>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Inlet Connection Size</Text>
+              <Text style={styles.tableCell}>{formData.inletConnectionSize}</Text>
+            </View>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Outlet Connection Size</Text>
+              <Text style={styles.tableCell}>{formData.outletConnectionSize}</Text>
+            </View>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Connection Type</Text>
+              <Text style={styles.tableCell}>{formData.connectionType}</Text>
+            </View>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Handing</Text>
+              <Text style={styles.tableCell}>{formData.handing}</Text>
+            </View>
+          </>
+        )}
+
+        {formData?.proposedRotaryJointModelType === "Flanged" && (
+          <>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Inlet Flanged Size</Text>
+              <Text style={styles.tableCell}>{formData.inletFlangedSize}</Text>
+            </View>
+            <View style={styles.tableRow}>
+              <Text style={styles.tableCellHeader}>Outlet Flanged Size</Text>
+              <Text style={styles.tableCell}>{formData.outletFlangedSize}</Text>
+            </View>
+          </>
+        )}
+      </View>
+    </Page>
+  </Document>
+);
+
 
 
   const handleButtonClick = () => {
@@ -878,7 +1183,7 @@ export default function CreateRotatory() {
 
             renderInput={(params) => (
               <TextField
-                className="custom-text-field"
+               className="custom-text-field"
                 {...params}
                 size="small"
                 label="Model Type"
@@ -1440,14 +1745,32 @@ try {
     </div>
 
 
-    <Grid item xs={4}>
+    <Grid item xs={4} style={{display:"flex"}}>
       <Grid item xs={4}>
 
         {!rjId ? (<Button className="submit-btn" type="submit" style={{ margin: "20px" }} onClick={(e) => handleSubmit(e, formData, navigate)} variant="contained" >Submit</Button>) : (
           <>
-            <Button className="update-btn" variant="contained" onClick={(e) => handleUpdate(e, formData, rjId, navigate)} disabled={authState?.sub !== formData.createdByUser }>Update</Button>
+            <Button className="update-btn" variant="contained" onClick={(e) => handleUpdate(e, formData, rjId, navigate)} >Update</Button>
             <Button className="cancel-btn" variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
       </Grid>
+      <Grid item xs={4} style={{ margin: '12px 0px 0px 20px' }}>
+  <PDFDownloadLink document={<PDFFile formData={formData} />} fileName="Rotaryjoint.pdf">
+    {({ loading }) => (
+      <Button
+        variant="contained"
+        startIcon={<SaveIcon />}
+        style={{
+          backgroundColor: '#ff6d6d',
+          color: 'white',
+          textDecoration: 'none',
+          cursor: 'pointer',
+        }}
+      >
+        {loading ? 'Loading document...' : 'Download PDF'}
+      </Button>
+    )}
+  </PDFDownloadLink>
+</Grid>
     </Grid>
     {/* </form> */}
   </Container>

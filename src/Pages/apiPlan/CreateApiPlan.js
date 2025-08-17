@@ -427,8 +427,8 @@ const styles = StyleSheet.create({
   },
 
   logoImg: {
-    width: 55,
-    height: 55,
+    width: 50,
+    height: 50,
     marginRight: 14
   },
 
@@ -442,7 +442,7 @@ const styles = StyleSheet.create({
   },
 
   subHeading:{
-    fontSize: 11,
+    fontSize: 10,
     borderTop:1,
     borderBottom:1,
     fontWeight: 'bold',
@@ -452,27 +452,26 @@ const styles = StyleSheet.create({
   },
 
   compDesc: {
-    fontSize: 10,
+    fontSize: 9,
     color: '#333',
     width:"100%"
   },
 
-  header: {
-    fontSize: 12,
-    fontWeight: 'bold',
-    marginTop: 8,         
-    marginBottom: 8,        
-    paddingLeft: 5,
-    borderBottom: 1,
-    paddingBottom: 4,      
-  },
-  
   section: {
-    marginTop: 8,        
-    marginBottom: 10,   
+    marginBottom: 3,
     flexDirection: 'column',
     flexWrap: 'wrap',
     wordBreak: 'break-word',
+  },
+
+  header: {
+    fontSize: 10,
+    fontWeight: "bold",
+    marginBottom: 5,
+    paddingLeft: 4,
+    borderBottom: 1,
+    paddingBottom: 3,
+    paddingTop: 4,
   },
   table: {
     display: 'table',
@@ -485,57 +484,72 @@ const styles = StyleSheet.create({
   },
   tableRow: {
     flexDirection: 'row',
-    // flexWrap: 'wrap',
+    flexWrap: 'wrap', 
+    padding:4,
     marginBottom: 2
   },
 
   tableCellHeader: {
     width: '40%',
-    padding: 4,
+    // padding: 4,
     fontWeight: 'bold',
     flexWrap: 'wrap',
-    wordBreak: 'break-word'
+    wordBreak: 'break-word',
+    fontSize: 9,
   },
    
+
   tableCell: {
     width: '60%',
     padding: 4,
-    fontSize: 9,
-    marginLeft:40,
-    flexShrink: 1,        // allow shrink
-    minWidth: 0,          // required in flex row
-    flexWrap: 'wrap',     // allow wrap
+    fontSize: 8,
+    // marginLeft:40,
+    flexShrink: 1,        
+    minWidth: 0,          
+    flexWrap: 'wrap',     
     wordBreak: 'break-word',
-    textOverflow: 'clip'  // safe fallback
+    textOverflow: 'clip'  
   },
 
   subHeader: {
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: 'bold',
     marginTop: 8,
     marginBottom: 4,
     textDecoration: 'underline'
   },
 
+  sharedSplitBoxContainer: {
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: '#000',
+    borderStyle: 'solid',
+    width: '100%',
+    maxWidth: '100%',  
+    marginBottom: 10,
+    alignItems: 'flex-start !important', 
+
+  },
+  
   leftSplitBox: {
     width: '50%',
-    borderStyle: 'solid',
-    borderLeftWidth: 1,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
     borderRightWidth: 1,
     borderColor: '#000',
+    // padding: 4,
+    flexShrink: 1,
+    flexDirection: 'column',
+    flexWrap: 'nowrap',       
   },
-
+  
   rightSplitBox: {
     width: '50%',
-    borderStyle: 'solid',
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: '#000',
+    // padding: 4,
+    flexDirection: 'column',
+    flexWrap: 'nowrap',
+    gap: 2,
+    boxSizing: 'border-box',
   },
+  
   rightTopHeading: {
     fontSize: 12,
     fontWeight: 'bold',
@@ -544,10 +558,8 @@ const styles = StyleSheet.create({
 });
 
 
-
 const PDFFile = ({ formData }) => (
   <Document>
-    {/* PAGE 1 */}
     <Page size="A4" style={styles.page}>
       {/* Header */}
       <View style={styles.compDetails}>
@@ -559,9 +571,9 @@ const PDFFile = ({ formData }) => (
         </View>
       </View>
 
-      {/* General Info */}
+      {/* General Info (FULL WIDTH) */}
       <View style={styles.section}>
-        <Text style={styles.header}>General Information</Text>
+  
         <View style={styles.table}>
           {[
             ['DRF Number', formData.drfNumber],
@@ -583,170 +595,239 @@ const PDFFile = ({ formData }) => (
         </View>
       </View>
 
-      {/* Equipment Detail */}
-      <View style={styles.section}>
-        <Text style={styles.header}>Equipment Detail</Text>
-        <View style={styles.table}>
-          {[
-            ['Make', formData.apiPlanInquiryItem.equipmentMake],
-            ['Model', formData.apiPlanInquiryItem.equipmentModel],
-            ['Type', formData.apiPlanInquiryItem.equipmentType],
-            ['Arrangement', formData.apiPlanInquiryItem.arrangement],
-            ['Tag Number', formData.apiPlanInquiryItem.tagNumber],
-            ['Pump MOC', formData.apiPlanInquiryItem.pumpMOC],
-          ].map(([label, value]) => (
-            <View style={styles.tableRow} key={label}>
-              <Text style={styles.tableCellHeader}>{label}</Text>
-              <Text style={styles.tableCell}>{value}</Text>
-            </View>
-          ))}
-        </View>
-      </View>
-
-      {/* Mechanical Seal Data */}
-      <View style={styles.section}>
-        <Text style={styles.header}>Mechanical Seal Data</Text>
-        <View style={styles.table}>
-          {[
-            ['Drawing Number', formData.apiPlanInquiryItem.drawingNumber],
-            ['Mechanical Seal Make', formData.apiPlanInquiryItem.mechanicalSealMake],
-            ['Mechanical Seal Series', formData.apiPlanInquiryItem.mechanicalSealSeries],
-            ['Connection Size', formData.apiPlanInquiryItem.connectionSize],
-            ['Shaft Size', formData.apiPlanInquiryItem.shaftSize],
-          ].map(([label, value]) => (
-            <View style={styles.tableRow} key={label}>
-              <Text style={styles.tableCellHeader}>{label}</Text>
-              <Text style={styles.tableCell}>{value}</Text>
-            </View>
-          ))}
-        </View>
-      </View>
-
-      {/* Operating Parameter */}
-      <View style={styles.section}>
-        <Text style={styles.header}>Operating Parameters</Text>
-        <View style={styles.table}>
-          {[
-            ['Rotation', formData.apiPlanInquiryItem.rotation],
-            ['MAWP', `${formData.apiPlanInquiryItem.mawp.value} ${formData.apiPlanInquiryItem.mawp.unit}`],
-            ['MAWT', `${formData.apiPlanInquiryItem.mawt.value} ${formData.apiPlanInquiryItem.mawt.unit}`],
-            ['Suction Pressure (Pump)', `${formData.apiPlanInquiryItem.suctionPressurePump.value} ${formData.apiPlanInquiryItem.suctionPressurePump.unit}`],
-            ['Discharge Pressure (Pump)', `${formData.apiPlanInquiryItem.dischargePressurePump.value} ${formData.apiPlanInquiryItem.dischargePressurePump.unit}`],
-            ['Box Pressure (Pump)', `${formData.apiPlanInquiryItem.boxPressurePump.value} ${formData.apiPlanInquiryItem.boxPressurePump.unit}`],
-            ['Vessel Pressure (Agitator)', `${formData.apiPlanInquiryItem.vesselPressureAgitator.value} ${formData.apiPlanInquiryItem.vesselPressureAgitator.unit}`],
-            ['Speed', formData.apiPlanInquiryItem.speed],
-          ].map(([label, value]) => (
-            <View style={styles.tableRow} key={label}>
-              <Text style={styles.tableCellHeader}>{label}</Text>
-              <Text style={styles.tableCell}>{value}</Text>
-            </View>
-          ))}
-        </View>
-      </View>
-
-    {/* PAGE 2 */}
-   
-      <View style={styles.section}>
-        <Text style={styles.header}>Fluid Detail</Text>
-        <View style={styles.table}>
-          {[
-            ['Fluid', formData.apiPlanInquiryItem.fluid],
-            ['Operating Temperature', `${formData.apiPlanInquiryItem.operatingTemperature.value} ${formData.apiPlanInquiryItem.operatingTemperature.unit}`],
-            ['Max Temperature', `${formData.apiPlanInquiryItem.maxTemperature.value} ${formData.apiPlanInquiryItem.maxTemperature.unit}`],
-            ['Viscosity', formData.apiPlanInquiryItem.viscosity],
-            ['Sp. Gravity', formData.apiPlanInquiryItem.spGravity],
-            ['Percentage of Solid', formData.apiPlanInquiryItem.percentageOfSolid],
-            ['Size of Solid particles', formData.apiPlanInquiryItem.solidSize],
-            ['Freezing Point', formData.apiPlanInquiryItem.freezingPoint],
-            ['Boiling Point', formData.apiPlanInquiryItem.boilingPoint],
-          ].map(([label, value]) => (
-            <View style={styles.tableRow} key={label}>
-              <Text style={styles.tableCellHeader}>{label}</Text>
-              <Text style={styles.tableCell}>{value}</Text>
-            </View>
-          ))}
-        </View>
-      </View>
-
-      {/* Existing Seal Support System */}
-      <View style={styles.section}>
-        <Text style={styles.header}>Existing Seal Support System</Text>
-        <View style={styles.table}>
-          {[
-            ['Make', formData.existingSealSupportMake],
-            ['API Plan', formData.existingSealSupportApiPlan],
-            ['Capacity', formData.existingSealSupportCapacity],
-            ['Reference Api Plan Drawing Number', formData.existingSealSupportReferenceApiPlanDrawingNumber],
-            ['Heat Exchange Type', formData.existingSealSupportHeatExchangeType],
-            ['Heat Exchange Area', formData.existingSealSupportHeatExchangeArea],
-            ['Standard', formData.existingSealSupportStandard],
-          ].map(([label, value]) => (
-            <View style={styles.tableRow} key={label}>
-              <Text style={styles.tableCellHeader}>{label}</Text>
-              <Text style={styles.tableCell}>{value}</Text>
-            </View>
-          ))}
-        </View>
-      </View>
-
-      {/* Leak Proof Proposal */}
-      <View style={styles.section}>
-        <Text style={styles.header}>Leak Proof Proposal</Text>
-        <View style={styles.table}>
-          {[
-            ['API Plan', formData.apiPlanInquiryItem.leakProofProposalApiPlan],
-            ['Capacity', formData.apiPlanInquiryItem.capacity],
-            ['Heat Exchange Type', formData.apiPlanInquiryItem.heatExchangeType],
-            ['Heat Exchange Area', formData.apiPlanInquiryItem.heatExchangeArea],
-            ['Standard', formData.apiPlanInquiryItem.standard],
-          ].map(([label, value]) => (
-            <View style={styles.tableRow} key={label}>
-              <Text style={styles.tableCellHeader}>{label}</Text>
-              <Text style={styles.tableCell}>{value}</Text>
-            </View>
-          ))}
-        </View>
-      </View>
-
-      {/* MOC */}
-      <View style={styles.section}>
-        <Text style={styles.header}>MOC</Text>
-        <View style={styles.table}>
-          {[
-            ['Vessel', formData.mocVessel],
-            ['Cooling Coil', formData.mocCoolingCoil],
-            ['Piping and Fitting', formData.mocPipingAndFitting],
-            ['Bladder', formData.mocBladder],
-            ['Structural Parts', formData.mocStructuralParts],
-          ].map(([label, value]) => (
-            <View style={styles.tableRow} key={label}>
-              <Text style={styles.tableCellHeader}>{label}</Text>
-              <Text style={styles.tableCell}>{value}</Text>
-            </View>
-          ))}
-        </View>
-      </View>
-
-      {/* Instruments */}
-      <View style={styles.section}>
-        <Text style={styles.header}>Instruments</Text>
-        <View style={styles.table}>
-          <View style={styles.tableRow}>
-            <Text style={styles.tableCellHeader}>Required Instrument/Loose Item</Text>
-            <Text style={styles.tableCellHeader}>Make of Instrument</Text>
+      {/* PAIRED SECTIONS */}
+      <View style={styles.sharedSplitBoxContainer}>
+        {/* Equipment Detail */}
+        <View style={styles.leftSplitBox}>
+          <Text style={styles.header}>Equipment Detail</Text>
+          <View >
+            {[
+              ['Make', formData.apiPlanInquiryItem.equipmentMake],
+              ['Model', formData.apiPlanInquiryItem.equipmentModel],
+              ['Type', formData.apiPlanInquiryItem.equipmentType],
+              ['Arrangement', formData.apiPlanInquiryItem.arrangement],
+              ['Tag Number', formData.apiPlanInquiryItem.tagNumber],
+              ['Pump MOC', formData.apiPlanInquiryItem.pumpMOC],
+            ].map(([label, value]) => (
+              <View style={styles.tableRow} key={label}>
+                <Text style={styles.tableCellHeader}>{label}</Text>
+                <Text style={styles.tableCell}>{value}</Text>
+              </View>
+            ))}
           </View>
-          {formData.instruments.map((item, idx) => (
-            <View style={styles.tableRow} key={idx}>
-              <Text style={styles.tableCell}>{item.requiredInstrumentOrLooseItem}</Text>
-              <Text style={styles.tableCell}>{item.makeOfInstrument}</Text>
-            </View>
-          ))}
+        </View>
+
+        {/* Mechanical Seal Data */}
+        <View style={styles.rightSplitBox}>
+          <Text style={styles.header}>Mechanical Seal Data</Text>
+          <View>
+            {[
+              ['Drawing Number', formData.apiPlanInquiryItem.drawingNumber],
+              ['Mechanical Seal Make', formData.apiPlanInquiryItem.mechanicalSealMake],
+              ['Mechanical Seal Series', formData.apiPlanInquiryItem.mechanicalSealSeries],
+              ['Connection Size', formData.apiPlanInquiryItem.connectionSize],
+              ['Shaft Size', formData.apiPlanInquiryItem.shaftSize],
+            ].map(([label, value]) => (
+              <View style={styles.tableRow} key={label}>
+                <Text style={styles.tableCellHeader}>{label}</Text>
+                <Text style={styles.tableCell}>{value}</Text>
+              </View>
+            ))}
+          </View>
         </View>
       </View>
 
-      {/* Other Details */}
+      <View style={styles.sharedSplitBoxContainer}>
+        {/* Operating Parameters */}
+        <View style={styles.leftSplitBox}>
+          <Text style={styles.header}>Operating Parameters</Text>
+          <View>
+            {[
+              ['Rotation', formData.apiPlanInquiryItem.rotation],
+              ['MAWP', `${formData.apiPlanInquiryItem.mawp.value} ${formData.apiPlanInquiryItem.mawp.unit}`],
+              ['MAWT', `${formData.apiPlanInquiryItem.mawt.value} ${formData.apiPlanInquiryItem.mawt.unit}`],
+              ['Suction Pressure (Pump)', `${formData.apiPlanInquiryItem.suctionPressurePump.value} ${formData.apiPlanInquiryItem.suctionPressurePump.unit}`],
+              ['Discharge Pressure (Pump)', `${formData.apiPlanInquiryItem.dischargePressurePump.value} ${formData.apiPlanInquiryItem.dischargePressurePump.unit}`],
+              ['Box Pressure (Pump)', `${formData.apiPlanInquiryItem.boxPressurePump.value} ${formData.apiPlanInquiryItem.boxPressurePump.unit}`],
+              ['Vessel Pressure (Agitator)', `${formData.apiPlanInquiryItem.vesselPressureAgitator.value} ${formData.apiPlanInquiryItem.vesselPressureAgitator.unit}`],
+              ['Speed', formData.apiPlanInquiryItem.speed],
+            ].map(([label, value]) => (
+              <View style={styles.tableRow} key={label}>
+                <Text style={styles.tableCellHeader}>{label}</Text>
+                <Text style={styles.tableCell}>{value}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        {/* Fluid Detail */}
+        <View style={styles.rightSplitBox}>
+          <Text style={styles.header}>Fluid Detail</Text>
+          <View >
+            {[
+              ['Fluid', formData.apiPlanInquiryItem.fluid],
+              ['Operating Temperature', `${formData.apiPlanInquiryItem.operatingTemperature.value} ${formData.apiPlanInquiryItem.operatingTemperature.unit}`],
+              ['Max Temperature', `${formData.apiPlanInquiryItem.maxTemperature.value} ${formData.apiPlanInquiryItem.maxTemperature.unit}`],
+              ['Viscosity', formData.apiPlanInquiryItem.viscosity],
+              ['Sp. Gravity', formData.apiPlanInquiryItem.spGravity],
+              ['Percentage of Solid', formData.apiPlanInquiryItem.percentageOfSolid],
+              ['Size of Solid particles', formData.apiPlanInquiryItem.solidSize],
+              ['Freezing Point', formData.apiPlanInquiryItem.freezingPoint],
+              ['Boiling Point', formData.apiPlanInquiryItem.boilingPoint],
+            ].map(([label, value]) => (
+              <View style={styles.tableRow} key={label}>
+                <Text style={styles.tableCellHeader}>{label}</Text>
+                <Text style={styles.tableCell}>{value}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+      </View>
+
+      <View style={styles.sharedSplitBoxContainer}>
+        {/* Existing Seal Support System */}
+        <View style={styles.leftSplitBox}>
+          <Text style={styles.header}>Existing Seal Support System</Text>
+          <View>
+            {[
+              ['Make', formData.existingSealSupportMake],
+              ['API Plan', formData.existingSealSupportApiPlan],
+              ['Capacity', formData.existingSealSupportCapacity],
+              ['Reference Api Plan Drawing Number', formData.existingSealSupportReferenceApiPlanDrawingNumber],
+              ['Heat Exchange Type', formData.existingSealSupportHeatExchangeType],
+              ['Heat Exchange Area', formData.existingSealSupportHeatExchangeArea],
+              ['Standard', formData.existingSealSupportStandard],
+            ].map(([label, value]) => (
+              <View style={styles.tableRow} key={label}>
+                <Text style={styles.tableCellHeader}>{label}</Text>
+                <Text style={styles.tableCell}>{value}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        {/* Leak Proof Proposal */}
+        <View style={styles.rightSplitBox}>
+          <Text style={styles.header}>Leak Proof Proposal</Text>
+          <View>
+            {[
+              ['API Plan', formData.apiPlanInquiryItem.leakProofProposalApiPlan],
+              ['Capacity', formData.apiPlanInquiryItem.capacity],
+              ['Heat Exchange Type', formData.apiPlanInquiryItem.heatExchangeType],
+              ['Heat Exchange Area', formData.apiPlanInquiryItem.heatExchangeArea],
+              ['Standard', formData.apiPlanInquiryItem.standard],
+            ].map(([label, value]) => (
+              <View style={styles.tableRow} key={label}>
+                <Text style={styles.tableCellHeader}>{label}</Text>
+                <Text style={styles.tableCell}>{value}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+      </View>
+
+      <View style={styles.sharedSplitBoxContainer}>
+        {/* MOC */}
+        <View style={styles.leftSplitBox}>
+          <Text style={styles.header}>MOC</Text>
+          <View >
+            {[
+              ['Vessel', formData.mocVessel],
+              ['Cooling Coil', formData.mocCoolingCoil],
+              ['Piping and Fitting', formData.mocPipingAndFitting],
+              ['Bladder', formData.mocBladder],
+              ['Structural Parts', formData.mocStructuralParts],
+            ].map(([label, value]) => (
+              <View style={styles.tableRow} key={label}>
+                <Text style={styles.tableCellHeader}>{label}</Text>
+                <Text style={styles.tableCell}>{value}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        {/* Instruments */}
+        <View style={styles.rightSplitBox}>
+  <Text style={styles.header}>Instruments</Text>
+
+  {/* Table */}
+  <View style={{ borderTopWidth: 1,borderBottomWidth:1, borderColor: '#000', borderStyle: 'solid' }}>
+    
+    {/* Header Row */}
+    <View style={{ flexDirection: 'row', borderBottomWidth: 1, borderColor: '#000' }}>
+      <Text
+        style={{
+          width: '50%',
+          fontWeight: 'bold',
+          fontSize: 8,
+          borderRightWidth: 1,
+          borderColor: '#000',
+          padding: 3,
+        }}
+      >
+        Required Instrument/Loose Item
+      </Text>
+      <Text
+        style={{
+          width: '50%',
+          fontWeight: 'bold',
+          fontSize: 8,
+          padding: 3,
+        }}
+      >
+        Make of Instrument
+      </Text>
+    </View>
+
+    {/* Data Rows */}
+    {formData.instruments.map((item, idx) => (
+      <View
+        style={{
+          flexDirection: 'row',
+          borderTopWidth: 1,
+          borderColor: '#000',
+        }}
+        key={idx}
+      >
+        {/* First Column */}
+        <Text
+          style={{
+            width: '50%',
+            fontSize: 8,
+            flexShrink: 1,
+            flexWrap: 'wrap',
+            wordBreak: 'break-word',
+            borderRightWidth: 1,
+            borderColor: '#000',
+            padding: 2,
+          }}
+        >
+          {item.requiredInstrumentOrLooseItem}
+        </Text>
+
+        {/* Second Column */}
+        <Text
+          style={{
+            width: '50%',
+            fontSize: 8,
+            flexShrink: 1,
+            flexWrap: 'wrap',
+            wordBreak: 'break-word',
+            padding: 2,
+          }}
+        >
+          {item.makeOfInstrument}
+        </Text>
+      </View>
+    ))}
+  </View>
+</View>
+
+      </View>
+
+      {/* Other Details (FULL WIDTH) */}
       <View style={styles.section}>
-        <Text style={styles.header}>Other Details</Text>
+        <Text style={styles.header}>Other Details :</Text>
         <View style={styles.table}>
           {[
             ['Recommended Buffer or Barrier Fluid', formData.recommendedBufferOrBarrierFluid],
@@ -760,11 +841,9 @@ const PDFFile = ({ formData }) => (
           ))}
         </View>
       </View>
-      </Page>
-   
+    </Page>
   </Document>
 );
-
 
 
 
@@ -2910,10 +2989,10 @@ console.log("formData is ",formData)
         
             console.log("File Upload Response:", data);
         
-            // ✅ Update `uploadedFileNames` at the correct index
+        
             setAtRefInput(data);
         
-            // ✅ Update `rotaryJointInquiries[index]` with the new filename
+           
             setFormData((prev) => ({
               ...prev,
        attachmentReferenceMechanicalSealDrawing:data
@@ -3049,11 +3128,11 @@ console.log("formData is ",formData)
 
             {!apId ? (<Button className="submit-btn" type="submit" onClick={(e) => handleSubmit(e, formData, navigate)} variant="contained" >Submit</Button>) : (
               <>
-                <Button className="update-btn" variant="contained" disabled={authState?.sub !== formData.createdByUser } onClick={(e) => handleUpdate(e, formData, navigate, apId)} >Update</Button>
+                <Button className="update-btn" variant="contained"  onClick={(e) => handleUpdate(e, formData, navigate, apId)} >Update</Button>
                 <Button className="cancel-btn" variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
-          <Grid item xs={4} style={{ margin: '12px 0px 0px 20px' }}>
-  <PDFDownloadLink document={<PDFFile formData={formData} />} fileName="AgitatorSeal.pdf">
+<Grid item xs={4} style={{ margin: '12px 0px 0px 20px' }}>
+  <PDFDownloadLink document={<PDFFile formData={formData} />} fileName="ApiPlan.pdf">
     {({ loading }) => (
       <Button
         variant="contained"

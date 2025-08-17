@@ -14,7 +14,7 @@ export const handleSubmit = async (e, formData,navigate) => {
     try {
       const res = await axiosInstance.post(`lens/apiPlan/save`, formData);
       console.log("response is ", res.data);
-      navigate(`/editDrf`);
+      navigate(`/createApi/${encodeURIComponent(res?.data[0]?.referenceValue)}`);
     } catch (err) {
       console.log(err);
     }

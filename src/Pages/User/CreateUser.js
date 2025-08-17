@@ -80,7 +80,7 @@ export default function CreateUser() {
       [name]: value
     }));
   
-    // If the radio button is for password update and value is 'yes', redirect
+  
     if (name === 'passwordUpdate' && value === 'yes') {
       navigate('/updatePassword');
     }
@@ -109,6 +109,8 @@ export default function CreateUser() {
   useEffect(() => {
     if (uId !== undefined) {
       getuser(uId, setFormData);
+      console.log("UID Block Executed!!")
+
     } else {
       setFormData({
         firstName: "",

@@ -469,8 +469,8 @@ export default function AgitatorSeal() {
     },
 
     logoImg: {
-      width: 55,
-      height: 55,
+      width: 50,
+      height: 50,
       marginRight: 14
     },
 

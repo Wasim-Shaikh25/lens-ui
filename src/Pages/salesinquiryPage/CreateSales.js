@@ -67,11 +67,6 @@ export default function CreateSales() {
   const unitOptions = ["℃", "℉"];
 
 
-  useEffect(() => {
-    const generateReferenceNo = () => `SI-${Date.now()}`;
-    setReferenceNo(generateReferenceNo());
-  }, []);
-
 
   // Add new state for mechanical seal section
   const [newSealType, setNewSealType] = useState(""); // Tracks the new dropdown selection
@@ -1027,6 +1022,10 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                     label="Sales Inquiry Item Reference No."
                     value={item?.agitatorInquiryReferenceNo}
                     InputProps={{ readOnly: true }}
+                    InputLabelProps={{
+                      shrink: Boolean(item?.agitatorInquiryReferenceNo),
+                    }}
+                    autoFocus={item?.agitatorInquiryReferenceNo}
                     size="small"
                     fullWidth
                     id="disableItem"

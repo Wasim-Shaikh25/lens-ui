@@ -13,6 +13,8 @@ import { LoaderProvider, useLoader } from "./LoaderContext/LoaderContext.js";
 import { setupInterceptors } from "./axios/axiosInstance";
 import GlobalError from "./utils/errorHandler.js";
 import { ToastProvider } from "./context/ToastContext";
+import { useAuth } from "./contextApi/AuthContext";
+
 
 function AppContent() {
   const [theme, colorMode] = useMode();
@@ -21,6 +23,8 @@ function AppContent() {
   const navigate = useNavigate();
   const token = useToken();
   const savedToken = Cookies.get("access_token");
+  const {logout, authState} = useAuth();
+
 
   const { showLoader, hideLoader, showError } = useLoader();
 
@@ -29,12 +33,54 @@ function AppContent() {
   
 
   useEffect(() => {
-    if (!token) {
-      navigate("/login");
+    const hasToken = token && (savedToken && savedToken !== "null");
+
+    if (!hasToken && location.pathname !== "/login" && location.pathname !== "/reset" ) {
+      
+      navigate("/login", { replace: true });
+    } 
+
+    else if (hasToken && location.pathname === "/login") {
+
+      navigate("/", { replace: true }); 
     }
+
   }, [token, navigate]);
 
+  useEffect(() => {
+    // Mark the session as active
+    sessionStorage.setItem("isActiveSession", "true");
   
+    const handleBeforeUnload = () => {
+      // If session flag exists → it's a refresh, skip logout
+      if (sessionStorage.getItem("isRefreshing") === "true") {
+        return;
+      }
+  
+      // Otherwise → it's a browser/tab close, logout
+      logout();
+    };
+  
+    const handleRefresh = () => {
+      // Mark as refresh just before unload
+      sessionStorage.setItem("isRefreshing", "true");
+  
+      // Remove flag after a short delay (so next visit is clean)
+      setTimeout(() => {
+        sessionStorage.removeItem("isRefreshing");
+      }, 1000);
+    };
+  
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("unload", handleRefresh);
+  
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("unload", handleRefresh);
+    };
+  }, []);
+
+
   useEffect(() => {
     // Setup axios interceptors with loader functions
     setupInterceptors(showLoader, hideLoader, showError);

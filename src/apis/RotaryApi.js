@@ -14,7 +14,7 @@ export const handleSubmit = async(e, formData, navigate) => {
       try{
           const res = await axiosInstance.post(`lens/rotaryJoint/save`, formData);
         console.log("response is ",res.data);
-        navigate(`/editDrf`);
+        navigate(`/createRotary/${encodeURIComponent(res?.data[0]?.referenceValue)}`);
 
         // navigate(`/rotarySuccess/${res.data}`);
       }  
