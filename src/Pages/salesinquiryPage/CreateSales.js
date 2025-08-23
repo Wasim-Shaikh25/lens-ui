@@ -344,7 +344,7 @@ const handleFileDelete = (index) => {
 
   const handleFetch=async(custId)=>{
     try{
-      const {data} = await axiosInstance.get(`http://localhost:8080/lens/customer/get?customerRefrenceNumber=${custId}`)
+      const {data} = await axiosInstance.get(`/lens/customer/get?customerRefrenceNumber=${custId}`)
       console.log("getCustomer is ",data)
 
       setFormData((prev)=>({
@@ -4724,7 +4724,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
         
           try {
             const { data } = await axiosInstance.post(
-              `http://localhost:8080/lens/fileUpload/file?filelocation=${encodeURIComponent(file.name)}`,
+              `/lens/fileUpload/file?filelocation=${encodeURIComponent(file.name.substring(0, 50))}`,
               formData,
               {
                 headers: { "Content-Type": "multipart/form-data" },
@@ -4733,7 +4733,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
         
             console.log("File Upload Response:", data);
         
-            // ✅ Update `uploadedFileNames` at the correct index
+        
             setUploadedFileNames((prev) => {
               const updatedFileNames = [...prev]; // Copy previous state
               updatedFileNames[index] = data; // Update specific index

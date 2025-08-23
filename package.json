@@ -2,7 +2,7 @@
   "name": "synterra-lens",
   "version": "0.1.0",
   "homepage": "/",
-  "proxy": "http://localhost:8080",
+  "proxy": "https://dev-cmr-api.lpe.app/lens-svc",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.3",

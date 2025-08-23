@@ -159,7 +159,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
             
             <Box pl={isSidebar ? 0 : 3}>
               <Menu>
-                {authState?.designation?.designationName === 'ADMIN' && (
+                {authState?.authorities.includes("Admin_Authority") && (
                <SubMenu label={<Typography variant="body1">Users</Typography>}
                open={activeSubMenu === "Users"}
                style={getSubMenuStyle("Users")} onClick={() => handleSubMenuClick("Users")} icon={<AccountCircleOutlinedIcon />}>
@@ -299,7 +299,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                       icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list "><g><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></g></svg>}
                       style={getMenuItemStyle("Edit Drf")} onClick={() => setActiveItemMenu("Edit Drf")}
                     >
-                      Edit Drf
+                      Edit
                     </MenuItem>
                   </Link>
                 </SubMenu>

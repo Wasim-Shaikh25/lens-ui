@@ -2797,7 +2797,7 @@ console.log("FormData is ",formData);
         
           try {
             const { data } = await axiosInstance.post(
-              `http://localhost:8080/lens/fileUpload/file?filelocation=${encodeURIComponent(file.name)}`,
+              `lens/fileUpload/file?filelocation=${encodeURIComponent(file.name)}`,
               formData,
               {
                 headers: { "Content-Type": "multipart/form-data" },
@@ -2957,7 +2957,7 @@ console.log("FormData is ",formData);
         
           try {
             const { data } = await axiosInstance.post(
-              `http://localhost:8080/lens/fileUpload/file?filelocation=${encodeURIComponent(file.name)}`,
+              `lens/fileUpload/file?filelocation=${encodeURIComponent(file.name)}`,
               formData,
               {
                 headers: { "Content-Type": "multipart/form-data" },
