@@ -15,7 +15,8 @@ import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { deleteDetail, getAllUser } from '../../apis/UserDashboardApi';
 
-
+import { TextField ,Button,  Container, Grid, InputLabel , IconButton } from '@mui/material';
+import { searchFilter } from '../../apis/UserDashboardApi';
 
 
 function UserDashboard(){
@@ -25,10 +26,18 @@ function UserDashboard(){
     const [itemsPerPage, setItemsPerPage] = useState(5); // Adjust as needed
     const navigate = useNavigate();  
 
+    const [empId, setEmpId] = useState();
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
+    const [branch, setBranch] = useState();
+    const [designation,setDesignation] = useState();
+    const [department, setDepartment] = useState();
+    const [role, setRole] = useState();
+
 
 
     useEffect(() => {
-        getAllUser(setData,currentPage,itemsPerPage,setIsDeleted)
+      searchFilter(empId,branch,firstName,lastName,designation,department,role,currentPage,itemsPerPage,setData)
         }, [currentPage, itemsPerPage])
         
         
@@ -51,6 +60,95 @@ return (
   <div className='editContainer' style={{ width:'83%', marginLeft:'5%'}} >
     <h1 style={{marginLeft:'2.5%'}}>User Details :</h1>
 
+
+    <Grid container spacing={2} >
+
+    <Grid container spacing={2} alignItems="center" sx={{mx:3, my:1}}>
+
+<Grid item  xs={12} sm={3} >
+    <TextField
+      size="small"
+      className="custom-text-field"
+      name="empId"
+      value={empId}
+      onChange={(e)=>setEmpId(e.target.value)}
+      label="Employee ID"
+    />
+  </Grid>
+
+
+<Grid item  xs={12} sm={3} >
+    <TextField
+      size="small"
+      className="custom-text-field"
+      name="firstName"
+      value={firstName}
+      onChange={(e)=>setFirstName(e.target.value)}
+      label="First Name"
+    />
+  </Grid>
+
+
+
+  <Grid item  xs={12} sm={3}>
+  {/* <InputLabel className="ip-label">Customer Name</InputLabel> */}
+  <TextField
+    size="small"
+    className="custom-text-field"
+    name="lastName"
+    value={lastName}
+    onChange={(e)=>setLastName(e.target.value)}
+    label="Last Name"
+  />
+</Grid>
+
+
+<Grid item  xs={12} sm={3} >
+{/* <InputLabel className="ip-label">Customer Reference No</InputLabel> */}
+    <TextField
+      size="small"
+      className="custom-text-field"
+      name="designation"
+      value={designation}
+      onChange={(e)=>setDesignation(e.target.value)}
+      label="Designation"
+    />
+  </Grid>
+
+  
+
+<Grid item xs={12} sm={3} >
+  {/* <InputLabel className="ip-label">Branch</InputLabel> */}
+  <TextField
+    size="small"
+    className="custom-text-field"
+    name="department"
+    value={department}
+    onChange={(e)=>setDepartment(e.target.value)}
+    label="Department"
+  />
+</Grid>
+
+<Grid item xs={12} sm={3} >
+  {/* <InputLabel className="ip-label">Branch</InputLabel> */}
+  <TextField
+    size="small"
+    className="custom-text-field"
+    name="role"
+    value={role}
+    onChange={(e)=>setRole(e.target.value)}
+    label="Role"
+  />
+</Grid>
+
+
+      </Grid>
+
+      
+<Button onClick={()=>searchFilter(empId,branch,firstName,lastName,designation,department,role,currentPage,itemsPerPage,setData)}  style={{width:"15%",margin:"0.8rem 2.5rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
+  Search
+</Button>
+
     <TableContainer component={Paper} className="table-container">
       <Table sx={{ minWidth: 500 }} aria-label="customized table">
         <TableHead className="table-header">
@@ -58,7 +156,9 @@ return (
             <TableCell>Sr No</TableCell>
             <TableCell align="right">Employee ID</TableCell>
             <TableCell align="right">First Name</TableCell>
+            <TableCell align="right">Last Name</TableCell>
             <TableCell align="right">Designation</TableCell>
+            <TableCell align="right">Department</TableCell>
             <TableCell align="right">Last Updated On</TableCell>
             <TableCell align="right">Action</TableCell>
           </TableRow>
@@ -74,7 +174,9 @@ return (
                 </TableCell>
                 <TableCell align="right">{row?.empId}</TableCell>
                 <TableCell align="right">{row?.firstName}</TableCell>
+                <TableCell align="right">{row?.lastName}</TableCell>
                 <TableCell align="right">{row?.designation.designationName}</TableCell>
+                <TableCell align="right">{row?.departments[0]?.departmentName}</TableCell>
                 <TableCell align="right">{row?.updatedOn}</TableCell>
                 <TableCell align="right">
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
@@ -112,6 +214,7 @@ return (
       </div>
       <hr style={{ border: '1px solid lightGray' }} />
     </TableContainer>
+    </Grid>
   </div>   
 )
 }

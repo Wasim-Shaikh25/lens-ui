@@ -1,13 +1,17 @@
 import axios from 'axios';
 import Cookies from "js-cookie";
 
+
+
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'https://dev-cmr-api.lpe.app/lens-svc',
+  // baseURL: process.env.REACT_APP_API_URL || 'https://dev-cmr-api.lpe.app/lens-svc',
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:8080',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
   }
 });
+
 
 
 export const setupInterceptors = (showLoader, hideLoader, showError) => {
@@ -25,6 +29,7 @@ export const setupInterceptors = (showLoader, hideLoader, showError) => {
       return Promise.reject(error);
     }
   );
+
 
 
   axiosInstance.interceptors.response.use(

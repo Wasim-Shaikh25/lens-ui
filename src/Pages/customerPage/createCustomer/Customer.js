@@ -25,21 +25,6 @@ export default function Customer() {
 
 
  
-const [customerNames, setCustomerNames] = useState([]);
-const [selectedCustomer, setSelectedCustomer] = useState(null);
-
-// useEffect(() => {
-//   const fetchCustomerNames = async () => {
-//     try {
-//       const { data } = await axiosInstance.get('lens/customer/names');
-//       setCustomerNames(data);
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   };
-
-//   fetchCustomerNames();
-// }, []);
 
 
   const [formData, setFormData] = useState({
@@ -683,7 +668,7 @@ const getDataByName = async (newInputValue) => {
 
         <Grid container  spacing={2}> 
         <Grid item xs={12}>
-          <IconButton className="deleteIcon" onClick={() => deleteItems(index)} >
+          <IconButton className="deleteIcon" disabled={!authState?.authorities.includes("CustomerDetail_Write")} onClick={() => deleteItems(index)} >
             <DeleteIcon />
           </IconButton>
         </Grid>
@@ -695,11 +680,11 @@ const getDataByName = async (newInputValue) => {
           </Grid>
           <Grid item xs={4}>
           <Grid item xs={4}  >
-<Button className="add-btn" sx={{margin:"0rem 1rem 1rem 0rem"}}  onClick={contactDetail}><AddIcon/> Add Customer Details</Button>
+<Button className="add-btn" sx={{margin:"0rem 1rem 1rem 0rem"}} disabled={!authState?.authorities.includes("CustomerDetail_Write")}  onClick={contactDetail}><AddIcon/> Add Customer Details</Button>
         
-        {!rId&&!formData.customerReferenceNumber?(<Button className="submit-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate,setErrors,validateField)} variant="contained" >Submit</Button>) : (
+        {!rId&&!formData.customerReferenceNumber?(<Button className="submit-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} disabled={!authState?.authorities.includes("CustomerDetail_Write")} type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate,setErrors,validateField)} variant="contained" >Submit</Button>) : (
           <>
-            <Button className="update-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} variant="contained" onClick={(e)=>handleUpdate(e,formData,rId,navigate)} >Update</Button>
+            <Button className="update-btn" disabled={!authState?.authorities.includes("CustomerDetail_Write")} sx={{margin:"1rem 1rem 0rem 1rem"}} variant="contained" onClick={(e)=>handleUpdate(e,formData,rId,navigate)} >Update</Button>
             <Button className="cancel-btn"  variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
         </Grid>

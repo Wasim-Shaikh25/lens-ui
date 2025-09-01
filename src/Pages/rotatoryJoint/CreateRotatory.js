@@ -1298,7 +1298,7 @@ const PDFFile = ({ formData }) => (
          
       <Grid container spacing={2}>
         <Grid item xs={4}>
-          {/* <InputLabel className="ip-label" >Existing erjMake</InputLabel > */}
+      
           <TextField
             size="small"
             className="custom-text-field"
@@ -1601,13 +1601,17 @@ console.log("Temporary File URL:", tempFileURL);
 // Prepare FormData
 const formData = new FormData();
 formData.append("file", file);
+formData.append("filetype", "rotaryjoint")
 
 try {
   const { data } = await axiosInstance.post(
-    `lens/fileUpload/file?filelocation=${encodeURIComponent(file.name)}`,
+    `/lens/fileUpload/file?filetype=rotaryjoint`,
     formData,
     {
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: {
+        "Content-Type": "multipart/form-data", 
+        "accept": "*/*"
+      }
     }
   );
 
@@ -1748,9 +1752,9 @@ try {
     <Grid item xs={4} style={{display:"flex"}}>
       <Grid item xs={4}>
 
-        {!rjId ? (<Button className="submit-btn" type="submit" style={{ margin: "20px" }} onClick={(e) => handleSubmit(e, formData, navigate)} variant="contained" >Submit</Button>) : (
+        {!rjId ? (<Button className="submit-btn" type="submit" style={{ margin: "20px" }} disabled={!authState?.authorities.includes("DRFInquiry_Write")} onClick={(e) => handleSubmit(e, formData, navigate)} variant="contained" >Submit</Button>) : (
           <>
-            <Button className="update-btn" variant="contained" onClick={(e) => handleUpdate(e, formData, rjId, navigate)} >Update</Button>
+            <Button className="update-btn"  disabled={(authState?.sub)!==formData.createdByUser&&!authState?.authorities.includes("DRFInquiry_Write")} variant="contained" onClick={(e) => handleUpdate(e, formData, rjId, navigate)} >Update</Button>
             <Button className="cancel-btn" variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
       </Grid>
       <Grid item xs={4} style={{ margin: '12px 0px 0px 20px' }}>
@@ -1777,3 +1781,4 @@ try {
   );
 
 }
+

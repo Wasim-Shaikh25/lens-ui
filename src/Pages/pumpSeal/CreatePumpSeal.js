@@ -275,7 +275,7 @@ const handleFileDelete = (fieldName)=>{
 
     subHeading:{
       fontSize: 10,
-      borderTop:1,
+      //borderTop:1,
       borderBottom:1,
       fontWeight: 'bold',
       paddingTop:5,
@@ -318,12 +318,12 @@ const handleFileDelete = (fieldName)=>{
       flexDirection: 'row',
       flexWrap: 'wrap', 
       padding:4,
-      marginBottom: 1
+      marginBottom: 2
     },
 
     tableCellHeader: {
       width: '40%',
-      // padding: 4,
+      fontSize:9,
       fontWeight: 'bold',
       flexWrap: 'wrap',
       wordBreak: 'break-word'
@@ -390,120 +390,554 @@ const handleFileDelete = (fieldName)=>{
 
 
 
-  const Row = ({ label, value }) => (
-    <View style={styles.tableRow}>
-      <Text style={styles.tableCellHeader}>{label}</Text>
-      <Text style={styles.tableCell}>{value || "-"}</Text>
-    </View>
-  );
 
 
   
-  const PDFFile = ({ formData }) => (
-    <Document>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.compDetails}>
-          <Image src={Logo} style={styles.logoImg} />
-          <View style={styles.compSec}>
-            <Text style={styles.title}>Mechanical Seal DRF</Text>
-            <Text style={styles.compDesc}>Generated Report</Text>
-          </View>
-        </View>
+//   const PDFFile = ({ formData }) => (
+//     <Document>
+//       <Page size="A4" style={styles.page}>
+//         <View style={styles.compDetails}>
+//           <Image src={Logo} style={styles.logoImg} />
+//           <View style={styles.compSec}>
+//             <Text style={styles.title}>Mechanical Seal DRF</Text>
+//             <Text style={styles.compDesc}>Generated Report</Text>
+//           </View>
+//         </View>
   
   
-        <View style={styles.section}>
+//         <View style={styles.section}>
         
-          <View style={styles.table}>
-            <Row label="DRF Number" value={formData.drfNumber} />
-            <Row label="Branch" value={formData.branch} />
-            <Row label="Sales Inquiry Ref No" value={formData.salesInquiryItemReferenceNo} />
-            <Row label="Created By" value={formData.createdByUser} />
-            <Row label="Created On" value={formData.createdOn} />
-            <Row label="Updated By" value={formData.updatedByUser} />
-            <Row label="Updated On" value={formData.updatedOn} />
-            <Row label="Customer Name" value={formData.customerName} />
-            <Row label="End User" value={formData.endUser} />
-            <Row label="Costing Requirement" value={formData.costingRequirement} />
-          </View>
-        </View>
+//      <View style={styles.table}>
+//   <View style={styles.tableRow}>
+//     <Text style={styles.tableCell}>DRF Number: {formData.drfNumber}</Text>
+//   </View>
+//   <View style={styles.tableRow}>
+//     <Text style={styles.tableCell}>Branch: {formData.branch}</Text>
+//   </View>
+//   <View style={styles.tableRow}>
+//     <Text style={styles.tableCell}>Sales Inquiry Ref No: {formData.salesInquiryItemReferenceNo}</Text>
+//   </View>
+//   <View style={styles.tableRow}>
+//     <Text style={styles.tableCell}>Created By: {formData.createdByUser}</Text>
+//   </View>
+//   <View style={styles.tableRow}>
+//     <Text style={styles.tableCell}>Created On: {formData.createdOn}</Text>
+//   </View>
+//   <View style={styles.tableRow}>
+//     <Text style={styles.tableCell}>Updated By: {formData.updatedByUser}</Text>
+//   </View>
+//   <View style={styles.tableRow}>
+//     <Text style={styles.tableCell}>Updated On: {formData.updatedOn}</Text>
+//   </View>
+//   <View style={styles.tableRow}>
+//     <Text style={styles.tableCell}>Customer Name: {formData.customerName}</Text>
+//   </View>
+//   <View style={styles.tableRow}>
+//     <Text style={styles.tableCell}>End User: {formData.endUser}</Text>
+//   </View>
+//   <View style={styles.tableRow}>
+//     <Text style={styles.tableCell}>Costing Requirement: {formData.costingRequirement}</Text>
+//   </View>
+// </View>
 
-        <View style={styles.sharedSplitBoxContainer}>
-          <View style={styles.leftSplitBox}>
-            <Text style={styles.subHeading}>Pump Data</Text>
-            <Row label="Make" value={formData.pumpInquiryItem.make} />
-            <Row label="Model" value={formData.pumpInquiryItem.model} />
-            <Row label="Pump MOC" value={formData.pumpInquiryItem.pumpMOC} />
-            <Row label="Impeller/Casing MOC" value={formData.pumpInquiryItem.impellerCasingMOC} />
-            <Row label="Shaft MOC" value={formData.pumpInquiryItem.shaftMOC} />
-            <Row label="Bearing BKT" value={formData.pumpInquiryItem.bearingBKT} />
-            <Row label="Tag Number" value={formData.pumpInquiryItem.tagNumber} />
-            <Row label="Arrangement" value={formData.pumpInquiryItem.arrangement} />
-            <Row label="Pump Type" value={formData.pumpInquiryItem.pumpType} />
-            <Row label="Stage" value={formData.pumpInquiryItem.stage} />
-            <Row label="Casing Type" value={formData.pumpInquiryItem.casingType} />
-          </View>
+//         </View>
+
+//         <View style={styles.sharedSplitBoxContainer}>
+//           <View style={styles.leftSplitBox}>
+//             <Text style={styles.subHeading}>Pump Data</Text>
+//             <Row label="Make" value={formData.pumpInquiryItem.make} />
+//             <Row label="Model" value={formData.pumpInquiryItem.model} />
+//             <Row label="Pump MOC" value={formData.pumpInquiryItem.pumpMOC} />
+//             <Row label="Impeller/Casing MOC" value={formData.pumpInquiryItem.impellerCasingMOC} />
+//             <Row label="Shaft MOC" value={formData.pumpInquiryItem.shaftMOC} />
+//             <Row label="Bearing BKT" value={formData.pumpInquiryItem.bearingBKT} />
+//             <Row label="Tag Number" value={formData.pumpInquiryItem.tagNumber} />
+//             <Row label="Arrangement" value={formData.pumpInquiryItem.arrangement} />
+//             <Row label="Pump Type" value={formData.pumpInquiryItem.pumpType} />
+//             <Row label="Stage" value={formData.pumpInquiryItem.stage} />
+//             <Row label="Casing Type" value={formData.pumpInquiryItem.casingType} />
+//           </View>
   
-          <View style={styles.rightSplitBox}>
-            <Text style={styles.subHeading}>Existing Seal</Text>
-            <Row label="Series" value={formData.existingSealSeries} />
-            <Row label="Performance" value={formData.pumpInquiryItem.performance} />
-            <Row label="Seal Arrangement" value={formData.pumpInquiryItem.sealArrangement} />
-            <Row label="Make" value={formData.pumpInquiryItem.existingSealMake} />
-            <Row label="Size" value={formData.pumpInquiryItem.existingSealSize} />
-            <Row label="MOC" value={formData.pumpInquiryItem.existingSealMOC} />
-            <Row label="API Plan" value={formData.pumpInquiryItem.existingSealApiPlan} />
-          </View>
-        </View>
+//           <View style={styles.rightSplitBox}>
+//             <Text style={styles.subHeading}>Existing Seal</Text>
+//             <Row label="Series" value={formData.existingSealSeries} />
+//             <Row label="Performance" value={formData.pumpInquiryItem.performance} />
+//             <Row label="Seal Arrangement" value={formData.pumpInquiryItem.sealArrangement} />
+//             <Row label="Make" value={formData.pumpInquiryItem.existingSealMake} />
+//             <Row label="Size" value={formData.pumpInquiryItem.existingSealSize} />
+//             <Row label="MOC" value={formData.pumpInquiryItem.existingSealMOC} />
+//             <Row label="API Plan" value={formData.pumpInquiryItem.existingSealApiPlan} />
+//           </View>
+//         </View>
   
-       <View style={styles.sharedSplitBoxContainer}>
-          <View style={styles.leftSplitBox}>
-            <Text style={styles.sectionHeader}>Operating Parameters & Fluid</Text>
-            <Text>Pressure: {formData.pressure}</Text>
-            <Text>Temperature: {formData.temperature}</Text>
-            <Text>Fluid: {formData.fluid}</Text>
-          </View>
-          <View style={styles.rightSplitBox}>
-            <Text style={styles.sectionHeader}>Proposed Mechanical Seal</Text>
-            <Text>Seal Type: {formData.sealType}</Text>
-            <Text>Material: {formData.material}</Text>
-            <Text>Size: {formData.size}</Text>
-          </View>
-        </View>
+//        <View style={styles.sharedSplitBoxContainer}>
+//           <View style={styles.leftSplitBox}>
+//             <Text style={styles.subHeading}>Operating Parameters & Fluid</Text>
+//             <Row label="Pressure" value={formData.pressure}></Row>
+//             <Row label="Temprature" value={formData.Temperature}></Row>
+//             <Row label="Fluid" value={formData.fluid}></Row>
+//           </View>
+          
+//           <View style={styles.rightSplitBox}>
+//             <Text style={styles.subHeading}>Proposed Mechanical Seal</Text>
+//             <Row label="Seal Type" value={formData.sealType}></Row>
+//             <Row label="Material" value={formData.material}></Row>
+//             <Row label="Size" value={formData.size}></Row>
+//           </View>
+//         </View>
 
-        <View style={{ borderWidth: 1, borderColor: "#000", marginBottom: 6 }}>
-          <Text style={styles.sectionHeader}>API Plan</Text>
-          <Text style={{ padding: 4 }}>{formData.apiPlan}</Text>
-        </View>
+//         <View style={{ borderWidth: 1, borderColor: "#000", marginBottom: 6 }}>
+//           <Text style={styles.subHeading}>API Plan</Text>
+//           <Row value={formData.apiPlan}></Row>
+//         </View>
 
-        <View style={{ borderWidth: 1, borderColor: "#000" }}>
-          <Text style={styles.sectionHeader}>Measurement</Text>
+//         <View style={{ borderWidth: 1, borderColor: "#000" }}>
+//           <Text style={styles.subHeading}>Measurement</Text>
 
-          <View style={styles.tableHeader}>
-            <Text style={styles.tableHeaderCell}>Parameter</Text>
-            <Text style={styles.tableHeaderLastCell}>Value</Text>
-          </View>
+//           <View style={styles.tableHeader}>
+//             <Text style={{marginLeft:"1.2rem"}}>Parameter</Text>
+//             <Text style={styles.tableCellHeader}>Value</Text>
+//           </View>
 
-          {formData?.measurements?.map((m, idx) => (
-            <View style={styles.row} key={idx}>
-              <Text style={styles.cell}>{m.parameter}</Text>
-              <Text style={styles.lastCell}>{m.value}</Text>
-            </View>
-          ))}
-        </View>
+//           {formData?.measurements?.map((m, idx) => (
+//             <View style={styles.row} key={idx}>
+//               <Text style={styles.cell}>{m.parameter}</Text>
+//               <Text style={styles.lastCell}>{m.value}</Text>
+//             </View>
+//           ))}
+//         </View>
 
   
-        <View style={styles.section}>
-          <Text style={styles.subHeading}>Other Details</Text>
-          <View style={styles.table}>
-            <Row label="Accessories" value={formData.otherDetailsAccessories} />
-            <Row label="Remarks" value={formData.otherDetailsRemarks} />
-          </View>
-        </View>
-      </Page>
-    </Document>
-  );
+//         <View style={styles.section}>
+//           <Text style={styles.subHeading}>Other Details</Text>
+//           <View style={styles.table}>
+//             <Row label="Accessories" value={formData.otherDetailsAccessories} />
+//             <Row label="Remarks" value={formData.otherDetailsRemarks} />
+//           </View>
+//         </View>
+//       </Page>
+//     </Document>
+//   );
   
 
+const PDFFile = ({ formData }) => (
+  <Document>
+    <Page size="A4" style={styles.page}>
+
+      {/* Company Header */}
+      <View style={styles.compDetails}>
+        <Image src={Logo} style={styles.logoImg} />
+        <View style={styles.compSec}>
+          <Text style={styles.title}>Mechanical Seal DRF</Text>
+          <Text style={styles.rightTopHeading}>Pump Seal DataSheet</Text>
+            <Text style={styles.compDesc}>Leak-Proof® Engineering Pvt. Ltd.</Text>
+              </View>
+      </View>
+
+      {/* DRF & General Info */}
+      <View style={styles.section}>
+        <View style={styles.table}>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>DRF Number :</Text>
+            <Text style={styles.tableCell}>{formData.drfNumber}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Branch :</Text>
+            <Text style={styles.tableCell}>{formData.branch}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Sales Inquiry Ref No :</Text>
+            <Text style={styles.tableCell}>{formData.salesInquiryItemReferenceNo}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Created By :</Text>
+            <Text style={styles.tableCell}>{formData.createdByUser}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Created On :</Text>
+            <Text style={styles.tableCell}>{formData.createdOn}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Updated By :</Text>
+            <Text style={styles.tableCell}>{formData.updatedByUser}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Updated On :</Text>
+            <Text style={styles.tableCell}>{formData.updatedOn}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Customer Name :</Text>
+            <Text style={styles.tableCell}>{formData.customerName}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>End User :</Text>
+            <Text style={styles.tableCell}>{formData.endUser}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Costing Requirement :</Text>
+            <Text style={styles.tableCell}>{formData.costingRequirement}</Text>
+          </View>
+
+        </View>
+      </View>
+
+      {/* Pump Data & Existing Seal */}
+      <View style={styles.sharedSplitBoxContainer}>
+
+        <View style={styles.leftSplitBox}>
+          <Text style={styles.subHeading}>Pump Data</Text>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Make :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.make}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Model :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.model}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Pump MOC :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.pumpMOC}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Impeller/Casing MOC :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.impellerCasingMOC}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Shaft MOC :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.shaftMOC}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Bearing BKT :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.bearingBKT}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Tag Number :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.tagNumber}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Arrangement :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.arrangement}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Pump Type :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.pumpType}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Stage :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.stage}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Casing Type :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.casingType}</Text>
+          </View>
+        </View>
+
+        <View style={styles.rightSplitBox}>
+          <Text style={styles.subHeading}>Existing Seal</Text>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Series :</Text>
+            <Text style={styles.tableCell}>{formData.existingSealSeries}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Performance :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.performance}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Seal Arrangement :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.sealArrangement}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Make :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.existingSealMake}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Size :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.existingSealSize}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>MOC :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.existingSealMOC}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>API Plan :</Text>
+            <Text style={styles.tableCell}>{formData.pumpInquiryItem.existingSealApiPlan}</Text>
+          </View>
+        </View>
+      </View>
+
+      {/* Operating Parameters & Proposed Seal */}
+      <View style={styles.sharedSplitBoxContainer}>
+        <View style={styles.leftSplitBox}>
+          <Text style={styles.subHeading}>Operating Parameters & Fluid</Text>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Pressure :</Text>
+            <Text style={styles.tableCell}>{formData.pressure}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Temperature :</Text>
+            <Text style={styles.tableCell}>{formData.Temperature}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Fluid :</Text>
+            <Text style={styles.tableCell}>{formData.fluid}</Text>
+          </View>
+        </View>
+
+        <View style={styles.rightSplitBox}>
+          <Text style={styles.subHeading}>Proposed Mechanical Seal</Text>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Seal Type :</Text>
+            <Text style={styles.tableCell}>{formData.sealType}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Material :</Text>
+            <Text style={styles.tableCell}>{formData.material}</Text>
+          </View>
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Size :</Text>
+            <Text style={styles.tableCell}>{formData.size}</Text>
+          </View>
+        </View>
+      </View>
+
+
+      {/* API Plan */}
+      <View style={{ borderWidth: 1, borderColor: "#000", marginBottom: 6, marginTop:25 }}>
+        <Text style={styles.subHeading}>API Plan</Text>
+
+        <View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Flushing Plan:</Text>
+  <Text style={styles.tableCell}>{formData.apiFlushingPlans}</Text>
+</View>
+
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Barrier/Buffer Plan:</Text>
+  <Text style={styles.tableCell}>{formData.apiBarrierBufferPlans}</Text>
+</View>
+
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Atmospheric Plan:</Text>
+  <Text style={styles.tableCell}>{formData.apiAtmosphericPlans}</Text>
+</View>
+
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Collection Plan:</Text>
+  <Text style={styles.tableCell}>{formData.apiCollectionPlans}</Text>
+</View>
+
+
+      </View>
+
+      {/* Measurements */}
+      <View style={{ borderWidth: 1,marginTop:5, borderColor: "#000" }}>
+        <Text style={styles.subHeading}>Measurement</Text>
+ <View style={{flexDirection:"row",justifyContent:"space-between"}}>
+
+<View>
+
+       {/* Shaft OD */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Shaft OD:</Text>
+  <Text style={styles.tableCell}>{formData.measurementShaftOd}</Text>
+</View>
+
+{/* Stuffing Box ID */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Stuffing Box ID:</Text>
+  <Text style={styles.tableCell}>{formData.measurementStuffingBoxId}</Text>
+</View>
+
+{/* Stuffing Box Depth */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Stuffing Box Depth:</Text>
+  <Text style={styles.tableCell}>{formData.measurementStuffingBoxDepth}</Text>
+</View>
+
+{/* Nearest Obstruction */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Nearest Obstruction:</Text>
+  <Text style={styles.tableCell}>{formData.measurementNearestObstruction}</Text>
+</View>
+
+{/* Spigot Dia */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Spigot Dia:</Text>
+  <Text style={styles.tableCell}>{formData.measurementSpigotDia}</Text>
+</View>
+
+{/* Socket Depth */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Socket Depth:</Text>
+  <Text style={styles.tableCell}>{formData.measurementSocketDepth}</Text>
+</View>
+
+{/* Shaft Sleeve Available */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Shaft Sleeve Available:</Text>
+  <Text style={styles.tableCell}>{formData.measurementShaftSleeveAvailable}</Text>
+</View>
+
+{/* Sleeve OD */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Sleeve OD:</Text>
+  <Text style={styles.tableCell}>{formData.measurementSleeveOd}</Text>
+</View>
+
+{/* Stuffing Box Throat Dia */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Stuffing Box Throat Dia:</Text>
+  <Text style={styles.tableCell}>{formData.measurementStuffingBoxThroatDia}</Text>
+</View>
+
+
+
+{/* Sleeve Shoulder Length */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Sleeve Shoulder Length:</Text>
+  <Text style={styles.tableCell}>{formData.measurementSleeveShoulderLength}</Text>
+</View>
+
+{/* Sleeve Extension Length */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Sleeve Extension Length:</Text>
+  <Text style={styles.tableCell}>{formData.measurementSleeveExtensionLength}</Text>
+</View>
+
+{/* Shaft Hub Distance */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Shaft Hub Distance:</Text>
+  <Text style={styles.tableCell}>{formData.measurementShaftHubDistance}</Text>
+</View>
+
+{/* No. of Studs */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>No. of Studs:</Text>
+  <Text style={styles.tableCell}>{formData.measurementNumberOfStuds}</Text>
+</View>
+</View>
+
+
+<View>
+  
+{/* Stud Size */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Stud Size:</Text>
+  <Text style={styles.tableCell}>{formData.measurementStudSize}</Text>
+</View>
+
+{/* Bolt Circle Diameter */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Bolt Circle Diameter:</Text>
+  <Text style={styles.tableCell}>{formData.measurementBoltCircleDiameter}</Text>
+</View>
+
+{/* Start Angle */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Start Angle:</Text>
+  <Text style={styles.tableCell}>{formData.measurementStartAngle}</Text>
+</View>
+
+{/* Flush Size */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Flush Size:</Text>
+  <Text style={styles.tableCell}>{formData.measurementFlushSize}</Text>
+</View>
+
+{/* Flush Angle */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Flush Angle:</Text>
+  <Text style={styles.tableCell}>{formData.measurementFlushAngle}</Text>
+</View>
+
+{/* Quench Size */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Quench Size:</Text>
+  <Text style={styles.tableCell}>{formData.measurementQuenchSize}</Text>
+</View>
+
+{/* Quench Angle */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Quench Angle:</Text>
+  <Text style={styles.tableCell}>{formData.measurementQuenchAngle}</Text>
+</View>
+
+{/* Drain Size */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Drain Size:</Text>
+  <Text style={styles.tableCell}>{formData.measurementDrainSize}</Text>
+</View>
+
+{/* Drain Angle */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Drain Angle:</Text>
+  <Text style={styles.tableCell}>{formData.measurementDrainAngle}</Text>
+</View>
+
+{/* Stuffing Box */}
+<View style={styles.tableRow}>
+  <Text style={styles.tableCellHeader}>Stuffing Box:</Text>
+  <Text style={styles.tableCell}>{formData.measurementStuffingBox}</Text>
+</View>
+</View>
+</View>
+
+</View>
+
+
+      <View style={{ borderWidth: 1,marginTop:10, borderColor: "#000" }}>
+        <Text style={styles.subHeading}>Other Details</Text>
+      
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Accessories :</Text>
+            <Text style={styles.tableCell}>{formData.otherDetailsAccessories}</Text>
+          </View>
+
+
+          <View style={styles.tableRow}>
+            <Text style={styles.tableCellHeader}>Remarks :</Text>
+            <Text style={styles.tableCell}>{formData.otherDetailsRemarks}</Text>
+          </View>
+      
+      </View>
+
+
+    </Page>
+  </Document>
+);
 
 
 
@@ -2792,21 +3226,24 @@ console.log("FormData is ",formData);
           console.log("Temporary File URL:", tempFileURL);
         
           // Prepare FormData
-          const formData = new FormData();
+         const formData = new FormData();
           formData.append("file", file);
+          formData.append("filetype", "pumpseal")
         
           try {
             const { data } = await axiosInstance.post(
-              `lens/fileUpload/file?filelocation=${encodeURIComponent(file.name)}`,
+              `/lens/fileUpload/file?filetype=pumpseal`,
               formData,
               {
-                headers: { "Content-Type": "multipart/form-data" },
+                headers: {
+                  "Content-Type": "multipart/form-data", 
+                  "accept": "*/*"
+                }
               }
             );
         
             console.log("File Upload Response:", data);
         
-            // ✅ Update `uploadedFileNames` at the correct index
             setAtmSeal(data);
         
             //  Update `rotaryJointInquiries[index]` with the new filename
@@ -2954,22 +3391,24 @@ console.log("FormData is ",formData);
           // Prepare FormData
           const formData = new FormData();
           formData.append("file", file);
+          formData.append("filetype", "pumpseal")
         
           try {
             const { data } = await axiosInstance.post(
-              `lens/fileUpload/file?filelocation=${encodeURIComponent(file.name)}`,
+              `/lens/fileUpload/file?filetype=pumpseal`,
               formData,
               {
-                headers: { "Content-Type": "multipart/form-data" },
+                headers: {
+                  "Content-Type": "multipart/form-data", 
+                  "accept": "*/*"
+                }
               }
             );
         
             console.log("File Upload Response:", data);
         
-            // ✅ Update `uploadedFileNames` at the correct index
             setAtStuff(data);
         
-            //  Update `rotaryJointInquiries[index]` with the new filename
             setFormData((prev) => ({
               ...prev,
               attachmentStuffingBoxDetails:data              
@@ -3102,6 +3541,7 @@ console.log("FormData is ",formData);
           <Grid item xs={4}>
             {!pId ? (
               <Button
+              disabled={!authState?.authorities.includes("DRFInquiry_Write")}
                 className="submit-btn"
                 style={{ margin: "2rem 1rem" }}
                 onClick={(e) => handleSubmit(e, formData, navigate)}
@@ -3115,7 +3555,7 @@ console.log("FormData is ",formData);
                 <Button
                   className="update-btn"
                   variant="contained"
-                  disabled={(authState?.sub)!==formData.createdByUser}
+                  disabled={(authState?.sub)!==formData.createdByUser && !authState?.authorities.includes("DRFInquiry_Write")}
                   type="submit"
                   onClick={(e) => handleUpdatePumpSeal(e, formData, pId, navigate)}
                 >

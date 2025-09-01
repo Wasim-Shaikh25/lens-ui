@@ -17,6 +17,7 @@ import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { searchFilter } from '../../../apis/CustomerApi';
 import useToken from '../../../contextApi/useToken';
+import { useAuth } from '../../../contextApi/AuthContext';
 
 
 
@@ -34,6 +35,7 @@ export default function EditCustomer() {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const token = useToken();
+  const { authState } = useAuth();
 
 
 
@@ -164,7 +166,7 @@ return (
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
                     <EditIcon style={{ color: 'blue' }} />
                   </button>
-                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row.customerReferenceNumber, data, setIsDeleted, setData,token)}>
+                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} disabled={!authState?.authorities.includes("CustomerDetail_Write")} onClick={() => deleteDetail(row.customerReferenceNumber, data, setIsDeleted, setData,token)}>
                     <DeleteIcon style={{ color: 'red' }} />
                   </button>
                 </TableCell>

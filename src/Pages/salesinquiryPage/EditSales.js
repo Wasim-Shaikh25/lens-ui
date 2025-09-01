@@ -16,6 +16,7 @@ import { deleteDetail } from '../../apis/SalesInquiryApi';
 import '../../App.css'
 import { searchFilter } from '../../apis/SalesInquiryApi';
 import { TextField ,Button,  Container, Grid, InputLabel , IconButton } from '@mui/material';
+import { useAuth } from "../../contextApi/AuthContext";
 
 
 
@@ -32,6 +33,7 @@ export default function EditSales() {
   const [branch,setBranch] = useState('');
   const [industry,setIndustry] = useState('');
 
+  const { authState } = useAuth();
 
 
   useEffect(() => {
@@ -152,7 +154,7 @@ return (
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
                     <EditIcon style={{ color: 'blue' }} />
                   </button>
-                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteDetail(row?.salesInquiryReferenceNo,data,setData, setIsDeleted)}>
+                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}   disabled={!authState?.authorities.includes("SalesInquiry_Write")} onClick={() => deleteDetail(row?.salesInquiryReferenceNo,data,setData, setIsDeleted)}>
                     <DeleteIcon style={{ color: 'red' }} />
                   </button>
                 </TableCell>

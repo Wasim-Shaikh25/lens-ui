@@ -16,11 +16,11 @@ import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { searchDrfFilter } from '../../apis/drfFilterApi';
 import useToken from '../../contextApi/useToken';
-import { useAuth } from '../../contextApi/AuthContext';
 import { deleteAgitatorDetail } from '../../apis/AgitatorApi';
 import { deleteApiDetail } from '../../apis/ApiPlan';
 import { deletePumpDetail } from '../../apis/PumpSealApi';
 import { deleteRotaryDetail } from '../../apis/RotaryApi';
+import { useAuth } from '../../contextApi/AuthContext';
 
 
 export default function EditDrf() {
@@ -203,7 +203,7 @@ return (
                    }}>
                     <EditIcon style={{ color:'blue' }} />
                   </button>
-              <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteRow(row.drfNumber, data,setData)}>
+              <button   style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} onClick={() => deleteRow(row.drfNumber, data,setData)}>
                     <DeleteIcon style={{ color: 'red' }} />
                   </button> 
                 </TableCell>

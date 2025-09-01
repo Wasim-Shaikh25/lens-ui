@@ -9,6 +9,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import { Radio, RadioGroup, FormControl, FormLabel } from '@mui/material';
 import { handleSubmit, handleUpdate } from '../../apis/QuotationApi';
 import { getQuotation } from '../../apis/QuotationApi';
+import { useAuth } from '../../contextApi/AuthContext';
 
 
 
@@ -23,6 +24,7 @@ export default function CreateQuotation() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [isInitialized, setIsInitialized] = useState(false);
   const [savedItems, setSavedItems] = useState([]);
+  const { authState } = useAuth();
 
 
 
@@ -1109,9 +1111,9 @@ console.log("formData",formData)
 
             {/* {selectedTab === 1?():null} */}
 
-            {!qId && (selectedTab === 3) ? (<Button className="update-btn" onClick={(e) => handleSubmit(e, navigate, formData, savedItems)} sx={{ margin: "1rem 1rem 0rem 1rem" }} type="submit" variant="contained" >Submit</Button>) : (selectedTab === 3) ? (
+            {!qId && (selectedTab === 3) ? (<Button className="update-btn" onClick={(e) => handleSubmit(e, navigate, formData, savedItems)} sx={{ margin: "1rem 1rem 0rem 1rem" }} type="submit" disabled={!authState?.authorities.includes("Quotation_Write")}variant="contained" >Submit</Button>) : (selectedTab === 3) ? (
               <>
-                <Button className="update-btn" onClick={(e) => handleUpdate(e, navigate, formData, savedItems)} sx={{ margin: "1rem 1rem 0rem 1rem" }} variant="contained"  >Update</Button>
+                <Button disabled={!authState?.authorities.includes("Quotation_Write")} className="update-btn" onClick={(e) => handleUpdate(e, navigate, formData, savedItems)} sx={{ margin: "1rem 1rem 0rem 1rem" }} variant="contained"  >Update</Button>
                 <Button className="cancel-btn" variant="contained" onClick={cancelUpdate} >Cancel</Button> </>) : null}
           </Grid>
         </Grid>

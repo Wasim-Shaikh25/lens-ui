@@ -4911,6 +4911,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
     <IconButton
   color="primary"
   size="small"
+  disabled={!authState?.authorities.includes("SalesInquiry_Write") &&!newSealType}
   onClick={() => {
     if (!newSealType) return;
 
@@ -4938,7 +4939,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
 
     setNewSealType(""); // Reset Dropdown
   }}
-  disabled={!newSealType}
+  
   style={{
     backgroundColor: newSealType ? "black" : "gray",
     color: "white",
@@ -4967,6 +4968,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                 style={{ margin: "2rem 1rem" }}
                 onClick={(e) => handleSubmit(e, formData, navigate)}
                 type="submit"
+                disabled={!authState?.authorities.includes("SalesInquiry_Write")}
                 variant="contained">
                 Submit
               </Button>
@@ -4975,6 +4977,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                 <Button
                   className="update-btn"
                   variant="contained"
+                  disabled={!authState?.authorities.includes("SalesInquiry_Write")}
                   type="submit"
                   onClick={(e) => handleUpdate(e, formData, sId, navigate)}
                 >

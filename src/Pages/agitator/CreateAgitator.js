@@ -2764,19 +2764,23 @@ export default function AgitatorSeal() {
                   // Prepare FormData
                   const formData = new FormData();
                   formData.append("file", file);
-
+                  formData.append("filetype", "agitator")
+                  
                   try {
                     const { data } = await axiosInstance.post(
-                      `lens/fileUpload/file?filelocation=${encodeURIComponent(file.name)}`,
+                      `/lens/fileUpload/file?filetype=agitator`,
                       formData,
                       {
-                        headers: { "Content-Type": "multipart/form-data" },
+                        headers: {
+                          "Content-Type": "multipart/form-data", 
+                          "accept": "*/*"
+                        }
                       }
                     );
+                
 
                     console.log("File Upload Response:", data);
 
-                    // ✅ Update `uploadedFileNames` at the correct index
                     setDrInput(data);
 
                     //  Update `rotaryJointInquiries[index]` with the new filename
@@ -2929,19 +2933,23 @@ export default function AgitatorSeal() {
                   // Prepare FormData
                   const formData = new FormData();
                   formData.append("file", file);
-
+                  formData.append("filetype", "agitator")
+                  
                   try {
                     const { data } = await axiosInstance.post(
-                      `lens/fileUpload/file?filelocation=${encodeURIComponent(file.name)}`,
+                      `/lens/fileUpload/file?filetype=agitator`,
                       formData,
                       {
-                        headers: { "Content-Type": "multipart/form-data" },
+                        headers: {
+                          "Content-Type": "multipart/form-data", 
+                          "accept": "*/*"
+                        }
                       }
                     );
+                
 
                     console.log("File Upload Response:", data);
 
-                    // ✅ Update `uploadedFileNames` at the correct index
                     setPPInput(data);
 
                     //  Update `rotaryJointInquiries[index]` with the new filename
@@ -3081,9 +3089,9 @@ export default function AgitatorSeal() {
         <Grid item xs={4} style={{display:"flex"}}>
           <Grid item xs={4}>
 
-            {!aId ? (<Button className="submit-btn" type="submit" onClick={(e) => handleSubmit(e, formData, navigate)} variant="contained" >Submit</Button>) : (
+            {!aId ? (<Button  disabled={!authState?.authorities.includes("DRFInquiry_Write")} className="submit-btn" type="submit" onClick={(e) => handleSubmit(e, formData, navigate)} variant="contained" >Submit</Button>) : (
               <>
-                <Button className="update-btn" variant="contained" disabled={authState?.sub !== formData.createdByUser } onClick={(e) => handleUpdate(e, formData, navigate, aId)} >Update</Button>
+                <Button className="update-btn" variant="contained" disabled={(authState?.sub)!==formData.createdByUser&&!authState?.authorities.includes("DRFInquiry_Write")} onClick={(e) => handleUpdate(e, formData, navigate, aId)} >Update</Button>
                 <Button className="cancel-btn" variant="contained" onClick={cancelUpdate} >Cancel</Button> </>)}
           </Grid>
           <Grid item xs={4} style={{ margin: '12px 0px 0px 20px' }}>
