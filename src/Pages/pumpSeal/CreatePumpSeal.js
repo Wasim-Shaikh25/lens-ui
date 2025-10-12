@@ -736,7 +736,7 @@ const PDFFile = ({ formData }) => (
 
 
       {/* API Plan */}
-      <View style={{ borderWidth: 1, borderColor: "#000", marginBottom: 6, marginTop:25 }}>
+      <View style={{ borderWidth: 1, borderColor: "#000", marginBottom: 6, marginTop:"58px" }}>
         <Text style={styles.subHeading}>API Plan</Text>
 
         <View style={styles.tableRow}>
@@ -2969,6 +2969,7 @@ console.log("FormData is ",formData);
                 size="small"
                 name="measurementStartAngle"
                 label="Start Angle"
+                type="number"
                 value={formData?.measurementStartAngle || ''}
                 onChange={(e) => handleChange(e)}
                 variant="outlined"
@@ -3015,6 +3016,7 @@ console.log("FormData is ",formData);
                     size="small"
                     name="measurementFlushAngle"
                     label="Angle"
+                    type="number"
                     value={formData?.measurementFlushAngle || ''}
                     onChange={(e) => handleChange(e)}
                     variant="outlined"
@@ -3051,6 +3053,7 @@ console.log("FormData is ",formData);
                     size="small"
                     name="measurementQuenchAngle"
                     label="Angle"
+                    type="number"
                     value={formData?.measurementQuenchAngle || ''}
                     onChange={(e) => handleChange(e)}
                     variant="outlined"
@@ -3086,6 +3089,7 @@ console.log("FormData is ",formData);
                     size="small"
                     name="measurementDrainAngle"
                     label="Angle"
+                    type="number"
                     value={formData?.measurementDrainAngle || ''}
                     onChange={(e) => handleChange(e)}
                     variant="outlined"

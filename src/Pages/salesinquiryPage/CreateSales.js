@@ -1182,523 +1182,516 @@ const handleChange = (arrayName = null, index = null) => (event) => {
          </Grid>
          
          
-                <Grid item xs={4}>
-                  <Autocomplete
-                    style={{ width: '100%' }}
-                    size="small"
-                value={formData?.agitatorInquiries[index]?.performance || ""}
-                    onChange={(event, newValue) => {
-                      setFormData({
-                        ...formData,
-                        agitatorInquiries: [
-                          {
-                            ...item,
-                            performance: newValue || "", // Update the sealArrangement field
-                          },
-                        ],
-                      });
-                    }}
-                    options={['Satisfactory', 'Unsatisfactory']}
-                    renderInput={(params) => (
-                      <TextField
-                        size="small"
-                        {...params}
-                        placeholder="Performance"
-                        variant="outlined"
-                        className='custom-text-field'
-                        fullWidth
-                        label="Performance"
-                      />
-                    )}
-                  />
-                </Grid>
-         
-         
-                {/* Make */}
-                <Grid item xs={4}>
-                  <TextField
-                    label="Make"
-                    name="existingSealMake"
-                  value={formData?.agitatorInquiries[index]?.existingSealMake}
-                    onChange={handleChange("agitatorInquiries",index)}
-                    size="small"
-                    fullWidth
-                    className="custom-text-field"
-                  />
-                </Grid>
-         
-                {/* Size */}
-                <Grid item xs={4}>
-                  <TextField
-                    label="Size"
-                    name="existingSealSize"
-                    value={item?.existingSealSize}
-                    onChange={handleChange("agitatorInquiries",index)}
-                    size="small"
-                    fullWidth
-                    className="custom-text-field"
-                  />
-                </Grid>
-         
-                {/* MOC */}
-                <Grid item xs={4}>
-                  <TextField
-                    label="MOC"
-                    name="existingSealMOC"
-                    value={item?.existingSealMOC}
-                    onChange={handleChange("agitatorInquiries",index)}
-                    size="small"
-                    fullWidth
-                    className="custom-text-field"
-                  />
-                </Grid>
-         
-                {/* API Plan */}
-                <Grid item xs={4}>
-                  <TextField
-                    label="API Plan"
-                    name="existingSealApiPlan"
-                    value={item?.existingSealApiPlan}
-                    onChange={handleChange("agitatorInquiries",index)}
-                    size="small"
-                    fullWidth
-                    className="custom-text-field"
-                  />
-                </Grid>
-              </Grid>
-         
-              {/*///////////////3rd form ////////////// */}
-         
-              <h3 style={{ padding: '10px 0' }}>Operating Parameters And Fluid Detail :-</h3>
-         
-              <Grid container spacing={2}>
-                {/* Vessel Pressure (Operating) */}
-         
-         
-         <Grid item xs={4}>
-          <TextField
-            size="small"
-            className="custom-text-field"
-            name="vesselPressureOperating"
-            value={item?.vesselPressureOperating}
-            onChange={(e) => {
-              const value = e.target.value;
-              setFormData((prev) => ({
-                ...prev,
-                agitatorInquiries: [
-                  {
-                    ...prev.agitatorInquiries[index],
-                    vesselPressureOperating: +value
-                  }
-                ]
-              }));
-            }}
-            label="Vessel Pressure (Operating)"
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <FormControl size="small" variant="outlined">
-                    <Select
-                      value={item?.vesselPressureOperatingUnit || ""}
-                      onChange={(e) => {
-                        const selectedUnit = e.target.value;
-                        setFormData((prev) => ({
-                          ...prev,
-                          agitatorInquiries: [
-                            {
-                              ...prev.agitatorInquiries[index],
-                              vesselPressureOperatingUnit: selectedUnit
-                            }
-                          ]
-                        }));
-                  
-                        
-                      }}
-                      displayEmpty
-                      disabled={!item?.vesselPressureOperating}
-                      sx={{
-                        height: "100%",
-                        borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                        borderRadius: 0,
-                        "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                        "& .MuiSelect-select": {
-                          padding: "0 8px",
-                          outline: "none",
-                          border: "none",
-                          height: "100%",
-                          display: "flex",
-                          alignItems: "center"
-                        },
-                        minWidth: 60
-                      }}
-                    >
-                      <MenuItem value="" disabled>
-                        Unit
-                      </MenuItem>
-                      <MenuItem value="kg/cm2">kg/cm²</MenuItem>
-                      <MenuItem value="kg/cm2 a">kg/cm² (a)</MenuItem>
-                      <MenuItem value="kg/cm2 g">kg/cm² (g)</MenuItem>
-                      <MenuItem value="bar">bar</MenuItem>
-                      <MenuItem value="bar (a)">bar (a)</MenuItem>
-                      <MenuItem value="bar (g)">bar (g)</MenuItem>
-                      <MenuItem value="Mpa">MPa</MenuItem>
-                      <MenuItem value="Mpa (a)">MPa (a)</MenuItem>
-                      <MenuItem value="Mpa (g)">MPa (g)</MenuItem>
-                      <MenuItem value="Kpa">kPa</MenuItem>
-                      <MenuItem value="Kpa (g)">kPa (g)</MenuItem>
-                      <MenuItem value="PSI">PSI</MenuItem>
-                      <MenuItem value="PSIG">PSIG</MenuItem>
-                      <MenuItem value="MLC">MLC</MenuItem>
-                      <MenuItem value="MWC">MWC</MenuItem>
-                      <MenuItem value="Meter">Meter</MenuItem>
-                      <MenuItem value="kgf/cm2">kgf/cm²</MenuItem>
-                    </Select>
-                  </FormControl>
-                </InputAdornment>
-              )
-            }}
-          />
-         </Grid>
-         
-         
-         
-                <Grid item xs={4}>
-                <TextField
-            size="small"
-            type="number"
-            className="custom-text-field"
-            name="vesselPressureDesign"
-            value={item?.vesselPressureDesign}
-            onChange={(e) => {
-              const value = e.target.value;
-              setFormData((prev) => ({
-                ...prev,
-                agitatorInquiries: [
-                  {
-                    ...prev.agitatorInquiries[index],
-                    vesselPressureDesign: +value
-                  }
-                ]
-              }));
-            }}
-            label="Vessel Pressure (Design)"
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <FormControl size="small" variant="outlined">
-                    <Select
-                      value={item?.vesselPressureDesignUnit || ""}
-                      onChange={(e) => {
-                        const selectedUnit = e.target.value;
-                        setFormData((prev) => ({
-                          ...prev,
-                          agitatorInquiries: [
-                            {
-                              ...prev.agitatorInquiries[index],
-                              vesselPressureDesignUnit: selectedUnit
-                            }
-                          ]
-                        }));
-                  
-                        
-                      }}
-                      displayEmpty
-                      disabled={!item?.vesselPressureDesign}
-                      sx={{
-                        height: "100%",
-                        borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                        borderRadius: 0,
-                        "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                        "& .MuiSelect-select": {
-                          padding: "0 8px",
-                          outline: "none",
-                          border: "none",
-                          height: "100%",
-                          display: "flex",
-                          alignItems: "center"
-                        },
-                        minWidth: 60
-                      }}
-                    >
-                      <MenuItem value="" disabled>
-                        Unit
-                      </MenuItem>
-                      <MenuItem value="MLC">MLC</MenuItem>
-                      <MenuItem value="MWC">MWC</MenuItem>
-                      <MenuItem value="Meter">Meter</MenuItem>
-                      <MenuItem value="kgf/cm2">kgf/cm2</MenuItem>
-                    </Select>
-                  </FormControl>
-                </InputAdornment>
-              ),
-            }}
-          />
-         </Grid>
-         
-         
-         
-         
-              
-         
-         
-         
-         
-                {/* Direction of Rotation */}
-                <Grid item xs={4}>
-                  <Autocomplete
-                    size="small"
-                    value={item?.directionOfRotation}
-                    onChange={(event, newValue) => {
-                      setFormData((prevState) => ({
-                        ...prevState,
-                        agitatorInquiries: [
-                          {
-                            ...prevState.agitatorInquiries[index], // Keep the other fields of the first object intact
-                            directionOfRotation: newValue || "", // Update the 'branch' property
-                          },
-                        ],
-                      }));
-                    }}
-                    options={['CW', 'CCW']}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Direction of Rotation"
-                        variant="outlined"
-                        size="small"
-                        fullWidth
-                        className="custom-text-field"
-                      />
-                    )}
-                  />
-                </Grid>
-         
-                {/* Speed */}
-                <Grid item xs={4}>
-                  <TextField
-                    label="Speed"
-                    type="number"
-                    name="speed"
-                    value={item?.speed}
-                    onChange={handleChange("agitatorInquiries",index)}
-                    fullWidth
-                    size="small"
-                    variant="outlined"
-                    className="custom-text-field"
-                  />
-                </Grid>
-              </Grid>
-         
-              {/*/////////////// 4th form /////////////// */}
-              <h3 style={{ padding: '10px 0' }}>Fluid :-</h3>
-              <Grid container spacing={2}>
-                {/* Fluid */}
-                <Grid item xs={4}>
-                  <TextField
-                    label="Fluid"
-                    name="fluid"
-                    value={item?.fluid}
-                    onChange={handleChange("agitatorInquiries",index)}
-                    fullWidth
-                    size="small"
-                    variant="outlined"
-                    className="custom-text-field"
-                  />
-                </Grid>
-         
-         
-                {/* Nature */}
-                <Grid item xs={4}>
-                  <Autocomplete
-                    size="small"
-                    value={item?.nature}
-                    onChange={(event, newValue) => {
-                      setFormData((prevState) => ({
-                        ...prevState,
-                        agitatorInquiries: [
-                          {
-                            ...prevState.agitatorInquiries[index], // Keep the other fields of the first object intact
-                            nature: newValue || "", // Update the 'branch' property
-                          },
-                        ],
-                      }));
-                    }}
-                    options={['Option1', 'Option2']} // Replace with actual nature options
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Nature"
-                        variant="outlined"
-                        size="small"
-                        fullWidth
-                        className="custom-text-field"
-                      />
-                    )}
-                  />
-                </Grid>
-         
-                {/* Pumping Temperature */}
-                 <Grid item xs={4}>
-          <TextField
-            size="small"
-            className="custom-text-field"
-            name="pumpingTemperature"
-            value={item?.pumpingTemperature?.value || ""}
-            onChange={(e) => {
-              const value = e.target.value;
-              setFormData((prev) => ({
-                ...prev,
-                agitatorInquiries: [
-                  {
-                    ...prev.agitatorInquiries[index],
+               {/* Performance */}
+<Grid item xs={4}>
+  <Autocomplete
+    style={{ width: "100%" }}
+    size="small"
+    value={formData?.agitatorInquiries[index]?.performance || ""}
+    onChange={(event, newValue) => {
+      setFormData((prev) => ({
+        ...prev,
+        agitatorInquiries: prev.agitatorInquiries.map((inq, i) =>
+          i === index ? { ...inq, performance: newValue || "" } : inq
+        ),
+      }));
+    }}
+    options={["Satisfactory", "Unsatisfactory"]}
+    renderInput={(params) => (
+      <TextField
+        size="small"
+        {...params}
+        placeholder="Performance"
+        variant="outlined"
+        className="custom-text-field"
+        fullWidth
+        label="Performance"
+      />
+    )}
+  />
+</Grid>
+
+{/* Make */}
+<Grid item xs={4}>
+  <TextField
+    label="Make"
+    name="existingSealMake"
+    value={formData?.agitatorInquiries[index]?.existingSealMake || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        agitatorInquiries: prev.agitatorInquiries.map((inq, i) =>
+          i === index ? { ...inq, existingSealMake: value } : inq
+        ),
+      }));
+    }}
+    size="small"
+    fullWidth
+    className="custom-text-field"
+  />
+</Grid>
+
+{/* Size */}
+<Grid item xs={4}>
+  <TextField
+    label="Size"
+    name="existingSealSize"
+    value={formData?.agitatorInquiries[index]?.existingSealSize || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        agitatorInquiries: prev.agitatorInquiries.map((inq, i) =>
+          i === index ? { ...inq, existingSealSize: value } : inq
+        ),
+      }));
+    }}
+    size="small"
+    fullWidth
+    className="custom-text-field"
+  />
+</Grid>
+
+{/* MOC */}
+<Grid item xs={4}>
+  <TextField
+    label="MOC"
+    name="existingSealMOC"
+    value={formData?.agitatorInquiries[index]?.existingSealMOC || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        agitatorInquiries: prev.agitatorInquiries.map((inq, i) =>
+          i === index ? { ...inq, existingSealMOC: value } : inq
+        ),
+      }));
+    }}
+    size="small"
+    fullWidth
+    className="custom-text-field"
+  />
+</Grid>
+
+{/* API Plan */}
+<Grid item xs={4}>
+  <TextField
+    label="API Plan"
+    name="existingSealApiPlan"
+    value={formData?.agitatorInquiries[index]?.existingSealApiPlan || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        agitatorInquiries: prev.agitatorInquiries.map((inq, i) =>
+          i === index ? { ...inq, existingSealApiPlan: value } : inq
+        ),
+      }));
+    }}
+    size="small"
+    fullWidth
+    className="custom-text-field"
+  />
+</Grid>
+
+{/* Vessel Pressure (Operating) */}
+<Grid item xs={4}>
+  <TextField
+    size="small"
+    type="number"
+    className="custom-text-field"
+    name="vesselPressureOperating"
+    value={formData?.agitatorInquiries[index]?.vesselPressureOperating || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        agitatorInquiries: prev.agitatorInquiries.map((inq, i) =>
+          i === index
+            ? { ...inq, vesselPressureOperating: value }
+            : inq
+        ),
+      }));
+    }}
+    label="Vessel Pressure (Operating)"
+    fullWidth
+    InputProps={{
+      endAdornment: (
+        <InputAdornment position="end">
+          <FormControl size="small" variant="outlined">
+            <Select
+              value={formData?.agitatorInquiries[index]?.vesselPressureOperatingUnit || ""}
+              onChange={(e) => {
+                const selectedUnit = e.target.value;
+                setFormData((prev) => ({
+                  ...prev,
+                  agitatorInquiries: prev.agitatorInquiries.map((inq, i) =>
+                    i === index
+                      ? { ...inq, vesselPressureOperatingUnit: selectedUnit }
+                      : inq
+                  ),
+                }));
+              }}
+              displayEmpty
+              disabled={!formData?.agitatorInquiries[index]?.vesselPressureOperating}
+              sx={{
+                height: "100%",
+                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                borderRadius: 0,
+                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                "& .MuiSelect-select": {
+                  padding: "0 8px",
+                  outline: "none",
+                  border: "none",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                },
+                minWidth: 60,
+              }}
+            >
+              <MenuItem value="" disabled>Unit</MenuItem>
+              <MenuItem value="kg/cm2">kg/cm²</MenuItem>
+              <MenuItem value="bar">bar</MenuItem>
+              <MenuItem value="MPa">MPa</MenuItem>
+              <MenuItem value="PSI">PSI</MenuItem>
+              <MenuItem value="Meter">Meter</MenuItem>
+            </Select>
+          </FormControl>
+        </InputAdornment>
+      ),
+    }}
+  />
+</Grid>
+
+{/* Vessel Pressure (Design) */}
+<Grid item xs={4}>
+  <TextField
+    size="small"
+    type="number"
+    className="custom-text-field"
+    name="vesselPressureDesign"
+    value={formData?.agitatorInquiries[index]?.vesselPressureDesign || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        agitatorInquiries: prev.agitatorInquiries.map((inq, i) =>
+          i === index ? { ...inq, vesselPressureDesign: value } : inq
+        ),
+      }));
+    }}
+    label="Vessel Pressure (Design)"
+    fullWidth
+    InputProps={{
+      endAdornment: (
+        <InputAdornment position="end">
+          <FormControl size="small" variant="outlined">
+            <Select
+              value={formData?.agitatorInquiries[index]?.vesselPressureDesignUnit || ""}
+              onChange={(e) => {
+                const selectedUnit = e.target.value;
+                setFormData((prev) => ({
+                  ...prev,
+                  agitatorInquiries: prev.agitatorInquiries.map((inq, i) =>
+                    i === index
+                      ? { ...inq, vesselPressureDesignUnit: selectedUnit }
+                      : inq
+                  ),
+                }));
+              }}
+              displayEmpty
+              disabled={!formData?.agitatorInquiries[index]?.vesselPressureDesign}
+              sx={{
+                height: "100%",
+                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                borderRadius: 0,
+                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                "& .MuiSelect-select": {
+                  padding: "0 8px",
+                  outline: "none",
+                  border: "none",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                },
+                minWidth: 60,
+              }}
+            >
+              <MenuItem value="" disabled>Unit</MenuItem>
+              <MenuItem value="MLC">MLC</MenuItem>
+              <MenuItem value="MWC">MWC</MenuItem>
+              <MenuItem value="Meter">Meter</MenuItem>
+              <MenuItem value="kgf/cm2">kgf/cm²</MenuItem>
+            </Select>
+          </FormControl>
+        </InputAdornment>
+      ),
+    }}
+  />
+</Grid>
+
+{/* Direction of Rotation */}
+<Grid item xs={4}>
+  <Autocomplete
+    size="small"
+    value={item?.directionOfRotation || ""}
+    onChange={(event, newValue) => {
+      setFormData((prevState) => {
+        const updatedInquiries = [...prevState.agitatorInquiries];
+        updatedInquiries[index] = {
+          ...updatedInquiries[index],
+          directionOfRotation: newValue || "",
+        };
+        return { ...prevState, agitatorInquiries: updatedInquiries };
+      });
+    }}
+    options={['CW', 'CCW']}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        label="Direction of Rotation"
+        variant="outlined"
+        size="small"
+        fullWidth
+        className="custom-text-field"
+      />
+    )}
+  />
+</Grid>
+
+{/* Speed */}
+<Grid item xs={4}>
+  <TextField
+    label="Speed"
+    type="number"
+    name="speed"
+    value={item?.speed || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => {
+        const updatedInquiries = [...prev.agitatorInquiries];
+        updatedInquiries[index] = {
+          ...updatedInquiries[index],
+          speed: value,
+        };
+        return { ...prev, agitatorInquiries: updatedInquiries };
+      });
+    }}
+    fullWidth
+    size="small"
+    variant="outlined"
+    className="custom-text-field"
+  />
+</Grid>
+
+{/* Fluid */}
+<Grid item xs={4}>
+  <TextField
+    label="Fluid"
+    name="fluid"
+    value={item?.fluid || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => {
+        const updatedInquiries = [...prev.agitatorInquiries];
+        updatedInquiries[index] = {
+          ...updatedInquiries[index],
+          fluid: value,
+        };
+        return { ...prev, agitatorInquiries: updatedInquiries };
+      });
+    }}
+    fullWidth
+    size="small"
+    variant="outlined"
+    className="custom-text-field"
+  />
+</Grid>
+
+{/* Nature */}
+<Grid item xs={4}>
+  <Autocomplete
+    size="small"
+    value={item?.nature || ""}
+    onChange={(event, newValue) => {
+      setFormData((prev) => {
+        const updatedInquiries = [...prev.agitatorInquiries];
+        updatedInquiries[index] = {
+          ...updatedInquiries[index],
+          nature: newValue || "",
+        };
+        return { ...prev, agitatorInquiries: updatedInquiries };
+      });
+    }}
+    options={['Option1', 'Option2']}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        label="Nature"
+        variant="outlined"
+        size="small"
+        fullWidth
+        className="custom-text-field"
+      />
+    )}
+  />
+</Grid>
+
+{/* Pumping Temperature */}
+<Grid item xs={4}>
+  <TextField
+    size="small"
+    className="custom-text-field"
+    name="pumpingTemperature"
+    type="number"
+    value={item?.pumpingTemperature?.value || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => {
+        const updatedInquiries = [...prev.agitatorInquiries];
+        updatedInquiries[index] = {
+          ...updatedInquiries[index],
+          pumpingTemperature: {
+            ...updatedInquiries[index]?.pumpingTemperature,
+            value,
+          },
+        };
+        return { ...prev, agitatorInquiries: updatedInquiries };
+      });
+    }}
+    label="Pumping Temperature"
+    fullWidth
+    InputProps={{
+      endAdornment: (
+        <InputAdornment position="end">
+          <FormControl size="small" variant="outlined">
+            <Select
+              value={item?.pumpingTemperature?.unit || ""}
+              onChange={(e) => {
+                const unit = e.target.value;
+                setFormData((prev) => {
+                  const updatedInquiries = [...prev.agitatorInquiries];
+                  updatedInquiries[index] = {
+                    ...updatedInquiries[index],
                     pumpingTemperature: {
-                      ...prev.agitatorInquiries[index]?.pumpingTemperature,
-                      value
-                    }
-                  }
-                ]
-              }));
-            }}
-            label="Pumping Temperature"
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <FormControl size="small" variant="outlined">
-                    <Select
-                      value={item?.pumpingTemperature?.unit || ""}
-                      onChange={(e) => {
-                        const selectedUnit = e.target.value;
-                        setFormData((prev) => ({
-                          ...prev,
-                          agitatorInquiries: [
-                            {
-                              ...prev.agitatorInquiries[index],
-                              pumpingTemperature: {
-                                ...prev.agitatorInquiries[index]?.pumpingTemperature,
-                                unit: selectedUnit
-                              }
-                            }
-                          ]
-                        }));
-                      }}
-                      displayEmpty
-                      disabled={!item?.pumpingTemperature?.value}
-                      sx={{
-                        height: "100%",
-                        borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                        borderRadius: 0,
-                        "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                        "& .MuiSelect-select": {
-                          padding: "0 8px",
-                          outline: "none",
-                          border: "none",
-                          height: "100%",
-                          display: "flex",
-                          alignItems: "center"
-                        },
-                        minWidth: 60
-                      }}
-                    >
-                      <MenuItem value="" disabled>
-                        Unit
-                      </MenuItem>
-                      <MenuItem value="C">℃ </MenuItem>
-                      <MenuItem value="F">℉</MenuItem>
-                    </Select>
-                  </FormControl>
-                </InputAdornment>
-              ),
-            }}
-          />
-         </Grid>
-         
-         
-                {/* Maximum Temperature */}
-          <Grid item xs={4}>
-          <TextField
-            size="small"
-            className="custom-text-field"
-            name="maximumTemperature"
-            value={item?.maximumTemperature?.value || ""}
-            onChange={(e) => {
-              const value = e.target.value;
-              setFormData((prev) => ({
-                ...prev,
-                agitatorInquiries: [
-                  {
-                    ...prev.agitatorInquiries[index],
+                      ...updatedInquiries[index]?.pumpingTemperature,
+                      unit,
+                    },
+                  };
+                  return { ...prev, agitatorInquiries: updatedInquiries };
+                });
+              }}
+              displayEmpty
+              disabled={!item?.pumpingTemperature?.value}
+              sx={{
+                height: "100%",
+                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                borderRadius: 0,
+                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                "& .MuiSelect-select": {
+                  padding: "0 8px",
+                  outline: "none",
+                  border: "none",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                },
+                minWidth: 60,
+              }}
+            >
+              <MenuItem value="" disabled>Unit</MenuItem>
+              <MenuItem value="C">℃</MenuItem>
+              <MenuItem value="F">℉</MenuItem>
+            </Select>
+          </FormControl>
+        </InputAdornment>
+      ),
+    }}
+  />
+</Grid>
+
+{/* Maximum Temperature */}
+<Grid item xs={4}>
+  <TextField
+    size="small"
+    className="custom-text-field"
+    name="maximumTemperature"
+    type="number"
+    value={item?.maximumTemperature?.value || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => {
+        const updatedInquiries = [...prev.agitatorInquiries];
+        updatedInquiries[index] = {
+          ...updatedInquiries[index],
+          maximumTemperature: {
+            ...updatedInquiries[index]?.maximumTemperature,
+            value,
+          },
+        };
+        return { ...prev, agitatorInquiries: updatedInquiries };
+      });
+    }}
+    label="Maximum Temperature"
+    fullWidth
+    InputProps={{
+      endAdornment: (
+        <InputAdornment position="end">
+          <FormControl size="small" variant="outlined">
+            <Select
+              value={item?.maximumTemperature?.unit || ""}
+              onChange={(e) => {
+                const unit = e.target.value;
+                setFormData((prev) => {
+                  const updatedInquiries = [...prev.agitatorInquiries];
+                  updatedInquiries[index] = {
+                    ...updatedInquiries[index],
                     maximumTemperature: {
-                      ...prev.agitatorInquiries[index]?.maximumTemperature,
-                      value
-                    }
-                  }
-                ]
-              }));
-            }}
-            label="Maximum Temperature"
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <FormControl size="small" variant="outlined">
-                    <Select
-                      value={item?.maximumTemperature?.unit || ""}
-                      onChange={(e) => {
-                        const selectedUnit = e.target.value;
-                        setFormData((prev) => ({
-                          ...prev,
-                          agitatorInquiries: [
-                            {
-                              ...prev.agitatorInquiries[index],
-                              maximumTemperature: {
-                                ...prev.agitatorInquiries[index]?.maximumTemperature,
-                                unit: selectedUnit
-                              }
-                            }
-                          ]
-                        }));
-                      }}
-                      displayEmpty
-                      disabled={!item?.maximumTemperature?.value}
-                      sx={{
-                        height: "100%",
-                        borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                        borderRadius: 0,
-                        "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                        "& .MuiSelect-select": {
-                          padding: "0 8px",
-                          outline: "none",
-                          border: "none",
-                          height: "100%",
-                          display: "flex",
-                          alignItems: "center"
-                        },
-                        minWidth: 60
-                      }}
-                    >
-                      <MenuItem value="" disabled>
-                        Unit
-                      </MenuItem>
-                      <MenuItem value="C">℃ </MenuItem>
-                      <MenuItem value="F">℉</MenuItem>
-                    </Select>
-                  </FormControl>
-                </InputAdornment>
-              ),
-            }}
-          />
-         </Grid>
-         
-         
+                      ...updatedInquiries[index]?.maximumTemperature,
+                      unit,
+                    },
+                  };
+                  return { ...prev, agitatorInquiries: updatedInquiries };
+                });
+              }}
+              displayEmpty
+              disabled={!item?.maximumTemperature?.value}
+              sx={{
+                height: "100%",
+                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                borderRadius: 0,
+                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                "& .MuiSelect-select": {
+                  padding: "0 8px",
+                  outline: "none",
+                  border: "none",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                },
+                minWidth: 60,
+              }}
+            >
+              <MenuItem value="" disabled>Unit</MenuItem>
+              <MenuItem value="C">℃</MenuItem>
+              <MenuItem value="F">℉</MenuItem>
+            </Select>
+          </FormControl>
+        </InputAdornment>
+      ),
+    }}
+  />
+</Grid>
+
          
                 {/* SP Gravity */}
                 <Grid item xs={4}>
                   <TextField
                     label="SP Gravity"
                     name="spGravity"
+                    type="number"
                     value={item?.spGravity}
                     onChange={handleChange("agitatorInquiries",index)}
                     fullWidth
@@ -1712,6 +1705,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                 <Grid item xs={4}>
                   <TextField
                     label="Freezing Point"
+                    type="number"
                     name="freezingPoint"
                     value={item?.freezingPoint}
                     onChange={handleChange("agitatorInquiries",index)}
@@ -1726,6 +1720,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                 <Grid item xs={4}>
                   <TextField
                     label="Boiling Point"
+                    type="number"
                     name="boilingPoint"
                     value={item?.boilingPoint}
                     onChange={handleChange("agitatorInquiries",index)}
@@ -1740,6 +1735,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                 <Grid item xs={4}>
                   <TextField
                     label="Viscosity"
+                    type="number"
                     name="viscosity"
                     value={item?.viscosity}
                     onChange={handleChange("agitatorInquiries",index)}
@@ -1754,6 +1750,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                 <Grid item xs={4}>
                   <TextField
                     label="Percentage Of Solid"
+                    type="number"
                     name="percentageOfSolid"
                     value={item?.percentageOfSolid}
                     onChange={handleChange("agitatorInquiries",index)}
@@ -1767,6 +1764,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                 {/* Solid Size */}
                 <Grid item xs={4}>
                   <TextField
+                    type="number"
                     label="Solid Size"
                     name="solidSize"
                     value={item?.solidSize}
@@ -2250,6 +2248,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
               <Grid item xs={4}>
           <TextField
             size="small"
+            type="number"
             className="custom-text-field"
             name="suctionPressure"
             value={item?.suctionPressure?.value || ""}
@@ -2257,15 +2256,17 @@ const handleChange = (arrayName = null, index = null) => (event) => {
               const value = e.target.value;
               setFormData((prev) => ({
                 ...prev,
-                pumpInquiries: [
-                  {
-                    ...prev.pumpInquiries[index],
-                    suctionPressure: {
-                      ...prev.pumpInquiries[index].suctionPressure,
-                      value
-                    }
-                  }
-                ]
+                pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+                  i === index
+                    ? {
+                        ...inquiry,
+                        suctionPressure: {
+                          ...inquiry.suctionPressure,
+                          value,
+                        },
+                      }
+                    : inquiry
+                ),
               }));
             }}
             label="Suction Pressure"
@@ -2280,15 +2281,17 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                         const selectedUnit = e.target.value;
                         setFormData((prev) => ({
                           ...prev,
-                          pumpInquiries: [
-                            {
-                              ...prev.pumpInquiries[index],
-                              suctionPressure: {
-                                ...prev.pumpInquiries[index].suctionPressure,
-                                unit: selectedUnit
-                              }
-                            }
-                          ]
+                          pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+                            i === index
+                              ? {
+                                  ...inquiry,
+                                  suctionPressure: {
+                                    ...inquiry.suctionPressure,
+                                    unit: selectedUnit,
+                                  },
+                                }
+                              : inquiry
+                          ),
                         }));
                       }}
                       displayEmpty
@@ -2324,285 +2327,341 @@ const handleChange = (arrayName = null, index = null) => (event) => {
         </Grid>
         
         <Grid item xs={4}>
-          <TextField
-            size="small"
-            className="custom-text-field"
-            name="boxPressure"
-            value={item?.boxPressure?.value || ""}
-            onChange={(e) => {
-              const value = e.target.value;
-              setFormData((prev) => ({
-                ...prev,
-                pumpInquiries: [
-                  {
-                    ...prev.pumpInquiries[index],
-                    boxPressure: {
-                      ...prev.pumpInquiries[index].boxPressure,
-                      value
-                    }
-                  }
-                ]
-              }));
-            }}
-            label="Box Pressure"
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <FormControl size="small" variant="outlined">
-                    <Select
-                      value={item?.boxPressure?.unit || ""}
-                      onChange={(e) => {
-                        const selectedUnit = e.target.value;
-                        setFormData((prev) => ({
-                          ...prev,
-                          pumpInquiries: [
-                            {
-                              ...prev.pumpInquiries[index],
-                              boxPressure: {
-                                ...prev.pumpInquiries[index].boxPressure,
-                                unit: selectedUnit
-                              }
-                            }
-                          ]
-                        }));
-                      }}
-                      displayEmpty
-                      disabled={!item?.boxPressure?.value}
-                      sx={{
-                        height: "100%",
-                        borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                        borderRadius: 0,
-                        "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                        "& .MuiSelect-select": {
-                          padding: "0 8px",
-                          outline: "none",
-                          border: "none",
-                          height: "100%",
-                          display: "flex",
-                          alignItems: "center"
-                        },
-                        minWidth: 60
-                      }}
-                    >
-                      {!item?.dischargePressure?.value && <MenuItem>Unit</MenuItem>}
-                      {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
-                        <MenuItem key={unit} value={unit}>
-                          {unit}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
+  <TextField
+    size="small"
+    className="custom-text-field"
+    name="boxPressure"
+    type="number"
+    value={item?.boxPressure?.value || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+          i === index
+            ? {
+                ...inquiry,
+                boxPressure: {
+                  ...inquiry.boxPressure,
+                  value,
+                },
+              }
+            : inquiry
+        ),
+      }));
+    }}
+    label="Box Pressure"
+    fullWidth
+    InputProps={{
+      endAdornment: (
+        <InputAdornment position="end">
+          <FormControl size="small" variant="outlined">
+            <Select
+              value={item?.boxPressure?.unit || ""}
+              onChange={(e) => {
+                const selectedUnit = e.target.value;
+                setFormData((prev) => ({
+                  ...prev,
+                  pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+                    i === index
+                      ? {
+                          ...inquiry,
+                          boxPressure: {
+                            ...inquiry.boxPressure,
+                            unit: selectedUnit,
+                          },
+                        }
+                      : inquiry
+                  ),
+                }));
+              }}
+              displayEmpty
+              disabled={!item?.boxPressure?.value}
+              sx={{
+                height: "100%",
+                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                borderRadius: 0,
+                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                "& .MuiSelect-select": {
+                  padding: "0 8px",
+                  outline: "none",
+                  border: "none",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                },
+                minWidth: 60,
+              }}
+            >
+              {!item?.boxPressure?.value && <MenuItem>Unit</MenuItem>}
+              {[
+                "kg/cm2",
+                "kg/cm2 a",
+                "kg/cm2 g",
+                "bar",
+                "bar (a)",
+                "bar (g)",
+                "Mpa",
+                "Mpa (a)",
+                "Mpa (g)",
+                "Kpa",
+                "Kpa (g)",
+                "PSI",
+                "PSIG",
+                "MLC",
+                "MWC",
+                "Meter",
+                "kgf/cm2",
+              ].map((unit) => (
+                <MenuItem key={unit} value={unit}>
+                  {unit}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </InputAdornment>
+      ),
+    }}
+  />
+</Grid>
+
+<Grid item xs={4}>
+  <TextField
+    size="small"
+    className="custom-text-field"
+    name="dischargePressure"
+    type="number"
+    value={item?.dischargePressure?.value || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+          i === index
+            ? {
+                ...inquiry,
+                dischargePressure: {
+                  ...inquiry.dischargePressure,
+                  value,
+                },
+              }
+            : inquiry
+        ),
+      }));
+    }}
+    label="Discharge Pressure"
+    fullWidth
+    InputProps={{
+      endAdornment: (
+        <InputAdornment position="end">
+          <FormControl size="small" variant="outlined">
+            <Select
+              value={item?.dischargePressure?.unit || ""}
+              onChange={(e) => {
+                const selectedUnit = e.target.value;
+                setFormData((prev) => ({
+                  ...prev,
+                  pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+                    i === index
+                      ? {
+                          ...inquiry,
+                          dischargePressure: {
+                            ...inquiry.dischargePressure,
+                            unit: selectedUnit,
+                          },
+                        }
+                      : inquiry
+                  ),
+                }));
+              }}
+              displayEmpty
+              disabled={!item?.dischargePressure?.value}
+              sx={{
+                height: "100%",
+                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                borderRadius: 0,
+                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                "& .MuiSelect-select": {
+                  padding: "0 8px",
+                  outline: "none",
+                  border: "none",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                },
+                minWidth: 60,
+              }}
+            >
+              {!item?.dischargePressure?.value && <MenuItem>Unit</MenuItem>}
+              {[
+                "kg/cm2",
+                "kg/cm2 a",
+                "kg/cm2 g",
+                "bar",
+                "bar (a)",
+                "bar (g)",
+                "Mpa",
+                "Mpa (a)",
+                "Mpa (g)",
+                "Kpa",
+                "Kpa (g)",
+                "PSI",
+                "PSIG",
+                "MLC",
+                "MWC",
+                "Meter",
+                "kgf/cm2",
+              ].map((unit) => (
+                <MenuItem key={unit} value={unit}>
+                  {unit}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </InputAdornment>
+      ),
+    }}
+  />
+</Grid>
+
+<Grid item xs={4}>
+  <TextField
+    size="small"
+    className="custom-text-field"
+    name="totalHead"
+    type="number"
+    value={item?.totalHead?.value || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+          i === index
+            ? {
+                ...inquiry,
+                totalHead: {
+                  ...inquiry.totalHead,
+                  value,
+                },
+              }
+            : inquiry
+        ),
+      }));
+    }}
+    label="Total Head"
+    fullWidth
+    InputProps={{
+      endAdornment: (
+        <InputAdornment position="end">
+          <FormControl size="small" variant="outlined">
+            <Select
+              value={item?.totalHead?.unit || ""}
+              onChange={(e) => {
+                const selectedUnit = e.target.value;
+                setFormData((prev) => ({
+                  ...prev,
+                  pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+                    i === index
+                      ? {
+                          ...inquiry,
+                          totalHead: {
+                            ...inquiry.totalHead,
+                            unit: selectedUnit,
+                          },
+                        }
+                      : inquiry
+                  ),
+                }));
+              }}
+              displayEmpty
+              disabled={!item?.totalHead?.value}
+              sx={{
+                height: "100%",
+                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                borderRadius: 0,
+                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                "& .MuiSelect-select": {
+                  padding: "0 8px",
+                  outline: "none",
+                  border: "none",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                },
+                minWidth: 60,
+              }}
+            >
+              {!item?.totalHead?.value && <MenuItem>Unit</MenuItem>}
+              {["Meter", "MWC", "MLC", "kg/cm2"].map((unit) => (
+                <MenuItem key={unit} value={unit}>
+                  {unit}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </InputAdornment>
+      ),
+    }}
+  />
+</Grid>
+
         
-        <Grid item xs={4}>
-          <TextField
-            size="small"
-            className="custom-text-field"
-            name="dischargePressure"
-            value={item?.dischargePressure?.value || ""}
-            onChange={(e) => {
-              const value = e.target.value;
-              setFormData((prev) => ({
-                ...prev,
-                pumpInquiries: [
-                  {
-                    ...prev.pumpInquiries[index],
-                    dischargePressure: {
-                      ...prev.pumpInquiries[index].dischargePressure,
-                      value
-                    }
-                  }
-                ]
-              }));
-            }}
-            label="Discharge Pressure"
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <FormControl size="small" variant="outlined">
-                    <Select
-                      value={item?.dischargePressure?.unit || ""}
-                      onChange={(e) => {
-                        const selectedUnit = e.target.value;
-                        setFormData((prev) => ({
-                          ...prev,
-                          pumpInquiries: [
-                            {
-                              ...prev.pumpInquiries[index],
-                              dischargePressure: {
-                                ...prev.pumpInquiries[index].dischargePressure,
-                                unit: selectedUnit
-                              }
-                            }
-                          ]
-                        }));
-                      }}
-                      displayEmpty
-                      disabled={!item?.dischargePressure?.value}
-                      sx={{
-                        height: "100%",
-                        borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                        borderRadius: 0,
-                        "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                        "& .MuiSelect-select": {
-                          padding: "0 8px",
-                          outline: "none",
-                          border: "none",
-                          height: "100%",
-                          display: "flex",
-                          alignItems: "center"
-                        },
-                        minWidth: 60
-                      }}
-                    >
-                      {!item?.dischargePressure?.value && <MenuItem>Unit</MenuItem>}
-                      {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
-                        <MenuItem key={unit} value={unit}>
-                          {unit}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
         
-        
-        <Grid item xs={4}>
-          <TextField
-            size="small"
-            className="custom-text-field"
-            name="totalHead"
-            value={item?.totalHead?.value || ""}
-            onChange={(e) => {
-              const value = e.target.value;
-              setFormData((prev) => ({
-                ...prev,
-                pumpInquiries: [
-                  {
-                    ...prev.pumpInquiries[index],
-                    totalHead: {
-                      ...prev.pumpInquiries[index].totalHead,
-                      value
-                    }
-                  }
-                ]
-              }));
-            }}
-            label="Total Head"
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <FormControl size="small" variant="outlined">
-                    <Select
-                      value={item?.totalHead?.unit || ""}
-                      onChange={(e) => {
-                        const selectedUnit = e.target.value;
-                        setFormData((prev) => ({
-                          ...prev,
-                          pumpInquiries: [
-                            {
-                              ...prev.pumpInquiries[index],
-                              totalHead: {
-                                ...prev.pumpInquiries[index].totalHead,
-                                unit: selectedUnit
-                              }
-                            }
-                          ]
-                        }));
-                      }}
-                      displayEmpty
-                      disabled={!item?.totalHead?.value}
-                      sx={{
-                        height: "100%",
-                        borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                        borderRadius: 0,
-                        "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                        "& .MuiSelect-select": {
-                          padding: "0 8px",
-                          outline: "none",
-                          border: "none",
-                          height: "100%",
-                          display: "flex",
-                          alignItems: "center"
-                        },
-                        minWidth: 60
-                      }}
-                    >
-                      {!item?.totalHead?.value && <MenuItem>Unit</MenuItem>}
-                      {["Meter", "MWC", "MLC", "kg/cm2"].map((unit) => (
-                        <MenuItem key={unit} value={unit}>
-                          {unit}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-        
-        
-        
-        <Grid item xs={4}>
-          <TextField
-            size="small"
-            className="custom-text-field"
-            name="directionOfRotation"
-            value={item?.directionOfRotation || ""}
-            onChange={(e) => {
-              const value = e.target.value;
-              setFormData((prev) => ({
-                ...prev,
-                pumpInquiries: [
-                  {
-                    ...prev.pumpInquiries[index],
-                    directionOfRotation: value
-                  }
-                ]
-              }));
-            }}
-            label="Direction of Rotation"
-            fullWidth
-            select
-          >
-            <MenuItem value="CW">CW</MenuItem>
-            <MenuItem value="CCW">CCW</MenuItem>
-          </TextField>
-        </Grid>
-        
-        <Grid item xs={4}>
-          <TextField
-            size="small"
-            className="custom-text-field"
-            name="speed"
-            value={item?.speed || ""}
-            onChange={(e) => {
-              const value = e.target.value;
-              setFormData((prev) => ({
-                ...prev,
-                pumpInquiries: [
-                  {
-                    ...prev.pumpInquiries[index],
-                    speed: value
-                  }
-                ]
-              }));
-            }}
-            label="Speed"
-            fullWidth
-          />
-        </Grid>
+<Grid item xs={4}>
+  <TextField
+    size="small"
+    className="custom-text-field"
+    name="directionOfRotation"
+    value={item?.directionOfRotation || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+          i === index
+            ? {
+                ...inquiry,
+                directionOfRotation: value,
+              }
+            : inquiry
+        ),
+      }));
+    }}
+    label="Direction of Rotation"
+    fullWidth
+    select
+  >
+    <MenuItem value="CW">CW</MenuItem>
+    <MenuItem value="CCW">CCW</MenuItem>
+  </TextField>
+</Grid>
+
+<Grid item xs={4}>
+  <TextField
+    size="small"
+    type="number"
+    className="custom-text-field"
+    name="speed"
+    value={item?.speed || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+          i === index
+            ? {
+                ...inquiry,
+                speed: value,
+              }
+            : inquiry
+        ),
+      }));
+    }}
+    label="Speed"
+    fullWidth
+  />
+</Grid>
+
         
               </Grid>
         
@@ -2611,328 +2670,363 @@ const handleChange = (arrayName = null, index = null) => (event) => {
         
               <h3 style={{ padding: '10px 0' }}>Fluid :-</h3>
               <Grid container spacing={2}>
-          <Grid item xs={4}>
-            <TextField
-              size="small"
-              label="Fluid"
-              name="fluid"
-              value={item?.fluid || ""}
-              onChange={(e) => {
-                const value = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [
-                    {
-                      ...prev.pumpInquiries[index],
-                      fluid: value,
-                    },
-                  ],
-                }));
-              }}
-              fullWidth
-              className="custom-text-field"
-            />
-          </Grid>
-        
-          {/* Nature */}
-          <Grid item xs={4}>
-            <Autocomplete
-              options={["Option 1", "Option 2", "Option 3"]} // Replace with actual options
-              renderInput={(params) => (
-                <TextField {...params} label="Nature" size="small" fullWidth className="custom-text-field" />
-              )}
-              onChange={(event, value) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [{ ...prev.pumpInquiries[index], nature: value }],
-                }))
-              }
-            />
-          </Grid>
-        
-          {/* Pumping Temperature */}
-        {/* Pumping Temperature */}
-        <Grid item xs={4}>
-          <TextField
-            size="small"
-            className="custom-text-field"
-            name="pumpingTemperature"
-            value={item?.pumpingTemperature?.value || ""}
-            onChange={(e) => {
-              const value = e.target.value;
-              setFormData((prev) => ({
-                ...prev,
-                pumpInquiries: [
-                  {
-                    ...prev.pumpInquiries[index],
-                    pumpingTemperature: {
-                      ...prev.pumpInquiries[index].pumpingTemperature,
-                      value,
-                    },
+  {/* Fluid */}
+  <Grid item xs={4}>
+    <TextField
+      size="small"
+      label="Fluid"
+      name="fluid"
+      value={item?.fluid || ""}
+      onChange={(e) => {
+        const value = e.target.value;
+        setFormData((prev) => ({
+          ...prev,
+          pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+            i === index ? { ...inquiry, fluid: value } : inquiry
+          ),
+        }));
+      }}
+      fullWidth
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Nature */}
+  <Grid item xs={4}>
+    <Autocomplete
+      options={["Option 1", "Option 2", "Option 3"]} // Replace with actual options
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Nature"
+          size="small"
+          fullWidth
+          className="custom-text-field"
+        />
+      )}
+      value={item?.nature || ""}
+      onChange={(event, value) =>
+        setFormData((prev) => ({
+          ...prev,
+          pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+            i === index ? { ...inquiry, nature: value } : inquiry
+          ),
+        }))
+      }
+    />
+  </Grid>
+
+  {/* Pumping Temperature */}
+  <Grid item xs={4}>
+    <TextField
+      size="small"
+      className="custom-text-field"
+      name="pumpingTemperature"
+      type="number"
+      value={item?.pumpingTemperature?.value || ""}
+      onChange={(e) => {
+        const value = e.target.value;
+        setFormData((prev) => ({
+          ...prev,
+          pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+            i === index
+              ? {
+                  ...inquiry,
+                  pumpingTemperature: {
+                    ...inquiry.pumpingTemperature,
+                    value,
                   },
-                ],
-              }));
-            }}
-            label="Pumping Temperature"
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <FormControl size="small" variant="outlined">
-                    <Select
-                      value={item?.pumpingTemperature?.unit || ""}
-                      onChange={(e) => {
-                        const selectedUnit = e.target.value;
-                        setFormData((prev) => ({
-                          ...prev,
-                          pumpInquiries: [
-                            {
-                              ...prev.pumpInquiries[index],
-                              pumpingTemperature: {
-                                ...prev.pumpInquiries[index].pumpingTemperature,
-                                unit: selectedUnit,
-                              },
+                }
+              : inquiry
+          ),
+        }));
+      }}
+      label="Pumping Temperature"
+      fullWidth
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <FormControl size="small" variant="outlined">
+              <Select
+                value={item?.pumpingTemperature?.unit || ""}
+                onChange={(e) => {
+                  const selectedUnit = e.target.value;
+                  setFormData((prev) => ({
+                    ...prev,
+                    pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+                      i === index
+                        ? {
+                            ...inquiry,
+                            pumpingTemperature: {
+                              ...inquiry.pumpingTemperature,
+                              unit: selectedUnit,
                             },
-                          ],
-                        }));
-                      }}
-                      displayEmpty
-                      disabled={!item?.pumpingTemperature?.value}
-                      sx={{
-                        height: "100%",
-                        borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                        borderRadius: 0,
-                        "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                        "& .MuiSelect-select": {
-                          padding: "0 8px",
-                          outline: "none",
-                          border: "none",
-                          height: "100%",
-                          display: "flex",
-                          alignItems: "center",
-                        },
-                        minWidth: 60,
-                      }}
-                    >
-                      {!item?.pumpingTemperature?.value && <MenuItem>Unit</MenuItem>}
-                      <MenuItem value="C">℃</MenuItem>
-                      <MenuItem value="F">℉</MenuItem>
-                    </Select>
-                  </FormControl>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-        
-        {/* Maximum Temperature */}
-        <Grid item xs={4}>
-          <TextField
-            size="small"
-            className="custom-text-field"
-            name="maximumTemperature"
-            value={item?.maximumTemperature?.value || ""}
-            onChange={(e) => {
-              const value = e.target.value;
-              setFormData((prev) => ({
-                ...prev,
-                pumpInquiries: [
-                  {
-                    ...prev.pumpInquiries[index],
-                    maximumTemperature: {
-                      ...prev.pumpInquiries[index].maximumTemperature,
-                      value,
-                    },
+                          }
+                        : inquiry
+                    ),
+                  }));
+                }}
+                displayEmpty
+                disabled={!item?.pumpingTemperature?.value}
+                sx={{
+                  height: "100%",
+                  borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                  borderRadius: 0,
+                  "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                  "& .MuiSelect-select": {
+                    padding: "0 8px",
+                    outline: "none",
+                    border: "none",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
                   },
-                ],
-              }));
-            }}
-            label="Maximum Temperature"
-            fullWidth
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <FormControl size="small" variant="outlined">
-                    <Select
-                      value={item?.maximumTemperature?.unit || ""}
-                      onChange={(e) => {
-                        const selectedUnit = e.target.value;
-                        setFormData((prev) => ({
-                          ...prev,
-                          pumpInquiries: [
-                            {
-                              ...prev.pumpInquiries[index],
-                              maximumTemperature: {
-                                ...prev.pumpInquiries[index].maximumTemperature,
-                                unit: selectedUnit,
-                              },
+                  minWidth: 60,
+                }}
+              >
+                {!item?.pumpingTemperature?.value && <MenuItem>Unit</MenuItem>}
+                <MenuItem value="C">℃</MenuItem>
+                <MenuItem value="F">℉</MenuItem>
+              </Select>
+            </FormControl>
+          </InputAdornment>
+        ),
+      }}
+    />
+  </Grid>
+
+  {/* Maximum Temperature */}
+  <Grid item xs={4}>
+    <TextField
+      size="small"
+      className="custom-text-field"
+      name="maximumTemperature"
+      type="number"
+      value={item?.maximumTemperature?.value || ""}
+      onChange={(e) => {
+        const value = e.target.value;
+        setFormData((prev) => ({
+          ...prev,
+          pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+            i === index
+              ? {
+                  ...inquiry,
+                  maximumTemperature: {
+                    ...inquiry.maximumTemperature,
+                    value,
+                  },
+                }
+              : inquiry
+          ),
+        }));
+      }}
+      label="Maximum Temperature"
+      fullWidth
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <FormControl size="small" variant="outlined">
+              <Select
+                value={item?.maximumTemperature?.unit || ""}
+                onChange={(e) => {
+                  const selectedUnit = e.target.value;
+                  setFormData((prev) => ({
+                    ...prev,
+                    pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+                      i === index
+                        ? {
+                            ...inquiry,
+                            maximumTemperature: {
+                              ...inquiry.maximumTemperature,
+                              unit: selectedUnit,
                             },
-                          ],
-                        }));
-                      }}
-                      displayEmpty
-                      disabled={!item?.maximumTemperature?.value}
-                      sx={{
-                        height: "100%",
-                        borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                        borderRadius: 0,
-                        "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                        "& .MuiSelect-select": {
-                          padding: "0 8px",
-                          outline: "none",
-                          border: "none",
-                          height: "100%",
-                          display: "flex",
-                          alignItems: "center",
-                        },
-                        minWidth: 60,
-                      }}
-                    >
-                      {!item?.maximumTemperature?.value && <MenuItem>Unit</MenuItem>}
-                      <MenuItem value="C">℃</MenuItem>
-                      <MenuItem value="F">℉</MenuItem>
-                    </Select>
-                  </FormControl>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-        
-        
-          {/* SP Gravity */}
-          <Grid item xs={4}>
-            <TextField
-              size="small"
-              label="SP Gravity"
-              name="spGravity"
-              value={item?.spGravity || ""}
-              onChange={(e) => {
-                const value = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [{ ...prev.pumpInquiries[index], spGravity: value }],
-                }));
-              }}
-              fullWidth
-              className="custom-text-field"
-            />
-          </Grid>
-        
-          {/* Freezing Point */}
-          <Grid item xs={4}>
-            <TextField
-              size="small"
-              label="Freezing Point"
-              name="freezingPoint"
-              value={item?.freezingPoint || ""}
-              onChange={(e) => {
-                const value = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [{ ...prev.pumpInquiries[index], freezingPoint: value }],
-                }));
-              }}
-              fullWidth
-              className="custom-text-field"
-            />
-          </Grid>
-        
-          {/* Boiling Point */}
-          <Grid item xs={4}>
-            <TextField
-              size="small"
-              label="Boiling Point"
-              name="boilingPoint"
-              value={item?.boilingPoint || ""}
-              onChange={(e) => {
-                const value = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [{ ...prev.pumpInquiries[index], boilingPoint: value }],
-                }));
-              }}
-              fullWidth
-              className="custom-text-field"
-            />
-          </Grid>
-        
-          {/* Viscosity */}
-          <Grid item xs={4}>
-            <TextField
-              size="small"
-              label="Viscosity"
-              name="viscosity"
-              value={item?.viscosity || ""}
-              onChange={(e) => {
-                const value = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [{ ...prev.pumpInquiries[index], viscosity: value }],
-                }));
-              }}
-              fullWidth
-              className="custom-text-field"
-            />
-          </Grid>
-        
-          {/* Percentage of Solid */}
-          <Grid item xs={4}>
-            <TextField
-              size="small"
-              label="Percentage of Solid"
-              name="percentageOfSolid"
-              value={item?.percentageOfSolid || ""}
-              onChange={(e) => {
-                const value = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [{ ...prev.pumpInquiries[index], percentageOfSolid: value }],
-                }));
-              }}
-              fullWidth
-              className="custom-text-field"
-            />
-          </Grid>
-        
-          {/* Solid Size */}
-          <Grid item xs={4}>
-            <TextField
-              size="small"
-              label="Solid Size"
-              name="solidSize"
-              value={item?.solidSize || ""}
-              onChange={(e) => {
-                const value = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [{ ...prev.pumpInquiries[index], solidSize: value }],
-                }));
-              }}
-              fullWidth
-              className="custom-text-field"
-            />
-          </Grid>
-        
-          {/* Special Note */}
-          <Grid item xs={4}>
-            <TextField
-              size="small"
-              label="Special Note"
-              name="specialNote"
-              value={item?.specialNote || ""}
-              onChange={(e) => {
-                const value = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  pumpInquiries: [{ ...prev.pumpInquiries[index], specialNote: value }],
-                }));
-              }}
-              fullWidth
-              className="custom-text-field"
-              inputProps={{ maxLength: 150 }}
-            />
-          </Grid>
+                          }
+                        : inquiry
+                    ),
+                  }));
+                }}
+                displayEmpty
+                disabled={!item?.maximumTemperature?.value}
+                sx={{
+                  height: "100%",
+                  borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                  borderRadius: 0,
+                  "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                  "& .MuiSelect-select": {
+                    padding: "0 8px",
+                    outline: "none",
+                    border: "none",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                  },
+                  minWidth: 60,
+                }}
+              >
+                {!item?.maximumTemperature?.value && <MenuItem>Unit</MenuItem>}
+                <MenuItem value="C">℃</MenuItem>
+                <MenuItem value="F">℉</MenuItem>
+              </Select>
+            </FormControl>
+          </InputAdornment>
+        ),
+      }}
+    />
+  </Grid>
+
+  {/* SP Gravity */}
+  <Grid item xs={4}>
+    <TextField
+      size="small"
+      label="SP Gravity"
+      type="number"
+      name="spGravity"
+      value={item?.spGravity || ""}
+      onChange={(e) => {
+        const value = e.target.value;
+        setFormData((prev) => ({
+          ...prev,
+          pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+            i === index ? { ...inquiry, spGravity: value } : inquiry
+          ),
+        }));
+      }}
+      fullWidth
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Freezing Point */}
+  <Grid item xs={4}>
+    <TextField
+      size="small"
+      label="Freezing Point"
+      name="freezingPoint"
+      type="number"
+      value={item?.freezingPoint || ""}
+      onChange={(e) => {
+        const value = e.target.value;
+        setFormData((prev) => ({
+          ...prev,
+          pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+            i === index ? { ...inquiry, freezingPoint: value } : inquiry
+          ),
+        }));
+      }}
+      fullWidth
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Boiling Point */}
+  <Grid item xs={4}>
+    <TextField
+      size="small"
+      label="Boiling Point"
+      name="boilingPoint"
+      type="number"
+      value={item?.boilingPoint || ""}
+      onChange={(e) => {
+        const value = e.target.value;
+        setFormData((prev) => ({
+          ...prev,
+          pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+            i === index ? { ...inquiry, boilingPoint: value } : inquiry
+          ),
+        }));
+      }}
+      fullWidth
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Viscosity */}
+  <Grid item xs={4}>
+    <TextField
+      size="small"
+      label="Viscosity"
+      type="number"
+      name="viscosity"
+      value={item?.viscosity || ""}
+      onChange={(e) => {
+        const value = e.target.value;
+        setFormData((prev) => ({
+          ...prev,
+          pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+            i === index ? { ...inquiry, viscosity: value } : inquiry
+          ),
+        }));
+      }}
+      fullWidth
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Percentage of Solid */}
+  <Grid item xs={4}>
+    <TextField
+      size="small"
+      label="Percentage of Solid"
+      name="percentageOfSolid"
+      type="number"
+      value={item?.percentageOfSolid || ""}
+      onChange={(e) => {
+        const value = e.target.value;
+        setFormData((prev) => ({
+          ...prev,
+          pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+            i === index ? { ...inquiry, percentageOfSolid: value } : inquiry
+          ),
+        }));
+      }}
+      fullWidth
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Solid Size */}
+  <Grid item xs={4}>
+    <TextField
+      size="small"
+      type="number"
+      label="Solid Size"
+      name="solidSize"
+      value={item?.solidSize || ""}
+      onChange={(e) => {
+        const value = e.target.value;
+        setFormData((prev) => ({
+          ...prev,
+          pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+            i === index ? { ...inquiry, solidSize: value } : inquiry
+          ),
+        }));
+      }}
+      fullWidth
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Special Note */}
+  <Grid item xs={4}>
+    <TextField
+      size="small"
+      label="Special Note"
+      name="specialNote"
+      value={item?.specialNote || ""}
+      onChange={(e) => {
+        const value = e.target.value;
+        setFormData((prev) => ({
+          ...prev,
+          pumpInquiries: prev.pumpInquiries.map((inquiry, i) =>
+            i === index ? { ...inquiry, specialNote: value } : inquiry
+          ),
+        }));
+      }}
+      fullWidth
+      className="custom-text-field"
+      inputProps={{ maxLength: 150 }}
+    />
+  </Grid>
         </Grid>
         
             </form>
@@ -3246,39 +3340,45 @@ const handleChange = (arrayName = null, index = null) => (event) => {
         <h3 style={{ padding: '10px 0' }}>Operating Parameters :-</h3>
         <Grid container spacing={2}>
           {/* Rotation */}
-          <Grid item xs={4}>
-            <TextField
-              label="Rotation"
-              name="rotation"
-              value={item?.rotation}
-              onChange={handleChange("apiPlanInquiries",0)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
-
-          {/* MAWP */}
-          <Grid item xs={4}>
+      {/* Rotation */}
+<Grid item xs={4}>
   <TextField
-    size="small"
-    className="custom-text-field"
-    name="mawp"
-    value={item.mawp?.value || ""}
+    label="Rotation"
+    name="rotation"
+    value={item?.rotation || ""}
     onChange={(e) => {
       const value = e.target.value;
       setFormData((prev) => ({
         ...prev,
-        apiPlanInquiries: [
-          {
-            ...prev.apiPlanInquiries[index],
-            mawp: {
-              ...prev.apiPlanInquiries[index].mawp,
-              value
-            }
-          }
-        ]
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index ? { ...inq, rotation: value } : inq
+        ),
+      }));
+    }}
+    fullWidth
+    size="small"
+    variant="outlined"
+    className="custom-text-field"
+  />
+</Grid>
+
+{/* MAWP */}
+<Grid item xs={4}>
+  <TextField
+    size="small"
+    type="number"
+    className="custom-text-field"
+    name="mawp"
+    value={item?.mawp?.value || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index
+            ? { ...inq, mawp: { ...inq.mawp, value } }
+            : inq
+        ),
       }));
     }}
     label="MAWP"
@@ -3288,24 +3388,20 @@ const handleChange = (arrayName = null, index = null) => (event) => {
         <InputAdornment position="end">
           <FormControl size="small" variant="outlined">
             <Select
-              value={item.mawp?.unit || ""}
+              value={item?.mawp?.unit || ""}
               onChange={(e) => {
-                const selectedUnit = e.target.value;
+                const unit = e.target.value;
                 setFormData((prev) => ({
                   ...prev,
-                  apiPlanInquiries: [
-                    {
-                      ...prev.apiPlanInquiries[index],
-                      mawp: {
-                        ...prev.apiPlanInquiries[index].mawp,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
+                  apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+                    i === index
+                      ? { ...inq, mawp: { ...inq.mawp, unit } }
+                      : inq
+                  ),
                 }));
               }}
               displayEmpty
-              disabled={!item.mawp?.value}
+              disabled={!item?.mawp?.value}
               sx={{
                 height: "100%",
                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
@@ -3317,17 +3413,19 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                   border: "none",
                   height: "100%",
                   display: "flex",
-                  alignItems: "center"
+                  alignItems: "center",
                 },
-                minWidth: 60
+                minWidth: 60,
               }}
             >
-              {!item.mawp?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
-                <MenuItem key={unit} value={unit}>
-                  {unit}
-                </MenuItem>
-              ))}
+              {!item?.mawp?.value && <MenuItem>Unit</MenuItem>}
+              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map(
+                (unit) => (
+                  <MenuItem key={unit} value={unit}>
+                    {unit}
+                  </MenuItem>
+                )
+              )}
             </Select>
           </FormControl>
         </InputAdornment>
@@ -3336,26 +3434,23 @@ const handleChange = (arrayName = null, index = null) => (event) => {
   />
 </Grid>
 
-          {/* MAWT */}
-          <Grid item xs={4}>
+{/* MAWT */}
+<Grid item xs={4}>
   <TextField
     size="small"
     className="custom-text-field"
     name="mawt"
-    value={item.mawt?.value || ""}
+    type="number"
+    value={item?.mawt?.value || ""}
     onChange={(e) => {
       const value = e.target.value;
       setFormData((prev) => ({
         ...prev,
-        apiPlanInquiries: [
-          {
-            ...prev.apiPlanInquiries[index],
-            mawt: {
-              ...prev.apiPlanInquiries[index].mawt,
-              value
-            }
-          }
-        ]
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index
+            ? { ...inq, mawt: { ...inq.mawt, value } }
+            : inq
+        ),
       }));
     }}
     label="MAWT"
@@ -3365,24 +3460,20 @@ const handleChange = (arrayName = null, index = null) => (event) => {
         <InputAdornment position="end">
           <FormControl size="small" variant="outlined">
             <Select
-              value={item.mawt?.unit || ""}
+              value={item?.mawt?.unit || ""}
               onChange={(e) => {
-                const selectedUnit = e.target.value;
+                const unit = e.target.value;
                 setFormData((prev) => ({
                   ...prev,
-                  apiPlanInquiries: [
-                    {
-                      ...prev.apiPlanInquiries[index],
-                      mawt: {
-                        ...prev.apiPlanInquiries[index].mawt,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
+                  apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+                    i === index
+                      ? { ...inq, mawt: { ...inq.mawt, unit } }
+                      : inq
+                  ),
                 }));
               }}
               displayEmpty
-              disabled={!item.mawt?.value}
+              disabled={!item?.mawt?.value}
               sx={{
                 height: "100%",
                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
@@ -3394,14 +3485,14 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                   border: "none",
                   height: "100%",
                   display: "flex",
-                  alignItems: "center"
+                  alignItems: "center",
                 },
-                minWidth: 60
+                minWidth: 60,
               }}
             >
-              {!item.mawt?.value && <MenuItem>Unit</MenuItem>} 
-                <MenuItem value="C">℃</MenuItem>
-                <MenuItem value="F">℉</MenuItem>
+              {!item?.mawt?.value && <MenuItem>Unit</MenuItem>}
+              <MenuItem value="C">℃</MenuItem>
+              <MenuItem value="F">℉</MenuItem>
             </Select>
           </FormControl>
         </InputAdornment>
@@ -3410,26 +3501,29 @@ const handleChange = (arrayName = null, index = null) => (event) => {
   />
 </Grid>
 
-          {/* Suction Pressure */}
-          <Grid item xs={4}>
+{/* Suction Pressure */}
+<Grid item xs={4}>
   <TextField
     size="small"
     className="custom-text-field"
     name="suctionPressurePump"
+    type="number"
     value={item?.suctionPressurePump?.value || ""}
     onChange={(e) => {
       const value = e.target.value;
       setFormData((prev) => ({
         ...prev,
-        apiPlanInquiries: [
-          {
-            ...prev.apiPlanInquiries[index],
-            suctionPressurePump: {
-              ...prev.apiPlanInquiries[index].suctionPressurePump,
-              value
-            }
-          }
-        ]
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index
+            ? {
+                ...inq,
+                suctionPressurePump: {
+                  ...inq.suctionPressurePump,
+                  value,
+                },
+              }
+            : inq
+        ),
       }));
     }}
     label="Suction Pressure"
@@ -3441,18 +3535,20 @@ const handleChange = (arrayName = null, index = null) => (event) => {
             <Select
               value={item?.suctionPressurePump?.unit || ""}
               onChange={(e) => {
-                const selectedUnit = e.target.value;
+                const unit = e.target.value;
                 setFormData((prev) => ({
                   ...prev,
-                  apiPlanInquiries: [
-                    {
-                      ...prev.apiPlanInquiries[index],
-                      suctionPressurePump: {
-                        ...prev.apiPlanInquiries[index].suctionPressurePump,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
+                  apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+                    i === index
+                      ? {
+                          ...inq,
+                          suctionPressurePump: {
+                            ...inq.suctionPressurePump,
+                            unit,
+                          },
+                        }
+                      : inq
+                  ),
                 }));
               }}
               displayEmpty
@@ -3468,17 +3564,19 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                   border: "none",
                   height: "100%",
                   display: "flex",
-                  alignItems: "center"
+                  alignItems: "center",
                 },
-                minWidth: 60
+                minWidth: 60,
               }}
             >
               {!item?.suctionPressurePump?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
-                <MenuItem key={unit} value={unit}>
-                  {unit}
-                </MenuItem>
-              ))}
+              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map(
+                (unit) => (
+                  <MenuItem key={unit} value={unit}>
+                    {unit}
+                  </MenuItem>
+                )
+              )}
             </Select>
           </FormControl>
         </InputAdornment>
@@ -3492,20 +3590,23 @@ const handleChange = (arrayName = null, index = null) => (event) => {
     size="small"
     className="custom-text-field"
     name="boxPressurePump"
+    type="number"
     value={item.boxPressurePump?.value || ""}
     onChange={(e) => {
       const value = e.target.value;
       setFormData((prev) => ({
         ...prev,
-        apiPlanInquiries: [
-          {
-            ...prev.apiPlanInquiries[index],
-            boxPressurePump: {
-              ...prev.apiPlanInquiries[index].boxPressurePump,
-              value
-            }
-          }
-        ]
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index
+            ? {
+                ...inq,
+                boxPressurePump: {
+                  ...inq.boxPressurePump,
+                  value,
+                },
+              }
+            : inq
+        ),
       }));
     }}
     label="Box Pressure"
@@ -3520,15 +3621,17 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                 const selectedUnit = e.target.value;
                 setFormData((prev) => ({
                   ...prev,
-                  apiPlanInquiries: [
-                    {
-                      ...prev.apiPlanInquiries[index],
-                      boxPressurePump: {
-                        ...prev.apiPlanInquiries[index].boxPressurePump,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
+                  apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+                    i === index
+                      ? {
+                          ...inq,
+                          boxPressurePump: {
+                            ...inq.boxPressurePump,
+                            unit: selectedUnit,
+                          },
+                        }
+                      : inq
+                  ),
                 }));
               }}
               displayEmpty
@@ -3544,13 +3647,13 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                   border: "none",
                   height: "100%",
                   display: "flex",
-                  alignItems: "center"
+                  alignItems: "center",
                 },
-                minWidth: 60
+                minWidth: 60,
               }}
             >
               {!item?.boxPressurePump?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+              {["kg/cm2","kg/cm2 a","kg/cm2 g","bar","bar (a)","bar (g)","Mpa","Mpa (a)","Mpa (g)","Kpa","Kpa (g)","PSI","PSIG","MLC","MWC","Meter","kgf/cm2"].map((unit) => (
                 <MenuItem key={unit} value={unit}>
                   {unit}
                 </MenuItem>
@@ -3562,26 +3665,28 @@ const handleChange = (arrayName = null, index = null) => (event) => {
     }}
   />
 </Grid>
-
 <Grid item xs={4}>
   <TextField
     size="small"
     className="custom-text-field"
     name="dischargePressurePump"
+    type="number"
     value={item.dischargePressurePump?.value || ""}
     onChange={(e) => {
       const value = e.target.value;
       setFormData((prev) => ({
         ...prev,
-        apiPlanInquiries: [
-          {
-            ...prev.apiPlanInquiries[index],
-            dischargePressurePump: {
-              ...prev.apiPlanInquiries[index].dischargePressurePump,
-              value
-            }
-          }
-        ]
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index
+            ? {
+                ...inq,
+                dischargePressurePump: {
+                  ...inq.dischargePressurePump,
+                  value,
+                },
+              }
+            : inq
+        ),
       }));
     }}
     label="Discharge Pressure"
@@ -3596,15 +3701,17 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                 const selectedUnit = e.target.value;
                 setFormData((prev) => ({
                   ...prev,
-                  apiPlanInquiries: [
-                    {
-                      ...prev.apiPlanInquiries[index],
-                      dischargePressurePump: {
-                        ...prev.apiPlanInquiries[index].dischargePressurePump,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
+                  apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+                    i === index
+                      ? {
+                          ...inq,
+                          dischargePressurePump: {
+                            ...inq.dischargePressurePump,
+                            unit: selectedUnit,
+                          },
+                        }
+                      : inq
+                  ),
                 }));
               }}
               displayEmpty
@@ -3620,13 +3727,13 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                   border: "none",
                   height: "100%",
                   display: "flex",
-                  alignItems: "center"
+                  alignItems: "center",
                 },
-                minWidth: 60
+                minWidth: 60,
               }}
             >
               {!item?.dischargePressurePump?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+              {["kg/cm2","kg/cm2 a","kg/cm2 g","bar","bar (a)","bar (g)","Mpa","Mpa (a)","Mpa (g)","Kpa","Kpa (g)","PSI","PSIG","MLC","MWC","Meter","kgf/cm2"].map((unit) => (
                 <MenuItem key={unit} value={unit}>
                   {unit}
                 </MenuItem>
@@ -3638,44 +3745,52 @@ const handleChange = (arrayName = null, index = null) => (event) => {
     }}
   />
 </Grid>
-
-          {/* Speed */}
-          <Grid item xs={4}>
-            <TextField
-              label="Speed"
-              name="speed"
-              value={item.speed}
-              onChange={handleChange("apiPlanInquiries",0)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
-
-          {/* Vessel Pressure */}
-          <Grid item xs={4}>
+<Grid item xs={4}>
+  <TextField
+    label="Speed"
+    type="number"
+    name="speed"
+    value={item.speed || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index ? { ...inq, speed: value } : inq
+        ),
+      }));
+    }}
+    fullWidth
+    size="small"
+    variant="outlined"
+    className="custom-text-field"
+  />
+</Grid>
+<Grid item xs={4}>
   <TextField
     size="small"
     className="custom-text-field"
     name="vesselPressureAgitator"
+    type="number"
     value={item.vesselPressureAgitator?.value || ""}
     onChange={(e) => {
       const value = e.target.value;
       setFormData((prev) => ({
         ...prev,
-        apiPlanInquiries: [
-          {
-            ...prev.apiPlanInquiries[index],
-            vesselPressureAgitator: {
-              ...prev.apiPlanInquiries[index].vesselPressureAgitator,
-              value
-            }
-          }
-        ]
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index
+            ? {
+                ...inq,
+                vesselPressureAgitator: {
+                  ...inq.vesselPressureAgitator,
+                  value,
+                },
+              }
+            : inq
+        ),
       }));
     }}
-    label="Vessel Pressure(Agitator)"
+    label="Vessel Pressure (Agitator)"
     fullWidth
     InputProps={{
       endAdornment: (
@@ -3687,15 +3802,17 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                 const selectedUnit = e.target.value;
                 setFormData((prev) => ({
                   ...prev,
-                  apiPlanInquiries: [
-                    {
-                      ...prev.apiPlanInquiries[index],
-                      vesselPressureAgitator: {
-                        ...prev.apiPlanInquiries[index].vesselPressureAgitator,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
+                  apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+                    i === index
+                      ? {
+                          ...inq,
+                          vesselPressureAgitator: {
+                            ...inq.vesselPressureAgitator,
+                            unit: selectedUnit,
+                          },
+                        }
+                      : inq
+                  ),
                 }));
               }}
               displayEmpty
@@ -3711,13 +3828,13 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                   border: "none",
                   height: "100%",
                   display: "flex",
-                  alignItems: "center"
+                  alignItems: "center",
                 },
-                minWidth: 60
+                minWidth: 60,
               }}
             >
               {!item.vesselPressureAgitator?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+              {["kg/cm2","kg/cm2 a","kg/cm2 g","bar","bar (a)","bar (g)","Mpa","Mpa (a)","Mpa (g)","Kpa","Kpa (g)","PSI","PSIG","MLC","MWC","Meter","kgf/cm2"].map((unit) => (
                 <MenuItem key={unit} value={unit}>
                   {unit}
                 </MenuItem>
@@ -3729,33 +3846,33 @@ const handleChange = (arrayName = null, index = null) => (event) => {
     }}
   />
 </Grid>
-
-        </Grid>
-
-        {/*/////////// 5th from/////////////////// */}
-        <h3 style={{ padding: '10px 0' }}>Fluid Details :-</h3>
-        <Grid container spacing={2}>
-          {/* Fluid */}
-          <Grid item xs={4}>
-            <TextField
-              label="Fluid"
-              name="fluid"
-              value={item.fluid}
-              onChange={handleChange("apiPlanInquiries",0)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
-
-          {/* Operating Temperature */}
-          <Grid item xs={4}>
+<Grid item xs={4}>
+  <TextField
+    label="Fluid"
+    name="fluid"
+    value={item.fluid || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index ? { ...inq, fluid: value } : inq
+        ),
+      }));
+    }}
+    fullWidth
+    size="small"
+    variant="outlined"
+    className="custom-text-field"
+  />
+</Grid>
+<Grid item xs={4}>
   <TextField
     size="small"
     className="custom-text-field"
     name="operatingTemperature"
-    value={item?.operatingTemperature?.value || ""}
+    type="number"
+    value={item.operatingTemperature?.value || ""}
     onChange={(e) => {
       const value = e.target.value;
       setFormData((prev) => ({
@@ -3773,14 +3890,14 @@ const handleChange = (arrayName = null, index = null) => (event) => {
         ),
       }));
     }}
-    label="OP. Temperature"
+    label="Operating Temperature"
     fullWidth
     InputProps={{
       endAdornment: (
         <InputAdornment position="end">
           <FormControl size="small" variant="outlined">
             <Select
-              value={item?.operatingTemperature?.unit || ""}
+              value={item.operatingTemperature?.unit || ""}
               onChange={(e) => {
                 const selectedUnit = e.target.value;
                 setFormData((prev) => ({
@@ -3799,7 +3916,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                 }));
               }}
               displayEmpty
-              disabled={!item?.operatingTemperature?.value}
+              disabled={!item.operatingTemperature?.value}
               sx={{
                 height: "100%",
                 borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
@@ -3816,26 +3933,8 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                 minWidth: 60,
               }}
             >
-              {!item?.operatingTemperature?.value && <MenuItem>Unit</MenuItem>}
-              {[
-                "kg/cm2",
-                "kg/cm2 a",
-                "kg/cm2 g",
-                "bar",
-                "bar (a)",
-                "bar (g)",
-                "Mpa",
-                "Mpa (a)",
-                "Mpa (g)",
-                "Kpa",
-                "Kpa (g)",
-                "PSI",
-                "PSIG",
-                "MLC",
-                "MWC",
-                "Meter",
-                "kgf/cm2",
-              ].map((unit) => (
+              {!item.operatingTemperature?.value && <MenuItem>Unit</MenuItem>}
+              {["°C", "°F"].map((unit) => (
                 <MenuItem key={unit} value={unit}>
                   {unit}
                 </MenuItem>
@@ -3847,31 +3946,31 @@ const handleChange = (arrayName = null, index = null) => (event) => {
     }}
   />
 </Grid>
-
-
-          {/* Max Temperature */}
-          <Grid item xs={4}>
+<Grid item xs={4}>
   <TextField
     size="small"
     className="custom-text-field"
     name="maxTemperature"
+    type="number"
     value={item.maxTemperature?.value || ""}
     onChange={(e) => {
       const value = e.target.value;
       setFormData((prev) => ({
         ...prev,
-        apiPlanInquiries: [
-          {
-            ...prev.apiPlanInquiries[index],
-            maxTemperature: {
-              ...prev.apiPlanInquiries[index].maxTemperature,
-              value
-            }
-          }
-        ]
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index
+            ? {
+                ...inq,
+                maxTemperature: {
+                  ...inq.maxTemperature,
+                  value,
+                },
+              }
+            : inq
+        ),
       }));
     }}
-    label="Max Temprature"
+    label="Max Temperature"
     fullWidth
     InputProps={{
       endAdornment: (
@@ -3883,15 +3982,17 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                 const selectedUnit = e.target.value;
                 setFormData((prev) => ({
                   ...prev,
-                  apiPlanInquiries: [
-                    {
-                      ...prev.apiPlanInquiries[index],
-                      maxTemperature: {
-                        ...prev.apiPlanInquiries[index].maxTemperature,
-                        unit: selectedUnit
-                      }
-                    }
-                  ]
+                  apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+                    i === index
+                      ? {
+                          ...inq,
+                          maxTemperature: {
+                            ...inq.maxTemperature,
+                            unit: selectedUnit,
+                          },
+                        }
+                      : inq
+                  ),
                 }));
               }}
               displayEmpty
@@ -3907,13 +4008,13 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                   border: "none",
                   height: "100%",
                   display: "flex",
-                  alignItems: "center"
+                  alignItems: "center",
                 },
-                minWidth: 60
+                minWidth: 60,
               }}
             >
               {!item.maxTemperature?.value && <MenuItem>Unit</MenuItem>}
-              {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
+              {["°C", "°F"].map((unit) => (
                 <MenuItem key={unit} value={unit}>
                   {unit}
                 </MenuItem>
@@ -3926,53 +4027,79 @@ const handleChange = (arrayName = null, index = null) => (event) => {
   />
 </Grid>
 
-          {/* Viscosity */}
-          <Grid item xs={4}>
-            <TextField
-              label="Viscosity"
-              name="viscosity"
-              value={item.viscosity || ""}
-              onChange={handleChange("apiPlanInquiries", index)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
+<Grid item xs={4}>
+  <TextField
+    label="Viscosity"
+    name="viscosity"
+    type="number"
+    value={item.viscosity || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index ? { ...inq, viscosity: value } : inq
+        ),
+      }));
+    }}
+    fullWidth
+    size="small"
+    variant="outlined"
+    className="custom-text-field"
+  />
+</Grid>
 
-          {/* Specific Gravity */}
-          <Grid item xs={4}>
-            <TextField
-              label="Sp. Gravity"
-              name="spGravity"
-              value={item.spGravity || ""}
-              onChange={handleChange("apiPlanInquiries", index)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
 
-          {/* Percentage of Solid */}
-          <Grid item xs={4}>
-            <TextField
-              label="Percentage of Solid"
-              name="percentageOfSolid"
-              value={item.percentageOfSolid || ""}
-              onChange={handleChange("apiPlanInquiries", index)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
+<Grid item xs={4}>
+  <TextField
+    label="Sp. Gravity"
+    name="spGravity"
+    type="number"
+    value={item.spGravity || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index ? { ...inq, spGravity: value } : inq
+        ),
+      }));
+    }}
+    fullWidth
+    size="small"
+    variant="outlined"
+    className="custom-text-field"
+  />
+</Grid>
+<Grid item xs={4}>
+  <TextField
+    label="Percentage of Solid"
+    name="percentageOfSolid"
+    type="number"
+    value={item.percentageOfSolid || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index ? { ...inq, percentageOfSolid: value } : inq
+        ),
+      }));
+    }}
+    fullWidth
+    size="small"
+    variant="outlined"
+    className="custom-text-field"
+  />
+</Grid>
+
 
           {/* Size of Solid Particles */}
           <Grid item xs={4}>
             <TextField
               label="Size of Solid Particles"
               name="solidSize"
+              type="number"
               value={item.solidSize || ""}
               onChange={handleChange("apiPlanInquiries", index)}
               fullWidth
@@ -3987,6 +4114,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
             <TextField
               label="Freezing Point"
               name="freezingPoint"
+              type="number"
               value={item.freezingPoint || ""}
               onChange={handleChange("apiPlanInquiries", index)}
               fullWidth
@@ -4001,6 +4129,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
             <TextField
               label="Boiling Point"
               name="boilingPoint"
+              type="number"
               value={item.boilingPoint || ""}
               onChange={handleChange("apiPlanInquiries", index)}
               fullWidth
@@ -4018,91 +4147,115 @@ const handleChange = (arrayName = null, index = null) => (event) => {
         <Grid container spacing={2}>
   {/* API Plan */}
   <Grid item xs={4}>
-    <TextField
-      label="API Plan"
-      name="leakProofProposalApiPlan"
-      value={item.leakProofProposalApiPlan || ""}
-      onChange={handleChange("apiPlanInquiries", index)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
+  <TextField
+    label="API Plan"
+    name="leakProofProposalApiPlan"
+    value={item.leakProofProposalApiPlan || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index ? { ...inq, leakProofProposalApiPlan: value } : inq
+        ),
+      }));
+    }}
+    fullWidth
+    size="small"
+    variant="outlined"
+    className="custom-text-field"
+  />
+</Grid>
+<Grid item xs={4}>
+  <TextField
+    label="Capacity"
+    name="capacity"
+    type="number"
+    value={item.capacity || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index ? { ...inq, capacity: value } : inq
+        ),
+      }));
+    }}
+    fullWidth
+    size="small"
+    variant="outlined"
+    className="custom-text-field"
+  />
+</Grid>
+<Grid item xs={4}>
+  <TextField
+    label="Heat Exchange Type"
+    name="heatExchangeType"
+    value={item.heatExchangeType || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index ? { ...inq, heatExchangeType: value } : inq
+        ),
+      }));
+    }}
+    fullWidth
+    size="small"
+    variant="outlined"
+    className="custom-text-field"
+  />
+</Grid>
+<Grid item xs={4}>
+  <TextField
+    label="Heat Exchange Area"
+    name="heatExchangeArea"
+    type="number"
+    value={item.heatExchangeArea || ""}
+    onChange={(e) => {
+      const value = e.target.value;
+      setFormData((prev) => ({
+        ...prev,
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index ? { ...inq, heatExchangeArea: value } : inq
+        ),
+      }));
+    }}
+    fullWidth
+    size="small"
+    variant="outlined"
+    className="custom-text-field"
+  />
+</Grid>
+<Grid item xs={4}>
+  <Autocomplete
+    style={{ width: '100%' }}
+    size="small"
+    value={item.standard || ""}
+    onChange={(event, newValue) => {
+      setFormData((prev) => ({
+        ...prev,
+        apiPlanInquiries: prev.apiPlanInquiries.map((inq, i) =>
+          i === index ? { ...inq, standard: newValue || "" } : inq
+        ),
+      }));
+    }}
+    options={['API', 'Non-API']}
+    renderInput={(params) => (
+      <TextField
+        size="small"
+        {...params}
+        placeholder="Standard"
+        variant="outlined"
+        className='custom-text-field'
+        fullWidth
+        label="Standard"
+      />
+    )}
+  />
+</Grid>
 
-  {/* Capacity */}
-  <Grid item xs={4}>
-    <TextField
-      label="Capacity"
-      name="capacity"
-      value={item.capacity || ""}
-      onChange={handleChange("apiPlanInquiries", index)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
-
-  {/* Heat Exchange Type */}
-  <Grid item xs={4}>
-    <TextField
-      label="Heat Exchange Type"
-      name="heatExchangeType"
-      value={item.heatExchangeType || ""}
-      onChange={ handleChange("apiPlanInquiries", index)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
-
-  {/* Heat Exchange Area */}
-  <Grid item xs={4}>
-    <TextField
-      label="Heat Exchange Area"
-      name="heatExchangeArea"
-      value={item.heatExchangeArea || ""}
-      onChange={handleChange("apiPlanInquiries",0)}
-      fullWidth
-      size="small"
-      variant="outlined"
-      className="custom-text-field"
-    />
-  </Grid>
-
-  {/* Standard */}
-  <Grid item xs={4}>
-          <Autocomplete
-            style={{ width: '100%' }}
-            size="small"
-        value={item.standard || ""}
-            onChange={(event, newValue) => {
-              setFormData({
-                ...formData,
-                apiPlanInquiries: [
-                  {
-                    ...item,
-                    standard: newValue || "", // Update the sealArrangement field
-                  },
-                ],
-              });
-            }}
-            options={['API', 'Non-API']}
-            renderInput={(params) => (
-              <TextField
-                size="small"
-                {...params}
-                placeholder="Standard"
-                variant="outlined"
-                className='custom-text-field'
-                fullWidth
-                label="Standard"
-              />
-            )}
-          />
-        </Grid>
 
 
 </Grid>
@@ -4117,591 +4270,565 @@ const handleChange = (arrayName = null, index = null) => (event) => {
               <div>
                 <h3>Rotaryjoin Item : {index+1}</h3>
                 <Grid container spacing={2} style={{ marginTop: "10px" }}>
-                {/* Sales Inquiry Item Reference No */}
-                <Grid item xs={4}>
-                  <TextField
-                    label="Sales Inquiry Item Reference No."
-                    value={item.rotaryJointInquiryReferenceNo}
-                    InputProps={{ readOnly: true }}
-                    size="small"
-                    fullWidth
-                    id="disableItem"
-                    disabled
-                    className="custom-text-field"
-                  />
-                </Grid>
-        
-                <Grid item xs={12} sm={4}>
-          <Autocomplete
-            size="small"
-            value={item.branch || ''}
-            onChange={(event, newValue) => {
-              setFormData((prevState) => ({
-                ...prevState,
-                rotaryJointInquiries: [
-                  {
-                    ...prevState.rotaryJointInquiries[index], // Keep the other fields of the first object intact
-                    branch: newValue || "", // Update the 'branch' property
-                  },
-                ],
-              }));
-            }}
-            
-            inputValue={formData?.rotaryJointInquiries[index]?.branch || ''}
-            onInputChange={(event, newInputValue) => {
-              setFormData((prevState) => ({
-                ...prevState,
-                rotaryJointInquiries: [
-                  {
-                    ...prevState.rotaryJointInquiries[index], // Keep the other fields of the first object intact
-                    branch: newInputValue || "", // Update the 'branch' property
-                  },
-                ],
-              }));
-            }}
-            options={Array.isArray(authState?.branchs) ? authState.branchs.map((b) => b.branchName) : []}
-            renderInput={(params) => (
-              <TextField
-                required
-                className="custom-text-field"
-                {...params}
-                size="small"
-                label="Branch"
-                variant="outlined"
-                fullWidth
-        
-              />
-            )}
-          />
-        </Grid>
-        
-                {/* Created By User */}
-                <Grid item xs={4}>
-                  <TextField
-                    label="Created By User"
-                    value={item.createdByUser}
-                    InputProps={{ readOnly: true }}
-                    size="small"
-                    fullWidth
-                    id="disableItem"
-                    disabled
-                    className="custom-text-field"
-                  />
-                </Grid>
-        
-        
-        
-                {/* Created On */}
-                <Grid item xs={4}>
-                  <TextField
-                    label="Created On"
-                    value={dateTime}
-                    InputProps={{ readOnly: true }}
-                    size="small"
-                    id="disableItem"
-                    fullWidth
-                    disabled
-                    className="custom-text-field"
-                  />
-                </Grid>
-        
-                {/* Updated By User */}
-                <Grid item xs={4}>
-                  <TextField
-                    label="Updated By User"
-                    value={item.updatedByUser}
-                    InputProps={{ readOnly: true }}
-                    size="small"
-                    fullWidth
-                    id="disableItem"
-                    disabled
-                    className="custom-text-field"
-                  />
-                </Grid>
-        
-                {/* Updated On */}
-                <Grid item xs={4}>
-                  <TextField
-                    label="Updated On"
-                    value={dateTime}
-                    id="disableItem"
-                    InputProps={{ readOnly: true }}
-                    size="small"
-                    fullWidth
-                    disabled
-                    className="custom-text-field"
-                  />
-                </Grid>
-              </Grid>
+  {/* Sales Inquiry Item Reference No */}
+  <Grid item xs={4}>
+    <TextField
+      label="Sales Inquiry Item Reference No."
+      value={item.rotaryJointInquiryReferenceNo || ""}
+      InputProps={{ readOnly: true }}
+      size="small"
+      fullWidth
+      disabled
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Branch */}
+  <Grid item xs={12} sm={4}>
+    <Autocomplete
+      size="small"
+      value={item.branch || ''}
+      onChange={(event, newValue) => {
+        setFormData((prevState) => ({
+          ...prevState,
+          rotaryJointInquiries: prevState.rotaryJointInquiries.map((inq, i) =>
+            i === index ? { ...inq, branch: newValue || "" } : inq
+          ),
+        }));
+      }}
+      inputValue={formData?.rotaryJointInquiries[index]?.branch || ''}
+      onInputChange={(event, newInputValue) => {
+        setFormData((prevState) => ({
+          ...prevState,
+          rotaryJointInquiries: prevState.rotaryJointInquiries.map((inq, i) =>
+            i === index ? { ...inq, branch: newInputValue || "" } : inq
+          ),
+        }));
+      }}
+      options={Array.isArray(authState?.branchs) ? authState.branchs.map((b) => b.branchName) : []}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          size="small"
+          label="Branch"
+          variant="outlined"
+          fullWidth
+          required
+          className="custom-text-field"
+        />
+      )}
+    />
+  </Grid>
+
+  {/* Created By User */}
+  <Grid item xs={4}>
+    <TextField
+      label="Created By User"
+      value={item.createdByUser || ""}
+      InputProps={{ readOnly: true }}
+      size="small"
+      fullWidth
+      disabled
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Created On */}
+  <Grid item xs={4}>
+    <TextField
+      label="Created On"
+      value={dateTime || ""}
+      InputProps={{ readOnly: true }}
+      size="small"
+      fullWidth
+      disabled
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Updated By User */}
+  <Grid item xs={4}>
+    <TextField
+      label="Updated By User"
+      value={item.updatedByUser || ""}
+      InputProps={{ readOnly: true }}
+      size="small"
+      fullWidth
+      disabled
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Updated On */}
+  <Grid item xs={4}>
+    <TextField
+      label="Updated On"
+      value={dateTime || ""}
+      InputProps={{ readOnly: true }}
+      size="small"
+      fullWidth
+      disabled
+      className="custom-text-field"
+    />
+  </Grid>
+</Grid>
+
         
               
               <h3 style={{ padding: '10px 0' }}>Application Details :-</h3>
-                <Grid container spacing={2}>
-                  {/* Equipment */}
-                  <Grid item xs={4}>
-                    <TextField
-                      label="Equipment"
-                      name="equipment"
-                      value={item.equipment}
-                      onChange={handleChange("rotaryJointInquiries",index)}
-                      fullWidth
-                      size="small"
-                      variant="outlined"
-                      className="custom-text-field"
-                    />
-                  </Grid>
-        
-                  {/* Make */}
-                  <Grid item xs={4}>
-                    <TextField
-                      label="Make"
-                      name="make"
-                      value={item.make}
-                      onChange={handleChange("rotaryJointInquiries",index)}
-                      fullWidth
-                      size="small"
-                      variant="outlined"
-                      className="custom-text-field"
-                    />
-                  </Grid>
-        
-                  {/* Model */}
-                  <Grid item xs={4}>
-                    <TextField
-                      label="Model"
-                      name="model"
-                      value={item.model}
-                      onChange={handleChange("rotaryJointInquiries",index)}
-                      fullWidth
-                      size="small"
-                      variant="outlined"
-                      className="custom-text-field"
-                    />
-                  </Grid>
-        
-                  {/* Fluid */}
-                  <Grid item xs={4}>
-                    <TextField
-                      label="Fluid"
-                      name="fluid"
-                      value={item.fluid}
-                      onChange={handleChange("rotaryJointInquiries",index)}
-                      fullWidth
-                      size="small"
-                      variant="outlined"
-                      className="custom-text-field"
-                    />
-                  </Grid>
-        
-                  {/* Operating Temperature */}
-      <Grid item xs={4}>
-  <TextField
-    size="small"
-    type="number"
-    className="custom-text-field"
-    name="operatingTemperature"
-    value={item?.operatingTemperature}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        rotaryJointInquiries: [
-          {
-            ...prev.rotaryJointInquiries[index],
-            operatingTemperature: +value
-          }
-        ]
-      }));
-    }}
-    label="Operating Temprature"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={item?.operatingTemperatureUnit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  rotaryJointInquiries: [
-                    {
-                      ...prev.rotaryJointInquiries[index],
-                      operatingTemperatureUnit: selectedUnit
-                    }
-                  ]
-                }));
-          
-                
-              }}
-              displayEmpty
-              disabled={!item?.operatingTemperature}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
+              <Grid container spacing={2}>
+  {/* Equipment */}
+  <Grid item xs={4}>
+    <TextField
+      label="Equipment"
+      name="equipment"
+      value={item.equipment || ""}
+      onChange={handleChange("rotaryJointInquiries", index)}
+      fullWidth
+      size="small"
+      variant="outlined"
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Make */}
+  <Grid item xs={4}>
+    <TextField
+      label="Make"
+      name="make"
+      value={item.make || ""}
+      onChange={handleChange("rotaryJointInquiries", index)}
+      fullWidth
+      size="small"
+      variant="outlined"
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Model */}
+  <Grid item xs={4}>
+    <TextField
+      label="Model"
+      name="model"
+      value={item.model || ""}
+      onChange={handleChange("rotaryJointInquiries", index)}
+      fullWidth
+      size="small"
+      variant="outlined"
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Fluid */}
+  <Grid item xs={4}>
+    <TextField
+      label="Fluid"
+      name="fluid"
+      value={item.fluid || ""}
+      onChange={handleChange("rotaryJointInquiries", index)}
+      fullWidth
+      size="small"
+      variant="outlined"
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Operating Temperature */}
+  <Grid item xs={4}>
+    <TextField
+      size="small"
+      type="number"
+      className="custom-text-field"
+      name="operatingTemperature"
+      value={item.operatingTemperature || ""}
+      onChange={(e) => {
+        const value = e.target.value;
+        setFormData((prev) => ({
+          ...prev,
+          rotaryJointInquiries: prev.rotaryJointInquiries.map((inq, i) =>
+            i === index ? { ...inq, operatingTemperature: +value } : inq
+          ),
+        }));
+      }}
+      label="Operating Temperature"
+      fullWidth
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <FormControl size="small" variant="outlined">
+              <Select
+                value={item.operatingTemperatureUnit || ""}
+                onChange={(e) => {
+                  const selectedUnit = e.target.value;
+                  setFormData((prev) => ({
+                    ...prev,
+                    rotaryJointInquiries: prev.rotaryJointInquiries.map((inq, i) =>
+                      i === index ? { ...inq, operatingTemperatureUnit: selectedUnit } : inq
+                    ),
+                  }));
+                }}
+                displayEmpty
+                disabled={!item.operatingTemperature}
+                sx={{
                   height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-              <MenuItem value="" disabled>
-                Unit
-              </MenuItem>
-              <MenuItem value="C">℃</MenuItem>
-              <MenuItem value="F">℉</MenuItem>
-             
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      )
-    }}
-  />
-</Grid>
-        
-                  {/* Flow Rate */}
-                  <Grid item xs={4}>
-                    <TextField
-                      label="Flow Rate"
-                      name="flowRate"
-                      value={item.flowRate}
-                      onChange={handleChange("rotaryJointInquiries",index)}
-                      fullWidth
-                      size="small"
-                      variant="outlined"
-                      className="custom-text-field"
-                    />
-                  </Grid>
-        
-                  {/* Speed */}
-                  <Grid item xs={4}>
-                    <TextField
-                      label="Speed"
-                      name="speed"
-                      value={item.speed}
-                      onChange={handleChange("rotaryJointInquiries",index)}
-                      fullWidth
-                      size="small"
-                      variant="outlined"
-                      className="custom-text-field"
-                    />
-                  </Grid>
-        
-                  {/* Operating Pressure */}
-                  <Grid item xs={4}>
-  <TextField
-    size="small"
-    className="custom-text-field"
-    name="operatingPressure"
-    value={item?.operatingPressure}
-    onChange={(e) => {
-      const value = e.target.value;
-      setFormData((prev) => ({
-        ...prev,
-        rotaryJointInquiries: [
-          {
-            ...prev.rotaryJointInquiries[index],
-            operatingPressure: +value
-          }
-        ]
-      }));
-    }}
-    label="Operating Pressure"
-    fullWidth
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <FormControl size="small" variant="outlined">
-            <Select
-              value={item?.operatingPressureUnit || ""}
-              onChange={(e) => {
-                const selectedUnit = e.target.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  rotaryJointInquiries: [
-                    {
-                      ...prev.rotaryJointInquiries[index],
-                      operatingPressureUnit: selectedUnit
-                    }
-                  ]
-                }));
-          
-                
-              }}
-              displayEmpty
-              disabled={!item?.operatingPressure}
-              sx={{
-                height: "100%",
-                borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
-                borderRadius: 0,
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                "& .MuiSelect-select": {
-                  padding: "0 8px",
-                  outline: "none",
-                  border: "none",
+                  borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                  borderRadius: 0,
+                  "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                  "& .MuiSelect-select": {
+                    padding: "0 8px",
+                    outline: "none",
+                    border: "none",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                  },
+                  minWidth: 60,
+                }}
+              >
+                <MenuItem value="" disabled>Unit</MenuItem>
+                <MenuItem value="C">℃</MenuItem>
+                <MenuItem value="F">℉</MenuItem>
+              </Select>
+            </FormControl>
+          </InputAdornment>
+        ),
+      }}
+    />
+  </Grid>
+
+  {/* Flow Rate */}
+  <Grid item xs={4}>
+    <TextField
+      label="Flow Rate"
+      name="flowRate"
+      type="number"
+      value={item.flowRate || ""}
+      onChange={handleChange("rotaryJointInquiries", index)}
+      fullWidth
+      size="small"
+      variant="outlined"
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Speed */}
+  <Grid item xs={4}>
+    <TextField
+      label="Speed"
+      name="speed"
+      type="number"
+      value={item.speed || ""}
+      onChange={handleChange("rotaryJointInquiries", index)}
+      fullWidth
+      size="small"
+      variant="outlined"
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Operating Pressure */}
+  <Grid item xs={4}>
+    <TextField
+      size="small"
+      className="custom-text-field"
+      name="operatingPressure"
+      type="number"
+      value={item.operatingPressure || ""}
+      onChange={(e) => {
+        const value = e.target.value;
+        setFormData((prev) => ({
+          ...prev,
+          rotaryJointInquiries: prev.rotaryJointInquiries.map((inq, i) =>
+            i === index ? { ...inq, operatingPressure: +value } : inq
+          ),
+        }));
+      }}
+      label="Operating Pressure"
+      fullWidth
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <FormControl size="small" variant="outlined">
+              <Select
+                value={item.operatingPressureUnit || ""}
+                onChange={(e) => {
+                  const selectedUnit = e.target.value;
+                  setFormData((prev) => ({
+                    ...prev,
+                    rotaryJointInquiries: prev.rotaryJointInquiries.map((inq, i) =>
+                      i === index ? { ...inq, operatingPressureUnit: selectedUnit } : inq
+                    ),
+                  }));
+                }}
+                displayEmpty
+                disabled={!item.operatingPressure}
+                sx={{
                   height: "100%",
-                  display: "flex",
-                  alignItems: "center"
-                },
-                minWidth: 60
-              }}
-            >
-               {!item?.operatingPressure && <MenuItem>Unit</MenuItem>}
-                      {["kg/cm2", "kg/cm2 a", "kg/cm2 g", "bar", "bar (a)", "bar (g)", "Mpa", "Mpa (a)", "Mpa (g)", "Kpa", "Kpa (g)", "PSI", "PSIG", "MLC", "MWC", "Meter", "kgf/cm2"].map((unit) => (
-                        <MenuItem key={unit} value={unit}>
-                          {unit}
-                        </MenuItem>
-                      ))}
-            </Select>
-          </FormControl>
-        </InputAdornment>
-      )
-    }}
-  />
+                  borderLeft: "1px solid rgba(0, 0, 0, 0.23)",
+                  borderRadius: 0,
+                  "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                  "& .MuiSelect-select": {
+                    padding: "0 8px",
+                    outline: "none",
+                    border: "none",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                  },
+                  minWidth: 60,
+                }}
+              >
+                {!item.operatingPressure && <MenuItem>Unit</MenuItem>}
+                {[
+                  "kg/cm2","kg/cm2 a","kg/cm2 g","bar","bar (a)","bar (g)",
+                  "Mpa","Mpa (a)","Mpa (g)","Kpa","Kpa (g)","PSI","PSIG",
+                  "MLC","MWC","Meter","kgf/cm2"
+                ].map((unit) => (
+                  <MenuItem key={unit} value={unit}>{unit}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </InputAdornment>
+        ),
+      }}
+    />
+  </Grid>
 </Grid>
-                </Grid>
+
         
                 {/*/////////////// 2nd Form  /////////////*/}
         
                 <h3 style={{ padding: '10px 0' }}>Existing Rotary Joint Details :-</h3>
                 <Grid container spacing={2}>
-                  {/* Make */}
-                  <Grid item xs={4}>
-                    <TextField
-                      label="Make"
-                      name="existingRotaryJointMake"
-                      value={item.existingRotaryJointMake}
-                      onChange={handleChange("rotaryJointInquiries",index)}
-                      fullWidth
-                      size="small"
-                      variant="outlined"
-                      className="custom-text-field"
-                    />
-                  </Grid>
-        
-                  {/* Model Type */}
-                  <Grid item xs={4}>
-                    <Autocomplete
-                      options={["Dual Flow", "Mono Flow"]}
-                      value={item.existingRotaryJointModelType}
-                      onChange={(event, newValue) => setFormData({ ...formData,  rotaryJointInquiries:[{
-                        ...formData.rotaryJointInquiries[index],
-                        existingRotaryJointModelType: newValue || ""
-                      }
-                     ] })}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          label="Model Type"
-                          fullWidth
-                          size="small"
-                          variant="outlined"
-                          className="custom-text-field"
-                        />
-                      )}
-                    />
-                  </Grid>
-        
-                  {/* Connection Size */}
-                  <Grid item xs={4}>
-                    <TextField
-                      label="Connection Size"
-                      name="existingRotaryJointConnectionSize"
-                      value={item.existingRotaryJointConnectionSize}
-                      onChange={handleChange("rotaryJointInquiries",index)}
-                      fullWidth
-                      size="small"
-                      variant="outlined"
-                      className="custom-text-field"
-                    />
-                  </Grid>
-        
-                  {/* Connection Type */}
-                  <Grid item xs={4}>
-                    <TextField
-                      label="Connection Type"
-                      name="existingRotaryJointConnectionType"
-                      value={item.existingRotaryJointConnectionType}
-                      onChange={handleChange("rotaryJointInquiries",index)}
-                      fullWidth
-                      size="small"
-                      variant="outlined"
-                      className="custom-text-field"
-                    />
-                  </Grid>
-        
-           {/* Joint Type Dropdown */}
-           <Grid item xs={4}>
-  <FormControl component="fieldset">
-    <FormLabel component="legend">Joint Type</FormLabel>
-    <RadioGroup
-      row
-      name="jointType"
-      value={item.jointType}
+  {/* Make */}
+  <Grid item xs={4}>
+    <TextField
+      label="Make"
+      name="existingRotaryJointMake"
+      value={item.existingRotaryJointMake || ""}
       onChange={handleChange("rotaryJointInquiries", index)}
-    >
-      <FormControlLabel
-        value="Threaded"
-        control={<Radio />}
-        label="Threaded"
-      />
-      <FormControlLabel
-        value="Flanged"
-        control={<Radio />}
-        label="Flanged"
-      />
-    </RadioGroup>
-  </FormControl>
+      fullWidth
+      size="small"
+      variant="outlined"
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Model Type */}
+  <Grid item xs={4}>
+    <Autocomplete
+      options={["Dual Flow", "Mono Flow"]}
+      value={item.existingRotaryJointModelType || ""}
+      onChange={(event, newValue) => {
+        setFormData((prev) => ({
+          ...prev,
+          rotaryJointInquiries: prev.rotaryJointInquiries.map((inq, i) =>
+            i === index ? { ...inq, existingRotaryJointModelType: newValue || "" } : inq
+          ),
+        }));
+      }}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Model Type"
+          fullWidth
+          size="small"
+          variant="outlined"
+          className="custom-text-field"
+        />
+      )}
+    />
+  </Grid>
+
+  {/* Connection Size */}
+  <Grid item xs={4}>
+    <TextField
+      label="Connection Size"
+      name="existingRotaryJointConnectionSize"
+      value={item.existingRotaryJointConnectionSize || ""}
+      onChange={handleChange("rotaryJointInquiries", index)}
+      fullWidth
+      size="small"
+      variant="outlined"
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Connection Type */}
+  <Grid item xs={4}>
+    <TextField
+      label="Connection Type"
+      name="existingRotaryJointConnectionType"
+      value={item.existingRotaryJointConnectionType || ""}
+      onChange={handleChange("rotaryJointInquiries", index)}
+      fullWidth
+      size="small"
+      variant="outlined"
+      className="custom-text-field"
+    />
+  </Grid>
+
+  {/* Joint Type Dropdown */}
+  <Grid item xs={4}>
+    <FormControl component="fieldset" fullWidth>
+      <FormLabel component="legend">Joint Type</FormLabel>
+      <RadioGroup
+        row
+        name="jointType"
+        value={item.jointType || ""}
+        onChange={handleChange("rotaryJointInquiries", index)}
+      >
+        <FormControlLabel
+          value="Threaded"
+          control={<Radio size="small" />}
+          label="Threaded"
+        />
+        <FormControlLabel
+          value="Flanged"
+          control={<Radio size="small" />}
+          label="Flanged"
+        />
+      </RadioGroup>
+    </FormControl>
+  </Grid>
 </Grid>
 
-                
-                </Grid>
-        
                 {/*//////////////// 3rd Form ////////////// */}
         
                 <h3 style={{ padding: '10px 0' }}>Proposed Rotary Joint Detail :-</h3>
-        <Grid container spacing={2}>
-          {/* Make */}
-          <Grid item xs={4}>
-            <TextField
-              label="Make"
-              name="proposedRotaryJointMake"
-              value={item.proposedRotaryJointMake}
-              onChange={handleChange("rotaryJointInquiries",index)}
-              fullWidth
-              size="small"
-              variant="outlined"
-              className="custom-text-field"
-            />
-          </Grid>
-        
-          {/* Model Type */}
-          <Grid item xs={4}>
-            <Autocomplete
-              options={["Dual Flow", "Mono Flow"]}
-              value={item.proposedRotaryJointModelType}
-              onChange={(event, newValue) => setFormData({ ...formData,
-                rotaryJointInquiries:[{
-                  ...formData.rotaryJointInquiries[index],
-                  proposedRotaryJointModelType: newValue || ""
-                }
-               ]
-              })}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Model Type"
-                  fullWidth
-                  size="small"
-                  variant="outlined"
-                  className="custom-text-field"
-                />
-              )}
-            />
-          </Grid>
-        
-       
-        
-          {/* Conditional Fields Based on Joint Type */}
-          {item.jointType === 'Threaded' && (
-            <>
-              <Grid item xs={4}>
-                <TextField
-                  label="Inlet Connection Size"
-                  name="inletConnectionSize"
-                  value={item.inletConnectionSize}
-                  onChange={handleChange("rotaryJointInquiries",index)}
-                  fullWidth
-                  size="small"
-                  variant="outlined"
-                  className="custom-text-field"
-                />
-              </Grid>
-        
-              <Grid item xs={4}>
-                <TextField
-                  label="Outlet Connection Size"
-                  name="outletConnectionSize"
-                  value={item.outletConnectionSize}
-                  onChange={handleChange("rotaryJointInquiries",index)}
-                  fullWidth
-                  size="small"
-                  variant="outlined"
-                  className="custom-text-field"
-                />
-              </Grid>
-        
-              <Grid item xs={4}>
-                <TextField
-                  label="Connection Type"
-                  name="connectionType"
-                  value={item.connectionType}
-                  onChange={handleChange("rotaryJointInquiries",index)}
-                  fullWidth
-                  size="small"
-                  variant="outlined"
-                  className="custom-text-field"
-                />
-              </Grid>
-        
-              <Grid item xs={4}>
-                <TextField
-                  label="Handing"
-                  name="handing"
-                  value={item.handing}
-                  onChange={handleChange("rotaryJointInquiries",index)}
-                  fullWidth
-                  size="small"
-                  variant="outlined"
-                  className="custom-text-field"
-                />
-              </Grid>
-            </>
-          )}
-        
-          {item.jointType === 'Flanged' && (
-            <>
-              <Grid item xs={4}>
-                <TextField
-                  label="Inlet Flanged Size"
-                  name="inletFlangedSize"
-                  value={item.inletFlangedSize}
-                  onChange={handleChange("rotaryJointInquiries",index)}
-                  fullWidth
-                  size="small"
-                  variant="outlined"
-                  className="custom-text-field"
-                />
-              </Grid>
-        
-              <Grid item xs={4}>
-                <TextField
-                  label="Outlet Flanged Size"
-                  name="outletFlangedSize"
-                  value={item.outletFlangedSize}
-                  onChange={handleChange("rotaryJointInquiries",index)}
-                  fullWidth
-                  size="small"
-                  variant="outlined"
-                  className="custom-text-field"
-                />
-              </Grid>
-            </>
-          )}
-        
-          {/* Attachments */}
-        
-          <Grid item xs={6}>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <Grid container spacing={2}>
+  {/* Make */}
+  <Grid item xs={4}>
+    <TextField
+      label="Make"
+      name="proposedRotaryJointMake"
+      value={item.proposedRotaryJointMake || ""}
+      onChange={handleChange("rotaryJointInquiries", index)}
+      fullWidth
+      size="small"
+      variant="outlined"
+      className="custom-text-field"
+    />
+  </Grid>
 
+  {/* Model Type */}
+  <Grid item xs={4}>
+    <Autocomplete
+      options={["Dual Flow", "Mono Flow"]}
+      value={item.proposedRotaryJointModelType || ""}
+      onChange={(event, newValue) => {
+        setFormData((prev) => ({
+          ...prev,
+          rotaryJointInquiries: prev.rotaryJointInquiries.map((inq, i) =>
+            i === index
+              ? { ...inq, proposedRotaryJointModelType: newValue || "" }
+              : inq
+          ),
+        }));
+      }}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Model Type"
+          fullWidth
+          size="small"
+          variant="outlined"
+          className="custom-text-field"
+        />
+      )}
+    />
+  </Grid>
+
+  {/* Conditional Fields Based on Joint Type */}
+  {item.jointType === "Threaded" && (
+    <>
+      <Grid item xs={4}>
+        <TextField
+          label="Inlet Connection Size"
+          name="inletConnectionSize"
+          value={item.inletConnectionSize || ""}
+          onChange={handleChange("rotaryJointInquiries", index)}
+          fullWidth
+          size="small"
+          variant="outlined"
+          className="custom-text-field"
+        />
+      </Grid>
+
+      <Grid item xs={4}>
+        <TextField
+          label="Outlet Connection Size"
+          name="outletConnectionSize"
+          value={item.outletConnectionSize || ""}
+          onChange={handleChange("rotaryJointInquiries", index)}
+          fullWidth
+          size="small"
+          variant="outlined"
+          className="custom-text-field"
+        />
+      </Grid>
+
+      <Grid item xs={4}>
+        <TextField
+          label="Connection Type"
+          name="connectionType"
+          value={item.connectionType || ""}
+          onChange={handleChange("rotaryJointInquiries", index)}
+          fullWidth
+          size="small"
+          variant="outlined"
+          className="custom-text-field"
+        />
+      </Grid>
+
+      <Grid item xs={4}>
+        <TextField
+          label="Handing"
+          name="handing"
+          value={item.handing || ""}
+          onChange={handleChange("rotaryJointInquiries", index)}
+          fullWidth
+          size="small"
+          variant="outlined"
+          className="custom-text-field"
+        />
+      </Grid>
+    </>
+  )}
+
+  {item.jointType === "Flanged" && (
+    <>
+      <Grid item xs={4}>
+        <TextField
+          label="Inlet Flanged Size"
+          name="inletFlangedSize"
+          value={item.inletFlangedSize || ""}
+          onChange={handleChange("rotaryJointInquiries", index)}
+          fullWidth
+          size="small"
+          variant="outlined"
+          className="custom-text-field"
+        />
+      </Grid>
+
+      <Grid item xs={4}>
+        <TextField
+          label="Outlet Flanged Size"
+          name="outletFlangedSize"
+          value={item.outletFlangedSize || ""}
+          onChange={handleChange("rotaryJointInquiries", index)}
+          fullWidth
+          size="small"
+          variant="outlined"
+          className="custom-text-field"
+        />
+      </Grid>
+    </>
+  )}
+
+  {/* Attachments */}
+  <Grid item xs={6}>
+    <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
       {/* Hidden File Input */}
       <input
         type="file"
@@ -4711,45 +4838,32 @@ const handleChange = (arrayName = null, index = null) => (event) => {
         onChange={async (event) => {
           const file = event.target.files[0];
           if (!file) return;
-        
-          console.log("Selected File:", file.name);
-        
-          // Generate a temporary file URL (for frontend preview)
+
           const tempFileURL = URL.createObjectURL(file);
-          console.log("Temporary File URL:", tempFileURL);
-        
-          // Prepare FormData
+
           const formData = new FormData();
           formData.append("file", file);
-        
+
           try {
             const { data } = await axiosInstance.post(
-              `/lens/fileUpload/file?filelocation=${encodeURIComponent(file.name.substring(0, 50))}`,
+              `/lens/fileUpload/file?filelocation=${encodeURIComponent(
+                file.name.substring(0, 50)
+              )}&&filetype=rotary`,
               formData,
-              {
-                headers: { "Content-Type": "multipart/form-data" },
-              }
+              { headers: { "Content-Type": "multipart/form-data" } }
             );
-        
-            console.log("File Upload Response:", data);
-        
-        
+
             setUploadedFileNames((prev) => {
-              const updatedFileNames = [...prev]; // Copy previous state
-              updatedFileNames[index] = data; // Update specific index
+              const updatedFileNames = [...prev];
+              updatedFileNames[index] = data;
               return updatedFileNames;
             });
-        
-            //  Update `rotaryJointInquiries[index]` with the new filename
+
             setFormData((prev) => ({
               ...prev,
               rotaryJointInquiries: prev.rotaryJointInquiries.map((inquiry, idx) =>
                 idx === index
-                  ? {
-                      ...inquiry,
-                      fileName: data,
-                      referenceDrawing: data,
-                    }
+                  ? { ...inquiry, fileName: data, referenceDrawing: data }
                   : inquiry
               ),
             }));
@@ -4776,103 +4890,94 @@ const handleChange = (arrayName = null, index = null) => (event) => {
           fontWeight: "bold",
           width: "100%",
         }}
-        onClick={() => fileInputRef.current.click()} // Trigger file input
+        onClick={() => fileInputRef.current.click()}
       >
         <AttachFileIcon style={{ fontSize: "16px" }} /> Reference Drawing
       </button>
-      {formData.rotaryJointInquiries[index]?.referenceDrawing &&uploadedFileNames[index] ? (
-      <button
-        type="button"
+
+      {formData.rotaryJointInquiries[index]?.referenceDrawing &&
+      uploadedFileNames[index] ||formData.rotaryJointInquiries[index]?.fileName  ? (
+        <button
+          type="button"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            backgroundColor: "#1976d2",
+            color: "white",
+            padding: "10px 15px",
+            borderRadius: "5px",
+            cursor: "pointer",
+            border: "none",
+            fontSize: "14px",
+            fontWeight: "bold",
+          }}
+          onClick={async () => {
+            try {
+              let fileName = formData.rotaryJointInquiries[index]?.referenceDrawing;
+              const res = await axiosInstance.get(
+                `lens/file/download/?fileName=${encodeURIComponent(fileName)}`,
+                { responseType: "blob" }
+              );
+
+              const contentType = res.headers["content-type"];
+              const url = window.URL.createObjectURL(
+                new Blob([res.data], { type: contentType })
+              );
+
+              const parts = fileName.split(".");
+              const second = parts[1].split("-");
+              const extension = second.shift();
+              second.push(`.${extension}`);
+              const formattedFileName = parts[0] + "-" + second.join("-");
+
+              const link = document.createElement("a");
+              link.href = url;
+              link.setAttribute("download", formattedFileName);
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+              window.URL.revokeObjectURL(url);
+            } catch (error) {
+              console.error("File download failed:", error);
+            }
+          }}
+        >
+          <DownloadIcon style={{ fontSize: "16px" }} /> Download
+        </button>
+      ) : null}
+    </div>
+
+    {uploadedFileNames[index] ||  formData.rotaryJointInquiries[index]?.fileName&& (
+      <p
         style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          backgroundColor: "#1976d2",
-          color: "white",
-          padding: "10px 15px",
-          borderRadius: "5px",
-          cursor: "pointer",
-          border: "none",
-          fontSize: "14px",
+          marginTop: "8px",
+          fontSize: "11px",
+          color: "black",
           fontWeight: "bold",
         }}
-        onClick={async() => {
-          try {
-            let fileName = formData.rotaryJointInquiries[index]?.referenceDrawing; // Extract filename
-            console.log("Original FileName:", fileName);
-
-            // Send API request with the original filename
-            const res = await axiosInstance.get(`lens/file/download/?fileName=${encodeURIComponent(fileName)}`, {
-                responseType: 'blob' // Handle binary data
-            });
-        
-            console.log("Response received:", res);
-        
-            // Extract content type from response headers
-            const contentType = res.headers['content-type'];
-        
-            // Create a downloadable URL
-            const url = window.URL.createObjectURL(new Blob([res.data], { type: contentType }));
-        
-
-            // **Modify filename only for saving** (Ensure extension is at the end)
-            const parts = fileName.split(".");
-            const second = parts[1].split("-");
-            const extension = second.shift(); // Extract extension
-            second.push(`.${extension}`); // Append extension at the end
-            const formattedFileName = parts[0] + "-" + second.join("-");
-        
-            console.log("Formatted FileName for download:", formattedFileName);
-        
-            // Create a link element
-            const link = document.createElement("a");
-            link.href = url;
-            link.setAttribute("download", formattedFileName); // Use formatted name for download
-        
-            // Append to DOM & trigger download
-            document.body.appendChild(link);
-            link.click();
-        
-            // Cleanup
-            document.body.removeChild(link);
-            window.URL.revokeObjectURL(url); // Free memory
-          } catch (error) {
-            console.error("File download failed:", error);
-          }
-          
-        }}
       >
-        <DownloadIcon style={{ fontSize: "16px" }} /> Download 
-      </button>
-    ): null}
-  </div>
-
-  {uploadedFileNames[index] && (
-            <p style={{ marginTop: "8px", fontSize: "11px", color: "black", fontWeight: "bold" }}>
-                Uploaded File: {uploadedFileNames[index]}
-                <button
-                    style={{
-                        marginLeft: "7px",
-                        background: "transparent",
-                        color: "red",
-                        border: "none",
-                        cursor: "pointer",
-                        padding: "5px",
-                        borderRadius: "3px",
-                        fontSize: "11px",
-                    }}
-                    onClick={() => handleFileDelete(index)}
-                >
-                    X
-                </button>
-            </p>
-      )}
-
-
+        Uploaded File: {uploadedFileNames[index] || formData.rotaryJointInquiries[index]?.fileName}
+        <button
+          style={{
+            marginLeft: "7px",
+            background: "transparent",
+            color: "red",
+            border: "none",
+            cursor: "pointer",
+            padding: "5px",
+            borderRadius: "3px",
+            fontSize: "11px",
+          }}
+          onClick={() => handleFileDelete(index)}
+        >
+          X
+        </button>
+      </p>
+    )}
+  </Grid>
 </Grid>
-    
-    
-    </Grid>
+
 
         </div>
         </form>)

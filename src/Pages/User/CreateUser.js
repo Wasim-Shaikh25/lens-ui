@@ -19,6 +19,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getDesignation, getBranches, getDepartments, getuser, handleSubmit, handleUpdate } from '../../apis/SignupApi';
+import { useAuth } from '../../contextApi/AuthContext';
+
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -31,6 +33,8 @@ export default function CreateUser() {
   const navigate = useNavigate();
   const { uId } = useParams();
   const [display, setDisplay]=useState(uId !== undefined)
+  const { authState, setAuthState, logout } = useAuth();
+
   
   const [formData, setFormData] = useState({
     firstName: "",
@@ -217,6 +221,8 @@ export default function CreateUser() {
                     value={formData.empId}
                     size="small"
                     required
+                    disabled={uId}
+                    readOnly={uId}
                     onChange={(e) => handleChange(e)}
                     fullWidth
                     id="empId"
@@ -408,7 +414,7 @@ export default function CreateUser() {
                 type="submit"
                 className='submit-btn'
                 variant="contained"
-                  onClick={(e) => handleUpdate(e, formData, navigate)}
+                  onClick={(e) => handleUpdate(e, formData, navigate, authState,setAuthState,logout)}
                 >
                   Update User
                 </Button>

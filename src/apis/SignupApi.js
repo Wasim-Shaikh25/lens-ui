@@ -1,11 +1,8 @@
  import axiosInstance from "../axios/axiosInstance";
  import moment from 'moment';
+import { WindowSharp } from "@mui/icons-material";
 
  
- 
- 
-
-
 
  //get All Designation
  export const getDesignation = async(setDesignation)=>{
@@ -117,18 +114,45 @@
   
 
 
-    export const handleUpdate = async(e,formData,navigate)=>{
+    export const handleUpdate = async(e,formData,navigate,authState,setAuthState, logout)=>{
       e.preventDefault();
+
+
       formData.departments[0].region = formData.departments[0].departmentName;
       formData.lastUpdatedByUserId = formData.empId;
             console.log(formData.middleName)
 
-  
       try{
-        const res = await axiosInstance.put(`/user/updateUser`,formData);
-        const{data} = res;
-        console.log("response Data ",data);
-        navigate('/user')
+     
+         if(formData.empId==authState?.sub && (formData.designation.designationName !== 'Admin' &&  formData.designation. designationName !== 'Director' )){
+          const confirmLogout = window.confirm("You Authority will be changed, need to login again!!");
+  
+          if (confirmLogout) {
+            const res = await axiosInstance.put(`/user/updateUser`,formData);
+            const{data} = res;
+            console.log("response Data ",data);
+            logout(); 
+          }
+
+         }
+         else{
+          const res = await axiosInstance.put(`/user/updateUser`,formData);
+          const{data} = res;
+          console.log("response Data ",data);
+
+          setAuthState((prev) => ({
+            ...prev,
+            designation:{designationName: formData.designation.designationName}
+          }));
+          console.log("Non admin block hit")
+          navigate('/user')
+          //navigate('/')
+           
+           console.log("became a normal user block hit")
+
+         }
+
+         console.log("authstate ka data ",authState)
       }
       
       catch(err){
@@ -138,3 +162,5 @@
    
    }
   
+
+

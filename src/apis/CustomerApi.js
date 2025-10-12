@@ -197,11 +197,13 @@ export const getCustomer = async (rId, setFormData) => {
 
 
 // delete data
-export const deleteDetail = (crId, data, setIsDeleted, setData) => {
-  axiosInstance.delete(`lens/customer/delete?customerRefrenceNumber=${crId}`)
+export const deleteDetail = (crId,cref, data, setIsDeleted, setData) => {
+
+  const reqUrl = `lens/customer/delete?customerDetailId=${crId}&customerRefrenceNumber=${cref}`
+  axiosInstance.delete(reqUrl)
   .then(res => {
     console.log(res);
-    const newData = data.filter(item => item.customerReferenceNumber !== crId);
+    const newData = data.filter(item => item.contactDetailReferenceNo !== crId);
     setIsDeleted(true);
     setData(newData);
   })
@@ -209,7 +211,7 @@ export const deleteDetail = (crId, data, setIsDeleted, setData) => {
     console.log(err);
   });
 
-  console.log("customer reference id of deletion elem is ", crId);
+  console.log("customer reference Num of deletion elem is ",cref, "Custom detaildid is ",crId );
 };
 
 

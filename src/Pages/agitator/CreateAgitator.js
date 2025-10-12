@@ -2486,6 +2486,7 @@ export default function AgitatorSeal() {
               <TextField
                 className="custom-text-field"
                 label="No of Studs"
+                type="number"
                 name="glandBoltingNumberOfStuds"
                 value={formData.glandBoltingNumberOfStuds || ''}
                 onChange={(e) => handleChange(e)}
@@ -2527,6 +2528,7 @@ export default function AgitatorSeal() {
               <TextField
                 className="custom-text-field"
                 label="Start Angle"
+                type="number"
                 name="glandBoltingStartAngle"
                 value={formData.glandBoltingStartAngle || ''}
                 onChange={(e) => handleChange(e)}

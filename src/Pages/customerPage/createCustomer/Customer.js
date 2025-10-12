@@ -28,6 +28,7 @@ export default function Customer() {
 
 
   const [formData, setFormData] = useState({
+    customerId:0,
     branch: '',
     customerName: '',
     contactDetail: [],
@@ -45,7 +46,9 @@ export default function Customer() {
     getCustomer(rId, setFormData)
     }else{
 
-      setFormData({ branch: '',
+      setFormData({
+      customerId:0,
+      branch: '',
       customerName: '',
       vendorCode:'',
       contactDetail:[],
@@ -437,6 +440,7 @@ const getDataByName = async (newInputValue) => {
     name="contactPerson"
     value={detail.contactPerson}
     onChange={e => handleChange(e, index)}
+    onInput={e => e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, '')}
     label="Contact Person"
     error={Boolean(errors[`contactDetail[${index}].contactPerson`])}
     helperText={errors[`contactDetail[${index}].contactPerson`]}
@@ -497,6 +501,7 @@ const getDataByName = async (newInputValue) => {
     value={detail.designation}
     onChange={e => handleChange(e, index)}
     fullWidth
+    onInput={e => e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, '')}
     label="Designation"
     error={Boolean(errors[`contactDetail[${index}].designation`])}
     helperText={errors[`contactDetail[${index}].designation`]}
@@ -537,6 +542,7 @@ const getDataByName = async (newInputValue) => {
      size="small"
      className="custom-text-field"
      name="mobileNumber"
+     type="number"
      value={detail.mobileNumber}
      onChange={e => handleChange(e, index)}
      label="Mobile Number"
@@ -668,7 +674,7 @@ const getDataByName = async (newInputValue) => {
 
         <Grid container  spacing={2}> 
         <Grid item xs={12}>
-          <IconButton className="deleteIcon" disabled={!authState?.authorities.includes("CustomerDetail_Write")} onClick={() => deleteItems(index)} >
+          <IconButton className="deleteIcon" disabled={!authState?.authorities.includes("CustomerDetail_Write") || rId} onClick={() => deleteItems(index)} >
             <DeleteIcon />
           </IconButton>
         </Grid>
@@ -680,7 +686,7 @@ const getDataByName = async (newInputValue) => {
           </Grid>
           <Grid item xs={4}>
           <Grid item xs={4}  >
-<Button className="add-btn" sx={{margin:"0rem 1rem 1rem 0rem"}} disabled={!authState?.authorities.includes("CustomerDetail_Write")}  onClick={contactDetail}><AddIcon/> Add Customer Details</Button>
+<Button className="add-btn" sx={{margin:"0rem 1rem 1rem 0rem"}} disabled={!authState?.authorities.includes("CustomerDetail_Write") || rId}  onClick={contactDetail}><AddIcon/> Add Customer Details</Button>
         
         {!rId&&!formData.customerReferenceNumber?(<Button className="submit-btn" sx={{margin:"1rem 1rem 0rem 1rem"}} disabled={!authState?.authorities.includes("CustomerDetail_Write")} type="submit" onClick ={(e)=>handleSubmit(e,formData,navigate,setErrors,validateField)} variant="contained" >Submit</Button>) : (
           <>

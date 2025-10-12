@@ -40,7 +40,7 @@ export default function EditCustomer() {
 
 
   useEffect(() => {
-    searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData,token)
+    searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData)
 
     }, [currentPage, itemsPerPage]);
     
@@ -128,7 +128,7 @@ return (
 
 {/* </div> */}
 
-<Button onClick={()=>searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData,token)}  style={{width:"15%",margin:"0.8rem 2.5rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
+<Button onClick={()=>searchFilter(startDate,endDate,branch,customerName,customerRef,currentPage,itemsPerPage,setData)}  style={{width:"15%",margin:"0.8rem 2.5rem", color:"white", backgroundColor:"#03C9D7"}} variant="contained">
   Search
 </Button>
 
@@ -166,7 +166,7 @@ return (
                   <button onClick={() => editDetail(row)} style={{ margin: '0px 3px', border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
                     <EditIcon style={{ color: 'blue' }} />
                   </button>
-                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} disabled={!authState?.authorities.includes("CustomerDetail_Write")} onClick={() => deleteDetail(row.customerReferenceNumber, data, setIsDeleted, setData,token)}>
+                  <button style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} disabled={!authState?.authorities.includes("CustomerDetail_Write")} onClick={() => deleteDetail(row.contactDetailReferenceNo,row.customerReferenceNumber, data, setIsDeleted, setData,token)}>
                     <DeleteIcon style={{ color: 'red' }} />
                   </button>
                 </TableCell>

@@ -37,6 +37,10 @@
   margin-left: 18px  !important;
 }
 
+.add-btn:disabled{
+  background-color: #ddd  !important;
+}
+
 
 .submit-btn{
   background-color: #03C9D7 !important;
@@ -72,7 +76,11 @@
   color: white !important;
 }
 
+.deleteIcon:disabled{
+    background-color: #ddd !important;
+    cursor: not-allowed !important;
 
+}
 
 
 /* Successpage */

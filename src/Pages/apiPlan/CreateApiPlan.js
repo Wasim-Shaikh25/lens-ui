@@ -1061,18 +1061,14 @@ console.log("formData is ",formData)
               className="custom-text-field"
               label="Customer Name"
               name="customerName"
-              value={formData.customerName} // Fetched based on reference number
-              
+              value={formData.customerName} 
+              onChange={handleChange()}
               InputLabelProps={{
                 shrink: Boolean(formData.customerName),
               }}
-              disabled 
-              id="disableItem"
               autoFocus={formData.customerName}
               fullWidth
-              InputProps={{
-                readOnly: true, // Fetched value
-              }}
+         
             />
           </Grid>
 

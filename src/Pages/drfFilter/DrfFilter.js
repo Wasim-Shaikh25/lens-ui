@@ -175,7 +175,7 @@ return (
             <TableCell align="right">Drf No</TableCell>
             <TableCell align="right">Branch</TableCell>
             <TableCell align="right">Customer Name</TableCell>
-            <TableCell align="right">Shaft Size</TableCell>
+            {/* <TableCell align="right">Shaft Size</TableCell> */}
             <TableCell align="right">Created On</TableCell>
             <TableCell align="right">Created By</TableCell>
             <TableCell align="right">Last Updated On</TableCell>
@@ -192,7 +192,7 @@ return (
                 <TableCell align="right">{row?.drfNumber}</TableCell>
                 <TableCell align="right">{row?.branch}</TableCell>
                 <TableCell align="right">{row.customerName}</TableCell>
-                <TableCell align="right">{row?.shaftSize}</TableCell>
+                {/* <TableCell align="right">{row?.shaftSize}</TableCell> */}
                 <TableCell align="right">{row?.createdOn}</TableCell>
                 <TableCell align="right">{row?.createdBy}</TableCell>
                 <TableCell align="right">{row?.updatedOn}</TableCell>

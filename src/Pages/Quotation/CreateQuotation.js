@@ -482,6 +482,7 @@ console.log("formData",formData)
                   fullWidth
                   className="custom-text-field"
                   name="kindAttentionTo"
+                  onInput={e => e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, '')}
                   value={formData.kindAttentionTo}
                   onChange={handleChange}
                   label="Kind Attention To"
@@ -652,6 +653,7 @@ console.log("formData",formData)
                   name="engineer"
                   value={formData.engineer}
                   label="Engineer"
+                  onInput={e => e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, '')}
                   onChange={handleChange} />
               </Grid>
 
@@ -745,6 +747,7 @@ console.log("formData",formData)
                         className="custom-text-field"
                         name="quantity" // Unique name for each item
                         label="Quantity"
+                        type="number"
                         value={detail.quantity || ''} // Access detail for each item
                         onChange={(e) => handleChange(e, index)} // Handle item change
                       />
@@ -769,6 +772,7 @@ console.log("formData",formData)
                         className="custom-text-field"
                         name="unitPrice" // Unique name for each item
                         label="Unit Price"
+                        tye="number"
                         value={detail.unitPrice || ''} // Access detail for each item
                         onChange={(e) => handleChange(e, index)} // Handle item change
                       />
@@ -780,6 +784,7 @@ console.log("formData",formData)
                         className="custom-text-field"
                         name="totalPrice" // Unique name for each item
                         label="Total Price"
+                        type="number"
                         value={detail.totalPrice || ''} // Access detail for each item
                         onChange={(e) => handleChange(e, index)} // Handle item change
                       />
