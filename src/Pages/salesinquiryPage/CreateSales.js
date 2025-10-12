@@ -4984,7 +4984,9 @@ const handleChange = (arrayName = null, index = null) => (event) => {
           }[item?.sealType]}
            {/* Remove Button */}
            <IconButton
+           className="deleteIcon"
             color="secondary"
+            disabled={sId}
             onClick={() => {
               const inquiryKey = inquiryTypes[item.sealType];
               setFormData(prev => ({
@@ -4992,7 +4994,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
                 [inquiryKey]: prev[inquiryKey]?.filter((_, i) => i !== index)
               }));
             }}
-            style={{ marginTop: "10px", backgroundColor: "red", color: "white", borderRadius: "5px" }}
+       
           >
             <DeleteIcon />
           </IconButton>
