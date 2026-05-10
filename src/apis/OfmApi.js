@@ -3,14 +3,16 @@ import moment from 'moment';
 
 
 
+const formatDateTime = (val) => {
+  if (!val) return null;
+  return moment(val).format("YYYY-MM-DD HH:mm:ss");
+};
 
-//Submit form
-export const handleSubmit = async (e, formData, navigate, savedItems) => {
-  e.preventDefault();
-
+const buildOfmPayload = (formData, savedItems, isUpdate = false) => {
   const cleanedItems = savedItems
     .filter((item) => item.factor || item.description || item.ciCode || item.quantity)
     .map((item) => ({
+      ...(isUpdate && item.ofmItemId ? { ofmItemId: item.ofmItemId } : {}),
       srNo: Number(item.srNo) || 0,
       header: item.header || "",
       factor: item.factor || "",
@@ -30,17 +32,22 @@ export const handleSubmit = async (e, formData, navigate, savedItems) => {
       discount: Number(item.discount) || 0,
       totalValue: Number(item.totalValue) || 0,
       totalListValue: Number(item.totalListValue) || 0,
-      naDrgNo: item.naDrgNo === "NA" ? true : item.naDrgNo === "DRG" ? false : Boolean(item.naDrgNo),
+      naDrgNo: item.naDrgNo === "NA"
+        ? true
+        : item.naDrgNo === "DRG"
+        ? false
+        : Boolean(item.naDrgNo),
       grandTotalListPrice: Number(formData.grandTotalListPrice) || 0,
     }));
 
-  const updatedFormData = {
+  return {
+    ...(isUpdate && formData.ofmId ? { ofmId: formData.ofmId } : {}),
     branch: formData.branch || "",
     ofmNo: formData.ofmNo || "",
     qutationNumber: formData.qutationNumber || "",
-    ofmDate: formData.ofmDate || null,
+    ofmDate: formatDateTime(formData.ofmDate),
     poNo: formData.poNo || "",
-    poDate: formData.poDate || null,
+    poDate: formatDateTime(formData.poDate),
     orderType: formData.orderType || "",
     category: formData.category || "",
     transportThrough: formData.transportThrough || "",
@@ -50,16 +57,17 @@ export const handleSubmit = async (e, formData, navigate, savedItems) => {
     transport: formData.transport || "",
     deliveryPeriod: formData.deliveryPeriod || "",
     preQANo: formData.preQANo || "",
-    preQADate: formData.preQADate || null,
+    preQADate: formatDateTime(formData.preQADate),
     statutoryRegulatoryRequirements: Boolean(formData.statutoryRegulatoryRequirements),
     specialInformation: formData.specialInformation || "",
     engineer: formData.engineer || "",
     paymentTerms: formData.paymentTerms || "",
     oaNo: formData.oaNo || "",
+    oaDate: formatDateTime(formData.oaDate),
     industry: formData.industry || "",
     projectOrder: Boolean(formData.projectOrder),
     penaltyApplicable: Boolean(formData.penaltyApplicable),
-    poReceived: Boolean(formData.poReceived),   // ✅ swagger expects boolean, you're sending string
+    poReceived: Boolean(formData.poReceived),
     invoiceTo: formData.invoiceTo || "",
     quotationNo: formData.quotationNo || "",
     priority: formData.priority || "",
@@ -75,20 +83,22 @@ export const handleSubmit = async (e, formData, navigate, savedItems) => {
     complianceCertificate: Boolean(formData.complianceCertificate),
     consigneeName: formData.consigneeName || "",
     consigneeAddress: formData.consigneeAddress || "",
-    createdOn: formData.createdOn || null,
-    updatedOn: formData.updatedOn || null,
+    createdOn: formatDateTime(formData.createdOn),
+    updatedOn: formatDateTime(formData.updatedOn),
     createdByUser: formData.createdByUser || "",
     updatedByUser: formData.updatedByUser || "",
-    insurance: Boolean(formData.insurance),      // ✅ swagger expects boolean, you're sending ""
+    insurance: Boolean(formData.insurance),
     insuranceBy: formData.insuranceBy || "",
     insuranceBorneBy: formData.insuranceBorneBy || "",
     company: formData.company || "",
     otherCharges: formData.otherCharges || "",
-    discount: Number(formData.discount) || 0,   // ✅ swagger expects number, you're sending string "65"
-    qapRequired: Boolean(formData.qapRequired),  // ✅ swagger expects boolean, you're sending ""
-    oaDate: formData.oaDate || null,
+    discount: parseFloat(formData.discount) || 0,
+    qapRequired: Boolean(formData.qapRequired),
     location: formData.location || "",
     endUserDetail: {
+      ...(isUpdate && formData.endUserDetail?.endUserDetailId
+        ? { endUserDetailId: formData.endUserDetail.endUserDetailId }
+        : {}),
       branch: formData.endUserDetail?.branch || "",
       customerName: formData.endUserDetail?.customerName || "",
       place: formData.endUserDetail?.place || "",
@@ -100,56 +110,180 @@ export const handleSubmit = async (e, formData, navigate, savedItems) => {
     },
     ofmItems: cleanedItems,
   };
+};
 
-  console.log("Payload to send:", JSON.stringify(updatedFormData, null, 2));
 
+// ── Submit (POST - new record) ──
+export const handleSubmit = async (e, navigate, formData, savedItems) => {
+  e.preventDefault();
+  const payload = buildOfmPayload(formData, savedItems, false);
+  console.log("Submit Payload:", JSON.stringify(payload, null, 2));
   try {
-    const res = await axiosInstance.post('lens/OrderForwardingMemo/save', updatedFormData);
-    console.log("Response:", res.data);
+    const res = await axiosInstance.post('lens/OrderForwardingMemo/save', payload);
+    console.log("Submit Response:", res.data);
     navigate('/editOfm');
   } catch (error) {
-    console.log("Error:", error?.response?.data || error);
+    console.log("Submit Error:", error?.response?.data || error);
   }
 };
 
 
-//getApi
-export const getOfm = async(oId,setFormData, setSavedItems)=>{
-
-  try{
-    const res = await axiosInstance.get(`lens/OrderForwardingMemo/get?ofmNo=${oId}`)
-    const {data} = res;
-    console.log("the oId fetched data is ",data)
-    setFormData({...data,ofmItems:[]});
-    setSavedItems(data.ofmItems);
-    }
-    catch(err){
-      console.log(err);
-    }
-    
-}
-
-
-//Update API
-export const handleUpdate = async (e, formData,oId,savedItems, navigate)=>{
+// ── Update (PUT - existing record) ──
+export const handleUpdate = async (e, navigate, formData, savedItems) => {
   e.preventDefault();
-  console.log("Saved Items are ",savedItems);
+  const payload = buildOfmPayload(formData, savedItems, true);
+  console.log("Update Payload:", JSON.stringify(payload, null, 2));
+  try {
+    const res = await axiosInstance.put('lens/OrderForwardingMemo/update', payload);
+    console.log("Update Response:", res.data);
+    navigate('/editOfm');
+  } catch (error) {
+    console.log("Update Error:", error?.response?.data || error);
+  }
+};
 
-  const updatedFormData = { ...formData, ofmItems: savedItems };
-    console.log("sending request data is ",updatedFormData);
 
-    try{
-        const res = await axiosInstance.put(`lens/OrderForwardingMemo/update`, updatedFormData);
-        console.log("response from update is ",res.data);
-        oId="";
-        navigate(`/ofmSuccess`);
-    }
-    catch(err){
-      console.log(err)
-    }
+// ── Get OFM by ID ──
+export const getOfm = async (oId, setFormData, setSavedItems) => {
+  try {
+    const { data } = await axiosInstance.get(`lens/OrderForwardingMemo/get?ofmNo=${oId}`);
 
-  
-}
+    const savedItems = (data.ofmItems || []).map((item) => ({
+      ofmItemId: item.ofmItemId,
+      srNo: item.srNo || 0,
+      header: item.header || "",
+      factor: item.factor || "",
+      type: item.type || "",
+      size: item.size || "",
+      face: item.face || "",
+      description: item.description || "",
+      ciCode: item.ciCode || "",
+      lpItemCode: item.lpItemCode || "",
+      drfNo: item.drfNo || "",
+      drawingNo: item.drawingNo || "",
+      quantity: item.quantity || "",
+      bookedQuantity: item.bookedQuantity || "",
+      unit: item.unit || "",
+      unitPrice: item.unitPrice || "",
+      unitLPrice: item.unitLPrice || "",
+      discount: item.discount || "",
+      totalValue: item.totalValue || "",
+      totalListValue: item.totalListValue || "",
+      naDrgNo: item.naDrgNo === true
+        ? "NA"
+        : (item.naDrgNo === false && item.drawingNo)
+        ? "DRG"
+        : "",
+      grandTotalListPrice: item.grandTotalListPrice || "",
+    }));
+
+    setSavedItems(savedItems);
+
+    // Derive grandTotal from items since backend stores it per item
+    const grandTotal = (data.ofmItems || []).reduce(
+      (sum, it) => sum + (Number(it.totalValue) || 0), 0
+    );
+    const grandTotalListPrice = (data.ofmItems || []).reduce(
+      (sum, it) => sum + (Number(it.grandTotalListPrice) || 0), 0
+    );
+
+    // Apply stored discount to derive displayed grand totals
+    const storedDiscount = Number(data.discount) || 0;
+    const finalGrandTotal = grandTotal - (grandTotal * storedDiscount) / 100;
+    const finalGrandListTotal = grandTotalListPrice - (grandTotalListPrice * storedDiscount) / 100;
+
+    setFormData({
+      ofmId: data.ofmId,
+      branch: data.branch || "",
+      ofmNo: data.ofmNo || "",
+      qutationNumber: data.qutationNumber || "",
+      ofmDate: data.ofmDate ? moment(data.ofmDate) : null,
+      poNo: data.poNo || "",
+      poDate: data.poDate ? moment(data.poDate) : null,
+      orderType: data.orderType || "",
+      category: data.category || "",
+      transportThrough: data.transportThrough || "",
+      customer: data.customer || "",
+      customerAddress: data.customerAddress || "",
+      kindAttentionTo: data.kindAttentionTo || "",
+      transport: data.transport || "",
+      deliveryPeriod: data.deliveryPeriod || "",
+      preQANo: data.preQANo || "",
+      preQADate: data.preQADate ? moment(data.preQADate) : null,
+      statutoryRegulatoryRequirements: data.statutoryRegulatoryRequirements ?? false,
+      specialInformation: data.specialInformation || "",
+      engineer: data.engineer || "",
+      paymentTerms: data.paymentTerms || "",
+      oaNo: data.oaNo || "",
+      oaDate: data.oaDate ? moment(data.oaDate) : null,
+      industry: data.industry || "",
+      projectOrder: data.projectOrder ?? null,
+      penaltyApplicable: data.penaltyApplicable ?? null,
+      poReceived: data.poReceived ?? false,
+      invoiceTo: data.invoiceTo || "",
+      quotationNo: data.quotationNo || "",
+      priority: data.priority || "",
+      ofmStatus: data.ofmStatus || "",
+      externalInspection: data.externalInspection ?? false,
+      externalInspectionWhere: data.externalInspectionWhere || "",
+      externalInspectionByWhom: data.externalInspectionByWhom || "",
+      rawMaterialTC: data.rawMaterialTC ?? false,
+      qcReport: data.qcReport ?? false,
+      testReport: data.testReport ?? false,
+      guaranteeCertificate: data.guaranteeCertificate ?? false,
+      fitmentCertificate: data.fitmentCertificate ?? false,
+      complianceCertificate: data.complianceCertificate ?? false,
+      consigneeName: data.consigneeName || "",
+      consigneeAddress: data.consigneeAddress || "",
+      createdOn: data.createdOn || null,
+      updatedOn: data.updatedOn || null,
+      createdByUser: data.createdByUser || "",
+      updatedByUser: data.updatedByUser || "",
+      insurance: data.insurance ?? false,
+      insuranceBy: data.insuranceBy || "",
+      insuranceBorneBy: data.insuranceBorneBy || "",
+      company: data.company || "",
+      otherCharges: data.otherCharges || "",
+      location: data.location || "",
+      qapRequired: data.qapRequired ?? false,
+
+      // ✅ These are the fields Other Charges section binds to
+      discount: data.discount ?? "",
+      pandF: data.pandF || "",        // not in response — will be "" (editable)
+      freight: data.freight || "",    // not in response — will be "" (editable)
+      sgst: data.sgst || "",          // not in response — will be "" (editable)
+      cgst: data.cgst || "",          // not in response — will be "" (editable)
+      igst: data.igst || "",          // not in response — will be "" (editable)
+
+      // ✅ Grand totals derived from items + stored discount
+      grandTotal: Number(finalGrandTotal.toFixed(2)),
+      grandTotalListPrice: Number(finalGrandListTotal.toFixed(2)),
+
+      endUserDetail: {
+        endUserDetailId: data.endUserDetail?.endUserDetailId,
+        branch: data.endUserDetail?.branch || "",
+        customerName: data.endUserDetail?.customerName || "",
+        place: data.endUserDetail?.place || "",
+        contactPersonName: data.endUserDetail?.contactPersonName || "",
+        mobileNumber: data.endUserDetail?.mobileNumber || "",
+        emailId: data.endUserDetail?.emailId || "",
+        endUserIndustry: data.endUserDetail?.endUserIndustry || "",
+        knots: data.endUserDetail?.knots || "",
+      },
+
+      // ✅ Keep blank item for adding new items in update mode
+      ofmItems: [{
+        srNo: "", header: "", factor: "", face: "", type: "", size: "",
+        description: "", ciCode: "", lpItemCode: "", drfNo: "", drawingNo: "",
+        quantity: "", bookedQuantity: "", unit: "", unitPrice: "", unitLPrice: "",
+        discount: "", naDrgNo: "", totalValue: "", totalListValue: "",
+      }],
+    });
+
+  } catch (error) {
+    console.log("getOfm error:", error?.response?.data || error);
+  }
+};
 
 //get All 
 export const getAllApi = async(setData,setIsDeleted)=>{

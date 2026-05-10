@@ -645,7 +645,38 @@ const removeItem = (index) => {
 />
 </Grid> 
 
+<Grid item xs={4}>
+<Autocomplete
+  size="small"
+  value={formData.category || ''}
+  onChange={(event, newValue) => {
+    setFormData({
+      ...formData,
+      category: newValue || ''
+    });
+  }}
+  inputValue={formData.category || ''}
+  onInputChange={(event, newInputValue) => {
+    setFormData({
+      ...formData,
+      category: newInputValue || ''
+    });
+  }}
 
+  options={["API Plan","Bearing Isolators","Grafoil","Mechanical Seal","Re-Conditioning","Rotary Joints"].map((cat) => cat)}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      size="small"
+      label="Category"
+      className="custom-text-field"
+      placeholder='Category'
+      variant="outlined"
+      fullWidth
+    />
+  )}
+/>
+</Grid>
             
 
             <Grid item xs={4}>
@@ -1469,29 +1500,7 @@ const removeItem = (index) => {
   
 
 
-    {/* End-User Remarks */}
-    <Grid item xs={4}>
-      <TextField
-        size="small"
-        fullWidth
-        label="End-User Remarks"
-        className="custom-text-field"
-        variant="outlined"
-        multiline
-        rows={2}
-        value={formData.endUserDetail.remarks || ""}
-        onChange={(e) =>
-          setFormData({
-            ...formData,
-            endUserDetail: {
-              ...formData.endUserDetail,
-              remarks: e.target.value
-            }
-          })
-        }
-      />
-    </Grid>
-    {/* End-User Remarks */}
+    {/* End-User Knots */}
     <Grid item xs={4}>
       <TextField
         size="small"
@@ -1974,7 +1983,7 @@ const removeItem = (index) => {
 
             {/* {selectedTab === 1?():null} */}
 
-            {!oId && (selectedTab === 2) ? (<Button className="update-btn" onClick={(e) => handleSubmit(e, formData, navigate, savedItems)} sx={{ margin: "1rem 1rem 0rem 1rem" }} type="submit" disabled={!authState?.authorities.includes("OFM_Write")}variant="contained" >Submit</Button>) : (selectedTab === 3) ? (
+            {!oId && (selectedTab === 2) ? (<Button className="update-btn" onClick={(e) => handleSubmit(e, formData, navigate, savedItems)} sx={{ margin: "1rem 1rem 0rem 1rem" }} type="submit" disabled={!authState?.authorities.includes("OFM_Write")}variant="contained" >Submit</Button>) : (selectedTab === 2) ? (
               <>
                 <Button disabled={!authState?.authorities.includes("OFM_Write")} className="update-btn" onClick={(e) => handleUpdate(e, navigate, formData, savedItems)} sx={{ margin: "1rem 1rem 0rem 1rem" }} variant="contained"  >Update</Button>
                 <Button className="cancel-btn" variant="contained" onClick={cancelUpdate} >Cancel</Button> </>) : null}
