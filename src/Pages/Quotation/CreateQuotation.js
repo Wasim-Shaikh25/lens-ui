@@ -10,6 +10,13 @@ import { Radio, RadioGroup, FormControl, FormLabel } from '@mui/material';
 import { handleSubmit, handleUpdate } from '../../apis/QuotationApi';
 import { getQuotation } from '../../apis/QuotationApi';
 import { useAuth } from '../../contextApi/AuthContext';
+import axiosInstance from '../../axios/axiosInstance';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import moment from 'moment';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { getData } from 'country-list';
+import { DatePicker } from '@mui/x-date-pickers';
 
 
 
@@ -26,22 +33,34 @@ export default function CreateQuotation() {
   const [savedItems, setSavedItems] = useState([]);
   const { authState } = useAuth();
 
+  const [baseTotal, setBaseTotal] = useState(0);
+
+  const countries = getData().map(({ name }) => name);
+const [custAddress, setCustAddress] = useState([])
+const [addressInputValue, setAddressInputValue] = useState('');
 
 
   const [formData, setFormData] = useState({
-
+    quotationId:  null,
+    transactiontype:"",
     category: "",
+    quotationDate: moment(),
+   country:"",
+   company:"",
     customerEnquiryNo: "",
+    salesInquiryNumber:"",
     branch: "",
     enquiryNo: "",
+    enquiryDate:null,
     customer: "",
     customerAddress: "",
     kindAttentionTo: "",
     designation: "",
-    dueOn: "",
+    dueOn: null,
     transport: "",
     specialComments: "",
     revisionNo: "",
+    revisionDate:null,
     validityWeeks: "",
     quotationSource: "",
     deliverySchedule: "",
@@ -72,7 +91,7 @@ export default function CreateQuotation() {
       itemCode: '',
       uom: '',
       discount: '',
-      tax: ''
+      tax: '',
     }],
     guaranteeWarranty: true,
     guarantee: "",
@@ -94,16 +113,23 @@ export default function CreateQuotation() {
   useEffect(() => {
     if (savedItems.length > 1) {
       setFormData({
-
+        quotationId:  null,
+        transactiontype:"",
         category: "",
+        quotationDate: moment(),
+       country:"",
+        company:"",
+        revisionDate:null,
+        enquiryDate:null,
         customerEnquiryNo: "",
+        salesInquiryNumber:"",
         branch: "",
         enquiryNo: "",
         customer: "",
         customerAddress: "",
         kindAttentionTo: "",
         designation: "",
-        dueOn: "",
+        dueOn: null,
         transport: "",
         specialComments: "",
         revisionNo: "",
@@ -148,20 +174,27 @@ export default function CreateQuotation() {
     }
 
     if (qId !== undefined) {
-      getQuotation(qId, setFormData)
+      getQuotation(qId, setFormData, setSavedItems)
     } else {
 
       setFormData({
-
+        quotationId: null,
+       transactiontype:"",
         category: "",
+       country:"",
+       company:"",
+        quotationDate: moment(),
+        enquiryDate:null,
+        revisionDate:null,
         customerEnquiryNo: "",
+        salesInquiryNumber:"",
         branch: "",
         enquiryNo: "",
         customer: "",
         customerAddress: "",
         kindAttentionTo: "",
         designation: "",
-        dueOn: "",
+        dueOn: null,
         transport: "",
         specialComments: "",
         revisionNo: "",
@@ -200,7 +233,7 @@ export default function CreateQuotation() {
         guaranteeWarranty: true,
         guarantee: "",
         warranty: "",
-        pandF: ''
+        pandF: ""
 
       })
 
@@ -209,11 +242,39 @@ export default function CreateQuotation() {
   }, [qId])
 
 
+  useEffect(() => {
+    // Runs for both update mode (sets value) and reset (clears value)
+    setAddressInputValue(formData.customerAddress || "");
+  }, [formData.customerAddress]);
+
+
+  useEffect(() => {
+    const newBaseTotal = savedItems.reduce((acc, item) => acc + item.totalPrice, 0);
+    setBaseTotal(newBaseTotal);
+  
+    // Re-apply existing discount when items change
+    const discountedTotal = newBaseTotal - (newBaseTotal * formData.discount) / 100;
+    setFormData(prev => ({
+      ...prev,
+      grandTotal: discountedTotal,
+    }));
+  }, [savedItems]);
+
   console.log("form Data from outside is ", formData)
 
 
 
   const handleChange = (e, index) => {
+//console.log("target object is ",e.target)
+
+if (!e?.target) {
+  const newFormData = { ...formData };
+  newFormData.dueOn = e ? moment(e).format("YYYY-MM-DDTHH:mm:ss") : null;
+  setFormData(newFormData);
+  return;
+}
+
+
     const { name, type, checked, value } = e.target;
     const newFormData = { ...formData };
 
@@ -226,9 +287,25 @@ export default function CreateQuotation() {
     //   newFormData.items[index][name] = value;
     // }
 
+    console.log("name is ",name)
+
     if (type === "checkbox") {
       newFormData[name] = checked;
-    } else if (name === "warranty" || name === "guarantee") {
+    }
+    else if (name === "discount") {
+      const discountValue = Number(value);
+      const baseTotal = savedItems.reduce((acc, item) => acc + item.totalPrice, 0);
+  
+      console.log("the discount is ",discountValue)
+      console.log("the  is ",discountValue)
+      setFormData(prev => ({
+        ...prev,
+        discount: value,     
+        grandTotal: baseTotal - (baseTotal * discountValue) / 100
+      }));
+      return ;
+    }
+    else if (name === "warranty" || name === "guarantee") {
       newFormData.guarantee = name === "guarantee" ? value : "";
       newFormData.warranty = name === "warranty" ? value : "";
     } else if (index === undefined) {
@@ -258,6 +335,45 @@ export default function CreateQuotation() {
     }));
   };
 
+  
+  const handleFetch = async (apiItem) => {
+
+    try {
+      const { data } = await axiosInstance(`lens/salesInquiry/get?itemReferenceNo=${apiItem}`)
+
+      console.log("response is ", data)
+      // setFormData({
+      //   ...formData,
+      //   pumpInquiryItem: { ...data?.pumpInquiry }
+      // })
+
+    } catch (err) {
+      console.log(err)
+    }
+
+  }
+  const getAddress = async (custName) => {
+    try {
+      const encodedName = custName.trim().replace(/\s+/g, '%20');
+      // OR use: encodeURIComponent(custName.trim())
+      
+      const { data } = await axiosInstance(`lens/customer/keyword?startkeyword=${encodedName}`);
+  
+      const allAddresses = data.flatMap((customer) =>
+        customer.contactDetail.map((contact) => ({
+          ...contact,
+          customerName: customer.customerName,
+          branch: customer.branch
+        }))
+      );
+  
+      setCustAddress(allAddresses);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
 
 
   const handleDeleteItems = index => {
@@ -272,10 +388,19 @@ export default function CreateQuotation() {
     // Save the current item to the savedItems array
     const newSavedItems = [...savedItems, formData.items[index]];
     setSavedItems(newSavedItems);
+    const newGrandTotal =  newSavedItems.reduce((acc, item) => acc + item.totalPrice, 0);
 
-    formData.items[index] = { itemName: '', itemDescription: '', quantity: 0, unitPrice: 0, totalPrice: 0, currency: '', itemCode: '', uom: '', discount: 0, tax: 0 }
 
     console.log("Saved items:", newSavedItems);
+    setFormData(prev => ({
+      ...prev,
+      grandTotal: newGrandTotal,   
+      items: prev.items.map((item, i) =>
+        i === index
+          ? { itemName: '', itemDescription: '', quantity: 0, unitPrice: 0, totalPrice: 0, currency: '', itemCode: '', uom: '', discount: 0, tax: 0 }
+          : item
+      )
+    }));
   };
 
 console.log("formData",formData)
@@ -311,6 +436,34 @@ console.log("formData",formData)
 
 
   
+  const handleItemChange = (index, field, value) => {
+    const updatedItems = [...formData.items];
+  
+    // convert numbers properly
+    if (["quantity", "unitPrice", "unitLPrice", "discount", "tax"].includes(field)) {
+      value = Number(value);
+    }
+  
+    updatedItems[index][field] = value;
+    
+    // Recalculate Total Value
+    const { quantity, unitPrice, discount } = updatedItems[index];
+    const gross = quantity * unitPrice;
+    const net = gross - (gross * discount) / 100;
+    
+    updatedItems[index].totalPrice = Number(net.toFixed(2));
+
+    if (updatedItems[index].totalPrice){
+      
+    }
+  
+    setFormData({
+      ...formData,
+      ...formData.grandTotal,
+      items: updatedItems
+    });
+  };
+  
 
 
 
@@ -338,6 +491,210 @@ console.log("formData",formData)
           <Grid container spacing={2} sx={{ marginTop: "0.5rem" }}>
 
             {selectedTab === 0 && <>
+
+              <Grid item xs={4}>
+
+              <TextField
+  size="small"
+  className="custom-text-field"
+  disabled
+  id="disableItem"
+  name="quotationId"
+  InputLabelProps={{
+    shrink: Boolean(qId && formData?.quotationId), // shrink only when qId exists AND has value
+  }}
+  label="Quotation ID"
+  autoFocus={!formData?.quotationId}
+  value={qId && formData?.quotationId ? formData.quotationId : ""}  // "" not null
+  onChange={handleChange}
+/>
+</Grid>
+
+            <Grid item xs={4}>
+  <LocalizationProvider dateAdapter={AdapterMoment}>
+    <DatePicker
+      label="Quotation Date"
+      value={formData.quotationDate}
+      format="DD-MMM-YYYY"
+      disabled
+      slotProps={{
+        textField: {
+          size: "small",
+          fullWidth: true,
+          className: "custom-text-field",
+           id:"disableItem"
+        }
+      }}
+    />
+  </LocalizationProvider>
+</Grid>
+
+
+            <Grid item xs={4}>
+<Autocomplete
+  size="small"
+  value={formData.transactiontype || ''}
+  onChange={(event, newValue) => {
+    setFormData({
+      ...formData,
+      transactiontype: newValue || ''
+    });
+  }}
+  inputValue={formData.transactiontype || ''}
+  onInputChange={(event, newInputValue) => {
+    setFormData({
+      ...formData,
+      transactiontype: newInputValue || ''
+    });
+  }}
+
+  options={["Quotation AHD","Quotation ASM","Quotation BCH","Quotation BIH","Quotation BLR","Quotation BRD","Quotation BSR","Quotation CBE","Quotation CHN","Quotation CNG","Quotation DEL","Quotation EER","Quotation EXP","Quotation GOA","Quotation HLD","Quotation HO","Quotation HUB","Quotation HYD","Quotation HYD2","Quotation IDR","Quotation JMR","Quotation KCH","Quotation KLP","Quotation KLC","Quotation KOP","Quotation KTA","Quotation LKW","Quotation MFG","Quotation MLR","Quotation MUM","Quotation NAG","Quotation NEL","Quotation NSK","Quotation PUN","Quotation AHD","Quotation RAJ","Quotation RPR","Quotation SDG","Quotation SLP","Quotation SRT","Quotation SUL","Quotation VAP","Quotation VIS"].map((trans) => trans)}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      size="small"
+      label="Transaction Type"
+      className="custom-text-field"
+      placeholder='transaction Type'
+      variant="outlined"
+      fullWidth
+    />
+  )}
+/>
+</Grid>
+
+
+
+              <Grid item xs={4}>
+              <TextField
+                size="small"
+                className="custom-text-field"
+                label="Sales Inquiry Reference No."
+                name="salesInquiryNumber"
+                value={formData.salesInquiryNumber}
+                onChange={(e) => handleChange(e)}
+                required
+                fullWidth
+                InputProps={{
+                  endAdornment: (
+                    <Button
+                      variant="contained"
+                      size="small"
+                      style={{
+                        backgroundColor: "#38c0d0",
+                        color: "white",
+                        padding: "3px 10px",
+                        minWidth: "auto",
+                        height: "24px", // Adjust to fit inside the field
+                        fontSize: "0.75rem", // Smaller text
+                        borderRadius: "5px",
+                        marginRight: "-8px", // Keeps button inside the border
+                        cursor: "pointer"
+                      }}
+                      disabled={!formData.salesInquiryNumber}
+                      onClick={() => handleFetch(formData?.salesInquiryNumber)} // Your function here
+                    >
+                      Fetch
+                    </Button>
+                  )
+                }}
+              />
+            </Grid>
+
+
+            <Grid item xs={4}>
+<Autocomplete
+  size="small"
+  value={formData.category || ''}
+  onChange={(event, newValue) => {
+    setFormData({
+      ...formData,
+      category: newValue || ''
+    });
+  }}
+  inputValue={formData.category || ''}
+  onInputChange={(event, newInputValue) => {
+    setFormData({
+      ...formData,
+      category: newInputValue || ''
+    });
+  }}
+
+  options={["API Plan","Bearing Isolators","Grafoil","Mechanical Seal","Re-Conditioning","Rotary Joints"].map((cat) => cat)}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      size="small"
+      label="Category"
+      className="custom-text-field"
+      placeholder='Category'
+      variant="outlined"
+      fullWidth
+    />
+  )}
+/>
+</Grid>
+
+
+ <Grid item xs={4}>
+  <Autocomplete
+    size="small"
+    value={formData.country || ''}
+    onChange={(_, newValue) => setFormData({ ...formData, country: newValue || '' })}
+    options={countries}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        size="small"
+        label="Country"
+        className="custom-text-field"
+        placeholder="Select Country"
+        variant="outlined"
+        fullWidth
+      />
+    )}
+  />
+</Grid> 
+
+
+
+<Grid item xs={4}>
+<Autocomplete
+  size="small"
+  value={formData.company || ''}
+  onChange={(event, newValue) => {
+    setFormData({
+      ...formData,
+      company: newValue || ''
+    });
+  }}
+  inputValue={formData.company || ''}
+  onInputChange={(event, newInputValue) => {
+    setFormData({
+      ...formData,
+      company: newInputValue || ''
+    });
+  }}
+
+  options={["Leak-Proof Engineering (I) Pvt. Ltd.","Test"].map((cat) => cat)}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      size="small"
+      label="Company"
+      className="custom-text-field"
+      placeholder='Select a Company'
+      variant="outlined"
+      fullWidth
+    />
+  )}
+/>
+</Grid> 
+
+
+
+
+
               <Grid item xs={4}>
 
 
@@ -359,7 +716,7 @@ console.log("formData",formData)
                     });
                   }}
 
-                  options={cbranch.map((branch) => branch)}
+                  options={Array.isArray(authState?.branchs) ? authState.branchs.map((b) => b.branchName) : []}
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -391,63 +748,33 @@ console.log("formData",formData)
               </Grid>
 
 
-              <Grid item xs={4}>
-                {/* <InputLabel className="ip-label" >Category</InputLabel > */}
-                <Autocomplete
-                  size="small"
-                  value={formData.category || ''}
-                  onChange={(event, newValue) => {
-                    setFormData({
-                      ...formData,
-                      category: newValue || ''
-                    });
-                  }}
-                  inputValue={formData.category || ''}
-                  onInputChange={(event, newInputValue) => {
-                    setFormData({
-                      ...formData,
-                      category: newInputValue || ''
-                    });
-                  }}
-
-
-                  options={catOptions.map((cat) => cat)}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      size="small"
-                      placeholder='select a Category'
-                      variant="outlined"
-                      label="Category"
-                      className='custom-text-field'
-                      fullWidth
-                    />
-                  )}
-                />
-              </Grid>
 
               <Grid item xs={4}>
-                {/* <InputLabel className="ip-label" >Customer</InputLabel >
-              <TextField
-              size="small"
-                className="custom-text-field"
-                name="customer"
-                value={formData.customer}
-                onChange={handleChange} /> */}
-                <TextField
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  className='custom-text-field'   //form css class applied
-                  name="customer"
-                  value={formData.customer}
-                  onChange={handleChange}
-                  label="Customer"
-                />
-              </Grid>
+  <LocalizationProvider dateAdapter={AdapterMoment}>
+    <DatePicker
+      label="Revision Date"
+      value={formData.revisionDate ? moment(formData.revisionDate) : null}
+      onChange={(newValue) => {
+        setFormData({
+          ...formData,
+          revisionDate: newValue ? newValue.toISOString() : null  // "2026-04-12T00:00:00.000Z"
+        });
+      }}
+      format="DD-MMM-YYYY"  
+      slotProps={{
+        textField: {
+          size: "small",
+          fullWidth: true,
+          className: "custom-text-field"
+        }
+      }}
+    />
+  </LocalizationProvider>
+</Grid>
 
-              <Grid item xs={4}>
-                {/* <InputLabel className="ip-label" >Customer Enquiry Number</InputLabel > */}
+
+<Grid item xs={4}>
+   
                 <TextField
                   size="small"
                   variant="outlined"
@@ -460,20 +787,82 @@ console.log("formData",formData)
                 />
               </Grid>
 
-              <Grid item xs={4}>
-                {/* <InputLabel className="ip-label" >Customer Address</InputLabel > */}
-                <TextField
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  className="custom-text-field"
-                  name="customerAddress"
-                  value={formData.customerAddress}
-                  onChange={handleChange}
-                  label="Customer Address"
-                />
-              </Grid>
 
+              
+              <Grid item xs={4}>
+  <LocalizationProvider dateAdapter={AdapterMoment}>
+    <DatePicker
+      label="Enquiry Date"
+      value={formData.enquiryDate ? moment(formData.enquiryDate) : null}
+      onChange={(newValue) => {
+        setFormData({
+          ...formData,
+          enquiryDate: newValue ? newValue.toISOString() : null 
+        });
+      }}
+      format="DD-MMM-YYYY"  
+      slotProps={{
+        textField: {
+          size: "small",
+          fullWidth: true,
+          className: "custom-text-field"
+        }
+      }}
+    />
+  </LocalizationProvider>
+</Grid>
+
+
+
+<Grid item xs={4}>
+  <TextField
+    size="small"
+    variant="outlined"
+    fullWidth
+    className='custom-text-field'
+    name="customer"
+    value={formData.customer}
+    onChange={handleChange}
+    label="Customer"
+  />
+</Grid>
+
+<Grid item xs={4}>
+<Autocomplete
+  size="small"
+  value={custAddress.find(a => a.customerAddress === formData.customerAddress) || null}
+  inputValue={addressInputValue}
+  onOpen={() => getAddress(formData.customer)}
+  onChange={(event, newValue) => {
+    setFormData({ ...formData, customerAddress: newValue?.customerAddress || '' });
+    setAddressInputValue(newValue?.customerAddress || '');
+  }}
+  onInputChange={(event, newInputValue, reason) => {
+    if (reason === 'input') {
+      setAddressInputValue(newInputValue);
+      getAddress(newInputValue);
+    }
+  }}
+  options={custAddress}
+  getOptionLabel={(option) => option?.customerAddress || ''}
+  renderOption={(props, option) => (
+    <li {...props} key={option.contactDetailId}>
+      <div style={{ fontWeight: 600 }}>{option.customerAddress}</div>
+    </li>
+  )}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      size="small"
+      label="Customer Address"
+      className="custom-text-field"
+      placeholder="Search by customer name"
+      variant="outlined"
+      fullWidth
+    />
+  )}
+/>
+</Grid>
 
               <Grid item xs={4}>
                 <TextField
@@ -540,8 +929,7 @@ console.log("formData",formData)
                 />
               </Grid>
 
-              <Grid item xs={4}>
-                {/* <InputLabel className="ip-label" >Due On</InputLabel > */}
+              {/* <Grid item xs={4}>
                 <TextField
                   size="small"
                   variant="outlined"
@@ -552,7 +940,30 @@ console.log("formData",formData)
                   onChange={handleChange}
                   label="Due On"
                 />
-              </Grid>
+              </Grid> */}
+
+<Grid item xs={4}>
+  <LocalizationProvider dateAdapter={AdapterMoment}>
+    <DatePicker
+      label="Due On"
+      value={formData.dueOn ? moment(formData.dueOn) : null}
+      onChange={(newValue) => {
+        setFormData({
+          ...formData,
+          dueOn: newValue ? newValue.toISOString() : null  // "2026-04-12T00:00:00.000Z"
+        });
+      }}
+      format="DD-MMM-YYYY"  
+      slotProps={{
+        textField: {
+          size: "small",
+          fullWidth: true,
+          className: "custom-text-field"
+        }
+      }}
+    />
+  </LocalizationProvider>
+</Grid>
 
 
 
@@ -749,7 +1160,7 @@ console.log("formData",formData)
                         label="Quantity"
                         type="number"
                         value={detail.quantity || ''} // Access detail for each item
-                        onChange={(e) => handleChange(e, index)} // Handle item change
+                        onChange={(e) => handleItemChange(index,"quantity",e.target.value)} // Handle item change
                       />
                     </Grid>
 
@@ -774,7 +1185,7 @@ console.log("formData",formData)
                         label="Unit Price"
                         tye="number"
                         value={detail.unitPrice || ''} // Access detail for each item
-                        onChange={(e) => handleChange(e, index)} // Handle item change
+                        onChange={(e) => handleItemChange(index,"unitPrice",e.target.value)}
                       />
                     </Grid>
 
@@ -786,7 +1197,8 @@ console.log("formData",formData)
                         label="Total Price"
                         type="number"
                         value={detail.totalPrice || ''} // Access detail for each item
-                        onChange={(e) => handleChange(e, index)} // Handle item change
+                        onChange={(e) =>handleItemChange(index,"totalPrice",e.target.value)}
+
                       />
                     </Grid>
 
@@ -828,9 +1240,9 @@ console.log("formData",formData)
                         size="small"
                         className="custom-text-field"
                         name="discount" // Unique name for each item
-                        label="Discount"
+                        label="Discount [%]"
                         value={detail.discount || ''} // Access detail for each item
-                        onChange={(e) => handleChange(e, index)} // Handle item change
+                        onChange={(e) => handleItemChange(index,"discount",e.target.value)} // Handle item change
                       />
                     </Grid>
 
@@ -841,7 +1253,7 @@ console.log("formData",formData)
                         name="tax" // Unique name for each item
                         label="Tax"
                         value={detail.tax || ''} // Access detail for each item
-                        onChange={(e) => handleChange(e, index)} // Handle item change
+                        onChange={(e) => handleItemChange(index, "tax", e.target.value)}  
                       />
                     </Grid>
 
@@ -862,6 +1274,7 @@ console.log("formData",formData)
                     <TextField
                       size="small"
                       className="custom-text-field"
+                      type="number"
                       name="pandF"
                       label="P&F [%]"
                       value={formData.pandF}
@@ -873,6 +1286,7 @@ console.log("formData",formData)
                     <TextField
                       sx={{ width: "100%" }}
                       size="small"
+                      type="number"
                       className="custom-text-field"
                       name="freight"
                       label="Freight"
@@ -884,17 +1298,19 @@ console.log("formData",formData)
                   <Grid item xs={3}>
                     <TextField
                       size="small"
+                      type="number"
                       className="custom-text-field"
                       name="discount"
                       label="Discount (%)"
                       value={formData.discount}
                       onChange={handleChange}
                     />
-                  </Grid>
+                    </Grid>
 
                   <Grid item xs={3}>
                     <TextField
                       size="small"
+                      type="number"
                       className="custom-text-field"
                       name="sgst"
                       label="SGST [%]"
@@ -905,6 +1321,7 @@ console.log("formData",formData)
 
                   <Grid item xs={3}>
                     <TextField
+                    type="number"
                       size="small"
                       className="custom-text-field"
                       name="cgst"
@@ -916,6 +1333,7 @@ console.log("formData",formData)
 
                   <Grid item xs={3}>
                     <TextField
+                    type="number"
                       size="small"
                       className="custom-text-field"
                       name="igst"
@@ -929,11 +1347,11 @@ console.log("formData",formData)
                     <TextField
                       sx={{ width: '100%' }}
                       size="small"
+                      type="number"
                       className="custom-text-field"
                       name="grandTotal"
                       label="Grand Total"
                       value={formData.grandTotal}
-                      onChange={handleChange}
                     />
                   </Grid>
 
@@ -1097,8 +1515,8 @@ console.log("formData",formData)
                     size="small"
                     className="custom-text-field"
                     label="Designation"
-                    name="designation"
-                    value={formData.designation}
+                    name="signatoryDesignation"
+                    value={formData.signatoryDesignation}
                     onChange={handleChange} />
                 </Grid>
               </Grid>

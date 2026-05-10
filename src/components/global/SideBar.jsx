@@ -68,9 +68,15 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
           else if (path.startsWith('/createAgitator')) setActiveItemMenu('Create Agitator');
           else if (path.startsWith('/editDrf')) setActiveItemMenu('Edit Drf');
         } 
-        else if (path.startsWith('/quotation')) {
+        else if (path.startsWith('/quotation') || path.startsWith('/EditQuotation')) {
           setActiveSubMenu('qtn');
-          setActiveItemMenu('quotation');
+
+          if(path.startsWith('/quotation')){
+            setActiveItemMenu('quotation');
+          }
+          else if(path.startsWith('/EditQuotation')){
+            setActiveItemMenu('EditQuotation')
+          }
         } 
         else if (path.startsWith('/createOfm') || path.startsWith('/editOfm')) {
           setActiveSubMenu('ofm');
@@ -319,7 +325,7 @@ const CustomSidebar = ({isSidebar,setIsSidebar}) => {
                   <Link to="/EditQuotation" style={{ color: 'inherit', textDecoration: "none" }}>
                   <MenuItem
                       icon={<svg width="20" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list "><g><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></g></svg>}
-                      style={getMenuItemStyle("Edit Drf")} onClick={() => setActiveItemMenu("Edit Drf")}
+                      style={getMenuItemStyle("EditQuotation")} onClick={() => setActiveItemMenu("EditQuotation")}
                     >
                       Edit
                     </MenuItem>

@@ -2153,46 +2153,22 @@ console.log("FormData is ",formData);
               </Grid>
 
 
-              {/* Nature (Dropdown) */}
               <Grid item xs={4}>
-                <Autocomplete
-                  style={{ width: '100%' }}
+                <TextField
+                  disabled
+                  id="disableItem"
                   size="small"
+                  className="custom-text-field"
+                  name="fluid"
                   value={formData?.pumpInquiryItem.nature}
-                  onChange={(event, newValue) => {
-                    setFormData({
-                      ...formData,
-                      pumpInquiryItem: {
-                        ...formData.pumpInquiryItem,
-                        nature: newValue
-                      }
-                    });
-                  }}
-                  // inputValue={formData?.nature || ''}
-                  onInputChange={(event, newInputValue) => {
-                    setFormData({
-                      ...formData,
-                      pumpInquiryItem: {
-                        ...formData.pumpInquiryItem,
-                        nature: newInputValue
-                      }
-                    });
-                  }}
-                  options={['Option1', 'Option2', 'Option3']} // Replace with actual options
-                  renderInput={(params) => (
-                    <TextField
-                      size="small"
-                      {...params}
-                      className="custom-text-field"
-                      placeholder="Select Nature"
-                      variant="outlined"
-                      label="Nature"
-                      fullWidth
-                    />
-                  )}
+                  onChange={(e) => handleChange(e)}
+                  label="Nature"
+                  fullWidth
                 />
               </Grid>
 
+
+ 
               {/* Pumping Temperature */}
               <Grid item xs={4}>
                 <TextField
@@ -2651,61 +2627,182 @@ console.log("FormData is ",formData);
               <div className="MuiBox-root css-2e6lci"><svg width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-circle "><g><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></g></svg><div class="MuiBox-root css-1isemmb"> API Plan :-</div></div>
             </Grid>
 
-            {/* Flushing Plans */}
-            <Grid item xs={4}>
-              <TextField
-                size="small"
-                className="custom-text-field"
-                name="apiFlushingPlans"
-                value={formData?.apiFlushingPlans || ''}
-                onChange={(e) => handleChange(e)}
-                label="Flushing Plan"
-                variant="outlined"
-                fullWidth
-              />
-            </Grid>
 
-            {/* Barrier/Buffer Plans */}
             <Grid item xs={4}>
-              <TextField
-                size="small"
-                className="custom-text-field"
-                name="apiBarrierBufferPlans"
-                value={formData?.apiBarrierBufferPlans || ''}
-                onChange={(e) => handleChange(e)}
-                label="Barrier/Buffer Plan"
-                variant="outlined"
-                fullWidth
-              />
-            </Grid>
+                  <Autocomplete
+                    size="small"
+                    value={formData.apiFlushingPlans || ""}
+                    onChange={(event, newValue) => {
+                      setFormData({
+                        ...formData,
+                        apiFlushingPlans: newValue || "",
+                      });
+                    }}
+                    inputValue={formData.apiFlushingPlans || ""}
+                    onInputChange={(event, newInputValue) => {
+                      setFormData({
+                        ...formData,
+                        apiFlushingPlans: newInputValue || "",
+                      });
+                    }}
+                    options={[
+                      "Plan 01 Single Seals / Double Seals (Inboard) – Internal flush",
+                      "Plan 02 Single Seals / Double Seals (Inboard) – No flush",
+                      "Plan 03 Single Seals / Double Seals (Inboard) – Circulation between seal chamber and pump created by the design of the seal chamber",
+                      "Plan 11 Single Seals / Double Seals (Inboard) – Recirculation from discharge with orifice",
+                      "Plan 12 Single Seals / Double Seals (Inboard) – Recirculation from discharge with strainer & orifice",
+                      "Plan 13 Single Seals / Double Seals (Inboard) – Recirculation from the seal chamber through an orifice to suction",
+                      "Plan 14 Single Seals / Double Seals (Inboard) – Recirculation from discharge through seal chamber back to suction",
+                      "Plan 21 Single Seals / Double Seals (Inboard) – Recirculation from discharge through orifice & heat exchanger",
+                      "Plan 22 Single Seals / Double Seals (Inboard) – Recirculation discharge through a strainer, orifice & heat exchanger",
+                      "Plan 23 Single Seals / Double Seals (Inboard) – Closed loop recirculation by pumping ring through a heat exchanger back to seal the chamber",
+                      "Plan 31 Single Seals / Double Seals (Inboard) – By-pass from discharge through abrasive separator",
+                      "Plan 32 Single Seals / Double Seals (Inboard) – External flush source to seal",
+                      "Plan 41 Single Seals / Double Seals (Inboard) – By-pass from discharge through abrasive separator & heat exchanger"
+                    ]
+                    }
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        size="small"
+                        placeholder="Select Api Flushing Plan"
+                        fullWidth
+                        className="custom-text-field"
+                        label="Api Flushing Plan"
+                      />
+                    )}
+                  />
+                </Grid>
 
-            {/* Atmospheric Plans */}
-            <Grid item xs={4}>
-              <TextField
-                size="small"
-                className="custom-text-field"
-                name="apiAtmosphericPlans"
-                value={formData?.apiAtmosphericPlans || ''}
-                onChange={(e) => handleChange(e)}
-                label="Atmospheric Plan"
-                variant="outlined"
-                fullWidth
-              />
-            </Grid>
 
-            {/* Collection Plans */}
-            <Grid item xs={4}>
-              <TextField
-                size="small"
-                className="custom-text-field"
-                name="apiCollectionPlans"
-                value={formData?.apiCollectionPlans || ''}
-                onChange={(e) => handleChange(e)}
-                label="Collection Plan"
-                variant="outlined"
-                fullWidth
-              />
-            </Grid>
+        
+                <Grid item xs={4}>
+                  <Autocomplete
+                    size="small"
+                    value={formData.apiBarrierBufferPlans || ""}
+                    onChange={(event, newValue) => {
+                      setFormData({
+                        ...formData,
+                        apiBarrierBufferPlans: newValue || "",
+                      });
+                    }}
+                    inputValue={formData.apiBarrierBufferPlans || ""}
+                    onInputChange={(event, newInputValue) => {
+                      setFormData({
+                        ...formData,
+                        apiBarrierBufferPlans: newInputValue || "",
+                      });
+                    }}
+                    options={[
+                      "Plan 52 Double Seals, unpressurized – External reservoir unpressurized liquid buffer",
+                      "Plan 53A Double Seals, pressurized – External reservoir pressurized liquid barrier",
+                      "Plan 53B Double Seals, pressurized – Liquid barrier through heat exchanger & pressurized by accumulator",
+                      "Plan 53C Double Seals, pressurized – Liquid barrier through heat exchanger with differential pressure tracking piston",
+                      "Plan 54 Double Seals, pressurized – External pressurized barrier system/source",
+                      "Plan 55 Double Seals, unpressurized – External, unpressurized buffer system/source",
+                      "Plan 71 Secondary containment seals – Tap connection for purchasers use",
+                      "Plan 72 Secondary containment seals – Low pressure buffer gas injected to outer seal cavity",
+                      "Plan 74 Double gas seals – Pressurized barrier gas system for double gas seals"
+                    ]
+                    
+                    }
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        size="small"
+                        placeholder="Select Api Barrier Buffer Plan"
+                        fullWidth
+                        className="custom-text-field"
+                        label="Api Barrier Buffer Plans"
+                      />
+                    )}
+                  />
+                </Grid>
+
+
+        
+                <Grid item xs={4}>
+                  <Autocomplete
+                    size="small"
+                    value={formData.apiAtmosphericPlans || ""}
+                    onChange={(event, newValue) => {
+                      setFormData({
+                        ...formData,
+                        apiAtmosphericPlans: newValue || "",
+                      });
+                    }}
+                    inputValue={formData.apiAtmosphericPlans || ""}
+                    onInputChange={(event, newInputValue) => {
+                      setFormData({
+                        ...formData,
+                        apiAtmosphericPlans: newInputValue || "",
+                      });
+                    }}
+                    options={[
+                      "Plan 51 Single Seals / Double Seals (Inboard) – Dead-ended atmospheric quench",
+                      "Plan 61 Quench seals – Quench connection for purchasers use",
+                      "Plan 62 Quench seals – External quench on atmospheric side of seal"
+                    ]                    
+                    }
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        size="small"
+                        placeholder="Select Api Atmospheric Buffer Plan"
+                        fullWidth
+                        className="custom-text-field"
+                        label="Api Atmospheric Plans"
+                      />
+                    )}
+                  />
+                </Grid>
+
+        
+                <Grid item xs={4}>
+                  <Autocomplete
+                    size="small"
+                    value={formData.apiCollectionPlans || ""}
+                    onChange={(event, newValue) => {
+                      setFormData({
+                        ...formData,
+                        apiCollectionPlans: newValue || "",
+                      });
+                    }}
+                    inputValue={formData.apiCollectionPlans || ""}
+                    onInputChange={(event, newInputValue) => {
+                      setFormData({
+                        ...formData,
+                        apiCollectionPlans: newInputValue || "",
+                      });
+                    }}
+                    options={[
+                      "Plan 65A Single seals – Atmospheric leakage collection/detection for condensing leakage with failure detection by excess flow into system",
+                      "Plan 65B Single seals – Atmospheric leakage collection/detection for condensing leakage with failure detection by cumulative leakage into system",
+                      "Plan 66A Single seals – External leakage detection arrangement with throttle bushings",
+                      "Plan 66B Single seals – External leakage detection arrangement with orifice plug",
+                      "Plan 75 Secondary containment seals – Leakage collection system for condensing or mixed phase leakage",
+                      "Plan 76 Secondary containment seals – Secondary containment seal vented to flare or collection system"
+                    ]
+                                  
+                    }
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        size="small"
+                        placeholder="Select Api Atmospheric Buffer Plan"
+                        fullWidth
+                        className="custom-text-field"
+                        label="Api Collection Plans"
+                      />
+                    )}
+                  />
+                </Grid>
+
+
+
+
+     
+
           </Grid>
 
           {/* Your existing Section 5&6 fields */}
@@ -2739,15 +2836,26 @@ console.log("FormData is ",formData);
                     // Logic for displaying different images based on selection
                   }}
                 >
-                  <FormControlLabel value="Type I" control={<Radio />} label="Type I" />
-                  <FormControlLabel value="Type II" control={<Radio />} label="Type II" />
-                  <FormControlLabel value="Type III" control={<Radio />} label="Type III" />
+                  <FormControlLabel value="Type_I" control={<Radio />} label="Type I" />
+                  <FormControlLabel value="Type_II" control={<Radio />} label="Type II" />
+                  <FormControlLabel value="Type_III" control={<Radio />} label="Type III" />
                 </RadioGroup>
-                {/* {formData?.typeOfStuffingBox && (
-                  <div>
-                    <img src={`/path/to/${formData?.typeOfStuffingBox}-image.jpg`} alt={formData?.typeOfStuffingBox} />
-                  </div>
-                )} */}
+                {formData?.measurementTypeOfStuffingBox && (
+                 <a
+                 href={`/images/${formData.measurementTypeOfStuffingBox}.jpg`}
+                 target="_blank"
+                 rel="noopener noreferrer"
+               >
+                 <div style={{ boxShadow: 'rgb(194, 213, 213) 5px 9px 12px 2px', margin:'2em 1em' }}>
+                   <img
+                     src={`/images/${formData.measurementTypeOfStuffingBox}.jpg`}
+                     alt="Stuffing Box"
+                     width={200}
+                     style={{ cursor: "zoom-in" }}
+                   />
+                 </div>
+               </a>
+                )}
               </FormControl>
             </Grid>
 

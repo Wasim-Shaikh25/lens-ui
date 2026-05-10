@@ -1525,7 +1525,7 @@ const handleChange = (arrayName = null, index = null) => (event) => {
         return { ...prev, agitatorInquiries: updatedInquiries };
       });
     }}
-    options={['Option1', 'Option2']}
+    options={['Clean', 'Slurry (Abrasive)', 'Slurry (Soft)', 'Dirty', 'Toxic/Corrosive']}
     renderInput={(params) => (
       <TextField
         {...params}
@@ -2694,8 +2694,8 @@ const handleChange = (arrayName = null, index = null) => (event) => {
   {/* Nature */}
   <Grid item xs={4}>
     <Autocomplete
-      options={["Option 1", "Option 2", "Option 3"]} // Replace with actual options
-      renderInput={(params) => (
+    options={['Clean', 'Slurry (Abrasive)', 'Slurry (Soft)', 'Dirty', 'Toxic/Corrosive']}
+    renderInput={(params) => (
         <TextField
           {...params}
           label="Nature"

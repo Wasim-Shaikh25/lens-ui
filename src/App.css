@@ -243,6 +243,7 @@ font-family: 'Sans-serif fonts', Times, serif !important;
   
     background-color: red !important;
     color: white !important;
+    margin:9px 0px !important;
   }
   
   .deleteIcon:disabled{

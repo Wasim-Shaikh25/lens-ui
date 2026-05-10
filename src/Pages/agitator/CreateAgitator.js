@@ -1635,26 +1635,23 @@ export default function AgitatorSeal() {
                 />
               </Grid>
 
-              {/* Nature */}
+
               <Grid item xs={4}>
                 <TextField
-                  select
-                  className="custom-text-field"
-                  label="Nature"
-                  name="nature"
                   disabled
                   id="disableItem"
-                  value={formData.agitatorInquiryItem.nature || ''}
-                  onChange={(e) => handleChange(e)}
-                  variant="outlined"
                   size="small"
+                  className="custom-text-field"
+                  name="fluid"
+                  value={formData?.agitatorInquiryItem.nature}
+                  onChange={(e) => handleChange(e)}
+                  label="Nature"
                   fullWidth
-                >
-                  <MenuItem value="Option1">Nature 1</MenuItem>
-                  <MenuItem value="Option2">Nature 2</MenuItem>
-                  <MenuItem value="Option3">Nature 3</MenuItem>
-                </TextField>
+                />
               </Grid>
+
+
+    
 
 
               {/* Pumping Temperature */}
@@ -2197,6 +2194,7 @@ export default function AgitatorSeal() {
             <div className="MuiBox-root css-1isemmb">Measurement</div>
           </div>
 
+      {/* <Grid item xs={16}>
           <FormControl component="fieldset" style={{ margin: '0 0 1rem 0.8rem' }}>
             <h3 style={{ padding: '1px 0' }}>Type of Pad Plate?</h3>
             <RadioGroup
@@ -2211,16 +2209,30 @@ export default function AgitatorSeal() {
                 })
               }} >
 
-              <FormControlLabel value="Type I" control={<Radio />} label="Type I" />
-              <FormControlLabel value="Type II" control={<Radio />} label="Type II" />
-              <FormControlLabel value="Type III" control={<Radio />} label="Type III" />
+              <FormControlLabel value="Type_I" control={<Radio />} label="Type I" />
+              <FormControlLabel value="Type_II" control={<Radio />} label="Type II" />
+              <FormControlLabel value="Type_III" control={<Radio />} label="Type III" />
             </RadioGroup>
-            {/* {formData?.typeOfStuffingBox && (
-                  <div>
-                    <img src={`/path/to/${formData?.typeOfStuffingBox}-image.jpg`} alt={formData?.typeOfStuffingBox} />
-                  </div>
-                )} */}
+            {formData?.measurementTypeOfPadPlate && (
+                   <a
+                   href={`/images/${formData.measurementTypeOfPadPlate}.jpg`}
+                   target="_blank"
+                   rel="noopener noreferrer"
+                 >
+                   <div style={{ boxShadow: 'rgb(194, 213, 213) 5px 9px 12px 2px', margin:'2em 1em' }}>
+                     <img
+                       src={`/images/${formData.measurementTypeOfPadPlate}.jpg`}
+                       alt="Stuffing Box"
+                       width={200}
+                       style={{ cursor: "zoom-in" }}
+                     />
+                   </div>
+                 </a>
+                )} 
           </FormControl>
+          </Grid> */}
+
+
           <Grid container spacing={2}>
 
 

@@ -5,23 +5,112 @@ import moment from 'moment';
 
 
 //Submit form
-export const handleSubmit = async(e,formData, navigate, savedItems)=>{
-    e.preventDefault();
-    // Update the formData with the new items array
-    const updatedFormData = { ...formData, ofmItems: savedItems };
+export const handleSubmit = async (e, formData, navigate, savedItems) => {
+  e.preventDefault();
 
-    console.log("Updated formData:", updatedFormData);
+  const cleanedItems = savedItems
+    .filter((item) => item.factor || item.description || item.ciCode || item.quantity)
+    .map((item) => ({
+      srNo: Number(item.srNo) || 0,
+      header: item.header || "",
+      factor: item.factor || "",
+      type: item.type || "",
+      size: item.size || "",
+      face: item.face || "",
+      description: item.description || "",
+      ciCode: item.ciCode || "",
+      lpItemCode: item.lpItemCode || "",
+      drfNo: item.drfNo || "",
+      drawingNo: item.drawingNo || "",
+      quantity: Number(item.quantity) || 0,
+      bookedQuantity: Number(item.bookedQuantity) || 0,
+      unit: item.unit || "",
+      unitPrice: Number(item.unitPrice) || 0,
+      unitLPrice: Number(item.unitLPrice) || 0,
+      discount: Number(item.discount) || 0,
+      totalValue: Number(item.totalValue) || 0,
+      totalListValue: Number(item.totalListValue) || 0,
+      naDrgNo: item.naDrgNo === "NA" ? true : item.naDrgNo === "DRG" ? false : Boolean(item.naDrgNo),
+      grandTotalListPrice: Number(formData.grandTotalListPrice) || 0,
+    }));
 
-    try {
-      const res = await axiosInstance.post('lens/OrderForwardingMemo/save',updatedFormData);
-      const {data} = res;
-      console.log("data is ",data)
-      navigate('/editOfm')
-    } catch (error) {
-      console.log(error)
-    }
-  
+  const updatedFormData = {
+    branch: formData.branch || "",
+    ofmNo: formData.ofmNo || "",
+    qutationNumber: formData.qutationNumber || "",
+    ofmDate: formData.ofmDate || null,
+    poNo: formData.poNo || "",
+    poDate: formData.poDate || null,
+    orderType: formData.orderType || "",
+    category: formData.category || "",
+    transportThrough: formData.transportThrough || "",
+    customer: formData.customer || "",
+    customerAddress: formData.customerAddress || "",
+    kindAttentionTo: formData.kindAttentionTo || "",
+    transport: formData.transport || "",
+    deliveryPeriod: formData.deliveryPeriod || "",
+    preQANo: formData.preQANo || "",
+    preQADate: formData.preQADate || null,
+    statutoryRegulatoryRequirements: Boolean(formData.statutoryRegulatoryRequirements),
+    specialInformation: formData.specialInformation || "",
+    engineer: formData.engineer || "",
+    paymentTerms: formData.paymentTerms || "",
+    oaNo: formData.oaNo || "",
+    industry: formData.industry || "",
+    projectOrder: Boolean(formData.projectOrder),
+    penaltyApplicable: Boolean(formData.penaltyApplicable),
+    poReceived: Boolean(formData.poReceived),   // ✅ swagger expects boolean, you're sending string
+    invoiceTo: formData.invoiceTo || "",
+    quotationNo: formData.quotationNo || "",
+    priority: formData.priority || "",
+    ofmStatus: formData.ofmStatus || "",
+    externalInspection: Boolean(formData.externalInspection),
+    externalInspectionWhere: formData.externalInspectionWhere || "",
+    externalInspectionByWhom: formData.externalInspectionByWhom || "",
+    rawMaterialTC: Boolean(formData.rawMaterialTC),
+    qcReport: Boolean(formData.qcReport),
+    testReport: Boolean(formData.testReport),
+    guaranteeCertificate: Boolean(formData.guaranteeCertificate),
+    fitmentCertificate: Boolean(formData.fitmentCertificate),
+    complianceCertificate: Boolean(formData.complianceCertificate),
+    consigneeName: formData.consigneeName || "",
+    consigneeAddress: formData.consigneeAddress || "",
+    createdOn: formData.createdOn || null,
+    updatedOn: formData.updatedOn || null,
+    createdByUser: formData.createdByUser || "",
+    updatedByUser: formData.updatedByUser || "",
+    insurance: Boolean(formData.insurance),      // ✅ swagger expects boolean, you're sending ""
+    insuranceBy: formData.insuranceBy || "",
+    insuranceBorneBy: formData.insuranceBorneBy || "",
+    company: formData.company || "",
+    otherCharges: formData.otherCharges || "",
+    discount: Number(formData.discount) || 0,   // ✅ swagger expects number, you're sending string "65"
+    qapRequired: Boolean(formData.qapRequired),  // ✅ swagger expects boolean, you're sending ""
+    oaDate: formData.oaDate || null,
+    location: formData.location || "",
+    endUserDetail: {
+      branch: formData.endUserDetail?.branch || "",
+      customerName: formData.endUserDetail?.customerName || "",
+      place: formData.endUserDetail?.place || "",
+      contactPersonName: formData.endUserDetail?.contactPersonName || "",
+      mobileNumber: formData.endUserDetail?.mobileNumber || "",
+      emailId: formData.endUserDetail?.emailId || "",
+      endUserIndustry: formData.endUserDetail?.endUserIndustry || "",
+      knots: formData.endUserDetail?.knots || "",
+    },
+    ofmItems: cleanedItems,
+  };
+
+  console.log("Payload to send:", JSON.stringify(updatedFormData, null, 2));
+
+  try {
+    const res = await axiosInstance.post('lens/OrderForwardingMemo/save', updatedFormData);
+    console.log("Response:", res.data);
+    navigate('/editOfm');
+  } catch (error) {
+    console.log("Error:", error?.response?.data || error);
   }
+};
 
 
 //getApi
